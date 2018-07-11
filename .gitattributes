@@ -1,0 +1,19 @@
+#source files
+* text=auto
+*.cmd text eol=crlf
+*.sh text eol=lf
+*.dpr text
+*.html text diff=html
+*.java text diff=java
+*.md text
+*.mwp text
+*.properties text
+*.xml text
+*.xsd text
+*.txt text
+
+#binaries
+*.jar binary
+*.gif binary
+*.png binary
+*.ico binary
