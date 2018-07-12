@@ -501,7 +501,7 @@ wsdl4j (1.6.2)
 
 * License: Common Public License 1.0
 
-Xerces (2.9.0)
+Xerces (2.12.0)
 
 * License: Apache License, 2.0
 
