@@ -27,6 +27,61 @@
     <packaging>pom</packaging>
     <name>EclipseLink Workbench</name>
 
+    <url>http://www.eclipse.org/eclipselink</url>
+    <organization>
+        <name>Eclipse.org - EclipseLink Project</name>
+        <url>http://www.eclipse.org/eclipselink</url>
+    </organization>
+    <issueManagement>
+        <system>bugzilla</system>
+        <url>https://bugs.eclipse.org/bugs</url>
+    </issueManagement>
+    <inceptionYear>2007</inceptionYear>
+    <mailingLists>
+        <mailingList>
+            <name>EclipseLink Developer List</name>
+            <post>eclipselink-dev@eclipse.org</post>
+            <archive>http://dev.eclipse.org/mhonarc/lists/eclipselink-dev</archive>
+        </mailingList>
+        <mailingList>
+            <name>EclipseLink User List</name>
+            <post>eclipselink-users@eclipse.org</post>
+            <archive>http://dev.eclipse.org/mhonarc/lists/eclipselink-users</archive>
+        </mailingList>
+    </mailingLists>
+    <licenses>
+        <license>
+            <name>Eclipse Public License v. 2.0</name>
+            <url>http://www.eclipse.org/legal/epl-v20.html</url>
+            <distribution>repo</distribution>
+            <comments>Standard Eclipse License</comments>
+        </license>
+        <license>
+            <name>Eclipse Distribution License v. 1.0</name>
+            <url>http://www.eclipse.org/org/documents/edl-v10.php</url>
+            <distribution>repo</distribution>
+            <comments>Standard Eclipse Distribution License</comments>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/eclipse-ee4j/eclipselink-workbench.git</connection>
+        <url>https://github.com/eclipse-ee4j/eclipselink-workbench.git</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>PeterKrogh</id>
+            <name>Peter Krogh</name>
+            <email>peter.krogh@oracle.com</email>
+            <organization>Eclipse.org - EclipseLink Project</organization>
+            <organizationUrl>http://www.eclipse.org/eclipselink</organizationUrl>
+            <roles>
+                <role>Project Manager</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
