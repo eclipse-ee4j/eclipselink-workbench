@@ -33,9 +33,7 @@ import org.eclipse.persistence.Version;
 
 /**
  * Session Configuration model adapter class for the
- * TopLink Foudation Library class TopLinkSessions
- *
- * @see TopLinkSessions
+ * TopLink Foundation Library class TopLinkSessions
  *
  * @author Tran Le
  */

@@ -38,7 +38,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.DocumentAdapter
  * This page shows the information about the {@link org.eclipse.persistence.tools.workbench.scplugin.model.adapter.UserDefinedTransportManagerAdapter
  * UserDefinedTransportManagerAdapter}.
  * <p>
- * Here the layout:</pre>
+ * Here the layout:<pre>
  * ____________________________________________________
  * |                  ___________________ ___________ |
  * | Transport Class: | I               | |Browse...| |

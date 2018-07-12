@@ -23,7 +23,7 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 
 /**
  * This encoder will replace any of a specified set of characters with an XML
- * "character reference": '/' => "&#x2f;"
+ * "character reference": '/' =&gt; "&#x2f;"
  */
 public final class XMLStringEncoder {
 

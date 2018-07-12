@@ -50,7 +50,7 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 
 /**
  * This page shows the information regarding the EIS login which is
- * specific for {@link EisLoginAdapter}.
+ * specific for {@link EISLoginAdapter}.
  * <p>
  * Here the layout:
  * <pre>
@@ -72,7 +72,7 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
  * |                                         |
  * -------------------------------------------</pre>
  *
- * @see EisLoginAdapter
+ * @see EISLoginAdapter
  *
  * @version 10.1.3
  * @author Pascal Filion

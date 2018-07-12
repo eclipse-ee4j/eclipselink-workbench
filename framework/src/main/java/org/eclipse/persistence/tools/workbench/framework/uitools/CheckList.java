@@ -106,7 +106,7 @@ public class CheckList extends AccessibleTitledPanel
     }
 
     /**
-     * Creates a new <code>CheckList</code> and uses a default {@link LabelDecorator}.
+     * Creates a new <code>CheckList</code> and uses a default {@link CellRendererAdapter}.
      *
      * @param itemHolder The holder of the items to be shown in the list
      * @param selectionModel The model where the selected items are stored
@@ -122,7 +122,7 @@ public class CheckList extends AccessibleTitledPanel
      *
      * @param itemHolder The holder of the items to be shown in the list
      * @param selectionModel The model where the selected items are stored
-     * @param labelDecorator The {@link LabelDecorator} used to decorate the
+     * @param labelDecorator The {@link CellRendererAdapter} used to decorate the
      * items contained in the given collection holder
      */
     public CheckList(CollectionValueModel itemHolder,
@@ -135,7 +135,7 @@ public class CheckList extends AccessibleTitledPanel
     }
 
     /**
-     * Creates a new <code>CheckList</code> and uses a default {@link LabelDecorator}.
+     * Creates a new <code>CheckList</code> and uses a default {@link CellRendererAdapter}.
      *
      * @param itemHolder The holder of the items to be shown in the list
      * @param selectionModel The model where the selected items are stored
@@ -151,7 +151,7 @@ public class CheckList extends AccessibleTitledPanel
      *
      * @param itemHolder The holder of the items to be shown in the list
      * @param selectionModel The model where the selected items are stored
-     * @param labelDecorator The {@link LabelDecorator} used to decorate the
+     * @param labelDecorator The {@link CellRendererAdapter} used to decorate the
      * items contained in the given collection holder
      */
     public CheckList(ListValueModel itemHolder,
@@ -227,7 +227,7 @@ public class CheckList extends AccessibleTitledPanel
      * Initializes this <code>CheckList</code>.
      *
      * @param itemHolder The holder of the items to be shown in the list
-     * @param selectionModel The model where the selected items are stored
+     * @param listSelectionModel The model where the selected items are stored
      * @param cellRendererAdapter The {@link CellRendererAdapter} used to
      * decorate the items contained in the given collection holder
      * @exception NullPointerException The item holder, the selectionModel or the
@@ -416,7 +416,7 @@ public class CheckList extends AccessibleTitledPanel
     }
 
     /**
-     * This check box is used by {@link CheckList.ListCellRenderer} to render
+     * This check box is used by {@link CheckBoxCellRenderer} to render
      * items as a checked/unchecked item.
      */
     private class CheckBox extends JCheckBox

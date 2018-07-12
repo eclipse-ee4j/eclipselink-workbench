@@ -38,6 +38,7 @@ import org.eclipse.persistence.tools.workbench.uitools.cell.CellRendererAdapter;
  * This dialog shows the non-managed sessions.
  * <p>
  * Here the layout of this dialog:<br>
+ * <pre>
  * _____________________________________
  * | Sessions                       x  |
  * |-----------------------------------|

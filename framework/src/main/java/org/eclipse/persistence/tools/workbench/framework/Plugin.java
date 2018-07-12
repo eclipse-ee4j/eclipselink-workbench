@@ -34,7 +34,7 @@ public interface Plugin {
 
     /**
      * These menu items will be added to the workbench window's
-     * "File -> New" sub-menu.
+     * "File -{@literal >} New" sub-menu.
      * They allow the user to create a new "project" for the plug-in.
      * A new set of menu items will be built for each workbench window.
      * If the plug-in does not have any "new" menu items, it should return

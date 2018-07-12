@@ -80,16 +80,16 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
  * |                                                         |
  * | _o Standard____________________________________________ |
  * | |                ______________________               | |
- * | | Logging Level: |                  |v|               | |<- {@link DefaultSessionLogAdapter#VALID_LOG_LEVEL}
+ * | | Logging Level: |                  |v|               | |{@literal <}- {@link DefaultSessionLogAdapter#VALID_LOG_LEVEL}
  * | |                ----------------------               | |
  * | | o Console                                           | |
  * | |                                                     | |
  * | | o File                                              | |
  * | |                ______________________ _____________ | |
- * | | Location:      | I                  | | Browse... | | |<- Enabled if File is selected
+ * | | Location:      | I                  | | Browse... | | |{@literal <}- Enabled if File is selected
  * | |                ---------------------- ------------- | |
  * | ------------------------------------------------------- |
- * | _x Options_____________________________________________ |<- Enabled if Java or Standard is selected
+ * | _x Options_____________________________________________ |{@literal <}- Enabled if Java or Standard is selected
  * | |                                                     | |
  * | |  LoggingOptionsPane                                 | |
  * | |                                                     | |
@@ -668,13 +668,13 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
      * <pre>
      * ________________________________________________________
      * |                _______________________               |
-     * | Logging Level: |                   |v|               |<- {@link DefaultSessionLogAdapter#VALID_LOG_LEVEL}
+     * | Logging Level: |                   |v|               |{@literal <}- {@link DefaultSessionLogAdapter#VALID_LOG_LEVEL}
      * |                -----------------------               |
      * |                _______________________               |   ___________
-     * | Destination:   | File              |v|               |<- | File    |
+     * | Destination:   | File              |v|               |{@literal <}- | File    |
      * |                -----------------------               |   | Console |
      * |                _______________________ _____________ |   -----------
-     * | Log Location:  | I                   | | Browse... | |<- Shows the File chooser,
+     * | Log Location:  | I                   | | Browse... | |{@literal <}- Shows the File chooser,
      * |                ----------------------- ------------- |   Disabled if Destination is Console
      * --------------------------------------------------------</pre>
      */

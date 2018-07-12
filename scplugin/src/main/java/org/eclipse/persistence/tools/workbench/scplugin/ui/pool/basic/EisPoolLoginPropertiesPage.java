@@ -127,7 +127,7 @@ public class EisPoolLoginPropertiesPage extends ScrollablePropertiesPage
      * Creates the selection holder that will hold the user object to be edited
      * by this page.
      *
-     * @return The <code>PropertyValueModel</code> containing the {@link EisLoginAdapter}
+     * @return The <code>PropertyValueModel</code> containing the {@link EISLoginAdapter}
      * to be edited by the {@link EisLoginPane}
      */
     protected PropertyValueModel buildLoginHolder()

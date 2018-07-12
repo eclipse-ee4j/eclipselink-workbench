@@ -261,7 +261,7 @@ public final class ClassDescriptionPackagePoolNode
     // ********** ClassDescriptionNodeContainer implementation **********
 
     /**
-     * @see ClassDescriptionNodeContainer#addClassNodesTo(java.util.Collection)
+     * @see ClassDescriptionNodeContainer#addClassDescriptionNodesTo(java.util.Collection)
      */
     @Override
     public void addClassDescriptionNodesTo(Collection classDescriptionNodes) {

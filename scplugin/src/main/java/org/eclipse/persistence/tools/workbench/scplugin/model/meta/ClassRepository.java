@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository;
+import org.eclipse.persistence.tools.workbench.scplugin.SCPlugin;
+import org.eclipse.persistence.tools.workbench.scplugin.model.SCModel;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.TopLinkSessionsAdapter;
 import org.eclipse.persistence.tools.workbench.utility.node.NodeModel;
 
 // Mapping Workbench
@@ -29,7 +32,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.NodeModel;
  * contains that information, which is located at:
  * <code>&lt;ORACHE_HOME&gt;/toplink/config/sc.xml</code>.
  *
- * @see SCSessionsPropertiesIO - Manages reading from and writing to sc.xml
  * @see SCModel - Global access to the repository
  * @see SCPlugin - Manages retrieving the classpath information from sc.xml and
  * loading/creating a {@link TopLinkSessionsAdapter}
@@ -49,7 +51,7 @@ public interface ClassRepository extends ClassDescriptionRepository,
      * Adds the given list of entries at the specified index.
      *
      * @param index The index of insertion
-     * @param entry The entries to be added
+     * @param entries The entries to be added
      */
     public void addClasspathEntries(int index, List entries);
 

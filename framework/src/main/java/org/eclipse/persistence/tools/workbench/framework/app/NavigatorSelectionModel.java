@@ -23,7 +23,6 @@ import javax.swing.tree.TreePath;
  * and a subset of the methods declared in the Swing TreeSelectionModel
  * interface.
  *
- * @see NavigatorView.LocalTreeSelectionModel
  */
 public interface NavigatorSelectionModel {
 

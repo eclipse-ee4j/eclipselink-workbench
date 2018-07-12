@@ -1943,7 +1943,7 @@ public final class MWClass extends MWModel
      *     Object foo = new String(); // this is valid
      *     String foo = new Object(); // this is invalid
      *
-     *     Object.isAssignableFrom(String) => true
+     *     Object.isAssignableFrom(String) =&gt; true
      *
      * We only return true if we are certain of the types'
      * assignability.
@@ -1991,7 +1991,7 @@ public final class MWClass extends MWModel
      *     Object foo = new String(); // this is valid
      *     String foo = new Object(); // this is invalid
      *
-     *     String.isAssignableTo(Object) => true
+     *     String.isAssignableTo(Object) =&gt; true
      *
      * See "The Java Language Specification" 5.1.4
      * @see java.lang.Class#isAssignableFrom(java.lang.Class)
@@ -2539,7 +2539,7 @@ public final class MWClass extends MWModel
      * MWClassRepository#refreshExternalClassDescriptions() first;
      * the type will be refreshed with the "default" external class description
      * returned by the external class repository
-     * @see ExternalClassRepository#getExternalClassDescription(String)
+     * @see ExternalClassRepository#getClassDescription(java.lang.String)
      */
     public void refresh() throws ExternalClassNotFoundException {
         this.refresh(DefaultMWClassRefreshPolicy.instance());

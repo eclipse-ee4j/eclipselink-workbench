@@ -72,7 +72,7 @@ import org.eclipse.persistence.tools.workbench.utility.TriStateBoolean;
  * | |                                       | |
  * | | x Native SQL                          | |
  * | |                    __________________ | |  ____________
- * | |   Batch Writing:   |              |v| | |<-| None     |
+ * | |   Batch Writing:   |              |v| | |{@literal <}-| None     |
  * | |                    ------------------ | |  | JDBC     |
  * | |                          ____________ | |  | Buffered |
  * | | x String Binding   Size: | I      |I| | |  ------------
@@ -86,7 +86,7 @@ import org.eclipse.persistence.tools.workbench.utility.TriStateBoolean;
  * | |                                       | |
  * | | x Trim Strings                        | |
  * | |                                       | |
- * | | x Use Properties                      | |<- Activate the Properties tab
+ * | | x Use Properties                      | |{@literal <}- Activate the Properties tab
  * | |                                       | |
  * | ----------------------------------------- |
  * ---------------------------------------------</pre>

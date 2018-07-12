@@ -42,8 +42,8 @@ public class ProjectValidator extends ProjectRunner implements ProjectValidatorI
     /**
      * Validates a Workbench project.
      *
-     * @param input fully qualified project filename (.mwp or .xml)
-     * @param output fully qualified report filename
+     * @param projectFileName fully qualified project filename (.mwp or .xml)
+     * @param reportfile fully qualified report filename
      * @return 0 if the there is no problem in the project.
      */
     @Override

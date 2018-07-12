@@ -16,6 +16,7 @@ package org.eclipse.persistence.tools.workbench.scplugin.ui.tools;
 
 // Mapping Workbench
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.project.ProjectNode;
 
 /**
  * This <code>ProjectDisplayableTranslatorAdapter</code> is responsible to add

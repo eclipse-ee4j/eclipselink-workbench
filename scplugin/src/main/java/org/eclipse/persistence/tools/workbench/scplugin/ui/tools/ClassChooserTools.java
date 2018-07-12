@@ -44,7 +44,7 @@ public final class ClassChooserTools
      * Creates a new button that when clicked will show the Class chooser dialog
      * and update the given selection holder with the selected value.
      *
-     * @param context The context ...
+     * @param contextHolder The context ...
      * @param key The key used to retrieve the localized text from the given
      * context's <code>ResourceRepository</code>
      * @param classRepositoryHolder The holder of the
@@ -100,7 +100,7 @@ public final class ClassChooserTools
      * you require a type to be selected.
      *
      * @param context The context ...
-     * @param classRepository The repository used to retrieve the list of classes
+     * @param repository The repository used to retrieve the list of classes
      * @param selectionHolder The holder of the selected item if set, otherwise
      * the value will remain <code>null</code>
      */

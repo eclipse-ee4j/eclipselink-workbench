@@ -48,7 +48,7 @@ public class SCClassRepository extends AbstractNodeModel
     /**
      * Creates a new <code>SCClassRepository</code>.
      *
-     * @param classpath The entries of the classpath
+     * @param classpathEntries The entries of the classpath
      */
     public SCClassRepository(String[] classpathEntries)
     {

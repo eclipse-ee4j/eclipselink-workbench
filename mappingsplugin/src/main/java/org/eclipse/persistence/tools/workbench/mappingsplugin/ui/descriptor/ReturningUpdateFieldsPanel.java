@@ -71,8 +71,6 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
     }
     /**
      * Initializes the layout of this pane.
-     *
-     * @return The container with all its widgets
      */
     @Override
     protected void initializeLayout()

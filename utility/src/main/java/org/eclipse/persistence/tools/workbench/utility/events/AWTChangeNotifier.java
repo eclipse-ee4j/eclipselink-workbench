@@ -77,7 +77,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#propertyChange(java.beans.PropertyChangeListener, java.beans.PropertyChangeEvent)
+     * @see ChangeNotifier#propertyChange(java.beans.PropertyChangeListener, java.beans.PropertyChangeEvent)
      */
     @Override
     public void propertyChange(final PropertyChangeListener listener, final PropertyChangeEvent event) {
@@ -99,7 +99,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#itemsAdded(CollectionChangeListener, CollectionChangeEvent)
+     * @see ChangeNotifier#itemsAdded(CollectionChangeListener, CollectionChangeEvent)
      */
     @Override
     public void itemsAdded(final CollectionChangeListener listener, final CollectionChangeEvent event) {
@@ -121,7 +121,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#itemsRemoved(CollectionChangeListener, CollectionChangeEvent)
+     * @see ChangeNotifier#itemsRemoved(CollectionChangeListener, CollectionChangeEvent)
      */
     @Override
     public void itemsRemoved(final CollectionChangeListener listener, final CollectionChangeEvent event) {
@@ -143,7 +143,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#collectionChanged(CollectionChangeListener, CollectionChangeEvent)
+     * @see ChangeNotifier#collectionChanged(CollectionChangeListener, CollectionChangeEvent)
      */
     @Override
     public void collectionChanged(final CollectionChangeListener listener, final CollectionChangeEvent event) {
@@ -165,7 +165,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#itemsAdded(ListChangeListener, ListChangeEvent)
+     * @see ChangeNotifier#itemsAdded(ListChangeListener, ListChangeEvent)
      */
     @Override
     public void itemsAdded(final ListChangeListener listener, final ListChangeEvent event) {
@@ -187,7 +187,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#itemsRemoved(ListChangeListener, ListChangeEvent)
+     * @see ChangeNotifier#itemsRemoved(ListChangeListener, ListChangeEvent)
      */
     @Override
     public void itemsRemoved(final ListChangeListener listener, final ListChangeEvent event) {
@@ -209,7 +209,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#itemsReplaced(ListChangeListener, ListChangeEvent)
+     * @see ChangeNotifier#itemsReplaced(ListChangeListener, ListChangeEvent)
      */
     @Override
     public void itemsReplaced(final ListChangeListener listener, final ListChangeEvent event) {
@@ -231,7 +231,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#listChanged(ListChangeListener, ListChangeEvent)
+     * @see ChangeNotifier#listChanged(ListChangeListener, ListChangeEvent)
      */
     @Override
     public void listChanged(final ListChangeListener listener, final ListChangeEvent event) {
@@ -253,7 +253,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#nodeAdded(TreeChangeListener, TreeChangeEvent)
+     * @see ChangeNotifier#nodeAdded(TreeChangeListener, TreeChangeEvent)
      */
     @Override
     public void nodeAdded(final TreeChangeListener listener, final TreeChangeEvent event) {
@@ -275,7 +275,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#nodeRemoved(TreeChangeListener, TreeChangeEvent)
+     * @see ChangeNotifier#nodeRemoved(TreeChangeListener, TreeChangeEvent)
      */
     @Override
     public void nodeRemoved(final TreeChangeListener listener, final TreeChangeEvent event) {
@@ -297,7 +297,7 @@ public final class AWTChangeNotifier
     }
 
     /**
-     * @see ChangeSupport.Notifier#treeChanged(TreeChangeListener, TreeChangeEvent)
+     * @see ChangeNotifier#treeChanged(TreeChangeListener, TreeChangeEvent)
      */
     @Override
     public void treeChanged(final TreeChangeListener listener, final TreeChangeEvent event) {

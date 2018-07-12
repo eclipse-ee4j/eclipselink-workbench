@@ -30,13 +30,12 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.CheckBoxModelAd
 
 /**
  * This pane gives an easy creation of the Remove Connection on Error check box
- * the sub-pane needs to add into its layout.
- * <pre>
+ * the sub-pane needs to add into its layout.<br>
  * Known subclasses of this pane:<br>
  * - {@link RCMJMSPane}<br>
  * - {@link RCMRMIPane}<br>
  * - {@link RCMUserDefinedPane}
- * <p>
+ * <br>
  * Known containers of this pane:<br>
  * - {@link RemoteCommandManagerPane}
  *

@@ -47,20 +47,20 @@ import org.eclipse.persistence.tools.workbench.utility.Transformer;
 
 /**
  * This page shows the information regarding the login.
- * <p>
  * Here the layout:
- * <pre>
+ * <pre>{@code
  * _____________________________________________
  * |                                           |
  * | x Use Non-Transactional Read Login        |<- Enable/Disable the AbstractRdbmsLoginPane
  * |                                           |
  * |   --------------------------------------- |
  * |   |                                     | |
- * |   | {@link Sub pane}                            | |
+ * |   | Sub pane                            | |
  * |   |                                     | |
  * |   --------------------------------------- |
  * |                                           |
- * ---------------------------------------------</pre>
+ * ---------------------------------------------
+ * }</pre>
  *
  * @see ConnectionPoolAdapter
  * @see ReadConnectionPoolAdapter

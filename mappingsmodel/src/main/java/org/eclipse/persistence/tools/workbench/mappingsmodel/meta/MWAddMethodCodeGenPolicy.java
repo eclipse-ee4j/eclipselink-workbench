@@ -53,18 +53,19 @@ public final class MWAddMethodCodeGenPolicy
 
     /**
      * return
-     *     "this.<attribute name>.add(<argument name>);"
+     *     "{@code this.<attribute name>.add(<argument name>);}"
      *         -or-
-     *     "<value get method>.add(<argument name>);
+     *     "{@code <value get method>.add(<argument name>);}"
      *
      * if back pointer, add
-     *     "<argument name>.<set method name>(this);"
+     *     "{@code <argument name>.<set method name>(this);}"
      *
-     * e.g.
+     * e.g.<pre>{@code 
      * "addBar(Bar bar) {
      *         getBars().add(bar);
      *         bar.setFoo(this);
      *  }"
+     * }</pre>
      */
     @Override
     protected void insertCollectionMethodBody(NonreflectiveMethodDefinition methodDef)
@@ -83,18 +84,19 @@ public final class MWAddMethodCodeGenPolicy
 
     /**
      * return
-     *     "this.<attribute name>.put(<argument name 1>, <argument name 2>);"
+     *     "{@code this.<attribute name>.put(<argument name 1>, <argument name 2>);}"
      *         -or-
-     *     "<value get method>.add(<argument name>);
+     *     "{@code <value get method>.add(<argument name>);}"
      *
      * if back pointer, adds
-     *     "<argument name>.<set method name>(this);"
+     *     "{@code <argument name>.<set method name>(this);}"
      *
-     * e.g.
+     * e.g.<pre>{@code
      * "addBar(Key key, Bar bar) {
      *         getBars().put(key, bar);
      *         bar.setFoo(this);
      *  }"
+     * }</pre>
      */
     @Override
     protected void insertMapMethodBody(NonreflectiveMethodDefinition methodDef)

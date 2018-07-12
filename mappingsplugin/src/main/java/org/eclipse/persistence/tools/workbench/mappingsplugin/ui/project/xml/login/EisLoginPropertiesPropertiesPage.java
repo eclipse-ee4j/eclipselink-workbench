@@ -25,9 +25,9 @@ import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 public class EisLoginPropertiesPropertiesPage extends AbstractLoginPropertiesPage
 {
     /**
-     * Creates a new <code>LoginPropertiesPropertiesPage</code>.
+     * Creates a new <code>EisLoginPropertiesPropertiesPage</code>.
      *
-     * @param nodeHolder The holder of {@link LoginAdapter}
+     * @param nodeHolder The holder of <code>LoginAdapter</code>.
      */
     public EisLoginPropertiesPropertiesPage(PropertyValueModel nodeHolder, WorkbenchContextHolder contextHolder)
     {

@@ -50,8 +50,7 @@ import org.eclipse.persistence.tools.workbench.utility.io.FileTools;
 
 /**
  * This page shows the location of the edited sessions.xml, along with its
- * classpath, which is stored in {@link org.eclipse.persistence.tools.workbench.scplugin.model.meta.SCSessionsPropertiesIO#SESSIONS_XML_PROPERTIES_XML
- * SESSIONS_XML_PROPERTIES_XML} and the list of sessions (Database or Server).
+ * classpath and the list of sessions (Database or Server).
  * <p>
  * Here the layout:
  * <pre>
@@ -103,8 +102,6 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
 {
     /**
      * Creates a new <code>ProjectPropertiesPage</code>.
-     *
-     * @param node The user object of this page
      */
     public ProjectPropertiesPage(WorkbenchContext context)
     {

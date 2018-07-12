@@ -93,7 +93,7 @@ public class FileChooserPanel
      *          JFileChooser.DIRECTORIES_ONLY
      *          JFileChooser.FILES_AND_DIRECTORIES
      *
-     * @see JFileChooser.#setFileSelectionMode
+     * @see JFileChooser#setFileSelectionMode(int)
     */
      public FileChooserPanel(ApplicationContext context,
                                     PropertyValueModel filePathHolder,

@@ -63,7 +63,6 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.DocumentAdapter
  * -------------------------------------------------------------</pre>
  *
  * Known containers of this pane:<br>
- * {@link JMSCluteringPane}<br>
  * {@link RCMJMSPane}<br>
  * {@link RCMRMIPane}
  *

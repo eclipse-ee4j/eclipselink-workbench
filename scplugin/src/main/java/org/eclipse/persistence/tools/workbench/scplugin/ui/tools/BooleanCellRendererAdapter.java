@@ -37,9 +37,9 @@ public final class BooleanCellRendererAdapter extends AbstractCellRendererAdapte
      * Creates a new <code>BooleanLabelDecorator</code> decorating
      * <code>Boolean</code> values.
      *
-     * @param trueDecorator The localized string used to decorate
+     * @param trueText The localized string used to decorate
      * <code>Boolean.TRUE</code>
-     * @param falseDecorator The localized string used to decorate
+     * @param falseText The localized string used to decorate
      * <code>Boolean.FALSE</code>
      */
     public BooleanCellRendererAdapter(String trueText,

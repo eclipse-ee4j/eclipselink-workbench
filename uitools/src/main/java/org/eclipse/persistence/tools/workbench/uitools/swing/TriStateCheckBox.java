@@ -26,10 +26,10 @@ import org.eclipse.persistence.tools.workbench.utility.TriStateBoolean;
 /**
  * This extension over the Swing's <code>JCheckBox</code> adds support for a
  * partially selected state.
- * <p>
+ * <br>
  * This code was found at: <a
- * href="http://forum.java.sun.com/thread.jspa?threadID=593755&messageID=3116647">http://forum.java.sun.com/thread.jspa?threadID=593755&messageID=3116647</a>
- * <p>
+ * href="http://forum.java.sun.com/thread.jspa?threadID=593755&messageID=3116647">forum</a>
+ * <br>
  * The Sun's bug number is 4079882: <a
  * href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4079882">http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4079882</a>
  *
@@ -490,7 +490,7 @@ public class TriStateCheckBox extends JCheckBox
          * {@link #PARTIALLY_SELECTED}. If <code>null</code>, then it is treated as
          * {@link #PARTIALLY_SELECTED}.
          *
-         * @param state The new selection state
+         * @param selectionState The new selection state
          */
         protected void setState(TriStateBoolean selectionState)
         {

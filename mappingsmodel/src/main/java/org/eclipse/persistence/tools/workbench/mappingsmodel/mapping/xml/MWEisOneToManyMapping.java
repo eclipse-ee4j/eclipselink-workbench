@@ -46,6 +46,7 @@ import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
+import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlNode;
 
 public final class MWEisOneToManyMapping
     extends MWEisReferenceMapping
@@ -407,14 +408,14 @@ public final class MWEisOneToManyMapping
 
     // **************** Model synchronization *********************************
 
-    /** @see MWXmlNode#resolveXpaths */
+    /** @see MWXmlNode#resolveXpaths() */
     @Override
     public void resolveXpaths() {
         super.resolveXpaths();
         this.foreignKeyGroupingElement.resolveXpaths();
     }
 
-    /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    /** @see MWXmlNode#schemaChanged(org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange) */
     @Override
     public void schemaChanged(SchemaChange change) {
         super.schemaChanged(change);

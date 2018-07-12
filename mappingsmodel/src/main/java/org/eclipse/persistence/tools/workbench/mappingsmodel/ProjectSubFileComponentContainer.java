@@ -22,19 +22,19 @@ import java.util.Iterator;
  * read and write the project sub-files, the XML files that hold the state
  * for classes, tables, and descriptors.
  */
+// see org.eclipse.persistence.tools.workbench.mappingsio.ProjectReader in mappingsio
+// see org.eclipse.persistence.tools.workbench.mappingsio.ProjectWriter in mappingsio
 public interface ProjectSubFileComponentContainer {
 
     /**
      * Return the project sub-file components that are saved in separate
      * XML files.
-     * @see org.eclipse.persistence.tools.workbench.mappingsio.ProjectWriter
      */
     Iterator projectSubFileComponents();
 
     /**
      * Set the project sub-file components that are saved in separate
      * XML files.
-     * @see org.eclipse.persistence.tools.workbench.mappingsio.ProjectReader
      */
     void setProjectSubFileComponents(Collection projectSubFileComponents);
 
@@ -42,15 +42,12 @@ public interface ProjectSubFileComponentContainer {
      * Return the names of the project sub-file components that were
      * present when the container was first read in
      * (or subsequently saved).
-     * @see org.eclipse.persistence.tools.workbench.mappingsio.ProjectWriter
-     * @see org.eclipse.persistence.tools.workbench.mappingsio.ProjectReader
      */
     Iterator originalProjectSubFileComponentNames();
 
     /**
      * Set the names of the project sub-file components that were
      * present when the container was saved.
-     * @see org.eclipse.persistence.tools.workbench.mappingsio.ProjectWriter
      */
     void setOriginalProjectSubFileComponentNames(Collection originalSubComponentNames);
 

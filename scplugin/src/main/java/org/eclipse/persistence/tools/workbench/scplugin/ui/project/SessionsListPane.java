@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.uitools.AddRemoveListPanel;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseSessionAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.Nominative;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionBrokerAdapter;

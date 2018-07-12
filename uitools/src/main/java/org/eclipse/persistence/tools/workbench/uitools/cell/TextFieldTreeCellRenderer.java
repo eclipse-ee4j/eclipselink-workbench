@@ -64,7 +64,7 @@ public class TextFieldTreeCellRenderer extends LabeledTreeCellRenderer {
     // ********** initialization **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.tools.LabeledTreeCellRenderer#buildComponent()
+     * @see LabeledTreeCellRenderer#buildComponent()
      */
     @Override
     protected JComponent buildComponent() {

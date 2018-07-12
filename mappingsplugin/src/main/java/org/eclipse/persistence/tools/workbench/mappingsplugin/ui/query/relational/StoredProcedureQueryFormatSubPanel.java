@@ -24,7 +24,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
 
 /**
- * This panel appears on the Named Queries->QueryFormatPanel, if the user
+ * This panel appears on the Named Queries-{@literal >}QueryFormatPanel, if the user
  * chooses StoredProcedure for the query format. It contains a StoredProcedureProperiesPane
  *
  * @version 11.1.1.0

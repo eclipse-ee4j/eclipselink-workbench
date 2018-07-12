@@ -210,7 +210,7 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
 
 
     /** Used to keep up to date with inheritance changes
-     * @see MWTransactionalPolicy.descriptorInheritanceChanged() */
+     * @see MWTransactionalPolicy#descriptorInheritanceChanged() */
     @Override
     public void descriptorInheritanceChanged() {
         this.cachingPolicy.descriptorInheritanceChanged();

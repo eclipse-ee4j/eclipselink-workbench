@@ -278,12 +278,6 @@ public abstract class AddRemovePanel extends AbstractPanel {
      * Creates a container that will properly lay out the given buttons, the
      * layout will be created once this method has added all its widgets, this
      * will let any subclass the ability to add or reorder the buttons.
-     *
-     * @param addButton The button used to add a new item
-     * @param removeButton The button used to remove the selected items
-     * @param optionalButton A button that can perform additional operation
-     * over the selected item
-     * @return A new container containing the given widgets
      */
     protected void buildButtonPanel(JComponent buttonPanel)
     {
@@ -300,11 +294,6 @@ public abstract class AddRemovePanel extends AbstractPanel {
      * {@link #buildButtonPanel(JComponent, JButton, JButton, JButton)} needs to
      * be used.
      *
-     * @param addButton The button used to add a new item
-     * @param removeButton The button used to remove the selected items
-     * @param optionalButton A button that can perform additional operation
-     * over the selected item
-     * @param orientation The position of the button panel in its container
      * @return A new container containing the given widgets
      */
     private JComponent buildButtonPanel()

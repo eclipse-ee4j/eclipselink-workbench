@@ -31,7 +31,7 @@ import org.eclipse.persistence.tools.workbench.uitools.swing.TextFieldWithDefaul
  * and if the text field does not have any input and it loses the focus, the
  * default value is reshown.
  *
- * @see TextFieldWithDefault
+ * @see TextFieldWithDefaultHandler
  *
  * @version 11.0.0
  * @since 11.0.0

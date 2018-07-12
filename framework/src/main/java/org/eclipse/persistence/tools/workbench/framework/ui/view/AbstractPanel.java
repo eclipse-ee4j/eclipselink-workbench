@@ -134,7 +134,7 @@ public abstract class AbstractPanel extends AccessibleTitledPanel {
      * along with the width of all the other components in order to get the
      * widest component and use its width as the width for all the components.
      *
-     * @param component The group containing component to be aligned with the
+     * @param group The group containing component to be aligned with the
      * component contained in this panel's group
      */
     protected final void addAlignLeft(ComponentAligner group)
@@ -155,11 +155,11 @@ public abstract class AbstractPanel extends AccessibleTitledPanel {
     }
 
     /**
-     * Adds the given group for left alignment. Its preferred width will be used
+     * Adds the given group for right alignment. Its preferred width will be used
      * along with the width of all the other components in order to get the
      * widest component and use its width as the width for all the components.
      *
-     * @param component The group containing component to be aligned with the
+     * @param group The group containing component to be aligned with the
      * component contained in this panel's group
      */
     protected final void addAlignRight(ComponentAligner group)
@@ -188,7 +188,7 @@ public abstract class AbstractPanel extends AccessibleTitledPanel {
      * used along with the width of all the other components in order to get the
      * widest component and use its width as the width for all the components.
      *
-     * @param panel The panel to be properly aligned with this panel
+     * @param page The panel to be properly aligned with this panel
      */
     protected final void addPaneForAlignLeft(AbstractPanel page)
     {
@@ -213,7 +213,7 @@ public abstract class AbstractPanel extends AccessibleTitledPanel {
      * used along with the width of all the other components in order to get the
      * widest component and use its width as the width for all the components.
      *
-     * @param panel The panel to be properly aligned with this panel
+     * @param page The panel to be properly aligned with this panel
      */
     protected final void addPaneForAlignRight(AbstractPanel page)
     {

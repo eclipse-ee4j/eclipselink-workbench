@@ -17,6 +17,7 @@ package org.eclipse.persistence.tools.workbench.uitools.app;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
+import org.eclipse.persistence.tools.workbench.utility.Model;
 import org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport;
 import org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent;
 import org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener;

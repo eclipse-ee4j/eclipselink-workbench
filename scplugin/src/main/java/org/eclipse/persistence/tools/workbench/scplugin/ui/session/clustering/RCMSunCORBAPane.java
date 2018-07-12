@@ -20,6 +20,7 @@ import java.awt.Insets;
 import javax.swing.JCheckBox;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SunCORBATransportManagerAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
 
 // Mapping Workbench
@@ -27,12 +28,12 @@ import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
 /**
  * This page shows the information about the {@link SunCORBATransportManagerAdapter}.
  * <p>
- * Here the layout of this pane:</pre>
+ * Here the layout of this pane:<pre>
  * ________________________________________________
  * |                                              |
  * |  x Remove Connection on Error                |
  * |                                              |
- * ------------------------------------------------<pre>
+ * ------------------------------------------------</pre>
  *
  * Known container of this pane:<br>
  * - {@link RemoteCommandManagerPane}

@@ -29,6 +29,7 @@ import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubject
 import org.eclipse.persistence.tools.workbench.framework.uitools.AddRemoveListPanel;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.Nominative;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionBrokerAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.TopLinkSessionsAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.project.RenameDialog;
 import org.eclipse.persistence.tools.workbench.uitools.Displayable;
@@ -67,8 +68,8 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
  * ------------------------------------------------------</pre>
  *
  * Known subclasses of this pane:<br>
- * - {@link org.eclipse.persistence.tools.workbench.scplugin.ui.broker.SessionsListPane}<br>
- * - {@link org.eclipse.persistence.tools.workbench.scplugin.ui.project.SessionsListPane}
+ * - <code>org.eclipse.persistence.tools.workbench.scplugin.ui.broker.SessionsListPane</code><br>
+ * - <code>org.eclipse.persistence.tools.workbench.scplugin.ui.project.SessionsListPane</code>
  *
  * @see SessionAdapter
  * @see SessionBrokerAdapter
@@ -145,7 +146,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
      * Creates the <code>PropertyChangeListener</code> that will be responsible
      * to update the given titled border when the value changes.
      *
-     * @param The border to update updated when the property changes
+     * @param border The border to update updated when the property changes
      * @return A new <code>PropertyChangeListener</code>
      */
     protected PropertyChangeListener buildDisplayStringListener(final TitledBorder border)
@@ -213,7 +214,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
      *
      * @param sessions The collection of {@link SessionAdapter}s that have been
      * selected to be removed
-     * @return <code>true<code> if they can be removed; <code>false<code>
+     * @return <code>true</code> if they can be removed; <code>false</code>
      * otherwise
      */
     protected boolean canRemoveSessions(Collection sessions)
@@ -317,7 +318,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
         /**
          * Invoked when the user selects the optional button.
          *
-         * @param listSelectionModel The model containing the selected item
+         * @param selectionModel The model containing the selected item
          */
         @Override
         public void optionOnSelection(ObjectListSelectionModel selectionModel)

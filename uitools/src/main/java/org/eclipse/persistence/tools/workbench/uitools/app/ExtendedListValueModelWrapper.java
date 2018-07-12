@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
+import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
 
 import org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CompositeListIterator;
@@ -269,7 +270,7 @@ public class ExtendedListValueModelWrapper
     // ********** AbstractModel implementation **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
+     * @see AbstractModel#toString(java.lang.StringBuffer)
      */
     @Override
     public void toString(StringBuffer sb) {

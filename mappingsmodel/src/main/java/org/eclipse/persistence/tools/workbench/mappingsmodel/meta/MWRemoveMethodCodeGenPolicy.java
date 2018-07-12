@@ -46,12 +46,12 @@ public final class MWRemoveMethodCodeGenPolicy
 
     /**
      * Return
-     *     "this.<attribute name>.remove(<argument name>);"
+     *     "{@code this.<attribute name>.remove(<argument name>);}"
      *         -or-
-     *     "<value get method>.remove(<argument name>);"
+     *     "{@code <value get method>.remove(<argument name>);}"
      *
      * if back pointer, add
-     *     "<argument name>.<set method name>(null);"
+     *     "{@code <argument name>.<set method name>(null);}"
      */
     @Override
     protected void insertCollectionMethodBody(NonreflectiveMethodDefinition methodDef)
@@ -71,14 +71,14 @@ public final class MWRemoveMethodCodeGenPolicy
 
     /**
      * Return
-     *     "this.<attribute name>.remove(<argument name>);"
+     *     "{@code this.<attribute name>.remove(<argument name>);}"
      *         -or-
-     *     "<value get method>.remove(<argument name>);"
+     *     "{@code <value get method>.remove(<argument name>);}"
      *
      * *or* if back pointer, return
-     *     "((<attribute type>) <attribute name>.remove(<argument name>)).<set method name>(null);"
+     *     "{@code ((<attribute type>) <attribute name>.remove(<argument name>)).<set method name>(null);}"
      *         -or-
-     *     "((<attribute type>) <value get method>.remove(<argument name>)).<set method name>(null);"
+     *     "{@code ((<attribute type>) <value get method>.remove(<argument name>)).<set method name>(null);}"
      */
     @Override
     protected void insertMapMethodBody(NonreflectiveMethodDefinition methodDef)

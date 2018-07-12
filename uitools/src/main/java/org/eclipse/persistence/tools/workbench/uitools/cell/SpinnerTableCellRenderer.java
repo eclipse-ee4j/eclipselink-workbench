@@ -164,16 +164,13 @@ public class SpinnerTableCellRenderer implements TableCellEditorAdapter.Renderer
     // ********** TableCellEditorAdapter.Renderer implementation **********
 
     /**
-     * @see TableCellEditorAdapter#getValue()
+     * @see TableCellEditorAdapter#getCellEditorValue()
      */
     @Override
     public Object getValue() {
         return this.spinner.getValue();
     }
 
-    /**
-     * @see TableCellEditorAdapter#setImmediateEditListener(TableCellEditorAdapter.ImmediateEditListener listener)
-     */
     @Override
     public void setImmediateEditListener(TableCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;

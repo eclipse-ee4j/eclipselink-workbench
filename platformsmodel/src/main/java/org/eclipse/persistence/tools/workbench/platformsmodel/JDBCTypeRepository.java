@@ -105,7 +105,7 @@ public final class JDBCTypeRepository extends AbstractNodeModel {
     // ********** initialization **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#initialize()
+     * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#initialize()
      */
     @Override
     protected void initialize() {
@@ -581,7 +581,7 @@ public final class JDBCTypeRepository extends AbstractNodeModel {
     // ********** behavior **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#addChildrenTo(java.util.List)
+     * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#addChildrenTo(java.util.List)
      */
     @Override
     protected void addChildrenTo(List children) {

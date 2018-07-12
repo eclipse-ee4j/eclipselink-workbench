@@ -16,6 +16,7 @@ package org.eclipse.persistence.tools.workbench.uitools.app;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
 
 /**
  * A BufferedPropertyValueModel is used to hold a temporary copy of the value
@@ -233,7 +234,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
+     * @see AbstractModel#toString(StringBuffer)
      */
     @Override
     public void toString(StringBuffer sb) {

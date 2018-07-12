@@ -40,10 +40,7 @@ public abstract class AbstractDisplayableTranslatorAdapter implements Displayabl
     private final CellRendererAdapter adapter;
 
     /**
-     * Creates a new <code>SessionDisplayableAdater</code>.
-     *
-     * @param repository The repository used to retrieve localized string and the
-     * icon that decorates <code>ApplicationNode</code>
+     * Creates a new <code>AbstractDisplayableTranslatorAdapter</code>.
      */
     public AbstractDisplayableTranslatorAdapter(CellRendererAdapter adapter)
     {

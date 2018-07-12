@@ -32,7 +32,7 @@ public final class RdbmsLoginPane extends AbstractRdbmsLoginPane
      * Creates a new <code>RdbmsLoginPane</code>.
      *
      * @param subjectHolder The holder of {@link DatabaseLoginAdapter}
-     * @param context The plug-in context to be used, such as <code>ResourceRepository</code>
+     * @param contextHolder The plug-in context to be used, such as <code>ResourceRepository</code>
      */
     public RdbmsLoginPane(PropertyValueModel subjectHolder, WorkbenchContextHolder contextHolder)
     {

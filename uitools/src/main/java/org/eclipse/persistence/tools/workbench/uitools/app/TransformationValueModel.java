@@ -16,6 +16,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
+import org.eclipse.persistence.tools.workbench.utility.Model;
 import org.eclipse.persistence.tools.workbench.utility.Transformer;
 import org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport;
 
@@ -74,7 +75,7 @@ public class TransformationValueModel
     }
 
     /**
-     * @see oracle.toplink.workbench.utility.AbstractModel#buildDefaultChangeSupport()
+     * @see AbstractModel#buildDefaultChangeSupport()
      */
     @Override
     protected ChangeSupport buildDefaultChangeSupport() {
@@ -162,7 +163,7 @@ public class TransformationValueModel
     }
 
     /**
-     * @see oracle.toplink.workbench.utility.AbstractModel#toString(StringBuffer)
+     * @see AbstractModel#toString(StringBuffer)
      */
     @Override
     public void toString(StringBuffer writer) {

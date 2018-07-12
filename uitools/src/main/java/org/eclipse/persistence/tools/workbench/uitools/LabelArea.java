@@ -325,7 +325,6 @@ public class LabelArea extends JLabel
      * Sets the maximum width this label should have. The width is used to
      * calculate the preferred height. The default is value is 300.
      *
-     * @return A positive value that fixes the width of this label
      * @exception IllegalArgumentException The preferred width cannot be negative
      */
     public void setPreferredWidth(int preferredWidth)
@@ -342,7 +341,7 @@ public class LabelArea extends JLabel
      * Determines if the text should wrap based on the available width. The
      * default value is <code>false</code>.
      *
-     * @param scrollabe <code>true</code> to let the text wrap automatically
+     * @param scrollable <code>true</code> to let the text wrap automatically
      * when the size changes; <code>false</code> otherwise to fix its width and
      * height based on {@link #preferredWidth}
      */
@@ -355,7 +354,7 @@ public class LabelArea extends JLabel
      * Sets the text of this <code>LabelArea</code> to the specified value. The
      * string will automatically be converted into an HTML string if it's not
      * already one. The original string, not formatted, can be retrieved
-     * with {@link #getActualText()}.
+     * with {@link #getOriginalText()}.
      *
      * @param text The new text to be set
      * @see javax.swing.JLabel#setText(String)

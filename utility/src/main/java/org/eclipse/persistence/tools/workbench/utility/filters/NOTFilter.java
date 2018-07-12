@@ -44,7 +44,7 @@ public class NOTFilter
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.Filter#accept(Object)
+     * @see Filter#accept(Object)
      */
     @Override
     public boolean accept(Object o) {

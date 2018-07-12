@@ -65,12 +65,11 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
  * This pane shows the information regarding {@link org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter
  * DatabaseLoginAdapter}.
  *
- * @see DatabaseSessionTabbedPane - The parent of this pane
+ * @see AbstractLoginPropertiesPage - The parent of this pane
  * @see DefaultSequencePropertyPane
  * @see NativeSequencePropertyPane
  * @see TableSequencePropertyPane
  * @see UnaryTableSequencePropertyPane
- * @see XMLFileSequencePropertyPane
  *
  * @version 11.1.0
  * @author Pascal Filion

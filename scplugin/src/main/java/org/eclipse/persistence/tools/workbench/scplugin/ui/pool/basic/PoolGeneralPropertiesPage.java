@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.ConnectionPoolAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.pool.PoolNode;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 
 // Mapping Workbench

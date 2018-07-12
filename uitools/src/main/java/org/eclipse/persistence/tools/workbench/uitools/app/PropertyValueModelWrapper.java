@@ -18,6 +18,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
+import org.eclipse.persistence.tools.workbench.utility.Model;
 import org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport;
 
 
@@ -87,7 +88,7 @@ public abstract class PropertyValueModelWrapper
 
     /**
      * Extend to start listening to the nested model if necessary.
-     * @see Model#addPropertyChangeListener(PropertyChangeListener)
+     * @see Model#addPropertyChangeListener(java.beans.PropertyChangeListener) 
      */
     @Override
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -151,7 +152,7 @@ public abstract class PropertyValueModelWrapper
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
+     * @see AbstractModel#toString(java.lang.StringBuffer)
      */
     @Override
     public void toString(StringBuffer sb) {

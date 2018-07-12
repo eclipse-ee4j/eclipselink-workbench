@@ -48,7 +48,7 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
  * |                                                |
  * | Struct Converters:                             |
  * | ___________________________________ __________ |
- * | |                               |^| | Add... | |<- Shows the Class chooser
+ * | |                               |^| | Add... | |{@literal <}- Shows the Class chooser
  * | |                               | | ---------- |
  * | |                               ||| __________ |
  * | |                               ||| | Remove | |

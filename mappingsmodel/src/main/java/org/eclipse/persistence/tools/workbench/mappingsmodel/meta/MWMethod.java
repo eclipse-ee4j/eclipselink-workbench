@@ -44,6 +44,7 @@ import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.sessions.Record;
 import org.eclipse.persistence.internal.codegen.NonreflectiveMethodDefinition;
+import org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel;
 
 /**
  * This class models a Java method or constructor.
@@ -1260,7 +1261,7 @@ public final class MWMethod
 
     /**
      * override to sort constructors first, then sort by signature
-     * @see MWRPersistentObject.compareTo(Object)
+     * @see AbstractNodeModel#compareTo(java.lang.Object)
      */
     @Override
     public int compareTo(Object object) {

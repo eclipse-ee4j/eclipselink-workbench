@@ -34,7 +34,7 @@ public class XORFilter
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.Filter#accept(Object)
+     * @see Filter#accept(Object)
      */
     @Override
     public boolean accept(Object o) {
@@ -42,7 +42,7 @@ public class XORFilter
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.CompoundFilter#operatorString()
+     * @see CompoundFilter#operatorString()
      */
     @Override
     protected String operatorString() {

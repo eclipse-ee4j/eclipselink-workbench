@@ -1157,8 +1157,8 @@ public abstract class MWProject
 
     /**
      * this is where the whole #postProjectBuild() cascade begins
-     * @see ProjectReader#readProject()
      */
+    // see org.eclipse.persistence.tools.workbench.mappingsio.ProjectReader#readProject() in mappingsio
     @Override
     public void postProjectBuild() {
         // set the child backpointers first

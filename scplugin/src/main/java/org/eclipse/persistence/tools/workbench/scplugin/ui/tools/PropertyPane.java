@@ -50,19 +50,20 @@ import org.eclipse.persistence.tools.workbench.uitools.cell.SimpleTableCellRende
  * This pane shows a table of keys and values.
  * <p>
  * Here the layout of this pane:
- * <pre>
+ * <pre>{@code
  * _________________________________________________
  * | _________________________________ ___________ |
- * | | |    Name      |    Value     | | Add...  | |<- Shows the {@link PropertyEditor}
+ * | | |    Name      |    Value     | | Add...  | |<- Shows the @link PropertyEditor
  * | |-|--------------|--------------| ----------- |   to add a new key/value
  * | |-|--------------|--------------| ___________ |
- * | | |              |              | | Edit... | |<- Shows the {@link PropertyEditor}
+ * | | |              |              | | Edit... | |<- Shows the @link PropertyEditor
  * | |-|--------------|--------------| ----------- |   to edit the selected row
  * | | |              |              | ___________ |
  * | |-|--------------|--------------| | Remove  | |
  * | | |              |              | ----------- |
  * | ---------------------------------             |
- * -------------------------------------------------</pre>
+ * -------------------------------------------------
+ * }</pre>
  *
  * @see Property
  *
@@ -109,8 +110,8 @@ public class PropertyPane extends AbstractSubjectPanel
     /**
      * Creates a new <code>LoginPropertiesPropertiesPage</code>.
      *
-     * @param nodeHolder The holder of {@link Property}
-     * @param context
+     * @param subjectHolder The holder of {@link Property}
+     * @param contextHolder
      */
     public PropertyPane(ValueModel subjectHolder,
                               WorkbenchContextHolder contextHolder)
@@ -340,8 +341,6 @@ public class PropertyPane extends AbstractSubjectPanel
 
     /**
      * Initializes the layout of this pane.
-     *
-     * @return The container with all its widgets
      */
     @Override
     protected void initializeLayout()
@@ -438,8 +437,8 @@ public class PropertyPane extends AbstractSubjectPanel
     * Sets whether or not this component is enabled. Disabling this pane will
     * also disable its children.
     *
-    * @param enabled <code>true<code> if this component and its children should
-    * be enabled, <code>false<code> otherwise
+    * @param enabled <code>true</code> if this component and its children should
+    * be enabled, <code>false</code> otherwise
     */
     @Override
     public void setEnabled(boolean enabled)

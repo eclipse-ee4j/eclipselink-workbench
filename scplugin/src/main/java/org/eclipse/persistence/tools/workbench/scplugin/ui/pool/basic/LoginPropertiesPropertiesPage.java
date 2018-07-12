@@ -23,6 +23,8 @@ import javax.swing.JComponent;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.ConnectionPoolAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.EISLoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.NullLoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.PropertyPane;
 import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
@@ -34,21 +36,21 @@ import org.eclipse.persistence.tools.workbench.uitools.app.TransformationPropert
 
 /**
  * ...
- * <p>
  * Here the layout of this pane:
- * <pre>
+ * <pre>{@code
  * _________________________________________________
  * | _________________________________ ___________ |
- * | | |    Key       |    Value     | | Add...  | |<- Shows the {@link PropertyEditor}
+ * | | |    Key       |    Value     | | Add...  | |<- Shows the @link PropertyEditor
  * | |-|--------------|--------------| ----------- |   to add a new key/value
  * | |-|--------------|--------------| ___________ |
- * | | |              |              | | Edit... | |<- Shows the {@link PropertyEditor}
+ * | | |              |              | | Edit... | |<- Shows the @link PropertyEditor
  * | |-|--------------|--------------| ----------- |   to edit the selected row
  * | | |              |              | ___________ |
  * | |-|--------------|--------------| | Remove  | |
  * | | |              |              | ----------- |
  * | ---------------------------------             |
- * -------------------------------------------------</pre>
+ * -------------------------------------------------
+ * }</pre>
  *
  * @see LoginAdapter
  *
@@ -60,8 +62,8 @@ public class LoginPropertiesPropertiesPage extends ScrollablePropertiesPage
     /**
      * Creates a new <code>LoginPropertiesPropertiesPage</code>.
      *
-     * @param nodeHolder The holder of {@link LoginAdapter}
-     * @param context
+     * @param subjectHolder The holder of {@link LoginAdapter}
+     * @param contextHolder
      */
     public LoginPropertiesPropertiesPage(PropertyValueModel subjectHolder, WorkbenchContextHolder contextHolder)
     {
@@ -119,8 +121,7 @@ public class LoginPropertiesPropertiesPage extends ScrollablePropertiesPage
      * Creates the selection holder that will hold the user object to be edited
      * by this page.
      *
-     * @param nodeHolder The holder of {@link DatabaseSessionNode}
-     * @return The <code>PropertyValueModel</code> containing the {@link EisLoginAdapter}
+     * @return The <code>PropertyValueModel</code> containing the {@link EISLoginAdapter}
      * to be edited by this page
      */
     @Override

@@ -78,7 +78,7 @@ public class OSplitPane extends JSplitPane
      * <code>OSplitPane.VERTICAL_SPLIT</code>
      * @param leftComponent the <code>Component</code> that will appear on the
      * left of a horizontally-split pane, or at the top of a vertically-split pane
-     * @param newRightComponent the <code>Component</code> that will appear on
+     * @param rightComponent the <code>Component</code> that will appear on
      * the right of a horizontally-split pane, or at the bottom of a
      * vertically-split pane
      * @exception IllegalArgumentException if <code>orientation</code> is not one
@@ -140,9 +140,6 @@ public class OSplitPane extends JSplitPane
      * however returns the given component.
      *
      * @param component The <code>Component</code> to display in that position
-     * @beaninfo
-     *    preferred: true
-     *  description: The component to the right (or below) the divider.
      */
     @Override
     public void setRightComponent(Component component)

@@ -19,17 +19,19 @@ import javax.swing.Icon;
 
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.ConnectionPoolAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SCAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.cell.AbstractCellRendererAdapter;
 
 // Mapping Workbench
 
 /**
  * This <code>ConnectionPoolCellRendererAdapter</code> formats
- * {@link LoginAdapter} objects by using its display string along with its type.
+ * {@link SCAdapter} objects by using its display string along with its type.
  *
  * @version 10.1.3
  * @author Pascal Filion
  */
+
 public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendererAdapter
 {
     /**
@@ -41,7 +43,7 @@ public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendere
      * Creates a new <code>ConnectionPoolCellRendererAdapter</code>.
      *
      * @param repository The repository used to retrieve localized string and the
-     * icon that decorates objects of type {@link LoginAdapter}
+     * icon that decorates objects of type {@link SCAdapter}
      */
     public ConnectionPoolCellRendererAdapter(ResourceRepository repository)
     {
@@ -53,8 +55,7 @@ public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendere
      * Creates the string that will be used to retrieve the localized string from
      * the resource bundle.
      *
-     * @param session The pool to be formatted
-     * @param prefixKey The string to be appended at the beginning of the key
+     * @param pool The pool to be formatted
      * @return The fully created key
      */
     private static String buildKey(ConnectionPoolAdapter pool)
@@ -80,7 +81,7 @@ public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendere
     /**
      * Retrieves the key mapped to the icon that reflects the given session.
      *
-     * @param session The {@link SessionAdapter} to be represented by an icon
+     * @param pool The pool to be represented by an icon
      * @return The key of the icon to be used
      */
     public static String iconKey(ConnectionPoolAdapter pool)

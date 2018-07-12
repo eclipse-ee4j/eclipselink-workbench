@@ -32,8 +32,8 @@ public abstract class MWAccessorCodeGenPolicy
     }
 
     /**
-     * Return "this.<attribute name>" in case of non value holders.
-     * Return "<value get method name>()" in case of value holder, and the value get method exists.
+     * Return "{@code this.<attribute name>}" in case of non value holders.
+     * Return "{@code <value get method name>()}" in case of value holder, and the value get method exists.
      * Return null otherwise.
      */
     protected String attributeValueCode()

@@ -95,7 +95,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
      * We cache these so we can swap out the entire list of children
      * when we receive a #listChanged() event (which does not include
      * the items that were affected).
-     * @see EventHelper#rebuildChildren()
+     * @see EventChangePolicy#rebuildChildren()
      */
     IdentityHashMap childrenLists;
 
@@ -103,7 +103,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
      * Map the children models to their parents.
      * We cache these so we can figure out the "real" source of the
      * list change events (the parent).
-     * @see EventHelper#parent()
+     * @see ChangePolicy#parent()
      */
     IdentityHashMap parents;
 

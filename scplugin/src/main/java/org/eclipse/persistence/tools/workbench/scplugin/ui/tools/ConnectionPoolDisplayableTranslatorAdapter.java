@@ -16,6 +16,7 @@ package org.eclipse.persistence.tools.workbench.scplugin.ui.tools;
 
 // Mapping Workbench
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SCAdapter;
 
 /**
  * This <code>DisplayableTranslator</code> is responsible to add more
@@ -31,7 +32,7 @@ public final class ConnectionPoolDisplayableTranslatorAdapter extends AbstractDi
      * Creates a new <code>ConnectionPoolDisplayableTranslatorAdapter</code>.
      *
      * @param repository The repository used to retrieve localized string and the
-     * icon that decorates objects of type {@link LoginNode}
+     * icon that decorates objects of type {@link SCAdapter}
      */
     public ConnectionPoolDisplayableTranslatorAdapter(ResourceRepository repository)
     {

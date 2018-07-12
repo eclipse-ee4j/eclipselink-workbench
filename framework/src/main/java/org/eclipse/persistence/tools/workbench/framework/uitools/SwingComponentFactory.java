@@ -547,6 +547,7 @@ public class SwingComponentFactory
      * @param key The key used to retrieve the text and the mnemonic
      * @param arguments The message text posses patterns to be replaced with the
      * array of values. The pattern is usually {i} where 'i' is a digit
+     * @param resourceRepository The repository used to retrieve the localized text
      */
     public static void setTextFor(AbstractButton button,
                                               String key,
@@ -563,6 +564,7 @@ public class SwingComponentFactory
      *
      * @param button The button to be udpated
      * @param key The key used to retrieve the text and the mnemonic
+     * @param resourceRepository The repository used to retrieve the localized text
      */
     public static void setTextFor(AbstractButton button,
                                               String key,
@@ -574,10 +576,11 @@ public class SwingComponentFactory
     /**
      * Sets the text and the mnemonic for the given label using the given key.
      *
-     * @param button The label to be udpated
+     * @param label The label to be udpated
      * @param key The key used to retrieve the text and the mnemonic
      * @param argument The tooltip text posses a pattern to be replaced with this
      * value. The pattern is usually {0}
+     * @param resourceRepository The repository used to retrieve the localized text
      */
     public static void setTextFor(JLabel label,
                                               String key,
@@ -590,10 +593,11 @@ public class SwingComponentFactory
     /**
      * Sets the text and the mnemonic for the given label using the given key.
      *
-     * @param button The label to be udpated
+     * @param label The label to be udpated
      * @param key The key used to retrieve the text and the mnemonic
      * @param arguments The message text posses patterns to be replaced with the
      * array of values. The pattern is usually {i} where 'i' is a digit
+     * @param resourceRepository The repository used to retrieve the localized text
      */
     public static void setTextFor(JLabel label,
                                       String key,
@@ -608,8 +612,9 @@ public class SwingComponentFactory
     /**
      * Sets the text and the mnemonic for the given label using the given key.
      *
-     * @param button The label to be udpated
+     * @param label The label to be udpated
      * @param key The key used to retrieve the text and the mnemonic
+     * @param resourceRepository The repository used to retrieve the localized text
      */
     public static void setTextFor(JLabel label, String key, ResourceRepository resourceRepository)
     {
@@ -1137,10 +1142,7 @@ public class SwingComponentFactory
      * Creates a new <code>ExpandablePanel</code> where the internal pane will
      * be collapsed by default.
      *
-     * @param expandedTextKey The key used to retrieve the button's text when the
-     * pane is collapsed
-     * @param collapsedTextKey The key used to retrieve the button's text when the
-     * pane is expanded
+     * @param key The key used to retrieve the expandable button's text
      * @param internalPane The pane that will be expanded or collapsed
      * @param repository The <code>ResourceRepository</code> used to retrieve
      * the button's text and the icons
@@ -1200,10 +1202,11 @@ public class SwingComponentFactory
      * Creates a new <code>ExpandablePanel</code> where the internal pane will
      * be collapsed by default.
      *
-     * @param key The key used to retrieve the expandable button's text
+     * @param expandedTextKey The key used to retrieve the button's text when the
+     * pane is collapsed
+     * @param collapsedTextKey The key used to retrieve the button's text when the
+     * pane is expanded
      * @param internalPane The pane that will be expanded or collapsed
-     * @param expanded <code>true</code> if the pane needs to be expanded by
-     * default or <code>false</code> to have it collapsed
      * @param repository The <code>ResourceRepository</code> used to retrieve
      * the button's text and the icons
      */
@@ -1227,7 +1230,7 @@ public class SwingComponentFactory
      *
      * @param key The key used to retrieve the localized string
      * @param model The model of the combo box
-     * @param renderer The <code>ListCellRenderer</code> used to decorate all the
+     * @param rendererAdapter The <code>ListCellRenderer</code> used to decorate all the
      * items in the model
      * @param rightComponent A component to be added to the right of the labeled
      * component, usually a browse button would be passed, <code>null</code> can
@@ -1713,7 +1716,6 @@ public class SwingComponentFactory
      * Creates a container that has a label, a center component and a right
      * component, the right component is usually a button or a spacer.
      *
-     * @param key The key used to retrieve the localized string for the label
      * @param centerComponent The component that is labeled and that is centered
      * in the returned container, it takes all the horizontal space. For lists
      * and trees, the component will also expand vertically
@@ -1916,7 +1918,7 @@ public class SwingComponentFactory
      * which will be rendered by the given <code>ListCellRenderer</code>.
      *
      * @param model The model holding the items listed in the combo box
-     * @param cellRenderer The renderer used to decorate the items contained in
+     * @param cellRendererAdapter The renderer used to decorate the items contained in
      * the model
      * @return A new <code>ListChooser</code>
      */
@@ -1935,7 +1937,7 @@ public class SwingComponentFactory
      * which will be rendered by the given <code>ListCellRenderer</code>.
      *
      * @param model The model holding the items listed in the combo box
-     * @param cellRenderer The renderer used to decorate the items contained in
+     * @param cellRendererAdapter The renderer used to decorate the items contained in
      * the model
      * @return A new <code>Combo</code>
      */
@@ -3809,9 +3811,6 @@ public class SwingComponentFactory
      * @param model The model of the combo box
      * @param renderer The <code>ListCellRenderer</code> used to decorate all the
      * items in the model
-     * @param rightComponent A component to be added to the right of the labeled
-     * component, usually a browse button would be passed, <code>null</code> can
-     * also be passed so that no filler will be added by default
      * @param repository The repository used to retrieve the localized string
      * @param leftAligner The label will be added to this <code>ComponentAligner</code>
      * @param rightAligner The right component will be added to this
@@ -4019,8 +4018,6 @@ public class SwingComponentFactory
      *
      * @param key The key used to retrieve the localized string
      * @param document The document of the text field
-     * @param rightComponent A component to be added to the right of the labeled
-     * component, usually a browse button would be passed
      * @param repository The repository used to retrieve the localized string
      * @param leftAligner The label will be added to this <code>ComponentAligner</code>
      * @param rightAligner The right component will be added to this
@@ -4145,7 +4142,6 @@ public class SwingComponentFactory
      * Creates a container that has a label and a spinner.
      *
      * @param key The key used to retrieve the localized string
-     * @param model The spinner's model, which only handles number
      * @param columns The number of columns the spinner's editor should have, the
      * default value is 4, even though on screen the width is greater than 4, a
      * column count of 3 makes it too narrow
@@ -4212,7 +4208,6 @@ public class SwingComponentFactory
      * Creates a container that has a label and a spinner.
      *
      * @param key The key used to retrieve the localized string
-     * @param model The spinner's model, which only handles number
      * @param repository The repository used to retrieve the localized string
      * @param leftAligner The label will be added to this <code>ComponentAligner</code>
      * @param rightAligner The right component will be added to this
@@ -4262,7 +4257,6 @@ public class SwingComponentFactory
     /**
      * Creates a new <code>JSpinner</code> that handles number.
      *
-     * @param model The spinner's model, which only handles number
      * @param columns The number of columns the spinner's editor should have, the
      * default value is 4, even though on screen the width is greater than 4, a
      * column count of 3 makes it too narrow
@@ -4440,7 +4434,7 @@ public class SwingComponentFactory
      *
      * @param document The text field's document
      * @param columns The number of columns to use to calculate the preferred
-     * width >= 0; if <code>columns</code> is set to zero, the preferred width
+     * width &gt;= 0; if <code>columns</code> is set to zero, the preferred width
      * will be whatever naturally results from the component implementation
      * @return A new <code>JTextField</code>
      */
@@ -4471,7 +4465,7 @@ public class SwingComponentFactory
      * Creates a container that has a label and a combo box.
      *
      * @param labelKey The key used to retrieve the localized string
-     * @param comboBoxModel The model of the combo box
+     * @param model The model of the combo box
      * @param cellRenderer The <code>ListCellRenderer</code> used to decorate all
      * the items in the model
      * @param repository The repository used to retrieve the localized string
@@ -4507,8 +4501,9 @@ public class SwingComponentFactory
      *
      * @param key The key used to retrieve the localized string
      * @param model The model of the combo box
-     * @param renderer The <code>ListCellRenderer</code> used to decorate all the
-     * items in the model
+     * @param rightComponent A component to be added to the right of the labeled
+     * component, usually a browse button would be passed, <code>null</code> can
+     * also be passed so that no filler will be added by default
      * @param repository The repository used to retrieve the localized string
      * @param leftAligner The label will be added to this <code>ComponentAligner</code>
      * @param rightAligner The right component will be added to this
@@ -4580,7 +4575,7 @@ public class SwingComponentFactory
      * Creates a container that has a label and a combo box.
      *
      * @param labelKey The key used to retrieve the localized string
-     * @param comboBoxModel The model of the combo box
+     * @param model The model of the combo box
      * @param cellRenderer The <code>ListCellRenderer</code> used to decorate all
      * the items in the model
      * @param repository The repository used to retrieve the localized string
@@ -4647,7 +4642,9 @@ public class SwingComponentFactory
      * Creates a container that has a label, a center component and a right
      * component, the right component is usually a button or a spacer.
      *
-     * @param key The key used to retrieve the localized string for the label
+     * @param leftComponent A component to be added to the left of the labeled
+     * component, usually a browse button would be passed, <code>null</code> can
+     * also be passed so that no filler will be added by default
      * @param centerComponent The component that is labeled and that is centered
      * in the returned container, it takes all the horizontal space. For lists
      * and trees, the component will also expand vertically
@@ -6199,7 +6196,7 @@ public class SwingComponentFactory
      *
      * @param key The key used to retrieve the localized string
      * @param model The model of the combo box
-     * @param renderer The <code>ListCellRenderer</code> used to decorate all the
+     * @param rightComponent The <code>ListCellRenderer</code> used to decorate all the
      * items in the model
      * @param repository The repository used to retrieve the localized string
      * @param leftAligner The label will be added to this <code>ComponentAligner</code>
@@ -6272,7 +6269,7 @@ public class SwingComponentFactory
      * Creates a container that has a label and a combo box.
      *
      * @param labelKey The key used to retrieve the localized string
-     * @param comboBoxModel The model of the combo box
+     * @param model The model of the combo box
      * @param cellRenderer The <code>ListCellRenderer</code> used to decorate all
      * the items in the model
      * @param repository The repository used to retrieve the localized string

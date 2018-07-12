@@ -337,7 +337,7 @@ public class RegexpDocument extends PlainDocument
      * Returns the regular expression used for this document.
      *
      * @return The regular expression used for this document
-     * @see #setRegularExpression
+     * @see #initialize(java.util.regex.Pattern) 
      */
     protected Pattern getRegularExpression()
     {
@@ -373,7 +373,7 @@ public class RegexpDocument extends PlainDocument
      * generated.
      *
      * @param startingOffset The offset into the document to insert the content
-     * >= 0. All positions that track change at or after the given location will
+     * {@literal >}= 0. All positions that track change at or after the given location will
      * move
      * @param text The string to insert
      * @param attributeSet The attributes to associate with the inserted content.
@@ -426,8 +426,8 @@ public class RegexpDocument extends PlainDocument
      * If the Document supports undo/redo, an UndoableEditEvent will also be
      * generated.
      *
-     * @param startingOffset The offset from the begining >= 0
-     * @param length The number of characters to remove >= 0
+     * @param startingOffset The offset from the begining {@literal >}= 0
+     * @param length The number of characters to remove {@literal >}= 0
      * @exception BadLocationException some portion of the removal range was not a
      * valid part of the document. The location in the exception is the first bad
      * position encountered

@@ -53,6 +53,7 @@ import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
+import org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel;
 
 
 public abstract class MWDescriptor extends MWModel
@@ -365,7 +366,7 @@ public abstract class MWDescriptor extends MWModel
     /**
      * This is overwritten so that *ONLY* active descriptors validate
      * themselves and their branches.
-     * @see AbstractNodeModel.validateBranch()
+     * @see AbstractNodeModel#validateBranch()
      */
     @Override
     public boolean validateBranchInternal() {

@@ -20,7 +20,7 @@ package org.eclipse.persistence.tools.workbench.framework.resources;
  * same key used to fetch the mnemonic's string from a
  * StringRepository.
  *
- * @see org.eclipse.persistence.tools.workbench.utility.StringRepository
+ * @see StringRepository
  */
 public interface MnemonicRepository {
 
@@ -35,7 +35,7 @@ public interface MnemonicRepository {
      * Return the mnemonic character for the specified key.
      * The character will be uppercase (as required by Swing...).
      *
-     * @see javax.swing.Jlabel#setDisplayedMnemonic(int)
+     * @see javax.swing.JLabel#setDisplayedMnemonic(int)
      */
     int getMnemonic(String key);
 
@@ -46,7 +46,7 @@ public interface MnemonicRepository {
      * This way you can choose something other than the first
      * occurrence of the letter in the string.
      *
-     * @see javax.swing.Jlabel#setDisplayedMnemonicIndex(int)
+     * @see javax.swing.JLabel#setDisplayedMnemonicIndex(int)
      */
     int getMnemonicIndex(String key);
 
