@@ -573,7 +573,7 @@ public final class MWXmlSchema extends MWModel
             }
             throw new RuntimeException(t);
         }
-        SchemaDOM schemaDOM = (SchemaDOM)parser.getDocument2();
+        SchemaDOM schemaDOM = (SchemaDOM)parser.getDocument();
         this.reload(xmlSchemaModel, schemaDOM);
         this.fireStateChanged();
         ((MWXmlProject) this.getProject()).schemaChanged(SchemaChange.schemaStructureChange(this));
