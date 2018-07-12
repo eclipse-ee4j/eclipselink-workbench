@@ -31,7 +31,7 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
  * objects containing design information that are not persisted into the
  * sessions.xml. A copy is always returned in order to not persist unsaved
  * properties. When it is time to save the extra information for a newly saved
- * sessions.xml, {@link #update(SCSessionsProperties)} needs to be called.
+ * sessions.xml, {@link SCSessionsProperties#save(java.util.prefs.Preferences)} needs to be called.
  *
  * @version 10.1.3
  * @author Pascal Filion
@@ -126,7 +126,7 @@ public final class SCSessionsPropertiesManager extends AbstractModel
      * @param path The path of the sessions.xml to retrieve its class repository
      * information
      * @return A copy of the original <code>SCSessionsProperties</code> that will
-     * be required to be saved through {@link #update(SCSessionsProperties)} when
+     * be required to be saved through {@link SCSessionsProperties#save(java.util.prefs.Preferences)} when
      * the file will be saved
      */
     public SCSessionsProperties getSessionsProperties(File path)

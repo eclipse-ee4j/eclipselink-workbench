@@ -21,6 +21,7 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import org.eclipse.persistence.tools.workbench.framework.app.AbstractApplicationNode;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
@@ -31,7 +32,7 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
     /**
      * Creates a new <code>RdbmsConnectionPropertiesPage</code>.
      *
-     * @param nodeHolder The holder of {@link org.eclipse.persistence.tools.workbench.scplugin.ui.session.DatabaseSessionNode DatabaseSessionNode}
+     * @param nodeHolder The holder of {@link AbstractApplicationNode DatabaseSessionNode}
      */
     public EisConnectionPropertiesPage(PropertyValueModel nodeHolder, WorkbenchContextHolder contextHolder)
     {

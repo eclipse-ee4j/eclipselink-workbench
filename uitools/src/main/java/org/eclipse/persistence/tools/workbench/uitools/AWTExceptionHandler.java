@@ -29,7 +29,7 @@ import org.eclipse.persistence.tools.workbench.utility.ClassTools;
  * or via a JVM command-line argument:
  *     java -Dsun.awt.exception.handler=org.eclipse.persistence.tools.workbench.uitools.AWTExceptionHandler
  *
- * @see java.awt.EventDispatchThread#handleException(Throwable)
+ * see java.awt.EventDispatchThread#handleException(Throwable)
  *
  * I'm not quite sure what Sun was thinking when the put this "temporary hack"
  * in place. The handler is instantiated with every exception and has no context....

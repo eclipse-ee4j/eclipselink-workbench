@@ -25,6 +25,7 @@ public interface LegacyProjectReadCallback {
      * continue with the reading of a project of the specified version.
      * Throw a client-determined runtime exception if the project should
      * not be read.
+     * @param schemaVersion the schema version used for the project file
      */
     void checkLegacyRead(String schemaVersion);
 

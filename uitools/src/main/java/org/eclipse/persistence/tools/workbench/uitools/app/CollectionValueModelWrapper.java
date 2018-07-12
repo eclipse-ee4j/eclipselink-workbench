@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
+import org.eclipse.persistence.tools.workbench.utility.Model;
 import org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport;
 import org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent;
 import org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener;
@@ -120,7 +121,7 @@ public abstract class CollectionValueModelWrapper
 
     /**
      * Extend to stop listening to the nested model if necessary.
-     * @see Model#removeCollectionChangeListener(CollectiontChangeListener)
+     * @see Model#removeCollectionChangeListener(CollectionChangeListener)
      */
     @Override
     public synchronized void removeCollectionChangeListener(CollectionChangeListener listener) {
@@ -201,7 +202,7 @@ public abstract class CollectionValueModelWrapper
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
+     * @see AbstractModel#toString(java.lang.StringBuffer)
      */
     @Override
     public void toString(StringBuffer sb) {

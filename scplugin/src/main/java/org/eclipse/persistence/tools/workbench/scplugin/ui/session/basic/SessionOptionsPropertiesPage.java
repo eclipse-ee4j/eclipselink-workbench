@@ -34,6 +34,7 @@ import org.eclipse.persistence.tools.workbench.framework.uitools.RegexpDocument;
 import org.eclipse.persistence.tools.workbench.framework.uitools.TriStateBooleanCellRendererAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SCAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.session.SessionNode;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.ClassChooserTools;
 import org.eclipse.persistence.tools.workbench.uitools.app.CollectionValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
@@ -55,7 +56,7 @@ import org.eclipse.persistence.tools.workbench.utility.TriStateBoolean;
  * <pre>
  * ______________________________________________________________________
  * |                                  __________________                |  ___________________
- * | Profiler:                        |              |v|                |<-| No Profiler     |
+ * | Profiler:                        |              |v|                |{@literal <}-| No Profiler     |
  * |                                  ------------------                |  | DMS             |
  * |                                  __________________ ______________ |  | Standard        |
  * | Exception Handler:               | I              | | Browse...  | |  -------------------
@@ -65,7 +66,7 @@ import org.eclipse.persistence.tools.workbench.utility.TriStateBoolean;
  * |                                  ------------------ -------------- |
  * | -Event Listeners-------------------------------------------------- |
  * | |                                                                | |
- * | | {@link org.eclipse.persistence.tools.workbench.scplugin.ui.session.EventListenersPane EventListenersPane}                                             | |
+ * | | {@link org.eclipse.persistence.tools.workbench.scplugin.ui.session.basic.EventListenersPane EventListenersPane}                                             | |
  * | |                                                                | |
  * | ------------------------------------------------------------------ |
  * ----------------------------------------------------------------------</pre>

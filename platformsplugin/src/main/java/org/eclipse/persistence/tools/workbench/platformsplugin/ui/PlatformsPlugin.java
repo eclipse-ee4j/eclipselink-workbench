@@ -78,7 +78,7 @@ public final class PlatformsPlugin implements Plugin {
 
     /**
      * we only return actions for this plug-in in development mode
-     * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildNewMenuItemWrappers(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
+     * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildNewMenuItems(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
     @Override
     public JMenuItem[] buildNewMenuItems(WorkbenchContext context) {

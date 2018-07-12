@@ -45,7 +45,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.CheckBoxModelAd
  * <pre>
  * _____________________________________________
  * |                                           |
- * | x Use Non-Transactional Read Login        |<- Enable/Disable the RdbmsPoolLoginPane
+ * | x Use Non-Transactional Read Login        |{@literal <}- Enable/Disable the RdbmsPoolLoginPane
  * |                                           |
  * |   --------------------------------------- |
  * |   |                                     | |

@@ -132,7 +132,7 @@ public class ItemCollectionListValueModelAdapter extends ItemAspectListValueMode
     // ********** behavior **********
 
     /**
-     * @see ItemAspectListValueModelAdapter#listenToItem(org.eclipse.persistence.tools.workbench.utility.Model)
+     * @see ItemAspectListValueModelAdapter#addCollectionChangeListener(CollectionChangeListener)
      */
     @Override
     protected void startListeningToItem(Model item) {
@@ -142,7 +142,7 @@ public class ItemCollectionListValueModelAdapter extends ItemAspectListValueMode
     }
 
     /**
-     * @see ItemAspectListValueModelAdapter#stopListeningToItem(org.eclipse.persistence.tools.workbench.utility.Model)
+     * @see ItemAspectListValueModelAdapter#removeCollectionChangeListener(CollectionChangeListener)
      */
     @Override
     protected void stopListeningToItem(Model item) {

@@ -42,7 +42,7 @@ public class DisplayableStringConverter implements StringConverter {
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.StringConverter#convert(java.lang.Object)
+     * @see StringConverter#convertToString(java.lang.Object)
      */
     @Override
     public String convertToString(Object o) {

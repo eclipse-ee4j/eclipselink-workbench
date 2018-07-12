@@ -31,7 +31,7 @@ public interface ComponentGroupDescription extends ComponentContainerDescription
      * how a component should be built to this group.
      *
      * @see org.eclipse.persistence.tools.workbench.framework.app.ComponentDescription
-     * @param button
+     * @param description
      */
     public void add(ComponentDescription description);
 
@@ -39,7 +39,7 @@ public interface ComponentGroupDescription extends ComponentContainerDescription
      * Removes an instance of <code>ComponentDescription</code> which describes
      * how a component should be built to this group.
      *
-     * @param button
+     * @param description
      */
     public void remove(ComponentDescription description);
 }

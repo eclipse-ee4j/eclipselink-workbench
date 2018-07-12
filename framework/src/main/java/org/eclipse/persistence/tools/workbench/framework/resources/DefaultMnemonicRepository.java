@@ -24,7 +24,7 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 /**
  * This class can be used alongside DefaultStringRepository to look up
  * strings and their mnemonics from the same JDK resource bundle.
- * The mnemonics can be indicated with an ampersand ('&') embedded
+ * The mnemonics can be indicated with an ampersand ('{@literal &}') embedded
  * in the resource string. The same resource string can fetched by both
  * DefaultStringRepository and this repository. DefaultStringRepository
  * will strip off the ampersand before returning the string; while this

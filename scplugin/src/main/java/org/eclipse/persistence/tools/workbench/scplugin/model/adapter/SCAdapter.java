@@ -130,7 +130,7 @@ public abstract class SCAdapter extends SCModel {
     }
     /**
      * Returns true if sessions.xml version is previous to 10g.
-     * For EL added the version > 3 clause since the version number has reset.
+     * For EL added the version {@literal >} 3 clause since the version number has reset.
      * When EL Workbench surpasses 3.0 this will need to be revisited, but perhaps we
      * won't be supporting opening older TL sessions files and this method can be removed.
      */
@@ -233,7 +233,7 @@ public abstract class SCAdapter extends SCModel {
      * Builds children adapters for the given modelObjects collection.
      * and returns a collection of resulting adapters.
      *
-     * @param modelObjects
+     * @param configObjects
      */
     protected Collection adaptAll( Collection configObjects) {
 
@@ -248,7 +248,7 @@ public abstract class SCAdapter extends SCModel {
     /**
      * Builds this child adapter for the given modelObject.
      *
-     * @param modelObject
+     * @param configObject
      */
     protected SCAdapter adapt( Object configObject) {
 

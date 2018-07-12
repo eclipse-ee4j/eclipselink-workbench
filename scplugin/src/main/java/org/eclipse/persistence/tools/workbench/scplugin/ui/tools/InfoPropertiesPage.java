@@ -33,12 +33,13 @@ import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
  * This page only shows a message on screen.
  * <p>
  * Here the layout:
- * <pre>
+ * <pre>{@code
  * _______________________
  * |                     |
  * |    <A message>      |
  * |                     |
- * -----------------------</pre>
+ * -----------------------
+ * }</pre>
  *
  * @version 10.1.3
  * @author Pascal Filion

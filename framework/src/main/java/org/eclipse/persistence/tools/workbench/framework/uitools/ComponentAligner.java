@@ -112,7 +112,7 @@ public final class ComponentAligner
     /**
      * Creates a new <code>ComponentAligner</code>.
      *
-     * @param items The collection of <code>JComponent</code>s and/or
+     * @param components The collection of <code>JComponent</code>s and/or
      * <code>ComponentAligner</code>s
      */
     public ComponentAligner(Collection components)
@@ -320,7 +320,7 @@ public final class ComponentAligner
     /**
      * Determines whether the length of each component should be set each time a
      * component is added or removed. If the component's text is changed and
-     * {@link #autoValidate()}returns <code>true</code> then the length of each
+     * {@link #isAutoValidate()}returns <code>true</code> then the length of each
      * component is automatically updated. When <code>false</code> is returned,
      * {@link #revalidatePreferredSize()}has to be called manually.
      *
@@ -469,7 +469,7 @@ public final class ComponentAligner
     /**
      * Determines whether the length of each component should be set each time a
      * component is added or removed. If the component's text is changed and
-     * {@link #autoValidate()}returns <code>true</code> then the length of each
+     * {@link #isAutoValidate()}returns <code>true</code> then the length of each
      * component is automatically updated. When <code>false</code> is returned,
      * {@link #revalidatePreferredSize()}has to be called manually.
      *

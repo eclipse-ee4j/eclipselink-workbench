@@ -191,8 +191,8 @@ public class GroupBox extends AccessibleTitledPanel
      * group box
      * @param button2 The second button to be shown at the top-left section of
      * the group box, which will be the group box's title
-     * @param pane The pane to be shown as a group where the last button in the
-     * given list is its title
+     * @param pane1 The pane to be shown as a group under the button1
+     * @param pane2 The pane to be shown as a group under the button1
      */
     public GroupBox(AbstractButton button1,
                          JComponent pane1,

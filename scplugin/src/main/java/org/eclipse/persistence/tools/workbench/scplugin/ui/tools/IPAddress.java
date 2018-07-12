@@ -56,7 +56,7 @@ public final class IPAddress
     /**
      * Creates a new <code>IPAddress</code> with the given array of addresses.
      *
-     * @param ipAddress The IP address to be contained by this object
+     * @param ipAddresses The IP address to be contained by this object
      * @exception NullPointerException The IP address cannot be <code>null</code>
      * @throws ParseException The IP address is not valid, the length has to be
      * 4 with values between 0 and 255
@@ -104,11 +104,9 @@ public final class IPAddress
     /**
      * Converts the given array of 4 integers values into a string.
      *
-     * @param ipAddress The IP address to be converted into a string
-     * @return String The string representatio of an IP address
-     * @exception IPAddressException The IP address is not valid, then cannot be
-     * converted into an array of integers
-     * @throws IPAddressException The IP address is not valid, then cannot be
+     * @param ipAddresses The IP address to be converted into a string
+     * @return String The string representation of an IP address
+     * @throws ParseException The IP address is not valid, then cannot be
      * converted into an array of integers
      */
     public static String convert(int[] ipAddresses) throws ParseException
@@ -140,8 +138,6 @@ public final class IPAddress
      *
      * @param ipAddress The IP address to be converted into an array of integers
      * @return int[] The array of integers parsed from the given string
-     * @exception IPAddressException The IP address is not valid, then cannot be
-     * converted into an array of integers
      * @throws ParseException The IP address is not valid, then cannot be
      * converted into an array of integers
      */

@@ -39,6 +39,7 @@ import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.foundation.AbstractCompositeDirectCollectionMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
+import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlNode;
 
 public abstract class MWAbstractXmlDirectCollectionMapping
     extends MWDirectContainerMapping
@@ -266,7 +267,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
         this.xmlField.resolveXpaths();
     }
 
-    /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    /** @see MWXmlNode#schemaChanged(org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange) */
     @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);

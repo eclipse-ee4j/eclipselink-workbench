@@ -51,7 +51,7 @@ public final class CLExternalClassRepositoryFactory
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepositoryFactory#buildExternalClassRepository(java.io.File[])
+     * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepositoryFactory#buildClassRepository(java.io.File[])
      */
     @Override
     public ExternalClassRepository buildClassRepository(File[] classpath) {

@@ -56,13 +56,13 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.ArrayIterator;
  * |                                       |
  * | x Enable Clustering                   |
  * |               _______________________ |  _________________________
- * |   Clustering: |                   |v| |<-| Remote Command        |
+ * |   Clustering: |                   |v| |{@literal <}-| Remote Command        |
  * |               ----------------------- |  | Cache Synchronization |
  * |   ----------------------------------- |  -------------------------
  * |   |                                 | |
  * |   | {@link RemoteCommandManagerPane}        | |
  * |   |  or                             | |
- * |   | {@link CacheSynchronizationManagerPane} | |
+ * |   | CacheSynchronizationManagerPane | |
  * |   |                                 | |
  * |   ----------------------------------- |
  * |                                       |

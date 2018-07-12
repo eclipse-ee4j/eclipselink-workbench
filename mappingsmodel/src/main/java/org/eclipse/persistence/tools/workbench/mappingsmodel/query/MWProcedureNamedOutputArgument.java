@@ -18,11 +18,11 @@ import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 /**
- * @see StoredProcedurePropertiesPage
  * @version 1.1
  * @since 1.1
  * @author Les Davis
  */
+// see org.eclipse.persistence.tools.workbench.mappingsplugin.ui.query.relationalStoredProcedurePropertiesPane in mappingsplugin
 public final class MWProcedureNamedOutputArgument extends MWAbstractProcedureArgument
 {
     /**

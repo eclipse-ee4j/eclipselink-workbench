@@ -116,7 +116,7 @@ public abstract class MWAbstractClassIndicatorPolicy
         //do nothing
     }
 
-    /** @see MWXmlNode.schemaChanged(SchemaChange) */
+    /** @see MWXmlNode#schemaChanged(org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange) */
     @Override
     public void schemaChanged(SchemaChange change) {
         //do nothing

@@ -21,7 +21,7 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 /**
  * DefaultStringRepository extends SimpleStringRepository to
- * 1. strip out any mnemonic markers ('&') embedded in the strings
+ * 1. strip out any mnemonic markers ('{@literal &}') embedded in the strings
  *     in the resource bundle
  * 2. format the strings in the resource with the arguments,
  *     as defined by java.text.MessageFormat
@@ -30,7 +30,7 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
  *
  * In the future, we might want to provide an escape character (e.g. '\')
  * that would allow the strings in the resource bundle to contain
- * ampersands that do not mark mnemonics (e.g. "Laurel \\& &Hardy").
+ * ampersands that do not mark mnemonics (e.g. "{@code Laurel \\& &Hardy}").
  */
 public class DefaultStringRepository extends ResourceBundleStringRepository {
 
@@ -47,7 +47,7 @@ public class DefaultStringRepository extends ResourceBundleStringRepository {
 
     /**
      * The strings in the specified resource bundle must
-     * 1. use an ampersand ('&') to mark their mnemonics
+     * 1. use an ampersand ('{@literal &}') to mark their mnemonics
      * 2. encode formatting information as defined by java.text.MessageFormat
      */
     public DefaultStringRepository(String resourceClassName) {
@@ -56,7 +56,7 @@ public class DefaultStringRepository extends ResourceBundleStringRepository {
 
     /**
      * The strings in the specified resource bundle must
-     * 1. use an ampersand ('&') to mark their mnemonics
+     * 1. use an ampersand ('{@literal &}') to mark their mnemonics
      * 2. encode formatting information as defined by java.text.MessageFormat
      */
     public DefaultStringRepository(Class resourceClass) {
@@ -68,7 +68,7 @@ public class DefaultStringRepository extends ResourceBundleStringRepository {
 
     /**
      * Return the string associated with the specified key,
-     * stripping off the first ampersand ('&'), if present.
+     * stripping off the first ampersand ('{@literal &}'), if present.
      */
     @Override
     protected String get(String key) {

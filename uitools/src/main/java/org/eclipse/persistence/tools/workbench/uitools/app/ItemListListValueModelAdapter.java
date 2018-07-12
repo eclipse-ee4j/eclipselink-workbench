@@ -136,7 +136,7 @@ public class ItemListListValueModelAdapter extends ItemAspectListValueModelAdapt
     // ********** behavior **********
 
     /**
-     * @see ItemAspectListValueModelAdapter#listenToItem(org.eclipse.persistence.tools.workbench.utility.Model)
+     * @see ItemAspectListValueModelAdapter#addListChangeListener(ListChangeListener)
      */
     @Override
     protected void startListeningToItem(Model item) {
@@ -146,7 +146,7 @@ public class ItemListListValueModelAdapter extends ItemAspectListValueModelAdapt
     }
 
     /**
-     * @see ItemAspectListValueModelAdapter#stopListeningToItem(org.eclipse.persistence.tools.workbench.utility.Model)
+     * @see ItemAspectListValueModelAdapter#removeListChangeListener(ListChangeListener)
      */
     @Override
     protected void stopListeningToItem(Model item) {

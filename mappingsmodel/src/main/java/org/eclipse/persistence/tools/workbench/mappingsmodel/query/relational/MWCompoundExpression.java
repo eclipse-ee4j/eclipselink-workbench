@@ -269,7 +269,7 @@ public final class MWCompoundExpression extends MWExpression {
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWExpression#restoreChanges(String, Object, Object)
+     * @see Undoable#undoChange(java.lang.String, java.lang.Object, java.lang.Object)
      */
     @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue) {

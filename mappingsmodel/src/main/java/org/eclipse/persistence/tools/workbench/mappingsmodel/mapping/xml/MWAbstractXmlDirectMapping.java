@@ -34,6 +34,7 @@ import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.foundation.AbstractDirectMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
+import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlNode;
 
 @SuppressWarnings("nls")
 public abstract class MWAbstractXmlDirectMapping
@@ -201,7 +202,7 @@ public abstract class MWAbstractXmlDirectMapping
         this.xmlField.resolveXpaths();
     }
 
-    /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    /** @see MWXmlNode#schemaChanged(org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange) */
     @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);

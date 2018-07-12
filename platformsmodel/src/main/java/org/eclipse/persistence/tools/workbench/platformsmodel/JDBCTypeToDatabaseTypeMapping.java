@@ -106,7 +106,7 @@ public final class JDBCTypeToDatabaseTypeMapping
     // ********** behavior **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#addProblemsTo(java.util.Set)
+     * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#addProblemsTo(java.util.List)
      */
     @Override
     protected void addProblemsTo(List currentProblems) {
@@ -174,7 +174,7 @@ public final class JDBCTypeToDatabaseTypeMapping
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
+     * @see org.eclipse.persistence.tools.workbench.utility.node.Node#displayString()
      */
     @Override
     public String displayString() {

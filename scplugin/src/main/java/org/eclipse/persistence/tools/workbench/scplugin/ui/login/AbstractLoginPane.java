@@ -247,8 +247,8 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     * Sets whether or not this component is enabled. Disabling this pane will
     * also disable its children through {@link #updateEnableStateOfChildren(boolean)}.
     *
-    * @param enabled <code>true<code> if this component and its children should
-    * be enabled, <code>false<code> otherwise
+    * @param enabled <code>true</code> if this component and its children should
+    * be enabled, <code>false</code> otherwise
     */
     @Override
     public final void setEnabled(boolean enabled)
@@ -263,8 +263,8 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     /**
      * Updates the enable state of the children of this pane.
      *
-    * @param enabled <code>true<code> if this pane's children should be enabled,
-    * <code>false<code> otherwise
+    * @param enabled <code>true</code> if this pane's children should be enabled,
+    * <code>false</code> otherwise
      */
     protected void updateEnableStateOfChildren(boolean enabled)
     {

@@ -39,11 +39,11 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.NumberSpinnerMo
 /**
  * This pane shows the Connection count widgets. Those widgets are disabled if
  * {@link org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter#usesExternalConnectionPooling() LoginAdapter.usesExternalConnectionPooling()}
- * returns <code>true<code>.
+ * returns <code>true</code>.
  * <p>
- * If the Login's External Connection Pooling flag is set to <code>true<code>,
+ * If the Login's External Connection Pooling flag is set to <code>true</code>,
  * then the components of this pane will be disabled.
- * <p>
+ * </p>
  * Here the layout:
  * <pre>
  * _________________________________
@@ -60,7 +60,6 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.NumberSpinnerMo
  *
  * Know containers of this pane:<br>
  * - {@link PoolGeneralPropertiesPage}<br>
- * - {@link ReadPoolGeneralPropertiesPage}<br>
  * - {@link org.eclipse.persistence.tools.workbench.scplugin.ui.pool.write.PoolGeneralPropertiesPage PoolGeneralPropertiesPage}
  *
  * @see ConnectionPoolAdapter

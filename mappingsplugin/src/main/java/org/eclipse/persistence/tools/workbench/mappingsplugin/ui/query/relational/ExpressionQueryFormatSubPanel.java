@@ -43,7 +43,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
 
 
 /**
- * This panel appears on the Named Queries->QueryFormatPanel, if the user chooses Expression
+ * This panel appears on the Named Queries-{@literal >}QueryFormatPanel, if the user chooses Expression
  * for the query format.  It contains a panel with a tree for viewing the expression
  * and an Edit button to edit the expression.
  */

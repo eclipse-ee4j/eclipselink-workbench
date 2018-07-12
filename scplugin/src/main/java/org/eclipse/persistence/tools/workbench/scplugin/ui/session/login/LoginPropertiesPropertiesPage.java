@@ -19,6 +19,7 @@ import java.awt.Component;
 import javax.swing.BorderFactory;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.PropertyPane;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 

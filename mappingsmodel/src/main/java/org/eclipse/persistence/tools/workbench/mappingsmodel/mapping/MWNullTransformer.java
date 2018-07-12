@@ -21,6 +21,7 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.
 
 import org.eclipse.persistence.internal.helper.DatabaseField;
 import org.eclipse.persistence.mappings.foundation.AbstractTransformationMapping;
+import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.AggregateRuntimeFieldNameGenerator;
 
 public final class MWNullTransformer
     extends MWTransformer

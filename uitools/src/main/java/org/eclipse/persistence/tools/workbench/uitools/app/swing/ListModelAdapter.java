@@ -42,7 +42,7 @@ public class ListModelAdapter extends AbstractListModel {
 
     /**
      * Cache the size of the list for "dramatic" changes.
-     * @see #listChanged(ListChangeEvent)
+     * @see #listChanged()
      */
     protected int listSize;
 

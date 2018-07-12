@@ -30,7 +30,7 @@ public class ExceptionHandlerThreadGroup
     // ********** constructors/initialization **********
 
     /**
-     * @see ThreadGroup(String)
+     * @see ThreadGroup#ThreadGroup(java.lang.String)
      */
     public ExceptionHandlerThreadGroup(String name, ExceptionBroadcaster broadcaster) {
         super(name);
@@ -38,7 +38,7 @@ public class ExceptionHandlerThreadGroup
     }
 
     /**
-     * @see ThreadGroup(ThreadGroup, String)
+     * @see ThreadGroup#ThreadGroup(java.lang.ThreadGroup, java.lang.String)
      */
     public ExceptionHandlerThreadGroup(ThreadGroup parent, String name, ExceptionBroadcaster broadcaster) {
         super(parent, name);

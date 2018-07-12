@@ -48,15 +48,17 @@ public class TokenWriter
     private final int delimiterBufferSize = 1024;
 
     /** The default delimiters are
-        <space>
-        <tab>
-        <newline>
-        <carriage return>
-        <form feed>
+     * <pre>{@code
+     *   <space>
+     *   <tab>
+     *   <newline>
+     *   <carriage return>
+     *   <form feed>
+     * }</pre>
      */
     public static final String DEFAULT_DELIMITERS = " \t\n\r\f";
 
-    /** The default escape character is '\' <backslash> */
+    /** The default escape character is '\' &lt;backslash&gt; */
     public static final char DEFAULT_ESCAPE_CHARACTER = '\\';
 
 

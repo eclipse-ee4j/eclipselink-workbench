@@ -23,6 +23,8 @@ import org.eclipse.persistence.tools.workbench.framework.context.ApplicationCont
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseSessionAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.session.login.EisConnectionPropertiesPage;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.session.login.RdbmsConnectionPropertiesPage;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.swing.CheckBoxModelAdapter;

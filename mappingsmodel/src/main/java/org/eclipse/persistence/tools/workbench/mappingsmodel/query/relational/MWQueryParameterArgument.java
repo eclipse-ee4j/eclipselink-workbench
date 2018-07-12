@@ -123,7 +123,7 @@ public final class MWQueryParameterArgument extends MWArgument {
 
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.mappingsmodel.query.Restorable#undoChange(String, Object)
+     * @see Undoable#undoChange(java.lang.String, java.lang.Object, java.lang.Object)
      */
     @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue)

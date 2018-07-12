@@ -319,7 +319,7 @@ public class StatusDialog extends AbstractDialog
     /**
      * Creates a new <code>CellRendererAdapter</code> to render the given value.
      *
-     * @param item The item to be formated on screen
+     * @param value The item to be formatted on screen
      * @return A new <code>CellRendererAdapter</code>
      */
     protected CellRendererAdapter buildNodeRenderer(Object value)

@@ -39,6 +39,8 @@ import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepos
 import org.eclipse.persistence.tools.workbench.framework.uitools.Pane;
 import org.eclipse.persistence.tools.workbench.framework.uitools.RegexpDocument;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.pool.basic.RdbmsPoolLoginPropertiesPage;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.session.login.RdbmsConnectionPropertiesPage;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.BooleanCellRendererAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.ClassChooserTools;
 import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
@@ -68,7 +70,7 @@ import org.eclipse.persistence.tools.workbench.utility.Transformer;
  * <pre>
  * ---------------------------------------------
  * |                    ---------------------- |  --------------------
- * | Database Driver:   |                  |v| |<-| Driver Manager   |
+ * | Database Driver:   |                  |v| |{@literal <}-| Driver Manager   |
  * |                    ---------------------- |  | J2EE Data Source |
  * | -PanelSwitcher--------------------------- |  --------------------
  * | |                                       | |
@@ -738,8 +740,8 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     /**
      * Updates the enable state of the children of this pane.
      *
-    * @param enabled <code>true<code> if this component and its children should
-    * be enabled, <code>false<code> otherwise
+    * @param enabled <code>true</code> if this component and its children should
+    * be enabled, <code>false</code> otherwise
      */
     @Override
     protected void updateEnableStateOfChildren(boolean enabled)

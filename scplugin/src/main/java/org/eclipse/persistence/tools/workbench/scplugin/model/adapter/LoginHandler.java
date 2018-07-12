@@ -14,6 +14,8 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.scplugin.model.adapter;
 
+import org.eclipse.persistence.internal.sessions.factories.model.login.DatabaseLoginConfig;
+
 /**
  * Defines the interface to an object that contains a DatabaseLogin.
  *

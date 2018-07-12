@@ -159,7 +159,7 @@ public abstract class AbstractTreeNodeValueModel
     }
 
     /**
-     * @see TreeNodeValueModel#indexOfChild(Object)
+     * @see TreeNodeValueModel#indexOfChild(TreeNodeValueModel)
      */
     @Override
     public int indexOfChild(TreeNodeValueModel child) {

@@ -34,7 +34,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.DocumentAdapter
  * This page shows the information about the {@link org.eclipse.persistence.tools.workbench.scplugin.model.adapter.JMSTopicTransportManagerAdapter
  * JMSTopicTransportManagerAdapter}.
  * <p>
- * Here the layout:</pre>
+ * Here the layout:<pre>
  * _______________________________________________________________
  * |                                ____________________________ |
  * | JMS Topic Name:                | I                        | |
@@ -47,7 +47,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.DocumentAdapter
  * | | {@link JNDINamingServicePane}                                   | |
  * | |                                                         | |
  * | ----------------------------------------------------------- |
- * ---------------------------------------------------------------<pre>
+ * ---------------------------------------------------------------</pre>
  *
  * Known container of this pane:<br>
  * - {@link RemoteCommandManagerPane}

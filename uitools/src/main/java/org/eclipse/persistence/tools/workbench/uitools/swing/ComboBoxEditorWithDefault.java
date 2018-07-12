@@ -29,7 +29,7 @@ import org.eclipse.persistence.tools.workbench.uitools.cell.CellRendererAdapter;
  * is fired. This editor also supports showing a default value if no entry is
  * set.
  *
- * @see TextFieldWithDefault
+ * @see TextFieldWithDefaultHandler
  *
  * @version 11.0.0
  * @since 11.0.0

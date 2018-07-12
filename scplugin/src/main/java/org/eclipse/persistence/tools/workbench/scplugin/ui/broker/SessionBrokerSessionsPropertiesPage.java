@@ -23,12 +23,14 @@ import javax.swing.JPanel;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionBrokerAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 
 // Mapping Workbench
 
 /**
- * This pane shows the list of {@link SessionsAdapter}s contained in a
+ * This pane shows the list of {@link SessionAdapter}s contained in a
  * {@link SessionBrokerAdapter}.
  * <p>
  * Here the layout:

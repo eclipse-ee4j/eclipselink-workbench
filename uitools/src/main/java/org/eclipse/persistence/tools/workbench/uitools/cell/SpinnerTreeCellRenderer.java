@@ -164,16 +164,13 @@ public class SpinnerTreeCellRenderer
     // ********** TreeCellEditorAdapter.Renderer implementation **********
 
     /**
-     * @see TreeCellEditorAdapter#getValue()
+     * @see TreeCellEditorAdapter#getCellEditorValue()
      */
     @Override
     public Object getValue() {
         return this.getSpinner().getValue();
     }
 
-    /**
-     * @see TreeCellEditorAdapter#setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener)
-     */
     @Override
     public void setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;

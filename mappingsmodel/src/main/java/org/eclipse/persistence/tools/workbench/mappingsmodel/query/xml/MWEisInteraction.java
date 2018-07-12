@@ -30,6 +30,7 @@ import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.queries.DatabaseQuery;
+import org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel;
 
 public final class MWEisInteraction
     extends MWModel
@@ -197,7 +198,7 @@ public final class MWEisInteraction
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.model.xml.MWXModel#addChildrenTo(Collection)
+     * @see AbstractNodeModel#addChildrenTo(java.util.List)
      */
     @Override
     protected void addChildrenTo(List children) {

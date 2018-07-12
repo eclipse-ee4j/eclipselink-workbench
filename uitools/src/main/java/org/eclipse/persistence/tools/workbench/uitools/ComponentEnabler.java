@@ -246,10 +246,10 @@ public class ComponentEnabler
     /**
      * Initializes this <code>ComponentEnabler</code> with the given state.
      *
-     * @param booleanHolder A value model on the underlying boolean model
-     * @param components An iterator on the collection of components whose
+     * @param booleanVM A value model on the underlying boolean model
+     * @param comps A collection of components whose
      * "enabled" state is kept in sync with the boolean holder's value
-     * @param defaultValue The value to use when the underlying model is
+     * @param defaultVal The value to use when the underlying model is
      * <code>null</code>
      */
     protected void initialize(ValueModel booleanVM,
@@ -271,7 +271,7 @@ public class ComponentEnabler
      * Updates the enable state of the <code>Component</code>s that are given
      * by the <code>CollectionValueModel</code>.
      *
-     * @param enabledState The new enable state the components need to have
+     * @param enabled The new enable state the components need to have
      */
     protected void updateEnableState(boolean enabled)
     {

@@ -45,7 +45,7 @@ import org.eclipse.persistence.tools.workbench.utility.node.Problem;
 /**
  * Here's the layout:
  *
- * @see SequencingPane - The invoker of this dialog
+ * @see SequencingPropertiesPage - The invoker of this dialog
  * @see SequenceStateObject
  *
  * @version 11.0.0

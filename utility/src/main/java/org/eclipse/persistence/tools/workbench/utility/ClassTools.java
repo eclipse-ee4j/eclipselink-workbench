@@ -939,12 +939,12 @@ public final class ClassTools {
      * Return the "toString()" name of the class.
      * "Member" classes will return only the final name:
      *     "com.foo.bar.TopLevelClass$MemberClass$NestedMemberClass"
-     *         => "NestedMemberClass"
+     *         =&gt; "NestedMemberClass"
      * "Local" and "anonymous" classes will still return the embedded '$'s:
      *     "com.foo.bar.TopLevelClass$1LocalClass"
-     *         => "TopLevelClass$1LocalClass"
+     *         =&gt; "TopLevelClass$1LocalClass"
      *     "com.foo.bar.TopLevelClass$1"
-     *         => "TopLevelClass$1"
+     *         =&gt; "TopLevelClass$1"
      */
     public static String toStringNameForClassNamed(String className) {
         return classNamedIsMember(className) ?
@@ -1324,7 +1324,7 @@ public final class ClassTools {
 
     /**
      * Return the class code for the specified class.
-     * @see java.lang.Class.getName()
+     * @see java.lang.Class#getName()
      */
     public static char codeForClass(Class javaClass) {
         PrimitiveClassCode[] codes = getPrimitiveClassCodes();
@@ -1338,7 +1338,7 @@ public final class ClassTools {
 
     /**
      * Return the class code for the specified class.
-     * @see java.lang.Class.getName()
+     * @see java.lang.Class#getName()
      */
     public static char codeForClassNamed(String className) {
         PrimitiveClassCode[] codes = getPrimitiveClassCodes();

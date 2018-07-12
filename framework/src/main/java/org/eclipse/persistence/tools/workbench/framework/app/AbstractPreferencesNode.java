@@ -80,7 +80,7 @@ public abstract class AbstractPreferencesNode
     protected abstract Component buildPropertiesPage();
 
     /**
-     * @see EditorNode#propertiesPageIcon()
+     * @see EditorNode#propertiesPageTitleIcon()
      */
     @Override
     public Icon propertiesPageTitleIcon() {
@@ -88,7 +88,7 @@ public abstract class AbstractPreferencesNode
     }
 
     /**
-     * @see EditorNode#propertiesPageTitle()
+     * @see EditorNode#propertiesPageTitleText()
      */
     @Override
     public String propertiesPageTitleText() {

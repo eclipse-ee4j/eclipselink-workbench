@@ -200,7 +200,7 @@ public final class MWXmlClassIndicatorFieldPolicy
         this.xmlField.resolveXpaths();
     }
 
-    /** @see MWXmlNode.schemaChanged(SchemaChange) */
+    /** @see MWXmlNode#schemaChanged(org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange) */
     @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);

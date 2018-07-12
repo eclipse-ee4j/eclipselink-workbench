@@ -100,7 +100,7 @@ import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
  * We could have overloaded the same method name (e.g. initializeFrom(MW___Mapping oldMapping))
  * but the resulting confusion is not worth it. "Upcasting" just makes this really fuzzy....
  *
- * <il> If necessary, each subclass (concrete and abstract) should override
+ * <li> If necessary, each subclass (concrete and abstract) should override
  * the initializeFromMW___Mapping(MW___Mapping oldMapping) method. This override
  * should first call super.initializeFromMW___Mapping(MW___Mapping oldMapping); then
  * it should initialize only the properties that are defined by it that have

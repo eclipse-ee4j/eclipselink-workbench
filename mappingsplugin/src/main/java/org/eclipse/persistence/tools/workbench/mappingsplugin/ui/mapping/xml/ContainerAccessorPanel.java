@@ -172,8 +172,8 @@ public final class ContainerAccessorPanel extends AbstractSubjectPanel {
     /**
      * Updates the enable state of the children of this panel.
      *
-    * @param enabled <code>true<code> if this pane's children should be enabled,
-    * <code>false<code> otherwise
+    * @param enabled <code>true</code> if this pane's children should be enabled,
+    * <code>false</code> otherwise
      */
     protected void updateEnableStateOfChildren(boolean enabled)
     {

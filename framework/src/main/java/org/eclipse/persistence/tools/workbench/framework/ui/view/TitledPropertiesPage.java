@@ -50,8 +50,6 @@ import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContex
  * |                                     |
  * ---------------------------------------</pre>
  *
- * @see DisplayableTitlePanel
- *
  */
 public abstract class TitledPropertiesPage extends AbstractPropertiesPage {
 

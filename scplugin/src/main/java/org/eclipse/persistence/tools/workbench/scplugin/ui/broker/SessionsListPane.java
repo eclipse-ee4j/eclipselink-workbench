@@ -40,7 +40,7 @@ import org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeLi
 // Mapping Workbench
 
 /**
- * This pane shows the list of {@link SessionsAdapter}s contained in a
+ * This pane shows the list of {@link SessionAdapter}s contained in a
  * {@link SessionBrokerAdapter}.
  * <p>
  * Here the layout:

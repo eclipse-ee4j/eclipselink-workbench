@@ -710,7 +710,7 @@ public final class StringTools {
 
     /**
      * Convert the specified "camel back" string to an "all caps" string:
-     * "largeProject" -> "LARGE_PROJECT"
+     * "largeProject" -&gt; "LARGE_PROJECT"
      */
     public static String convertCamelBackToAllCaps(String camelBackString) {
         int len = camelBackString.length();
@@ -735,7 +735,7 @@ public final class StringTools {
 
     /**
      * Convert the specified "camel back" string to an "all caps" string:
-     * "largeProject" -> "LARGE_PROJECT"
+     * "largeProject" -&gt; "LARGE_PROJECT"
      * Limit the resulting string to the specified maximum length.
      */
     public static String convertCamelBackToAllCaps(String camelBackString, int maxLength) {
@@ -770,16 +770,16 @@ public final class StringTools {
     /**
      * Return whether the specified series of characters occur at
      * a "camel back" work break:
-     *     "*aa" -> false
-     *     "*AA" -> false
-     *     "*Aa" -> false
-     *     "AaA" -> false
-     *     "AAA" -> false
-     *     "aa*" -> false
-     *     "AaA" -> false
-     *     "aAa" -> true
-     *     "AA*" -> false
-     *     "AAa" -> true
+     *     "*aa" -&gt; false
+     *     "*AA" -&gt; false
+     *     "*Aa" -&gt; false
+     *     "AaA" -&gt; false
+     *     "AAA" -&gt; false
+     *     "aa*" -&gt; false
+     *     "AaA" -&gt; false
+     *     "aAa" -&gt; true
+     *     "AA*" -&gt; false
+     *     "AAa" -&gt; true
      * where '*' == any char
      */
     private static boolean camelBackWordBreak(char prev, char c, char next) {
@@ -800,7 +800,7 @@ public final class StringTools {
 
     /**
      * Convert the specified "all caps" string to a "camel back" string:
-     * "LARGE_PROJECT" -> "LargeProject"
+     * "LARGE_PROJECT" -&gt; "LargeProject"
      * Capitalize the first letter.
      */
     public static String convertAllCapsToCamelBack(String allCapsString) {
@@ -809,7 +809,7 @@ public final class StringTools {
 
     /**
      * Convert the specified "all caps" string to a "camel back" string:
-     * "LARGE_PROJECT" -> "largeProject"
+     * "LARGE_PROJECT" -&gt; "largeProject"
      * Optionally capitalize the first letter.
      */
     public static String convertAllCapsToCamelBack(String allCapsString, boolean capitalizeFirstLetter) {
@@ -977,12 +977,10 @@ public final class StringTools {
      * The weight can be one of the following:
      * <ul>
      * <li>{@link #NO_MATCH} No match was found
-     * <li>{@link #STRING_CONTAINS_PART_OF_THE_OTHER}
-     * <li>{@link #STRING_CONTAINS_THE_OTHER}
-     * <li>{@link #STRINGS_SUBSET_NON_CONTINUOUS}
-     * <li>{@link #STRINGS_SUBSET_CONTINUOUS}
-     * <li>{@link #STRINGS_EQUAL_WITH_DELIMITOR} Both strings are equals by
-     * ignoring one character
+     * <li>{@link #STRING_CONTAINS_PART}
+     * <li>{@link #STRINGS_EQUAL_WITH_IGNORE_CHARACTERS}
+     * <li>{@link #STRING_CONTAINS_PART_CONTINUOUS}
+     * <li>{@link #STRING_CONTAINS}
      * <li>{@link #STRINGS_EQUAL} Both strings are equals
      * </ul>
      *
@@ -1003,11 +1001,10 @@ public final class StringTools {
      * The weight can be one of the following:
      * <ul>
      * <li>{@link #NO_MATCH} No match was found
-     * <li>{@link #STRING_CONTAINS_PART_OF_THE_OTHER}
-     * <li>{@link #STRING_CONTAINS_THE_OTHER}
-     * <li>{@link #STRINGS_SUBSET_CONTINUOUS}
-     * <li>{@link #STRINGS_EQUAL_WITH_DELIMITOR} Both strings are equals by
-     * ignoring one character
+     * <li>{@link #STRING_CONTAINS_PART}
+     * <li>{@link #STRINGS_EQUAL_WITH_IGNORE_CHARACTERS}
+     * <li>{@link #STRING_CONTAINS_PART_CONTINUOUS}
+     * <li>{@link #STRING_CONTAINS}
      * <li>{@link #STRINGS_EQUAL} Both strings are equals
      * </ul>
      *
@@ -1055,11 +1052,10 @@ public final class StringTools {
      * The weight can be one of the following:
      * <ul>
      * <li>{@link #NO_MATCH} No match was found
-     * <li>{@link #STRING_CONTAINS_PART_OF_THE_OTHER}
-     * <li>{@link #STRING_CONTAINS_THE_OTHER}
-     * <li>{@link #STRINGS_SUBSET_CONTINUOUS}
-     * <li>{@link #STRINGS_EQUAL_WITH_DELIMITOR} Both strings are equals by
-     * ignoring one character
+     * <li>{@link #STRING_CONTAINS_PART}
+     * <li>{@link #STRINGS_EQUAL_WITH_IGNORE_CHARACTERS}
+     * <li>{@link #STRING_CONTAINS_PART_CONTINUOUS}
+     * <li>{@link #STRING_CONTAINS}
      * <li>{@link #STRINGS_EQUAL} Both strings are equals
      * </ul>
      *
@@ -1067,7 +1063,7 @@ public final class StringTools {
      * could be the equals, contained or a sub-set
      * @param string2 The string to use to check if it is equal, contained or
      * partially contained in the main string
-     * @param ignoreCharacter The character that can be ignored during the
+     * @param ignoreCharacters The character that can be ignored during the
      * calculation or '\0' to not ignore any character
      * @return The weight of the match
      */
@@ -1123,12 +1119,10 @@ public final class StringTools {
      * The weight can be one of the following:
      * <ul>
      * <li>{@link #NO_MATCH} No match was found
-     * <li>{@link #STRING_CONTAINS_PART_OF_THE_OTHER}
-     * <li>{@link #STRING_CONTAINS_THE_OTHER}
-     * <li>{@link #STRINGS_SUBSET_NON_CONTINUOUS}
-     * <li>{@link #STRINGS_SUBSET_CONTINUOUS}
-     * <li>{@link #STRINGS_EQUAL_WITH_DELIMITOR} Both strings are equals by
-     * ignoring one character
+     * <li>{@link #STRING_CONTAINS_PART}
+     * <li>{@link #STRINGS_EQUAL_WITH_IGNORE_CHARACTERS}
+     * <li>{@link #STRING_CONTAINS_PART_CONTINUOUS}
+     * <li>{@link #STRING_CONTAINS}
      * <li>{@link #STRINGS_EQUAL} Both strings are equals
      * </ul>
      *
@@ -1149,11 +1143,10 @@ public final class StringTools {
      * The weight can be one of the following:
      * <ul>
      * <li>{@link #NO_MATCH} No match was found
-     * <li>{@link #STRING_CONTAINS_PART_OF_THE_OTHER}
-     * <li>{@link #STRING_CONTAINS_THE_OTHER}
-     * <li>{@link #STRINGS_SUBSET_CONTINUOUS}
-     * <li>{@link #STRINGS_EQUAL_WITH_DELIMITOR} Both strings are equals by
-     * ignoring one character
+     * <li>{@link #STRING_CONTAINS_PART}
+     * <li>{@link #STRINGS_EQUAL_WITH_IGNORE_CHARACTERS}
+     * <li>{@link #STRING_CONTAINS_PART_CONTINUOUS}
+     * <li>{@link #STRING_CONTAINS}
      * <li>{@link #STRINGS_EQUAL} Both strings are equals
      * </ul>
      *
@@ -1176,11 +1169,10 @@ public final class StringTools {
      * The weight can be one of the following:
      * <ul>
      * <li>{@link #NO_MATCH} No match was found
-     * <li>{@link #STRING_CONTAINS_PART_OF_THE_OTHER}
-     * <li>{@link #STRING_CONTAINS_THE_OTHER}
-     * <li>{@link #STRINGS_SUBSET_CONTINUOUS}
-     * <li>{@link #STRINGS_EQUAL_WITH_DELIMITOR} Both strings are equals by
-     * ignoring one character
+     * <li>{@link #STRING_CONTAINS_PART}
+     * <li>{@link #STRINGS_EQUAL_WITH_IGNORE_CHARACTERS}
+     * <li>{@link #STRING_CONTAINS_PART_CONTINUOUS}
+     * <li>{@link #STRING_CONTAINS}
      * <li>{@link #STRINGS_EQUAL} Both strings are equals
      * </ul>
      *
@@ -1188,7 +1180,7 @@ public final class StringTools {
      * could be the equals, contained or a sub-set
      * @param string2 The string to use to check if it is equal, contained
      * or partially contained in the main string
-     * @param ignoreCharacter The character that can be ignored during the
+     * @param ignoreCharacters The character that can be ignored during the
      * calculation or '\0' to not ignore any character
      * @return The weight of the match
      */
@@ -1641,7 +1633,7 @@ public final class StringTools {
      * a string representation for each object. The collection can contain
      * <code>null</code> values.
      *
-     * @param iter The collection of objects to be tested with the given string
+     * @param collection  The collection of objects to be tested with the given string
      * @param string The string to be compared (case ignored) with all the objects
      * contained in the given collection
      * @return <code>true</code> if the collection contains the given string,

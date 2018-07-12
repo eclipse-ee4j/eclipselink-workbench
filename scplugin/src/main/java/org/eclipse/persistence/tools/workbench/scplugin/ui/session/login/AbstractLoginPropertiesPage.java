@@ -18,6 +18,8 @@ package org.eclipse.persistence.tools.workbench.scplugin.ui.session.login;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseSessionAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.EISLoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.session.DatabaseSessionNode;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 
@@ -44,8 +46,7 @@ abstract class AbstractLoginPropertiesPage extends ScrollablePropertiesPage
      * Creates the selection holder that will hold the user object to be edited
      * by this page.
      *
-     * @param nodeHolder The holder of {@link DatabaseSessionNode}
-     * @return The <code>PropertyValueModel</code> containing the {@link EisLoginAdapter}
+     * @return The <code>PropertyValueModel</code> containing the {@link EISLoginAdapter}
      * to be edited by this page
      */
     @Override

@@ -116,7 +116,7 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
      * have any listeners.
      * This is necessary because some crappy jdk code gets the value
      * from the model *before* listening to the model.  ~bjv
-     * @see javax.swing.JSpinner.DefaultEditor(javax.swing.JSpinner)
+     * @see javax.swing.JSpinner.DefaultEditor#DefaultEditor(javax.swing.JSpinner)
      * @see javax.swing.SpinnerModel#getValue()
      */
     @Override

@@ -187,16 +187,13 @@ public class ComboBoxTreeCellRenderer
     // ********** TableCellEditorAdapter.Renderer implementation **********
 
     /**
-     * @see TreeCellEditorAdapter#getValue()
+     * @see TreeCellEditorAdapter#getCellEditorValue()
      */
     @Override
     public Object getValue() {
         return this.getComboBox().getSelectedItem();
     }
 
-    /**
-     * @see TreeCellEditorAdapter#setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener)
-     */
     @Override
     public void setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;

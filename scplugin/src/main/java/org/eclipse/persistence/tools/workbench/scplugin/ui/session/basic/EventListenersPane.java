@@ -47,7 +47,7 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
  * |                                                |
  * | Event Listeners:                               |
  * | ___________________________________ __________ |
- * | |                               |^| | Add... | |<- Shows the Class chooser
+ * | |                               |^| | Add... | |{@literal <}- Shows the Class chooser
  * | |                               | | ---------- |
  * | |                               ||| __________ |
  * | |                               ||| | Remove | |

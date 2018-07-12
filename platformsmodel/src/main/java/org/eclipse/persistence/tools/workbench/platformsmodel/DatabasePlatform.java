@@ -500,7 +500,7 @@ public final class DatabasePlatform
     // ********** behavior **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#addChildrenTo(java.util.List)
+     * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#addChildrenTo(java.util.List)
      */
     @Override
     protected void addChildrenTo(List children) {
@@ -510,7 +510,7 @@ public final class DatabasePlatform
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#nodeRemoved(org.eclipse.persistence.tools.workbench.utility.Node)
+     * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#nodeRemoved(org.eclipse.persistence.tools.workbench.utility.Node)
      */
     @Override
     public void nodeRemoved(org.eclipse.persistence.tools.workbench.utility.node.Node node) {
@@ -702,7 +702,7 @@ public final class DatabasePlatform
     // ********** printing and displaying **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
+     * @see org.eclipse.persistence.tools.workbench.utility.node.Node#displayString()
      */
     @Override
     public String displayString() {

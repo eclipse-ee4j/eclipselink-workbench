@@ -121,7 +121,7 @@ public abstract class ListCurator
 
     /**
      * Unsupported in this implementation
-     * @see ListValueModel.addItem(int, Object)
+     * @see ListValueModel#addItem(int, Object)
      */
     @Override
     public void addItem(int index, Object item) {
@@ -130,7 +130,7 @@ public abstract class ListCurator
 
     /**
      * Unsupported in this implementation
-     * @see ListValueModel.addItems(int, List)
+     * @see ListValueModel#addItems(int, List)
      */
     @Override
     public void addItems(int index, List items) {
@@ -141,7 +141,7 @@ public abstract class ListCurator
 
     /**
      * Unsupported in this implementation
-     * @see ListValueModel.removeItem(int)
+     * @see ListValueModel#removeItem(int)
      */
     @Override
     public Object removeItem(int index) {
@@ -150,7 +150,7 @@ public abstract class ListCurator
 
     /**
      * Unsupported in this implementation
-     * @see ListValueModel.removeItems(int, int)
+     * @see ListValueModel#removeItems(int, int)
      */
     @Override
     public List removeItems(int index, int length) {
@@ -163,7 +163,7 @@ public abstract class ListCurator
 
     /**
      * Unsupported in this implementation
-     * @see ListValueModel.replaceItem(int, Object)
+     * @see ListValueModel#replaceItem(int, Object)
      */
     @Override
     public Object replaceItem(int index, Object item) {
@@ -172,7 +172,7 @@ public abstract class ListCurator
 
     /**
      * Unsupported in this implementation
-     * @see ListValueModel.replaceItems(int, List)
+     * @see ListValueModel#replaceItems(int, List)
      */
     @Override
     public List replaceItems(int index, List items) {

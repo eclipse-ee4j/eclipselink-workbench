@@ -42,7 +42,7 @@ import java.util.Hashtable;
  * panel.add(new ToolBarButton("Next"));
  *
  * constraints.fill = GridConstraints.NONE;
- * panel.add(RigidBox.box(), constraints);<pre>
+ * panel.add(RigidBox.box(), constraints);</pre>
  * The rigid box will not be resized as Back and Next will be.
  * <pre>
  * panel.add(new JButton("Cancel"));

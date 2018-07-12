@@ -50,7 +50,6 @@ public class DefaultListChooserDialog
 
     /**
      * Do not use this constructor if the owner is a Dialog.
-     * @see #createDialog()
      */
     public DefaultListChooserDialog(WorkbenchContext context, Builder builder) {
         super(context);
@@ -152,7 +151,7 @@ public class DefaultListChooserDialog
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#getHelpTopicID()
+     * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#helpTopicId()
      */
     @Override
     protected String helpTopicId() {

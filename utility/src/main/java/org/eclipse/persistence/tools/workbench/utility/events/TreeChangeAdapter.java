@@ -27,7 +27,7 @@ public class TreeChangeAdapter implements TreeChangeListener {
     }
 
     /**
-     * @see TreeChangeListener#treeNodeAdded(TreeChangeEvent)
+     * @see TreeChangeListener#nodeAdded(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeEvent) 
      */
     @Override
     public void nodeAdded(TreeChangeEvent e) {
@@ -35,7 +35,7 @@ public class TreeChangeAdapter implements TreeChangeListener {
     }
 
     /**
-     * @see TreeChangeListener#itemRemoved(TreeChangeEvent)
+     * @see TreeChangeListener#nodeRemoved(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeEvent) 
      */
     @Override
     public void nodeRemoved(TreeChangeEvent e) {
@@ -43,7 +43,7 @@ public class TreeChangeAdapter implements TreeChangeListener {
     }
 
     /**
-     * @see TreeChangeListener#treeChanged(TreeChangeEvent)
+     * @see TreeChangeListener#treeChanged(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeEvent)
      */
     @Override
     public void treeChanged(TreeChangeEvent e) {

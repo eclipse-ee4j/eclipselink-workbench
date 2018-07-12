@@ -35,7 +35,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.DocumentAdapter
 
 
 /**
- * This panel appears on the Named Queries->QueryFormatPanel, if the user chooses SQL or EJBQL
+ * This panel appears on the Named Queries-{@literal >}QueryFormatPanel, if the user chooses SQL or EJBQL
  * for the query format.  It contains a panel with textArea for editing the query string
  */
 final class StringQueryFormatSubPanel

@@ -69,10 +69,10 @@ public final class MWColumn
 
     /**
      * Parse the table name from a possibly "qualified" column name:
-     * "ACTG.EMPLOYEE.F_NAME" -> "ACCTG.EMPLOYEE"
-     * "ACTG..F_NAME" -> "ACCTG.."
-     * "EMPLOYEE.F_NAME" -> "EMPLOYEE"
-     * "F_NAME" -> ""
+     * "ACTG.EMPLOYEE.F_NAME" -&gt; "ACCTG.EMPLOYEE"
+     * "ACTG..F_NAME" -&gt; "ACCTG.."
+     * "EMPLOYEE.F_NAME" -&gt; "EMPLOYEE"
+     * "F_NAME" -&gt; ""
      */
     public static String parseTableNameFromQualifiedName(String name) {
         int index = name.lastIndexOf('.');
@@ -84,10 +84,10 @@ public final class MWColumn
 
     /**
      * Parse the column name from a possibly "qualified" column name:
-     * "ACCT.EMPLOYEE.F_NAME" -> "F_NAME"
-     * "ACCT..F_NAME" -> "F_NAME"
-     * "EMPLOYEE.F_NAME" -> "F_NAME"
-     * "F_NAME" -> "F_NAME"
+     * "ACCT.EMPLOYEE.F_NAME" -&gt; "F_NAME"
+     * "ACCT..F_NAME" -&gt; "F_NAME"
+     * "EMPLOYEE.F_NAME" -&gt; "F_NAME"
+     * "F_NAME" -&gt; "F_NAME"
      */
     public static String parseColumnNameFromQualifiedName(String name) {
         int index = name.lastIndexOf('.');

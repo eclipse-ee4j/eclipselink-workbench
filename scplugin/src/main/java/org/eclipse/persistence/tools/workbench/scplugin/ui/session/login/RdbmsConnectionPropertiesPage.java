@@ -33,6 +33,7 @@ import org.eclipse.persistence.tools.workbench.platformsmodel.DatabasePlatformRe
 import org.eclipse.persistence.tools.workbench.platformsplugin.ui.PlatformComponentFactory;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseSessionAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.ServerPlatformAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionBrokerAdapter;
@@ -64,7 +65,7 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
  * |                                         |
  * | --------------------------------------- |
  * | |                                     | |
- * | | {@link CustomizedExternalOptionsPane}       | |<- {@link LoginExternalOptionsPane}
+ * | | {@link CustomizedExternalOptionsPane}       | |{@literal <}- {@link LoginExternalOptionsPane}
  * | |                                     | |
  * | --------------------------------------- |
  * |                                         |

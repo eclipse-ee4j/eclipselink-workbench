@@ -25,6 +25,7 @@ import javax.swing.text.Document;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.EISLoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.pool.basic.EisPoolLoginPropertiesPage;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.ClassChooserTools;
 import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
@@ -67,7 +68,7 @@ public class EisLoginPane extends AbstractLoginPane
      * Creates a new <code>EisLoginPane</code>.
      *
      * @param subjectHolder The holder of {@link EISLoginAdapter}
-     * @param context The plug-in context to be used, such as <code>ResourceRepository</code>
+     * @param contextHolder The plug-in context to be used, such as <code>ResourceRepository</code>
      */
     public EisLoginPane(PropertyValueModel subjectHolder,
                               WorkbenchContextHolder contextHolder)

@@ -245,11 +245,11 @@ public final class XMLTools {
      * The child node must exist (or you will get a NPE).
      *
      * For example, given the following XML:
-     *
+     * <pre>{@code
      *     <parent>
      *         <child>Charlie</child>
      *     </parent>
-     *
+     * }</pre>
      * XMLTools.childTextContent(parentNode, "child")
      * will return "Charlie".
      * Node#getChildTextContent(String childName)
@@ -421,6 +421,7 @@ public final class XMLTools {
      * For example, the following call:
      *     XMLTools.addSimpleTextNodes(parentNode, "children", "child", new String[] {"foo", "bar", "baz"})
      * will generate the following XML:
+     * <pre>{@code
      *
      *     <parent>
      *         ...
@@ -430,7 +431,7 @@ public final class XMLTools {
      *             <child>baz</child>
      *         </children>
      *     </parent>
-     *
+     * }</pre>
      *
      * will return a list of three "child" nodes.
      * Node#addSimpleTextNodes(String childrenName, String childName, String[] childrenTexts)

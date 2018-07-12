@@ -21,6 +21,8 @@ import javax.swing.JComponent;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
+import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.PropertyPane;
 import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
@@ -48,8 +50,8 @@ public class RdbmsPropertiesPropertiesPage extends LoginPropertiesPropertiesPage
     /**
      * Creates a new <code>LoginPropertiesPropertiesPage</code>.
      *
-     * @param nodeHolder The holder of {@link DatabaseLoginAdapter}
-     * @param context
+     * @param subjectHolder The holder of {@link DatabaseLoginAdapter}
+     * @param contextHolder
      */
     public RdbmsPropertiesPropertiesPage(PropertyValueModel subjectHolder, WorkbenchContextHolder contextHolder)
     {

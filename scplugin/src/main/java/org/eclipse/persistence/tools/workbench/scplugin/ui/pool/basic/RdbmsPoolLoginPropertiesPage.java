@@ -128,7 +128,7 @@ public class RdbmsPoolLoginPropertiesPage extends ScrollablePropertiesPage
      * by this page.
      *
      * @return The <code>PropertyValueModel</code> containing the {@link DatabaseLoginAdapter}
-     * to be edited by the {@link AbstractRdbmsLoginPane}
+     * to be edited by the <code>AbstractRdbmsLoginPane</code>
      */
     protected PropertyValueModel buildLoginHolder()
     {

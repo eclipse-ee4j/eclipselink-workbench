@@ -136,7 +136,7 @@ public abstract class TreeAspectAdapter
 
     /**
      * Insert the specified node in the subject's tree aspect.
-     * @see TreeValueModel#addNode(Object[])
+     * @see TreeValueModel#addNode(java.lang.Object[], java.lang.Object)
      */
     @Override
     public void addNode(Object[] parentPath, Object node) {

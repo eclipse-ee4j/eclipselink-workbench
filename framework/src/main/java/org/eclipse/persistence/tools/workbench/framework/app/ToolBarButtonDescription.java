@@ -30,7 +30,7 @@ import org.eclipse.persistence.tools.workbench.framework.action.FrameworkAction;
  *
  * @see org.eclipse.persistence.tools.workbench.framework.app.ButtonDescription
  * @see org.eclipse.persistence.tools.workbench.framework.action.FrameworkAction
- * @see org.eclipse.persistence.tools.workbench.framework.app.ToolBarButton
+ * @see org.eclipse.persistence.tools.workbench.framework.app.ToolBarButtonDescription
  * @version 10.1.3
  */
 public class ToolBarButtonDescription extends ButtonDescription

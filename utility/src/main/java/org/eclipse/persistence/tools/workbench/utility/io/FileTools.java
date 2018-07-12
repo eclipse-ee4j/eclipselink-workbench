@@ -57,7 +57,7 @@ public final class FileTools {
                 : is the filename separator in MacOS and the drive indicator in DOS
                 * is a DOS wildcard character
                 | is a DOS redirection character
-                & is our own escape character
+                &amp; is our own escape character
                 / is the filename separator in Unix and the command option tag in DOS
                 \ is the filename separator in DOS/Windows and the escape character in Unix
                 ; is ???
@@ -66,8 +66,8 @@ public final class FileTools {
                 ] is ???
                 = is ???
                 + is ???
-                < is a DOS redirection character
-                > is a DOS redirection character
+                &lt; is a DOS redirection character
+                &gt; is a DOS redirection character
                 " is used by DOS to delimit file names with spaces
                 , is ???
      */
@@ -841,10 +841,10 @@ public final class FileTools {
      * file, relative to the specified directory.
      *     Linux/Unix/Mac:
      *         convertToRelativeFile(/foo/bar/baz.java, /foo)
-     *             => bar/baz.java
+     *             =&gt; bar/baz.java
      *     Windows:
      *         convertToRelativeFile(C:\foo\bar\baz.java, C:\foo)
-     *             => bar/baz.java
+     *             =&gt; bar/baz.java
      * The file can be either a file or a directory; the directory
      * *should* be a directory.
      * If the file is already relative or it cannot be made relative
@@ -913,10 +913,10 @@ public final class FileTools {
      * file, relative to the current working directory.
      *     Linux/Unix/Mac (CWD = /foo):
      *         convertToRelativeFile(/foo/bar/baz.java)
-     *             => bar/baz.java
+     *             =&gt; bar/baz.java
      *     Windows (CWD = C:\foo):
      *         convertToRelativeFile(C:\foo\bar\baz.java)
-     *             => bar/baz.java
+     *             =&gt; bar/baz.java
      * The file can be either a file or a directory.
      * If the file is already relative or it cannot be made relative
      * to the directory, it will be returned unchanged.
@@ -932,7 +932,7 @@ public final class FileTools {
     /**
      * Return an array of files representing the path to the specified
      * file. For example:
-     *     C:/foo/bar/baz.txt =>
+     *     C:/foo/bar/baz.txt =&gt;
      *     { C:/, C:/foo, C:/foo/bar, C:/foo/bar/baz.txt }
      */
     private static File[] pathFiles(File file) {
@@ -946,7 +946,7 @@ public final class FileTools {
 
     /**
      * Return a file with the specified (non-zero) number of relative
-     * file names, e.g. xxx(3) => ../../..
+     * file names, e.g. xxx(3) =&gt; ../../..
      */
     private static File relativeParentFile(int len) {
         if (len <= 0) {
@@ -964,10 +964,10 @@ public final class FileTools {
      * file, absolute to the specified directory.
      *     Linux/Unix/Mac:
      *         convertToAbsoluteFile(bar/baz.java, /foo)
-     *             => /foo/bar/baz.java
+     *             =&gt; /foo/bar/baz.java
      *     Windows:
      *         convertToAbsoluteFile(bar/baz.java, C:\foo)
-     *             => C:\foo\bar\baz.java
+     *             =&gt; C:\foo\bar\baz.java
      * The file can be either a file or a directory; the directory
      * *should* be a directory.
      * If the file is already absolute, it will be returned unchanged.
@@ -989,10 +989,10 @@ public final class FileTools {
      * file, absolute to the current working directory.
      *     Linux/Unix/Mac (CWD = /foo):
      *         convertToAbsoluteFile(bar/baz.java)
-     *             => /foo/bar/baz.java
+     *             =&gt; /foo/bar/baz.java
      *     Windows (CWD = C:\foo):
      *         convertToAbsoluteFile(bar/baz.java)
-     *             => C:\foo\bar\baz.java
+     *             =&gt; C:\foo\bar\baz.java
      * The file can be either a file or a directory.
      * If the file is already absolute, it will be returned unchanged.
      *

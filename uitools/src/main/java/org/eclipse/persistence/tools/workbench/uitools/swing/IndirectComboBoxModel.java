@@ -178,7 +178,7 @@ public abstract class IndirectComboBoxModel
     /**
      * Return the size of the subject's collection aspect.
      * At this point we can be sure that the subject is not null.
-     * @see #size()
+     * @see #getSize()
      */
     protected int listSizeFromSubject(Object listSubject) {
         return CollectionTools.size(this.listValue());

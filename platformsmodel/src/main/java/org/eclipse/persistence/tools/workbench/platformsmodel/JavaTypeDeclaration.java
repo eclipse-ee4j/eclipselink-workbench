@@ -151,7 +151,7 @@ public final class JavaTypeDeclaration
     // ********** printing and displaying **********
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
+     * @see org.eclipse.persistence.tools.workbench.utility.node.Node#displayString()
      */
     @Override
     public String displayString() {

@@ -15,6 +15,7 @@
 package org.eclipse.persistence.tools.workbench.uitools.app;
 
 import org.eclipse.persistence.tools.workbench.utility.AbstractModel;
+import org.eclipse.persistence.tools.workbench.utility.Model;
 import org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport;
 import org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent;
 import org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener;
@@ -162,7 +163,7 @@ public abstract class ListValueModelWrapper
     }
 
     /**
-     * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
+     * @see AbstractModel#toString(java.lang.StringBuffer)
      */
     @Override
     public void toString(StringBuffer sb) {

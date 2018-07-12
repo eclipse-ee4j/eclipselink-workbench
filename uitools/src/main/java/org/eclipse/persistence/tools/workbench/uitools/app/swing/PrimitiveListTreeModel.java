@@ -44,7 +44,7 @@ import org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener
  *
  * Subclasses must implement #primitiveChanged(int, Object) and update
  * the model appropriately. This method is called when the user edits the
- * list directly and presses <Enter>.
+ * list directly and presses {@code <Enter>}.
  *
  * The JTree using this model must be configured as "editable":
  *     tree.setEditable(true);

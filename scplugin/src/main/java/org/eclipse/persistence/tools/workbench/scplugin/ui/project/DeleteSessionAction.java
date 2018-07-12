@@ -67,9 +67,9 @@ public class DeleteSessionAction extends AbstractEnablableFrameworkAction {
      * Determines whether if the given collection of {@link SessionAdapter}s can
      * be removed from the list.
      *
-     * @param sessions The collection of {@link SessionAdapter}s that have been
+     * @param session The {@link SessionAdapter}s that have been
      * selected to be removed
-     * @return <code>true<code> if they can be removed; <code>false<code>
+     * @return <code>true</code> if they can be removed; <code>false</code>
      * otherwise
      */
     protected boolean canRemoveSessions(TopLinkSessionsAdapter topLinkSessions,

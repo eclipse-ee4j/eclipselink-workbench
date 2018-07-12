@@ -48,7 +48,7 @@ import org.eclipse.persistence.tools.workbench.uitools.swing.EmptyIcon;
 
 
 /**
- * display the Java mappings: Java type --> JDBC type;
+ * display the Java mappings: Java type --{@literal >} JDBC type;
  * for now, these are display-only
  */
 final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends ScrollablePropertiesPage {

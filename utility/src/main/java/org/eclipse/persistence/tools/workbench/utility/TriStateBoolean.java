@@ -52,9 +52,9 @@ public class TriStateBoolean
 
     /**
      * Convert the specified string into a corresponding tri-state boolean.
-     *     - null or "undefined" => null
-     *     - "true" => TRUE
-     *     - anything else => FALSE
+     *     - null or "undefined" =&gt; null
+     *     - "true" =&gt; TRUE
+     *     - anything else =&gt; FALSE
      * Strings are case-insensitive
      */
     public static TriStateBoolean valueOf(String value) {
@@ -83,9 +83,9 @@ public class TriStateBoolean
 
     /**
      * Convert the specified string into a corresponding boolean.
-     * null or "undefined" => null
-     * "true" => TRUE
-     * anything else => FALSE
+     * null or "undefined" =&gt; null
+     * "true" =&gt; TRUE
+     * anything else =&gt; FALSE
      * Strings are case-insensitive
      */
     private static Boolean toBoolean(String value) {
@@ -116,9 +116,9 @@ public class TriStateBoolean
 
     /**
      * Construct a tri-state boolean corresponding to the specified string.
-     *     - null or "undefined" => null
-     *     - "true" => TRUE
-     *     - anything else => FALSE
+     *     - null or "undefined" =&gt; null
+     *     - "true" =&gt; TRUE
+     *     - anything else =&gt; FALSE
      * Strings are case-insensitive
      */
     public TriStateBoolean(String value) {

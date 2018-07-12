@@ -37,10 +37,10 @@ import javax.swing.SwingConstants;
  * An icon that displays a triangle pointing in one of the four
  * compass directions.
  *
- * @see javax.swing.SwingConstants.NORTH
- * @see javax.swing.SwingConstants.EAST
- * @see javax.swing.SwingConstants.SOUTH
- * @see javax.swing.SwingConstants.WEST
+ * @see javax.swing.SwingConstants#NORTH
+ * @see javax.swing.SwingConstants#EAST
+ * @see javax.swing.SwingConstants#SOUTH
+ * @see javax.swing.SwingConstants#WEST
  */
 public class ArrowIcon
     implements Icon, Accessible
@@ -136,10 +136,10 @@ public class ArrowIcon
 
     /**
      * Return the orientation of icon's arrow.
-     * @see javax.swing.SwingConstants.NORTH
-     * @see javax.swing.SwingConstants.EAST
-     * @see javax.swing.SwingConstants.SOUTH
-     * @see javax.swing.SwingConstants.WEST
+     * @see javax.swing.SwingConstants#NORTH
+     * @see javax.swing.SwingConstants#EAST
+     * @see javax.swing.SwingConstants#SOUTH
+     * @see javax.swing.SwingConstants#WEST
      */
     public int getOrientation() {
         return this.orientation;
@@ -147,10 +147,10 @@ public class ArrowIcon
 
     /**
      * Set the orientation of icon's arrow.
-     * @see javax.swing.SwingConstants.NORTH
-     * @see javax.swing.SwingConstants.EAST
-     * @see javax.swing.SwingConstants.SOUTH
-     * @see javax.swing.SwingConstants.WEST
+     * @see javax.swing.SwingConstants#NORTH
+     * @see javax.swing.SwingConstants#EAST
+     * @see javax.swing.SwingConstants#SOUTH
+     * @see javax.swing.SwingConstants#WEST
      */
     public void setOrientation(int orientation) {
         if (orientation != this.orientation) {

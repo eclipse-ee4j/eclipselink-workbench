@@ -55,20 +55,20 @@ import org.eclipse.persistence.tools.workbench.utility.Transformer;
 // Mapping Workbench
 
 /**
- * This is a sub-pane of {@link org.eclipse.persistence.tools.workbench.scplugin.ui.session.SessionClusteringPropertiesPage
+ * This is a sub-pane of {@link org.eclipse.persistence.tools.workbench.scplugin.ui.session.clustering.SessionClusteringPropertiesPage
  * SessionClusteringPropertiesPage} and it is shown when the Clustering Type is
  * Remote Command.
  * <p>
  * Here the layout:<pre>
  * ______________________________________
  * |          _________________________ |  ________________
- * | Type:    |                     |v| |<-| CORBA        |
+ * | Type:    |                     |v| |{@literal <}-| CORBA        |
  * |          ------------------------- |  | JMS          |
  * |          _________________________ |  | RMI          |
  * | Channel: | I                     | |  | RMI/IIOP     |
  * |          ------------------------- |  | User Defined |
  * |                                    |  ----------------
- * | x Remove Connection on Error       |<- This check box is placed within the
+ * | x Remove Connection on Error       |{@literal <}- This check box is placed within the
  * |                                    |   Transport Manager pane for better
  * | -Options-------------------------- |   layout
  * |                                    |

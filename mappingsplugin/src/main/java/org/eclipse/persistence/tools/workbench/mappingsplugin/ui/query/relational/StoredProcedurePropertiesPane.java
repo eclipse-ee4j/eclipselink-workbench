@@ -62,7 +62,7 @@ import org.eclipse.persistence.tools.workbench.utility.Transformer;
 /**
  *
  * @see MWProcedure
- * @see StoredProcedurePropertiesPage – The parent container
+ * @see StoredProcedureQueryFormatSubPanel – The parent container
  *
  * @version 11.0.0
  * @since 11.0.0

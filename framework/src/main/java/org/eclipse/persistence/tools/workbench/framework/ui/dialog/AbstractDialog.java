@@ -113,7 +113,7 @@ import org.eclipse.persistence.tools.workbench.utility.string.BidiStringConverte
  *   | ------------------------------------ |
  *   | ____________________________________ |
  *   | ______        ________ ____ ________ |
- *   | |Help|        |Custom| |OK| |Cancel| | <- custom buttons defined by subclass appear "left" of OK
+ *   | |Help|        |Custom| |OK| |Cancel| | {@literal <}- custom buttons defined by subclass appear "left" of OK
  *   | ------        -------- ---- -------- |
  *   ----------------------------------------
  * </pre>
@@ -534,7 +534,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
      * By default the Cancel button is displayed.
      * If you do not want it to be displayed, return false.
      *
-     * Pressing <Esc> will still perform the cancel action.
+     * Pressing {@code <Esc>} will still perform the cancel action.
      */
     protected boolean cancelButtonIsVisible() {
         return true;
@@ -578,13 +578,13 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * Set the action to be executed when the <Enter> key is pressed,
+     * Set the action to be executed when the {@code <Enter>} key is pressed,
      * regardless of whether the button has keyboard focus
      * (unless there is another component within
      * the dialog which consumes the activation event,
      * such as a JTextPane or another JButton that currently has focus).
      * For default activation to work, the button must be an enabled
-     * descendent of the root pane when activation occurs.
+     * descendant of the root pane when activation occurs.
      *
      * By default, the OK action is the default action.
       *
@@ -1754,7 +1754,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, ValueModel, ListCellRenderer, Object, JComponent, ResourceRepository, ComponentAligner, ComponentAligner)
+     * @see SwingComponentFactory#buildLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, ValueModel, ListCellRenderer, Object, ResourceRepository, ComponentAligner, ComponentAligner)
      */
     protected final JComponent buildLabeledEditableListChooser(String key,
                                                                ComboBoxModel model,
@@ -2089,7 +2089,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildPaneTitledBorder(ResourceRepository, String)
+     * @see SwingComponentFactory#buildPaneTitledBorder(String, ResourceRepository)
      */
     protected final Border buildPaneTitledBorder(String key)
     {
@@ -2097,7 +2097,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildRadioButton(String, ButtonModel)
+     * @see SwingComponentFactory#buildRadioButton(String, ButtonModel, ResourceRepository)
      */
     protected final JRadioButton buildRadioButton(String key,
                                                   ButtonModel buttonModel)
@@ -2111,7 +2111,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildSpinnerDate(SpinnerNumberModel)
+     * @see SwingComponentFactory#buildSpinnerDate(SpinnerDateModel)
      */
     protected final JSpinner buildSpinnerDate(SpinnerDateModel model)
     {
@@ -2572,7 +2572,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildTopLabeledEditableListChooser(String, ComboBoxModel, ValueModel, JComponent, ResourceRepository, ComponentAligner, ComponentAligner)
+     * @see SwingComponentFactory#buildTopLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, JComponent, ResourceRepository, ComponentAligner, ComponentAligner)
      */
     protected final JComponent buildTopLabeledEditableListChooser(String key,
                                                                   ComboBoxModel model,
@@ -2616,7 +2616,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildTopLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, BidiStringConverter, Object, ResourceRepository, ComponentAligner, ComponentAligner)
+     * @see SwingComponentFactory#buildTopLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, ListCellRenderer, BidiStringConverter, ResourceRepository, ComponentAligner, ComponentAligner)
      */
     protected final JComponent buildTopLabeledEditableListChooser(String key,
                                                                   ComboBoxModel model,
@@ -2640,7 +2640,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildTopLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, BidiStringConverter, Object, ResourceRepository, ComponentAligner, ComponentAligner)
+     * @see SwingComponentFactory#buildTopLabeledEditableListChooser(String, ComboBoxModel, ValueModel, PropertyValueModel, ListCellRenderer, BidiStringConverter, Object, ResourceRepository, ComponentAligner, ComponentAligner)
      */
     protected final JComponent buildTopLabeledEditableListChooser(String key,
                                                                   ComboBoxModel model,
@@ -2947,7 +2947,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildTopLabeledListChooser(String, ComboBoxModel, JComponnet, ResourceRepository, ComponentAligner, ComponentAligner)
+     * @see SwingComponentFactory#buildTopLabeledListChooser(String, ComboBoxModel, JComponent, ResourceRepository, ComponentAligner, ComponentAligner)
      */
     protected final JComponent buildTopLabeledListChooser(String key,
                                                           ComboBoxModel model,
@@ -2982,7 +2982,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     }
 
     /**
-     * @see SwingComponentFactory#buildTopLabeledListChooser(String, ComboBoxModel, ListCellRenderer, JComponnet, ResourceRepository, ComponentAligner, ComponentAligner)
+     * @see SwingComponentFactory#buildTopLabeledListChooser(String, ComboBoxModel, ListCellRenderer, JComponent, ResourceRepository, ComponentAligner, ComponentAligner)
      */
     protected final JComponent buildTopLabeledListChooser(String key,
                                                           ComboBoxModel model,

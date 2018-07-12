@@ -204,11 +204,11 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
         this.setServerPlatform( sp.buildAdapter( this));
     }
     /**
-     * Determines whether {@link CacheSynchronizationManagerAdapter} is an
+     * Determines whether <code>CacheSynchronizationManagerAdapter</code> is an
      * allowed Clustering type or not.
      *
-     * @return <code>true<code> if the sessions.xml was read with an existing
-     * Cache Synchronization Manager, <code>false<code> in any other case
+     * @return <code>true</code> if the sessions.xml was read with an existing
+     * Cache Synchronization Manager, <code>false</code> in any other case
      */
     public boolean isCacheSynchronizationManagerAllowed() {
         return this.cacheSynchronizationManagerAllowed;
