@@ -25,6 +25,7 @@ public final class OXInheritancePolicyPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected String helpTopicIdPrefix() {
         return "descriptor.ox";
     }

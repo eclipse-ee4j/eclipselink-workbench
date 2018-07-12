@@ -30,16 +30,19 @@ final class WildcardNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     public String displayString() {
         return "any";
     }
 
     // **************** ParticleTermNodeStructure contract ********************
 
+    @Override
     public void disengageParticle() {
         this.disengageComponent();
     }
 
+    @Override
     public ListIterator details(ListIterator particleDetails) {
         return particleDetails;
     }

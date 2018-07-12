@@ -42,7 +42,6 @@ import org.eclipse.persistence.tools.workbench.uitools.LabelArea;
 import org.eclipse.persistence.tools.workbench.uitools.app.CollectionAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.CollectionValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel;
-import org.eclipse.persistence.tools.workbench.uitools.swing.EmptyIcon;
 import org.eclipse.persistence.tools.workbench.utility.io.FileTools;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
@@ -64,6 +63,7 @@ public final class ProjectNode extends SessionsNode {
 
     // **************** factory methods ****************************************
 
+    @Override
     protected AbstractApplicationNode buildChildNode( SessionAdapter session) {
         AbstractApplicationNode node = null;
         try {
@@ -78,37 +78,45 @@ public final class ProjectNode extends SessionsNode {
         return node;
     }
 
+    @Override
     protected CollectionValueModel buildSessionsAspectAdapter() {
 
         return new CollectionAspectAdapter( this, TopLinkSessionsAdapter.SESSIONS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return (( TopLinkSessionsAdapter)subject).sessions();
             }
+            @Override
             protected int sizeFromSubject() {
                 return (( TopLinkSessionsAdapter)subject).sessionsSize();
             }
         };
     }
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
 
         return new ProjectPropertiesPage(context);
     }
 
+    @Override
     protected Object propertiesPageKey() {
 
         return ProjectPropertiesPage.class;
     }
 
+    @Override
     protected String buildIconKey() {
         return "SESSIONS_CONFIGURATION";
     }
 
+    @Override
     protected FrameworkAction buildRenameNodeAction(WorkbenchContext workbenchContext) {
         // No rename supported for now use SaveAs
         return null;
     }
 
+    @Override
     protected String buildDisplayString() {
         String displayString = super.buildDisplayString();
         File path = this.topLinkSessions().getPath();
@@ -120,6 +128,7 @@ public final class ProjectNode extends SessionsNode {
         return displayString;
     }
 
+    @Override
     protected List buildDisplayStringPropertyNamesList() {
 
         List displayStrings = super.buildDisplayStringPropertyNamesList();
@@ -135,6 +144,7 @@ public final class ProjectNode extends SessionsNode {
         return new AddNewBrokerAction(workbenchContext);
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -168,6 +178,7 @@ public final class ProjectNode extends SessionsNode {
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -186,6 +197,7 @@ public final class ProjectNode extends SessionsNode {
         return workbenchContext.getActionRepository().getCloseAction();
     }
 
+    @Override
     protected FrameworkAction buildDeleteNodeAction(WorkbenchContext workbenchContext) {
         return null; // Always null
     }
@@ -203,11 +215,13 @@ public final class ProjectNode extends SessionsNode {
         return ( TopLinkSessionsAdapter)this.getValue();
     }
 
+    @Override
     public String helpTopicID() {
         return "navigator.scproject";
     }
     // **************** Initialization ****************************************
 
+    @Override
     public boolean save(File mostRecentSaveDirectory, WorkbenchContext workbenchContext) {
         TopLinkSessionsAdapter sessions = this.topLinkSessions();
         File path = sessions.getPath();
@@ -280,6 +294,7 @@ public final class ProjectNode extends SessionsNode {
         }
     }
 
+    @Override
     public boolean saveAs(File mostRecentSaveDirectory, WorkbenchContext workbenchContext) {
 
         File path = topLinkSessions().getPath();
@@ -307,6 +322,7 @@ public final class ProjectNode extends SessionsNode {
         return saved;
     }
 
+    @Override
     public File saveFile() {
         //The framework expects null if the project has never been saved before
         File saveLocation = this.topLinkSessions().getPath();
@@ -361,6 +377,7 @@ public final class ProjectNode extends SessionsNode {
          * Determines whether the selected file can be used as the new location to
          * persist the document.
          */
+        @Override
         public void approveSelection()
         {
             int result = canReplaceExistingFile();

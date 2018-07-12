@@ -42,6 +42,7 @@ public class ColumnCellRendererAdapter
         this.appendType = appendType;
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         MWColumn col = (MWColumn) value;
         StringBuffer sb = new StringBuffer(100);

@@ -47,6 +47,7 @@ final class AggregateDescriptorTabbedPropertiesPage extends MappingDescriptorTab
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         super.initializeTabs();
         this.queryKeysPage = new RelationalDescriptorQueryKeysPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
@@ -56,6 +57,7 @@ final class AggregateDescriptorTabbedPropertiesPage extends MappingDescriptorTab
                 buildEventsPolicyPropertiesPage(), "RELATIONAL_DESCRIPTOR_EVENTS_TAB");
     }
 
+    @Override
     protected Component buildInheritancePolicyPropertiesPage() {
         return new RelationalInheritancePolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
@@ -63,10 +65,12 @@ final class AggregateDescriptorTabbedPropertiesPage extends MappingDescriptorTab
     /**
      * InheritancePolicy <code>ComponentBuilder</code> for dynamic tab.
      */
+    @Override
     protected ComponentBuilder buildInheritancePolicyPageBuilder() {
         return new ComponentBuilder() {
             private RelationalInheritancePolicyPropertiesPage inheritancePolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder) {
                 if (inheritancePolicyPage == null) {
                         inheritancePolicyPage = new RelationalInheritancePolicyPropertiesPage(nodeHolder, getWorkbenchContextHolder());

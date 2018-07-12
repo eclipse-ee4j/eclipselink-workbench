@@ -110,10 +110,12 @@ final class RefreshCachePolicyPanel extends AbstractPanel {
 
     private PropertyValueModel buildAlwaysRefreshCacheAdapter() {
         return new PropertyAspectAdapter(refreshCachePolicyHolder, MWRefreshCachePolicy.ALWAYS_REFRESH_CACHE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWRefreshCachePolicy) subject).isAlwaysRefreshCache());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRefreshCachePolicy) subject).setAlwaysRefreshCache(((Boolean) value).booleanValue());
             }
@@ -134,10 +136,12 @@ final class RefreshCachePolicyPanel extends AbstractPanel {
 
     private PropertyValueModel buildOnlyRefreshCacheIfNewerVersionAdapter() {
         return new PropertyAspectAdapter(refreshCachePolicyHolder, MWRefreshCachePolicy.ONLY_REFRESH_IF_NEWER_VERSION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWRefreshCachePolicy) subject).isOnlyRefreshCacheIfNewerVersion());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRefreshCachePolicy) subject).setOnlyRefreshCacheIfNewerVersion(((Boolean) value).booleanValue());
             }
@@ -158,10 +162,12 @@ final class RefreshCachePolicyPanel extends AbstractPanel {
 
     private PropertyValueModel buildDisableCacheHitsAdapter() {
         return new PropertyAspectAdapter(refreshCachePolicyHolder, MWRefreshCachePolicy.DISABLE_CACHE_HITS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWRefreshCachePolicy) subject).isDisableCacheHits());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRefreshCachePolicy) subject).setDisableCacheHits(((Boolean) value).booleanValue());
             }

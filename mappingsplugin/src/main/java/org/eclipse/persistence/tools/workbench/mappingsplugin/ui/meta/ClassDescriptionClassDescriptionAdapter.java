@@ -42,6 +42,7 @@ public class ClassDescriptionClassDescriptionAdapter
     /**
      * Assume the "class description" is a ClassDescription object.
      */
+    @Override
     public String className(Object classDescription) {
         return ((ClassDescription) classDescription).getName();
     }
@@ -49,6 +50,7 @@ public class ClassDescriptionClassDescriptionAdapter
     /**
      * Assume the "class description" is a ClassDescription object.
      */
+    @Override
     public String additionalInfo(Object classDescription) {
         return ((ClassDescription) classDescription).getAdditionalInfo();
     }

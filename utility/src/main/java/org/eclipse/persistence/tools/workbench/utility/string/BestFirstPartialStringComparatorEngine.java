@@ -33,6 +33,7 @@ public class BestFirstPartialStringComparatorEngine
         this.partialStringComparator = partialStringComparator;
     }
 
+    @Override
     public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
         int len1 = stringHolders1.length;
         int len2 = stringHolders2.length;
@@ -84,6 +85,7 @@ public class BestFirstPartialStringComparatorEngine
         return pairs;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.partialStringComparator);
     }

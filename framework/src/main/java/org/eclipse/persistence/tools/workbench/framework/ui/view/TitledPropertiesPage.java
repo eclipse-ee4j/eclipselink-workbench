@@ -59,6 +59,7 @@ public abstract class TitledPropertiesPage extends AbstractPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 

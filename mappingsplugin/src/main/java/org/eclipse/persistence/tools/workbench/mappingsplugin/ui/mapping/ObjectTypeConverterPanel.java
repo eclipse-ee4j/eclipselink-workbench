@@ -89,6 +89,7 @@ final class ObjectTypeConverterPanel
         return (MWObjectTypeConverter) subject();
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -185,9 +186,11 @@ final class ObjectTypeConverterPanel
 
     private PropertyValueModel buildDataTypeHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWTypeConverter.DATA_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWObjectTypeConverter) this.subject).getDataType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWObjectTypeConverter) this.subject).setDataType((MWTypeDeclaration) value);
             }
@@ -196,6 +199,7 @@ final class ObjectTypeConverterPanel
 
     private CollectionValueModel buildTypesCollectionModel() {
         return new CollectionAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWConverter) this.subject).buildBasicTypes().iterator();
             }
@@ -204,6 +208,7 @@ final class ObjectTypeConverterPanel
 
     private StringConverter buildMWClassStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTypeDeclaration) o).displayStringWithPackage();
             }
@@ -242,9 +247,11 @@ final class ObjectTypeConverterPanel
 
     private PropertyValueModel buildAttributeTypeHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWTypeConverter.ATTRIBUTE_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWObjectTypeConverter) this.subject).getAttributeType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWObjectTypeConverter) this.subject).setAttributeType((MWTypeDeclaration) value);
             }
@@ -269,6 +276,7 @@ final class ObjectTypeConverterPanel
         return "mapping.converter.objectType";
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
 
@@ -290,6 +298,7 @@ final class ObjectTypeConverterPanel
             super(objectTypeConverterHolder, contextHolder);
         }
 
+        @Override
         protected void initializeLayout() {
             this.setLayout(new GridBagLayout());
 
@@ -362,6 +371,7 @@ final class ObjectTypeConverterPanel
 
         private Action buildAddConversionValueAction() {
             return new AbstractAction(this.resourceRepository().getString("ADD_VALUE_PAIRS_BUTTON")) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     ConversionValueDialog.promptToAddConversionValuePair(
                         ObjectTypeConverterPanel.this.getObjectTypeConverter(),
@@ -374,6 +384,7 @@ final class ObjectTypeConverterPanel
         /** Sets the addButton enabled/disabled based on this panels enabled/disabled state */
         private PropertyChangeListener buildAddButtonEnabler(final Action action) {
             return new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     action.setEnabled(((Boolean) evt.getNewValue()).booleanValue());
                 }
@@ -388,6 +399,7 @@ final class ObjectTypeConverterPanel
 
         private Action buildEditConversionValueAction() {
             return new AbstractAction(this.resourceRepository().getString("EDIT_VALUE_PAIRS_BUTTON")) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     MWObjectTypeConverter.ValuePair selectedValuePair =
                         (MWObjectTypeConverter.ValuePair) ConversionValuesPanel.this.valuePairsTableSelectionModel.getMinSelectedValue();
@@ -407,6 +419,7 @@ final class ObjectTypeConverterPanel
 
         private Action buildRemoveConversionValueAction() {
             return new AbstractAction(this.resourceRepository().getString("REMOVE_VALUE_PAIRS_BUTTON")) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     for (
                         Iterator stream = CollectionTools.iterator(ConversionValuesPanel.this.valuePairsTableSelectionModel.getSelectedValues());
@@ -437,9 +450,11 @@ final class ObjectTypeConverterPanel
 
         private CollectionValueModel buildValuePairsHolder() {
             return new CollectionAspectAdapter(getSubjectHolder(), MWObjectTypeConverter.VALUE_PAIRS_COLLECTION) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return ((MWObjectTypeConverter) this.subject).valuePairs();
                 }
+                @Override
                 protected int sizeFromSubject() {
                     return ((MWObjectTypeConverter) this.subject).valuePairsSize();
                 }
@@ -459,6 +474,7 @@ final class ObjectTypeConverterPanel
 
         private ListSelectionListener buildValuePairsListSelectionListener(final ListSelectionModel selectionModel) {
             return new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         updateValuePairsActions(selectionModel);
@@ -476,6 +492,7 @@ final class ObjectTypeConverterPanel
         /** Sets the table enabled/disabled based on this panels enabled/disabled state */
         private PropertyChangeListener buildTableEnabler(final JTable table) {
             return new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     table.setEnabled(((Boolean) evt.getNewValue()).booleanValue());
                 }
@@ -507,12 +524,15 @@ final class ObjectTypeConverterPanel
         private class ConversionValueDocumentHandler
             implements DocumentListener
         {
+            @Override
             public void changedUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void insertUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void removeUpdate(DocumentEvent de) {
                 updateOKButton();
             }
@@ -552,6 +572,7 @@ final class ObjectTypeConverterPanel
             this.attributeValueDocument = this.buildAttributeValueDocument();
         }
 
+        @Override
         protected void initialize() {
             super.initialize();
             getOKAction().setEnabled(false);
@@ -564,6 +585,7 @@ final class ObjectTypeConverterPanel
             return "EDIT";
         }
 
+        @Override
         protected Component buildMainPanel() {
             this.setTitle(resourceRepository().getString("CONVERSION_VALUE_DIALOG_" + addOrEditString() +".title"));
 
@@ -700,10 +722,12 @@ final class ObjectTypeConverterPanel
             return messagePanel;
         }
 
+        @Override
         protected Component initialFocusComponent() {
             return this.dataValueTextField;
         }
 
+        @Override
         protected String helpTopicId() {
             return "mapping.converter.objectType.conversionValueDialog";
         }
@@ -729,6 +753,7 @@ final class ObjectTypeConverterPanel
             return (this.valuePair == null) ? "" : this.valuePair.getAttributeValueAsString();
         }
 
+        @Override
         protected boolean preConfirm() {
             return ConversionValueDialog.this.wasAbleToCompleteValuePair();
         }
@@ -923,14 +948,17 @@ final class ObjectTypeConverterPanel
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case DATA_VALUE_COLUMN:                    return Object.class;
@@ -940,10 +968,12 @@ final class ObjectTypeConverterPanel
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index == DEFAULT_ATTRIBUTE_VALUE_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWObjectTypeConverter.ValuePair valuePair = (MWObjectTypeConverter.ValuePair) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -957,6 +987,7 @@ final class ObjectTypeConverterPanel
 
         private PropertyValueModel buildDataValueAdapter(MWObjectTypeConverter.ValuePair valuePair) {
             return new PropertyAspectAdapter(MWObjectTypeConverter.ValuePair.DATA_VALUE_PROPERTY, valuePair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWObjectTypeConverter.ValuePair) this.subject).getDataValueAsString();
                 }
@@ -965,6 +996,7 @@ final class ObjectTypeConverterPanel
 
         private PropertyValueModel buildAttributeValueAdapter(MWObjectTypeConverter.ValuePair valuePair) {
             return new PropertyAspectAdapter(MWObjectTypeConverter.ValuePair.ATTRIBUTE_VALUE_PROPERTY, valuePair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWObjectTypeConverter.ValuePair) this.subject).getAttributeValueAsString();
                 }
@@ -973,9 +1005,11 @@ final class ObjectTypeConverterPanel
 
         private PropertyValueModel buildDefaultAttributeValueAdapter(MWObjectTypeConverter.ValuePair valuePair) {
             return new PropertyAspectAdapter(MWObjectTypeConverter.ValuePair.DEFAULT_ATTRIBUTE_VALUE_PROPERTY, valuePair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWObjectTypeConverter.ValuePair) this.subject).isDefaultAttributeValue());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWObjectTypeConverter.ValuePair) this.subject).setDefaultAttributeValue(((Boolean) value).booleanValue());
                 }

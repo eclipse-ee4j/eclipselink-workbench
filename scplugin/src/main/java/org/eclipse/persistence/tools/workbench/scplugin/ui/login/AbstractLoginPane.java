@@ -71,6 +71,7 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), "")
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SCAdapter adapter = (SCAdapter) subject;
@@ -101,12 +102,14 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LoginAdapter.PASSWORD_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LoginAdapter adapter = (LoginAdapter) subject;
                 return adapter.getPassword();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LoginAdapter adapter = (LoginAdapter) subject;
@@ -139,9 +142,11 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
 
     private PropertyValueModel buildSavePasswordPropertyAdapter() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), LoginAdapter.SAVE_PASSWORD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((LoginAdapter) this.subject).isSavePassword());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((LoginAdapter) this.subject).setSavePassword(((Boolean) value).booleanValue());
             }
@@ -169,9 +174,11 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
 
     private PropertyValueModel buildSaveUsernamePropertyAdapter() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), LoginAdapter.SAVE_USERNAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((LoginAdapter) this.subject).isSaveUsername());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((LoginAdapter) this.subject).setSaveUsername(((Boolean) value).booleanValue());
             }
@@ -209,12 +216,14 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LoginAdapter.USER_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LoginAdapter adapter = (LoginAdapter) subject;
                 return adapter.getUserName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LoginAdapter adapter = (LoginAdapter) subject;
@@ -241,6 +250,7 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     * @param enabled <code>true<code> if this component and its children should
     * be enabled, <code>false<code> otherwise
     */
+    @Override
     public final void setEnabled(boolean enabled)
     {
         if (isEnabled() == enabled)

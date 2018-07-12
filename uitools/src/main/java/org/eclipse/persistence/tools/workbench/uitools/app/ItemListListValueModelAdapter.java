@@ -97,6 +97,7 @@ public class ItemListListValueModelAdapter extends ItemAspectListValueModelAdapt
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.itemListListener = this.buildItemListListener();
@@ -108,18 +109,23 @@ public class ItemListListValueModelAdapter extends ItemAspectListValueModelAdapt
      */
     protected ListChangeListener buildItemListListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ItemListListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ItemListListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ItemListListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ItemListListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public String toString() {
                 return "item list listener: " + Arrays.asList(ItemListListValueModelAdapter.this.listNames);
             }
@@ -132,6 +138,7 @@ public class ItemListListValueModelAdapter extends ItemAspectListValueModelAdapt
     /**
      * @see ItemAspectListValueModelAdapter#listenToItem(org.eclipse.persistence.tools.workbench.utility.Model)
      */
+    @Override
     protected void startListeningToItem(Model item) {
         for (int i = this.listNames.length; i-- > 0; ) {
             item.addListChangeListener(this.listNames[i], this.itemListListener);
@@ -141,6 +148,7 @@ public class ItemListListValueModelAdapter extends ItemAspectListValueModelAdapt
     /**
      * @see ItemAspectListValueModelAdapter#stopListeningToItem(org.eclipse.persistence.tools.workbench.utility.Model)
      */
+    @Override
     protected void stopListeningToItem(Model item) {
         for (int i = this.listNames.length; i-- > 0; ) {
             item.removeListChangeListener(this.listNames[i], this.itemListListener);

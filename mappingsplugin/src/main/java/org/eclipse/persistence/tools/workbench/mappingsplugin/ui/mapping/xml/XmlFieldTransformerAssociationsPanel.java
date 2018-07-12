@@ -48,8 +48,10 @@ final class XmlFieldTransformerAssociationsPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected ActionListener buildAddFieldTransformerAssociationAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWXmlTransformationMapping transformationMapping =
                     (MWXmlTransformationMapping) XmlFieldTransformerAssociationsPanel.this.getSubjectHolder().getValue();
@@ -61,8 +63,10 @@ final class XmlFieldTransformerAssociationsPanel
         };
     }
 
+    @Override
     protected ActionListener buildEditFieldTransformerAssociationAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWXmlFieldTransformerAssociation association =
                     (MWXmlFieldTransformerAssociation) XmlFieldTransformerAssociationsPanel.this.selectedFieldTransformerAssociation();
@@ -74,12 +78,15 @@ final class XmlFieldTransformerAssociationsPanel
         };
     }
 
+    @Override
     protected ColumnAdapter buildFieldTransformerAssociationsColumnAdapter() {
         return new XmlFieldTransformationAssociationsColumnAdapter(this.resourceRepository());
     }
 
+    @Override
     protected TableCellRenderer buildFieldColumnCellRenderer() {
         return new SimpleTableCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if ("".equals(value)) {
                     return XmlFieldTransformerAssociationsPanel.this.resourceRepository().getString("NONE_SELECTED");
@@ -101,6 +108,7 @@ final class XmlFieldTransformerAssociationsPanel
             super(resourceRepository);
         }
 
+        @Override
         public String getColumnName(int index) {
             if (index == FIELD_COLUMN) {
                 return this.resourceRepository.getString("TRANSFORMATION_MAPPING_XPATH_COLUMN_LABEL");
@@ -110,6 +118,7 @@ final class XmlFieldTransformerAssociationsPanel
             }
         }
 
+        @Override
         public Class getColumnClass(int index) {
             if (index == FIELD_COLUMN) {
                 return String.class;
@@ -119,11 +128,13 @@ final class XmlFieldTransformerAssociationsPanel
             }
         }
 
+        @Override
         protected PropertyValueModel buildFieldAdapter(MWFieldTransformerAssociation association) {
             return new PropertyAspectAdapter(
                 MWXmlField.XPATH_PROPERTY,
                 ((MWXmlFieldTransformerAssociation) association).getXmlField()
             ) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWXmlField) this.subject).getXpath();
                 }

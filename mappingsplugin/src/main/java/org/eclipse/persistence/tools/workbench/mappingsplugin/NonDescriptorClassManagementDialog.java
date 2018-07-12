@@ -89,6 +89,7 @@ public final class NonDescriptorClassManagementDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         String egg = "";
@@ -126,6 +127,7 @@ public final class NonDescriptorClassManagementDialog
         return new ObjectListSelectionModel(this.classesListModel);
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -148,6 +150,7 @@ public final class NonDescriptorClassManagementDialog
     private ListCellRenderer buildCellRenderer() {
         ClassCellRendererAdapter adapter =
             new ClassCellRendererAdapter(this.resourceRepository()) {
+                @Override
                 public boolean showDetailedIcon() {
                     return false;
                 }
@@ -156,6 +159,7 @@ public final class NonDescriptorClassManagementDialog
         return new AdaptableListCellRenderer(adapter);
     }
 
+    @Override
     protected Iterator buildCustomActions() {
         Collection actions = new ArrayList();
         actions.add(this.buildAddAction());
@@ -166,6 +170,7 @@ public final class NonDescriptorClassManagementDialog
 
     private Action buildAddAction() {
         return new AbstractAction(this.resourceRepository().getString("NON_DESCRIPTOR_CLASS_MANAGEMENT_DIALOG.ADD_ACTION")) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 NonDescriptorClassManagementDialog.this.addClasses();
             }
@@ -211,6 +216,7 @@ public final class NonDescriptorClassManagementDialog
     private Action buildRemoveAction() {
         final Action action =
             new AbstractAction(this.resourceRepository().getString("NON_DESCRIPTOR_CLASS_MANAGEMENT_DIALOG.REMOVE_ACTION")) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     NonDescriptorClassManagementDialog.this.removeSelectedClasses();
                 }
@@ -218,6 +224,7 @@ public final class NonDescriptorClassManagementDialog
         action.setEnabled(false);
         this.classesListSelectionModel.addListSelectionListener(
             new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         action.setEnabled(! NonDescriptorClassManagementDialog.this.classesListSelectionModel.isSelectionEmpty());
@@ -239,6 +246,7 @@ public final class NonDescriptorClassManagementDialog
     private Action buildRefreshAction() {
         final Action action =
             new AbstractAction(this.resourceRepository().getString("NON_DESCRIPTOR_CLASS_MANAGEMENT_DIALOG.REFRESH_ACTION")) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     NonDescriptorClassManagementDialog.this.refreshSelectedClasses();
                 }
@@ -246,6 +254,7 @@ public final class NonDescriptorClassManagementDialog
         action.setEnabled(false);
         this.classesListSelectionModel.addListSelectionListener(
             new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         action.setEnabled( ! NonDescriptorClassManagementDialog.this.classesListSelectionModel.isSelectionEmpty());
@@ -276,6 +285,7 @@ public final class NonDescriptorClassManagementDialog
 
     Iterator descriptorClasses() {
         return new TransformationIterator(this.project.descriptors()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWDescriptor) next).getMWClass();
             }
@@ -285,10 +295,12 @@ public final class NonDescriptorClassManagementDialog
 
     // **************** AbstractDialog implementation/overrides ***************
 
+    @Override
     protected boolean cancelButtonIsVisible() {
         return false;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.nonDescriptorManagement";
     }
@@ -322,6 +334,7 @@ public final class NonDescriptorClassManagementDialog
 
         private Iterator allDescriptorClassNames() {
             return new TransformationIterator(NonDescriptorClassManagementDialog.this.descriptorClasses()) {
+                @Override
                 protected Object transform(Object next) {
                     return ((MWClass) next).getName();
                 }
@@ -335,6 +348,7 @@ public final class NonDescriptorClassManagementDialog
             return result;
         }
 
+        @Override
         protected boolean accept(String externalClassDescriptionName) {
             return super.accept(externalClassDescriptionName) &&
                     this.userClassNames.contains(externalClassDescriptionName) &&

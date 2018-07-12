@@ -57,6 +57,7 @@ public final class AttributeTransformerPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         this.setLayout(new GridBagLayout());
 
@@ -135,6 +136,7 @@ public final class AttributeTransformerPanel
 
     private PropertyValueModel buildAttributeTransformerPropertyValue() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWTransformationMapping.ATTRIBUTE_TRANSFORMER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTransformationMapping) this.subject).getAttributeTransformer();
             }
@@ -153,6 +155,7 @@ public final class AttributeTransformerPanel
 
     private ActionListener buildAttributeTransformerEditAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWTransformationMapping transformationMapping =
                     (MWTransformationMapping) AttributeTransformerPanel.this.subject();

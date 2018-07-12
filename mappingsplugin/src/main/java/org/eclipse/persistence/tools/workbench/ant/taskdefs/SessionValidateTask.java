@@ -29,6 +29,7 @@ public class SessionValidateTask extends TopLinkTask implements SessionValidator
         super();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -43,6 +44,7 @@ public class SessionValidateTask extends TopLinkTask implements SessionValidator
         this.loginSpec = loginSpec;
     }
 
+    @Override
     public void execute() throws BuildException {
         super.execute();
 
@@ -58,6 +60,7 @@ public class SessionValidateTask extends TopLinkTask implements SessionValidator
      * Executes the MappingsRunner.
      * Returns 0 if the there is no problem in the project.
      */
+    @Override
     public int execute( String sessionName, String sessionsFileName, String url, String driverclass, String user, String password) {
 
         Object[] args = { sessionName, sessionsFileName, url, driverclass, user, password};
@@ -65,6 +68,7 @@ public class SessionValidateTask extends TopLinkTask implements SessionValidator
        return this.execute( args);
     }
 
+    @Override
     protected String getProjectRunnerClassName() {
 
         return "org.eclipse.persistence.tools.workbench.ant.SessionValidator";
@@ -91,6 +95,7 @@ public class SessionValidateTask extends TopLinkTask implements SessionValidator
         return login;
     }
 
+    @Override
     protected void preExecute() throws BuildException {
         super.preExecute();
 

@@ -40,25 +40,30 @@ public class LongConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.value = stream.readLong();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" value: ");
         writer.println(this.value);
     }
 
+    @Override
     public String description() {
         return "long";
     }
 
+    @Override
     public void printFieldInitializationClauseOn(PrintWriter writer) {
         writer.print(this.value);
         writer.print('L');
     }
 
+    @Override
     boolean consumesTwoPoolEntries() {
         return true;
     }
@@ -67,10 +72,12 @@ public class LongConstant extends Constant {
         return this.value;
     }
 
+    @Override
     public Object value() {
         return new Long(this.value);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

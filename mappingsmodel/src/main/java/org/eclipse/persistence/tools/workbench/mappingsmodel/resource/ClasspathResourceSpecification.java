@@ -52,10 +52,12 @@ public final class ClasspathResourceSpecification
 
     // **************** ResourceSpecification contract ************************
 
+    @Override
     public String getSourceKey() {
         return KEY;
     }
 
+    @Override
     protected URL resourceUrl()
         throws ResourceException
     {

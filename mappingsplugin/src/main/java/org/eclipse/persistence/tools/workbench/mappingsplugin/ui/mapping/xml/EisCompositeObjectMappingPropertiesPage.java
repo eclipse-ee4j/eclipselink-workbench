@@ -25,6 +25,7 @@ public final class EisCompositeObjectMappingPropertiesPage extends
         super(context);
     }
 
+    @Override
     protected AbstractXmlFieldPanel buildXmlFieldPanel() {
         return new AggregatableXmlFieldPanel(getSelectionHolder(), this.buildXmlFieldHolder(), this.getWorkbenchContextHolder(), MWCompositeObjectMapping.ELEMENT_TYPE_PROPERTY);
     }

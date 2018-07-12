@@ -133,17 +133,21 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
 
         final JComboBox result = new JComboBox() {
             private boolean fakeFocus;
+            @Override
             public boolean hasFocus() {
                 return fakeFocus || super.hasFocus();
             }
+            @Override
             public void paint(Graphics g) {
                 fakeFocus = ComboBoxTableCellRenderer.this.fakeFocusFlag;
                 super.paint(g);
                 fakeFocus = false;
             }
             //wrap the renderer to deal with the prototypeDisplayValue
+            @Override
             public void setRenderer(final ListCellRenderer aRenderer) {
                 super.setRenderer(new ListCellRenderer(){
+                    @Override
                     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                         if (value == prototypeLabel) {
                             return prototypeLabel;
@@ -152,6 +156,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
                     }
                 });
             }
+            @Override
             public int getSelectedIndex() {
                 boolean listNotCached = !listIsCached();
                 if (listNotCached) {
@@ -188,6 +193,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
 
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JComboBox comboBox = (JComboBox) e.getSource();
                 Object selectedItem = comboBox.getSelectedItem();
@@ -214,6 +220,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     private PopupMenuListener buildPopupMenuListener() {
         return new PopupMenuListener() {
 
+            @Override
             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
                 if (listIsCached()) {
                     uncacheList();
@@ -221,6 +228,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
                 cacheList();
             }
 
+            @Override
             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
                 if (listIsCached()) {
                     uncacheList();
@@ -228,6 +236,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
 
             }
 
+            @Override
             public void popupMenuCanceled(PopupMenuEvent e) {
                 if (listIsCached()) {
                     uncacheList();
@@ -253,6 +262,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     /**
      * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
      */
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object val, boolean selected, boolean hasFocus, int row, int column) {
         this.fakeFocusFlag = selected || hasFocus;
         if (this.comboBox == null) {
@@ -318,6 +328,7 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     /**
      * @see TableCellEditorAdapter#getValue()
      */
+    @Override
     public Object getValue() {
         return this.value;
     }
@@ -325,10 +336,12 @@ public class ComboBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     /**
      * @see TableCellEditorAdapter#setImmediateEditListener(TableCellEditorAdapter.ImmediateEditListener)
      */
+    @Override
     public void setImmediateEditListener(TableCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;
     }
 
+    @Override
     public void commit() {
         // Nothing to commit
     }

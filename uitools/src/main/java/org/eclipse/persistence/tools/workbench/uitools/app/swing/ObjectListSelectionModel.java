@@ -61,15 +61,19 @@ public class ObjectListSelectionModel extends DefaultListSelectionModel {
 
     private ListDataListener buildListDataListener() {
         return new ListDataListener() {
+            @Override
             public void intervalAdded(ListDataEvent e) {
                 // this does not affect the selection
             }
+            @Override
             public void intervalRemoved(ListDataEvent e) {
                 // this does not affect the selection
             }
+            @Override
             public void contentsChanged(ListDataEvent e) {
                 ObjectListSelectionModel.this.listModelContentsChanged(e);
             }
+            @Override
             public String toString() {
                 return "list data listener";
             }
@@ -92,6 +96,7 @@ public class ObjectListSelectionModel extends DefaultListSelectionModel {
 
     // ********** ListSelectionModel implementation **********
 
+    @Override
     public void addListSelectionListener(ListSelectionListener l) {
         if (this.hasNoListSelectionListeners()) {
             this.listModel.addListDataListener(this.listDataListener);
@@ -99,6 +104,7 @@ public class ObjectListSelectionModel extends DefaultListSelectionModel {
         super.addListSelectionListener(l);
     }
 
+    @Override
     public void removeListSelectionListener(ListSelectionListener l) {
         super.removeListSelectionListener(l);
         if (this.hasNoListSelectionListeners()) {

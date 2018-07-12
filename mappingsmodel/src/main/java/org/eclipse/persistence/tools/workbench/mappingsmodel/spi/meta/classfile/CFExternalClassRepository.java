@@ -105,6 +105,7 @@ final class CFExternalClassRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepository#getClassDescription(String)
      */
+    @Override
     public ExternalClassDescription getClassDescription(String typeName) {
         // lazy initialize to postpone the suffering until required
         synchronized (this) {
@@ -118,6 +119,7 @@ final class CFExternalClassRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepository#getClassDescriptions()
      */
+    @Override
     public ExternalClassDescription[] getClassDescriptions() {
         // lazy initialize to postpone the suffering until required
         synchronized (this) {
@@ -225,6 +227,7 @@ final class CFExternalClassRepository
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         String moreInfo;
         if (this.classDescriptions == null) {

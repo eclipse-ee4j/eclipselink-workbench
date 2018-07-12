@@ -17,15 +17,12 @@ package org.eclipse.persistence.tools.workbench.ant;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import org.apache.tools.ant.BuildException;
 import org.eclipse.persistence.tools.workbench.framework.resources.DefaultStringRepository;
 import org.eclipse.persistence.tools.workbench.framework.resources.StringRepository;
 import org.eclipse.persistence.tools.workbench.mappingsio.ProjectIOManager;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWError;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWLoginSpec;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.xml.MWEisLoginSpec;
@@ -49,6 +46,7 @@ public class ProjectExporter extends ProjectRunner implements ProjectExplorerInt
         super( log);
     }
 
+    @Override
     protected void initialize( PrintStream log) {
         super.initialize( log);
 
@@ -61,6 +59,7 @@ public class ProjectExporter extends ProjectRunner implements ProjectExplorerInt
      * @param projectFileName fully qualified project filename (.mwp or .xml)
      * @param deploymentFileName fully qualified name for the deployment file.
      */
+    @Override
     public int execute( String projectFileName, String deploymentFileName, String ejbJarXMLDir, Vector ignoreErrorCodes, Boolean failOnErrorObject, String url, String driverclass, String user, String password) {
         boolean failOnError = failOnErrorObject.booleanValue();
         File projectFile = new File( projectFileName);

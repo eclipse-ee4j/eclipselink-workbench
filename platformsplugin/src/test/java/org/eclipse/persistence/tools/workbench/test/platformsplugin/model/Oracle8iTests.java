@@ -33,18 +33,22 @@ public class Oracle8iTests extends OracleTests {
     /**
      * the Oracle 8.1.7.4.1 server in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb4.ca.oracle.com";
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         super.appendColumnsToTableDDL(sb);
     }
 
+    @Override
     protected String platformName() {
         return "Oracle8i";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "8.1.7.4.1";
     }

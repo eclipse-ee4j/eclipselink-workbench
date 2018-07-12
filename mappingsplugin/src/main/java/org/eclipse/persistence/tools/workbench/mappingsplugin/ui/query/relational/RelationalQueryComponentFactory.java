@@ -54,6 +54,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
                             buildCacheStatementAdapter(relationalOptionsHolder)));
         comboBox.setRenderer(new AdaptableListCellRenderer(
                 new TriStateBooleanCellRendererAdapter(resourceRepository) {
+                    @Override
                     protected String undefinedString() {
                         Boolean projectCacheStatement = (Boolean) projectCacheStatementHolder.getValue();
                         return resourceRepository.getString("QUERY_DESCRIPTOR_DEFAULT_VALUE", projectCacheStatement);
@@ -69,10 +70,12 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static PropertyValueModel buildCacheStatementAdapter(PropertyValueModel relationalOptionsHolder) {
         return new PropertyAspectAdapter(relationalOptionsHolder, MWRelationalQuery.CACHE_STATEMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalQuery) this.subject).isCacheStatement();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalQuery) this.subject).setCacheStatement((TriStateBoolean) value);
             }
@@ -81,6 +84,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static PropertyChangeListener buildProjectDefaultListener(final JComboBox comboBox) {
         return new PropertyChangeListener(){
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //repainting the comboBox because the rendering changes when
                 //the project value is changed.
@@ -91,6 +95,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static PropertyValueModel buildProjectCacheStatementHolder(PropertyValueModel relationalOptionsHolder) {
         return new PropertyAspectAdapter(relationalOptionsHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Boolean(((MWRelationalProjectDefaultsPolicy) ((MWRelationalSpecificQueryOptions) this.subject).getProject().getDefaultsPolicy()).shouldQueriesCacheAllStatements());
             }
@@ -110,6 +115,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
                             buildBindParametersPropertyAdapter(relationalOptionsHolder)));
         comboBox.setRenderer(new AdaptableListCellRenderer(
                 new TriStateBooleanCellRendererAdapter(resourceRepository) {
+                    @Override
                     protected String undefinedString() {
                         Boolean projectBindParameters = (Boolean) projectBindParametersHolder.getValue();
                         return resourceRepository.getString("QUERY_DESCRIPTOR_DEFAULT_VALUE", projectBindParameters);
@@ -125,10 +131,12 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static PropertyValueModel buildBindParametersPropertyAdapter(PropertyValueModel relationalOptionsHolder) {
         return new PropertyAspectAdapter(relationalOptionsHolder, MWRelationalQuery.BIND_ALL_PARAMETERS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalQuery) this.subject).isBindAllParameters();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalQuery) this.subject).setBindAllParameters((TriStateBoolean) value);
             }
@@ -137,6 +145,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static PropertyValueModel buildProjectBindParametersHolder(PropertyValueModel relationalOptionsHolder) {
         return new PropertyAspectAdapter(relationalOptionsHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Boolean(((MWRelationalProjectDefaultsPolicy) ((MWRelationalSpecificQueryOptions) this.subject).getProject().getDefaultsPolicy()).shouldQueriesBindAllParameters());
             }
@@ -146,6 +155,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static PropertyValueModel buildRelationalOptionsHolder(PropertyValueModel queryHolder) {
         return new PropertyAspectAdapter(queryHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalQuery) this.subject).getRelationalOptions();
             }
@@ -155,6 +165,7 @@ class RelationalQueryComponentFactory extends QueryComponentFactory {
 
     private static CollectionValueModel buildTriStateBooleanValueModel() {
         return new AbstractReadOnlyCollectionValueModel() {
+            @Override
             public Object getValue() {
                 return triStateBooleanOptions();
             }

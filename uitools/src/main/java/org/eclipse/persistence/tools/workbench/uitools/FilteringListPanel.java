@@ -171,15 +171,19 @@ public class FilteringListPanel extends JPanel {
      */
     private DocumentListener buildTextFieldListener() {
         return new DocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 FilteringListPanel.this.filterList();
             }
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 FilteringListPanel.this.filterList();
             }
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 FilteringListPanel.this.filterList();
             }
+            @Override
             public String toString() {
                 return "text field listener";
             }
@@ -379,6 +383,7 @@ public class FilteringListPanel extends JPanel {
      */
     protected ListCellRenderer buildDefaultCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return FilteringListPanel.this.stringConverter.convertToString(value);
             }
@@ -437,9 +442,11 @@ public class FilteringListPanel extends JPanel {
      */
     private ListModel buildPartialArrayListModel(final Object[] array, final int size) {
         return new AbstractListModel() {
+            @Override
             public int getSize() {
                 return size;
             }
+            @Override
             public Object getElementAt(int index) {
                 return array[index];
             }

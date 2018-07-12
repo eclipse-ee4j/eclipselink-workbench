@@ -57,6 +57,7 @@ public final class SunAS9PlatformAdapter extends ServerPlatformAdapter {
         /**
         * Factory method for building this model.
         */
+    @Override
         protected Object buildModel() {
             return new SunAS9PlatformConfig();
         }

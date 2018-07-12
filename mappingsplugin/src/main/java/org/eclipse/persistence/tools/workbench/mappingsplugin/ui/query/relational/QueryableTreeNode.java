@@ -43,6 +43,7 @@ final class QueryableTreeNode extends DefaultMutableTreeNode
          this.allowsNull = false;
      }
 
+    @Override
     public int getChildCount()
     {
         if (children == null) {

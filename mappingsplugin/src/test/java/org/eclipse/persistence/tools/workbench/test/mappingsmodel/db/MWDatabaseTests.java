@@ -49,6 +49,7 @@ public class MWDatabaseTests extends AbstractModelDatabaseTests {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
     }

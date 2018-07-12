@@ -61,6 +61,7 @@ final class ReportQueryOptionsPanel
 
     private PropertyValueModel buildReportQueryHolder(PropertyValueModel queryHolder) {
         return new FilteringPropertyValueModel(queryHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWReportQuery;
             }
@@ -211,6 +212,7 @@ final class ReportQueryOptionsPanel
 
     private ListCellRenderer buildTopLinkOptionModelRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 //null check for comboBox
                 return value == null ? "" : resourceRepository().getString(((TopLinkOption) value).resourceKey());
@@ -220,6 +222,7 @@ final class ReportQueryOptionsPanel
 
     private ListValueModel buildReturnChoiceValueModel() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWReportQuery.returnChoiceOptions().toplinkOptions();
             }
@@ -228,10 +231,12 @@ final class ReportQueryOptionsPanel
 
     private PropertyValueModel buildReturnChoicePropertyAdapter() {
         return new PropertyAspectAdapter(this.queryHolder, MWReportQuery.RETURN_CHOICE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWReportQuery) this.subject).getReturnChoice();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWReportQuery) this.subject).setReturnChoice((MWReportQuery.ReturnChoiceOption) value);
             }
@@ -250,6 +255,7 @@ final class ReportQueryOptionsPanel
 
     private ListValueModel buildRetrievePrimaryKeysValueModel() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWReportQuery.retrievePrimaryKeysOptions().toplinkOptions();
             }
@@ -258,10 +264,12 @@ final class ReportQueryOptionsPanel
 
     private PropertyValueModel buildRetrievePrimaryKeysPropertyAdapter() {
         return new PropertyAspectAdapter(this.queryHolder, MWReportQuery.RETRIVE_PRIMARY_KEYS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWReportQuery) this.subject).getRetrievePrimaryKeys();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWReportQuery) this.subject).setRetrievePrimaryKeys((MWReportQuery.RetrievePrimaryKeysOption) value);
             }
@@ -294,6 +302,7 @@ final class ReportQueryOptionsPanel
 
     private ActionListener buildAdvancedOptionsAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 showAdvancedOptionsDialog();
             }

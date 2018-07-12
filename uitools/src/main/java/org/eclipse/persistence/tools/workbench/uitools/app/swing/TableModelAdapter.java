@@ -132,18 +132,23 @@ public class TableModelAdapter extends AbstractTableModel {
 
     private ListChangeListener buildListChangeListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 TableModelAdapter.this.addRows(e.getIndex(), e.size(), e.items());
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 TableModelAdapter.this.removeRows(e.getIndex(), e.size());
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 TableModelAdapter.this.replaceRows(e.getIndex(), e.items());
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 TableModelAdapter.this.rebuildTable();
             }
+            @Override
             public String toString() {
                 return "list listener";
             }
@@ -152,9 +157,11 @@ public class TableModelAdapter extends AbstractTableModel {
 
     private PropertyChangeListener buildCellListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 TableModelAdapter.this.cellChanged((PropertyValueModel) evt.getSource());
             }
+            @Override
             public String toString() {
                 return "cell listener";
             }
@@ -167,6 +174,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.TableModel#getColumnCount()
      */
+    @Override
     public int getColumnCount() {
         return this.columnAdapter.getColumnCount();
     }
@@ -174,6 +182,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.TableModel#getRowCount()
      */
+    @Override
     public int getRowCount() {
         return this.rows.size();
     }
@@ -181,6 +190,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.AbstractTableModel#getColumnName(int)
      */
+    @Override
     public String getColumnName(int column) {
         return this.columnAdapter.getColumnName(column);
     }
@@ -188,6 +198,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
      */
+    @Override
     public Class getColumnClass(int columnIndex) {
         return this.columnAdapter.getColumnClass(columnIndex);
     }
@@ -195,6 +206,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
      */
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return this.columnAdapter.isColumnEditable(columnIndex);
     }
@@ -202,6 +214,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.TableModel#getValueAt(int, int)
      */
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         PropertyValueModel[] row = (PropertyValueModel[]) this.rows.get(rowIndex);
         return row[columnIndex].getValue();
@@ -210,6 +223,7 @@ public class TableModelAdapter extends AbstractTableModel {
     /**
      * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
      */
+    @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         if (rowIndex < this.rows.size()) {
             PropertyValueModel[] row = (PropertyValueModel[]) this.rows.get(rowIndex);
@@ -221,6 +235,7 @@ public class TableModelAdapter extends AbstractTableModel {
      * Extend to start listening to the underlying model if necessary.
      * @see javax.swing.table.AbstractTableModel#addTableModelListener(javax.swing.event.TableModelListener)
      */
+    @Override
     public void addTableModelListener(TableModelListener l) {
         if (this.hasNoTableModelListeners()) {
             this.engageModel();
@@ -232,6 +247,7 @@ public class TableModelAdapter extends AbstractTableModel {
      * Extend to stop listening to the underlying model if necessary.
      * @see javax.swing.table.AbstractTableModel#removeTableModelListener(javax.swing.event.TableModelListener)
      */
+    @Override
     public void removeTableModelListener(TableModelListener l) {
         super.removeTableModelListener(l);
         if (this.hasNoTableModelListeners()) {

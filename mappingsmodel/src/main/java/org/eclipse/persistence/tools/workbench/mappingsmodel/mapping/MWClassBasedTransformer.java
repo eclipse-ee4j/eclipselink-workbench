@@ -53,6 +53,7 @@ public final class MWClassBasedTransformer
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parentNode) {
         super.initialize(parentNode);
         this.transformerClassHandle = new MWClassHandle(this, this.buildTransformerClassScrubber());
@@ -61,6 +62,7 @@ public final class MWClassBasedTransformer
 
     // **************** Containment hierarchy ****************************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.transformerClassHandle);
@@ -68,9 +70,11 @@ public final class MWClassBasedTransformer
 
     private NodeReferenceScrubber buildTransformerClassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassBasedTransformer.this.setTransformerClass(null);
             }
+            @Override
             public String toString() {
                 return "MWClassBasedTransformer.buildTransformerClassScrubber()";
             }
@@ -97,10 +101,12 @@ public final class MWClassBasedTransformer
 
     // **************** Aggregate Support *************************************
 
+    @Override
     public String fieldNameForRuntime() {
         return "CLASS_TRANSFORMER " + ((getTransformerClass() == null) ? null : getTransformerClass().getName());
     }
 
+    @Override
     public AggregateFieldDescription fullFieldDescription() {
         return getDescriptionForTransformer(getTransformerClass());
     }
@@ -108,16 +114,19 @@ public final class MWClassBasedTransformer
     private AggregateFieldDescription getDescriptionForTransformer(MWClass mwClass) {
         final String classDescription = (mwClass == null) ? null : mwClass.getName();
         return new AggregateFieldDescription() {
+            @Override
             public String getMessageKey() {
                 return "AGGREGATE_FIELD_DESCRIPTION_FOR_CLASS_BASED_TRANSFORMER";
             }
 
+            @Override
             public Object[] getMessageArguments() {
                 return new Object[] {classDescription};
             }
         };
     }
 
+    @Override
     public boolean fieldIsWritten() {
         return true;
     }
@@ -125,6 +134,7 @@ public final class MWClassBasedTransformer
 
     // **************** UI support *********************************************
 
+    @Override
     public String transformerDisplayString() {
         MWClass type = this.getTransformerClass();
         return (type == null) ? null : type.displayStringWithPackage();
@@ -133,6 +143,7 @@ public final class MWClassBasedTransformer
 
     // **************** Problems *********************************************
 
+    @Override
     public void addAttributeTransformerProblemsForMapping(List newProblems, MWTransformationMapping mapping) {
         if (this.getTransformerClass() == null) {
             newProblems.add(buildProblem(ProblemConstants.MAPPING_ATTRIBUTE_TRANSFORMER_CLASS_MISSING));
@@ -146,6 +157,7 @@ public final class MWClassBasedTransformer
         }
     }
 
+    @Override
     public void addFieldTransformerProblemsForAssociation(List newProblems, MWFieldTransformerAssociation association) {
         if (this.getTransformerClass() == null) {
             newProblems.add(buildProblem(ProblemConstants.MAPPING_FIELD_TRANSFORMER_CLASS_MISSING,
@@ -164,12 +176,14 @@ public final class MWClassBasedTransformer
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void setRuntimeAttributeTransformer(AbstractTransformationMapping mapping) {
         if (this.getTransformerClass() != null) {
             mapping.setAttributeTransformerClassName(this.getTransformerClass().getName());
         }
     }
 
+    @Override
     public void addRuntimeFieldTransformer(AbstractTransformationMapping mapping, DatabaseField runtimeField) {
         if (this.getTransformerClass() != null) {
             mapping.addFieldTransformerClassName(runtimeField, this.getTransformerClass().getName());
@@ -179,6 +193,7 @@ public final class MWClassBasedTransformer
 
     // **************** Misc. *************************************************
 
+    @Override
     public void toString(StringBuffer sb) {
         this.transformerClassHandle.toString(sb);
     }

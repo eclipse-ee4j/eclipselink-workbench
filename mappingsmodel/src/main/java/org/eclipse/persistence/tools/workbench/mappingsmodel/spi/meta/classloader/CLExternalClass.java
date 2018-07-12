@@ -56,6 +56,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredClasses()
      */
+    @Override
     public ExternalClassDescription[] getDeclaredClasses() {
         return this.buildClassDescriptionArray(this.javaClass.getDeclaredClasses());
     }
@@ -63,6 +64,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredConstructors()
      */
+    @Override
     public ExternalConstructor[] getDeclaredConstructors() {
         return this.buildConstructorArray(this.javaClass.getDeclaredConstructors());
     }
@@ -70,6 +72,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredFields()
      */
+    @Override
     public ExternalField[] getDeclaredFields() {
         return this.buildFieldArray(this.javaClass.getDeclaredFields());
     }
@@ -77,6 +80,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredMethods()
      */
+    @Override
     public ExternalMethod[] getDeclaredMethods() {
         return this.buildMethodArray(this.javaClass.getDeclaredMethods());
     }
@@ -84,6 +88,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaringClass()
      */
+    @Override
     public ExternalClassDescription getDeclaringClass() {
         return this.classDescriptionFor(this.javaClass.getDeclaringClass());
     }
@@ -91,6 +96,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getInterfaces()
      */
+    @Override
     public ExternalClassDescription[] getInterfaces() {
         return this.buildClassDescriptionArray(this.javaClass.getInterfaces());
     }
@@ -98,6 +104,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getModifiers()
      */
+    @Override
     public int getModifiers() {
         return this.javaClass.getModifiers();
     }
@@ -105,6 +112,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getName()
      */
+    @Override
     public String getName() {
         return this.javaClass.getName();
     }
@@ -112,6 +120,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getSuperclass()
      */
+    @Override
     public ExternalClassDescription getSuperclass() {
         return this.classDescriptionFor(this.javaClass.getSuperclass());
     }
@@ -119,6 +128,7 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#isInterface()
      */
+    @Override
     public boolean isInterface() {
         return this.javaClass.isInterface();
     }
@@ -126,12 +136,14 @@ final class CLExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#isPrimitive()
      */
+    @Override
     public boolean isPrimitive() {
         return this.javaClass.isPrimitive();
     }
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

@@ -77,6 +77,7 @@ public abstract class SimpleFilter
      * Return whether the the specified object should be "accepted".
      * The semantics of "accepted" is determined by the client.
      */
+    @Override
     public boolean accept(Object next) {
         return ! this.reject(next);
     }
@@ -84,6 +85,7 @@ public abstract class SimpleFilter
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -95,6 +97,7 @@ public abstract class SimpleFilter
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if ( ! (o instanceof SimpleFilter)) {
             return false;
@@ -107,6 +110,7 @@ public abstract class SimpleFilter
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return (this.criterion == null) ? 0 : this.criterion.hashCode();
     }
@@ -114,6 +118,7 @@ public abstract class SimpleFilter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.criterion);
     }

@@ -44,6 +44,7 @@ final class FrameworkActionRepository implements ActionRepository {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.action.ActionRepository#getSaveAction()
      */
+    @Override
     public FrameworkAction getSaveAction() {
         return new SaveAction(this.workbenchContext, this.frameworkNodeManager);
     }
@@ -51,6 +52,7 @@ final class FrameworkActionRepository implements ActionRepository {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.action.ActionRepository#getSaveAsAction()
      */
+    @Override
     public FrameworkAction getSaveAsAction() {
         return new SaveAsAction(this.workbenchContext, this.frameworkNodeManager);
     }
@@ -58,6 +60,7 @@ final class FrameworkActionRepository implements ActionRepository {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.action.ActionRepository#getCloseAction()
      */
+    @Override
     public FrameworkAction getCloseAction() {
         return new CloseAction(this.workbenchContext, this.frameworkNodeManager);
     }

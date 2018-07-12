@@ -36,26 +36,32 @@ public abstract class AbstractQuickViewSection implements QuickViewSection
         this.accessibleNameKey = accessibleNameKey;
     }
 
+    @Override
     public String accessibleName() {
         return this.resourceRepository.getString(this.accessibleNameKey);
     }
 
+    @Override
     public String displayString() {
         return this.resourceRepository.getString(this.displayStringKey);
     }
 
+    @Override
     public Object getValue() {
         return null;
     }
 
+    @Override
     public Icon icon() {
         return null; // TODO
     }
 
+    @Override
     public final boolean isRemovable() {
         return false; // For now a section is not removable
     }
 
+    @Override
     public final void remove() {
         throw new UnsupportedOperationException("A IQuickViewSection cannot be removed");
     }

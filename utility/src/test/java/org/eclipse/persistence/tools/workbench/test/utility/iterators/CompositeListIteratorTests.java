@@ -35,6 +35,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         super(name);
     }
 
+    @Override
     void verifyHasAnother(Iterator stream) {
         super.verifyHasAnother(stream);
         ListIterator stream2 = (ListIterator) stream;
@@ -46,6 +47,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         assertEquals(8, i);
     }
 
+    @Override
     void verifyAnother(Iterator stream) {
         super.verifyAnother(stream);
         int i = 8;
@@ -55,6 +57,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         }
     }
 
+    @Override
     public void testRemove() {
         super.testRemove();
         List list1 = this.buildList1();
@@ -324,6 +327,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         // TODO
     }
 
+    @Override
     void verifyNoSuchElementException(Iterator stream) {
         super.verifyNoSuchElementException(stream);
         ListIterator stream2 = (ListIterator) stream;
@@ -340,6 +344,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         assertTrue("NoSuchElementException not thrown: " + string, exCaught);
     }
 
+    @Override
     void verifyUnsupportedOperationException(Iterator stream) {
         super.verifyUnsupportedOperationException(stream);
         boolean exCaught = false;
@@ -357,6 +362,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         assertTrue("UnsupportedOperationException not thrown", exCaught);
     }
 
+    @Override
     void verifyIllegalStateException(Iterator stream) {
         super.verifyIllegalStateException(stream);
         ListIterator stream2 = (ListIterator) stream;
@@ -369,6 +375,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         assertTrue("IllegalStateException not thrown", exCaught);
     }
 
+    @Override
     void verifyEmptyHasAnother(Iterator stream) {
         super.verifyEmptyHasAnother(stream);
         ListIterator stream2 = (ListIterator) stream;
@@ -380,6 +387,7 @@ public class CompositeListIteratorTests extends CompositeIteratorTests {
         assertEquals(0, i);
     }
 
+    @Override
     Iterator buildCompositeIterator(Iterator iterators) {
         return this.buildCompositeListIterator((ListIterator) iterators);
     }

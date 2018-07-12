@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.test.models.projects;
 import java.sql.Blob;
 import java.util.Iterator;
 
-import org.eclipse.persistence.mappings.converters.TypeConversionConverter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWCachingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorAfterLoadingPolicy;
@@ -28,7 +27,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relation
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassIndicatorFieldPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptorInheritancePolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWTableDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWJoinFetchableMapping.JoinFetchOption;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWDefaultNullValuePolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWObjectTypeConverter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWTypeConversionConverter;

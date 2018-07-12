@@ -68,11 +68,13 @@ public final class MWListContainerPolicy
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.containerClass = new DefaultingContainerClass(this);
     }
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.containerClass);
@@ -81,6 +83,7 @@ public final class MWListContainerPolicy
 
     // ************ accessors ***************
 
+    @Override
     public DefaultingContainerClass getDefaultingContainerClass() {
         return this.containerClass;
     }
@@ -97,24 +100,29 @@ public final class MWListContainerPolicy
         return ((MWMapping) getParent()).getInstanceVariable();
     }
 
+    @Override
     public boolean usesSorting() {
         return false;
     }
 
+    @Override
     public void setUsesSorting(boolean sort) {
         // do nothing currently only applies to set container policies
     }
 
+    @Override
     public MWClass getComparatorClass() {
         return null;
     }
 
+    @Override
     public void setComparatorClass(MWClass comparatorClass) {
         // do nothing currently only applies to set container policies
     }
 
     // **************** Behavior **********************************************
 
+    @Override
     public MWClass defaultContainerClass() {
         if (this.getContainerMapping().usesTransparentIndirection()) {
             return this.defaultIndirectContainerClass();
@@ -143,12 +151,14 @@ public final class MWListContainerPolicy
         return typeFor(IndirectList.class);
     }
 
+    @Override
     public void referenceDescriptorChanged(MWDescriptor newReferenceDescriptor) {
         //nothing to do
     }
 
     // ************** Problem Handling ****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         MWClass containerType = this.getDefaultingContainerClass().getContainerClass();
@@ -160,6 +170,7 @@ public final class MWListContainerPolicy
 
     // **************** Runtime conversion *****************
 
+    @Override
     public ContainerPolicy runtimeContainerPolicy() {
         return new ListContainerPolicy(getDefaultingContainerClass().getContainerClass().getName());
     }

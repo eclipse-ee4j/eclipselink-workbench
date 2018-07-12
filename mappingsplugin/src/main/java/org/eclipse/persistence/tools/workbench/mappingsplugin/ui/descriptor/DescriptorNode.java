@@ -86,12 +86,15 @@ public abstract class DescriptorNode
 
     // ************ AbstractApplicationNode overrides *************
 
+    @Override
     public String accessibleName() {
         return resourceRepository().getString(accessibleNameKey(), displayString());
     }
 
+    @Override
     protected abstract String accessibleNameKey();
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return DESCRIPTOR_DISPLAY_STRING_PROPERTY_NAMES;
     }
@@ -100,6 +103,7 @@ public abstract class DescriptorNode
      * listen to the descriptor's 'active' property in addition
      * to its 'has branch problems' property
      */
+    @Override
     protected String[] iconPropertyNames() {
         return DESCRIPTOR_ICON_PROPERTY_NAMES;
     }
@@ -107,6 +111,7 @@ public abstract class DescriptorNode
     /**
      * dim the icon if the descriptor is inactive
      */
+    @Override
     protected IconBuilder buildIconBuilder() {
         return new ActiveIconBuilder(super.buildIconBuilder(), this.getDescriptor().isActive());
     }
@@ -114,10 +119,12 @@ public abstract class DescriptorNode
 
     // ************ MWApplicationNode overrides ***********
 
+    @Override
     public String candidatePackageName() {
         return this.getDescriptor().packageName();
     }
 
+    @Override
     public boolean isAutoMappable() {
         return true;
     }
@@ -126,6 +133,7 @@ public abstract class DescriptorNode
         return new SingleElementIterator(this.getDescriptor());
     }
 
+    @Override
     public void addDescriptorsTo(Collection descriptors) {
         descriptors.add(this.getDescriptor());
     }
@@ -133,6 +141,7 @@ public abstract class DescriptorNode
 
     // ********** AutomappableNode implementation **********
 
+    @Override
     public String getAutomapSuccessfulStringKey() {
         return "AUTOMAP_DESCRIPTOR_SUCCESSFUL";
     }
@@ -140,6 +149,7 @@ public abstract class DescriptorNode
 
     // ********** UnmappablePackageNode implementation **********
 
+    @Override
     public void unmapEntirePackage() {
         this.getPackageNode().unmap();
     }
@@ -155,10 +165,12 @@ public abstract class DescriptorNode
 
     // ********** Removable implementation **********
 
+    @Override
     public String getName() {
         return this.getDescriptor().getName();
     }
 
+    @Override
     public void remove() {
         this.getDescriptor().getProject().removeDescriptor(this.getDescriptor());
     }
@@ -178,6 +190,7 @@ public abstract class DescriptorNode
         return this.getDescriptor().getTransactionalPolicy();
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
         RootMenuDescription desc = new RootMenuDescription();

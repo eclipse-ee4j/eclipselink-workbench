@@ -71,12 +71,14 @@ public final class MWXmlSchemaRepository
 
     // **************** Initialization ****************************************
 
+    @Override
     protected /*private-protected*/ void initialize(Node parent) {
         super.initialize(parent);
         this.schemas = new Hashtable();
         this.schemaNames = new HashSet();
     }
 
+    @Override
     protected /*private-protected*/ void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.schemas) { children.addAll(this.schemas.values()); }
@@ -173,6 +175,7 @@ public final class MWXmlSchemaRepository
      * the repository's descendants have NO references (handles)
      * to any models other than other descendants of the repository
      */
+    @Override
     public void nodeRemoved(Node node) {
         if (node.isDescendantOf(this)) {
             super.nodeRemoved(node);
@@ -184,6 +187,7 @@ public final class MWXmlSchemaRepository
      * the repository's descendants have NO references (handles)
      * to any models other than other descendants of the repository
      */
+    @Override
     public void nodeRenamed(Node node) {
         if (node.isDescendantOf(this)) {
             super.nodeRenamed(node);
@@ -195,6 +199,7 @@ public final class MWXmlSchemaRepository
      * performance tuning: ignore this method - assume there are no
      * references to mappings in the schema repository or its descendants
      */
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         // do nothing
     }
@@ -203,6 +208,7 @@ public final class MWXmlSchemaRepository
      * performance tuning: ignore this method - assume there are no
      * references to descriptors in the database or its descendants
      */
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         // do nothing
     }
@@ -211,6 +217,7 @@ public final class MWXmlSchemaRepository
      * performance tuning: ignore this method - assume there are no
      * references to mappings in the schema repository or its descendants
      */
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         // do nothing
     }
@@ -218,10 +225,12 @@ public final class MWXmlSchemaRepository
 
     // ********** SubComponentContainer implementation **********
 
+    @Override
     public Iterator projectSubFileComponents() {
         return this.schemas();
     }
 
+    @Override
     public void setProjectSubFileComponents(Collection subComponents) {
         this.schemas = new Hashtable(subComponents.size());
         for (Iterator stream = subComponents.iterator(); stream.hasNext(); ) {
@@ -230,14 +239,17 @@ public final class MWXmlSchemaRepository
         }
     }
 
+    @Override
     public Iterator originalProjectSubFileComponentNames() {
         return this.schemaNames.iterator();
     }
 
+    @Override
     public void setOriginalProjectSubFileComponentNames(Collection originalSubComponentNames) {
         this.schemaNames = originalSubComponentNames;
     }
 
+    @Override
     public boolean hasChangedMainProjectSaveFile() {
         if (this.isDirty()) {
             // the repository itself is dirty

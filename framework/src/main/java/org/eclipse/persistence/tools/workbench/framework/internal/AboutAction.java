@@ -24,12 +24,14 @@ final class AboutAction extends AbstractFrameworkAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         setText(resourceRepository().getString("ABOUT"));
         initializeMnemonic("ABOUT");
 //        initializeIcon("about");
     }
 
+    @Override
     protected void execute() {
         getAboutDialog().show();
     }

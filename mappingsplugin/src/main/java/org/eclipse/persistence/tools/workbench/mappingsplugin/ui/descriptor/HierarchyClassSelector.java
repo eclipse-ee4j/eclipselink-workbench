@@ -55,15 +55,18 @@ final class HierarchyClassSelector extends AbstractDialog {
         return selectedClass;
     }
 
+    @Override
     protected String helpTopicId() {
         return "descriptor.hierarchyClassSelector";
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         getOKAction().setEnabled(false);
     }
 
+    @Override
     protected Component buildMainPanel() {
         setTitle(resourceRepository().getString("HIERARCHY_CLASS_SELECTOR_DIALOG.title"));
 
@@ -112,6 +115,7 @@ final class HierarchyClassSelector extends AbstractDialog {
         hierarchyTree.setRowHeight(20);
         hierarchyTree.setDoubleBuffered(true);
         hierarchyTree.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent event) {
                 TreePath path = ((JTree) event.getSource()).getLeadSelectionPath();
                 if (path != null) {
@@ -143,16 +147,19 @@ final class HierarchyClassSelector extends AbstractDialog {
         this.hierarchyTree.expandPath(new TreePath(nextParentNode.getPath()));
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.hierarchyTree;
     }
 
     private TreeCellRenderer buildMWClassCellRenderer() {
         return new SimpleTreeCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 MWClass mwClass = (MWClass) ((DefaultMutableTreeNode) value).getUserObject();
                 return mwClass == null ? "" : mwClass.getName();
             }
+            @Override
             protected Icon buildIcon(Object value) {
                 return null;
             }

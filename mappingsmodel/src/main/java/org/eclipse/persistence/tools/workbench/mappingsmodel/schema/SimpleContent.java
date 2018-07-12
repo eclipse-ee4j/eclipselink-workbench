@@ -33,10 +33,12 @@ public final class SimpleContent
 
     // **************** Behavior **********************************************
 
+    @Override
     boolean hasTextContent() {
         return true;
     }
 
+    @Override
     boolean containsWildcard() {
         return false;
     }

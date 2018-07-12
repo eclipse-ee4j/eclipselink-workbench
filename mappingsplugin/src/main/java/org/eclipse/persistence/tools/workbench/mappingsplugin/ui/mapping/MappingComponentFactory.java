@@ -81,9 +81,11 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildReadOnlyHolder(ValueModel mappingHolder) {
         return new PropertyAspectAdapter(mappingHolder, MWMapping.READ_ONLY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWMapping) subject).isReadOnly());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWMapping) subject).setReadOnly(((Boolean) value).booleanValue());
             }
@@ -109,6 +111,7 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     public static NodeSelector buildDescriptorNodeSelector(final WorkbenchContextHolder contextHolder) {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 ProjectNode projectNode = (ProjectNode) contextHolder.getWorkbenchContext().getNavigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectDescriptorNodeFor((MWDescriptor) item, contextHolder.getWorkbenchContext().getNavigatorSelectionModel());
@@ -143,6 +146,7 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static CollectionValueModel buildCandidateReferenceDescriptorsCollectionValue(final ValueModel referenceMappingHolder) {
         return new FilteringCollectionValueModel(buildDescriptorsCollectionValue(referenceMappingHolder)) {
+            @Override
             protected boolean accept(Object value) {
                 MWReferenceObjectMapping  referenceMapping = (MWReferenceObjectMapping) referenceMappingHolder.getValue();
                 return (referenceMapping == null) ? false : referenceMapping.descriptorIsValidReferenceDescriptor((MWDescriptor) value);
@@ -152,10 +156,12 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static CollectionValueModel buildDescriptorsCollectionValue(ValueModel referenceMappingHolder) {
         return new CollectionAspectAdapter(buildProjectValue(referenceMappingHolder), MWProject.DESCRIPTORS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWProject) this.subject).descriptors();
             }
 
+            @Override
             protected int sizeFromSubject() {
                 return ((MWProject) this.subject).descriptorsSize();
             }
@@ -164,6 +170,7 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildProjectValue(ValueModel referenceMappingHolder) {
         return new PropertyAspectAdapter(referenceMappingHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWMapping) subject).getProject();
             }
@@ -172,10 +179,12 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildReferenceDescriptorValue(ValueModel referenceMappingHolder) {
         return new PropertyAspectAdapter(referenceMappingHolder, MWReferenceObjectMapping.REFERENCE_DESCRIPTOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWReferenceObjectMapping) this.subject).getReferenceDescriptor();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWReferenceObjectMapping) this.subject).setReferenceDescriptor((MWDescriptor) value);
             }
@@ -184,6 +193,7 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static Comparator buildDescriptorComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((MWDescriptor) o1).displayStringWithPackage().compareTo(((MWDescriptor) o2).displayStringWithPackage());
             }
@@ -204,6 +214,7 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static StringConverter buildDescriptorStringConverter(final ResourceRepository resourceRepository) {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWDescriptor) o).displayStringWithPackage();
             }
@@ -235,11 +246,13 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildPrivateOwnedHolder(ValueModel referenceMappingHolder) {
         return new PropertyAspectAdapter(referenceMappingHolder, MWReferenceMapping.PRIVATE_OWNED_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 MWReferenceMapping mapping = (MWReferenceMapping) subject;
                 return Boolean.valueOf(mapping.isPrivateOwned());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 MWReferenceMapping mapping = (MWReferenceMapping) subject;
                 mapping.setPrivateOwned(((Boolean) value).booleanValue());
@@ -273,10 +286,12 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildUsesIndirectionValue(ValueModel indirectableMappingHolder) {
         return new PropertyAspectAdapter(indirectableMappingHolder, MWIndirectableMapping.INDIRECTION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWIndirectableMapping) this.subject).usesValueHolderIndirection());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 boolean useValueHolderIndirection = ((Boolean) value).booleanValue();
 
@@ -317,10 +332,12 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildMutableValue(ValueModel transformationMappingHolder) {
         return new PropertyAspectAdapter(transformationMappingHolder, MWTransformationMapping.MUTABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWTransformationMapping) subject).isMutable());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTransformationMapping) subject).setMutable(((Boolean) value).booleanValue());
             }
@@ -404,6 +421,7 @@ public class MappingComponentFactory extends SwingComponentFactory {
 
     private static ActionListener buildAdvancedCollectionOptionsButtonActionListener(final JButton button, final JPanel selectionPanel, final String title) {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectionPanel.isVisible()) {
                     selectionPanel.setVisible(false);

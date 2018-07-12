@@ -37,18 +37,22 @@ public class MWNullArgument extends MWArgument {
         super(expression);
     }
 
+    @Override
     public String getType() {
         return null;
     }
 
+    @Override
     Expression runtimeExpression(ExpressionBuilder builder) {
         return null;
     }
 
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue) {
 
     }
 
+    @Override
     public String displayString() {
         return "";
     }

@@ -43,6 +43,7 @@ final class ManyToManySourceReferencePanel
      * set of candidate references; it has two, in the relation table:
      * source and target
      */
+    @Override
     protected Iterator candidateReferences(MWTableReferenceMapping mapping) {
         return ((MWManyToManyMapping) mapping).candidateRelationTableSourceReferences();
     }
@@ -51,6 +52,7 @@ final class ManyToManySourceReferencePanel
      * setting the reference on a many-to-many mapping will set the
      * mapping's "source" reference
      */
+    @Override
     protected void setReference(MWReference reference) {
         super.setReference(reference);
         if (this.mapping().getRelationTable() == null) {
@@ -61,6 +63,7 @@ final class ManyToManySourceReferencePanel
     /**
      * the reference source is the "relation" table
      */
+    @Override
     protected List candidateNewReferenceSourceTables() {
         MWTable relationTable = this.mapping().getRelationTable();
         if (relationTable == null) {
@@ -72,6 +75,7 @@ final class ManyToManySourceReferencePanel
     /**
      * the reference source is the "relation" table
      */
+    @Override
     protected MWTable defaultNewReferenceSourceTable() {
         return this.mapping().getRelationTable();
     }
@@ -79,6 +83,7 @@ final class ManyToManySourceReferencePanel
     /**
      * the reference target is one of the "parent" descriptor's tables
      */
+    @Override
     protected MWTable defaultNewReferenceTargetTable() {
         Iterator candidateTables = this.mapping().getParentRelationalDescriptor().candidateTables();
         return candidateTables.hasNext() ? (MWTable) candidateTables.next() : null;

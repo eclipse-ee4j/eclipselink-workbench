@@ -37,6 +37,7 @@ final class FieldAccessingPanel extends AbstractSubjectPanel
     }
 
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
         setBorder(BorderFactory.createTitledBorder(resourceRepository().getString("FIELD_ACCESSING_PANEL_BORDER_TEXT")));
@@ -76,9 +77,11 @@ final class FieldAccessingPanel extends AbstractSubjectPanel
 
     private PropertyValueModel buildMethodAccessingHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWProjectDefaultsPolicy.METHOD_ACCESSING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWProjectDefaultsPolicy)subject).isMethodAccessing());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWProjectDefaultsPolicy) subject).setMethodAccessing(((Boolean) value).booleanValue());
             }

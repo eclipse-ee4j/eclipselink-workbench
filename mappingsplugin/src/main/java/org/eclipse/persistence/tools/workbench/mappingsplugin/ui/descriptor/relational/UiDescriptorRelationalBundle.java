@@ -165,6 +165,7 @@ public class UiDescriptorRelationalBundle
      * @return An table where the first element is the key used to
      * retrieve the second element, which is the value
      */
+    @Override
     public Object[][] getContents()
     {
         return contents;

@@ -161,6 +161,7 @@ public final class ClassDescriptionPackageNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.displayString;
     }
@@ -171,6 +172,7 @@ public final class ClassDescriptionPackageNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel#getParent()
      */
+    @Override
     public TreeNodeValueModel getParent() {
         return this.poolNode;
     }
@@ -178,6 +180,7 @@ public final class ClassDescriptionPackageNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel#getChildrenModel()
      */
+    @Override
     public ListValueModel getChildrenModel() {
         return this.sortedClassNodesHolder;
     }
@@ -185,10 +188,12 @@ public final class ClassDescriptionPackageNode
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         // the package is static - do nothing
     }
 
+    @Override
     protected void disengageValue() {
         // the package is static - do nothing
     }
@@ -199,6 +204,7 @@ public final class ClassDescriptionPackageNode
     /**
      * @see ClassDescriptionNodeContainer#addClassDescriptionNodesTo(java.util.Collection)
      */
+    @Override
     public void addClassDescriptionNodesTo(Collection classDescriptionNodes) {
         CollectionTools.addAll(classDescriptionNodes, this.classNodes());
     }
@@ -206,6 +212,7 @@ public final class ClassDescriptionPackageNode
 
     // ********** Comparable implementation **********
 
+    @Override
     public int compareTo(Object o) {
         // sort by name first...
         int result = this.nameCollationKey.compareTo(((ClassDescriptionPackageNode) o).nameCollationKey);
@@ -219,6 +226,7 @@ public final class ClassDescriptionPackageNode
 
     // ********** Displayable implementation **********
 
+    @Override
     public String displayString() {
         return this.displayString;
     }
@@ -233,6 +241,7 @@ public final class ClassDescriptionPackageNode
     /**
      * the icon is cached in the package pool node
      */
+    @Override
     public Icon icon() {
         return this.poolNode.getPackageIcon();
     }
@@ -240,6 +249,7 @@ public final class ClassDescriptionPackageNode
 
     // ********** standard methods **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.displayString);
     }

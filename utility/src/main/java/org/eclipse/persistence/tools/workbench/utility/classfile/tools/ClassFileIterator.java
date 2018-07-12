@@ -78,6 +78,7 @@ public class ClassFileIterator
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.classNames.hasNext();
     }
@@ -85,6 +86,7 @@ public class ClassFileIterator
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         String className = (String) this.classNames.next();
         ClassFile classFile = null;
@@ -107,6 +109,7 @@ public class ClassFileIterator
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }

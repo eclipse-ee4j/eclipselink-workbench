@@ -49,22 +49,27 @@ public class CFExternalClassRepositoryTests
         super(name);
     }
 
+    @Override
     protected ExternalClassRepositoryFactory buildFactory() {
         return CFExternalClassRepositoryFactory.instance();
     }
 
+    @Override
     protected ExternalClassRepository systemClasspathRepository() {
         return this.factory.buildClassRepository(this.buildSystemClasspath());
     }
 
+    @Override
     protected ExternalClassRepository systemRepositoryFor(ExternalClassRepository repository) {
         return repository;
     }
 
+    @Override
     protected void verifyArrayTypesContains(Map arrayTypes, Class arrayType) {
         assertTrue(arrayTypes.containsKey(arrayType.getName()));
     }
 
+    @Override
     protected ExternalClassRepository buildExternalClassRepository(File[] classpath) {
         File[] systemClasspath = AllModelSPIMetaClassFileTests.buildMinimumSystemClasspath();
         File[] combinedClasspath = new File[systemClasspath.length + classpath.length];

@@ -25,6 +25,7 @@ public class ReferenceCellRendererAdapter extends NoneSelectedCellRendererAdapte
         super(repository);
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         MWReference reference = (MWReference) value;
         String sourceTableName = reference.getSourceTable().getName();

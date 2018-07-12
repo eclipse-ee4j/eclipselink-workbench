@@ -50,6 +50,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         // delegate to the nested iterator
         return this.nestedListIterator.hasNext();
@@ -58,6 +59,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         // delegate to the nested iterator
         return this.nestedListIterator.next();
@@ -66,6 +68,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasPrevious()
      */
+    @Override
     public boolean hasPrevious() {
         // delegate to the nested iterator
         return this.nestedListIterator.hasPrevious();
@@ -74,6 +77,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previous()
      */
+    @Override
     public Object previous() {
         // delegate to the nested iterator
         return this.nestedListIterator.previous();
@@ -82,6 +86,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int nextIndex() {
         // delegate to the nested iterator
         return this.nestedListIterator.nextIndex();
@@ -90,6 +95,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previousIndex()
      */
+    @Override
     public int previousIndex() {
         // delegate to the nested iterator
         return this.nestedListIterator.previousIndex();
@@ -98,6 +104,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -105,6 +112,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#set(Object)
      */
+    @Override
     public void set(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -112,6 +120,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#add(Object)
      */
+    @Override
     public void add(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -119,6 +128,7 @@ public class ReadOnlyListIterator implements ListIterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nestedListIterator + ')';
     }

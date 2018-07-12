@@ -44,6 +44,7 @@ final class TypeConversionConverterPanel extends AbstractSubjectPanel {
         super(typeConversionConverterHolder, context);
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -113,9 +114,11 @@ final class TypeConversionConverterPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildDataTypeHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWTypeConversionConverter.DATA_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTypeConversionConverter) subject).getDataType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTypeConversionConverter) subject).setDataType((MWTypeDeclaration) value);
             }
@@ -124,6 +127,7 @@ final class TypeConversionConverterPanel extends AbstractSubjectPanel {
 
     private CollectionValueModel buildTypesCollectionModel() {
         return new CollectionAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTypeConversionConverter) subject).getBasicTypes().iterator();
             }
@@ -132,6 +136,7 @@ final class TypeConversionConverterPanel extends AbstractSubjectPanel {
 
     private StringConverter buildTypeDeclarationStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTypeDeclaration) o).displayStringWithPackage();
             }
@@ -171,9 +176,11 @@ final class TypeConversionConverterPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildAttributeTypeHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWTypeConversionConverter.ATTRIBUTE_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTypeConversionConverter) subject).getAttributeType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTypeConversionConverter) subject).setAttributeType((MWTypeDeclaration) value);
             }
@@ -185,6 +192,7 @@ final class TypeConversionConverterPanel extends AbstractSubjectPanel {
         return "mapping.converter.typeConverter";
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
 

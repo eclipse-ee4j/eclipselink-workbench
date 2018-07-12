@@ -137,6 +137,7 @@ public abstract class PropertyAspectAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         // our value is null when we are not listening to the subject
@@ -150,9 +151,11 @@ public abstract class PropertyAspectAdapter
     protected PropertyChangeListener buildPropertyChangeListener() {
         // transform the subject's property change events into VALUE property change events
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyAspectAdapter.this.propertyChanged();
             }
+            @Override
             public String toString() {
                 return "property change listener: " + Arrays.asList(PropertyAspectAdapter.this.propertyNames);
             }
@@ -166,6 +169,7 @@ public abstract class PropertyAspectAdapter
      * Return the value of the subject's property.
      * @see ValueModel#getValue()
      */
+    @Override
     public final Object getValue() {
         return this.value;
     }
@@ -177,6 +181,7 @@ public abstract class PropertyAspectAdapter
      * Set the value of the subject's property.
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         if (this.subject != null) {
             this.setValueOnSubject(value);
@@ -198,6 +203,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see AspectAdapter#hasListeners()
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyPropertyChangeListeners(VALUE);
     }
@@ -205,6 +211,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see AspectAdapter#fireAspectChange(Object, Object)
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.firePropertyChanged(VALUE, oldValue, newValue);
     }
@@ -212,6 +219,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see AspectAdapter#engageSubject()
      */
+    @Override
     protected void engageSubject() {
         super.engageSubject();
         // synch our value *after* we start listening to the subject,
@@ -222,6 +230,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see AspectAdapter#engageNonNullSubject()
      */
+    @Override
     protected void engageNonNullSubject() {
         for (int i = this.propertyNames.length; i-- > 0; ) {
             ((Model) this.subject).addPropertyChangeListener(this.propertyNames[i], this.propertyChangeListener);
@@ -231,6 +240,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see AspectAdapter#disengageSubject()
      */
+    @Override
     protected void disengageSubject() {
         super.disengageSubject();
         // clear out our value when we are not listening to the subject
@@ -240,6 +250,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see AspectAdapter#disengageNonNullSubject()
      */
+    @Override
     protected void disengageNonNullSubject() {
         for (int i = this.propertyNames.length; i-- > 0; ) {
             ((Model) this.subject).removePropertyChangeListener(this.propertyNames[i], this.propertyChangeListener);
@@ -252,6 +263,7 @@ public abstract class PropertyAspectAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         for (int i = 0; i < this.propertyNames.length; i++) {
             if (i != 0) {

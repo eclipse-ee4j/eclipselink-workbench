@@ -68,6 +68,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
     {
         return new FocusListener()
         {
+            @Override
             public void focusGained(FocusEvent e)
             {
                 TreePath[] paths = getSelectionPaths();
@@ -82,6 +83,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
                 }
             }
 
+            @Override
             public void focusLost(FocusEvent e)
             {
                 focusGained(e);
@@ -93,6 +95,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
     {
         return new TreeSelectionListener()
         {
+            @Override
             public void valueChanged(TreeSelectionEvent e)
             {
                 TreePath treePath = e.getNewLeadSelectionPath();
@@ -123,6 +126,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
      * that caused this method to return the wrong node, so here we simply return
      * the good one.
      */
+    @Override
     public TreePath getSelectionPath()
     {
         TreePath[] paths = getSelectionPaths();
@@ -157,6 +161,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
      *
      * @param e The <code>MouseEvent</code>
      */
+    @Override
     protected void processMouseEvent(MouseEvent e)
     {
         // Make sure the editing is stopped before the new MousePressed is
@@ -252,6 +257,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
         {
             return new ActionListener()
             {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     queryableNode.setAllowsNull(allowsNullCheckBox.isSelected());
@@ -264,6 +270,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
         {
             return new DefaultTreeCellRenderer()
             {
+                @Override
                 public Color getBackgroundSelectionColor()
                 {
                     if (!QueryableTree.this.hasFocus() && !isEditing())
@@ -272,6 +279,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
                     return super.getBackgroundSelectionColor();
                 }
 
+                @Override
                 public Color getBorderSelectionColor()
                 {
                     if (!QueryableTree.this.hasFocus() && !isEditing())
@@ -280,6 +288,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
                     return super.getBorderSelectionColor();
                 }
 
+                @Override
                 public Dimension getPreferredSize()
                 {
                     Dimension size = super.getPreferredSize();
@@ -376,11 +385,13 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
             return new QueryableNodeCheckBoxPanel();
         }
 
+        @Override
         public Object getCellEditorValue()
         {
             return value;
         }
 
+        @Override
         public Component getTreeCellEditorComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row)
         {
             // If I am asking for the editor, then a selection is about to take
@@ -392,6 +403,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
             return editor;
         }
 
+        @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int rowIndex, boolean hasFocus)
         {
             if (tree.getModel().getRoot() == value)
@@ -413,6 +425,7 @@ final class QueryableTree extends SwingComponentFactory.AccessibleTree
             editor = createQueryKeyPanel();
         }
 
+        @Override
         public boolean isCellEditable(EventObject e)
         {
             // Retrieve the node where the mouse event location occurred

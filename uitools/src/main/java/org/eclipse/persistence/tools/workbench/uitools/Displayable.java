@@ -69,6 +69,7 @@ public interface Displayable
      */
     Comparator DEFAULT_COMPARATOR =
         new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 // disallow duplicates based on object identity
                 if (o1 == o2) {
@@ -92,6 +93,7 @@ public interface Displayable
                 // (unless the objects are always passed into this method in the same order).
                 return -1;        // if all else fails, indicate that o1 < o2
             }
+            @Override
             public String toString() {
                 return "Displayable.DEFAULT_COMPARATOR";
             }

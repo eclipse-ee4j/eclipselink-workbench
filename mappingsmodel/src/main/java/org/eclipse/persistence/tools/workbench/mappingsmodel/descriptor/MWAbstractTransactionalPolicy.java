@@ -20,8 +20,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWEisTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWOXTransactionalPolicy;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryManager;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryManager;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
@@ -120,6 +118,7 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.queryManager = buildQueryManager();
@@ -129,6 +128,7 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
         this.descriptorAlias = getDescriptor().shortName();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.refreshCachePolicy);
@@ -148,49 +148,59 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
 
     // **************** accessors *****************
 
+    @Override
     public MWRefreshCachePolicy getRefreshCachePolicy() {
         return this.refreshCachePolicy;
     }
 
+    @Override
     public boolean isConformResultsInUnitOfWork() {
         // this method name not good, but it's convention to have it... for boolean attributes
         return this.conformResultsInUnitOfWork;
     }
 
+    @Override
     public void setConformResultsInUnitOfWork(boolean newValue) {
         boolean oldValue = this.conformResultsInUnitOfWork;
         this.conformResultsInUnitOfWork = newValue;
         this.firePropertyChanged(CONFORM_RESULTS_IN_UNIT_OF_WORK_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public boolean isReadOnly() {
         return this.readOnly;
     }
 
+    @Override
     public void setReadOnly(boolean newValue) {
         boolean oldValue = this.readOnly;
         this.readOnly = newValue;
         this.firePropertyChanged(READ_ONLY_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public MWCachingPolicy getCachingPolicy() {
         return this.cachingPolicy;
     }
 
+    @Override
     public MWLockingPolicy getLockingPolicy() {
         return this.lockingPolicy;
     }
 
+    @Override
     public MWQueryManager getQueryManager() {
         return this.queryManager;
     }
 
     // ************* Descriptor Alias **************
 
+    @Override
     public String getDescriptorAlias() {
         return this.descriptorAlias;
     }
 
+    @Override
     public void setDescriptorAlias(String descriptorAlias) {
         String oldDescriptorAlias = getDescriptorAlias();
         this.descriptorAlias = descriptorAlias;
@@ -201,6 +211,7 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
 
     /** Used to keep up to date with inheritance changes
      * @see MWTransactionalPolicy.descriptorInheritanceChanged() */
+    @Override
     public void descriptorInheritanceChanged() {
         this.cachingPolicy.descriptorInheritanceChanged();
     }
@@ -208,6 +219,7 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
 
     //*************** runtime conversion *************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         this.refreshCachePolicy.adjustRuntimeDescriptor(runtimeDescriptor);
 
@@ -223,6 +235,7 @@ public abstract class MWAbstractTransactionalPolicy extends MWModel
 
     // ************ TopLink Methods ***********
 
+    @Override
     public MWAbstractTransactionalPolicy getValueForTopLink() {
         return this;
     }

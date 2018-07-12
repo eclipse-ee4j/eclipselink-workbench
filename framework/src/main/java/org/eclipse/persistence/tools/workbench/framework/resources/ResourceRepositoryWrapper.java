@@ -62,6 +62,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see StringRepository#hasString(String)
      */
+    @Override
     public boolean hasString(String key) {
         return this.localResourceRepository.hasString(key) ||
                     this.wrappedResourceRepository.hasString(key);
@@ -70,6 +71,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see StringRepository#getString(String)
      */
+    @Override
     public String getString(String key) {
         if (this.localResourceRepository.hasString(key)) {
             return this.localResourceRepository.getString(key);
@@ -80,6 +82,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see StringRepository#getString(String, Object)
      */
+    @Override
     public String getString(String key, Object argument) {
         if (this.localResourceRepository.hasString(key)) {
             return this.localResourceRepository.getString(key, argument);
@@ -90,6 +93,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see StringRepository#getString(String, Object, Object)
      */
+    @Override
     public String getString(String key, Object argument1, Object argument2) {
         if (this.localResourceRepository.hasString(key)) {
             return this.localResourceRepository.getString(key, argument1, argument2);
@@ -100,6 +104,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see StringRepository#getString(String, Object, Object, Object)
      */
+    @Override
     public String getString(String key, Object argument1, Object argument2, Object argument3) {
         if (this.localResourceRepository.hasString(key)) {
             return this.localResourceRepository.getString(key, argument1, argument2, argument3);
@@ -110,6 +115,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see StringRepository#getString(String, Object[])
      */
+    @Override
     public String getString(String key, Object[] arguments) {
         if (this.localResourceRepository.hasString(key)) {
             return this.localResourceRepository.getString(key, arguments);
@@ -120,6 +126,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see MnemonicRepository#hasMnemonic(String)
      */
+    @Override
     public boolean hasMnemonic(String key) {
         return this.localResourceRepository.hasMnemonic(key) ||
                     this.wrappedResourceRepository.hasMnemonic(key);
@@ -128,6 +135,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see MnemonicRepository#getMnemonic(String)
      */
+    @Override
     public int getMnemonic(String key) {
         if (this.localResourceRepository.hasMnemonic(key)) {
             return this.localResourceRepository.getMnemonic(key);
@@ -138,6 +146,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see MnemonicRepository#getMnemonicIndex(String)
      */
+    @Override
     public int getMnemonicIndex(String key) {
         if (this.localResourceRepository.hasMnemonic(key)) {
             return this.localResourceRepository.getMnemonicIndex(key);
@@ -148,6 +157,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see AcceleratorRepository#hasAccelerator(String)
      */
+    @Override
     public boolean hasAccelerator(String key) {
         return this.localResourceRepository.hasAccelerator(key) ||
                     this.wrappedResourceRepository.hasAccelerator(key);
@@ -156,6 +166,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see AcceleratorRepository#getAccelerator(String)
      */
+    @Override
     public KeyStroke getAccelerator(String key) {
         if (this.localResourceRepository.hasAccelerator(key)) {
             return this.localResourceRepository.getAccelerator(key);
@@ -166,6 +177,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see IconRepository#hasIcon(String)
      */
+    @Override
     public boolean hasIcon(String key) {
         return this.localResourceRepository.hasIcon(key) ||
                     this.wrappedResourceRepository.hasIcon(key);
@@ -174,6 +186,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see IconRepository#getIcon(String)
      */
+    @Override
     public Icon getIcon(String key) {
         if (this.localResourceRepository.hasIcon(key)) {
             return this.localResourceRepository.getIcon(key);
@@ -187,6 +200,7 @@ public class ResourceRepositoryWrapper
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this);
     }

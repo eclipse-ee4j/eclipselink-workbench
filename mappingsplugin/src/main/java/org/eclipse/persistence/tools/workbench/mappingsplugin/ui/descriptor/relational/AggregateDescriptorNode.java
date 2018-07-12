@@ -32,16 +32,19 @@ public final class AggregateDescriptorNode extends RelationalClassDescriptorNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public String helpTopicID() {
         return "descriptor.aggregate";
     }
 
+    @Override
     public String buildIconKey() {
         return "descriptor.aggregate";
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return AggregateDescriptorTabbedPropertiesPage.class;
     }
@@ -49,6 +52,7 @@ public final class AggregateDescriptorNode extends RelationalClassDescriptorNode
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_AGGREGATE_DESCRIPTOR_NODE";
     }
@@ -56,10 +60,12 @@ public final class AggregateDescriptorNode extends RelationalClassDescriptorNode
 
     // ********** MWRelationalClassDescriptorNode overrides **********
 
+    @Override
     public boolean isAggregateDescriptor() {
         return true;
     }
 
+    @Override
     public void selectQueryKey(MWQueryKey queryKey, WorkbenchContext context) {
         ((AggregateDescriptorTabbedPropertiesPage) context.getPropertiesPage()).selectQueryKey(queryKey);
     }

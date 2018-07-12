@@ -39,6 +39,7 @@ public class UTF8Constant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.value = this.readStringFrom(stream);
     }
@@ -90,6 +91,7 @@ public class UTF8Constant extends Constant {
         }
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" value: \"");
@@ -97,6 +99,7 @@ public class UTF8Constant extends Constant {
         writer.println("\"");
     }
 
+    @Override
     public String description() {
         return "UTF8";
     }
@@ -105,10 +108,12 @@ public class UTF8Constant extends Constant {
         return this.value;
     }
 
+    @Override
     public Object value() {
         return this.value;
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

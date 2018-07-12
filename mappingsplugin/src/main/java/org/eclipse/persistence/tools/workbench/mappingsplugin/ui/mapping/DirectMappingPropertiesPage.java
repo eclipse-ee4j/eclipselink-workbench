@@ -32,6 +32,7 @@ public abstract class DirectMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeTabs() {
         this.addTab(this.buildGeneralPanel(), "GENERAL_TAB");
         this.addTab(this.buildConverterPanel(), "DIRECT_MAPPING_CONVERTER_TAB");

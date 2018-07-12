@@ -36,6 +36,7 @@ public final class DirectMappingXmlFieldPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         super.initializeLayout();
 

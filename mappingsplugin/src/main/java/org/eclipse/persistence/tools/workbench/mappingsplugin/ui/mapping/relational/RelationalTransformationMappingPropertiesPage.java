@@ -53,6 +53,7 @@ final class RelationalTransformationMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));

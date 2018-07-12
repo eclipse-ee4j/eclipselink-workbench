@@ -133,6 +133,7 @@ public final class HelpFacade {
      */
     private static Runnable buildPostLaunchRunnable(final InternalHelpManager helpManager, final HelpManagerConfig config) {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     config.getLaunchCompleteFlag().waitUntilTrue();

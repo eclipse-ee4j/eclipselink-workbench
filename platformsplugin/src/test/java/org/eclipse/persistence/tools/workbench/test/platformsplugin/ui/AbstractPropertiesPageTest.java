@@ -104,6 +104,7 @@ public abstract class AbstractPropertiesPageTest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -133,6 +134,7 @@ public abstract class AbstractPropertiesPageTest {
 
     private Action buildNextAction() {
         Action action = new AbstractAction("next") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 AbstractPropertiesPageTest.this.next();
             }
@@ -169,6 +171,7 @@ public abstract class AbstractPropertiesPageTest {
 
     private Action buildPreviousAction() {
         Action action = new AbstractAction("previous") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 AbstractPropertiesPageTest.this.previous();
             }
@@ -191,6 +194,7 @@ public abstract class AbstractPropertiesPageTest {
 
     private Action buildClearAction() {
         Action action = new AbstractAction("clear") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 AbstractPropertiesPageTest.this.clear();
             }
@@ -215,6 +219,7 @@ public abstract class AbstractPropertiesPageTest {
 
     private Action buildPrintAction() {
         Action action = new AbstractAction("print") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 AbstractPropertiesPageTest.this.print();
             }

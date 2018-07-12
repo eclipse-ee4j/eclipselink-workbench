@@ -77,15 +77,18 @@ final class RelationalFieldTransformerAssociationEditingDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(FieldTransformerAssociationEditor associationEditor) {
         super.initialize(associationEditor);
         this.associationEditor().fieldHolder().addPropertyChangeListener(ValueModel.VALUE, this.validatingListener);
     }
 
+    @Override
     protected Component buildMainPanel() {
         return new RelationalFieldTransformerAssociationEditingPanel(this.associationEditor(), this.getWorkbenchContext());
     }
 
+    @Override
     protected void updateMessage() {
         super.updateMessage();
 
@@ -100,6 +103,7 @@ final class RelationalFieldTransformerAssociationEditingDialog
 
     // **************** Behavior **********************************************
 
+    @Override
     protected void prepareToShow() {
         pack();
         setSize(Math.max(600, getWidth()), getHeight());
@@ -148,6 +152,7 @@ final class RelationalFieldTransformerAssociationEditingDialog
 
         // **************** "Field" *******************************************
 
+        @Override
         public PropertyValueModel fieldHolder() {
             if (this.fieldHolder == null) {
                 this.fieldHolder = this.buildFieldHolder();
@@ -162,10 +167,12 @@ final class RelationalFieldTransformerAssociationEditingDialog
 
         private PropertyValueModel buildInternalFieldHolder() {
             return new PropertyAspectAdapter(MWRelationalFieldTransformerAssociation.FIELD_PROPERTY, this.association()) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWRelationalFieldTransformerAssociation) this.subject).getColumn();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWRelationalFieldTransformerAssociation) this.subject).setColumn((MWColumn) value);
                 }
@@ -176,10 +183,12 @@ final class RelationalFieldTransformerAssociationEditingDialog
             return (MWColumn) this.fieldHolder().getValue();
         }
 
+        @Override
         public Iterator candidateFields() {
             return this.transformationMapping().candidateColumns();
         }
 
+        @Override
         public boolean fieldIsDuplicate() {
             return this.association().duplicateField(this.field());
         }
@@ -187,6 +196,7 @@ final class RelationalFieldTransformerAssociationEditingDialog
 
         // **************** Editing *******************************************
 
+        @Override
         public void commit() {
             super.commit();
             this.fieldTrigger.accept();

@@ -25,10 +25,12 @@ final class JavaDocAction extends AbstractFrameworkAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("API");
     }
 
+    @Override
     protected void execute() {
         this.helpManager().showTopic("eclipselink_api");
     }

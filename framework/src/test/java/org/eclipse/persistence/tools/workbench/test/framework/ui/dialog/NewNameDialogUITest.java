@@ -118,6 +118,7 @@ public class NewNameDialogUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -143,6 +144,7 @@ public class NewNameDialogUITest {
 
     private ListCellRenderer buildListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((TestModel) value).getName();
             }
@@ -176,6 +178,7 @@ public class NewNameDialogUITest {
 
     private Action buildAddAction() {
         Action action = new AbstractAction("add") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 NewNameDialogUITest.this.add();
             }
@@ -202,6 +205,7 @@ public class NewNameDialogUITest {
 
     private Action buildDeleteAction() {
         Action action = new AbstractAction("delete") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 NewNameDialogUITest.this.delete();
             }
@@ -224,6 +228,7 @@ public class NewNameDialogUITest {
 
     private Action buildRenameAction() {
         Action action = new AbstractAction("rename") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 NewNameDialogUITest.this.rename();
             }
@@ -307,6 +312,7 @@ public class NewNameDialogUITest {
 
     private NewNameDialog.DocumentFactory buildDefaultDocumentFactory() {
         return new NewNameDialog.DocumentFactory() {
+            @Override
             public Document buildDocument() {
                 return new PlainDocument();
             }
@@ -315,6 +321,7 @@ public class NewNameDialogUITest {
 
     private Iterator existingNames() {
         return new TransformationIterator((Iterator) this.testModels.getValue()) {
+            @Override
             protected Object transform(Object next) {
                 return ((TestModel) next).getName();
             }
@@ -332,6 +339,7 @@ public class NewNameDialogUITest {
 
     private NewNameDialog.DocumentFactory buildNoZedDocumentFactory() {
         return new NewNameDialog.DocumentFactory() {
+            @Override
             public Document buildDocument() {
                 return new NoZedDocument();
             }
@@ -364,9 +372,11 @@ private class TestModel extends AbstractModel implements Comparable {
         this.name = name;
         this.firePropertyChanged(NAME_PROPERTY, old, name);
     }
+    @Override
     public int compareTo(Object o) {
         return this.name.compareToIgnoreCase(((TestModel) o).name);
     }
+    @Override
     public String toString() {
         return "TestModel(" + this.getName() + ")";
     }
@@ -374,6 +384,7 @@ private class TestModel extends AbstractModel implements Comparable {
 
 
 private static class NoZedDocument extends PlainDocument {
+    @Override
     public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
         if (str != null) {
             str = StringTools.removeAllOccurrences(str, 'z');

@@ -55,6 +55,7 @@ public abstract class PlatformTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.databasePlatformRepository = DatabasePlatformRepository.getDefault();
@@ -127,6 +128,7 @@ public abstract class PlatformTests extends TestCase {
         return "password";
     }
 
+    @Override
     protected void tearDown() throws Exception {
         this.connection.close();
         TestTools.clear(this);

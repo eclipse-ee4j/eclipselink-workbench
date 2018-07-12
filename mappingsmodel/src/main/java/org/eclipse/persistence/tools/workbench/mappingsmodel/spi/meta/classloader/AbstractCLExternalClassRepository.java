@@ -71,6 +71,7 @@ abstract class AbstractCLExternalClassRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepository#getExternalClassDescription(String)
      */
+    @Override
     public ExternalClassDescription getClassDescription(String className) {
         // lazy initialize to postpone the suffering until required
         synchronized (this) {
@@ -84,6 +85,7 @@ abstract class AbstractCLExternalClassRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepository#getExternalClassDescriptions()
      */
+    @Override
     public ExternalClassDescription[] getClassDescriptions() {
         // lazy initialize to postpone the suffering until required
         synchronized (this) {
@@ -213,6 +215,7 @@ abstract class AbstractCLExternalClassRepository
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         String moreInfo;
         if (this.classDescriptions == null) {

@@ -48,6 +48,7 @@ public final class NullEnumeration implements Enumeration {
     /**
      * @see java.util.Enumeration#hasMoreElements()
      */
+    @Override
     public boolean hasMoreElements() {
         return false;
     }
@@ -55,6 +56,7 @@ public final class NullEnumeration implements Enumeration {
     /**
      * @see java.util.Enumeration#nextElement()
      */
+    @Override
     public Object nextElement() {
         throw new NoSuchElementException();
     }
@@ -62,6 +64,7 @@ public final class NullEnumeration implements Enumeration {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

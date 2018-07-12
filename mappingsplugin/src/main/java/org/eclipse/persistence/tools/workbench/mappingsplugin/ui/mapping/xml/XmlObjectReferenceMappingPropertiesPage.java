@@ -20,7 +20,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,7 +29,6 @@ import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.TitledPropertiesPage;
 import org.eclipse.persistence.tools.workbench.framework.uitools.SwingComponentFactory;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlObjectReferenceMapping;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.common.UiCommonBundle;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.MappingComponentFactory;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.MethodAccessingPanel;

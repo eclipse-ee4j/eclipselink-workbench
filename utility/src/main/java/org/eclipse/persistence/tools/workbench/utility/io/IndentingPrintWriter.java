@@ -48,6 +48,7 @@ public class IndentingPrintWriter extends PrintWriter {
     /**
      * Set flag so following line is indented.
      */
+    @Override
     public void println() {
         synchronized (this.lock) {
             super.println();
@@ -70,6 +71,7 @@ public class IndentingPrintWriter extends PrintWriter {
     /**
      * Write a portion of an array of characters.
      */
+    @Override
     public void write(char buf[], int off, int len) {
         synchronized (this.lock) {
             this.printIndent();
@@ -80,6 +82,7 @@ public class IndentingPrintWriter extends PrintWriter {
     /**
      * Write a single character.
      */
+    @Override
     public void write(int c) {
         synchronized (this.lock) {
             this.printIndent();
@@ -90,6 +93,7 @@ public class IndentingPrintWriter extends PrintWriter {
     /**
      * Write a portion of a string.
      */
+    @Override
     public void write(String s, int off, int len) {
         synchronized (this.lock) {
             this.printIndent();

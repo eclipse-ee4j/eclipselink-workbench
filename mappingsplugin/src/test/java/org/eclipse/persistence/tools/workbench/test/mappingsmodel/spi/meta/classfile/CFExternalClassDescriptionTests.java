@@ -32,6 +32,7 @@ public class CFExternalClassDescriptionTests extends ExternalClassDescriptionTes
         super(name);
     }
 
+    @Override
     protected ExternalClassRepository buildRepository() {
         return CFExternalClassRepositoryFactory.instance().buildClassRepository(AllModelSPIMetaClassFileTests.buildMinimumSystemClasspath());
     }

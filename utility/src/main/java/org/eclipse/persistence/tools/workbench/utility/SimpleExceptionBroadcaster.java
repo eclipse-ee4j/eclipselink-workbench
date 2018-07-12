@@ -61,6 +61,7 @@ public class SimpleExceptionBroadcaster
     /**
      * Broadcast the specified exception to the broadcaster's listeners.
      */
+    @Override
     public void broadcast(Thread thread, Throwable exception) {
         ExceptionListener[] currentListeners = null;
         synchronized (this) {
@@ -88,6 +89,7 @@ public class SimpleExceptionBroadcaster
     /**
      * @see ExceptionBroadcaster#addExceptionListener(ExceptionListener)
      */
+    @Override
     public synchronized void addExceptionListener(ExceptionListener listener) {
         if (listener == null) {
             throw new NullPointerException();        // better sooner than later
@@ -108,6 +110,7 @@ public class SimpleExceptionBroadcaster
     /**
      * @see ExceptionBroadcaster#removeExceptionListener(ExceptionListener)
      */
+    @Override
     public synchronized void removeExceptionListener(ExceptionListener listener) {
         if (this.listeners == null) {
             throw new IllegalArgumentException("listener not registered");
@@ -170,6 +173,7 @@ public class SimpleExceptionBroadcaster
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

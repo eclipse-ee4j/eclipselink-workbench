@@ -83,6 +83,7 @@ public class TransformationValueModel
 
     protected PropertyChangeListener buildValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 TransformationValueModel.this.valueChanged(e);
             }
@@ -174,6 +175,7 @@ public class TransformationValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // transform the object returned by the nested value model before returning it
         return this.transform(this.valueHolder.getValue());

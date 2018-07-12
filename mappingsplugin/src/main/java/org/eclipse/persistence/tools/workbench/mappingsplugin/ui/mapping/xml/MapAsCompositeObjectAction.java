@@ -30,6 +30,7 @@ final class MapAsCompositeObjectAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.compositeObject");
@@ -41,14 +42,17 @@ final class MapAsCompositeObjectAction
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWCompositeObjectMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWXmlDescriptor) descriptor).addCompositeObjectMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWCompositeObjectMapping.class;
     }

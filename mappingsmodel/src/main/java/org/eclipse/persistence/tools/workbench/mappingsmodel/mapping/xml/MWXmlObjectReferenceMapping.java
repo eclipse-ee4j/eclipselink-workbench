@@ -49,6 +49,7 @@ public final class MWXmlObjectReferenceMapping extends MWAbstractXmlReferenceMap
 
     // **************** Morphing **********************************************
 
+    @Override
     public MWXmlObjectReferenceMapping asMWXmlObjectReferenceMapping() {
         return this;
     }

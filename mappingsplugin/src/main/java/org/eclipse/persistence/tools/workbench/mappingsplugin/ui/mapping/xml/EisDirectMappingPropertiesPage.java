@@ -43,6 +43,7 @@ final class EisDirectMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildGeneralPanel() {
         return new EisDirectMappingGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }

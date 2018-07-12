@@ -204,6 +204,7 @@ public class InnerClass {
         return this.innerClassAccessFlags;
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.innerClassName() + ')';
     }

@@ -60,6 +60,7 @@ final class DatabaseTypePropertiesPage
         super(context);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -208,6 +209,7 @@ final class DatabaseTypePropertiesPage
 
     private ListCellRenderer buildJDBCTypeRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 // need null check for combo-box
                 return (value == null) ? "" : ((JDBCType) value).getName();
@@ -217,9 +219,11 @@ final class DatabaseTypePropertiesPage
 
     private CollectionValueModel buildAllJDBCTypesAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return CollectionTools.sortedSet(((DatabaseType) this.subject).jdbcTypes()).iterator();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabaseType) this.subject).jdbcTypesSize();
             }
@@ -228,9 +232,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyValueModel buildJDBCTypeAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabaseType.JDBC_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabaseType) this.subject).getJDBCType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setJDBCType((JDBCType) value);
             }
@@ -251,9 +257,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyValueModel buildAllowsSizeAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabaseType.ALLOWS_SIZE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((DatabaseType) this.subject).allowsSize());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setAllowsSize(((Boolean) value).booleanValue());
             }
@@ -262,9 +270,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyValueModel buildRequiresSizeAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabaseType.REQUIRES_SIZE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((DatabaseType) this.subject).requiresSize());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setRequiresSize(((Boolean) value).booleanValue());
             }
@@ -273,9 +283,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyAspectAdapter buildAllowsSubSizeAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabaseType.ALLOWS_SUB_SIZE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((DatabaseType) this.subject).allowsSubSize());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setAllowsSubSize(((Boolean) value).booleanValue());
             }
@@ -284,9 +296,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyAspectAdapter buildAllowsNullAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabaseType.ALLOWS_NULL_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((DatabaseType) this.subject).allowsNull());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setAllowsNull(((Boolean) value).booleanValue());
             }
@@ -341,9 +355,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyValueModel buildInitialSizeAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabaseType.INITIAL_SIZE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((DatabaseType) this.subject).getInitialSize());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setInitialSize(((Number) value).intValue());
             }
@@ -397,9 +413,11 @@ final class DatabaseTypePropertiesPage
 
     private PropertyAspectAdapter buildCommentAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), AbstractNodeModel.COMMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabaseType) this.subject).getComment();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabaseType) this.subject).setComment((String) value);
             }

@@ -62,6 +62,7 @@ public class RemoteCommandManagerAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new RemoteCommandManagerConfig();
     }
@@ -69,6 +70,7 @@ public class RemoteCommandManagerAdapter extends SCAdapter {
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 
@@ -133,6 +135,7 @@ public class RemoteCommandManagerAdapter extends SCAdapter {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -143,6 +146,7 @@ public class RemoteCommandManagerAdapter extends SCAdapter {
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
 
         super.initialize( newConfig);
@@ -150,6 +154,7 @@ public class RemoteCommandManagerAdapter extends SCAdapter {
         this.commands = null;            // optional
         this.transportManager = null;    // optional
     }
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 

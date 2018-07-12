@@ -21,14 +21,12 @@ import java.util.Vector;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethod;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneListIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.mappings.foundation.AbstractTransformationMapping;
@@ -36,7 +34,6 @@ import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.sessions.Record;
 
 public abstract class MWTransformationMapping
     extends MWMapping
@@ -79,6 +76,7 @@ public abstract class MWTransformationMapping
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.attributeTransformer = new MWNullTransformer(this);
@@ -87,6 +85,7 @@ public abstract class MWTransformationMapping
         this.mutable = true;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.attributeTransformer);
@@ -173,19 +172,23 @@ public abstract class MWTransformationMapping
 
     // **************** Indirection *******************************************
 
+    @Override
     public boolean usesValueHolderIndirection() {
         return this.indirectionType == VALUE_HOLDER_INDIRECTION;
     }
 
+    @Override
     public boolean usesNoIndirection() {
         return this.indirectionType == NO_INDIRECTION;
     }
 
 
+    @Override
     public void setUseNoIndirection() {
         this.setIndirectionType(NO_INDIRECTION);
     }
 
+    @Override
     public void setUseValueHolderIndirection() {
         this.setIndirectionType(VALUE_HOLDER_INDIRECTION);
     }
@@ -198,16 +201,19 @@ public abstract class MWTransformationMapping
 
     // **************** MWTransformer.Parent **********************************************
 
+    @Override
     public MWTransformationMapping transformationMapping() {
         return this;
     }
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWTransformationMapping(this);
     }
 
+    @Override
     protected void initializeFromMWIndirectableMapping(MWIndirectableMapping oldMapping) {
         super.initializeFromMWIndirectableMapping(oldMapping);
 
@@ -222,6 +228,7 @@ public abstract class MWTransformationMapping
 
     // **************** Problems *********************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.attributeTransformer.addAttributeTransformerProblemsForMapping(newProblems, this);
@@ -252,6 +259,7 @@ public abstract class MWTransformationMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AbstractTransformationMapping mapping = (AbstractTransformationMapping) super.runtimeMapping();
 

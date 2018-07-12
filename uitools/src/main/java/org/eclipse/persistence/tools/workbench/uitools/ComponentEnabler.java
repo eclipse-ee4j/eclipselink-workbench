@@ -212,10 +212,12 @@ public class ComponentEnabler
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 updateEnableState(booleanValue((Boolean) ComponentEnabler.this.booleanHolder.getValue()));
             }
+            @Override
             public String toString() {
                 return "boolean change listener";
             }

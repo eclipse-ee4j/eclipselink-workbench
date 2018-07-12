@@ -35,16 +35,19 @@ public class AccessibleTitledBorder extends TitledBorder
         super(BorderFactory.createEmptyBorder(), title);
     }
 
+    @Override
     public Insets getBorderInsets(Component component, Insets insets)
     {
         return insets;
     }
 
+    @Override
     public Dimension getMinimumSize(Component component)
     {
         return new Dimension(0, 0);
     }
 
+    @Override
     public void paintBorder(Component component,
                                     Graphics g,
                                     int x,

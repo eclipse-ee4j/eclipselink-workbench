@@ -32,6 +32,7 @@ public final class CompositeCollectionMappingNode
 
     // **************** MappingNode contract **********************************
 
+    @Override
     protected String buildIconKey() {
         return "mapping.compositeCollection";
     }
@@ -39,6 +40,7 @@ public final class CompositeCollectionMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_COMPOSITE_COLLECTION_MAPPING_NODE";
     }
@@ -46,6 +48,7 @@ public final class CompositeCollectionMappingNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
 //        return this.getDescriptorNode().mappingHelpTopicPrefix() + ".compositeCollection";
 
@@ -62,6 +65,7 @@ public final class CompositeCollectionMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         XmlDescriptorNode parentNode = (XmlDescriptorNode) getDescriptorNode();
         return parentNode.propertiesPageClassForCompositeCollectionMapping();

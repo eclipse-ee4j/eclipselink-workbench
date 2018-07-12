@@ -106,9 +106,11 @@ public class DocumentAdapter implements Document, Serializable {
 
     protected PropertyChangeListener buildStringListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 DocumentAdapter.this.stringChanged(e);
             }
+            @Override
             public String toString() {
                 return "string listener";
             }
@@ -125,6 +127,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getLength()
      */
+    @Override
     public int getLength() {
         return this.delegate.getLength();
     }
@@ -133,6 +136,7 @@ public class DocumentAdapter implements Document, Serializable {
      * Extend to start listening to the underlying models if necessary.
      * @see javax.swing.text.Document#addDocumentListener(javax.swing.event.DocumentListener)
      */
+    @Override
     public void addDocumentListener(DocumentListener listener) {
         if (this.listenerList.getListenerCount(DocumentListener.class) == 0) {
             this.delegate.addDocumentListener(this.delegateListener);
@@ -145,6 +149,7 @@ public class DocumentAdapter implements Document, Serializable {
      * Extend to stop listening to the underlying models if appropriate.
      * @see javax.swing.text.Document#removeDocumentListener(javax.swing.event.DocumentListener)
      */
+    @Override
     public void removeDocumentListener(DocumentListener listener) {
         this.listenerList.remove(DocumentListener.class, listener);
         if (this.listenerList.getListenerCount(DocumentListener.class) == 0) {
@@ -157,6 +162,7 @@ public class DocumentAdapter implements Document, Serializable {
      * Extend to start listening to the delegate document if necessary.
      * @see javax.swing.text.Document#addUndoableEditListener(javax.swing.event.UndoableEditListener)
      */
+    @Override
     public void addUndoableEditListener(UndoableEditListener listener) {
         if (this.listenerList.getListenerCount(UndoableEditListener.class) == 0) {
             this.delegate.addUndoableEditListener(this.delegateListener);
@@ -168,6 +174,7 @@ public class DocumentAdapter implements Document, Serializable {
      * Extend to stop listening to the delegate document if appropriate.
      * @see javax.swing.text.Document#removeUndoableEditListener(javax.swing.event.UndoableEditListener)
      */
+    @Override
     public void removeUndoableEditListener(UndoableEditListener listener) {
         this.listenerList.remove(UndoableEditListener.class, listener);
         if (this.listenerList.getListenerCount(UndoableEditListener.class) == 0) {
@@ -178,6 +185,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getProperty(java.lang.Object)
      */
+    @Override
     public Object getProperty(Object key) {
         return this.delegate.getProperty(key);
     }
@@ -185,6 +193,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#putProperty(java.lang.Object, java.lang.Object)
      */
+    @Override
     public void putProperty(Object key, Object value) {
         this.delegate.putProperty(key, value);
     }
@@ -194,6 +203,7 @@ public class DocumentAdapter implements Document, Serializable {
      * The resulting event will be ignored: @see synchronizeDelegate(String).
      * @see javax.swing.text.Document#remove(int, int)
      */
+    @Override
     public void remove(int offset, int len) throws BadLocationException {
         this.delegate.remove(offset, len);
         this.stringHolder.setValue(this.delegate.getText(0, this.delegate.getLength()));
@@ -204,6 +214,7 @@ public class DocumentAdapter implements Document, Serializable {
      * The resulting event will be ignored: @see synchronizeDelegate(String).
      * @see javax.swing.text.Document#insertString(int, java.lang.String, javax.swing.text.AttributeSet)
      */
+    @Override
     public void insertString(int offset, String insertedString, AttributeSet a) throws BadLocationException {
         this.delegate.insertString(offset, insertedString, a);
         this.stringHolder.setValue(this.delegate.getText(0, this.delegate.getLength()));
@@ -212,6 +223,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getText(int, int)
      */
+    @Override
     public String getText(int offset, int length) throws BadLocationException {
         return this.delegate.getText(offset, length);
     }
@@ -219,6 +231,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getText(int, int, javax.swing.text.Segment)
      */
+    @Override
     public void getText(int offset, int length, Segment txt) throws BadLocationException {
         this.delegate.getText(offset, length, txt);
     }
@@ -226,6 +239,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getStartPosition()
      */
+    @Override
     public Position getStartPosition() {
         return this.delegate.getStartPosition();
     }
@@ -233,6 +247,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getEndPosition()
      */
+    @Override
     public Position getEndPosition() {
         return this.delegate.getEndPosition();
     }
@@ -240,6 +255,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#createPosition(int)
      */
+    @Override
     public Position createPosition(int offs) throws BadLocationException {
         return this.delegate.createPosition(offs);
     }
@@ -247,6 +263,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getRootElements()
      */
+    @Override
     public Element[] getRootElements() {
         return this.delegate.getRootElements();
     }
@@ -254,6 +271,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#getDefaultRootElement()
      */
+    @Override
     public Element getDefaultRootElement() {
         return this.delegate.getDefaultRootElement();
     }
@@ -261,6 +279,7 @@ public class DocumentAdapter implements Document, Serializable {
     /**
      * @see javax.swing.text.Document#render(java.lang.Runnable)
      */
+    @Override
     public void render(Runnable r) {
         this.delegate.render(r);
     }
@@ -355,6 +374,7 @@ public class DocumentAdapter implements Document, Serializable {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.stringHolder);
     }
@@ -370,24 +390,28 @@ public class DocumentAdapter implements Document, Serializable {
         /**
          * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent)
          */
+        @Override
         public void changedUpdate(DocumentEvent e) {
             DocumentAdapter.this.delegateChangedUpdate(e);
         }
         /**
          * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
          */
+        @Override
         public void insertUpdate(DocumentEvent e) {
             DocumentAdapter.this.delegateInsertUpdate(e);
         }
         /**
          * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.DocumentEvent)
          */
+        @Override
         public void removeUpdate(DocumentEvent e) {
             DocumentAdapter.this.delegateRemoveUpdate(e);
         }
         /**
          * @see javax.swing.event.UndoableEditListener#undoableEditHappened(javax.swing.event.UndoableEditEvent)
          */
+        @Override
         public void undoableEditHappened(UndoableEditEvent e) {
             DocumentAdapter.this.delegateUndoableEditHappened(e);
         }
@@ -406,30 +430,35 @@ public class DocumentAdapter implements Document, Serializable {
         /**
          * @see javax.swing.event.DocumentEvent#getChange(javax.swing.text.Element)
          */
+        @Override
         public ElementChange getChange(Element elem) {
             return this.delegate.getChange(elem);
         }
         /**
          * @see javax.swing.event.DocumentEvent#getDocument()
          */
+        @Override
         public Document getDocument() {
             return (Document) this.source;
         }
         /**
          * @see javax.swing.event.DocumentEvent#getLength()
          */
+        @Override
         public int getLength() {
             return this.delegate.getLength();
         }
         /**
          * @see javax.swing.event.DocumentEvent#getOffset()
          */
+        @Override
         public int getOffset() {
             return this.delegate.getOffset();
         }
         /**
          * @see javax.swing.event.DocumentEvent#getType()
          */
+        @Override
         public EventType getType() {
             return this.delegate.getType();
         }

@@ -44,6 +44,7 @@ final class FrameworkExceptionDialog extends ExceptionDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#helpTopicId()
      */
+    @Override
     protected String helpTopicId() {
         return "dialog.unexpectedError";
     }
@@ -52,6 +53,7 @@ final class FrameworkExceptionDialog extends ExceptionDialog {
      * No need for a Cancel button.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#cancelButtonIsVisible()
      */
+    @Override
     protected boolean cancelButtonIsVisible() {
         return false;
     }

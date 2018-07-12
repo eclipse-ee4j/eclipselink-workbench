@@ -56,6 +56,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredClasses()
      */
+    @Override
     public ExternalClassDescription[] getDeclaredClasses() {
         return this.buildClassDescriptionArray(this.classFile.declaredMemberClassNames());
     }
@@ -63,6 +64,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredConstructors()
      */
+    @Override
     public ExternalConstructor[] getDeclaredConstructors() {
         return this.buildConstructorArray(this.classFile.getMethodPool().declaredConstructors());
     }
@@ -70,6 +72,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredFields()
      */
+    @Override
     public ExternalField[] getDeclaredFields() {
         return this.buildFieldArray(this.classFile.getFieldPool().declaredFields());
     }
@@ -77,6 +80,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredMethods()
      */
+    @Override
     public ExternalMethod[] getDeclaredMethods() {
         return this.buildMethodArray(this.classFile.getMethodPool().declaredMethods());
     }
@@ -84,6 +88,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaringClass()
      */
+    @Override
     public ExternalClassDescription getDeclaringClass() {
         return this.classDescriptionNamed(this.classFile.declaringClassName());
     }
@@ -91,6 +96,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getInterfaces()
      */
+    @Override
     public ExternalClassDescription[] getInterfaces() {
         return this.buildClassDescriptionArray(this.classFile.interfaceNames());
     }
@@ -98,6 +104,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getModifiers()
      */
+    @Override
     public int getModifiers() {
         return this.classFile.standardAccessFlags();
     }
@@ -105,6 +112,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getName()
      */
+    @Override
     public String getName() {
         return this.classFile.className();
     }
@@ -112,6 +120,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getSuperclass()
      */
+    @Override
     public ExternalClassDescription getSuperclass() {
         return this.classDescriptionNamed(this.classFile.superClassName());
     }
@@ -119,6 +128,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#isInterface()
      */
+    @Override
     public boolean isInterface() {
         return this.classFile.isInterface();
     }
@@ -126,6 +136,7 @@ final class CFExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#isPrimitive()
      */
+    @Override
     public boolean isPrimitive() {
         return false;
     }
@@ -133,6 +144,7 @@ final class CFExternalClass
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

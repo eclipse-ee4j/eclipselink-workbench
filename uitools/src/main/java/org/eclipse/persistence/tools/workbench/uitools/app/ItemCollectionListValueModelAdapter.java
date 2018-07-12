@@ -97,6 +97,7 @@ public class ItemCollectionListValueModelAdapter extends ItemAspectListValueMode
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.itemCollectionListener = this.buildItemCollectionListener();
@@ -108,15 +109,19 @@ public class ItemCollectionListValueModelAdapter extends ItemAspectListValueMode
      */
     protected CollectionChangeListener buildItemCollectionListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 ItemCollectionListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 ItemCollectionListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 ItemCollectionListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public String toString() {
                 return "item collection listener: " + Arrays.asList(ItemCollectionListValueModelAdapter.this.collectionNames);
             }
@@ -129,6 +134,7 @@ public class ItemCollectionListValueModelAdapter extends ItemAspectListValueMode
     /**
      * @see ItemAspectListValueModelAdapter#listenToItem(org.eclipse.persistence.tools.workbench.utility.Model)
      */
+    @Override
     protected void startListeningToItem(Model item) {
         for (int i = this.collectionNames.length; i-- > 0; ) {
             item.addCollectionChangeListener(this.collectionNames[i], this.itemCollectionListener);
@@ -138,6 +144,7 @@ public class ItemCollectionListValueModelAdapter extends ItemAspectListValueMode
     /**
      * @see ItemAspectListValueModelAdapter#stopListeningToItem(org.eclipse.persistence.tools.workbench.utility.Model)
      */
+    @Override
     protected void stopListeningToItem(Model item) {
         for (int i = this.collectionNames.length; i-- > 0; ) {
             item.removeCollectionChangeListener(this.collectionNames[i], this.itemCollectionListener);

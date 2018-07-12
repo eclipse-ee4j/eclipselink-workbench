@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.ColumnStringHolder;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
@@ -52,16 +51,12 @@ import org.eclipse.persistence.tools.workbench.utility.string.PartialStringMatch
 import org.eclipse.persistence.tools.workbench.utility.string.SimplePartialStringMatcher;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringMatcher.StringHolderScore;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.internal.indirection.ProxyIndirectionPolicy;
 import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.mappings.VariableOneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
-import org.eclipse.persistence.sessions.Record;
 
 public final class MWVariableOneToOneMapping
     extends MWAbstractReferenceMapping
@@ -112,12 +107,14 @@ public final class MWVariableOneToOneMapping
 
     // **************** Initialization **************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.columnQueryKeyPairs = new Vector();
         this.classIndicatorPolicy = new MWRelationalClassIndicatorFieldPolicy(this);
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
         if (!getInstanceVariable().isValueHolder() && getInstanceVariable().getType().isInterface()) {
@@ -125,6 +122,7 @@ public final class MWVariableOneToOneMapping
         }
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.columnQueryKeyPairs) { children.addAll(this.columnQueryKeyPairs); }
@@ -138,6 +136,7 @@ public final class MWVariableOneToOneMapping
         return this.classIndicatorPolicy;
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor newValue) {
         super.setReferenceDescriptor(newValue);
 
@@ -147,6 +146,7 @@ public final class MWVariableOneToOneMapping
             getClassIndicatorPolicy().resetDescriptorAvailableForIndication(NullIterator.instance());
     }
 
+    @Override
     public boolean descriptorIsValidReferenceDescriptor(MWDescriptor descriptor) {
         return ((MWRelationalDescriptor) descriptor).isInterfaceDescriptor();
     }
@@ -207,16 +207,19 @@ public final class MWVariableOneToOneMapping
 
     // *********** MWProxyIndirectionMapping implementation ***********
 
+    @Override
     public boolean usesProxyIndirection() {
         return getIndirectionType() == PROXY_INDIRECTION;
     }
 
+    @Override
     public void setUseProxyIndirection() {
         setIndirectionType(PROXY_INDIRECTION);
     }
 
     // *********** MWQueryable implementation ************
 
+    @Override
     public String iconKey() {
         return "mapping.variableOneToOne";
     }
@@ -224,6 +227,7 @@ public final class MWVariableOneToOneMapping
     // **************** Behavior ***************
 
     //TODO change this to 2 separate calls, implementorAdded and implementorRemoved
+    @Override
     public void implementorsChangedFor(MWInterfaceDescriptor descriptor) {
         if (getReferenceDescriptor() == descriptor) {
             Collection implementors = CollectionTools.collection(((MWRelationalProject) getProject()).descriptorsThatImplement(descriptor));
@@ -256,6 +260,7 @@ public final class MWVariableOneToOneMapping
 
     // ************** Aggregate Support ************
 
+    @Override
     public void parentDescriptorMorphedToAggregate() {
         super.parentDescriptorMorphedToAggregate();
         for (Iterator stream = columnQueryKeyPairs(); stream.hasNext(); ) {
@@ -264,6 +269,7 @@ public final class MWVariableOneToOneMapping
         getClassIndicatorPolicy().setField(null);
     }
 
+    @Override
     protected Collection buildAggregateFieldNameGenerators() {
         Collection generators = super.buildAggregateFieldNameGenerators();
         generators.add(this.classIndicatorPolicy);
@@ -278,6 +284,7 @@ public final class MWVariableOneToOneMapping
 
     // **************** Morphing ***************
 
+    @Override
     public MWVariableOneToOneMapping asMWVariableOneToOneMapping() {
         return this;
     }
@@ -285,10 +292,12 @@ public final class MWVariableOneToOneMapping
     /**
      * IMPORTANT:  See MWMapping class comment.
      */
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWVariableOneToOneMapping(this);
     }
 
+    @Override
     protected void initializeFromMWIndirectableContainerMapping(MWIndirectableContainerMapping oldMapping) {
         super.initializeFromMWIndirectableContainerMapping(oldMapping);
         if (oldMapping.usesValueHolderIndirection()) {
@@ -299,6 +308,7 @@ public final class MWVariableOneToOneMapping
         }
     }
 
+    @Override
     protected void initializeFromMWIndirectableMapping(MWIndirectableMapping oldMapping) {
         super.initializeFromMWIndirectableMapping(oldMapping);
         if (oldMapping.usesValueHolderIndirection()) {
@@ -306,6 +316,7 @@ public final class MWVariableOneToOneMapping
         }
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         if (this.isReadOnly()) {
             return;
@@ -336,6 +347,7 @@ public final class MWVariableOneToOneMapping
 
     // **************** MWClassIndicatorPolicy.Parent implementation **********
 
+    @Override
     public MWMappingDescriptor getContainingDescriptor() {
         return this.getParentDescriptor();
     }
@@ -343,6 +355,7 @@ public final class MWVariableOneToOneMapping
 
     //*************** Problem Handling ***************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -353,6 +366,7 @@ public final class MWVariableOneToOneMapping
         this.addClassIndicatorValueProblemsTo(newProblems);
      }
 
+    @Override
     protected String referenceDescriptorInvalidProblemString() {
         return ProblemConstants.MAPPING_REFERENCE_DESCRIPTOR_NOT_INTERFACE_DESCRIPTOR;
     }
@@ -402,6 +416,7 @@ public final class MWVariableOneToOneMapping
         }
     }
 
+    @Override
     public void addClassIndicatorFieldNotSpecifiedProblemTo(List newProblems) {
         //CR#4067 - An indicator field is not necessary as long as the foreign key field is unique
         boolean uniqueForeignKeyFields = true;
@@ -449,6 +464,7 @@ public final class MWVariableOneToOneMapping
 
     // ************* Automap Support ***********
 
+    @Override
     public void automap() {
         super.automap();
         this.automapClassIndicatorField();
@@ -476,10 +492,12 @@ public final class MWVariableOneToOneMapping
     // ************* runtime conversion ***********
 
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new VariableOneToOneMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         VariableOneToOneMapping runtimeMapping = (VariableOneToOneMapping) super.runtimeMapping();
         if ((getReferenceDescriptor() != null) && (getReferenceDescriptor().getMWClass() != null)) {
@@ -511,6 +529,7 @@ public final class MWVariableOneToOneMapping
         this.columnQueryKeyPairs = columnQueryKeyPairs;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (getReferenceDescriptor() != null) {

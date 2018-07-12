@@ -78,6 +78,7 @@ public final class ExplicitSimpleTypeDefinition
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.variety = ATOMIC;
@@ -85,6 +86,7 @@ public final class ExplicitSimpleTypeDefinition
         this.memberTypes = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.baseType);
@@ -99,6 +101,7 @@ public final class ExplicitSimpleTypeDefinition
 
     // **************** MWSimpleTypeDefinition contract ***********************
 
+    @Override
     public String getVariety() {
         return this.variety;
     }
@@ -115,10 +118,12 @@ public final class ExplicitSimpleTypeDefinition
         return this.variety == UNION;
     }
 
+    @Override
     public MWSimpleTypeDefinition getItemType() {
         return this.itemType;
     }
 
+    @Override
     public ListIterator memberTypes() {
         return this.memberTypes.listIterator();
     }
@@ -126,14 +131,17 @@ public final class ExplicitSimpleTypeDefinition
 
     // **************** MWSchemaTypeDefinition contract ***********************
 
+    @Override
     public MWSchemaTypeDefinition getBaseType() {
         return this.baseType;
     }
 
+    @Override
     public boolean isComplex() {
         return false;
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         if (this.builtIn) {
             return new SingleElementIterator(this);
@@ -151,6 +159,7 @@ public final class ExplicitSimpleTypeDefinition
 
     private Iterator memberTypeBaseBuiltInTypes() {
         return new TransformationIterator(this.memberTypes.iterator()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWSimpleTypeDefinition) next).baseBuiltInTypes();
             }
@@ -160,14 +169,17 @@ public final class ExplicitSimpleTypeDefinition
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean containsText() {
         return true;
     }
 
+    @Override
     public boolean containsWildcard() {
         return false;
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         // no elements in a simple type
         return 0;
@@ -176,6 +188,7 @@ public final class ExplicitSimpleTypeDefinition
 
     // **************** MWNamedSchemaComponent contract ***********************
 
+    @Override
     public String componentTypeName() {
         return "simpleType";
     }
@@ -186,6 +199,7 @@ public final class ExplicitSimpleTypeDefinition
     /**
      * Simple types have no structural subcomponents.
      */
+    @Override
     public Iterator structuralComponents() {
         return NullIterator.instance();
     }
@@ -193,6 +207,7 @@ public final class ExplicitSimpleTypeDefinition
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject xsObject) {
         super.reloadInternal(xsObject);
 
@@ -302,6 +317,7 @@ public final class ExplicitSimpleTypeDefinition
         }
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
 

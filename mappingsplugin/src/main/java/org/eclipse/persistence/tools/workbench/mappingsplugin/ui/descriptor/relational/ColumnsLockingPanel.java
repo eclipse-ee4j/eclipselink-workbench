@@ -42,11 +42,13 @@ final class ColumnsLockingPanel extends AbstractSubjectPanel {
         super(lockingPolicyHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.optimisticFieldsLockingPolicyTypeModel = buildOptimisticFieldsLockingPolicyTypeValueHolder();
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -146,10 +148,12 @@ final class ColumnsLockingPanel extends AbstractSubjectPanel {
     private PropertyValueModel buildOptimisticFieldsLockingPolicyTypeValueHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(),
                     MWTableDescriptorLockingPolicy.OPTIMISTIC_COLUMNS_LOCKING_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptorLockingPolicy) subject).getOptimisticColumnsLockingType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptorLockingPolicy) subject).setOptimisticColumnsLockingType((String) value);
             }
@@ -167,6 +171,7 @@ final class ColumnsLockingPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildFieldsLockingPanelEnabler(Component[] components) {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(this.optimisticFieldsLockingPolicyTypeModel) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value != null);
             }
@@ -176,6 +181,7 @@ final class ColumnsLockingPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildSelectedFieldsPanelEnabler(Component component) {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(this.optimisticFieldsLockingPolicyTypeModel) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null) {
                     return null;

@@ -84,6 +84,7 @@ final public class QuerySelectionCriteriaPanel extends AbstractPanel
     {
         return new Transformer()
         {
+            @Override
             public JComponent transform(Object queryFormat)
             {
                 if (queryFormat == null)
@@ -351,6 +352,7 @@ final public class QuerySelectionCriteriaPanel extends AbstractPanel
         {
             return new Transformer()
             {
+                @Override
                 public JComponent transform(Object queryFormat)
                 {
                     if (queryFormat == null)

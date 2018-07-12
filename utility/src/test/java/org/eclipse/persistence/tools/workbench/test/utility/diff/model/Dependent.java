@@ -38,6 +38,7 @@ public class Dependent {
         this.description = description;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.name);
     }

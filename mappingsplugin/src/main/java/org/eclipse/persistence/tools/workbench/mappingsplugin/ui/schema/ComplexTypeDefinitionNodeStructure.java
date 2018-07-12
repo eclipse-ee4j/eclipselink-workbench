@@ -34,6 +34,7 @@ final class ComplexTypeDefinitionNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     protected ListIterator componentDetails() {
         return new CompositeListIterator(this.nameDetails(), this.typeDetails());
     }
@@ -41,6 +42,7 @@ final class ComplexTypeDefinitionNodeStructure
 
     // **************** NamedSchemaComponentNodeStructure contract ************
 
+    @Override
     Integer topLevelOrderIndex() {
         return new Integer(3);
     }
@@ -60,10 +62,12 @@ final class ComplexTypeDefinitionNodeStructure
 
     SchemaComponentDetail buildBaseTypeDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "base";
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 MWSchemaTypeDefinition baseType = ((MWComplexTypeDefinition) this.component).getBaseType();
                 return (baseType == null) ? null : baseType;
@@ -73,10 +77,12 @@ final class ComplexTypeDefinitionNodeStructure
 
     SchemaComponentDetail buildDerivationMethodDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "derivation method";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return ((MWComplexTypeDefinition) this.component).getDerivationMethod();
             }
@@ -85,10 +91,12 @@ final class ComplexTypeDefinitionNodeStructure
 
     SchemaComponentDetail buildAbstractDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "abstract";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return String.valueOf(((MWComplexTypeDefinition) this.component).isAbstract());
             }

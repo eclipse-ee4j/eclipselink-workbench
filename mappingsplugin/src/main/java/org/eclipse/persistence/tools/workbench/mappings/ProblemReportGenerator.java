@@ -51,6 +51,7 @@ public class ProblemReportGenerator implements Generator.Adapter
     /**
      * @see Generator.Adapter#export(org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject, java.io.File)
      */
+    @Override
     public void export( MWProject project, File outputFile) {
 
         System.out.println( this.mappingsStringRepository.getString(

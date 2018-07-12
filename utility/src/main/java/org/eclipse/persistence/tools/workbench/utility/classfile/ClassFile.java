@@ -375,6 +375,7 @@ public class ClassFile {
         return this.attributePool;
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.className() + ')';
     }
@@ -466,6 +467,7 @@ public class ClassFile {
             return this.majorVersion;
         }
 
+        @Override
         public String toString() {
             return ClassTools.shortClassNameForObject(this) + "(class file version: " + this.version() + ')';
         }
@@ -485,6 +487,7 @@ public class ClassFile {
             classFile.accept(this);
         }
 
+        @Override
         public void visit(ObjectType objectType) {
             this.addReferencedClassName(objectType.elementTypeName());
         }

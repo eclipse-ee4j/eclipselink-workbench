@@ -33,6 +33,7 @@ public class RenamePoolAction extends AbstractEnablableFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "RENAME_POOL");
@@ -42,6 +43,7 @@ public class RenamePoolAction extends AbstractEnablableFrameworkAction {
         this.initializeToolTipText( "RENAME_POOL.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         ConnectionPoolAdapter pool = ( ConnectionPoolAdapter)selectedNode.getValue();
@@ -63,6 +65,7 @@ public class RenamePoolAction extends AbstractEnablableFrameworkAction {
         }
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
 
         ConnectionPoolAdapter pool = (ConnectionPoolAdapter) selectedNode.getValue();

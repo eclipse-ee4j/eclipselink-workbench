@@ -20,25 +20,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.ColumnStringHolder;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAdvancedPropertyAdditionException;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAdvancedPropertyRemovalException;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWCachingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorFieldPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorValue;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorCachingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorInheritancePolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorInterfaceAliasPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWInheritancePolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWInterfaceAliasDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWLockingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWNullDescriptorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWRefreshCachePolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWReturningPolicy;
@@ -57,7 +53,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational.
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWRelationalQueryManager;
-import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.filters.Filter;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CompositeIterator;
@@ -68,19 +63,13 @@ import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringComparatorEngine.StringHolderPair;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.RelationalDescriptor;
 import org.eclipse.persistence.descriptors.changetracking.AttributeChangeTrackingPolicy;
 import org.eclipse.persistence.descriptors.changetracking.ObjectChangeTrackingPolicy;
 import org.eclipse.persistence.internal.helper.DatabaseField;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
-import org.eclipse.persistence.queries.ReadAllQuery;
-import org.eclipse.persistence.sessions.Record;
 
 public final class MWTableDescriptor
     extends MWRelationalClassDescriptor
@@ -138,6 +127,7 @@ public final class MWTableDescriptor
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.primaryTableHandle = new MWTableHandle(this, this.buildPrimaryTableScrubber());
@@ -152,6 +142,7 @@ public final class MWTableDescriptor
 
     // ********** Accessors **********
 
+    @Override
     public MWTable getPrimaryTable() {
         return this.primaryTableHandle.getTable();
     }
@@ -164,6 +155,7 @@ public final class MWTableDescriptor
         this.primaryKeyPolicy().descriptorPrimaryTableChanged(newValue);
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         getRelationalQueryManager().notifyExpressionsToRecalculateQueryables();
     }
@@ -171,6 +163,7 @@ public final class MWTableDescriptor
     // ********** Transactional Policy **********
 
     /** override default behavior */
+    @Override
     protected MWTransactionalPolicy buildDefaultTransactionalPolicy() {
         return new MWRelationalTransactionalPolicy(this);
     }
@@ -193,6 +186,7 @@ public final class MWTableDescriptor
 
     // - returns a collection of the attributes mapped by all mappings obtained by
     //   getPrimaryKeyMappings()
+    @Override
     public Iterator primaryKeyAttributes()
     {
         Collection pkAttributes = new Vector();
@@ -206,6 +200,7 @@ public final class MWTableDescriptor
 
     // - returns an iterator on all mappings in this descriptor that map to primary key fields,
     //   plus all mappings in this descriptor's superdescriptors that do the same
+    @Override
     public Iterator primaryKeyMappings() {
         Collection pkMappings = new Vector();
         Iterator pkFieldIt = primaryKeyPolicy().primaryKeys();
@@ -218,6 +213,7 @@ public final class MWTableDescriptor
 
     public Iterator primaryKeyNames() {
         return new TransformationIterator(primaryKeys()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumn) next).getName();
             }
@@ -268,6 +264,7 @@ public final class MWTableDescriptor
      * inheritance hierarchy uses sequencing, as descriptors
      * inherit sequencing information
      */
+    @Override
     public boolean usesSequencingInDescriptorHierarchy() {
         if (this.usesSequencing()) {
             return true;
@@ -429,11 +426,13 @@ public final class MWTableDescriptor
         firePropertyChanged(INTERFACE_ALIAS_POLICY_PROPERTY, old, this.interfaceAliasPolicy);
     }
 
+    @Override
     public MWDescriptorPolicy getInterfaceAliasPolicy()
     {
         return this.interfaceAliasPolicy;
     }
 
+    @Override
     public void removeInterfaceAliasPolicy()
     {
         if (this.interfaceAliasPolicy.isActive())
@@ -446,6 +445,7 @@ public final class MWTableDescriptor
         }
     }
 
+    @Override
     public void addInterfaceAliasPolicy() throws MWAdvancedPropertyAdditionException
     {
         if (this.interfaceAliasPolicy.isActive())
@@ -455,10 +455,12 @@ public final class MWTableDescriptor
         setInterfaceAliasPolicy(new MWDescriptorInterfaceAliasPolicy(this));
     }
 
+    @Override
     public boolean supportsInterfaceAliasPolicy() {
         return true;
     }
 
+    @Override
     public boolean supportsMultitablePolicy() {
         return true;
     }
@@ -497,6 +499,7 @@ public final class MWTableDescriptor
         return false;
     }
 
+    @Override
     public Iterator associatedTables() {
         if (getPrimaryTable() != null && !CollectionTools.contains(secondaryTables(), getPrimaryTable())) {
             return new CompositeIterator(getPrimaryTable(), secondaryTables());
@@ -504,6 +507,7 @@ public final class MWTableDescriptor
         return this.secondaryTables();
     }
 
+    @Override
     public int associatedTablesSize() {
         return CollectionTools.size(associatedTables());
     }
@@ -540,6 +544,7 @@ public final class MWTableDescriptor
 
     //     ********** MWReturningPolicy API**********
 
+    @Override
     public MWDescriptorPolicy getReturningPolicy() {
         return this.returningPolicy;
     }
@@ -567,6 +572,7 @@ public final class MWTableDescriptor
         firePropertyChanged( RETURNING_POLICY_PROPERTY, old, returningPolicy);
     }
 
+    @Override
     public void addReturningPolicy() throws MWAdvancedPropertyAdditionException {
         if( this.returningPolicy.isActive()) {
             throw new MWAdvancedPropertyAdditionException( RETURNING_POLICY_PROPERTY, "policy already exists on descriptor");
@@ -574,6 +580,7 @@ public final class MWTableDescriptor
         setReturningPolicy( new MWRelationalReturningPolicy( this));
     }
 
+    @Override
     public void removeReturningPolicy() {
         if( this.returningPolicy.isActive()) {
             getReturningPolicy().dispose();
@@ -584,20 +591,24 @@ public final class MWTableDescriptor
         }
     }
 
+    @Override
     public boolean supportsReturningPolicy() {
         return true;
     }
 
+    @Override
     public boolean supportsCachingPolicy() {
         return true;
     }
 
     // *************** morphing support **************
 
+    @Override
     public MWTableDescriptor asMWTableDescriptor() {
         return this;
     }
 
+    @Override
     public void initializeOn(MWDescriptor newDescriptor) {
         ((MWRelationalDescriptor) newDescriptor).initializeFromMWTableDescriptor(this);
     }
@@ -607,16 +618,19 @@ public final class MWTableDescriptor
         return true;
     }
 
+    @Override
     public boolean isTableDescriptor() {
         return true;
     }
 
+    @Override
     public void applyAdvancedPolicyDefaults(MWProjectDefaultsPolicy defaultsPolicy) {
         defaultsPolicy.applyAdvancedPolicyDefaults(this);
     }
 
     // ************** containment hierarchy **************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.sequenceNumberColumnHandle);
@@ -629,9 +643,11 @@ public final class MWTableDescriptor
 
     private NodeReferenceScrubber buildSequenceNumberColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWTableDescriptor.this.setSequenceNumberColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWTableDescriptor.buildSequenceNumberColumnScrubber()";
             }
@@ -640,9 +656,11 @@ public final class MWTableDescriptor
 
     private NodeReferenceScrubber buildSequenceNumberTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWTableDescriptor.this.setSequenceNumberTable(null);
             }
+            @Override
             public String toString() {
                 return "MWTableDescriptor.buildSequenceNumberTableScrubber()";
             }
@@ -651,9 +669,11 @@ public final class MWTableDescriptor
 
     private NodeReferenceScrubber buildPrimaryTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWTableDescriptor.this.setPrimaryTable(null);
             }
+            @Override
             public String toString() {
                 return "MWTableDescriptor.buildPrimaryTableScrubber()";
             }
@@ -668,6 +688,7 @@ public final class MWTableDescriptor
      * if a parent descriptor is found, convert the descriptor to
      * an aggregate descriptor if necessary
      */
+    @Override
     protected void automapInheritanceHierarchyInternal(Collection automapDescriptors) {
         super.automapInheritanceHierarchyInternal(automapDescriptors);
         MWRelationalClassDescriptor parentDescriptor = this.automapFindParentDescriptor();
@@ -730,10 +751,12 @@ public final class MWTableDescriptor
         }
     }
 
+    @Override
     protected boolean autoMapRequiresMetaDataInternal() {
         return (this.getPrimaryTable() == null);
     }
 
+    @Override
     protected void automapDirectMappingColumns() {
         MappingStringHolder[] mappingStringHolders = this.buildColumnlessDirectMappingStringHolders();
         ColumnStringHolder[] columnStringHolders = this.buildAllUnmappedColumnStringHolders();
@@ -781,6 +804,7 @@ public final class MWTableDescriptor
     //************* Problem Handling *************
 
     /** Check for any problems and add them to the specified collection. */
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -934,6 +958,7 @@ public final class MWTableDescriptor
         }
     }
 
+    @Override
     protected String multipleMappingsWriteFieldProblemResourceStringKey() {
         return ProblemConstants.MULTIPLE_MAPPINGS_WRITE_TO_COLUMN;
     }
@@ -960,12 +985,14 @@ public final class MWTableDescriptor
 
     //************** runtime conversion **************/
 
+    @Override
     protected ClassDescriptor buildBasicRuntimeDescriptor() {
         RelationalDescriptor descriptor = new RelationalDescriptor();
         descriptor.setJavaClassName(getMWClass().getName());
         return descriptor;
     }
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         ClassDescriptor runtimeDescriptor = super.buildRuntimeDescriptor();
 
@@ -999,6 +1026,7 @@ public final class MWTableDescriptor
         return runtimeDescriptor;
     }
 
+    @Override
     protected void adjustUserDefinedQueryKeys(ClassDescriptor runtimeDescriptor) {
         for (Iterator queryKeys = userDefinedQueryKeys(); queryKeys.hasNext();) {
             MWUserDefinedQueryKey queryKey = (MWUserDefinedQueryKey) queryKeys.next();

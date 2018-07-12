@@ -53,6 +53,7 @@ public final class NullCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return 0;
     }
@@ -60,6 +61,7 @@ public final class NullCollectionValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return NullIterator.instance();
     }
@@ -70,6 +72,7 @@ public final class NullCollectionValueModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "NullCollectionValueModel";
     }

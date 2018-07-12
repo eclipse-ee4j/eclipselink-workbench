@@ -102,10 +102,12 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     public static CachingComboBoxModel buildColumnComboBoxModel(PropertyValueModel databaseFieldHolder, ValueModel parentDescriptorHolder) {
         return new IndirectComboBoxModel(databaseFieldHolder, parentDescriptorHolder) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return orderedColumns((MWRelationalClassDescriptor) subject);
             }
 
+            @Override
             protected int listSizeFromSubject(Object subject) {
                 return ((MWRelationalClassDescriptor) subject).allAssociatedColumnsSize();
             }
@@ -116,6 +118,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
     public static ListCellRenderer buildColumnListRenderer(final ValueModel parentDescriptorHolder, ResourceRepository resourceRepository) {
         return new AdaptableListCellRenderer(
             new ColumnCellRendererAdapter(resourceRepository) {
+                @Override
                 protected String buildNullValueText() {
                     if (parentDescriptorHolder.getValue() == null) {
                         return super.buildNullValueText();
@@ -132,6 +135,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     public static StringConverter buildColumnStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWColumn) o).qualifiedName();
             }
@@ -140,10 +144,12 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static PropertyValueModel buildColumnHolder(ValueModel mappingHolder) {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(mappingHolder, MWRelationalDirectMapping.COLUMN_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalDirectMapping) subject).getColumn();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDirectMapping) subject).setColumn((MWColumn) value);
             }
@@ -153,6 +159,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     public static NodeSelector buildColumnNodeSelector(final WorkbenchContextHolder contextHolder) {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 RelationalProjectNode projectNode = (RelationalProjectNode) contextHolder.getWorkbenchContext().getNavigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectColumn((MWColumn) item, contextHolder.getWorkbenchContext());
@@ -173,10 +180,12 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static PropertyValueModel buildUseBatchReadingHolder(ValueModel tableReferenceMappingHolder) {
         return new PropertyAspectAdapter(tableReferenceMappingHolder, MWTableReferenceMapping.BATCH_READING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWTableReferenceMapping) subject).usesBatchReading());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableReferenceMapping) subject).setUsesBatchReading(((Boolean) value).booleanValue());
             }
@@ -187,10 +196,12 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static PropertyValueModel buildJoinFetchingHolder(ValueModel joinFetchableMappingHolder) {
         return new PropertyAspectAdapter(joinFetchableMappingHolder, MWJoinFetchableMapping.JOIN_FETCH_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWJoinFetchableMapping) this.subject).getJoinFetchOption();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWJoinFetchableMapping) this.subject).setJoinFetchOption((JoinFetchOption) value);
             }
@@ -207,6 +218,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static ListValueModel buildJoinFetchCollectionHolder(final Object joinFetchableMapping) {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions().toplinkOptions();
             }
@@ -215,6 +227,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static ListCellRenderer buildJoinFetchOptionRenderer(final ResourceRepository resourceRepository) {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return resourceRepository.getString(((JoinFetchOption) value).resourceKey());
             }
@@ -248,6 +261,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static StringConverter buildTableStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTable) o).getName();
             }
@@ -256,6 +270,7 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static ValueModel buildParentDescriptorHolder(ValueModel mappingHolder) {
         return new PropertyAspectAdapter(mappingHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWMapping) subject).getParentDescriptor();
             }
@@ -264,9 +279,11 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static PropertyValueModel buildTargetTableHolder(ValueModel directContainerMappingHolder) {
         return new PropertyAspectAdapter(directContainerMappingHolder, MWRelationalDirectContainerMapping.TARGET_TABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalDirectContainerMapping) subject).getTargetTable();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDirectContainerMapping) subject).setTargetTable((MWTable) value);
             }
@@ -306,10 +323,12 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static PropertyValueModel buildDirectValueColumnAdapter(ValueModel directContainerMappingHolder) {
         return new PropertyAspectAdapter(directContainerMappingHolder, MWRelationalDirectContainerMapping.DIRECT_VALUE_COLUMN_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalDirectContainerMapping) subject).getDirectValueColumn();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDirectContainerMapping) subject).setDirectValueColumn((MWColumn) value);
             }
@@ -326,9 +345,11 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static CollectionValueModel buildDirectValueColumnCollectionHolder(ValueModel directContainerMappingHolder) {
         return new CollectionAspectAdapter(buildTargetTableHolder(directContainerMappingHolder), MWTable.COLUMNS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTable) subject).columns();
             }
+            @Override
             public int size() {
                 return ((MWTable) subject).columnsSize();
             }
@@ -369,10 +390,12 @@ public final class RelationalMappingComponentFactory extends MappingComponentFac
 
     private static PropertyValueModel buildDirectKeyColumnAdapter(ValueModel directContainerMappingHolder) {
         return new PropertyAspectAdapter(directContainerMappingHolder, MWRelationalDirectMapMapping.DIRECT_KEY_COLUMN_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalDirectMapMapping) subject).getDirectKeyColumn();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDirectMapMapping) subject).setDirectKeyColumn((MWColumn) value);
             }

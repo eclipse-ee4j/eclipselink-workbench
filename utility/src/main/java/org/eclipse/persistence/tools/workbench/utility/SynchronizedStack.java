@@ -76,6 +76,7 @@ public class SynchronizedStack
     /**
      * @see Stack#push(Object)
      */
+    @Override
     public void push(Object o) {
         synchronized (this.mutex) {
             this.stack.push(o);
@@ -86,6 +87,7 @@ public class SynchronizedStack
     /**
      * @see Stack#pop()
      */
+    @Override
     public Object pop() {
         synchronized (this.mutex) {
             Object o = this.stack.pop();
@@ -97,6 +99,7 @@ public class SynchronizedStack
     /**
      * @see Stack#peek()
      */
+    @Override
     public Object peek() {
         synchronized (this.mutex) {
             return this.stack.peek();
@@ -106,6 +109,7 @@ public class SynchronizedStack
     /**
      * @see Stack#isEmpty()
      */
+    @Override
     public boolean isEmpty() {
         synchronized (this.mutex) {
             return this.stack.isEmpty();
@@ -288,6 +292,7 @@ public class SynchronizedStack
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         synchronized (this.mutex) {
             return this.stack.toString();

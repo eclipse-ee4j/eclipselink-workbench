@@ -21,5 +21,6 @@ public interface ParticleTerm
 
     boolean isXpathComponent();
 
+    @Override
     int totalElementCount();
 }

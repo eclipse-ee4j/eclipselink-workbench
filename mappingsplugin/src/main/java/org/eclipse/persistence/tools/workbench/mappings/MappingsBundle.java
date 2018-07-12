@@ -30,6 +30,7 @@ public class MappingsBundle extends ListResourceBundle {
         {"error", "Error: "},
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

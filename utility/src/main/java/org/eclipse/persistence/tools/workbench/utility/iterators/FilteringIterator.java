@@ -74,6 +74,7 @@ public class FilteringIterator implements Iterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         if (this.next == START) {
             this.loadNext();
@@ -84,6 +85,7 @@ public class FilteringIterator implements Iterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.next == START) {
             this.loadNext();
@@ -102,6 +104,7 @@ public class FilteringIterator implements Iterator {
      * method.
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -135,6 +138,7 @@ public class FilteringIterator implements Iterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nestedIterator + ')';
     }

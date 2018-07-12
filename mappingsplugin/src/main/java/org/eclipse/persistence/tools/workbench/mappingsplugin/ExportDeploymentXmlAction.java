@@ -26,6 +26,7 @@ public final class ExportDeploymentXmlAction extends AbstractEnablableFrameworkA
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeText("EXPORT_DEPLOYMENT_XML_ACTION");
@@ -35,6 +36,7 @@ public final class ExportDeploymentXmlAction extends AbstractEnablableFrameworkA
         initializeIcon("GENERATE_XML");
     }
 
+    @Override
     protected void execute() {
         ProjectDeploymentXmlGenerationCoordinator coordinator = new ProjectDeploymentXmlGenerationCoordinator(getWorkbenchContext());
         ApplicationNode[] projectNodes = selectedProjectNodes();
@@ -43,6 +45,7 @@ public final class ExportDeploymentXmlAction extends AbstractEnablableFrameworkA
         }
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return selectedProjectNodes().length > 0;
     }

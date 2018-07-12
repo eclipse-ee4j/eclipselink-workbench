@@ -25,10 +25,12 @@ final class HomeAction extends AbstractFrameworkAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         initializeTextAndMnemonic("ECLIPSELINK_HOME");
     }
 
+    @Override
     protected void execute() {
         helpManager().showTopic("eclipselink_home");
     }

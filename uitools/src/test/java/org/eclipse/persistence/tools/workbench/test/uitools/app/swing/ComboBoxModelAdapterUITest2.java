@@ -36,6 +36,7 @@ public class ComboBoxModelAdapterUITest2 extends ComboBoxModelAdapterUITest {
     /**
      * add a null to the front of the list
      */
+    @Override
     protected ListValueModel buildColorListHolder() {
         // the default is to prepend the wrapped list with a null item
         return new ExtendedListValueModelWrapper(super.buildColorListHolder());
@@ -44,6 +45,7 @@ public class ComboBoxModelAdapterUITest2 extends ComboBoxModelAdapterUITest {
     /**
      * use a different model that allows the color to be set to null
      */
+    @Override
     protected TestModel buildTestModel() {
         return new TestModel2();
     }
@@ -51,8 +53,10 @@ public class ComboBoxModelAdapterUITest2 extends ComboBoxModelAdapterUITest {
     /**
      * convert null to some text
      */
+    @Override
     protected ListCellRenderer buildComboBoxRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return (value == null) ? "<none selected>" : super.buildText(value);
             }
@@ -64,6 +68,7 @@ protected static class TestModel2 extends TestModel {
     /**
      * null is OK here
      */
+    @Override
     public void checkColor(String color) {
         if (color == null) {
             return;

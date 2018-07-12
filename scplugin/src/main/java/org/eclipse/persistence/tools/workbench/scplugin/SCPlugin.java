@@ -95,6 +95,7 @@ public final class SCPlugin implements Plugin {
     }
 
     // ********** Plugin implementation **********
+    @Override
     public JMenuItem[] buildNewMenuItems(WorkbenchContext context) {
         return new JMenuItem[] {buildNewConfigurationMenuItem(context)};
     }
@@ -103,6 +104,7 @@ public final class SCPlugin implements Plugin {
         return new JMenuItem[0];
     }
 
+    @Override
     public ApplicationNode open(File file, WorkbenchContext context) throws UnsupportedFileException, OpenException {
         if ( ! FileTools.extension(file).equalsIgnoreCase(".xml")) {
             throw new UnsupportedFileException();
@@ -119,16 +121,19 @@ public final class SCPlugin implements Plugin {
         }
     }
 
+    @Override
     public ComponentContainerDescription buildToolBarDescription(WorkbenchContext context) {
 
         return new ToolBarButtonGroupDescription();
     }
 
+    @Override
     public ComponentContainerDescription buildMenuDescription(WorkbenchContext context) {
 
         return new MenuGroupDescription();
     }
 
+    @Override
     public PreferencesNode[] buildPreferencesNodes(PreferencesContext context) {
 
         return new PreferencesNode[] {new SCPreferencesNode((PreferencesContext) this.wrap(context))};

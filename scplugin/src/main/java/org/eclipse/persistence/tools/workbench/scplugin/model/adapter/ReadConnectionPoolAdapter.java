@@ -54,16 +54,19 @@ public class ReadConnectionPoolAdapter extends ConnectionPoolAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new ReadConnectionPoolConfig();
     }
 
+    @Override
     protected void initialize() {
         super.initialize( );
 
         this.setConfigRequired( true);
     }
 
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
         this.setExclusive( true);
@@ -72,6 +75,7 @@ public class ReadConnectionPoolAdapter extends ConnectionPoolAdapter {
      * Initializes this adapter.
      * This does not have a Login at creation.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -80,6 +84,7 @@ public class ReadConnectionPoolAdapter extends ConnectionPoolAdapter {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -87,6 +92,7 @@ public class ReadConnectionPoolAdapter extends ConnectionPoolAdapter {
         this.useNonTransactionalReadLogin = ( readPool().getLoginConfig() != null);
     }
 
+    @Override
     protected void postInitializationFromModel() {
         super.postInitializationFromModel();
 
@@ -102,6 +108,7 @@ public class ReadConnectionPoolAdapter extends ConnectionPoolAdapter {
     /**
      * Returns this config model property.
      */
+    @Override
     public boolean isReadConnectionPool() {
 
         return true;

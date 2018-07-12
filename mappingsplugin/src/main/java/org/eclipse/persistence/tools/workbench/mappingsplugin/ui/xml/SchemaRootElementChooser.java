@@ -124,6 +124,7 @@ public final class SchemaRootElementChooser
 
     private ActionListener buildBrowseAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 SchemaRootElementChooser.this.promptToSelectRootElement();
             }
@@ -138,6 +139,7 @@ public final class SchemaRootElementChooser
         dialog.show();
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
 
@@ -171,6 +173,7 @@ public final class SchemaRootElementChooser
             super(rootElementHolder);
         }
 
+        @Override
         protected void initialize() {
             super.initialize();
             this.propertyChangeListener = this.buildPropertyChangeListener();
@@ -178,6 +181,7 @@ public final class SchemaRootElementChooser
 
         private PropertyChangeListener buildPropertyChangeListener() {
             return new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     RootElementDisplayStringValueModel.this.displayStringChanged();
                 }
@@ -231,6 +235,7 @@ public final class SchemaRootElementChooser
         /**
          * @see ValueModel#getValue()
          */
+        @Override
         public Object getValue() {
             return this.displayString;
         }
@@ -241,6 +246,7 @@ public final class SchemaRootElementChooser
         /**
          * @see PropertyValueModel#setValue(java.lang.Object)
          */
+        @Override
         public void setValue(Object value) {
                 throw new UnsupportedOperationException();
         }
@@ -248,12 +254,14 @@ public final class SchemaRootElementChooser
 
         // ********** PropertyValueModelWrapper implementation **********
 
+        @Override
         protected void engageValueHolder() {
             super.engageValueHolder();
             this.engageNewElement();
             this.synchronizeDisplayString();
         }
 
+        @Override
         protected void disengageValueHolder() {
             this.disengageOldElement();
             super.disengageValueHolder();
@@ -263,6 +271,7 @@ public final class SchemaRootElementChooser
         /**
          * @see PropertyValueModelWrapper#valueChanged(java.beans.PropertyChangeEvent)
          */
+        @Override
         protected void valueChanged(PropertyChangeEvent e) {
             this.disengageOldElement();
             this.engageNewElement();

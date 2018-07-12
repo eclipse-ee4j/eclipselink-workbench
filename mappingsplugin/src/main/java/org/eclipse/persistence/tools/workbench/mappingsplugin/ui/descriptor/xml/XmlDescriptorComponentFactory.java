@@ -54,6 +54,7 @@ final class XmlDescriptorComponentFactory extends SwingComponentFactory {
 
     private static SchemaRepositoryValue buildSchemaRepositoryValue(final ValueModel xmlDescriptorHolder) {
         return new SchemaRepositoryValue() {
+            @Override
             public Iterator schemas() {
                 return ((MWXmlProject) ((MWXmlDescriptor) xmlDescriptorHolder.getValue()).getProject()).getSchemaRepository().schemas();
             }
@@ -62,11 +63,13 @@ final class XmlDescriptorComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildSchemaContextComponentHolder(ValueModel xmlDescriptorHolder) {
         return new PropertyAspectAdapter(xmlDescriptorHolder, MWXmlDescriptor.SCHEMA_CONTEXT_PROPERTY) {
+            @Override
             public Object getValueFromSubject() {
                 MWXmlDescriptor descriptor = (MWXmlDescriptor) this.subject;
                 return (descriptor.getSchemaContext() == null) ? null : descriptor.getSchemaContext();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlDescriptor) this.subject).setSchemaContext((MWSchemaContextComponent) value);
             }
@@ -96,6 +99,7 @@ final class XmlDescriptorComponentFactory extends SwingComponentFactory {
 
     private static SchemaValue buildSchemaValue(final ValueModel xmlDescriptorHolder) {
         return new SchemaValue() {
+            @Override
             public MWXmlSchema schema() {
                 return schemaContextSchema(xmlDescriptorHolder);
             }
@@ -109,10 +113,12 @@ final class XmlDescriptorComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildDefaultRootElementHolder(ValueModel xmlDescriptorHolder) {
         return new PropertyAspectAdapter(xmlDescriptorHolder, MWXmlDescriptor.DEFAULT_ROOT_ELEMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlDescriptor) this.subject).getDefaultRootElement();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlDescriptor) this.subject).setDefaultRootElement((MWElementDeclaration) value);
             }
@@ -121,10 +127,12 @@ final class XmlDescriptorComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildDefaultRootElementTypeHolder(ValueModel oxDescriptorHolder) {
         return new PropertyAspectAdapter(oxDescriptorHolder, MWOXDescriptor.DEFAULT_ROOT_ELEMENT_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWOXDescriptor) this.subject).getDefaultRootElementType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWOXDescriptor) this.subject).setDefaultRootElementType((MWComplexTypeDefinition) value);
             }

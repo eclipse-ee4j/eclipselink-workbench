@@ -77,6 +77,7 @@ public abstract class MappingNode
         this(value, parent.getApplicationContext(), mappingNodeTypePolicy, parent);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.attributeNameListener = this.buildAttributeNameListener();
@@ -85,9 +86,11 @@ public abstract class MappingNode
 
     private PropertyChangeListener buildAttributeNameListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 MappingNode.this.attributeNameChanged();
             }
+            @Override
             public String toString() {
                 return "attribute name listener";
             }
@@ -96,9 +99,11 @@ public abstract class MappingNode
 
     private PropertyChangeListener buildAttributeTypeDeclarationListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 MappingNode.this.attributeTypeDeclarationChanged();
             }
+            @Override
             public String toString() {
                 return "attribute type declaration listener";
             }
@@ -108,6 +113,7 @@ public abstract class MappingNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     protected void engageValue() {
         super.engageValue();
         this.descriptor().addPropertyChangeListener(MWDescriptor.ACTIVE_PROPERTY, this.getValueIconListener());
@@ -116,6 +122,7 @@ public abstract class MappingNode
         this.instanceVariable().addPropertyChangeListener(MWClassAttribute.DECLARATION_PROPERTY, this.attributeTypeDeclarationListener);
     }
 
+    @Override
     protected void disengageValue() {
         this.instanceVariable().removePropertyChangeListener(MWClassAttribute.DECLARATION_PROPERTY, this.attributeTypeDeclarationListener);
         this.instanceVariable().removePropertyChangeListener(MWClassAttribute.NAME_PROPERTY, this.attributeNameListener);
@@ -124,6 +131,7 @@ public abstract class MappingNode
         super.disengageValue();
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return MAPPING_DISPLAY_STRING_PROPERTY_NAMES;
     }
@@ -132,6 +140,7 @@ public abstract class MappingNode
      * add an up-arrow to the normal icon if the mapping is inherited and
      * dim the icon if the mapping's descriptor is inactive
      */
+    @Override
     protected IconBuilder buildIconBuilder() {
         IconBuilder inheritedIconBuilder = new CompositeIconBuilder(
                 super.buildIconBuilder(),
@@ -149,6 +158,7 @@ public abstract class MappingNode
      * display the attribute type, to make it easier for the user
      * to map the attribute
      */
+    @Override
     protected String buildPropertiesPageTitleText() {
         return this.getMapping().nameWithShortType();
     }
@@ -156,6 +166,7 @@ public abstract class MappingNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         WorkbenchContext localContext = buildLocalWorkbenchContext(workbenchContext);
         GroupContainerDescription desc =  this.mappingNodeTypePolicy.buildMenuDescription(localContext);
@@ -163,6 +174,7 @@ public abstract class MappingNode
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         return this.mappingNodeTypePolicy.buildToolBarDescription(buildLocalWorkbenchContext(workbenchContext));
     }
@@ -170,10 +182,12 @@ public abstract class MappingNode
 
     // ********** MappingsApplicationNode overrides **********
 
+    @Override
     public String candidatePackageName() {
         return this.getDescriptorNode().candidatePackageName();
     }
 
+    @Override
     public boolean isAutoMappable() {
         return false;
     }
@@ -182,6 +196,7 @@ public abstract class MappingNode
         return new SingleElementIterator(this.descriptor());
     }
 
+    @Override
     public void addDescriptorsTo(Collection descriptors) {
         descriptors.add(this.descriptor());
     }

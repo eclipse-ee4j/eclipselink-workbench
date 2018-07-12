@@ -39,20 +39,24 @@ public class StringConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.stringIndex = stream.readU2();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" string: ");
         writer.println(this.string());
     }
 
+    @Override
     public String description() {
         return "String";
     }
 
+    @Override
     public void printFieldInitializationClauseOn(PrintWriter writer) {
         writer.print('"');
         writer.print(this.string());
@@ -67,10 +71,12 @@ public class StringConstant extends Constant {
         return this.stringIndex;
     }
 
+    @Override
     public Object value() {
         return this.string();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

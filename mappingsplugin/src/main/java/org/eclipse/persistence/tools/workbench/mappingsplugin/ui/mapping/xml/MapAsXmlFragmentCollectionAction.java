@@ -19,7 +19,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappin
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWOXDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFragmentCollectionMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFragmentMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.ChangeMappingTypeAction;
 

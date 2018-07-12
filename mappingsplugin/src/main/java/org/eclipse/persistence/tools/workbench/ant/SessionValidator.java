@@ -41,6 +41,7 @@ public class SessionValidator extends ProjectRunner implements SessionValidatorI
      *
      * @return 0 if the there is no error in the project.
      */
+    @Override
     public int execute( String sessionName, String sessionsFileName, String url, String driverclass, String user, String password) {
         int status = 0;
         try {

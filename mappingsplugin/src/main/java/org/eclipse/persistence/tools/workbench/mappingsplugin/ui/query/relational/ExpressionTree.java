@@ -46,15 +46,19 @@ final class ExpressionTree extends JTree
 
 
         getModel().addTreeModelListener(new TreeModelListener() {
+            @Override
             public void treeNodesChanged(TreeModelEvent e) {
                 updateRootVisibility();
             }
+            @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 updateRootVisibility();
             }
+            @Override
             public void treeNodesRemoved(TreeModelEvent e) {
                 updateRootVisibility();
             }
+            @Override
             public void treeStructureChanged(TreeModelEvent e) {
                 updateRootVisibility();
             }

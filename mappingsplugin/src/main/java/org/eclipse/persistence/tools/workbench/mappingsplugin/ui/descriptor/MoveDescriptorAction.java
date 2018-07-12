@@ -33,6 +33,7 @@ final class MoveDescriptorAction extends AbstractFrameworkAction {
         super(workbenchContext);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -40,6 +41,7 @@ final class MoveDescriptorAction extends AbstractFrameworkAction {
         initializeToolTipText("MOVE_DESCRIPTOR_ACTION.tooltip");
     }
 
+    @Override
     protected void execute() {
         String packageName = promptForPackageName(selectedNodes()[0]);
         if (packageName != null) {

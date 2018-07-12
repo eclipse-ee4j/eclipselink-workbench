@@ -31,21 +31,25 @@ public class SCPreferencesNode extends AbstractPreferencesNode
         super(context);
     }
 
+    @Override
     protected String buildDisplayString()
     {
         return resourceRepository().getString("PREFERENCES.SC");
     }
 
+    @Override
     protected Component buildPropertiesPage()
     {
         return new SCPreferencesPage(getPreferencesContext());
     }
 
+    @Override
     public String helpTopicId()
     {
         return "preferences.sessions.general";
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();

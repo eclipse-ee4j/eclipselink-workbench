@@ -89,6 +89,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
     {
         return new TransformationPropertyValueModel(getSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -129,6 +130,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseSessionAdapter.USE_ADDITIONAL_PROJECTS_COLLECTION)
         {
+            @Override
             protected Object buildValue()
             {
                 if (subject == null)
@@ -137,6 +139,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
                 return getValueFromSubject();
             }
 
+            @Override
             public Object getValueFromSubject()
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
@@ -151,6 +154,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
         {
             private SessionMultipleProjectsPropertiesPage page;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (page == null)
@@ -205,6 +209,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
     {
         return new TransformationPropertyValueModel(getNodeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -249,6 +254,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.MANAGED_BY_BROKER)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return Boolean.valueOf(((SessionAdapter) subject).isManaged());
@@ -276,6 +282,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
             return (Component) ClassTools.newInstance(pageClass, parameterTypes, parameters);
         }
 
+        @Override
         public Object getValue()
         {
             if (this.page == null)
@@ -313,6 +320,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
             return "SESSION_SERVER_PLATFORM_TAB_TITLE";
         }
 
+        @Override
         protected JTabbedPane buildTabbedPane()
         {
             JTabbedPane tabbedPane = super.buildTabbedPane();
@@ -320,11 +328,13 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
             return tabbedPane;
         }
 
+        @Override
         protected Component buildTitlePanel()
         {
             return new JComponent() {};
         }
 
+        @Override
         protected void initializeTabs()
         {
             addTab(buildProjectPropertiesPage(), 0, buildProjectPropertiesPageTitle());
@@ -391,6 +401,7 @@ abstract class SessionTabbedPropertiesPage extends TabbedPropertiesPage
          * @return The component associated with the given <code>Boolean</code>
          * value
          */
+        @Override
         public Object transform(Object object)
         {
             if (Boolean.FALSE.equals(object))

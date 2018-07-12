@@ -32,6 +32,7 @@ final class DeleteProjectAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         initializeText("DELETE_PROJECT_ACTION");
         initializeMnemonic("DELETE_PROJECT_ACTION");
@@ -39,6 +40,7 @@ final class DeleteProjectAction extends AbstractFrameworkAction {
         initializeIcon("project.remove");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         MWProject selectedProject = (MWProject) selectedNode.getValue();
         File saveDirectory = selectedProject.getSaveDirectory();
@@ -84,6 +86,7 @@ final class DeleteProjectAction extends AbstractFrameworkAction {
             // Check and see if projectFileToDelete is the only project in the directory
             File directory = projectFileToDelete.getParentFile();
             File[] mwpFiles = directory.listFiles(new FilenameFilter() {
+                @Override
                 public boolean accept(File dir, String name) {
                     return (name.toLowerCase().endsWith(MWProject.FILE_NAME_EXTENSION));
                 }
@@ -120,6 +123,7 @@ final class DeleteProjectAction extends AbstractFrameworkAction {
         File directory = projectFileToDelete.getParentFile();
         projectFileToDelete.delete();
         File[] bldrDirectories = directory.listFiles(new FilenameFilter() {
+            @Override
             public boolean accept(File dir, String name) {
                 return (name.equals("classes")
                     || name.equals("descriptors")

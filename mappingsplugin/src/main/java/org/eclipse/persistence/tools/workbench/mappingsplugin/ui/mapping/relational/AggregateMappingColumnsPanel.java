@@ -68,6 +68,7 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
     }
 
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.sortedPathsToFieldsAdapter = buildSortedPathToFieldsAdapter();
@@ -82,9 +83,11 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
 
     private CollectionValueModel buildPathsToFieldsAdapter() {
         return new CollectionAspectAdapter(getSelectionHolder(), MWAggregateMapping.PATHS_TO_FIELDS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWAggregateMapping) this.subject).pathsToFields();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWAggregateMapping) this.subject).pathsToFieldsSize();
             }
@@ -108,6 +111,7 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
 
 
 
+    @Override
     protected Component buildPage() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -178,6 +182,7 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildParentDescriptorHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAggregateMapping) this.subject).getParentDescriptor();
             }
@@ -209,14 +214,17 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case COLUMN_DESCRIPTION_COLUMN:        return Object.class;
@@ -225,10 +233,12 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index != COLUMN_DESCRIPTION_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWAggregatePathToColumn pathToField = (MWAggregatePathToColumn) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -242,6 +252,7 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
         private PropertyValueModel buildColumnDescriptionAdapter(MWAggregatePathToColumn pathToField) {
             // TODO apparently this property never changes - it's never fired in an event...
             return new PropertyAspectAdapter(MWAggregatePathToColumn.AGGREGATE_RUNTIME_FIELD_NAME_GENERATOR_PROPERTY, pathToField) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWAggregatePathToColumn ptf = (MWAggregatePathToColumn) this.subject;
                     AggregateFieldDescription fieldDescription = ptf.getAggregateRuntimeFieldNameGenerator().fullFieldDescription();
@@ -252,9 +263,11 @@ final class AggregateMappingColumnsPanel extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildColumnAdapter(MWAggregatePathToColumn pathToField) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWAggregatePathToColumn.COLUMN_PROPERTY, pathToField) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWAggregatePathToColumn) this.subject).getColumn();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAggregatePathToColumn) this.subject).setColumn((MWColumn) value);
                 }

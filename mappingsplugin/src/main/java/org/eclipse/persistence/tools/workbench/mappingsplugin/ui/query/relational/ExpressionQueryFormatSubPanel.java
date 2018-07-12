@@ -61,6 +61,7 @@ final class ExpressionQueryFormatSubPanel extends AbstractSubjectPanel
 
     protected ActionListener buildEditExpressionAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 editExpresion();
             }
@@ -69,12 +70,14 @@ final class ExpressionQueryFormatSubPanel extends AbstractSubjectPanel
 
     private PropertyChangeListener buildQueryPropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 populateTree();
             }
         };
     }
 
+    @Override
     protected void initializeLayout()
     {
         this.expressionQueryFormatHolder = buildExpressionQueryFormatHolder();
@@ -104,6 +107,7 @@ final class ExpressionQueryFormatSubPanel extends AbstractSubjectPanel
         expressionLabel.setLabelFor(expressionTree);
 
         expressionTree.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent event) {
                 if (event.getClickCount() == 2) {
                     ExpressionQueryFormatSubPanel.this.editExpresion();
@@ -147,6 +151,7 @@ final class ExpressionQueryFormatSubPanel extends AbstractSubjectPanel
 
     private PropertyValueModel buildExpressionQueryFormatHolder() {
         return new FilteringPropertyValueModel((PropertyValueModel)getSubjectHolder()) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWExpressionQueryFormat;
             }
@@ -185,6 +190,7 @@ final class ExpressionQueryFormatSubPanel extends AbstractSubjectPanel
 
     private ValueModel buildQueryBooleanHolder() {
         return new PropertyAspectAdapter(getSubjectHolder()) {
+            @Override
             public Object buildValue() {
                 return this.subject == null ? Boolean.FALSE : Boolean.TRUE;
             }

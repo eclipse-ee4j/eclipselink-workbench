@@ -153,6 +153,7 @@ public final class JavaTypeDeclaration
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
      */
+    @Override
     public String displayString() {
         StringBuffer sb = new StringBuffer();
         this.displayStringOn(sb);
@@ -169,6 +170,7 @@ public final class JavaTypeDeclaration
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         this.displayStringOn(sb);
     }

@@ -26,8 +26,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappin
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.internal.identitymaps.CacheIdentityMap;
 import org.eclipse.persistence.internal.identitymaps.FullIdentityMap;
 import org.eclipse.persistence.internal.identitymaps.HardCacheWeakIdentityMap;
 import org.eclipse.persistence.internal.identitymaps.NoIdentityMap;
@@ -179,6 +177,7 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.cacheCoordination      = (CacheCoordinationOption) cacheCoordinationOptions().topLinkOptionForMWModelOption(DEFAULT_CACHE_COORDINATION);
@@ -189,39 +188,47 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         this.existenceChecking      = (ExistenceCheckingOption) existenceCheckingOptions().topLinkOptionForMWModelOption(DEFAULT_EXISTENCE_CHECKING);
     }
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.cacheExpiry);
     }
 
+    @Override
     public void initializeFrom(MWCachingPolicy otherPolicy) {
         throw new UnsupportedOperationException();
     }
+    @Override
     public CacheCoordinationOption getCacheCoordination()
     {
         return this.cacheCoordination;
     }
 
+    @Override
     public CacheIsolationOption getCacheIsolation()
     {
         return this.cacheIsolation;
     }
 
+    @Override
     public int getCacheSize()
     {
         return this.cacheSize;
     }
 
+    @Override
     public CacheTypeOption getCacheType()
     {
         return this.cacheType;
     }
 
+    @Override
     public ExistenceCheckingOption getExistenceChecking()
     {
         return this.existenceChecking;
     }
 
+    @Override
     public void setCacheCoordination(CacheCoordinationOption cacheCoordination)
     {
         CacheCoordinationOption oldCacheCoordination = this.cacheCoordination;
@@ -229,6 +236,7 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         firePropertyChanged(CACHE_COORDINATION_PROPERTY, oldCacheCoordination, cacheCoordination);
     }
 
+    @Override
     public void setCacheIsolation(CacheIsolationOption cacheIsolation)
     {
         CacheIsolationOption oldCacheIsolation = this.cacheIsolation;
@@ -240,6 +248,7 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         }
     }
 
+    @Override
     public void setCacheSize(int cacheSize)
     {
         int oldCacheSize = this.cacheSize;
@@ -247,6 +256,7 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         firePropertyChanged(CACHE_SIZE_PROPERTY, oldCacheSize, cacheSize);
     }
 
+    @Override
     public void setCacheType(CacheTypeOption cacheType)
     {
         CacheTypeOption oldCacheType = this.cacheType;
@@ -254,10 +264,12 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         firePropertyChanged(CACHE_TYPE_PROPERTY, oldCacheType, cacheType);
     }
 
+    @Override
     public void setCacheType(String cacheTypeString) {
         setCacheType((CacheTypeOption) cacheTypeOptions().topLinkOptionForMWModelOption(cacheTypeString));
     }
 
+    @Override
     public void setExistenceChecking(ExistenceCheckingOption newExistenceChecking)
     {
         Object oldValue = this.existenceChecking;
@@ -265,36 +277,44 @@ public final class MWTransactionalProjectCachingPolicy extends MWModel implement
         firePropertyChanged(EXISTENCE_CHECKING_PROPERTY, oldValue, this.existenceChecking);
     }
 
+    @Override
     public void setExistenceChecking(String existenceChecking) {
         setExistenceChecking((ExistenceCheckingOption) existenceCheckingOptions().topLinkOptionForMWModelOption(existenceChecking));
     }
 
 
+    @Override
     public MWCacheExpiry getCacheExpiry() {
         return this.cacheExpiry;
     }
 
+    @Override
     public void setUseProjectDefaultCacheExpiry(boolean useProjectCacheExpiry) {
         throw new UnsupportedOperationException("Does not apply for Project caching policy");
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public MWMappingDescriptor getOwningDescriptor() {
         return null; //TODO grrrr, need to make a sepearate interface for the descriptor caching policy for this and adjustRuntimeDescriptor
     }
 
+    @Override
     public boolean usesProjectDefaultCacheSize() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void descriptorInheritanceChanged() {
     }
 
     //***************** TopLink only methods ****************
 
+    @Override
     public MWCachingPolicy getPersistedPolicy() {
         return this;
     }

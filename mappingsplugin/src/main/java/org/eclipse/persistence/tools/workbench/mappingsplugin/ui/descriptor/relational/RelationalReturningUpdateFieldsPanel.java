@@ -37,14 +37,17 @@ final class RelationalReturningUpdateFieldsPanel extends ReturningUpdateFieldsPa
         super( subjectHolder, contextHolder);
     }
 
+    @Override
     protected String addButtonKey() {
         return "UPDATE_ADD_BUTTON";
     }
 
+    @Override
     protected String removeButtonKey() {
         return "UPDATE_REMOVE_BUTTON";
     }
 
+    @Override
     protected void addField() {
         Iterator selectedFields = this.returningPolicy().updateFields();
 

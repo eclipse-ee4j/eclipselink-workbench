@@ -59,11 +59,13 @@ public class EisLoginPaneTest extends AbstractLoginPaneTest
         testFocusTransferByMnemonic("CONNECTION_EIS_CONNECTION_SPEC_CLASS_NAME_FIELD", COMPONENT_TEXT_FIELD);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         throw new IllegalAccessException();
     }
 
+    @Override
     protected String windowTitle()
     {
         return "EIS Login Pane";

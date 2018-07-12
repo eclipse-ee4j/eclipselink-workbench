@@ -64,6 +64,7 @@ public abstract class BackwardCompatibilityTestCase
         super(name);
     }
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
 
@@ -120,6 +121,7 @@ public abstract class BackwardCompatibilityTestCase
 
         de.setUserDifferentiator(MWDescriptorCachingPolicy.class,
             new ReflectiveDifferentiator(MWDescriptorCachingPolicy.class, de.getRecordingDifferentiator()) {
+                @Override
                 public Diff diff(Object object1, Object object2) {
                     return new CompositeDiff(
                         object1,
@@ -166,6 +168,7 @@ public abstract class BackwardCompatibilityTestCase
         );
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

@@ -34,6 +34,7 @@ public final class NoLogAdapter extends LogAdapter {
         super(parent);
     }
 
+    @Override
     protected Object buildModel() {
         DefaultSessionLogConfig config = new DefaultSessionLogConfig();
         config.setLogLevel(OFF_LOG_LEVEL);
@@ -43,14 +44,17 @@ public final class NoLogAdapter extends LogAdapter {
     /**
      * Returns true if options are used.
      */
+    @Override
     public boolean optionsIsEnable() {
         return false;
     }
 
+    @Override
     public void enableOptions() {
         // do nothing
     }
 
+    @Override
     public void disableOptions() {
         // do nothing
     }

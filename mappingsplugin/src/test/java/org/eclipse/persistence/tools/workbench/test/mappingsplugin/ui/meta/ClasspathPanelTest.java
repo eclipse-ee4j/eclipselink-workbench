@@ -82,6 +82,7 @@ public class ClasspathPanelTest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.out.println("classpath:");
@@ -113,29 +114,36 @@ public class ClasspathPanelTest {
 
     private ListValueModel buildEntriesHolder() {
         return new ListAspectAdapter(MWClassRepository.CLASSPATH_ENTRIES_LIST, this.project.getRepository()) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWClassRepository) this.subject).classpathEntries();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWClassRepository) this.subject).classpathEntriesSize();
             }
 
+            @Override
             public void addItem(int index, Object item) {
                 ((MWClassRepository) this.subject).addClasspathEntry(index, (String) item);
             }
 
+            @Override
             public void addItems(int index, List items) {
                 ((MWClassRepository) this.subject).addClasspathEntries(index, items);
             }
 
+            @Override
             public Object removeItem(int index) {
                 return ((MWClassRepository) this.subject).removeClasspathEntry(index);
             }
 
+            @Override
             public List removeItems(int index, int length) {
                 return ((MWClassRepository) this.subject).removeClasspathEntries(index, length);
             }
 
+            @Override
             public Object replaceItem(int index, Object item) {
                 return ((MWClassRepository) this.subject).replaceClasspathEntry(index, (String) item);
             }
@@ -152,6 +160,7 @@ public class ClasspathPanelTest {
 
     private Action buildBackdoorAction() {
         Action action = new AbstractAction("test backdoor") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ClasspathPanelTest.this.testBackdoor();
             }

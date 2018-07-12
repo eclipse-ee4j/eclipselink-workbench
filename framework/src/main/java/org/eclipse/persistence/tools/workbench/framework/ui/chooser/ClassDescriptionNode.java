@@ -130,6 +130,7 @@ public final class ClassDescriptionNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.userClassDescription;
     }
@@ -140,6 +141,7 @@ public final class ClassDescriptionNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel#getParent()
      */
+    @Override
     public TreeNodeValueModel getParent() {
         return this.packageNode;
     }
@@ -147,6 +149,7 @@ public final class ClassDescriptionNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel#getChildrenModel()
      */
+    @Override
     public ListValueModel getChildrenModel() {
         return NullListValueModel.instance();
     }
@@ -154,10 +157,12 @@ public final class ClassDescriptionNode
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         // the class is static - do nothing
     }
 
+    @Override
     protected void disengageValue() {
         // the class is static - do nothing
     }
@@ -168,6 +173,7 @@ public final class ClassDescriptionNode
     /**
      * @see ClassDescriptionNodeContainer#addClassDescriptionNodesTo(java.util.Collection)
      */
+    @Override
     public void addClassDescriptionNodesTo(Collection classDescriptionNodes) {
         classDescriptionNodes.add(this);
     }
@@ -178,6 +184,7 @@ public final class ClassDescriptionNode
     /**
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         return this.collationKey.compareTo(((ClassDescriptionNode) o).collationKey);
     }
@@ -185,6 +192,7 @@ public final class ClassDescriptionNode
 
     // ********** Displayable implementation **********
 
+    @Override
     public String displayString() {
         return this.shortClassName;
     }
@@ -192,6 +200,7 @@ public final class ClassDescriptionNode
     /**
      * the icon is cached in the package pool node
      */
+    @Override
     public Icon icon() {
         return this.packageNode.classIcon();
     }
@@ -199,6 +208,7 @@ public final class ClassDescriptionNode
 
     // ********** standard methods **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.shortClassName);
     }

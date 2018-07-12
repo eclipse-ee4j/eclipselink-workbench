@@ -173,11 +173,13 @@ public class CheckList extends AccessibleTitledPanel
     {
         return new FocusListener()
         {
+            @Override
             public void focusGained(FocusEvent e)
             {
                 CheckList.this.listBox.repaint();
             }
 
+            @Override
             public void focusLost(FocusEvent e)
             {
                 CheckList.this.listBox.repaint();
@@ -207,6 +209,7 @@ public class CheckList extends AccessibleTitledPanel
     {
         return new ListSelectionListener()
         {
+            @Override
             public void valueChanged(ListSelectionEvent e)
             {
                 if (e.getValueIsAdjusting())
@@ -304,6 +307,7 @@ public class CheckList extends AccessibleTitledPanel
      * Redirects the focus selection to the actual component of this widget that
      * can really accept the focus, which is the list itself.
      */
+    @Override
     public void requestFocus()
     {
         this.listBox.requestFocus();
@@ -313,6 +317,7 @@ public class CheckList extends AccessibleTitledPanel
      * Redirects the focus selection to the actual component of this widget that
      * can really accept the focus, which is the list itself.
      */
+    @Override
     public boolean requestFocus(boolean temporary)
     {
         return this.listBox.requestFocus(temporary);
@@ -322,6 +327,7 @@ public class CheckList extends AccessibleTitledPanel
      * Redirects the focus selection to the actual component of this widget that
      * can really accept the focus, which is the list itself.
      */
+    @Override
     public boolean requestFocusInWindow()
     {
         return this.listBox.requestFocusInWindow();
@@ -331,6 +337,7 @@ public class CheckList extends AccessibleTitledPanel
      * Redirects the focus selection to the actual component of this widget that
      * can really accept the focus, which is the list itself.
      */
+    @Override
     protected boolean requestFocusInWindow(boolean temporary)
     {
         return this.listBox.requestFocusInWindow(temporary);
@@ -438,6 +445,7 @@ public class CheckList extends AccessibleTitledPanel
          * @param icon The new default icon or <code>null</code> to remove the old
          * icon
          */
+        @Override
         public void setIcon(Icon icon)
         {
             if (UIManager.getLookAndFeel().getID().equals("GTK"))
@@ -495,6 +503,7 @@ public class CheckList extends AccessibleTitledPanel
         /**
          * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, Object, int, boolean, boolean)
          */
+        @Override
         public Component getListCellRendererComponent(JList list,
                                                                      Object value,
                                                                      int index,
@@ -608,6 +617,7 @@ public class CheckList extends AccessibleTitledPanel
          * @return An <code>AccessibleEditableCheckList</code> that serves as the
          * <code>AccessibleContext</code> of this <code>EditableCheckList</code>
          */
+        @Override
         public AccessibleContext getAccessibleContext()
         {
             if (this.accessibleContext == null) {
@@ -617,6 +627,7 @@ public class CheckList extends AccessibleTitledPanel
             return this.accessibleContext;
         }
 
+        @Override
         public boolean requestFocusInWindow(boolean temporary)
         {
             return super.requestFocusInWindow(temporary);
@@ -637,12 +648,14 @@ public class CheckList extends AccessibleTitledPanel
                 initialize();
             }
 
+            @Override
             public Accessible getAccessibleAt(Point location)
             {
                 int index = locationToIndex(location);
                 return getAccessibleChild(index);
             }
 
+            @Override
             public Accessible getAccessibleChild(int index)
             {
             if ((index < 0) || (index >= getModel().getSize()))
@@ -669,6 +682,7 @@ public class CheckList extends AccessibleTitledPanel
                     this.index = index;
                 }
 
+                @Override
                 public String getAccessibleName()
                 {
                     String name = super.getAccessibleName();
@@ -711,11 +725,13 @@ public class CheckList extends AccessibleTitledPanel
             return bounds.contains(location.x, location.y) ? index : -1;
         }
 
+        @Override
         public void mouseDragged(MouseEvent e)
         {
             mouseMoved(e);
         }
 
+        @Override
         public void mouseExited(MouseEvent e)
         {
             CheckBoxCellRenderer renderer = (CheckBoxCellRenderer) CheckList.this.listBox.getCellRenderer();
@@ -730,6 +746,7 @@ public class CheckList extends AccessibleTitledPanel
             }
         }
 
+        @Override
         public void mouseMoved(MouseEvent e)
         {
             if (CheckList.this.listBox.getModel().getSize() == 0) {
@@ -772,6 +789,7 @@ public class CheckList extends AccessibleTitledPanel
             }
         }
 
+        @Override
         public void mousePressed(MouseEvent e)
         {
             if (!SwingUtilities.isLeftMouseButton(e))
@@ -791,6 +809,7 @@ public class CheckList extends AccessibleTitledPanel
             }
         }
 
+        @Override
         public void mouseReleased(MouseEvent e)
         {
             if (!SwingUtilities.isLeftMouseButton(e))
@@ -843,6 +862,7 @@ public class CheckList extends AccessibleTitledPanel
      */
     private class PressedAction extends AbstractAction
     {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             int[] indices = CheckList.this.listBox.getSelectedIndices();
@@ -866,6 +886,7 @@ public class CheckList extends AccessibleTitledPanel
      */
     private class ReleasedAction extends AbstractAction
     {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             int[] selectedIndices = CheckList.this.listBox.getSelectedIndices();
@@ -916,6 +937,7 @@ public class CheckList extends AccessibleTitledPanel
          * @return An <code>AccessibleContentPane</code> that serves as the
          * <code>AccessibleContext</code> of this <code>ContentPane</code>
          */
+        @Override
         public AccessibleContext getAccessibleContext()
         {
             if (this.accessibleContext == null)
@@ -934,6 +956,7 @@ public class CheckList extends AccessibleTitledPanel
         private class AccessibleLabel extends JLabel
         {
 
+            @Override
             public void setText(String text)
             {
                 String oldText = getText();
@@ -959,6 +982,7 @@ public class CheckList extends AccessibleTitledPanel
          */
         private class StatusBar extends JPanel
         {
+            @Override
             public AccessibleContext getAccessibleContext()
             {
                 if (this.accessibleContext == null) {
@@ -970,6 +994,7 @@ public class CheckList extends AccessibleTitledPanel
 
             protected class AccessibleStatusBar extends AccessibleJPanel
             {
+                @Override
                 public AccessibleRole getAccessibleRole()
                 {
                     return AccessibleRole.STATUS_BAR;

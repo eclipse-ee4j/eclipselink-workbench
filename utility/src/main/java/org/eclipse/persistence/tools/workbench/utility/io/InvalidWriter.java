@@ -52,6 +52,7 @@ public final class InvalidWriter
     /**
      * @see java.io.Writer#write(char[], int, int)
      */
+    @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
         throw new UnsupportedOperationException();
     }
@@ -59,6 +60,7 @@ public final class InvalidWriter
     /**
      * @see java.io.Writer#flush()
      */
+    @Override
     public void flush() throws IOException {
         // do nothing
     }
@@ -66,6 +68,7 @@ public final class InvalidWriter
     /**
      * @see java.io.Writer#close()
      */
+    @Override
     public void close() throws IOException {
         // do nothing
     }
@@ -73,6 +76,7 @@ public final class InvalidWriter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

@@ -65,6 +65,7 @@ public abstract class AbstractEnablableFrameworkAction extends AbstractFramework
      */
     protected abstract boolean shouldBeEnabled(ApplicationNode selectedNode);
 
+    @Override
     public void setUp() {
         super.setUp();
         this.selectedNodes = selectedNodes();
@@ -72,6 +73,7 @@ public abstract class AbstractEnablableFrameworkAction extends AbstractFramework
         updateEnabledState();
     }
 
+    @Override
     public void tearDown() {
         disengageListeners();
         this.selectedNodes = null;
@@ -143,6 +145,7 @@ public abstract class AbstractEnablableFrameworkAction extends AbstractFramework
 
     protected PropertyChangeListener buildEnabledStateListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 AbstractEnablableFrameworkAction.this.updateEnabledState();
             }

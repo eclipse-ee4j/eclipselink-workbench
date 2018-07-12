@@ -30,6 +30,7 @@ final class EisReturningInsertFieldsPanel
         super( subjectHolder, contextHolder);
     }
 
+    @Override
     protected void addField() {
         MWEisReturningPolicy returningPolicy = (MWEisReturningPolicy) this.returningPolicy();
         MWEisReturningPolicyInsertFieldReturnOnlyFlag insertField =

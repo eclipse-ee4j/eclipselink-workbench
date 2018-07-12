@@ -88,6 +88,7 @@ public class DatabasePlatformRepositoryTabbedPropertiesPageTest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -115,6 +116,7 @@ public class DatabasePlatformRepositoryTabbedPropertiesPageTest {
 
     private Action buildClearAction() {
         Action action = new AbstractAction("clear") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DatabasePlatformRepositoryTabbedPropertiesPageTest.this.clear();
             }
@@ -140,6 +142,7 @@ public class DatabasePlatformRepositoryTabbedPropertiesPageTest {
 
     private Action buildPrintAction() {
         Action action = new AbstractAction("print") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DatabasePlatformRepositoryTabbedPropertiesPageTest.this.print();
             }

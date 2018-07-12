@@ -37,6 +37,7 @@ final class AddOrRefreshTablesAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         // TODO this mnemonic should be set with an index ~kfm
@@ -45,6 +46,7 @@ final class AddOrRefreshTablesAction
         this.initializeToolTipText("ADD_OR_REFRESH_TABLES_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = this.selectedProjectNodes();
         for (int i = 0; i < projectNodes.length; i++) {
@@ -62,10 +64,12 @@ final class AddOrRefreshTablesAction
         this.startTableImporter(database, importDialog.importsTablesFullyQualified(), importDialog.selectedTables());
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return ((DatabaseNode) selectedNode).getDatabase().isConnected();
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {MWDatabase.CONNECTED_PROPERTY};
     }
@@ -97,6 +101,7 @@ final class AddOrRefreshTablesAction
             this.selectedTables = selectedTables;
         }
 
+        @Override
         public void run() {
             WaitDialog waitDialog = this.buildWaitDialog();
             launchLater(waitDialog);

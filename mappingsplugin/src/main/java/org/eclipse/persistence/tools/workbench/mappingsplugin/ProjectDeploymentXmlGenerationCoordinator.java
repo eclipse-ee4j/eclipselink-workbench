@@ -113,9 +113,11 @@ public final class ProjectDeploymentXmlGenerationCoordinator {
 
     private FileFilter buildXMLFileFilter() {
         return new FileFilter() {
+            @Override
             public boolean accept(File file) {
                 return file.isDirectory() || ".xml".equals(FileTools.extension(file).toLowerCase());
             }
+            @Override
             public String getDescription() {
                 return resourceRepository().getString("PROJECT_XML_SAVE_AS_DIALOG_XML_DESCRIPTION");
             }
@@ -189,6 +191,7 @@ public final class ProjectDeploymentXmlGenerationCoordinator {
          * Determines whether the selected file can be used as the new location to
          * persist the document.
          */
+        @Override
         public void approveSelection()
         {
             int result = canReplaceExistingFile();

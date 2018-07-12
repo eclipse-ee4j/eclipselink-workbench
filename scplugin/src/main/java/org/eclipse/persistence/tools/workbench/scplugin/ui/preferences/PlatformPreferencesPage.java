@@ -96,6 +96,7 @@ final class PlatformPreferencesPage extends AbstractPanel
 
         radioButton.addItemListener(new ItemListener()
         {
+            @Override
             public void itemStateChanged(ItemEvent e)
             {
                 JRadioButton radioButton = (JRadioButton) e.getSource();
@@ -111,6 +112,7 @@ final class PlatformPreferencesPage extends AbstractPanel
     {
         return new ListDataListener()
         {
+            @Override
             public void contentsChanged(ListDataEvent e)
             {
                 if ((e.getIndex0() == -1) && (e.getIndex1() == -1))
@@ -120,10 +122,12 @@ final class PlatformPreferencesPage extends AbstractPanel
                 }
             }
 
+            @Override
             public void intervalAdded(ListDataEvent e)
             {
             }
 
+            @Override
             public void intervalRemoved(ListDataEvent e)
             {
             }
@@ -150,11 +154,13 @@ final class PlatformPreferencesPage extends AbstractPanel
 
         adapter.setConverter(new BidiStringConverter()
         {
+            @Override
             public Object convertToObject(String value)
             {
                 return convertToString(value);
             }
 
+            @Override
             public String convertToString(Object value)
             {
                 if (SCPlugin.DATA_SOURCE_TYPE_PREFERENCE_RELATIONAL_CHOICE.equals(value))
@@ -322,6 +328,7 @@ final class PlatformPreferencesPage extends AbstractPanel
     {
         return new SimpleListCellRenderer()
         {
+            @Override
             protected String buildText(Object cellValue)
             {
                 if (((String) cellValue).equals("AQPlatform"))
@@ -419,6 +426,7 @@ final class PlatformPreferencesPage extends AbstractPanel
 
         adapter.setConverter(new BidiStringConverter()
         {
+            @Override
             public Object convertToObject(String value)
             {
                 if (value == null)
@@ -427,6 +435,7 @@ final class PlatformPreferencesPage extends AbstractPanel
                 return DatabasePlatformRepository.getDefault().platformNamed(value);
             }
 
+            @Override
             public String convertToString(Object value)
             {
                 if (value == null)
@@ -456,6 +465,7 @@ final class PlatformPreferencesPage extends AbstractPanel
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 boolean checked = ((JCheckBox) e.getSource()).isSelected();
@@ -506,6 +516,7 @@ final class PlatformPreferencesPage extends AbstractPanel
     {
         return new SimpleListCellRenderer()
         {
+            @Override
             protected String buildText(Object value)
             {
                 if (value == null)

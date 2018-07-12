@@ -39,6 +39,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredClasses()
      */
+    @Override
     public ExternalClassDescription[] getDeclaredClasses() {
         return EMPTY_EXTERNAL_CLASS_DESCRIPTIONS;
     }
@@ -46,6 +47,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredConstructors()
      */
+    @Override
     public ExternalConstructor[] getDeclaredConstructors() {
         return EMPTY_EXTERNAL_CONSTRUCTORS;
     }
@@ -53,6 +55,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredFields()
      */
+    @Override
     public ExternalField[] getDeclaredFields() {
         return EMPTY_EXTERNAL_FIELDS;
     }
@@ -60,6 +63,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaredMethods()
      */
+    @Override
     public ExternalMethod[] getDeclaredMethods() {
         return EMPTY_EXTERNAL_METHODS;
     }
@@ -67,6 +71,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getDeclaringClass()
      */
+    @Override
     public ExternalClassDescription getDeclaringClass() {
         return null;
     }
@@ -74,6 +79,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getInterfaces()
      */
+    @Override
     public ExternalClassDescription[] getInterfaces() {
         return EMPTY_EXTERNAL_CLASS_DESCRIPTIONS;
     }
@@ -82,6 +88,7 @@ final class PrimitiveExternalClass
      * public abstract final
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getModifiers()
      */
+    @Override
     public int getModifiers() {
         return this.primitiveClass.getModifiers();
     }
@@ -90,6 +97,7 @@ final class PrimitiveExternalClass
      * "int", "float", "void", etc.
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getName()
      */
+    @Override
     public String getName() {
         return this.primitiveClass.getName();
     }
@@ -97,6 +105,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#getSuperclass()
      */
+    @Override
     public ExternalClassDescription getSuperclass() {
         return null;
     }
@@ -104,6 +113,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#isInterface()
      */
+    @Override
     public boolean isInterface() {
         return false;
     }
@@ -111,6 +121,7 @@ final class PrimitiveExternalClass
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClass#isPrimitive()
      */
+    @Override
     public boolean isPrimitive() {
         return true;
     }
@@ -118,6 +129,7 @@ final class PrimitiveExternalClass
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

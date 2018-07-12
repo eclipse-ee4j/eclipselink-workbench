@@ -38,6 +38,7 @@ final class FrameworkLogHandler extends Handler {
     /**
      * @see java.util.logging.Handler#close()
      */
+    @Override
     public void close() throws SecurityException {
         // do nothing
     }
@@ -45,6 +46,7 @@ final class FrameworkLogHandler extends Handler {
     /**
      * @see java.util.logging.Handler#flush()
      */
+    @Override
     public void flush() {
         // do nothing
     }
@@ -53,6 +55,7 @@ final class FrameworkLogHandler extends Handler {
      * If the record is loggable, notify the user.
      * @see java.util.logging.Handler#publish(java.util.logging.LogRecord)
      */
+    @Override
     public void publish(LogRecord record) {
         if (this.isLoggable(record)) {
             FrameworkLogHandlerDialog dialog = new FrameworkLogHandlerDialog(this.application, record);

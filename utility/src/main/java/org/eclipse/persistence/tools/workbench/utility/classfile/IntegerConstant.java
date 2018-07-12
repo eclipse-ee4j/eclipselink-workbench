@@ -39,20 +39,24 @@ public class IntegerConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.value = stream.readU4();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" value: ");
         writer.println(this.value);
     }
 
+    @Override
     public String description() {
         return "int";
     }
 
+    @Override
     public void printFieldInitializationClauseOn(PrintWriter writer) {
         writer.print(this.value);
     }
@@ -61,10 +65,12 @@ public class IntegerConstant extends Constant {
         return this.value;
     }
 
+    @Override
     public Object value() {
         return new Integer(this.value);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

@@ -36,6 +36,7 @@ public class AddNewSessionsAction extends AbstractFrameworkAction {
         this.plugin = plugin;
     }
 
+    @Override
     protected void initialize() {
         this.initializeText( "NEW_SESSIONS_CONFIGURATION");
         this.initializeMnemonic( "NEW_SESSIONS_CONFIGURATION");
@@ -44,6 +45,7 @@ public class AddNewSessionsAction extends AbstractFrameworkAction {
         this.initializeToolTipText( "NEW_SESSIONS_CONFIGURATION.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
 
         navigatorSelectionModel().pushExpansionState();

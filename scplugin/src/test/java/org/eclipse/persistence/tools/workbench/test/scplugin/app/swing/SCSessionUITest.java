@@ -31,6 +31,7 @@ public abstract class SCSessionUITest extends SCAbstractUITest {
         super();
     }
 
+    @Override
     protected void setUp() {
 
         super.setUp();
@@ -48,14 +49,17 @@ public abstract class SCSessionUITest extends SCAbstractUITest {
         return this.subjectHolder;
     }
 
+    @Override
     protected void clearModel() {
         this.subjectHolder.setValue( null);
     }
 
+    @Override
     protected void restoreModel() {
         this.subjectHolder.setValue( subject());
     }
 
+    @Override
     protected void printModel() {
         System.out.println( subject());
     }

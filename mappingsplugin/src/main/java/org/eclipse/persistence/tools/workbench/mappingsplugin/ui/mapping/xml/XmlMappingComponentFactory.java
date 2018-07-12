@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWAbstractAnyMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlElementTypeableMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlMapping;
@@ -54,10 +53,12 @@ public class XmlMappingComponentFactory
 
     private static PropertyValueModel buildWildcardHolder(ValueModel mappingHolder) {
         return new PropertyAspectAdapter(mappingHolder, MWAbstractAnyMapping.WILDCARD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWAbstractAnyMapping) subject).isWildcardMapping());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWAbstractAnyMapping) subject).setWildcardMapping(((Boolean) value).booleanValue());
             }
@@ -76,6 +77,7 @@ public class XmlMappingComponentFactory
 
     private static SchemaValue buildSchemaValue(final ValueModel xmlMappingHolder) {
         return new SchemaValue() {
+            @Override
             public MWXmlSchema schema() {
                 return schemaContextSchema(xmlMappingHolder);
             }
@@ -89,10 +91,12 @@ public class XmlMappingComponentFactory
 
     private static PropertyValueModel buildElementTypeHolder(ValueModel mappingHolder, String propertyString) {
         return new PropertyAspectAdapter(mappingHolder, propertyString) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlElementTypeableMapping) this.subject).getElementType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlElementTypeableMapping) this.subject).setElementType((MWComplexTypeDefinition) value);
             }

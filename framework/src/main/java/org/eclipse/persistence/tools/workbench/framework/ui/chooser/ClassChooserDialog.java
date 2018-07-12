@@ -215,6 +215,7 @@ public class ClassChooserDialog extends AbstractDialog {
      */
     private MouseListener buildDoubleClickMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     ClassChooserDialog.this.clickOK();
@@ -225,9 +226,11 @@ public class ClassChooserDialog extends AbstractDialog {
 
     private Action buildRefreshAction() {
         return new AbstractFrameworkAction(this.getWorkbenchContext()) {
+            @Override
             protected void initialize() {
                 this.initializeTextAndMnemonic("CLASS_CHOOSER_DIALOG.REFRESH_BUTTON");
             }
+            @Override
             protected void execute() {
                 ClassChooserDialog.this.refresh();
             }
@@ -237,6 +240,7 @@ public class ClassChooserDialog extends AbstractDialog {
 
     // ********** main panel **********
 
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
@@ -303,9 +307,11 @@ public class ClassChooserDialog extends AbstractDialog {
 
     private ListCellRenderer buildClassListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected Icon buildIcon(Object value) {
                 return ClassChooserDialog.this.classIcon;
             }
+            @Override
             protected String buildText(Object value) {
                 return ((ShortClassNameEntry) value).getName();
             }
@@ -314,6 +320,7 @@ public class ClassChooserDialog extends AbstractDialog {
 
     private ListSelectionListener buildClassListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ClassChooserDialog.this.classSelectionChanged(e);
@@ -324,9 +331,11 @@ public class ClassChooserDialog extends AbstractDialog {
 
     private ListCellRenderer buildPackageListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected Icon buildIcon(Object value) {
                 return ClassChooserDialog.this.packageIcon;
             }
+            @Override
             protected String buildText(Object value) {
                 return ((PackageEntry) value).getDisplayString();
             }
@@ -335,6 +344,7 @@ public class ClassChooserDialog extends AbstractDialog {
 
     private ListSelectionListener buildPackageListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ClassChooserDialog.this.packageSelectionChanged(e);
@@ -349,24 +359,29 @@ public class ClassChooserDialog extends AbstractDialog {
     /**
      * nothing is selected initially - so disable the OK button
      */
+    @Override
     protected Action buildOKAction() {
         Action action = super.buildOKAction();
         action.setEnabled(false);
         return action;
     }
 
+    @Override
     protected Iterator buildCustomActions() {
         return new SingleElementIterator(this.buildRefreshAction());
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.classChooser";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.filteringPanel.getTextField();
     }
 
+    @Override
     protected void prepareToShow() {
         pack();
         Dimension size = getPreferredSize();
@@ -382,6 +397,7 @@ public class ClassChooserDialog extends AbstractDialog {
     /**
      * increase visibility slightly for inner class
      */
+    @Override
     protected void clickOK() {
         super.clickOK();
     }
@@ -520,10 +536,12 @@ public class ClassChooserDialog extends AbstractDialog {
             return null;
         }
 
+        @Override
         public int compareTo(Object o) {
             return this.collationKey.compareTo(((ShortClassNameEntry) o).collationKey);
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.name);
         }
@@ -535,6 +553,7 @@ public class ClassChooserDialog extends AbstractDialog {
      * Converts a short class name entry to a string in an obvious fashion.
      */
     private class ShortClassNameEntryStringConverter implements StringConverter {
+        @Override
         public String convertToString(Object o) {
             return (o == null) ? null : ((ShortClassNameEntry) o).getName();
         }
@@ -604,6 +623,7 @@ public class ClassChooserDialog extends AbstractDialog {
             return this.classDescription == otherClassDescription;
         }
 
+        @Override
         public int compareTo(Object o) {
             // sort by name first...
             int result = this.collator.compare(this.name, ((PackageEntry) o).name);
@@ -614,6 +634,7 @@ public class ClassChooserDialog extends AbstractDialog {
             return this.collator.compare(this.displayString, ((PackageEntry) o).displayString);
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.displayString);
         }
@@ -625,6 +646,7 @@ public class ClassChooserDialog extends AbstractDialog {
 
     public static void gc() {
         Thread t = new Thread() {
+            @Override
             public void run() {
                 try {
                     Thread.sleep(100);

@@ -40,12 +40,14 @@ public interface Association {
      * Return true if both the associations' keys and values
      * are equal.
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * Return a hash code based on the association's
      * key and value.
      */
+    @Override
     int hashCode();
 
 }

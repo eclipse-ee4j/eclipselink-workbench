@@ -22,7 +22,6 @@ import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContex
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
 import org.eclipse.persistence.tools.workbench.framework.uitools.FileChooserPanel.FileHolder;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational.MWRelationalProject;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
@@ -57,9 +56,11 @@ public abstract class ProjectOptionsPropertiesPage
      */
     protected final FileHolder buildFileChooserRootFileHolder() {
         return new FileHolder() {
+            @Override
             public File getFile() {
                 return ProjectOptionsPropertiesPage.this.project().getSaveDirectory();
             }
+            @Override
             public void setFile(File file) {
                 // the project save directory cannot be changed
                 throw new UnsupportedOperationException();
@@ -75,6 +76,7 @@ public abstract class ProjectOptionsPropertiesPage
      */
     protected final FileHolder buildFileChooserDefaultDirectoryHolder(final String prefKey) {
         return new FileHolder() {
+            @Override
             public File getFile() {
                 File projectSaveDir = ProjectOptionsPropertiesPage.this.project().getSaveDirectory();
                 if (projectSaveDir != null) {
@@ -89,6 +91,7 @@ public abstract class ProjectOptionsPropertiesPage
                 return FileTools.userHomeDirectory();
             }
 
+            @Override
             public void setFile(File file) {
                 if (file.equals(FileTools.userHomeDirectory())) {
                     // don't save the user home
@@ -113,9 +116,11 @@ public abstract class ProjectOptionsPropertiesPage
 
     protected PropertyValueModel buildDeploymentXMLFileNameHolder(ValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder, MWProject.DEPLOYMENT_XML_FILE_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWProject) this.subject).getDeploymentXMLFileName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWProject) this.subject).setDeploymentXMLFileName((String) value);
             }
@@ -127,9 +132,11 @@ public abstract class ProjectOptionsPropertiesPage
 
     protected PropertyValueModel buildModelSourceDirectoryNameHolder(ValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder, MWProject.MODEL_SOURCE_DIRECTORY_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWProject) this.subject).getModelSourceDirectoryName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWProject) this.subject).setModelSourceDirectoryName((String) value);
             }
@@ -144,9 +151,11 @@ public abstract class ProjectOptionsPropertiesPage
 
     protected PropertyValueModel buildWeavingAdapter() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWProject.USES_WEAVING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWProject) this.subject).usesWeaving());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWProject) this.subject).setUsesWeaving(((Boolean) value).booleanValue());
             }

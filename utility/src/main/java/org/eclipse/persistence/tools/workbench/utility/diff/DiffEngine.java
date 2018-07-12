@@ -109,6 +109,7 @@ public class DiffEngine implements Differentiator {
      * synchronized so diffs are single-threaded
      * @see Differentiator#diff(Object, Object)
      */
+    @Override
     public synchronized Diff diff(Object object1, Object object2) {
         return this.diff(object1, object2, DifferentiatorAdapter.NORMAL);
     }
@@ -117,6 +118,7 @@ public class DiffEngine implements Differentiator {
      * synchronized so diffs are single-threaded
      * @see Differentiator#keyDiff(Object, Object)
      */
+    @Override
     public synchronized Diff keyDiff(Object object1, Object object2) {
         return this.diff(object1, object2, DifferentiatorAdapter.KEY);
     }
@@ -131,6 +133,7 @@ public class DiffEngine implements Differentiator {
     /**
      * @see Differentiator#comparesValueObjects()
      */
+    @Override
     public boolean comparesValueObjects() {
         return false;
     }
@@ -361,6 +364,7 @@ public class DiffEngine implements Differentiator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this);
     }
@@ -386,12 +390,15 @@ public class DiffEngine implements Differentiator {
         Log NULL_INSTANCE =
             new Log() {
                 // nothing is logged
+                @Override
                 public void log(Diff diff) {
                     // do nothing
                 }
+                @Override
                 public void close() {
                     // do nothing
                 }
+                @Override
                 public String toString() {
                     return "NullLog";
                 }
@@ -428,6 +435,7 @@ public class DiffEngine implements Differentiator {
             this.writer = writer;
             this.logsValueDiffs = false;
         }
+        @Override
         public void log(Diff diff) {
             if (diff.getDifferentiator().comparesValueObjects() && ! this.logsValueDiffs) {
                 return;
@@ -443,6 +451,7 @@ public class DiffEngine implements Differentiator {
             }
             this.writer.println();
         }
+        @Override
         public void close() {
             this.writer.close();
         }
@@ -481,6 +490,7 @@ public class DiffEngine implements Differentiator {
         /**
          * @see Differentiator#diff(Object, Object)
          */
+        @Override
         public Diff diff(Object object1, Object object2) {
             Differentiator differentiator = DiffEngine.this.differentiatorFor(object1);
             if ( ! differentiator.comparesValueObjects()) {
@@ -496,6 +506,7 @@ public class DiffEngine implements Differentiator {
         /**
          * @see Differentiator#keyDiff(Object, Object)
          */
+        @Override
         public Diff keyDiff(Object object1, Object object2) {
             Differentiator differentiator = DiffEngine.this.differentiatorFor(object1);
             Diff diff = differentiator.keyDiff(object1, object2);
@@ -506,6 +517,7 @@ public class DiffEngine implements Differentiator {
         /**
          * @see Differentiator#comparesValueObjects()
          */
+        @Override
         public boolean comparesValueObjects() {
             return false;
         }
@@ -539,6 +551,7 @@ public class DiffEngine implements Differentiator {
         /**
          * @see Object#toString()
          */
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this);
         }

@@ -55,6 +55,7 @@ public class InnerClassesAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.count = stream.readU2();
         short cnt = this.count;
@@ -65,6 +66,7 @@ public class InnerClassesAttribute extends Attribute {
         }
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         short cnt = this.count;
         InnerClass[] classes = this.innerClasses;
@@ -79,6 +81,7 @@ public class InnerClassesAttribute extends Attribute {
         return this.innerClasses[index].innerClassInfoName();
     }
 
+    @Override
     public InnerClass innerClassNamed(String className) {
         short cnt = this.count;
         InnerClass[] classes = this.innerClasses;
@@ -122,6 +125,7 @@ public class InnerClassesAttribute extends Attribute {
      * a "nested" class is either a "member" class or a "local" class
      * or an "anonymous" class
      */
+    @Override
     public boolean isNestedClass() {
         return this.thisInnerClassAttribute() != null;
     }
@@ -130,6 +134,7 @@ public class InnerClassesAttribute extends Attribute {
      * only "member" classes have "declaring" classes
      * ("local" and "anonymous" classes do not)
      */
+    @Override
     public boolean isMemberClass() {
         InnerClass innerClass = this.thisInnerClassAttribute();
         return (innerClass != null) &&
@@ -140,6 +145,7 @@ public class InnerClassesAttribute extends Attribute {
      * "local" classes have no "declaring" classes, but they do have names
      * ("anonymous" classes do not)
      */
+    @Override
     public boolean isLocalClass() {
         InnerClass innerClass = this.thisInnerClassAttribute();
         return (innerClass != null) &&
@@ -150,6 +156,7 @@ public class InnerClassesAttribute extends Attribute {
     /**
      * "anonymous" classes have neither "declaring" classes nor names
      */
+    @Override
     public boolean isAnonymousClass() {
         InnerClass innerClass = this.thisInnerClassAttribute();
         return (innerClass != null) &&
@@ -161,6 +168,7 @@ public class InnerClassesAttribute extends Attribute {
      * only "member" classes have a declaring class
      * ("top-level", "local", and "anonymous" classes do not)
      */
+    @Override
     public String declaringClassName() {
         InnerClass innerClass = this.thisInnerClassAttribute();
         return (innerClass == null) ? null : innerClass.declaringClassName();
@@ -170,11 +178,13 @@ public class InnerClassesAttribute extends Attribute {
      * only "member" and "local" classes have names
      * ("anonymous" classes do not)
      */
+    @Override
     public String nestedClassName() {
         InnerClass innerClass = this.thisInnerClassAttribute();
         return (innerClass == null) ? null : innerClass.innerClassName();
     }
 
+    @Override
     public short nestedClassAccessFlags() {
         InnerClass innerClass = this.thisInnerClassAttribute();
         return (innerClass == null) ? 0 : innerClass.getInnerClassAccessFlags();
@@ -184,6 +194,7 @@ public class InnerClassesAttribute extends Attribute {
      * this will include the compiler-generated names for the
      * "local" and "anonymous" classes
      */
+    @Override
     public String[] nestedClassNames() {
         short cnt = this.count;
         if (cnt == 0) {
@@ -199,6 +210,7 @@ public class InnerClassesAttribute extends Attribute {
     /**
      * return the subset of "nested" classes that are "member" classes
      */
+    @Override
     public String[] declaredMemberClassNames() {
         short cnt = this.count;
         if (cnt == 0) {
@@ -215,6 +227,7 @@ public class InnerClassesAttribute extends Attribute {
             (String[]) declaredMemberClassNames.toArray(new String[declaredMemberClassNames.size()]);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         short cnt = this.count;
@@ -236,6 +249,7 @@ public class InnerClassesAttribute extends Attribute {
         return this.innerClasses[index];
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.count);
         sb.append(" inner class(es)");

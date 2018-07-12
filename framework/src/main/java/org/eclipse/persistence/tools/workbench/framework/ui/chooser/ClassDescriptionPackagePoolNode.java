@@ -121,6 +121,7 @@ public final class ClassDescriptionPackagePoolNode
 
     private Iterator emptyPackageNodes() {
         return new FilteringIterator(this.packageNodes()) {
+            @Override
             public boolean accept(Object next) {
                 return ((ClassDescriptionPackageNode) next).isEmpty();
             }
@@ -218,6 +219,7 @@ public final class ClassDescriptionPackagePoolNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // answer this dummy value so we aren't equal to another package pool node
         return this.value;
@@ -229,6 +231,7 @@ public final class ClassDescriptionPackagePoolNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel#getParent()
      */
+    @Override
     public TreeNodeValueModel getParent() {
         return null;
     }
@@ -236,6 +239,7 @@ public final class ClassDescriptionPackagePoolNode
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel#getChildrenModel()
      */
+    @Override
     public ListValueModel getChildrenModel() {
         return this.sortedPackageNodesHolder;
     }
@@ -243,10 +247,12 @@ public final class ClassDescriptionPackagePoolNode
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         // the package pool is static - do nothing
     }
 
+    @Override
     protected void disengageValue() {
         // the package pool is static - do nothing
     }
@@ -257,6 +263,7 @@ public final class ClassDescriptionPackagePoolNode
     /**
      * @see ClassDescriptionNodeContainer#addClassNodesTo(java.util.Collection)
      */
+    @Override
     public void addClassDescriptionNodesTo(Collection classDescriptionNodes) {
         for (Iterator stream = this.packageNodes(); stream.hasNext(); ) {
             ((ClassDescriptionPackageNode) stream.next()).addClassDescriptionNodesTo(classDescriptionNodes);
@@ -266,6 +273,7 @@ public final class ClassDescriptionPackagePoolNode
 
     // ********** Comparable implementation **********
 
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -273,10 +281,12 @@ public final class ClassDescriptionPackagePoolNode
 
     // ********** Displayable implementation **********
 
+    @Override
     public String displayString() {
         return this.name;
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -287,6 +297,7 @@ public final class ClassDescriptionPackagePoolNode
     Iterator classNodes() {
         return new CompositeIterator(
             new TransformationIterator(this.packageNodes()) {
+                @Override
                 protected Object transform(Object next) {
                     return ((ClassDescriptionPackageNode) next).classNodes();
                 }
@@ -296,6 +307,7 @@ public final class ClassDescriptionPackagePoolNode
 
     Iterator userClassDescriptions() {
         return new TransformationIterator(this.classNodes()) {
+            @Override
             protected Object transform(Object next) {
                 return ((ClassDescriptionNode) next).getUserClassDescription();
             }
@@ -305,6 +317,7 @@ public final class ClassDescriptionPackagePoolNode
 
     // ********** standard methods **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }

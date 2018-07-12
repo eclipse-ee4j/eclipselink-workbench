@@ -63,12 +63,14 @@ public class DropDownToolBarButtonDescription extends ButtonDescription
         this.menuDescription = menuDescription;
     }
 
+    @Override
     public Iterator actions()
     {
         return new CompositeIterator(super.actions(),
                                 this.menuDescription.actions());
     }
 
+    @Override
     public void updateOn(Collection frameworkActions)
     {
         super.updateOn(frameworkActions);
@@ -84,6 +86,7 @@ public class DropDownToolBarButtonDescription extends ButtonDescription
             this.menuDescription = menuDescription;
         }
 
+        @Override
         public AbstractButton createButton(FrameworkAction action)
         {
             return new DropDownButton(action, ((JMenu) this.menuDescription.component()).getPopupMenu());

@@ -45,6 +45,7 @@ final class CloseAllAction
         this.initialize(nodeManager);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.closeAll");
@@ -64,12 +65,15 @@ final class CloseAllAction
 
     private CollectionChangeListener buildProjectNodesListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CloseAllAction.this.projectNodesChanged();
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CloseAllAction.this.projectNodesChanged();
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CloseAllAction.this.projectNodesChanged();
             }
@@ -78,6 +82,7 @@ final class CloseAllAction
 
     private WindowListener buildWorkbenchWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 CloseAllAction.this.workbenchWindowClosed();
             }
@@ -92,6 +97,7 @@ final class CloseAllAction
         this.setEnabled(this.nodeManager.projectNodesSize() > 0);
     }
 
+    @Override
     protected void execute() {
         this.nodeManager.closeAll(this.getWorkbenchContext());
     }

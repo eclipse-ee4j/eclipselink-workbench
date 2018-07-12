@@ -72,6 +72,7 @@ public final class RelationalQueriesPropertiesPage
     }
 
 
+    @Override
     protected Component buildPage() {
         setName(resourceRepository().getString("QUERIES_PANEL_NAME"));
 
@@ -184,8 +185,10 @@ public final class RelationalQueriesPropertiesPage
         return new RelationalQuickViewPanel(getQueryHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected PropertyValueModel buildQueryManagerHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) this.subject).getQueryManager();
             }
@@ -194,6 +197,7 @@ public final class RelationalQueriesPropertiesPage
 
     private Transformer buildQueryTypeTransformer() {
         return new Transformer() {
+            @Override
             public Object transform(Object o) {
                 if (o instanceof MWReportQuery) {
                     return RelationalQueriesPropertiesPage.this.reportQueryPanel;
@@ -272,6 +276,7 @@ public final class RelationalQueriesPropertiesPage
         }
     }
 
+    @Override
     protected QueryGeneralPanel getQueryGeneralPanel() {
         if (getQueryHolder().getValue() instanceof MWReadAllQuery) {
             return this.readAllQueryPanel.getQueryGeneralPanel();
@@ -284,6 +289,7 @@ public final class RelationalQueriesPropertiesPage
         }
     }
 
+    @Override
     protected JTabbedPane getQueryTabbedPane() {
         if (getQueryHolder().getValue() instanceof MWReadAllQuery) {
             return this.readAllQueryPanel.getQueryTabbedPane();
@@ -305,6 +311,7 @@ public final class RelationalQueriesPropertiesPage
             super(subjectHolder, contextHolder);
         }
 
+        @Override
         protected QuickViewSectionFactory buildSectionFactory(Node node) {
             if (node instanceof MWReportQuery)
                 return buildReportQueryQuickViewSectionFactory();
@@ -320,6 +327,7 @@ public final class RelationalQueriesPropertiesPage
 
         private PropertyValueModel buildAbstractRelationalReadQueryHolder() {
             return new TransformationPropertyValueModel((PropertyValueModel) getSubjectHolder()) {
+                @Override
                 protected Object transform(Object value) {
                     return value instanceof MWAbstractRelationalReadQuery ? value : null;
                 }
@@ -328,6 +336,7 @@ public final class RelationalQueriesPropertiesPage
 
         private PropertyValueModel buildOrderableQueryHolder() {
             return new TransformationPropertyValueModel((PropertyValueModel) getSubjectHolder()) {
+                @Override
                 protected Object transform(Object value) {
                     return value instanceof MWOrderableQuery ? value : null;
                 }
@@ -336,6 +345,7 @@ public final class RelationalQueriesPropertiesPage
 
         private PropertyValueModel buildRelationalReadAllQueryHolder() {
             return new TransformationPropertyValueModel((PropertyValueModel) getSubjectHolder()) {
+                @Override
                 protected Object transform(Object value) {
                     return value instanceof MWRelationalReadAllQuery ? value : null;
                 }
@@ -344,6 +354,7 @@ public final class RelationalQueriesPropertiesPage
 
         private PropertyValueModel buildReportQueryHolder() {
             return new TransformationPropertyValueModel((PropertyValueModel) getSubjectHolder()) {
+                @Override
                 protected Object transform(Object value) {
                     return value instanceof MWReportQuery ? value : null;
                 }
@@ -353,6 +364,7 @@ public final class RelationalQueriesPropertiesPage
 
         private QuickViewSectionFactory buildReadAllQueryQuickViewSectionFactory() {
             return new QuickViewSectionFactory() {
+                @Override
                 public QuickViewSection[] buildSections() {
                     return new QuickViewSection[] {
                             new ParametersQuickViewSection(
@@ -369,6 +381,7 @@ public final class RelationalQueriesPropertiesPage
 
         private QuickViewSectionFactory buildReadObjectQueryQuickViewSectionFactory() {
             return new QuickViewSectionFactory() {
+                @Override
                 public QuickViewSection[] buildSections() {
                     return new QuickViewSection[] {
                             new ParametersQuickViewSection(
@@ -383,6 +396,7 @@ public final class RelationalQueriesPropertiesPage
 
         private QuickViewSectionFactory buildReportQueryQuickViewSectionFactory() {
             return new QuickViewSectionFactory() {
+                @Override
                 public QuickViewSection[] buildSections() {
                     return new QuickViewSection[] {
                             new ParametersQuickViewSection(
@@ -403,8 +417,10 @@ public final class RelationalQueriesPropertiesPage
                 super(resourceRepository(), "QUICK_VIEW_ATTRIBUTES_LABEL", "QUICK_VIEW_ATTRIBUTES_LABEL_ACCESSIBLE");
             }
 
+            @Override
             public ListValueModel buildItemsHolder() {
                 return new TransformationListValueModelAdapter(buildAttributesFunctionAdapter()) {
+                    @Override
                     protected Object transformItem(Object item) {
                         return RelationalQueriesPropertiesPage.this.buildReportAttributeQuickViewItem((MWReportAttributeItem) item);
                     }
@@ -420,16 +436,19 @@ public final class RelationalQueriesPropertiesPage
 
             private ListValueModel buildAttributesListHolder() {
                 return new ListAspectAdapter(buildReportQueryHolder(), MWReportQuery.ATTRIBUTE_ITEMS_LIST) {
+                    @Override
                     protected ListIterator getValueFromSubject() {
                         return ((MWReportQuery) this.subject).attributeItems();
                     }
 
+                    @Override
                     protected int sizeFromSubject() {
                         return ((MWReportQuery) this.subject).attributeItemsSize();
                     }
                 };
             }
 
+            @Override
             public void select() {
                 selectReportQueryAttributesTab();
             }
@@ -441,8 +460,10 @@ public final class RelationalQueriesPropertiesPage
                 super(resourceRepository(), "QUICK_VIEW_BATCH_READ_ATTRIBUTES_LABEL", "QUICK_VIEW_BATCH_READ_ATTRIBUTES_LABEL_ACCESSIBLE");
             }
 
+            @Override
             public ListValueModel buildItemsHolder() {
                 return new TransformationListValueModelAdapter(buildAttributesListHolder()) {
+                    @Override
                     protected Object transformItem(Object item) {
                         return buildBatchReadAttributeQuickViewItem((MWBatchReadItem) item);
                     }
@@ -451,16 +472,19 @@ public final class RelationalQueriesPropertiesPage
 
             private ListValueModel buildAttributesListHolder() {
                 return new ListAspectAdapter(buildRelationalReadAllQueryHolder(), MWRelationalReadAllQuery.BATCH_READ_ITEMS_LIST) {
+                    @Override
                     protected ListIterator getValueFromSubject() {
                         return ((MWRelationalReadAllQuery) this.subject).batchReadItems();
                     }
 
+                    @Override
                     protected int sizeFromSubject() {
                         return ((MWRelationalReadAllQuery) this.subject).batchReadItemsSize();
                     }
                 };
             }
 
+            @Override
             public void select() {
                 selectBatchReadAttributesTab();
             }
@@ -471,8 +495,10 @@ public final class RelationalQueriesPropertiesPage
                 super(resourceRepository(), "QUICK_VIEW_GROUPING_ATTRIBUTES_LABEL", "QUICK_VIEW_GROUPING_ATTRIBUTES_LABEL_ACCESSIBLE");
             }
 
+            @Override
             public ListValueModel buildItemsHolder() {
                 return new TransformationListValueModelAdapter(buildGroupingListHolder()) {
+                    @Override
                     protected Object transformItem(Object item) {
                         return buildGroupingAttributeQuickViewItem((MWGroupingItem) item);
                     }
@@ -481,16 +507,19 @@ public final class RelationalQueriesPropertiesPage
 
             private ListValueModel buildGroupingListHolder() {
                 return new ListAspectAdapter(buildReportQueryHolder(), MWReportQuery.GROUPING_ITEMS_LIST) {
+                    @Override
                     protected ListIterator getValueFromSubject() {
                         return ((MWReportQuery) this.subject).groupingItems();
                     }
 
+                    @Override
                     protected int sizeFromSubject() {
                         return ((MWReportQuery) this.subject).groupingItemsSize();
                     }
                 };
             }
 
+            @Override
             public void select() {
                 selectReportQueryGroupingOrderingTab();
             }
@@ -501,8 +530,10 @@ public final class RelationalQueriesPropertiesPage
                 super(resourceRepository(), "QUICK_VIEW_JOINED_ATTRIBUTES_LABEL", "QUICK_VIEW_JOINED_ATTRIBUTES_LABEL_ACCESSIBLE");
             }
 
+            @Override
             public ListValueModel buildItemsHolder() {
                 return new TransformationListValueModelAdapter(buildAttributesListHolder()) {
+                    @Override
                     protected Object transformItem(Object item) {
                         return buildJoinedAttributeQuickViewItem((MWJoinedItem) item);
                     }
@@ -511,16 +542,19 @@ public final class RelationalQueriesPropertiesPage
 
             private ListValueModel buildAttributesListHolder() {
                 return new ListAspectAdapter(buildAbstractRelationalReadQueryHolder(), MWAbstractRelationalReadQuery.JOINED_ITEMS_LIST) {
+                    @Override
                     protected ListIterator getValueFromSubject() {
                         return ((MWAbstractRelationalReadQuery) this.subject).joinedItems();
                     }
 
+                    @Override
                     protected int sizeFromSubject() {
                         return ((MWAbstractRelationalReadQuery) this.subject).joinedItemsSize();
                     }
                 };
             }
 
+            @Override
             public void select() {
                 selectJoinedAttributesTab();
             }
@@ -531,8 +565,10 @@ public final class RelationalQueriesPropertiesPage
                 super(resourceRepository(), "QUICK_VIEW_ORDERING_ATTRIBUTES_LABEL", "QUICK_VIEW_ORDERING_ATTRIBUTES_LABEL_ACCESSIBLE");
             }
 
+            @Override
             public ListValueModel buildItemsHolder() {
                 return new TransformationListValueModelAdapter(buildOrderingListAscendingAdapter()) {
+                    @Override
                     protected Object transformItem(Object item) {
                         return buildOrderingAttributeQuickViewItem((Ordering) item);
                     }
@@ -548,16 +584,19 @@ public final class RelationalQueriesPropertiesPage
 
             protected ListValueModel buildOrderingListHolder() {
                 return new ListAspectAdapter(buildOrderableQueryHolder(), MWOrderableQuery.ORDERING_ITEMS_LIST) {
+                    @Override
                     protected ListIterator getValueFromSubject() {
                         return ((MWOrderableQuery) this.subject).orderingItems();
                     }
 
+                    @Override
                     protected int sizeFromSubject() {
                         return ((MWOrderableQuery) this.subject).orderingItemsSize();
                     }
                 };
             }
 
+            @Override
             public void select() {
                 selectOrderingTab();
             }

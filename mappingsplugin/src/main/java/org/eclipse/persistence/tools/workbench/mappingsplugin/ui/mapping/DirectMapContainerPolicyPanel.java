@@ -58,6 +58,7 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
         super(directMapMappingHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.directMapContainerPolicyHolder = this.buildDirectMapContainerPolicyHolder();
@@ -66,6 +67,7 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildDefaultingContainerClassHolder() {
         return new PropertyAspectAdapter(this.directMapContainerPolicyHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDirectMapContainerPolicy) this.subject).getDefaultingContainerClass();
             }
@@ -74,6 +76,7 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWModel) DirectMapContainerPolicyPanel.this.subject()).getRepository();
             }
@@ -83,6 +86,7 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
     private ItemListener buildContainerClassChooserEnabler(final ClassChooserPanel containerClassChooserPanel)
     {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 containerClassChooserPanel.setEnabled(e.getStateChange() == ItemEvent.SELECTED);
             }
@@ -91,10 +95,12 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildDirectMapContainerClassHolder() {
         return new PropertyAspectAdapter(this.defaultingContainerClassHolder, DefaultingContainerClass.CONTAINER_CLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DefaultingContainerClass) this.subject).getContainerClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DefaultingContainerClass) this.subject).setContainerClass((MWClass) value);
             }
@@ -103,6 +109,7 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildDirectMapContainerPolicyHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWContainerMapping.CONTAINER_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalDirectMapMapping) this.subject).getContainerPolicy();
             }
@@ -120,9 +127,11 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
                 return (value == null) ? null : Boolean.valueOf(! value.booleanValue());
             }
 
+            @Override
             protected Object reverseTransform(Object value) {
                 return this.oppositeValue((Boolean) value);
             }
+            @Override
             protected Object transform(Object value) {
                 return this.oppositeValue((Boolean) value);
             }
@@ -131,11 +140,13 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildUseDefaultContainerClassHolder() {
         return new PropertyAspectAdapter(this.defaultingContainerClassHolder, DefaultingContainerClass.USES_DEFAULT_CONTAINER_CLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 // return the opposite of usesDefaultContainerClass
                 return Boolean.valueOf(((DefaultingContainerClass) this.subject).usesDefaultContainerClass());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 // set the opposite value for useDefaultContainerClass
                 ((DefaultingContainerClass) this.subject).setUseDefaultContainerClass(((Boolean) value).booleanValue());
@@ -144,6 +155,7 @@ public final class DirectMapContainerPolicyPanel extends AbstractSubjectPanel {
     }
 
     // **************** Initialization ****************************************
+    @Override
     protected void initializeLayout() {
         this.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
 

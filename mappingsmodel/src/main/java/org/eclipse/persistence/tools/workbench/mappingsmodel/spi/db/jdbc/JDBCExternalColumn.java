@@ -139,6 +139,7 @@ final class JDBCExternalColumn implements ExternalColumn {
      * the name should never be null or empty
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#getName()
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -147,6 +148,7 @@ final class JDBCExternalColumn implements ExternalColumn {
      * the type name can be null if we have problems reading the result set
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#getTypeName()
      */
+    @Override
     public String getTypeName() {
         return this.typeName;
     }
@@ -154,6 +156,7 @@ final class JDBCExternalColumn implements ExternalColumn {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#getJDBCTypeCode()
      */
+    @Override
     public int getJDBCTypeCode() {
         return this.jdbcTypeCode;
     }
@@ -161,6 +164,7 @@ final class JDBCExternalColumn implements ExternalColumn {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#getSize()
      */
+    @Override
     public int getSize() {
         return this.size;
     }
@@ -168,6 +172,7 @@ final class JDBCExternalColumn implements ExternalColumn {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#getScale()
      */
+    @Override
     public int getScale() {
         return this.scale;
     }
@@ -175,6 +180,7 @@ final class JDBCExternalColumn implements ExternalColumn {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#isNullable()
      */
+    @Override
     public boolean isNullable() {
         return this.nullable;
     }
@@ -182,6 +188,7 @@ final class JDBCExternalColumn implements ExternalColumn {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalColumn#isPrimaryKey()
      */
+    @Override
     public boolean isPrimaryKey() {
         return this.primaryKey;
     }
@@ -192,6 +199,7 @@ final class JDBCExternalColumn implements ExternalColumn {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.name);
     }

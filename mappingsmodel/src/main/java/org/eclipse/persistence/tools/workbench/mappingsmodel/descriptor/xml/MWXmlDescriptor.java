@@ -87,6 +87,7 @@ public abstract class MWXmlDescriptor
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.schemaContextHandle = new MWNamedSchemaComponentHandle(this, this.buildSchemaContextScrubber());
@@ -118,6 +119,7 @@ public abstract class MWXmlDescriptor
 
     // **************** Default root element **********************************
 
+    @Override
     public abstract boolean isRootDescriptor();
 
     public abstract boolean isEisDescriptor();
@@ -142,6 +144,7 @@ public abstract class MWXmlDescriptor
 
     //************** Mapping Creation *****************************************
 
+    @Override
     public abstract MWMappingFactory mappingFactory();
 
     public MWCompositeObjectMapping addCompositeObjectMapping(MWClassAttribute attribute) {
@@ -161,6 +164,7 @@ public abstract class MWXmlDescriptor
 
     //***************** Model synchronization *********************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.schemaContextHandle);
@@ -169,9 +173,11 @@ public abstract class MWXmlDescriptor
 
     private NodeReferenceScrubber buildSchemaContextScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWXmlDescriptor.this.setSchemaContext(null);
             }
+            @Override
             public String toString() {
                 return "MWXmlDescriptor.buildSchemaContextScrubber()";
             }
@@ -180,15 +186,18 @@ public abstract class MWXmlDescriptor
 
     private NodeReferenceScrubber buildDefaultRootElementScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWXmlDescriptor.this.setDefaultRootElement(null);
             }
+            @Override
             public String toString() {
                 return "MWXmlDescriptor.buildDefaultRootElementtScrubber()";
             }
         };
     }
 
+    @Override
     protected void refreshClass(MWClassRefreshPolicy refreshPolicy)
         throws ExternalClassNotFoundException, InterfaceDescriptorCreationException
     {
@@ -200,6 +209,7 @@ public abstract class MWXmlDescriptor
     }
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         ((MWXmlNode) this.getInheritancePolicy()).resolveXpaths();
         ((MWXmlNode) this.getLockingPolicy()).resolveXpaths();
@@ -210,6 +220,7 @@ public abstract class MWXmlDescriptor
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         if (this.getSchemaContext() == null || this.getSchemaContext().getSchema() != change.getSchema()) {
             return;
@@ -229,6 +240,7 @@ public abstract class MWXmlDescriptor
     //***************** Problem Handling **************************************
 
     /** Check for any problems and add them to the specified collection. */
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -242,6 +254,7 @@ public abstract class MWXmlDescriptor
         }
     }
 
+    @Override
     public Collection allWritableMappingsForField(MWDataField field) {
         // Answer all mappings that map to the xml field with an xpath that maps to this same element/attribute
         Collection mappingsForField = new ArrayList();
@@ -276,6 +289,7 @@ public abstract class MWXmlDescriptor
         return mappingsForField;
     }
 
+    @Override
     public Collection writableMappingsForField( MWDataField field ) {
         // Answer all mappings that map to the xml field
 
@@ -307,6 +321,7 @@ public abstract class MWXmlDescriptor
         }
     }
 
+    @Override
     protected String multipleMappingsWriteFieldProblemResourceStringKey() {
         return ProblemConstants.DESCRIPTOR_MULTIPLE_MAPPINGS_WRITE_TO_XPATH;
     }
@@ -314,6 +329,7 @@ public abstract class MWXmlDescriptor
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         ClassDescriptor runtimeDescriptor = super.buildRuntimeDescriptor();
 
@@ -328,8 +344,10 @@ public abstract class MWXmlDescriptor
         }
     }
 
+    @Override
     protected Comparator orderedMappingComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 MWXmlField xmlField1 = ((MWXmlMapping) o1).firstMappedXmlField();
                 MWXmlField xmlField2 = ((MWXmlMapping) o2).firstMappedXmlField();

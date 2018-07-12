@@ -14,12 +14,8 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
-
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.queries.DatabaseQuery;
-import org.eclipse.persistence.queries.ObjectLevelReadQuery;
 
 /**
  * Used by MWQuery if the format SQL is chosen
@@ -43,10 +39,12 @@ public final class MWSQLQueryFormat extends MWStringQueryFormat
         super(parent, queryString);
     }
 
+    @Override
     String getType() {
         return MWRelationalQuery.SQL_FORMAT;
     }
 
+    @Override
     public boolean reportAttributesAllowed() {
         return true;
     }
@@ -64,11 +62,13 @@ public final class MWSQLQueryFormat extends MWStringQueryFormat
     }
 
     //Conversion to Runtime
+    @Override
     void convertToRuntime(DatabaseQuery runtimeQuery)
     {
             runtimeQuery.setSQLString(getQueryString());
     }
 
+    @Override
     void convertFromRuntime(DatabaseQuery runtimeQuery)
     {
         if (runtimeQuery.getSQLString() != null) {

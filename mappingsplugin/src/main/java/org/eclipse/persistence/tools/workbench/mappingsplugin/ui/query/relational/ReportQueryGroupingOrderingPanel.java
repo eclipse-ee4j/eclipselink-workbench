@@ -45,6 +45,7 @@ final class ReportQueryGroupingOrderingPanel
 
     private PropertyValueModel buildReportQueryHolder(PropertyValueModel queryHolder) {
         return new FilteringPropertyValueModel(queryHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWReportQuery;
             }
@@ -75,6 +76,7 @@ final class ReportQueryGroupingOrderingPanel
                 Filter.NULL_INSTANCE,
                 buildOrderingChooseableFilter(),
                 getWorkbenchContextHolder()) {
+            @Override
             AttributeItemDialog buildAttributeItemDialog(MWAttributeItem item) {
                 return new ReportQueryOrderingAttributeDialog(
                         (MWReportQuery) getQuery(),

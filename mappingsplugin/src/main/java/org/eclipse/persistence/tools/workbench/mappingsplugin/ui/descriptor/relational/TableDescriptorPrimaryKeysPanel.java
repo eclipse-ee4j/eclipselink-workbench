@@ -108,10 +108,12 @@ final class TableDescriptorPrimaryKeysPanel
             "PRIMARY_KEYS_PANEL.TITLE",
             RelationalMappingComponentFactory.buildColumnNodeSelector(getWorkbenchContextHolder())
         ) {
+            @Override
             protected String addButtonKey() {
                 return "PRIMARY_KEYS_PANEL_ADD_BUTTON";
             }
 
+            @Override
             protected String removeButtonKey() {
                 return "PRIMARY_KEYS_PANEL_REMOVE_BUTTON";
             }
@@ -124,10 +126,12 @@ final class TableDescriptorPrimaryKeysPanel
 
     private AddRemoveListPanel.Adapter buildPrimaryKeysAddRemoveAdapter() {
         return new AddRemoveListPanel.Adapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 listSelectionModel.setSelectedValues(TableDescriptorPrimaryKeysPanel.this.addPrimaryKeys());
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 TableDescriptorPrimaryKeysPanel.this.removePrimaryKeys(listSelectionModel.getSelectedValues());
             }
@@ -160,9 +164,11 @@ final class TableDescriptorPrimaryKeysPanel
 
     private CollectionValueModel buildPrimaryKeysHolder() {
         return new CollectionAspectAdapter(this.buildPrimaryKeyPolicyHolder(), MWRelationalPrimaryKeyPolicy.PRIMARY_KEYS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWRelationalPrimaryKeyPolicy) this.subject).primaryKeys();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWRelationalPrimaryKeyPolicy) this.subject).primaryKeysSize();
             }
@@ -171,6 +177,7 @@ final class TableDescriptorPrimaryKeysPanel
 
     private ValueModel buildPrimaryKeyPolicyHolder() {
         return new PropertyAspectAdapter(this.relationalDescriptorHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) this.subject).primaryKeyPolicy();
             }
@@ -179,6 +186,7 @@ final class TableDescriptorPrimaryKeysPanel
 
     private ListCellRenderer buildPrimaryKeysListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((MWColumn) value).displayString();
             }
@@ -214,6 +222,7 @@ final class TableDescriptorPrimaryKeysPanel
             super(context);
         }
 
+        @Override
         protected void initialize() {
             super.initialize();
             this.primaryKeysModel = this.buildPrimaryKeyListAdapter();
@@ -233,6 +242,7 @@ final class TableDescriptorPrimaryKeysPanel
 
         private CollectionValueModel buildPrimaryKeysHolder() {
             return new CollectionAspectAdapter(TableDescriptorPrimaryKeysPanel.this.relationalDescriptorHolder) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return ((MWTableDescriptor) this.subject).primaryKeyChoices();
                 }
@@ -247,6 +257,7 @@ final class TableDescriptorPrimaryKeysPanel
 
         private ListSelectionListener buildSelectionListener() {
             return new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         PrimaryKeyDialog.this.selectionChanged();
@@ -259,6 +270,7 @@ final class TableDescriptorPrimaryKeysPanel
             this.getOKAction().setEnabled(! this.primaryKeysSelectionModel.isSelectionEmpty());
         }
 
+        @Override
         protected Component buildMainPanel() {
             JList list = SwingComponentFactory.buildList(this.primaryKeysModel);
             list.setSelectionModel(this.primaryKeysSelectionModel);
@@ -270,6 +282,7 @@ final class TableDescriptorPrimaryKeysPanel
 
         private ListCellRenderer buildListCellRenderer() {
             return new SimpleListCellRenderer() {
+                @Override
                 protected String buildText(Object value) {
                     return ((MWColumn) value).getName();
                 }
@@ -282,6 +295,7 @@ final class TableDescriptorPrimaryKeysPanel
          */
         protected MouseListener buildListMouseListener() {
             return new MouseAdapter() {
+                @Override
                 public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() == 2) {
                         PrimaryKeyDialog.this.clickOK();
@@ -290,6 +304,7 @@ final class TableDescriptorPrimaryKeysPanel
             };
         }
 
+        @Override
         protected String helpTopicId() {
             return TableDescriptorPrimaryKeysPanel.this.helpTopicId();
         }

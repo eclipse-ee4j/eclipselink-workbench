@@ -47,6 +47,7 @@ public class LoggingOptionsAdapter extends SCAdapter {
 
         return ( LoggingOptionsConfig)this.getModel();
     }
+    @Override
     protected void initializeDefaults() {
 
         super.initializeDefaults();
@@ -60,6 +61,7 @@ public class LoggingOptionsAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new LoggingOptionsConfig();
     }

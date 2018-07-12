@@ -34,6 +34,7 @@ final class DevelopmentConsoleAction
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.action.AbstractFrameworkAction#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("DEVELOPMENT_CONSOLE");
@@ -42,6 +43,7 @@ final class DevelopmentConsoleAction
     /**
      * ignore the selected nodes
      */
+    @Override
     protected void execute() {
         application.openDevelopmentConsole();
     }

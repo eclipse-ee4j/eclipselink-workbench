@@ -59,6 +59,7 @@ public final class MWEisQueryManager
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node model) {
         super.initialize(model);
         this.deleteInteraction = new MWEisInteraction(this);
@@ -69,6 +70,7 @@ public final class MWEisQueryManager
         this.updateInteraction = new MWEisInteraction(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.deleteInteraction);
@@ -79,14 +81,17 @@ public final class MWEisQueryManager
         children.add(this.updateInteraction);
     }
 
+    @Override
     public MWReadAllQuery buildReadAllQuery(String queryName) {
         return new MWEisReadAllQuery(this, queryName);
     }
 
+    @Override
     public MWReadObjectQuery buildReadObjectQuery(String queryName) {
         return new MWEisReadObjectQuery(this, queryName);
     }
 
+    @Override
     public boolean supportsReportQueries() {
         return false;
     }
@@ -131,11 +136,13 @@ public final class MWEisQueryManager
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         // TODO
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         // TODO
     }
@@ -143,6 +150,7 @@ public final class MWEisQueryManager
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptor(runtimeDescriptor);
 

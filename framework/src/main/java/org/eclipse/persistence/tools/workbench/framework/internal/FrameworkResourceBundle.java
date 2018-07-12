@@ -320,6 +320,7 @@ public final class FrameworkResourceBundle extends ListResourceBundle {
 
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

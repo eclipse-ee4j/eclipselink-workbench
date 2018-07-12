@@ -81,6 +81,7 @@ public final class MWQueryKeyHandle extends MWHandle {
         this.queryKey = queryKey;
     }
 
+    @Override
     protected Node node() {
         return getQueryKey();
     }
@@ -90,6 +91,7 @@ public final class MWQueryKeyHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void resolveColumnHandles() {
         super.resolveColumnHandles();
 
@@ -113,10 +115,12 @@ public final class MWQueryKeyHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER query key should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.queryKey.compareTo(((MWQueryKeyHandle) o).queryKey);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.queryKey == null) {
             sb.append("null");

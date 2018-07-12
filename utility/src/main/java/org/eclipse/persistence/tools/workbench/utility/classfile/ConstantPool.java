@@ -147,6 +147,7 @@ public class ConstantPool {
         return this.getUTF8Constant(index).string();
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.count + " constant(s))";
     }

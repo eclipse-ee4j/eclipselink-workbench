@@ -299,6 +299,7 @@ public class GroupBox extends AccessibleTitledPanel
     {
         return new ItemListener()
         {
+            @Override
             public void itemStateChanged(ItemEvent e)
             {
                 AbstractButton button = (AbstractButton) e.getSource();
@@ -353,6 +354,7 @@ public class GroupBox extends AccessibleTitledPanel
      * @return An <code>AccessibleGroupBox</code> that serves as the
      * <code>AccessibleContext</code> of this <code>GroupBox</code>
      */
+    @Override
     public AccessibleContext getAccessibleContext()
     {
         if (accessibleContext == null)
@@ -604,6 +606,7 @@ public class GroupBox extends AccessibleTitledPanel
 
         private PropertyChangeListener buildPropertyChangeListener() {
             return new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     AbstractButton button = (AbstractButton)evt.getSource();
                     setTitleFont(button.getFont());

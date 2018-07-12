@@ -29,10 +29,12 @@ public abstract class MapAsDirectCollectionAction
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return (MWMapping) mapping.asMWDirectCollectionMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return (MWMapping) descriptor.addDirectCollectionMapping(attribute);
     }

@@ -25,11 +25,13 @@ final class MapInheritedAttributesToSuperclassAction extends AbstractMapInherite
         super(context);
     }
 
+    @Override
     protected void execute(MWMappingDescriptor descriptor) throws ClassNotFoundException
     {
         descriptor.mapInheritedAttributesToSuperclass();
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();

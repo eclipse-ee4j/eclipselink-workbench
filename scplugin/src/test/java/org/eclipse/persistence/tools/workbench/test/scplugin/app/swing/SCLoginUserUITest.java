@@ -44,6 +44,7 @@ public class SCLoginUserUITest extends SCDatabaseLoginUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Enter the User Name:";
     }
@@ -62,9 +63,11 @@ public class SCLoginUserUITest extends SCDatabaseLoginUITest {
     private PropertyValueModel buildStringHolder( ValueModel subjectHolder) {
 
         return new PropertyAspectAdapter( subjectHolder, LoginAdapter.USER_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return (( LoginAdapter)subject).getUserName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 (( LoginAdapter)subject).setUserName(( String)value);
             }
@@ -76,6 +79,7 @@ public class SCLoginUserUITest extends SCDatabaseLoginUITest {
         return new DocumentAdapter( stringHolder);
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel taskListPanel = new JPanel( new GridLayout(1, 0));
@@ -90,6 +94,7 @@ public class SCLoginUserUITest extends SCDatabaseLoginUITest {
         return textField;
     }
 
+    @Override
     protected void resetProperty() {
 
         subject().setUserName( "");

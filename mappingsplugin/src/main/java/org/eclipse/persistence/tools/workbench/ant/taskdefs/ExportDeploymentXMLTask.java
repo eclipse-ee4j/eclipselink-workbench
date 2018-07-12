@@ -37,6 +37,7 @@ public class ExportDeploymentXMLTask extends MappingsTask implements ProjectExpl
         super();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -79,6 +80,7 @@ public class ExportDeploymentXMLTask extends MappingsTask implements ProjectExpl
         this.failonerror = failonerror;
     }
 
+    @Override
     public void execute() throws BuildException {
         super.execute();
 
@@ -99,6 +101,7 @@ public class ExportDeploymentXMLTask extends MappingsTask implements ProjectExpl
      * depending on the specified Workbench project.
      * Returns 0 if the generation is successful.
      */
+    @Override
     public int execute( String projectFile, String deploymentFile, String ejbJarXMLDir, Vector ignoreErrorCodes, Boolean failOnError, String url, String driverclass, String user, String password) {
 
         Object[] args = { projectFile, deploymentFile, ejbJarXMLDir, ignoreErrorCodes, failOnError, url, driverclass, user, password};
@@ -106,11 +109,13 @@ public class ExportDeploymentXMLTask extends MappingsTask implements ProjectExpl
         return this.execute( args);
     }
 
+    @Override
     protected String getProjectRunnerClassName() {
 
         return "org.eclipse.persistence.tools.workbench.ant.ProjectExporter";
     }
 
+    @Override
     protected void preExecute() throws BuildException {
         super.preExecute();
 

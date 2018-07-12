@@ -65,5 +65,6 @@ void setProjects(Vector projects);
 void setResponsibilitiesList(Vector responsibilities);
 void setSalary(int salary);
 void setStartTime(Time startTime);
+@Override
 String toString();
 }

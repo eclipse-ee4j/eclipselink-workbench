@@ -119,38 +119,46 @@ public class SessionBrokerGeneralPropertiesPageTest extends SCAbstractPanelTest
         assertFalse(renameButton.isEnabled());
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder(ApplicationNode projectNode)
     {
         SessionBrokerAdapter broker = (SessionBrokerAdapter) getTopLinkSessions().sessionNamed("SC-SessionBrokerTest");
         return new SimplePropertyValueModel(retrieveNode(projectNode, broker));
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(SessionBrokerSessionsPropertiesPage.class, getNodeHolder());
     }
 
+    @Override
     protected SCAdapter buildSelection()
     {
         return (SessionBrokerAdapter) getTopLinkSessions().sessionNamed("SC-SessionBrokerTest");
     }
 
+    @Override
     protected void clearModel()
     {
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected void restoreModel()
     {
     }
 
+    @Override
     protected String windowTitle()
     {
         return "SessionBroker - General Tab Test";

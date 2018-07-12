@@ -56,6 +56,7 @@ final class OXDescriptorInfoPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -171,10 +172,12 @@ final class OXDescriptorInfoPropertiesPage
 
     private PropertyValueModel buildAnyTypeDescriptorValue() {
          return new PropertyAspectAdapter(this.getSelectionHolder(), MWOXDescriptor.ANY_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWOXDescriptor) subject).isAnyTypeDescriptor());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWOXDescriptor) subject).setAnyTypeDescriptor(((Boolean) value).booleanValue());
             }
@@ -192,10 +195,12 @@ final class OXDescriptorInfoPropertiesPage
 
     private PropertyValueModel buildDocumentRootHolder() {
          return new PropertyAspectAdapter(getSelectionHolder(), MWOXDescriptor.ROOT_DESCRIPTOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWOXDescriptor) subject).isRootDescriptor());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWOXDescriptor) subject).setRootDescriptor(((Boolean) value).booleanValue());
             }
@@ -291,6 +296,7 @@ final class OXDescriptorInfoPropertiesPage
 
     private PropertyChangeListener buildDocumentRootListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() == Boolean.TRUE);
             }
@@ -308,10 +314,12 @@ final class OXDescriptorInfoPropertiesPage
 
     private PropertyValueModel buildPreserveDocumentHolder() {
          return new PropertyAspectAdapter(getSelectionHolder(), MWOXDescriptor.PRESERVE_DOCUMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWOXDescriptor) subject).isPreserveDocument());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWOXDescriptor) subject).setPreserveDocument(((Boolean) value).booleanValue());
             }

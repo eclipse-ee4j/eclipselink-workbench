@@ -106,6 +106,7 @@ final class SecondArgumentPanel
 
     private ValueModel buildNullArgumentBooleanHolder() {
         return new PropertyAspectAdapter(this.argumentHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(!(this.subject instanceof MWNullArgument));
             }
@@ -233,6 +234,7 @@ final class SecondArgumentPanel
 
     private PropertyChangeListener buildArgumentListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 updateActiveArgumentPanel();
             }
@@ -256,10 +258,12 @@ final class SecondArgumentPanel
     private PropertyValueModel buildArgumentTypeHolder() {
         PropertyAspectAdapter adapter =  new PropertyAspectAdapter(this.basicExpressionHolder, MWBasicExpression.SECOND_ARGUMENT_PROPERTY) {
 
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWBasicExpression) this.subject).getSecondArgument();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 if (value == MWArgument.LITERAL_TYPE) {
                     ((MWBasicExpression) this.subject).setSecondArgumentToLiteral();
@@ -274,6 +278,7 @@ final class SecondArgumentPanel
         };
 
         return new TransformationPropertyValueModel(adapter) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null) {
                     return null;

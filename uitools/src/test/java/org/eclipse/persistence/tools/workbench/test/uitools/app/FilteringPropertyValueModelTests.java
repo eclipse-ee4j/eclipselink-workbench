@@ -45,6 +45,7 @@ public class FilteringPropertyValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.objectHolder = new SimplePropertyValueModel("foo");
@@ -53,15 +54,18 @@ public class FilteringPropertyValueModelTests extends TestCase {
 
     private BidiFilter buildFilter() {
         return new BidiFilter() {
+            @Override
             public boolean accept(Object o) {
                 return (o != null) && ((String) o).startsWith("b");
             }
+            @Override
             public boolean reverseAccept(Object o) {
                 return (o != null) && ((String) o).startsWith("b");
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -174,6 +178,7 @@ public class FilteringPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 FilteringPropertyValueModelTests.this.event = e;
             }
@@ -182,6 +187,7 @@ public class FilteringPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildFilteredListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 FilteringPropertyValueModelTests.this.filteredEvent = e;
             }

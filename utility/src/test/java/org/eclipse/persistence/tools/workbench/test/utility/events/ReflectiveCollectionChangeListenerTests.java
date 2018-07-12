@@ -287,6 +287,7 @@ public class ReflectiveCollectionChangeListenerTests extends TestCase {
         }
         Iterator strings() {
             return new CloneIterator(this.strings) {
+                @Override
                 protected void remove(Object o) {
                     TestModel.this.removeString((String) o);
                 }

@@ -98,6 +98,7 @@ public class ExternalClassLoadFailuresDialog extends StatusDialog {
         return statusList;
     }
 
+    @Override
     protected CellRendererAdapter buildNodeRenderer(Object value) {
         if (value instanceof String)
             return new ClassNameCellRendererAdapter();
@@ -109,10 +110,12 @@ public class ExternalClassLoadFailuresDialog extends StatusDialog {
     }
 
     protected class ClassNameCellRendererAdapter extends AbstractCellRendererAdapter {
+        @Override
         public Icon buildIcon(Object value) {
             return resourceRepository().getIcon("class.public");
         }
 
+        @Override
         public String buildText(Object value) {
             String className = (String) value;
 
@@ -164,10 +167,12 @@ public class ExternalClassLoadFailuresDialog extends StatusDialog {
     }
 
     private class ErrorCellRendererAdapter extends AbstractCellRendererAdapter {
+        @Override
         public Icon buildIcon(Object value) {
             return resourceRepository().getIcon("error");
         }
 
+        @Override
         public String buildText(Object value) {
             return ((Error) value).getErrorMessage(resourceRepository());
         }

@@ -50,6 +50,7 @@ public class IgnoreError extends MappingsType {
         this.code = code;
     }
 
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 

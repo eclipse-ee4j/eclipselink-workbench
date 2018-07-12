@@ -77,6 +77,7 @@ public class CollectionListValueModelAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() { // private-protected
         super.initialize();
         this.collectionChangeListener = this.buildCollectionChangeListener();
@@ -86,6 +87,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
@@ -96,15 +98,19 @@ public class CollectionListValueModelAdapter
      */
     protected CollectionChangeListener buildCollectionChangeListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CollectionListValueModelAdapter.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CollectionListValueModelAdapter.this.itemsRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CollectionListValueModelAdapter.this.collectionChanged(e);
             }
+            @Override
             public String toString() {
                 return "collection change listener";
             }
@@ -117,6 +123,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // try to prevent backdoor modification of the list
         return new ReadOnlyListIterator(this.list);
@@ -128,6 +135,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#addItem(int, Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -135,6 +143,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#addItems(int, java.util.List)
      */
+    @Override
     public void addItems(int index, List items) {
         throw new UnsupportedOperationException();
     }
@@ -142,6 +151,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         throw new UnsupportedOperationException();
     }
@@ -149,6 +159,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         throw new UnsupportedOperationException();
     }
@@ -156,6 +167,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#replaceItem(int, Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -163,6 +175,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#replaceItems(int, java.util.List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         throw new UnsupportedOperationException();
     }
@@ -170,6 +183,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         return this.list.get(index);
     }
@@ -177,6 +191,7 @@ public class CollectionListValueModelAdapter
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.list.size();
     }
@@ -188,6 +203,7 @@ public class CollectionListValueModelAdapter
      * Override to start listening to the collection holder if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addListChangeListener(ListChangeListener)
      */
+    @Override
     public void addListChangeListener(ListChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModel();
@@ -199,6 +215,7 @@ public class CollectionListValueModelAdapter
      * Override to start listening to the collection holder if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addListChangeListener(String, ListChangeListener)
      */
+    @Override
     public void addListChangeListener(String listName, ListChangeListener listener) {
         if (listName == VALUE && this.hasNoListeners()) {
             this.engageModel();
@@ -210,6 +227,7 @@ public class CollectionListValueModelAdapter
      * Override to stop listening to the collection holder if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeListChangeListener(ListChangeListener)
      */
+    @Override
     public void removeListChangeListener(ListChangeListener listener) {
         super.removeListChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -221,6 +239,7 @@ public class CollectionListValueModelAdapter
      * Override to stop listening to the collection holder if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeListChangeListener(String, ListChangeListener)
      */
+    @Override
     public void removeListChangeListener(String listName, ListChangeListener listener) {
         super.removeListChangeListener(listName, listener);
         if (listName == VALUE && this.hasNoListeners()) {
@@ -339,6 +358,7 @@ public class CollectionListValueModelAdapter
         }
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.collectionHolder);
     }

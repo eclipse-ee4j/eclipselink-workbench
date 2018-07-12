@@ -57,6 +57,7 @@ public class TextAreaDialogUITest {
 
     private Action buildTextAction() {
         return new AbstractAction("text") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TextAreaDialogUITest.this.testText();
             }
@@ -69,6 +70,7 @@ public class TextAreaDialogUITest {
 
     private Action buildExceptionAction() {
         return new AbstractAction("exception") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TextAreaDialogUITest.this.testException();
             }

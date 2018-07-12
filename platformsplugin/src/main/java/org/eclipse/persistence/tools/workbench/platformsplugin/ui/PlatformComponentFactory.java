@@ -116,6 +116,7 @@ public final class PlatformComponentFactory
             return sb.toString();
         }
 
+        @Override
         protected String buildText(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             return (value == null) ? this.buildSeparator(list) : ((DatabasePlatform) value).getName();
         }
@@ -127,6 +128,7 @@ public final class PlatformComponentFactory
      */
     private static class PlatformComparator implements Comparator {
 
+        @Override
         public int compare(Object o1, Object o2) {
             DatabasePlatform platform1 = (DatabasePlatform) o1;
             DatabasePlatform platform2 = (DatabasePlatform) o2;
@@ -194,6 +196,7 @@ public final class PlatformComponentFactory
          */
         private ListSelectionListener buildListSelectionListener(final PropertyValueModel platformSelectionHolder) {
             return new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if (!e.getValueIsAdjusting()) {
                         platformSelectionHolder.setValue(getSelectedValue());
@@ -234,6 +237,7 @@ public final class PlatformComponentFactory
             return index;
         }
 
+        @Override
         public void setSelectedItem(Object item) {
             // If null is to be selected because it's the separator, then select
             // the next item in the list: which could be either the item above or

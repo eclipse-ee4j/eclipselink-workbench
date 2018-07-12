@@ -31,6 +31,7 @@ public class EmptyPropertiesPage extends AbstractPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeLayout() {
         // do nothing
     }

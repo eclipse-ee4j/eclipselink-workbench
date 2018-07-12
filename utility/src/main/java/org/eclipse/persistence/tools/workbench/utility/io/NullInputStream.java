@@ -52,6 +52,7 @@ public final class NullInputStream
     /**
      * @see java.io.InputStream#read()
      */
+    @Override
     public int read() throws IOException {
         return -1;
     }
@@ -59,6 +60,7 @@ public final class NullInputStream
     /**
      * @see java.io.InputStream#read(byte[])
      */
+    @Override
     public int read(byte[] b) throws IOException {
         return -1;
     }
@@ -66,6 +68,7 @@ public final class NullInputStream
     /**
      * @see java.io.InputStream#read(byte[], int, int)
      */
+    @Override
     public int read(byte[] b, int off, int len) throws IOException {
         return -1;
     }
@@ -73,6 +76,7 @@ public final class NullInputStream
     /**
      * @see java.io.InputStream#skip(long)
      */
+    @Override
     public long skip(long n) throws IOException {
         return 0;
     }
@@ -80,6 +84,7 @@ public final class NullInputStream
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

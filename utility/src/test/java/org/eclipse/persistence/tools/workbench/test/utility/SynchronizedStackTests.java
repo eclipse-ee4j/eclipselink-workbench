@@ -42,6 +42,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.ss = new SynchronizedStack();
@@ -73,6 +74,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
 
     private Runnable buildRunnable(final SlowStack slowStack) {
         return new Runnable() {
+            @Override
             public void run() {
                 slowStack.slowPop();
             }
@@ -85,6 +87,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
     }
 
     private class SlowSimpleStack extends SimpleStack implements SlowStack {
+        @Override
         public Object slowPop() {
             try {
                 Thread.sleep(500);
@@ -97,6 +100,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
     }
 
     private class SlowSynchronizedStack extends SynchronizedStack implements SlowStack {
+        @Override
         public synchronized Object slowPop() {
             try {
                 Thread.sleep(100);
@@ -189,6 +193,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
 
     private Command buildPushCommand() {
         return new Command() {
+            @Override
             public void execute(SynchronizedStack synchronizedStack) {
                 synchronizedStack.push(ITEM_1);
             }
@@ -197,6 +202,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
 
     private Command buildWaitToPopCommand(final long timeout) {
         return new Command() {
+            @Override
             public void execute(SynchronizedStack synchronizedStack) throws Exception {
                 SynchronizedStackTests.this.setStartTime(System.currentTimeMillis());
                 try {
@@ -211,6 +217,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
 
     private Command buildPopCommand() {
         return new Command() {
+            @Override
             public void execute(SynchronizedStack synchronizedStack) {
                 SynchronizedStackTests.this.setPoppedObject(synchronizedStack.pop());
             }
@@ -219,6 +226,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
 
     private Command buildWaitToPushCommand(final long timeout) {
         return new Command() {
+            @Override
             public void execute(SynchronizedStack synchronizedStack) throws Exception {
                 SynchronizedStackTests.this.setStartTime(System.currentTimeMillis());
                 SynchronizedStackTests.this.setTimeoutOccurred( ! synchronizedStack.waitToPush(ITEM_2, timeout));
@@ -229,6 +237,7 @@ public class SynchronizedStackTests extends SimpleStackTests {
 
     private Runnable buildRunnable(final Command command, final SynchronizedStack synchronizedStack, final long sleep) {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     if (sleep != 0) {

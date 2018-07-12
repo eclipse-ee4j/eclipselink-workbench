@@ -27,7 +27,6 @@ import java.util.Vector;
 
 import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
 
 import org.eclipse.persistence.internal.codegen.ClassDefinition;

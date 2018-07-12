@@ -52,11 +52,13 @@ public abstract class MWReturningPolicy
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.insertFieldReturnOnlyFlags = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.insertFieldReturnOnlyFlags) { children.addAll(this.insertFieldReturnOnlyFlags); }
@@ -67,6 +69,7 @@ public abstract class MWReturningPolicy
 
     public Iterator insertFieldReturnOnlyFlags() {
         return new CloneIterator(this.insertFieldReturnOnlyFlags) {
+            @Override
             protected void remove(Object current) {
                 MWReturningPolicy.this.removeInsertFieldReturnOnlyFlag((MWReturningPolicyInsertFieldReturnOnlyFlag) current);
             }
@@ -88,6 +91,7 @@ public abstract class MWReturningPolicy
     /** Return only the fields (MWDataFields), less their flags */
     public Iterator insertFields() {
         return new TransformationIterator(this.insertFieldReturnOnlyFlags()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWReturningPolicyInsertFieldReturnOnlyFlag) next).getField();
             }
@@ -106,10 +110,12 @@ public abstract class MWReturningPolicy
 
     // ********** MWDescriptorPolicy implementation **********
 
+    @Override
     public boolean isActive() {
         return true;
     }
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
@@ -117,6 +123,7 @@ public abstract class MWReturningPolicy
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkTypeIndicatorField(problems);
@@ -175,6 +182,7 @@ public abstract class MWReturningPolicy
 
     // ********** runtime conversion **********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         ReturningPolicy returningPolicy = new ReturningPolicy();
         runtimeDescriptor.setReturningPolicy(returningPolicy);

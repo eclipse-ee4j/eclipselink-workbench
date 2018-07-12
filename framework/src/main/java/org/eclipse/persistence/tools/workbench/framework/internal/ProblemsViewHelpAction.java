@@ -26,11 +26,13 @@ final class ProblemsViewHelpAction extends AbstractFrameworkAction {
         super(workbenchContext);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("CSH_HELP");
     }
 
+    @Override
     protected void execute() {
         this.helpManager().showTopic("problemsPane");
     }

@@ -84,6 +84,7 @@ abstract class AbstractAttributeItemsPanel extends AbstractPanel {
 
     private ValueModel buildAttributesEnabler() {
         return new PropertyAspectAdapter(buildRelationalSpecificOptionsHolder(), MWRelationalQuery.QUERY_FORMAT_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(panelEnabled(((MWRelationalSpecificQueryOptions) this.subject).getQueryFormat()));
             }
@@ -92,6 +93,7 @@ abstract class AbstractAttributeItemsPanel extends AbstractPanel {
 
     private PropertyValueModel buildRelationalSpecificOptionsHolder() {
         return new PropertyAspectAdapter(this.queryHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalQuery) this.subject).getRelationalOptions();
             }
@@ -114,6 +116,7 @@ abstract class AbstractAttributeItemsPanel extends AbstractPanel {
         panel.setCellRenderer(buildQueryItemCellRenderer());
         SwingComponentFactory.addDoubleClickMouseListener(panel.getComponent(),
                 new DoubleClickMouseListener() {
+                    @Override
                     public void mouseDoubleClicked(MouseEvent e) {
                         editSelectedAttribute((MWAttributeItem) AbstractAttributeItemsPanel.this.attributesPanel.getSelectionModel().getSelectedValue());
                     }
@@ -138,6 +141,7 @@ abstract class AbstractAttributeItemsPanel extends AbstractPanel {
 
     private ListCellRenderer buildQueryItemCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((MWAttributeItem) value).displayString();
             }

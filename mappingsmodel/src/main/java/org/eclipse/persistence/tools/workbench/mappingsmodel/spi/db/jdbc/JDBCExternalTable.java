@@ -169,6 +169,7 @@ final class JDBCExternalTable implements ExternalTable {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTable#getColumns()
      */
+    @Override
     public ExternalColumn[] getColumns() {
         return this.columns;
     }
@@ -176,6 +177,7 @@ final class JDBCExternalTable implements ExternalTable {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTable#getForeignKeys()
      */
+    @Override
     public ExternalForeignKey[] getForeignKeys() {
         return this.foreignKeys;
     }
@@ -201,6 +203,7 @@ final class JDBCExternalTable implements ExternalTable {
         return null;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.tableDescription.getQualifiedName());
     }

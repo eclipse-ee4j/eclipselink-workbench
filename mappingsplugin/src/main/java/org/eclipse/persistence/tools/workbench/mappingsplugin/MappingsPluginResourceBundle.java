@@ -472,6 +472,7 @@ public class MappingsPluginResourceBundle extends ListResourceBundle {
 
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

@@ -42,6 +42,7 @@ public class ExternalClassDescriptionClassDesciptionAdapter
     /**
      * The "class description" is an ExternalClassDescription.
      */
+    @Override
     public String className(Object classDescription) {
         return ((ExternalClassDescription) classDescription).getName();
     }
@@ -49,6 +50,7 @@ public class ExternalClassDescriptionClassDesciptionAdapter
     /**
      * The "class description" is an ExternalClassDescription.
      */
+    @Override
     public String additionalInfo(Object classDescription) {
         return ((ExternalClassDescription) classDescription).getAdditionalInfo();
     }

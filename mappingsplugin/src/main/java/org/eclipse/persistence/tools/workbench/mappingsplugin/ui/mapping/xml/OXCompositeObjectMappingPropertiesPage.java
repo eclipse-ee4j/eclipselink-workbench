@@ -34,6 +34,7 @@ public final class OXCompositeObjectMappingPropertiesPage extends
         super(context);
     }
 
+    @Override
     protected AbstractXmlFieldPanel buildXmlFieldPanel() {
         return new ElementTypeableXmlFieldPanel(getSelectionHolder(), this.buildXmlFieldHolder(), this.getWorkbenchContextHolder(), MWCompositeObjectMapping.ELEMENT_TYPE_PROPERTY);
     }

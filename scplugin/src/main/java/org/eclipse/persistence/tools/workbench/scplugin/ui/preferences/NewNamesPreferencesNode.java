@@ -31,16 +31,19 @@ final class NewNamesPreferencesNode extends AbstractPreferencesNode
         super(context);
     }
 
+    @Override
     protected String buildDisplayString()
     {
         return resourceRepository().getString("PREFERENCES.SC.NEW_NAMES");
     }
 
+    @Override
     protected Component buildPropertiesPage()
     {
         return new NewNamesPreferencesPage(getPreferencesContext());
     }
 
+    @Override
     public String helpTopicId()
     {
         return "preferences.sessions.newNames";

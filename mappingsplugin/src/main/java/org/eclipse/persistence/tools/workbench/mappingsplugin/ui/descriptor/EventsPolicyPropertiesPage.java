@@ -93,6 +93,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder)
     {
         super.initialize(nodeHolder);
@@ -111,6 +112,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
         return "descriptor.events";
     }
 
+    @Override
     protected Component buildPage()
     {
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -652,6 +654,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
             eventsPolicyValueModel = new PropertyAspectAdapter(getSelectionHolder(),
                     MWMappingDescriptor.EVENTS_POLICY_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     MWDescriptorPolicy policy = ((MWMappingDescriptor) this.subject).getEventsPolicy();
@@ -666,6 +669,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new CollectionAspectAdapter(buildEventMethodTypeHolder(),
                 MWClass.METHODS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 return ((MWClass)subject).allMethods();
@@ -681,6 +685,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     private FilteringCollectionValueModel buildEventMethodFilteringCollectionModel()
     {
         return new FilteringCollectionValueModel(buildEventMethodPropertyListAdapter()) {
+            @Override
             protected boolean accept(Object value)
             {
                 return ((MWMethod)value).isCandidateDescriptorEventMethod();
@@ -691,6 +696,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     private PropertyValueModel buildEventMethodTypeHolder()
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWDescriptor.MW_CLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptor)subject).getMWClass();
@@ -994,11 +1000,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_BUILD_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostBuildMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostBuildMethod((MWMethod)value);
@@ -1010,11 +1018,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_CLONE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostCloneMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostCloneMethod((MWMethod)value);
@@ -1026,11 +1036,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_MERGE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostMergeMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostMergeMethod((MWMethod)value);
@@ -1042,11 +1054,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_REFRESH_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostRefreshMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostRefreshMethod((MWMethod)value);
@@ -1058,11 +1072,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.PRE_DELETING_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPreDeletingMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPreDeletingMethod((MWMethod)value);
@@ -1074,11 +1090,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_DELETING_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostDeletingMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostDeletingMethod((MWMethod)value);
@@ -1090,11 +1108,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.PRE_INSERT_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPreInsertMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPreInsertMethod((MWMethod)value);
@@ -1106,11 +1126,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.ABOUT_TO_INSERT_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getAboutToInsertMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setAboutToInsertMethod((MWMethod)value);
@@ -1122,11 +1144,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_INSERT_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostInsertMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostInsertMethod((MWMethod)value);
@@ -1138,11 +1162,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.PRE_UPDATE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPreUpdateMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPreUpdateMethod((MWMethod)value);
@@ -1154,11 +1180,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.ABOUT_TO_UPDATE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getAboutToUpdateMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setAboutToUpdateMethod((MWMethod)value);
@@ -1170,11 +1198,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_UPDATE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostUpdateMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostUpdateMethod((MWMethod)value);
@@ -1186,11 +1216,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.PRE_WRITING_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPreWritingMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPreWritingMethod((MWMethod)value);
@@ -1202,11 +1234,13 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(buildEventsPolicyHolder(),
                 MWDescriptorEventsPolicy.POST_WRITING_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorEventsPolicy)subject).getPostWritingMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWDescriptorEventsPolicy)subject).setPostWritingMethod((MWMethod)value);
@@ -1262,6 +1296,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
             this.list = list;
         }
 
+        @Override
         public void valueChanged(ListSelectionEvent e)
         {
             if ( ! e.getValueIsAdjusting()) {
@@ -1273,6 +1308,7 @@ public final class EventsPolicyPropertiesPage extends ScrollablePropertiesPage
     private class MethodTypeTransformer implements Transformer
     {
 
+        @Override
         public Object transform(Object o)
         {
             String selectionChoice = (String)o;

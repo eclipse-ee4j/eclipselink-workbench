@@ -36,18 +36,21 @@ public abstract class AbstractSessionPanelTest extends SCAbstractPanelTest {
         super(name);
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder( ApplicationNode projectNode) {
 
         SCAdapter session = getTopLinkSessions().sessionNamed("SC-EmployeeTest");
         return new SimplePropertyValueModel(retrieveNode(projectNode, session));
     }
 
+    @Override
     protected SCAdapter buildSelection() {
 
         this.selection = getTopLinkSessions().sessionNamed( "SC-EmployeeTest");
         return this.selection;
     }
 
+    @Override
     protected void clearModel() {
 
         getSelectionHolder().setValue( null);
@@ -58,22 +61,26 @@ public abstract class AbstractSessionPanelTest extends SCAbstractPanelTest {
         return (SessionAdapter) getSelection();
     }
 
+    @Override
     protected void printModel() {
 
         System.out.println( this.selection);
     }
 
+    @Override
     protected void resetProperty() {
 
         this.selection = getTopLinkSessions().sessionNamed( "SC-EmployeeTest");
         this.restoreModel();
     }
 
+    @Override
     protected void restoreModel() {
 
         getSelectionHolder().setValue( this.selection);
     }
 
+    @Override
     protected void tearDown() throws Exception {
 
         super.tearDown();

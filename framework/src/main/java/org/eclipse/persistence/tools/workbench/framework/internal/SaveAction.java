@@ -45,6 +45,7 @@ final class SaveAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -58,12 +59,14 @@ final class SaveAction
 
     private PropertyChangeListener buildDirtyListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 SaveAction.this.updateEnabledState();
             }
         };
     }
 
+    @Override
     public void setUp() {
         super.setUp();
         this.selectedProjectNodes = selectedProjectNodes();
@@ -71,6 +74,7 @@ final class SaveAction
         this.updateEnabledState();
     }
 
+    @Override
     public void tearDown() {
         this.disengageSelectedProjectNodes();
         super.tearDown();
@@ -104,6 +108,7 @@ final class SaveAction
         this.selectedProjectNodes = null;
     }
 
+    @Override
     protected void execute() {
         for (int i = this.selectedProjectNodes.length; i-- > 0; ) {
             this.nodeManager.save(this.selectedProjectNodes[i], getWorkbenchContext());

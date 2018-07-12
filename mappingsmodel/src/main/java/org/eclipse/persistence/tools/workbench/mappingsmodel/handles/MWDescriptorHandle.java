@@ -70,6 +70,7 @@ public final class MWDescriptorHandle extends MWHandle {
         this.descriptor = descriptor;
     }
 
+    @Override
     protected Node node() {
         return getDescriptor();
     }
@@ -79,6 +80,7 @@ public final class MWDescriptorHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void resolveDescriptorHandles() {
         super.resolveDescriptorHandles();
         if (this.descriptorName != null) {
@@ -93,10 +95,12 @@ public final class MWDescriptorHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER descriptor should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.descriptor.compareTo(((MWDescriptorHandle) o).descriptor);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append((this.descriptor == null) ? "null" : this.descriptor.getName());
     }

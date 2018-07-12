@@ -58,6 +58,7 @@ public final class MWRelationalPrimaryKeyPolicy extends MWModel {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.primaryKeyHandles = new Vector();
@@ -68,6 +69,7 @@ public final class MWRelationalPrimaryKeyPolicy extends MWModel {
 
     private Iterator primaryKeyHandles() {
         return new CloneIterator(this.primaryKeyHandles) {
+            @Override
             protected void remove(Object current) {
                 MWRelationalPrimaryKeyPolicy.this.removePrimaryKeyHandle((MWColumnHandle) current);
             }
@@ -81,6 +83,7 @@ public final class MWRelationalPrimaryKeyPolicy extends MWModel {
 
     public Iterator primaryKeys() {
         return new TransformationIterator(this.primaryKeyHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumnHandle) next).getColumn();
             }
@@ -123,6 +126,7 @@ public final class MWRelationalPrimaryKeyPolicy extends MWModel {
 
     // **************** Model Synchronization ************************************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.primaryKeyHandles) { children.addAll(this.primaryKeyHandles); }
@@ -137,9 +141,11 @@ public final class MWRelationalPrimaryKeyPolicy extends MWModel {
 
     private NodeReferenceScrubber buildPrimaryKeyScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalPrimaryKeyPolicy.this.removePrimaryKeyHandle((MWColumnHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWRelationalPrimaryKeyPolicy.buildPrimaryKeyScrubber()";
             }
@@ -176,6 +182,7 @@ public final class MWRelationalPrimaryKeyPolicy extends MWModel {
         }
 
         return new FilteringIterator(primaryTable.columns()) {
+            @Override
             protected boolean accept(Object next) {
                 return ! MWRelationalPrimaryKeyPolicy.this.containsPrimaryKey((MWColumn) next);
             }

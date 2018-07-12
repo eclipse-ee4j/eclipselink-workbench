@@ -46,6 +46,7 @@ public class ObjectStringHolder extends AbstractStringHolder {
     /**
      * @see StringHolder#getString()
      */
+    @Override
     public final String getString() {
         return this.string;
     }

@@ -100,6 +100,7 @@ public class CheckBoxTreeCellRenderer
 
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (CheckBoxTreeCellRenderer.this.immediateEditListener != null) {
                     CheckBoxTreeCellRenderer.this.immediateEditListener.immediateEdit();
@@ -124,6 +125,7 @@ public class CheckBoxTreeCellRenderer
     /**
      * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
      */
+    @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         this.checkBox.setHorizontalAlignment(SwingConstants.LEADING);
         this.checkBox.setComponentOrientation(tree.getComponentOrientation());
@@ -234,6 +236,7 @@ public class CheckBoxTreeCellRenderer
     /**
      * @see TreeCellEditorAdapter#getValue()
      */
+    @Override
     public Object getValue() {
         return Boolean.valueOf(this.checkBox.isSelected());
     }
@@ -241,6 +244,7 @@ public class CheckBoxTreeCellRenderer
     /**
      * @see TreeCellEditorAdapter#setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener listener)
      */
+    @Override
     public void setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;
     }

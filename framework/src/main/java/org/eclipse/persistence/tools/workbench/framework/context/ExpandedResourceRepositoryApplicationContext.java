@@ -45,6 +45,7 @@ public class ExpandedResourceRepositoryApplicationContext extends ApplicationCon
     /**
      * @see ApplicationContextWrapper#getResourceRepository()
      */
+    @Override
     public ResourceRepository getResourceRepository() {
         return this.expandedResourceRepository;
     }

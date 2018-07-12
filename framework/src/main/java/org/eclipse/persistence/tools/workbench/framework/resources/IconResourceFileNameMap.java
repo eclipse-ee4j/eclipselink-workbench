@@ -42,12 +42,15 @@ public interface IconResourceFileNameMap {
      */
     IconResourceFileNameMap NULL_INSTANCE =
         new IconResourceFileNameMap() {
+            @Override
             public boolean hasResourceFileName(String key) {
                 return false;
             }
+            @Override
             public String getResourceFileName(String key) {
                 throw new MissingIconException("Missing icon file resource name: " + key, key);
             }
+            @Override
             public String toString() {
                 return "NullIconResourceFileNameMap";
             }

@@ -31,7 +31,6 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.SingleElementIt
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationListIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
-import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 public final class ExplicitModelGroup
     extends AbstractParticle
@@ -75,16 +74,19 @@ public final class ExplicitModelGroup
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.particles = new Vector();
     }
 
+    @Override
     protected /* private-protected */ void initialize(Node parent) {
         super.initialize(parent);
         this.compositor = MWModelGroup.SEQUENCE;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.particles) { children.addAll(this.particles); }
@@ -100,10 +102,12 @@ public final class ExplicitModelGroup
 
     // **************** MWModelGroup contract ***********************************
 
+    @Override
     public String getCompositor() {
         return this.compositor;
     }
 
+    @Override
     public boolean containsWildcard() {
         boolean containsWildcard = false;
 
@@ -124,6 +128,7 @@ public final class ExplicitModelGroup
 
     // **************** MWParticle contract ***********************************
 
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {
         for (Iterator stream = this.particles(); stream.hasNext(); ) {
             MWParticle particle = (MWParticle) stream.next();
@@ -137,6 +142,7 @@ public final class ExplicitModelGroup
         }
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         MWParticle particle1 = null, particle2 = null;
 
@@ -169,6 +175,7 @@ public final class ExplicitModelGroup
         }
     }
 
+    @Override
     public boolean isEquivalentTo(XSParticleDecl xsParticle) {
         return xsParticle.getTerm() instanceof XSModelGroup;
     }
@@ -176,16 +183,19 @@ public final class ExplicitModelGroup
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public Iterator structuralComponents() {
         return this.particles();
     }
 
+    @Override
     public Iterator descriptorContextComponents() {
         return new CompositeIterator(this.descriptorContextComponentIterators());
     }
 
     private Iterator descriptorContextComponentIterators() {
         return new TransformationIterator(this.particles()) {
+            @Override
             protected Object transform(Object next) {
                 MWParticle particle = (MWParticle) next;
 
@@ -199,6 +209,7 @@ public final class ExplicitModelGroup
         };
     }
 
+    @Override
     public Iterator xpathComponents() {
         return new CompositeIterator(this.xpathComponentIterators());
     }
@@ -206,6 +217,7 @@ public final class ExplicitModelGroup
     // NOTE: If anyone is upset by use of "instanceof" here, please give me suggestions - pwf
     private ListIterator xpathComponentIterators() {
         return new TransformationListIterator(this.particles()) {
+            @Override
             protected Object transform(Object next) {
                 MWParticle particle = (MWParticle) next;
 
@@ -219,6 +231,7 @@ public final class ExplicitModelGroup
         };
     }
 
+    @Override
     public MWAttributeDeclaration nestedAttribute(String namespaceUrl, String attributeName) {
         for (Iterator stream = this.particles(); stream.hasNext(); ) {
             MWAttributeDeclaration attribute = ((MWParticle) stream.next()).nestedAttribute(namespaceUrl, attributeName);
@@ -232,6 +245,7 @@ public final class ExplicitModelGroup
     }
 
     // NOTE: If anyone is upset by use of "instanceof" here, please give me suggestions - pwf
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         for (Iterator stream = this.particles(); stream.hasNext(); ) {
             MWParticle particle = (MWParticle) stream.next();
@@ -257,6 +271,7 @@ public final class ExplicitModelGroup
     }
 
     // NOTE: If anyone is upset by use of "instanceof" here, please give me suggestions - pwf
+    @Override
     public int totalElementCount() {
         int totalElementCount = 0;
 
@@ -277,6 +292,7 @@ public final class ExplicitModelGroup
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject xsObject) {
         XSModelGroupImpl groupNode = null;
         if (xsObject instanceof XSParticleDecl) {
@@ -351,6 +367,7 @@ public final class ExplicitModelGroup
         return false;
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
 

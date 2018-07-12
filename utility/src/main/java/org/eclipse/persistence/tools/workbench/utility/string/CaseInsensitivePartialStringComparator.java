@@ -48,6 +48,7 @@ public final class CaseInsensitivePartialStringComparator
     /**
      * @see PartialStringComparator#compare(String, String)
      */
+    @Override
     public double compare(String s1, String s2) {
         return s1.equalsIgnoreCase(s2) ? 1 : 0;
     }
@@ -55,6 +56,7 @@ public final class CaseInsensitivePartialStringComparator
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

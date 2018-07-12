@@ -35,6 +35,7 @@ final class XmlProjectGeneralPropertiesPage extends AbstractProjectGeneralProper
         super(projectNodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 

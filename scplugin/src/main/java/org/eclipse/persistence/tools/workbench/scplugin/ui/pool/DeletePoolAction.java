@@ -29,6 +29,7 @@ public class DeletePoolAction extends AbstractEnablableFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "DELETE_CONNECTION_POOL");
@@ -38,6 +39,7 @@ public class DeletePoolAction extends AbstractEnablableFrameworkAction {
         this.initializeToolTipText( "DELETE_CONNECTION_POOL.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
         ConnectionPoolAdapter pool = ( ConnectionPoolAdapter)selectedNode.getValue();
         String name = pool.getName();
@@ -71,6 +73,7 @@ public class DeletePoolAction extends AbstractEnablableFrameworkAction {
         return ( option == JOptionPane.YES_OPTION);
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return true;
     }

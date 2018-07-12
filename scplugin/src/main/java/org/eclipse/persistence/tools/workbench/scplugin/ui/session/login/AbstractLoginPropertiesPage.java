@@ -48,11 +48,13 @@ abstract class AbstractLoginPropertiesPage extends ScrollablePropertiesPage
      * @return The <code>PropertyValueModel</code> containing the {@link EisLoginAdapter}
      * to be edited by this page
      */
+    @Override
     protected PropertyValueModel buildSelectionHolder()
     {
         return new PropertyAspectAdapter(super.buildSelectionHolder(),
                                                     DatabaseSessionAdapter.LOGIN_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;

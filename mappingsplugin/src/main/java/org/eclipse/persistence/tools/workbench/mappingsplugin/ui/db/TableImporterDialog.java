@@ -118,6 +118,7 @@ final class TableImporterDialog
 
     private static final Comparator EXTERNAL_TABLE_DESCRIPTION_COMPARATOR =
         new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return Collator.getInstance().compare(((ExternalTableDescription) o1).getQualifiedName(), ((ExternalTableDescription) o2).getQualifiedName());
             }
@@ -129,11 +130,13 @@ final class TableImporterDialog
         this.initialize(database);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setTitle(this.resourceRepository().getString("IMPORT_TABLES_FROM_DATABASE_DIALOG.title"));
     }
 
+    @Override
     protected void prepareToShow() {
         this.setSize(700, 500);
         this.setLocationRelativeTo(this.getParent());
@@ -203,14 +206,17 @@ final class TableImporterDialog
         return schemas;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.importingTables";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.tableNamePatternTextField;
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -393,6 +399,7 @@ final class TableImporterDialog
 
     private Action buildGetTableNamesAction() {
         return new AbstractAction(this.resourceRepository().getString("GET_TABLE_NAMES_BUTTON_TEXT")) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 TableImporterDialog.this.getTableNamesPressed();
             }
@@ -424,10 +431,12 @@ final class TableImporterDialog
 
     private DualListSelectorPanel.Adapter buildExternalTableDescriptionSelectionAdapter() {
         return new DualListSelectorPanel.Adapter() {
+            @Override
             public void select(Object item) {
                 TableImporterDialog.this.availableExternalTableDescriptionsHolder.removeItem(item);
                 TableImporterDialog.this.selectedExternalTableDescriptionsHolder.addItem(item);
             }
+            @Override
             public void deselect(Object item) {
                 TableImporterDialog.this.selectedExternalTableDescriptionsHolder.removeItem(item);
                 TableImporterDialog.this.availableExternalTableDescriptionsHolder.addItem(item);
@@ -437,6 +446,7 @@ final class TableImporterDialog
 
     private ListCellRenderer buildExternalTableDescriptionRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((ExternalTableDescription) value).getQualifiedName();
             }
@@ -529,6 +539,7 @@ final class TableImporterDialog
      */
     void addTableNamesCallback(final Collection tableNames) throws InterruptedException, InvocationTargetException {
         EventQueue.invokeAndWait(new Runnable() {
+            @Override
             public void run() {
                 TableImporterDialog.this.availableExternalTableDescriptionsHolder.clear();
                 // add all the tables at once to reduce the sorting effort
@@ -546,6 +557,7 @@ final class TableImporterDialog
             super();
         }
 
+        @Override
         public void run() {
             this.setCursor(CursorConstants.WAIT_CURSOR);
             WaitDialog waitDialog = this.buildWaitDialog();

@@ -28,9 +28,11 @@ public interface ExceptionListener {
 
     ExceptionListener NULL_INSTANCE =
         new ExceptionListener() {
+            @Override
             public void exceptionThrown(Thread thread, Throwable exception) {
                 // do nothing
             }
+            @Override
             public String toString() {
                 return "NullExceptionListener";
             }
@@ -38,10 +40,12 @@ public interface ExceptionListener {
 
     ExceptionListener DEFAULT_INSTANCE =
         new ExceptionListener() {
+            @Override
             public void exceptionThrown(Thread thread, Throwable exception) {
                 // let the exception do what comes naturally
                 exception.printStackTrace();
             }
+            @Override
             public String toString() {
                 return "DefaultExceptionListener";
             }

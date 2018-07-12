@@ -39,6 +39,7 @@ public class PoolNode extends SCApplicationNode {
         super( pool, parent, plugin, context);
     }
 
+    @Override
     protected List buildDisplayStringPropertyNamesList() {
 
         List displayStrings = super.buildDisplayStringPropertyNamesList();
@@ -46,6 +47,7 @@ public class PoolNode extends SCApplicationNode {
         return displayStrings;
     }
 
+    @Override
     protected FrameworkAction buildDeleteNodeAction(WorkbenchContext workbenchContext) {
 
         return new DeletePoolAction(workbenchContext);
@@ -56,6 +58,7 @@ public class PoolNode extends SCApplicationNode {
         return ( ConnectionPoolAdapter)this.getValue();
     }
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
 
         AbstractPropertiesPage propertiesPage = null;
@@ -119,6 +122,7 @@ public class PoolNode extends SCApplicationNode {
         return EisPoolTabbedPropertiesPage.class;
     }
 
+    @Override
     protected Object propertiesPageKey() {
 
         if( this.pool().platformIsRdbms()) {
@@ -133,10 +137,12 @@ public class PoolNode extends SCApplicationNode {
         return EmptyPropertiesPage.class;
     }
 
+    @Override
     public String helpTopicID() {
         return "navigator.connectionPool";
     }
 
+    @Override
     protected String buildIconKey() {
         if( pool().isReadConnectionPool())
             return "CONNECTION_POOL_READ";
@@ -150,6 +156,7 @@ public class PoolNode extends SCApplicationNode {
         return "CONNECTION_POOL";
     }
 
+    @Override
     protected FrameworkAction buildRenameNodeAction(WorkbenchContext workbenchContext) {
 
         return new RenamePoolAction( workbenchContext);

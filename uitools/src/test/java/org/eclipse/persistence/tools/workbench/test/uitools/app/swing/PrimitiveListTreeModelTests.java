@@ -48,6 +48,7 @@ public class PrimitiveListTreeModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.testModel = this.buildTestModel();
@@ -60,6 +61,7 @@ public class PrimitiveListTreeModelTests extends TestCase {
 
     private TreeModel buildTreeModel() {
         return new PrimitiveListTreeModel(this.buildListValueModel()) {
+            @Override
             protected void primitiveChanged(int index, Object newValue) {
                 if ( ! newValue.equals("")) {
                     PrimitiveListTreeModelTests.this.testModel.replaceName(index, (String) newValue);
@@ -70,33 +72,42 @@ public class PrimitiveListTreeModelTests extends TestCase {
 
     private ListValueModel buildListValueModel() {
         return new ListAspectAdapter(TestModel.NAMES_LIST, this.testModel) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((TestModel) this.subject).names();
             }
+            @Override
             public Object getItem(int index) {
                 return ((TestModel) this.subject).getName(index);
             }
+            @Override
             public int size() {
                 return ((TestModel) this.subject).namesSize();
             }
+            @Override
             public void addItem(int index, Object item) {
                 ((TestModel) this.subject).addName(index, (String) item);
             }
+            @Override
             public void addItems(int index, List items) {
                 ((TestModel) this.subject).addNames(index, items);
             }
+            @Override
             public Object removeItem(int index) {
                 return ((TestModel) this.subject).removeName(index);
             }
+            @Override
             public List removeItems(int index, int length) {
                 return ((TestModel) this.subject).removeNames(index, length);
             }
+            @Override
             public Object replaceItem(int index, Object item) {
                 return ((TestModel) this.subject).replaceName(index, (String) item);
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -104,6 +115,7 @@ public class PrimitiveListTreeModelTests extends TestCase {
 
     public void testAddPrimitive() {
         this.treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 PrimitiveListTreeModelTests.this.verifyTreeModelEvent(e, new int[] {0}, new String[] {"foo"});
             }
@@ -116,6 +128,7 @@ public class PrimitiveListTreeModelTests extends TestCase {
         this.testModel.addName("bar");
         this.testModel.addName("baz");
         this.treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesRemoved(TreeModelEvent e) {
                 PrimitiveListTreeModelTests.this.verifyTreeModelEvent(e, new int[] {1}, new String[] {"bar"});
             }
@@ -129,6 +142,7 @@ public class PrimitiveListTreeModelTests extends TestCase {
         this.testModel.addName("bar");
         this.testModel.addName("baz");
         this.treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesChanged(TreeModelEvent e) {
                 PrimitiveListTreeModelTests.this.verifyTreeModelEvent(e, new int[] {1}, new String[] {"jar"});
             }
@@ -196,15 +210,19 @@ public class PrimitiveListTreeModelTests extends TestCase {
 
 
     public class TestTreeModelListener implements TreeModelListener {
+        @Override
         public void treeNodesChanged(TreeModelEvent e) {
             fail("unexpected event");
         }
+        @Override
         public void treeNodesInserted(TreeModelEvent e) {
             fail("unexpected event");
         }
+        @Override
         public void treeNodesRemoved(TreeModelEvent e) {
             fail("unexpected event");
         }
+        @Override
         public void treeStructureChanged(TreeModelEvent e) {
             fail("unexpected event");
         }

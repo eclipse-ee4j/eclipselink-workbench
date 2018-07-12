@@ -51,6 +51,7 @@ public abstract class SCApplicationNode extends AbstractApplicationNode {
      * The default implementation caches properties pages in the
      * MW plug-in. The cache key is determined by subclasses.
      */
+    @Override
     public Component propertiesPage(WorkbenchContext context) {
         WorkbenchContext localContext = this.buildLocalWorkbenchContext(context);
         AbstractPropertiesPage propertiesPage = (AbstractPropertiesPage) this.getSCPlugin().getPropertiesPage(this.propertiesPageKey());
@@ -87,6 +88,7 @@ public abstract class SCApplicationNode extends AbstractApplicationNode {
      * The default implementation caches properties pages in the
      * MW plug-in. The cache key is determined by subclasses.
      */
+    @Override
     public void releasePropertiesPage(Component propertiesPage) {
         this.releasePropertiesPage((AbstractPropertiesPage) propertiesPage);
     }
@@ -105,6 +107,7 @@ public abstract class SCApplicationNode extends AbstractApplicationNode {
         return ( SCPlugin)this.getPlugin();
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -120,6 +123,7 @@ public abstract class SCApplicationNode extends AbstractApplicationNode {
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -162,6 +166,7 @@ public abstract class SCApplicationNode extends AbstractApplicationNode {
         return new OracleHelpAction(workbenchContext);
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
 
         List actions = this.buildDisplayStringPropertyNamesList();

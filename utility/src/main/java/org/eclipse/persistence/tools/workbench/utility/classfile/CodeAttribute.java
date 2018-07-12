@@ -58,6 +58,7 @@ public class CodeAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.maxStack = stream.readU2();
         this.maxLocals = stream.readU2();
@@ -78,6 +79,7 @@ public class CodeAttribute extends Attribute {
         this.attributePool = new AttributePool(stream, this.classFile());
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         writer.print("max stack: ");
         writer.println(this.maxStack);
@@ -101,6 +103,7 @@ public class CodeAttribute extends Attribute {
         this.attributePool.displayStringOn(writer);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         short count = this.exceptionHandlerCount;
@@ -143,6 +146,7 @@ public class CodeAttribute extends Attribute {
         return this.attributePool;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append("code length: ");
         sb.append(this.codeLength);

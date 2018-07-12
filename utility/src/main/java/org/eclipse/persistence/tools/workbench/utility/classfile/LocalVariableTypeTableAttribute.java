@@ -47,6 +47,7 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.count = stream.readU2();
         short cnt = this.count;
@@ -57,6 +58,7 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         }
     }
 
+    @Override
     public void displayNameOn(IndentingPrintWriter writer) {
         super.displayNameOn(writer);
         writer.print(" (count: ");
@@ -64,6 +66,7 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         writer.print(")");
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         short cnt = this.count;
         LocalVariableType[] types = this.localVariableTypes;
@@ -102,6 +105,7 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         return names;
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         short cnt = this.count;
@@ -123,6 +127,7 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         return this.localVariableTypes[index];
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.count);
         sb.append(" local variable type(s)");

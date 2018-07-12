@@ -89,6 +89,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -137,6 +138,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 SessionAdapter session = (SessionAdapter) selection();
@@ -173,6 +175,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
     {
         return new TransformationPropertyValueModel(buildServerPlatformHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -188,12 +191,14 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.SERVER_PLATFORM_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter session = (SessionAdapter) subject;
                 return session.getServerPlatform();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 // It has to be done through an ActionListener since this method
@@ -208,6 +213,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
     {
         return new TransformationPropertyValueModel(buildServerPlatformHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -228,6 +234,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
     {
         return new TransformationPropertyValueModel(buildServerPlatformHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -263,6 +270,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new PropertyAspectAdapter(getSelectionHolder())
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     SCAdapter adapter = (SCAdapter) subject;
@@ -302,12 +310,14 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new PropertyAspectAdapter(getSubjectHolder(), CustomServerPlatformAdapter.EXTERNAL_TRANSACTION_CONTROLLER_CLASS_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     CustomServerPlatformAdapter customServerPlatform = (CustomServerPlatformAdapter) subject;
                     return customServerPlatform.getExternalTransactionControllerClass();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     CustomServerPlatformAdapter customServerPlatform = (CustomServerPlatformAdapter) subject;
@@ -347,12 +357,14 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new PropertyAspectAdapter(getSubjectHolder(), CustomServerPlatformAdapter.SERVER_CLASS_NAME_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     CustomServerPlatformAdapter customServerPlatform = (CustomServerPlatformAdapter) subject;
                     return customServerPlatform.getServerClassName();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     CustomServerPlatformAdapter customServerPlatform = (CustomServerPlatformAdapter) subject;
@@ -364,6 +376,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         /**
          * Initializes the layout of this pane.
          */
+        @Override
         protected void initializeLayout()
         {
             GridBagConstraints constraints = new GridBagConstraints();
@@ -436,6 +449,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new TransformationPropertyValueModel(buildServerPlatformHolder())
             {
+                @Override
                 protected Object transform(Object value)
                 {
                     if (value == null)
@@ -462,6 +476,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new TransformationPropertyValueModel(buildServerPlatformHolder())
             {
+                @Override
                 protected Object transform(Object value)
                 {
                     if (value == null)
@@ -482,12 +497,14 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new PropertyAspectAdapter(getSubjectHolder(), ServerPlatformAdapter.ENABLE_JTA_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     ServerPlatformAdapter serverPlatform = (ServerPlatformAdapter) subject;
                     return Boolean.valueOf(serverPlatform.getEnableJTA());
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     ServerPlatformAdapter serverPlatform = (ServerPlatformAdapter) subject;
@@ -505,12 +522,14 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new PropertyAspectAdapter(getSubjectHolder(), ServerPlatformAdapter.ENABLE_RUNTIME_SERVICES_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     ServerPlatformAdapter serverPlatform = (ServerPlatformAdapter) subject;
                     return Boolean.valueOf(serverPlatform.getEnableRuntimeServices());
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     ServerPlatformAdapter serverPlatform = (ServerPlatformAdapter) subject;
@@ -542,6 +561,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             return new SimpleListCellRenderer()
             {
+                @Override
                 protected String buildText(Object value)
                 {
                     if (value == null)
@@ -556,12 +576,14 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
         {
             PropertyAspectAdapter adapter = new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.SERVER_PLATFORM_CONFIG_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     SessionAdapter session = (SessionAdapter) subject;
                     return session.getServerPlatform();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     SessionAdapter session = (SessionAdapter) subject;
@@ -589,6 +611,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
 
             return new TransformationPropertyValueModel(adapter)
             {
+                @Override
                 protected Object transform(Object value)
                 {
                     if (value == null)
@@ -608,6 +631,7 @@ public class SessionServerPlatformPropertiesPage extends ScrollablePropertiesPag
             };
         }
 
+        @Override
         protected void initializeLayout()
         {
             GridBagConstraints constraints = new GridBagConstraints();

@@ -65,6 +65,7 @@ public abstract class AbstractPreferencesNode
      * place before building the page
      * @see EditorNode#propertiesPage(WorkbenchContext)
      */
+    @Override
     public Component propertiesPage(WorkbenchContext workbenchContext) {
         if (this.propertiesPage == null) {
             this.propertiesPage = this.buildPropertiesPage();
@@ -81,6 +82,7 @@ public abstract class AbstractPreferencesNode
     /**
      * @see EditorNode#propertiesPageIcon()
      */
+    @Override
     public Icon propertiesPageTitleIcon() {
         return null;
     }
@@ -88,6 +90,7 @@ public abstract class AbstractPreferencesNode
     /**
      * @see EditorNode#propertiesPageTitle()
      */
+    @Override
     public String propertiesPageTitleText() {
         return this.displayString();
     }
@@ -97,6 +100,7 @@ public abstract class AbstractPreferencesNode
      * to share the properties page
      * @see EditorNode#releasePropertiesPage(java.awt.Component)
      */
+    @Override
     public void releasePropertiesPage(Component page) {
         // do nothing
     }
@@ -107,6 +111,7 @@ public abstract class AbstractPreferencesNode
     /**
      * @see PreferencesNode#getPreferences()
      */
+    @Override
     public Preferences getPreferences() {
         return this.getPreferencesContext().getPreferences();
     }
@@ -117,6 +122,7 @@ public abstract class AbstractPreferencesNode
      * place before building the string
      * @see PreferencesNode#displayString()
      */
+    @Override
     public String displayString() {
         if (this.displayString == null) {
             this.displayString = this.buildDisplayString();
@@ -133,6 +139,7 @@ public abstract class AbstractPreferencesNode
     /**
      * @see PreferencesNode#helpTopicId()
      */
+    @Override
     public String helpTopicId() {
         return null;
     }

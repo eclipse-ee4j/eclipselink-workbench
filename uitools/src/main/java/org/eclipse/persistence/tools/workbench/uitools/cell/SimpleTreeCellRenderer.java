@@ -44,6 +44,7 @@ public class SimpleTreeCellRenderer
     /**
      * @see javax.swing.tree.DefaultTreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree, Object, boolean, boolean, boolean, int, boolean)
      */
+    @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean cellHasFocus) {
         // substitute null for the cell value so an empty string is used for the text...
         super.getTreeCellRendererComponent(tree, null, sel, expanded, leaf, row, cellHasFocus);

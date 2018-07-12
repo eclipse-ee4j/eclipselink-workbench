@@ -78,6 +78,7 @@ public class UiMetaBundle
 
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

@@ -41,6 +41,7 @@ public class ValueStatePropertyValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.junk = new Junk("foo");
@@ -48,6 +49,7 @@ public class ValueStatePropertyValueModelAdapterTests extends TestCase {
         this.junkHolder2 = new ValueStatePropertyValueModelAdapter(this.junkHolder);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -94,6 +96,7 @@ public class ValueStatePropertyValueModelAdapterTests extends TestCase {
             this.oldValue = oldValue;
             this.newValue = newValue;
         }
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             this.eventReceived = true;
             assertEquals(this.source, e.getSource());
@@ -119,6 +122,7 @@ public class ValueStatePropertyValueModelAdapterTests extends TestCase {
             this.fireStateChanged();
         }
 
+        @Override
         public String toString() {
             return "Junk(" + this.name + ")";
         }

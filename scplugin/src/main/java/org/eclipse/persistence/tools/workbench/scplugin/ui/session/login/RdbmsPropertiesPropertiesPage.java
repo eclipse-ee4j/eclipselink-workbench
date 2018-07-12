@@ -61,6 +61,7 @@ public class RdbmsPropertiesPropertiesPage extends LoginPropertiesPropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         JComponent subPane = (JComponent) super.buildPage();
@@ -91,6 +92,7 @@ public class RdbmsPropertiesPropertiesPage extends LoginPropertiesPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.USE_PROPERTIES_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;

@@ -40,6 +40,7 @@ public class ReadOnlyCollectionValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.collectionHolder = this.buildCollectionHolder();
@@ -47,6 +48,7 @@ public class ReadOnlyCollectionValueModelTests extends TestCase {
 
     private CollectionValueModel buildCollectionHolder() {
         return new AbstractReadOnlyCollectionValueModel() {
+            @Override
             public Object getValue() {
                 return ReadOnlyCollectionValueModelTests.collection();
             }
@@ -71,6 +73,7 @@ public class ReadOnlyCollectionValueModelTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

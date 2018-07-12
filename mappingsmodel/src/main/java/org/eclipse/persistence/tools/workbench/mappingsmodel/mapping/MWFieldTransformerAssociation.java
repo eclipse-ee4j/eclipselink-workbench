@@ -20,7 +20,6 @@ import java.util.List;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWRelationalFieldTransformerAssociation;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFieldTransformerAssociation;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
@@ -80,6 +79,7 @@ public abstract class MWFieldTransformerAssociation
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.fieldTransformer);
@@ -98,6 +98,7 @@ public abstract class MWFieldTransformerAssociation
 
     // **************** MWTransformer.Parent **********************************************
 
+    @Override
     public MWTransformationMapping transformationMapping() {
         return this.getMapping();
     }
@@ -139,6 +140,7 @@ public abstract class MWFieldTransformerAssociation
         this.setFieldTransformer(new MWClassBasedTransformer(this, newFieldTransformerClass));
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         MWDataField field = this.getField();
         sb.append((field == null) ? "null" : field.fieldName());
@@ -148,6 +150,7 @@ public abstract class MWFieldTransformerAssociation
 
     // **************** Problems *********************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.fieldTransformer.addFieldTransformerProblemsForAssociation(currentProblems, this);
@@ -171,6 +174,7 @@ public abstract class MWFieldTransformerAssociation
 
     // **************** Comparable contract ***********************************
 
+    @Override
     public int compareTo(Object o) {
         return Collator.getInstance().compare(this.fieldName(), ((MWFieldTransformerAssociation) o).fieldName());
     }

@@ -46,6 +46,7 @@ public class CollectionDiffTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.differentiator = ContainerDifferentiator.forCollections();
@@ -63,6 +64,7 @@ public class CollectionDiffTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -237,6 +239,7 @@ public class CollectionDiffTests extends TestCase {
             this.key = key;
             this.description = description;
         }
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, Integer.toString(this.key) + " - " + this.description);
         }

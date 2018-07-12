@@ -41,6 +41,7 @@ public class ProjectClassAdapter extends ProjectAdapter {
         super( parent, name);
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -52,10 +53,12 @@ public class ProjectClassAdapter extends ProjectAdapter {
         return ( ProjectClassConfig)this.getModel();
     }
 
+    @Override
     protected Object buildModel() {
             return new ProjectClassConfig();
     }
 
+    @Override
     public boolean isClass() {
       return true;
     }

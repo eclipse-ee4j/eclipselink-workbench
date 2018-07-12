@@ -52,6 +52,7 @@ public final class NullListValueModel
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return 0;
     }
@@ -59,6 +60,7 @@ public final class NullListValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return NullListIterator.instance();
     }
@@ -69,6 +71,7 @@ public final class NullListValueModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "NullListValueModel";
     }

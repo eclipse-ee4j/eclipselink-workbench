@@ -75,6 +75,7 @@ public class CloneIterator
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.nestedIterator.hasNext();
     }
@@ -82,6 +83,7 @@ public class CloneIterator
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         this.current = this.nestedIterator.next();
         return this.current;
@@ -90,6 +92,7 @@ public class CloneIterator
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         if (this.current == UNKNOWN) {
             throw new IllegalStateException();
@@ -114,6 +117,7 @@ public class CloneIterator
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }
@@ -136,9 +140,11 @@ public class CloneIterator
 
         Mutator READ_ONLY_INSTANCE =
             new Mutator() {
+                @Override
                 public void remove(Object current) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public String toString() {
                     return "ReadOnlyMutator";
                 }

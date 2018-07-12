@@ -107,12 +107,15 @@ public class CompositeIconUITest {
      */
     private ListDataListener buildOrientationListener() {
         return new ListDataListener() {
+            @Override
             public void intervalAdded(ListDataEvent e) {
                 // this does not affect the selection
             }
+            @Override
             public void intervalRemoved(ListDataEvent e) {
                 // this does not affect the selection
             }
+            @Override
             public void contentsChanged(ListDataEvent e) {
                 if ((e.getIndex0() == -1) && (e.getIndex1() == -1)) {
                     CompositeIconUITest.this.synchronizeAlignmentModel();
@@ -191,6 +194,7 @@ public class CompositeIconUITest {
 
     private Action buildAddAction() {
         return new AbstractAction("add") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 CompositeIconUITest.this.add();
             }
@@ -361,9 +365,11 @@ public class CompositeIconUITest {
     }
 
     private static class EntryRenderer extends SimpleListCellRenderer {
+        @Override
         protected Icon buildIcon(Object value) {
             return ((Entry) value).getIcon();
         }
+        @Override
         protected String buildText(Object value) {
             return ((Entry) value).getText();
         }

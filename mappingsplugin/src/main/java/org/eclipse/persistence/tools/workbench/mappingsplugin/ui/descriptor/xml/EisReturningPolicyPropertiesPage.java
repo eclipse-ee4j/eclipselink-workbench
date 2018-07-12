@@ -35,10 +35,12 @@ final class EisReturningPolicyPropertiesPage extends ReturningPolicyPropertiesPa
     }
 
 
+    @Override
     protected AbstractPanel insertFieldsPanel(PropertyValueModel returningPolicyHolder) {
         return new EisReturningInsertFieldsPanel(returningPolicyHolder, getWorkbenchContextHolder());
     }
 
+    @Override
     protected AbstractPanel updateFieldsPanel(PropertyValueModel returningPolicyHolder) {
         return new EisReturningUpdateFieldsPanel(returningPolicyHolder, getWorkbenchContextHolder());
     }

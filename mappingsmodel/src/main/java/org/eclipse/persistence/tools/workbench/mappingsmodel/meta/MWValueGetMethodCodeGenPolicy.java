@@ -24,6 +24,7 @@ public final class MWValueGetMethodCodeGenPolicy
         super(method, attribute, classCodeGenPolicy);
     }
 
+    @Override
     void insertArguments(NonreflectiveMethodDefinition methodDef)
     {
         // should have no arguments
@@ -34,6 +35,7 @@ public final class MWValueGetMethodCodeGenPolicy
      *     - return the short name of the value type, as the type should be in the return type of the method,
      *       so the import should be taken care of already.  Don't worry about name collisions at this point.
      */
+    @Override
     void insertMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         methodDef.addLine("return ("  + getAccessedAttribute().getValueType().shortName()

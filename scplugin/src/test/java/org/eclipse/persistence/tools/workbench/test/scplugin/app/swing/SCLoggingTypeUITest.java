@@ -61,6 +61,7 @@ public class SCLoggingTypeUITest extends SCSessionUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Select a Logging Type:";
     }
@@ -82,6 +83,7 @@ public class SCLoggingTypeUITest extends SCSessionUITest {
         return new ComboBoxModelAdapter( listHolder, selectionHolder);
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel propertyListPanel = new JPanel( new GridLayout( 1, 0));
@@ -97,10 +99,12 @@ public class SCLoggingTypeUITest extends SCSessionUITest {
         return comboBox;
     }
 
+    @Override
     protected void printModel() {
         System.out.println( "subject.log( "+ subject().getLog().displayString() + " )");
     }
 
+    @Override
     protected void resetProperty() {
 
         subject().setDefaultLogging();
@@ -115,6 +119,7 @@ public class SCLoggingTypeUITest extends SCSessionUITest {
 
         return new SimpleListCellRenderer() {
 
+            @Override
             protected String buildText( Object value) {
                 return( value == null) ? "" : (( ComboBoxSelection)value).displayString();
             }
@@ -125,10 +130,12 @@ public class SCLoggingTypeUITest extends SCSessionUITest {
 
         return new PropertyAspectAdapter( subjectHolder, SessionAdapter.LOG_CONFIG_PROPERTY) {
 
+            @Override
             protected Object getValueFromSubject() {
                 LogAdapter log = (( SessionAdapter)subject).getLog();
                 return SCLoggingTypeUITest.this.getComboBoxSelectionFor( log);
             }
+            @Override
             protected void setValueOnSubject( Object value) {
                 (( ComboBoxSelection)value).setPropertyOn( subject());
 
@@ -171,11 +178,13 @@ public class SCLoggingTypeUITest extends SCSessionUITest {
 
         Object[] loggingTypes = {
             new ComboBoxSelection( STANDARD) {
+                    @Override
                     public void setPropertyOn( Object session) {
                         (( SessionAdapter)session).setDefaultLogging();
                     }
                 },
             new ComboBoxSelection( JAVA) {
+                    @Override
                     public void setPropertyOn( Object session) {
                         (( SessionAdapter)session).setJavaLogging();
                     }

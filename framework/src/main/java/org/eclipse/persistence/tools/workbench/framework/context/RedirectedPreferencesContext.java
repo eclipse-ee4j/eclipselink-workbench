@@ -44,6 +44,7 @@ public class RedirectedPreferencesContext
     /**
      * @see PreferencesContextWrapper#getPreferences()
      */
+    @Override
     public Preferences getPreferences() {
         return this.delegatePreferences().node(this.path);
     }

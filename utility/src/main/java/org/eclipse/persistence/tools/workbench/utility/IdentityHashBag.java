@@ -175,6 +175,7 @@ public class IdentityHashBag extends AbstractCollection
     /**
      * This implementation simply returns the maintained count.
      */
+    @Override
     public int size() {
         return this.count;
     }
@@ -182,6 +183,7 @@ public class IdentityHashBag extends AbstractCollection
     /**
      * This implementation simply compares the maintained count to zero.
      */
+    @Override
     public boolean isEmpty() {
         return this.count == 0;
     }
@@ -191,6 +193,7 @@ public class IdentityHashBag extends AbstractCollection
      * calculating the object's identity hash code and examining the
      * entries in the corresponding hash table bucket.
      */
+    @Override
     public boolean contains(Object o) {
         Entry[] tab = this.table;
         int hash = System.identityHashCode(o);
@@ -252,6 +255,7 @@ public class IdentityHashBag extends AbstractCollection
      * calculating the object's identity hash code and examining the
      * entries in the corresponding hash table bucket.
      */
+    @Override
     public boolean add(Object o) {
         this.modCount++;
         Entry[] tab = this.table;
@@ -289,6 +293,7 @@ public class IdentityHashBag extends AbstractCollection
      * calculating the object's identity hash code and examining the
      * entries in the corresponding hash table bucket.
      */
+    @Override
     public boolean remove(Object o) {
         Entry[] tab = this.table;
         int hash = System.identityHashCode(o);
@@ -317,6 +322,7 @@ public class IdentityHashBag extends AbstractCollection
      * This implementation uses object-identity to determine whether
      * specified collection contains a particular element.
      */
+    @Override
     public boolean removeAll(Collection c) {
         return super.removeAll(new IdentityHashBag(c));
     }
@@ -325,6 +331,7 @@ public class IdentityHashBag extends AbstractCollection
      * This implementation uses object-identity to determine whether
      * specified collection contains a particular element.
      */
+    @Override
     public boolean retainAll(Collection c) {
         return super.retainAll(new IdentityHashBag(c));
     }
@@ -332,6 +339,7 @@ public class IdentityHashBag extends AbstractCollection
     /**
      * This implementation simply clears out all of the hash table buckets.
      */
+    @Override
     public void clear() {
         Entry[] tab = this.table;
         this.modCount++;
@@ -348,6 +356,7 @@ public class IdentityHashBag extends AbstractCollection
      *
      * @return a shallow copy of this bag.
      */
+    @Override
     public Object clone() {
         try {
             IdentityHashBag clone = (IdentityHashBag) super.clone();
@@ -386,16 +395,19 @@ public class IdentityHashBag extends AbstractCollection
         /**
          * Cascade the clone to all the entries in the same bucket.
          */
+        @Override
         protected Object clone() {
             return new Entry(this.hash, this.object, this.count,
                     (this.next == null ? null : (Entry) this.next.clone()));
         }
 
+        @Override
         public String toString() {
             return this.object + "=>" + this.count;
         }
     }
 
+    @Override
     public Iterator iterator() {
         if (this.count == 0) {
             return emptyIterator;
@@ -410,14 +422,17 @@ public class IdentityHashBag extends AbstractCollection
 
     private static class EmptyIterator implements Iterator {
 
+        @Override
         public boolean hasNext() {
             return false;
         }
 
+        @Override
         public Object next() {
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove() {
             throw new IllegalStateException();
         }
@@ -441,6 +456,7 @@ public class IdentityHashBag extends AbstractCollection
             super();
         }
 
+        @Override
         public boolean hasNext() {
             Entry e = this.nextEntry;
             int i = this.index;
@@ -454,6 +470,7 @@ public class IdentityHashBag extends AbstractCollection
             return e != null;
         }
 
+        @Override
         public Object next() {
             if (IdentityHashBag.this.modCount != this.expectedModCount) {
                 throw new ConcurrentModificationException();
@@ -479,6 +496,7 @@ public class IdentityHashBag extends AbstractCollection
             return e.object;
         }
 
+        @Override
         public void remove() {
             if (this.lastReturnedEntry == null) {
                 throw new IllegalStateException();
@@ -514,6 +532,7 @@ public class IdentityHashBag extends AbstractCollection
         }
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -537,6 +556,7 @@ public class IdentityHashBag extends AbstractCollection
         }
     }
 
+    @Override
     public int hashCode() {
         int h = 0;
         for (Iterator stream = this.iterator(); stream.hasNext(); ) {

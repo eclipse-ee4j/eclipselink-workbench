@@ -63,6 +63,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalDatabase#getCatalogNames()
      */
+    @Override
     public String[] getCatalogNames() {
         ResultSet resultSet;
         try {
@@ -76,6 +77,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalDatabase#getSchemaNames()
      */
+    @Override
     public String[] getSchemaNames() {
         ResultSet resultSet;
         try {
@@ -89,6 +91,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalDatabase#getTableTypeNames()
      */
+    @Override
     public String[] getTableTypeNames() {
         ResultSet resultSet;
         try {
@@ -102,6 +105,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalDatabase#getTableDescriptions(String, String, String, String[])
      */
+    @Override
     public ExternalTableDescription[] getTableDescriptions(String catalogName, String schemaNamePattern, String tableNamePattern, String[] tableTypeNames) {
         // #setCatalog(String) is used by Sybase, MS SQL Server, and others(?)
         // to set a "local context" for later interactions with the server;
@@ -129,6 +133,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalDatabase#getTableDescriptions()
      */
+    @Override
     public ExternalTableDescription[] getTableDescriptions() {
         // query for *all* the tables on the database - could be painful...
         return this.getTableDescriptions(null, null, "%", null);
@@ -156,6 +161,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this);
     }
@@ -178,6 +184,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
      * Trim a single-column result set of strings.
      */
     private static class StringResultSetAdapter implements ResultSetIterator.Adapter {
+        @Override
         public Object buildNext(ResultSet rs) throws SQLException {
             // result set column indexes are 1-based
             String string = rs.getString(1);
@@ -191,6 +198,7 @@ final class JDBCExternalDatabase implements ExternalDatabase {
      * @see java.sql.DatabaseMetaData#getTables(String, String, String, String[])
      */
     private class ExternalTableDescriptionResultSetAdapter implements ResultSetIterator.Adapter {
+        @Override
         public Object buildNext(ResultSet rs) throws SQLException {
             return new JDBCExternalTableDescription(rs, JDBCExternalDatabase.this);
         }

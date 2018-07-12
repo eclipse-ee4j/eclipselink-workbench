@@ -110,6 +110,7 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
         // Holder of the ServerSessionAdapter
         PropertyAspectAdapter sessionHolder = new PropertyAspectAdapter(getSubjectHolder(), "")
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 // Pool->PoolsAdapter->ServerSessionAdapter
@@ -121,6 +122,7 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
         // Holder of the LoginAdapter, just in case it changes
         PropertyAspectAdapter loginHolder = new PropertyAspectAdapter(sessionHolder, ServerSessionAdapter.LOGIN_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ServerSessionAdapter session = (ServerSessionAdapter) subject;
@@ -131,6 +133,7 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
         // Holder of the LoginAdapter's property: External Connection Pooling
         PropertyAspectAdapter booleanHolder = new PropertyAspectAdapter(loginHolder, DatabaseSessionAdapter.EXTERNAL_CONNECTION_POOLING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LoginAdapter login = (LoginAdapter) subject;
@@ -143,6 +146,7 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
         // Convert the boolean from true to false and vice versa
         return new TransformationPropertyValueModel(booleanHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
                 // Reverse the value
@@ -161,12 +165,14 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), ConnectionPoolAdapter.MAX_CONNECTIONS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ConnectionPoolAdapter pool = (ConnectionPoolAdapter) subject;
                 return new Integer(pool.getMaxConnections());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ConnectionPoolAdapter pool = (ConnectionPoolAdapter) subject;
@@ -197,12 +203,14 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), ConnectionPoolAdapter.MIN_CONNECTIONS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ConnectionPoolAdapter pool = (ConnectionPoolAdapter) subject;
                 return new Integer(pool.getMinConnections());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ConnectionPoolAdapter pool = (ConnectionPoolAdapter) subject;
@@ -226,6 +234,7 @@ public final class ConnectionCountPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         setBorder(buildTitledBorder("CONNECTION_POOL_CONNECTION_COUNT_TITLE"));

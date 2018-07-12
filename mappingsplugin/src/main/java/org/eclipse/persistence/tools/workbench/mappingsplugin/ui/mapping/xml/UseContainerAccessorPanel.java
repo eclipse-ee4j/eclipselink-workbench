@@ -105,9 +105,11 @@ public final class UseContainerAccessorPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildUsesContainerAccessorHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWAbstractCompositeMapping.USES_CONTAINER_ACCESSOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAbstractCompositeMapping) this.subject).usesContainerAccessor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWAbstractCompositeMapping) this.subject).setUsesContainerAccessor((Boolean)value);
             }

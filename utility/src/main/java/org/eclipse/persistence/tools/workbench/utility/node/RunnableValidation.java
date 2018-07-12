@@ -84,6 +84,7 @@ public class RunnableValidation
      *
      * @see java.lang.Runnable#run()
      */
+    @Override
     public void run() {
         while (this.continueFlag.isTrue()) {
             try {

@@ -115,6 +115,7 @@ abstract class AbstractJDBCTypeToJavaTypeDeclarationMapping
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
      */
+    @Override
     public String displayString() {
         StringBuffer sb = new StringBuffer();
         this.displayStringOn(sb);
@@ -124,6 +125,7 @@ abstract class AbstractJDBCTypeToJavaTypeDeclarationMapping
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(java.lang.StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         this.displayStringOn(sb);
     }

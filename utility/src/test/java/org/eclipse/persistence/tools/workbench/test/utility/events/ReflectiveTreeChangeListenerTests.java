@@ -299,6 +299,7 @@ public class ReflectiveTreeChangeListenerTests extends TestCase {
         }
         Iterator strings() {
             return new CloneIterator(this.childrenLists.keySet()) {
+                @Override
                 protected void remove(Object o) {
                     TestModel.this.removeNode((String) o);
                 }

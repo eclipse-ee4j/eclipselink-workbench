@@ -43,6 +43,7 @@ public class SimpleIconBuilder
     /**
      * @see IconBuilder#buildIcon()
      */
+    @Override
     public Icon buildIcon() {
         return this.icon;
     }
@@ -50,6 +51,7 @@ public class SimpleIconBuilder
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -61,6 +63,7 @@ public class SimpleIconBuilder
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (o instanceof SimpleIconBuilder) {
             return this.equals((SimpleIconBuilder) o);
@@ -75,6 +78,7 @@ public class SimpleIconBuilder
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return (this.icon == null) ? 0 : this.icon.hashCode();
     }
@@ -82,6 +86,7 @@ public class SimpleIconBuilder
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.icon);
     }

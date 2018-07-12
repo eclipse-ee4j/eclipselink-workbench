@@ -44,6 +44,7 @@ final class DatabasePlatformChooserDialog
 
     private DoubleClickMouseListener buildDoubleClickMouseListener() {
         return new DoubleClickMouseListener() {
+            @Override
             public void mouseDoubleClicked(MouseEvent e) {
                 DatabasePlatformChooserDialog.this.clickOK();
             }
@@ -52,6 +53,7 @@ final class DatabasePlatformChooserDialog
 
     private ListSelectionListener buildListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     JList list = (JList) e.getSource();
@@ -61,6 +63,7 @@ final class DatabasePlatformChooserDialog
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         // Create the list
         this.list = PlatformComponentFactory.buildPlatformList(selectionHolder);
@@ -75,14 +78,17 @@ final class DatabasePlatformChooserDialog
         return scrollPane;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.databasePlatform";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.list;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         getOKAction().setEnabled(false);

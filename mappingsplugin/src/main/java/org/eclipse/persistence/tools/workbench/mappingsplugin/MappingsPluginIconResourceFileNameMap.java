@@ -148,6 +148,7 @@ public final class MappingsPluginIconResourceFileNameMap extends AbstractIconRes
         {"policy.sequencing",     "mw/policy/Policy.sequencing.gif"},
     };
 
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

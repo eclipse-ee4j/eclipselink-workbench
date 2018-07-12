@@ -91,6 +91,7 @@ public class PreferencesBrowser {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 Window window = e.getWindow();
                 window.setVisible(false);
@@ -111,6 +112,7 @@ public class PreferencesBrowser {
 
     private Action buildNewWindowAction() {
         return new AbstractAction("New Window") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesBrowser.this.openWindow();
             }

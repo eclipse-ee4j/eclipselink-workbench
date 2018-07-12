@@ -54,6 +54,7 @@ public final class UnmappedMappingNode
 
     // ********** AbstractTreeNodeValueModel overrides **********
 
+    @Override
     public boolean equals(Object o) {
         if (o == null) {
             return false;
@@ -65,10 +66,12 @@ public final class UnmappedMappingNode
         return this.classAttribute == other.classAttribute;
     }
 
+    @Override
     public int hashCode() {
         return this.classAttribute.hashCode();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.classAttribute.getName());
     }
@@ -81,14 +84,17 @@ public final class UnmappedMappingNode
      * willy-nilly on a collection of heterogeneous nodes - narrow
      * down the collection to the relevant nodes  ~bjv
      */
+    @Override
     public Object getValue() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     protected String buildDisplayString() {
         return this.classAttribute.getName();
     }
 
+    @Override
     protected String buildIconKey() {
         return "mapping.unmapped";
     }
@@ -96,6 +102,7 @@ public final class UnmappedMappingNode
     /**
      * an unmapped mapping is never dirty
      */
+    @Override
     protected boolean buildDirtyFlag() {
         return false;
     }
@@ -103,6 +110,7 @@ public final class UnmappedMappingNode
     /**
      * make our title look like the title for a real mapping
      */
+    @Override
     protected String buildPropertiesPageTitleText() {
         return this.classAttribute.nameWithShortType();
     }
@@ -110,6 +118,7 @@ public final class UnmappedMappingNode
     /**
      * an unmapped mapping never has any application problems
      */
+    @Override
     protected void addExclusiveApplicationProblemsTo(List list) {
         // no problems
     }
@@ -117,6 +126,7 @@ public final class UnmappedMappingNode
     /**
      * an unmapped mapping never has problems
      */
+    @Override
     protected boolean valueHasBranchProblems() {
         return false;
     }
@@ -124,38 +134,47 @@ public final class UnmappedMappingNode
     /**
      * an unmapped mapping never has any application problems
      */
+    @Override
     public boolean containsBranchApplicationProblemFor(Problem problem) {
         return false;
     }
 
+    @Override
     public void addValuePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         // do nothing, no model to listen to
     }
 
+    @Override
     public void removeValuePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         // do nothing, no model to unlisten :) to
     }
 
+    @Override
     protected void engageValue(String[] propertyNames, PropertyChangeListener listener) {
         // do nothing, no model to listen to
     }
 
+    @Override
     protected void disengageValue(String[] propertyNames, PropertyChangeListener listener) {
         // do nothing, no model to unlisten :) to
     }
 
+    @Override
     protected void engageValue(String[] listNames, ListChangeListener listener) {
         // do nothing, no model to listen to
     }
 
+    @Override
     protected void disengageValue(String[] listNames, ListChangeListener listener) {
         // do nothing, no model to unlisten :) to
     }
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_UNMAPPED_MAPPING_NODE";
     }
 
+    @Override
     public String helpTopicID() {
         return "mapping.unmapped";
     }
@@ -163,6 +182,7 @@ public final class UnmappedMappingNode
 
     // ********** MappingsApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return UnmappedMappingPropertiesPage.class;
     }
@@ -170,14 +190,17 @@ public final class UnmappedMappingNode
 
     // ************ MappingNode overrides ************
 
+    @Override
     public boolean isMapped() {
         return false;
     }
 
+    @Override
     public boolean isAutoMappable() {
         return true;
     }
 
+    @Override
     protected void attributeNameChanged() {
         super.attributeNameChanged();
         this.displayStringChanged();
@@ -187,18 +210,22 @@ public final class UnmappedMappingNode
     /**
      * call #isMapped() before calling this method
      */
+    @Override
     public MWMapping getMapping() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public MWClassAttribute instanceVariable() {
         return this.classAttribute;
     }
 
+    @Override
     public boolean mappingIsInherited() {
         return CollectionTools.contains(this.descriptor().inheritedAttributes(), this.classAttribute);
     }
 
+    @Override
     void remove() {
         this.removeInstanceVariable();
     }

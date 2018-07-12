@@ -35,6 +35,7 @@ final class NewDatabasePlatformRepositoryAction extends AbstractFrameworkAction 
         this.plugin = plugin;
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("NEW_DATABASE_PLATFORM_REPOSITORY");
         // no accelerator
@@ -58,6 +59,7 @@ final class NewDatabasePlatformRepositoryAction extends AbstractFrameworkAction 
         return result;
     }
 
+    @Override
     protected void execute() {
         NewNameDialog dialog = this.getDialogBuilder().buildDialog(this.getWorkbenchContext());
         dialog.show();

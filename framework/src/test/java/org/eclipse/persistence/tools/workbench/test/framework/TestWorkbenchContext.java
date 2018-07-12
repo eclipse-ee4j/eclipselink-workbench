@@ -88,39 +88,50 @@ public class TestWorkbenchContext extends AbstractWorkbenchContext {
 
     private NodeManager buildNodeManager() {
         return new NodeManager() {
+            @Override
             public void addProjectNode(ApplicationNode node) {
                 // do nothing
             }
+            @Override
             public boolean save(ApplicationNode node, WorkbenchContext workbenchContext) {
                 return false;
             }
 
+            @Override
             public void removeProjectNode(ApplicationNode node) {
                 // do nothing
             }
+            @Override
             public ApplicationNode[] projectNodesFor(Plugin plugin) {
                 return new ApplicationNode[0];
             }
+            @Override
             public TreeNodeValueModel getRootNode() {
                 return new AbstractApplicationNode(TestWorkbenchContext.this.getApplicationContext()) {
+                    @Override
                     public Component propertiesPage(WorkbenchContext workbenchContext) {
                         return null;
                     }
+                    @Override
                     public void releasePropertiesPage(Component c) {
                         // do nothing
                     }
+                    @Override
                     protected String buildDisplayString() {
                         return "";
                     }
+                    @Override
                     protected boolean buildDirtyFlag() {
                         return false;
                     }
                     public String helpTopicId() {
                         return "default";
                     }
+                    @Override
                     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
                         return new ToolBarDescription();
                     }
+                    @Override
                     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
                         return new RootMenuDescription();
                     }
@@ -137,24 +148,30 @@ public class TestWorkbenchContext extends AbstractWorkbenchContext {
         }
     }
 
+    @Override
     public ApplicationContext getApplicationContext() {
         return new AbstractApplicationContext() {
+            @Override
             public Application getApplication() {
                 return TestWorkbenchContext.this.application;
             }
 
+            @Override
             public HelpManager getHelpManager() {
                 return TestWorkbenchContext.this.helpManager;
             }
 
+            @Override
             public NodeManager getNodeManager() {
                 return TestWorkbenchContext.this.nodeManager;
             }
 
+            @Override
             public Preferences getPreferences() {
                 return TestWorkbenchContext.this.preferences;
             }
 
+            @Override
             public ResourceRepository getResourceRepository() {
                 return TestWorkbenchContext.this.resourceRepository;
             }
@@ -185,6 +202,7 @@ public class TestWorkbenchContext extends AbstractWorkbenchContext {
 
     // ********** WorkbenchContext **********
 
+    @Override
     public Window getCurrentWindow() {
         return this.currentWindow;
     }
@@ -193,6 +211,7 @@ public class TestWorkbenchContext extends AbstractWorkbenchContext {
         this.currentWindow = currentWindow;
     }
 
+    @Override
     public NavigatorSelectionModel getNavigatorSelectionModel() {
         return this.navigatorSelectionModel;
     }
@@ -201,6 +220,7 @@ public class TestWorkbenchContext extends AbstractWorkbenchContext {
         this.navigatorSelectionModel = navigatorSelectionModel;
     }
 
+    @Override
     public ActionRepository getActionRepository() {
         return this.actionRepository;
     }
@@ -209,6 +229,7 @@ public class TestWorkbenchContext extends AbstractWorkbenchContext {
         this.actionRepository = actionRepository;
     }
 
+    @Override
     public Component getPropertiesPage() {
         return this.propertiesPage;
     }

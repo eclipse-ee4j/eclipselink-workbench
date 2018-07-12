@@ -36,6 +36,7 @@ public final class ExportDeploymentXmlAndInitializeRuntimeDescriptorsAction exte
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeTextAndMnemonic("EXPORT_DEPLOYMENT_XML_AND_INITIALIZE_RUNTIME_DESCRIPTORS_ACTION");
@@ -43,6 +44,7 @@ public final class ExportDeploymentXmlAndInitializeRuntimeDescriptorsAction exte
         initializeIcon("GENERATE_XML");
     }
 
+    @Override
     protected void execute() {
         ProjectDeploymentXmlGenerationCoordinator coordinator = new ProjectDeploymentXmlGenerationCoordinator(getWorkbenchContext());
         ApplicationNode[] projectNodes = selectedProjectNodes();
@@ -67,6 +69,7 @@ public final class ExportDeploymentXmlAndInitializeRuntimeDescriptorsAction exte
         return new URLClassLoader(cp.urls(), this.getClass().getClassLoader());
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return selectedProjectNodes().length > 0;
     }

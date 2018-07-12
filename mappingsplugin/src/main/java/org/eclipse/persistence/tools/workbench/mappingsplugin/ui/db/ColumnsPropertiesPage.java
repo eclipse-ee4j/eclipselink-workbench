@@ -92,6 +92,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
         super(tableNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.databaseTypesHolder = buildDatabaseTypesListHolder();
@@ -107,9 +108,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private CollectionValueModel buildDatabaseTypesHolder() {
         return new CollectionAspectAdapter(this.buildDatabasePlatformAdapter(), DatabasePlatform.DATABASE_TYPES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).databaseTypes();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabasePlatform) this.subject).databaseTypesSize();
             }
@@ -118,6 +121,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildDatabasePlatformAdapter() {
         return new PropertyAspectAdapter(this.buildDatabaseAdapter(), MWDatabase.DATABASE_PLATFORM_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDatabase) this.subject).getDatabasePlatform();
             }
@@ -126,9 +130,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private ValueModel buildDatabaseAdapter() {
         return new TransformationPropertyValueModel(this.getSelectionHolder()) {
+            @Override
             protected Object transform(Object value) {
                 return (value == null) ? null : ((MWTable) value).getDatabase();
             }
+            @Override
             protected Object reverseTransform(Object value) {
                 throw new UnsupportedOperationException();
             }
@@ -146,9 +152,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private CollectionValueModel buildColumnsAdapter() {
         return new CollectionAspectAdapter(getSelectionHolder(), MWTable.COLUMNS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTable) this.subject).columns();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWTable) this.subject).columnsSize();
             }
@@ -175,6 +183,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     ColumnsPropertiesPage.this.rowSelectionChanged(e);
@@ -194,6 +203,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
         this.renameAction.setEnabled(fieldSelected);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -308,6 +318,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private SpinnerTableCellRenderer buildSizeRenderer() {
         return new SpinnerTableCellRenderer(new NumberSpinnerModelAdapter(new SimplePropertyValueModel(), new Integer(0), null, new Integer(1), new Integer(0))) {
+            @Override
             public Component getTableCellRendererComponent(JTable t, Object value, boolean selected, boolean hasFocus, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).getDatabaseType().allowsSize()) {
                     return super.getTableCellRendererComponent(t, value, selected, hasFocus, row, column);
@@ -319,6 +330,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private TableCellEditor buildSizeEditor() {
         return new TableCellEditorAdapter(this.buildNumberSpinnerRenderer()) {
+            @Override
             public Component getTableCellEditorComponent(JTable t, Object value, boolean selected, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).getDatabaseType().allowsSize()) {
                     return super.getTableCellEditorComponent(t, value, selected, row, column);
@@ -330,6 +342,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private SpinnerTableCellRenderer buildSubSizeRenderer() {
         return new SpinnerTableCellRenderer(new NumberSpinnerModelAdapter(new SimplePropertyValueModel(), new Integer(0), null, new Integer(1), new Integer(0))) {
+            @Override
             public Component getTableCellRendererComponent(JTable t, Object value, boolean selected, boolean hasFocus, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).getDatabaseType().allowsSubSize()) {
                     return super.getTableCellRendererComponent(t, value, selected, hasFocus, row, column);
@@ -341,6 +354,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private TableCellEditor buildSubSizeEditor() {
         return new TableCellEditorAdapter(this.buildNumberSpinnerRenderer()) {
+            @Override
             public Component getTableCellEditorComponent(JTable t, Object value, boolean selected, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).getDatabaseType().allowsSubSize()) {
                     return super.getTableCellEditorComponent(t, value, selected, row, column);
@@ -352,6 +366,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private CheckBoxTableCellRenderer buildAllowsNullRenderer() {
         return new CheckBoxTableCellRenderer() {
+            @Override
             public Component getTableCellRendererComponent(JTable t, Object value, boolean selected, boolean hasFocus, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).getDatabaseType().allowsNull()) {
                     return super.getTableCellRendererComponent(t, value, selected, hasFocus, row, column);
@@ -363,6 +378,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private TableCellEditor buildAllowsNullEditor() {
         return new TableCellEditorAdapter(new CheckBoxTableCellRenderer()) {
+            @Override
             public Component getTableCellEditorComponent(JTable t, Object value, boolean selected, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).getDatabaseType().allowsNull()) {
                     return super.getTableCellEditorComponent(t, value, selected, row, column);
@@ -374,6 +390,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private CheckBoxTableCellRenderer buildIdentityRenderer() {
         return new CheckBoxTableCellRenderer() {
+            @Override
             public Component getTableCellRendererComponent(JTable t, Object value, boolean selected, boolean hasFocus, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).supportsIdentityClause()) {
                     return super.getTableCellRendererComponent(t, value, selected, hasFocus, row, column);
@@ -385,6 +402,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private TableCellEditor buildIdentityEditor() {
         return new TableCellEditorAdapter(new CheckBoxTableCellRenderer()) {
+            @Override
             public Component getTableCellEditorComponent(JTable t, Object value, boolean selected, int row, int column) {
                 if (ColumnsPropertiesPage.this.column(row).supportsIdentityClause()) {
                     return super.getTableCellEditorComponent(t, value, selected, row, column);
@@ -410,11 +428,13 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private Action buildAddAction() {
         FrameworkAction action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("ADD_DATABASE_FIELD_BUTTON_TEXT");
                 initializeMnemonic("ADD_DATABASE_FIELD_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ColumnsPropertiesPage.this.addColumn();
             }
@@ -443,11 +463,13 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private Action buildRemoveAction() {
         this.removeAction = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("REMOVE_DATABASE_FIELD_BUTTON_TEXT");
                 initializeMnemonic("REMOVE_DATABASE_FIELD_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ColumnsPropertiesPage.this.removeColumn();
             }
@@ -481,11 +503,13 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private Action buildRenameAction() {
         this.renameAction = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("RENAME_DATABASE_FIELD_BUTTON_TEXT");
                 initializeMnemonic("RENAME_DATABASE_FIELD_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ColumnsPropertiesPage.this.renameColumn();
             }
@@ -535,6 +559,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private Iterator columnNames() {
         return new TransformationIterator(table().columns()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumn) next).getName();
             }
@@ -553,6 +578,7 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
     private ListCellRenderer buildDatabaseTypeListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((DatabaseType) value).getName();
             }
@@ -612,14 +638,17 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case NAME_COLUMN:            return Object.class;
@@ -633,10 +662,12 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index != NAME_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWColumn field = (MWColumn) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -655,9 +686,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildNameAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.NAME_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumn) this.subject).getName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setName((String) value);
                 }
@@ -666,9 +699,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildTypeAdapter(MWColumn table) {
             return new PropertyAspectAdapter(MWColumn.DATABASE_TYPE_PROPERTY, table) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumn) this.subject).getDatabaseType();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setDatabaseType((DatabaseType) value);
                 }
@@ -677,9 +712,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildSizeAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.SIZE_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return new Integer(((MWColumn) this.subject).getSize());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setSize(((Integer) value).intValue());
                 }
@@ -688,9 +725,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildSubSizeAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.SUB_SIZE_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return new Integer(((MWColumn) this.subject).getSubSize());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setSubSize(((Integer) value).intValue());
                 }
@@ -699,9 +738,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildAllowsNullAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.ALLOWS_NULL_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWColumn) this.subject).allowsNull());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setAllowsNull(((Boolean) value).booleanValue());
                 }
@@ -710,9 +751,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildPrimaryKeyAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.PRIMARY_KEY_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWColumn) this.subject).isPrimaryKey());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setPrimaryKey(((Boolean) value).booleanValue());
                 }
@@ -721,9 +764,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildIdentityAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.IDENTITY_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWColumn) this.subject).isIdentity());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setIdentity(((Boolean) value).booleanValue());
                 }
@@ -732,9 +777,11 @@ public class ColumnsPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildUniqueAdapter(MWColumn field) {
             return new PropertyAspectAdapter(MWColumn.UNIQUE_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWColumn) this.subject).isUnique());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumn) this.subject).setUnique(((Boolean) value).booleanValue());
                 }

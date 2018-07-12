@@ -29,12 +29,15 @@ import org.eclipse.persistence.sessions.Session;
 public final class NormalHoursTransformer
     implements AttributeTransformer, FieldTransformer
 {
+    @Override
     public void initialize(AbstractTransformationMapping mapping) {}
 
+    @Override
     public Object buildAttributeValue(Record record, Object object, Session session) {
         return null;
     }
 
+    @Override
     public Object buildFieldValue(Object instance, String fieldName, Session session) {
         return null;
     }

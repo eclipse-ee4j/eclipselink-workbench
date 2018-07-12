@@ -41,6 +41,7 @@ final class CLExternalField
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalField#getType()
      */
+    @Override
     public ExternalClassDescription getType() {
         return this.classDescriptionFor(this.getField().getType());
     }
@@ -49,6 +50,7 @@ final class CLExternalField
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#isSynthetic()
      * This is just a best guess at which fields are synthetic.
      */
+    @Override
     public boolean isSynthetic() {
         if (super.isSynthetic()) {
             return true;

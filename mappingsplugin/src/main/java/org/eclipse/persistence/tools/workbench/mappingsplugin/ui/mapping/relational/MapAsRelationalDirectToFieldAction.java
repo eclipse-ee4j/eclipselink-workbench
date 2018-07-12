@@ -27,6 +27,7 @@ class MapAsRelationalDirectToFieldAction extends MapAsRelationalDirectMapping {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.directToField");
@@ -36,6 +37,7 @@ class MapAsRelationalDirectToFieldAction extends MapAsRelationalDirectMapping {
     }
 
 
+    @Override
     protected String converterType() {
         return MWConverter.NO_CONVERTER;
     }

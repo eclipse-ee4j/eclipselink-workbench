@@ -281,6 +281,7 @@ public class ClassDeclaration {
         return this.interfaceIndexes[index];
     }
 
+    @Override
     public String toString() {
         StringWriter sw = new StringWriter(200);
         PrintWriter pw = new PrintWriter(sw);

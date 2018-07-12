@@ -46,6 +46,7 @@ public class ListAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#diffIsFatal(Object, Object)
      */
+    @Override
     public boolean diffIsFatal(Object object1, Object object2) {
         if ( ! (object1 instanceof List)) {
             return true;
@@ -59,6 +60,7 @@ public class ListAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#containerClass()
      */
+    @Override
     public Class containerClass() {
         return List.class;
     }
@@ -66,6 +68,7 @@ public class ListAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#size(Object)
      */
+    @Override
     public int size(Object container) {
         return ((List) container).size();
     }
@@ -73,6 +76,7 @@ public class ListAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#get(Object, int)
      */
+    @Override
     public Object get(Object container, int index) {
         return ((List) container).get(index);
     }
@@ -80,6 +84,7 @@ public class ListAdapter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "ListAdapter";
     }

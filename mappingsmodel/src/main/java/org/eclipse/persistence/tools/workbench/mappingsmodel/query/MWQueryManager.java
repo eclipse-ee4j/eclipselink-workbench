@@ -32,7 +32,6 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.DescriptorQueryManager;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.oxm.XMLDescriptor;
@@ -81,11 +80,13 @@ public abstract class MWQueryManager extends MWModel {
         super(descriptor);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.queries) { children.addAll(this.queries); }
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.queries = new Vector();

@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.relati
 
 import java.awt.BorderLayout;
 import java.awt.Insets;
-import java.util.Comparator;
 import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
@@ -26,7 +25,6 @@ import javax.swing.ListCellRenderer;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.framework.uitools.Spacer;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.common.cell.ColumnCellRendererAdapter;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.FieldTransformerAssociationEditingPanel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ListValueModel;
@@ -51,6 +49,7 @@ final class RelationalFieldTransformerAssociationEditingPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected JPanel buildFieldChooserPanel() {
         Insets offset = BorderFactory.createTitledBorder("m").getBorderInsets(this);
         JPanel panel = new JPanel(new BorderLayout());

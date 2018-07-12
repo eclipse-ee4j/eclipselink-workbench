@@ -127,6 +127,7 @@ public class EisReadPoolLoginPropertiesPage extends AbstractReadPoolLoginPropert
      *
      * @return {@link EisLoginPane}
      */
+    @Override
     protected JComponent buildLoginPane()
     {
         GridBagConstraints constraints = new GridBagConstraints();

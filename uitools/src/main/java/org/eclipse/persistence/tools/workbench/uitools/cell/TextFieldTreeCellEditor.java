@@ -57,6 +57,7 @@ public class TextFieldTreeCellEditor extends AbstractCellEditor implements TreeC
 
     protected ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 // when the text field fires an action event, we stop editing
                 TextFieldTreeCellEditor.this.stopCellEditing();
@@ -69,6 +70,7 @@ public class TextFieldTreeCellEditor extends AbstractCellEditor implements TreeC
     /**
      * @see javax.swing.CellEditor#getCellEditorValue()
      */
+    @Override
     public Object getCellEditorValue() {
         return this.renderer.getValue();
     }
@@ -76,6 +78,7 @@ public class TextFieldTreeCellEditor extends AbstractCellEditor implements TreeC
     /**
      * @see javax.swing.CellEditor#isCellEditable(java.util.EventObject)
      */
+    @Override
     public boolean isCellEditable(EventObject e) {
         if (e instanceof MouseEvent) {
             return ((MouseEvent) e).getClickCount() >= 2;    // force double-click
@@ -89,6 +92,7 @@ public class TextFieldTreeCellEditor extends AbstractCellEditor implements TreeC
     /**
      * @see javax.swing.tree.TreeCellEditor#getTreeCellEditorComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int)
      */
+    @Override
     public Component getTreeCellEditorComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row) {
         return this.renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, true);
     }

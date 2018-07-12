@@ -48,6 +48,7 @@ public class AddNewBrokerAction extends AbstractFrameworkAction {
         this.selectNode = selectNode;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "ADD_BROKER");
@@ -73,10 +74,12 @@ public class AddNewBrokerAction extends AbstractFrameworkAction {
         return CollectionTools.collection(topLinkSessions.sessionBrokerNames());
     }
 
+    @Override
     public void execute() {
         super.execute();
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         TopLinkSessionsAdapter topLinkSessions = ( TopLinkSessionsAdapter) selectedNode.getValue();

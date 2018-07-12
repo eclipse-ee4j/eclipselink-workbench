@@ -33,14 +33,17 @@ public class NonCachingComboBoxModel implements CachingComboBoxModel {
 
     // ********** CachingComboBoxModel implementation **********
 
+    @Override
     public void cacheList() {
         //do nothing
     }
 
+    @Override
     public void uncacheList() {
         //do nothing
     }
 
+    @Override
     public boolean isCached() {
         return false;
     }
@@ -48,10 +51,12 @@ public class NonCachingComboBoxModel implements CachingComboBoxModel {
 
     // ********** ComboBoxModel implementation **********
 
+    @Override
     public void setSelectedItem(Object anItem) {
         this.wrappedComboBoxModel.setSelectedItem(anItem);
     }
 
+    @Override
     public Object getSelectedItem() {
         return this.wrappedComboBoxModel.getSelectedItem();
     }
@@ -59,18 +64,22 @@ public class NonCachingComboBoxModel implements CachingComboBoxModel {
 
     // ********** ListModel implementation **********
 
+    @Override
     public int getSize() {
         return this.wrappedComboBoxModel.getSize();
     }
 
+    @Override
     public Object getElementAt(int index) {
         return this.wrappedComboBoxModel.getElementAt(index);
     }
 
+    @Override
     public void addListDataListener(ListDataListener l) {
         this.wrappedComboBoxModel.addListDataListener(l);
     }
 
+    @Override
     public void removeListDataListener(ListDataListener l) {
         this.wrappedComboBoxModel.removeListDataListener(l);
     }

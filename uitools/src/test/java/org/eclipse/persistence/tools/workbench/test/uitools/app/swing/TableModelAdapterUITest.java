@@ -172,9 +172,11 @@ public class TableModelAdapterUITest {
 
     private CollectionValueModel buildPeopleAdapter() {
         return new CollectionAspectAdapter(this.crowdHolder, Crowd.PEOPLE_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((Crowd) this.subject).people();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((Crowd) this.subject).peopleSize();
             }
@@ -198,6 +200,7 @@ public class TableModelAdapterUITest {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -227,6 +230,7 @@ public class TableModelAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -347,6 +351,7 @@ public class TableModelAdapterUITest {
 
     private Action buildAddAction() {
         Action action = new AbstractAction("add") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TableModelAdapterUITest.this.addPerson();
             }
@@ -371,6 +376,7 @@ public class TableModelAdapterUITest {
 
     private Action buildRemoveAction() {
         this.removeAction = new AbstractAction("remove") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TableModelAdapterUITest.this.removePerson();
             }
@@ -395,6 +401,7 @@ public class TableModelAdapterUITest {
 
     private Action buildRenameAction() {
         this.renameAction = new AbstractAction("rename") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TableModelAdapterUITest.this.renamePerson();
             }
@@ -423,6 +430,7 @@ public class TableModelAdapterUITest {
 
     private Action buildAddEyeColorAction() {
         Action action = new AbstractAction("add eye color") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TableModelAdapterUITest.this.addEyeColor();
             }
@@ -463,6 +471,7 @@ public class TableModelAdapterUITest {
 
     private Action buildPrintAction() {
         Action action = new AbstractAction("print") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TableModelAdapterUITest.this.printCrowd();
             }
@@ -487,6 +496,7 @@ public class TableModelAdapterUITest {
 
     private Action buildResetAction() {
         Action action = new AbstractAction("reset") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TableModelAdapterUITest.this.reset();
             }
@@ -537,9 +547,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildNameAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setName((String) value);
             }
@@ -559,9 +571,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildBirthDateAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.BIRTH_DATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getBirthDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setBirthDate((Date) value);
             }
@@ -581,9 +595,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildGoneWestDateAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.GONE_WEST_DATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getGoneWestDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setGoneWestDate((Date) value);
             }
@@ -603,9 +619,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildEyeColorAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.EYE_COLOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getEyeColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEyeColor((String) value);
             }
@@ -628,9 +646,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildEvilAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.EVIL_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((Person) this.subject).isEvil());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEvil(((Boolean) value).booleanValue());
             }
@@ -650,9 +670,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildRankAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.RANK_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getRank());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setRank(((Integer) value).intValue());
             }
@@ -672,9 +694,11 @@ public class TableModelAdapterUITest {
 
     private PropertyValueModel buildAdventureCountAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.ADVENTURE_COUNT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getAdventureCount());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setAdventureCount(((Integer) value).intValue());
             }
@@ -707,6 +731,7 @@ public class TableModelAdapterUITest {
      * It does nothing special unless you uncomment the code below....
      */
     private class EyeColorRenderer extends DefaultListCellRenderer {
+        @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             // just do something to show the renderer is working...
     //        value = ">" + value;

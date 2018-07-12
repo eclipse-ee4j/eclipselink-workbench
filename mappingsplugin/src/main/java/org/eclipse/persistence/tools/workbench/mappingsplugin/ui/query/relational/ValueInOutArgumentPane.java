@@ -144,6 +144,7 @@ public final class ValueInOutArgumentPane extends AbstractSubjectPanel {
 
     private Action buildEditAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ArgumentValueDialog dialog = new ArgumentValueDialog(getWorkbenchContext(), getSubjectHolder());
 
@@ -227,6 +228,7 @@ public final class ValueInOutArgumentPane extends AbstractSubjectPanel {
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWModel) ValueInOutArgumentPane.this.subject()).getRepository();
             }
@@ -364,12 +366,15 @@ public final class ValueInOutArgumentPane extends AbstractSubjectPanel {
         }
 
         private class CVDocumentListener implements DocumentListener {
+            @Override
             public void changedUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void insertUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void removeUpdate(DocumentEvent de) {
                 updateOKButton();
             }

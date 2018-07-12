@@ -42,6 +42,7 @@ final class RdbmsSessionTabbedPropertiesPage extends SessionTabbedPropertiesPage
         return "SESSION_LOGIN_TAB_TITLE";
     }
 
+    @Override
     protected void initializeTabs()
     {
         addTab(buildGeneralPropertiesPage(),    buildGeneralPropertiesPageTitle());

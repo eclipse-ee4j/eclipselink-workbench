@@ -34,7 +34,6 @@ import org.eclipse.persistence.tools.workbench.test.mappingsmodel.MappingsModelT
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.xml.MWOXProject;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.resource.ResourceException;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWXmlSchema;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWXmlSchemaRepository;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.MappingsPlugin;
@@ -139,6 +138,7 @@ public class SchemaPanelTest
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -168,6 +168,7 @@ public class SchemaPanelTest
 
     private Action buildRenameAction(final JTextField renameTextField) {
         Action action = new AbstractAction("Rename Schema") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SchemaPanelTest.this.renameSchema(renameTextField.getText());
             }
@@ -186,6 +187,7 @@ public class SchemaPanelTest
 
     private Action buildSchemaReloadAction() {
         Action action = new AbstractAction("ReloadSchema") {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 SchemaPanelTest.this.reloadSchema();
             }

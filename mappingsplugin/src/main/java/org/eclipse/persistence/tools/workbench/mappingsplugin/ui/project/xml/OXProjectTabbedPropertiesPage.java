@@ -37,12 +37,14 @@ final class OXProjectTabbedPropertiesPage extends ProjectTabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(buildProjectGeneralPropertiesPage(),  "GENERAL_TAB_TITLE");
         addTab(buildProjectDefaultsPropertiesPage(), "DEFAULTS_TAB_TITLE");
         addTab(buildProjectOptionsPropertiesPage(),  "OPTIONS_TAB_TITLE");
     }
 
+    @Override
     protected Component buildProjectGeneralPropertiesPage() {
         return new XmlProjectGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }

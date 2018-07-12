@@ -60,11 +60,13 @@ public abstract class MWAbstractAnyMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.xmlField = new MWXmlField(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.xmlField);
@@ -73,6 +75,7 @@ public abstract class MWAbstractAnyMapping
 
     // **************** MWXpathedMapping implementation  **********************
 
+    @Override
     public MWXmlField getXmlField() {
         return this.xmlField;
     }
@@ -93,10 +96,12 @@ public abstract class MWAbstractAnyMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.oxDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         if (this.getXmlField().isResolved()) {
             return this.getXmlField();
@@ -106,6 +111,7 @@ public abstract class MWAbstractAnyMapping
         }
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         if (! this.isReadOnly() && ! this.getXmlField().getXpath().equals("")) {
             writtenFields.add(this.getXmlField());
@@ -115,24 +121,29 @@ public abstract class MWAbstractAnyMapping
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.schemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return MWAbstractAnyMapping.this.mayUseCollectionData();
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return true;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return false;
             }
@@ -150,6 +161,7 @@ public abstract class MWAbstractAnyMapping
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeFromMWXpathedMapping(MWXpathedMapping oldMapping) {
         super.initializeFromMWXpathedMapping(oldMapping);
 
@@ -160,6 +172,7 @@ public abstract class MWAbstractAnyMapping
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         // would like to add xpath and reference descriptor problems first
         this.addXmlFieldProblemsTo(newProblems);
@@ -224,11 +237,13 @@ public abstract class MWAbstractAnyMapping
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         this.xmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);
     }

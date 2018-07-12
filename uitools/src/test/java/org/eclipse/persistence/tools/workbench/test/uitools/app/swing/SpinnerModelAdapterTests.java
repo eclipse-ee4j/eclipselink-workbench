@@ -43,12 +43,14 @@ public class SpinnerModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.valueHolder = new SimplePropertyValueModel(new Integer(0));
         this.spinnerModelAdapter = new SpinnerModelAdapter(this.valueHolder);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -57,6 +59,7 @@ public class SpinnerModelAdapterTests extends TestCase {
     public void testSetValueSpinnerModel() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 SpinnerModelAdapterTests.this.eventFired = true;
                 assertEquals(SpinnerModelAdapterTests.this.spinnerModelAdapter, e.getSource());
@@ -70,6 +73,7 @@ public class SpinnerModelAdapterTests extends TestCase {
     public void testSetValueValueHolder() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 SpinnerModelAdapterTests.this.eventFired = true;
                 assertEquals(SpinnerModelAdapterTests.this.spinnerModelAdapter, e.getSource());
@@ -110,6 +114,7 @@ public class SpinnerModelAdapterTests extends TestCase {
 
 
 private class TestChangeListener implements ChangeListener {
+    @Override
     public void stateChanged(ChangeEvent e) {
         fail("unexpected event");
     }

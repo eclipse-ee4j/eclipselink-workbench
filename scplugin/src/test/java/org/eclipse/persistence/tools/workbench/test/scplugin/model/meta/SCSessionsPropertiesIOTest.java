@@ -172,6 +172,7 @@ public class SCSessionsPropertiesIOTest extends TestCase
         return (Collection) sessionsPropertiesField.get(manager);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         this.preferences = Preferences.userNodeForPackage(AllSCTests.class);
@@ -197,6 +198,7 @@ public class SCSessionsPropertiesIOTest extends TestCase
         classpathPreferences.put(CLASSPATH_4_KEY, CLASSPATH_4_VALUE);
     }
 
+    @Override
     protected void tearDown() throws Exception
     {
         //classpath-scplugin-workbench-toplink- oracle - test
@@ -352,16 +354,19 @@ public class SCSessionsPropertiesIOTest extends TestCase
             setValidator(PluggableValidator.buildSynchronousValidator(this));
         }
 
+        @Override
         public String displayString()
         {
             return "";
         }
 
+        @Override
         public Validator getValidator()
         {
             return this.validator;
         }
 
+        @Override
         public void setValidator(Validator validator)
         {
             this.validator = validator;

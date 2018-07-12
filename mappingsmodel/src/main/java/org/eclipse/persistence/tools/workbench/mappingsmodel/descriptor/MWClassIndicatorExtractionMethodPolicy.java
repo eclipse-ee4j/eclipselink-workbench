@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
@@ -25,7 +24,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethod;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -52,6 +50,7 @@ public final class MWClassIndicatorExtractionMethodPolicy extends MWAbstractClas
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.methodHandle = new MWMethodHandle(this, this.buildMethodScrubber());
@@ -60,6 +59,7 @@ public final class MWClassIndicatorExtractionMethodPolicy extends MWAbstractClas
 
     // *************** Accessors ****************
 
+    @Override
     public String getType() {
         return CLASS_EXTRACTION_METHOD_TYPE;
     }
@@ -77,6 +77,7 @@ public final class MWClassIndicatorExtractionMethodPolicy extends MWAbstractClas
 
     // *************** Model Synchronization Support ****************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.methodHandle);
@@ -84,9 +85,11 @@ public final class MWClassIndicatorExtractionMethodPolicy extends MWAbstractClas
 
     private NodeReferenceScrubber buildMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassIndicatorExtractionMethodPolicy.this.setClassExtractionMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassIndicatorExtractionMethodPolicy.buildMethodScrubber()";
             }
@@ -96,6 +99,7 @@ public final class MWClassIndicatorExtractionMethodPolicy extends MWAbstractClas
 
     //*************** Problem Handling *************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         checkClassExtractionMethod(newProblems);
@@ -116,6 +120,7 @@ public final class MWClassIndicatorExtractionMethodPolicy extends MWAbstractClas
 
     // *************** Runtime Conversion ****************
 
+    @Override
     public void adjustRuntimeInheritancePolicy(InheritancePolicy runtimeInheritancePolicy) {
         if (getClassExtractionMethod() != null) {
             runtimeInheritancePolicy.setClassExtractionMethodName(getClassExtractionMethod().getName());

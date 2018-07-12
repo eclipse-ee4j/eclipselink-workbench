@@ -50,6 +50,7 @@ public class TableCellEditorAdapter extends AbstractCellEditor implements TableC
 
     private ImmediateEditListener buildImmediateEditListener() {
         return new ImmediateEditListener() {
+            @Override
             public void immediateEdit() {
                 TableCellEditorAdapter.this.stopCellEditing();
             }
@@ -62,6 +63,7 @@ public class TableCellEditorAdapter extends AbstractCellEditor implements TableC
     /**
      * @see javax.swing.CellEditor#getCellEditorValue()
      */
+    @Override
     public Object getCellEditorValue() {
         return this.renderer.getValue();
     }
@@ -72,6 +74,7 @@ public class TableCellEditorAdapter extends AbstractCellEditor implements TableC
     /**
      * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
      */
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean selected, int row, int column) {
         return this.renderer.getTableCellRendererComponent(table, value, selected, true, row, column);
     }

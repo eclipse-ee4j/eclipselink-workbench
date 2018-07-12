@@ -63,6 +63,7 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
         super(descriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel descriptorNodeHolder) {
         super.initialize(descriptorNodeHolder);
         this.mwClassHolder = buildMWClassHolder();
@@ -70,12 +71,14 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildMWClassHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptor) this.subject).getMWClass();
             }
         };
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -198,6 +201,7 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
 
     ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ClassPropertiesPage.this.getMWClass().getRepository();
             }
@@ -225,6 +229,7 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildClassNameHolder() {
         return new PropertyAspectAdapter(this.mwClassHolder, MWClass.NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClass) this.subject).getName();
             }
@@ -236,9 +241,11 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildSuperClassHolder() {
         return new PropertyAspectAdapter(this.mwClassHolder, MWClass.SUPERCLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClass) this.subject).getSuperclass();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClass) this.subject).setSuperclass((MWClass) value);
             }
@@ -270,6 +277,7 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
 
     private AddRemoveListPanel.Adapter buildAddRemoveListPanelAdapter() {
         return new AddRemoveListPanel.Adapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                     MWClass type = ClassChooserTools.promptForType(
                             ClassPropertiesPage.this.getMWClass().getRepository(),
@@ -282,6 +290,7 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
                     ClassPropertiesPage.this.getMWClass().addInterface(type);
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 getMWClass().removeInterfaces(CollectionTools.collection(listSelectionModel.getSelectedValues()));
             }
@@ -299,9 +308,11 @@ final class ClassPropertiesPage extends ScrollablePropertiesPage {
 
     private CollectionValueModel buildInterfacesCollectionValueModel() {
         return new CollectionAspectAdapter(this.mwClassHolder, MWClass.INTERFACES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWClass) this.subject).interfaces();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWClass) this.subject).interfacesSize();
             }

@@ -28,7 +28,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
@@ -181,6 +180,7 @@ final public class QueryGeneralPanel
 
     private PropertyChangeListener buildQueryTypeLabelListener(final JLabel label) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 label.setEnabled(getQuery() != null);
             }
@@ -197,8 +197,10 @@ final public class QueryGeneralPanel
 
     private CollectionValueModel buildQueryTypeValueModel() {
         return new CollectionAspectAdapter(this.queryHolder) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return new TransformationIterator(((MWQuery) this.subject).queryTypes()) {
+                    @Override
                     protected Object transform(Object next) {
                         return resourceRepository().getString((String) next);
                     }
@@ -275,10 +277,12 @@ final public class QueryGeneralPanel
 
     private PropertyValueModel buildQueryTypePropertyAdapter(final ObjectListSelectionModel querySelectionModel) {
         return new PropertyAspectAdapter(this.queryHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return resourceRepository().getString(((MWQuery) this.subject).queryType());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 if (!QueryGeneralPanel.this.queryTypeCanChange())
                     return;
@@ -300,6 +304,7 @@ final public class QueryGeneralPanel
 
     private PropertyChangeListener buildQueryTypeChooserListener(final JComboBox comboBox) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (getQuery() == null) {
                     comboBox.setEnabled(false);

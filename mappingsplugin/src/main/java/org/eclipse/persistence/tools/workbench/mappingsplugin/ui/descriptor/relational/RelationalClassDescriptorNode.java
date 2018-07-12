@@ -65,6 +65,7 @@ public abstract class RelationalClassDescriptorNode extends MappingDescriptorNod
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         GroupContainerDescription desc = super.buildMenuDescription(context);
         context = buildLocalWorkbenchContext(context);
@@ -100,6 +101,7 @@ public abstract class RelationalClassDescriptorNode extends MappingDescriptorNod
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         GroupContainerDescription desc =  super.buildToolBarDescription(workbenchContext);
@@ -114,10 +116,12 @@ public abstract class RelationalClassDescriptorNode extends MappingDescriptorNod
         return desc;
     }
 
+    @Override
     protected boolean supportsDescriptorMorphing() {
         return true;
     }
 
+    @Override
     protected MenuGroupDescription buildDescriptorTypeMenuGroupDescription(WorkbenchContext workbenchContext) {
         MenuGroupDescription typeDesc = new MenuGroupDescription();
         typeDesc.add(this.getMorphToAggregateDescriptorAction(workbenchContext));
@@ -162,6 +166,7 @@ public abstract class RelationalClassDescriptorNode extends MappingDescriptorNod
 
     // ************** MappingDescriptorNode implementation ************
 
+    @Override
     protected MappingNode buildMappingNode(MWMapping mapping) {
         if (mapping instanceof MWDirectToFieldMapping) {
             return new DirectToFieldMappingNode((MWDirectToFieldMapping) mapping, new RelationalMappingSelectionActionsPolicy(getMappingsPlugin()), this);
@@ -197,10 +202,12 @@ public abstract class RelationalClassDescriptorNode extends MappingDescriptorNod
         throw new IllegalArgumentException(mapping.toString());
     }
 
+    @Override
     protected MappingNode buildUnmappedMappingNode(MWClassAttribute attribute) {
         return new UnmappedMappingNode(attribute, getApplicationContext(), new RelationalMappingSelectionActionsPolicy(getMappingsPlugin()), this);
     }
 
+    @Override
     public String mappingHelpTopicPrefix() {
 //        return "mapping.relational";
         return "mapping"; // For 10.1.3

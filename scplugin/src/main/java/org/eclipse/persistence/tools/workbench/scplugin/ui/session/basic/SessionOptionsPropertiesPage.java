@@ -97,6 +97,7 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder())
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SCAdapter adapter = (SCAdapter) subject;
@@ -144,12 +145,14 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.EXCEPTION_HANDLER_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter adapter = (SessionAdapter) subject;
                 return adapter.getExceptionHandlerClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 SessionAdapter adapter = (SessionAdapter) subject;
@@ -163,6 +166,7 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
      *
      * @return The component where all the widgets have been installed.
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -302,14 +306,17 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
     private CellRendererAdapter buildProfilerLabelDecorator()
     {
         return new TriStateBooleanCellRendererAdapter(resourceRepository()) {
+            @Override
             protected String undefinedResourceKey() {
                 return "OPTIONS_PROFILER_NO_PROFILER_CHOICE";
             }
 
+            @Override
             protected String trueResourceKey() {
                 return "OPTIONS_PROFILER_TOPLINK_CHOICE";
             }
 
+            @Override
             protected String falseResourceKey() {
                 return "OPTIONS_PROFILER_DMS_CHOICE";
             }
@@ -327,6 +334,7 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.PROFILER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter adapter = (SessionAdapter) subject;
@@ -339,6 +347,7 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
                 return TriStateBoolean.valueOf(useTopLinkProfiler);
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 SessionAdapter session = (SessionAdapter) subject;
@@ -398,12 +407,14 @@ public final class SessionOptionsPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.SESSION_CUSTOMIZER_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter adapter = (SessionAdapter) subject;
                 return adapter.getSessionCustomizerClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 SessionAdapter adapter = (SessionAdapter) subject;

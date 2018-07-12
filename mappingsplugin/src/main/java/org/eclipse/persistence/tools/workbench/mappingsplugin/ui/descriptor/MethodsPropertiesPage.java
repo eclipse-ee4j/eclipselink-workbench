@@ -68,6 +68,7 @@ final class MethodsPropertiesPage
         super(descriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.mwClassHolder = buildMWClassHolder();
@@ -76,6 +77,7 @@ final class MethodsPropertiesPage
 
     private PropertyValueModel buildMWClassHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptor) this.subject).getMWClass();
             }
@@ -88,15 +90,18 @@ final class MethodsPropertiesPage
 
     private CollectionValueModel buildMethodsHolder() {
         return new CollectionAspectAdapter(this.mwClassHolder, MWClass.METHODS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWClass) this.subject).methods();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWClass) this.subject).methodsSize();
             }
         };
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -148,6 +153,7 @@ final class MethodsPropertiesPage
 
     private ListSelectionListener buildListSelectionListener(final AddRemoveListPanel methodsListPanel) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -175,22 +181,27 @@ final class MethodsPropertiesPage
 
     private AddRemoveListPanel.OptionAdapter buildAddRemoveListPanelAdapter() {
         return new AddRemoveListPanel.OptionAdapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 addNewMethod(listSelectionModel);
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 removeMethods(CollectionTools.iterator(listSelectionModel.getSelectedValues()));
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 renameMethod(listSelectionModel);
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public String optionalButtonKey(){
                 return "RENAME_BUTTON";
             }
@@ -205,6 +216,7 @@ final class MethodsPropertiesPage
         builder.setHelpTopicId("dialog.newMethod");
         builder.setDocumentFactory(
                 new DocumentFactory() {
+                    @Override
                     public Document buildDocument() {
                         return new RegexpDocument(RegexpDocument.RE_METHOD);
                     }
@@ -236,6 +248,7 @@ final class MethodsPropertiesPage
         builder.setOriginalName(method.getName());
         builder.setDocumentFactory(
                 new DocumentFactory() {
+                    @Override
                     public Document buildDocument() {
                         return new RegexpDocument(RegexpDocument.RE_METHOD);
                     }

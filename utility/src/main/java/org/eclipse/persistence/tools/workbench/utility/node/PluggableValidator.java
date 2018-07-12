@@ -54,6 +54,7 @@ public class PluggableValidator implements Node.Validator {
     /**
      * @see Node.Validator#validate()
      */
+    @Override
     public void validate() {
         if ( ! this.pause) {
             this.delegate.validate();
@@ -63,6 +64,7 @@ public class PluggableValidator implements Node.Validator {
     /**
      * @see Node.Validator#pause()
      */
+    @Override
     public void pause() {
         if (this.pause) {
             throw new IllegalStateException("already paused");
@@ -73,6 +75,7 @@ public class PluggableValidator implements Node.Validator {
     /**
      * @see Node.Validator#resume()
      */
+    @Override
     public void resume() {
         if ( ! this.pause) {
             throw new IllegalStateException("not paused");
@@ -85,6 +88,7 @@ public class PluggableValidator implements Node.Validator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.delegate);
     }
@@ -108,9 +112,11 @@ public class PluggableValidator implements Node.Validator {
          */
         Delegate NULL_DELEGATE =
             new PluggableValidator.Delegate() {
+                @Override
                 public void validate() {
                     // do nothing
                 }
+                @Override
                 public String toString() {
                     return "NULL_DELEGATE";
                 }

@@ -56,6 +56,7 @@ public class DropDownButton extends JButton {
 
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DropDownButton.this.displayPopupMenu();
             }
@@ -72,6 +73,7 @@ public class DropDownButton extends JButton {
     /**
      * Append a down-pointing arrow to the specified icon.
      */
+    @Override
     public void setIcon(Icon defaultIcon) {
         super.setIcon(new CompositeIcon(defaultIcon, 4, new ArrowIcon(7, 7, SwingConstants.SOUTH)));
     }

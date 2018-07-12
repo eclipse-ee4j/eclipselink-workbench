@@ -70,6 +70,7 @@ public final class MWTableHandle extends MWHandle {
         this.table = table;
     }
 
+    @Override
     protected Node node() {
         return getTable();
     }
@@ -79,6 +80,7 @@ public final class MWTableHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void resolveMetadataHandles() {
         super.resolveMetadataHandles();
 
@@ -94,10 +96,12 @@ public final class MWTableHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER table should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.table.compareTo(((MWTableHandle) o).table);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.table == null) {
             sb.append("null");

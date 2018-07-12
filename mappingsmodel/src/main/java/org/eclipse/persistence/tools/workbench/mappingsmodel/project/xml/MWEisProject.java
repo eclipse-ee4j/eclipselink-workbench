@@ -48,6 +48,7 @@ public final class MWEisProject
         initialize(j2cAdapterName);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.eisLoginSpec);
@@ -56,6 +57,7 @@ public final class MWEisProject
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
@@ -66,6 +68,7 @@ public final class MWEisProject
         this.eisLoginSpec = buildEisLoginSpec(j2cAdapterName);
     }
 
+    @Override
     protected MWProjectDefaultsPolicy buildDefaultsPolicy() {
         return new MWEisProjectDefaultsPolicy(this);
     }
@@ -77,6 +80,7 @@ public final class MWEisProject
 
     // ************ Descriptor creation ************
 
+    @Override
     protected MWDescriptor createDescriptorForType(MWClass type) throws InterfaceDescriptorCreationException {
         if (type.isInterface()) {
             throw new InterfaceDescriptorCreationException(type);
@@ -99,6 +103,7 @@ public final class MWEisProject
 
     // ************** runtime conversion **********
 
+    @Override
     protected DatasourceLogin buildRuntimeLogin() {
         return getEisLoginSpec().buildRuntimeLogin();
     }

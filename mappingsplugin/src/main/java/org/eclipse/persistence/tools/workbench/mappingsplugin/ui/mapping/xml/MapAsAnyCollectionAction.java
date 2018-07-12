@@ -30,6 +30,7 @@ final class MapAsAnyCollectionAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.anyCollection");
@@ -41,14 +42,17 @@ final class MapAsAnyCollectionAction
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWAnyCollectionMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWOXDescriptor) descriptor).addAnyCollectionMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWAnyCollectionMapping.class;
     }

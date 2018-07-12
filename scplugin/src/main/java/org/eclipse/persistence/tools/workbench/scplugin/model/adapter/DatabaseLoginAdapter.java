@@ -93,6 +93,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         DatabaseLoginConfig dBLoginConfig = new DatabaseLoginConfig();
         dBLoginConfig.setStructConverterConfig(new StructConverterConfig());
@@ -109,6 +110,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Factory method for building a child default SequencingAdapter.
      */
+    @Override
     protected SequencingAdapter buildSequencing() {
         SequencingAdapter sequencing = super.buildSequencing();
 
@@ -175,12 +177,14 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Returns whether the Database Driver is Driver Manager.
      */
+    @Override
     public boolean databaseDriverIsDriverManager() {
         return this.useDriverManager;
     }
     /**
      * Returns whether the Database Driver is Data Source.
      */
+    @Override
     public boolean databaseDriverIsDataSource() {
         return !this.useDriverManager;
     }
@@ -226,6 +230,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
         }
     }
 
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 
@@ -239,6 +244,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
         return ( DatabaseLoginConfig)this.getModel();
     }
 
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 
@@ -263,6 +269,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Initializes this <code>DatabaseLoginAdapter</code>.
      */
+    @Override
     protected void initializeFromModel(Object scConfig) {
         super.initializeFromModel( scConfig);
 
@@ -285,6 +292,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Completes the initialization of the config model.
      */
+    @Override
     protected void postInitializationFromModel() {
         super.postInitializationFromModel();
 
@@ -296,6 +304,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Returns the datasource platform class from user's preference.
      */
+    @Override
     protected String getDefaultPlatformClassName() {
 
         String platformName = this.preferences().get( SCPlugin.DATABASE_PLATFORM_PREFERENCE, SCPlugin.DATABASE_PLATFORM_PREFERENCE_DEFAULT);
@@ -340,6 +349,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
 
         return oldClasses;
     }
+    @Override
     boolean platformIsRdbms() {
 
         return true;
@@ -706,6 +716,7 @@ public final class DatabaseLoginAdapter extends LoginAdapter {
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo(branchProblems);

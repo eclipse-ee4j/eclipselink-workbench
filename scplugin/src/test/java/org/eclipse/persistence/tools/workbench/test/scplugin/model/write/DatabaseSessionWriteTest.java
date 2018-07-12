@@ -273,6 +273,7 @@ public class DatabaseSessionWriteTest extends TestCase {
         return new TestSuite( DatabaseSessionWriteTest.class);
     }
 
+    @Override
     protected void setUp() throws Exception {
 
         path = "/temp/";
@@ -280,6 +281,7 @@ public class DatabaseSessionWriteTest extends TestCase {
         topLinkSessions = new TopLinkSessionsAdapter( path, true);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

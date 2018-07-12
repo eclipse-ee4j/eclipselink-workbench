@@ -40,12 +40,14 @@ public interface Problem {
      * Problem interface and its source, message key, and message
      * arguments are all equal to this problem's.
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * Return the problem's hash code, which should calculated as an
      * XOR of the source's hash code and the message key's hash code.
      */
+    @Override
     int hashCode();
 
 }

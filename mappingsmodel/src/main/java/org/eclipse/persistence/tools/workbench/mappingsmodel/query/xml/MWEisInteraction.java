@@ -14,7 +14,6 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.xml;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -189,6 +188,7 @@ public final class MWEisInteraction
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent){
         super.initialize(parent);
         this.inputArguments = new Vector();
@@ -199,6 +199,7 @@ public final class MWEisInteraction
     /**
      * @see org.eclipse.persistence.tools.workbench.model.xml.MWXModel#addChildrenTo(Collection)
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.inputArguments) { children.addAll(this.inputArguments); }

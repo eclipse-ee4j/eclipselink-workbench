@@ -62,6 +62,7 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel selectionNodeHolder) {
         super.initialize(selectionNodeHolder);
         this.repositoryHolder = this.buildRepositoryHolder();
@@ -70,9 +71,11 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
 
     protected PropertyValueModel buildRepositoryHolder() {
         return new TransformationPropertyValueModel(this.getSelectionHolder()) {
+            @Override
             protected Object transform(Object value) {
                 return (value == null) ? null : ((DatabasePlatformRepository) value).getJDBCTypeRepository();
             }
+            @Override
             protected Object reverseTransform(Object value) {
                 throw new UnsupportedOperationException();
             }
@@ -89,9 +92,11 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
 
     private CollectionValueModel buildMappingsAdapter() {
         return new CollectionAspectAdapter(this.repositoryHolder, JDBCTypeRepository.JAVA_TYPE_DECLARATION_TO_JDBC_TYPE_MAPPINGS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((JDBCTypeRepository) this.subject).javaTypeDeclarationToJDBCTypeMappings();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((JDBCTypeRepository) this.subject).javaTypeDeclarationToJDBCTypeMappingsSize();
             }
@@ -102,6 +107,7 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
         return new MappingColumnAdapter(this.getApplicationContext());
     }
 
+    @Override
     protected Component buildPage() {
         JTable table = SwingComponentFactory.buildTable(this.tableModel);
 
@@ -116,9 +122,11 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
 
     private TableCellRenderer buildJDBCTypeRenderer() {
         return new AdaptableTableCellRenderer(new AbstractCellRendererAdapter() {
+            @Override
             public String buildText(Object value) {
                 return ((JDBCType) value).displayString();
             }
+            @Override
             public Icon buildIcon(Object value) {
                 return EMPTY_ICON;
             }
@@ -127,9 +135,11 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
 
     private TableCellRenderer buildJavaTypeRenderer() {
         return new AdaptableTableCellRenderer(new AbstractCellRendererAdapter() {
+            @Override
             public String buildText(Object value) {
                 return ((JavaTypeDeclaration) value).displayString();
             }
+            @Override
             public Icon buildIcon(Object value) {
                 return EMPTY_ICON;
             }
@@ -159,22 +169,27 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
             this.context = context;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.context.getResourceRepository().getString(COLUMN_NAMES[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             return Object.class;
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             JavaTypeDeclarationToJDBCTypeMapping mapping = (JavaTypeDeclarationToJDBCTypeMapping) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -188,9 +203,11 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
         private PropertyValueModel buildJavaTypeAdapter(JavaTypeDeclarationToJDBCTypeMapping mapping) {
             // JavaTypeDeclarations are immutable
             return new PropertyAspectAdapter(EMPTY_STRING_ARRAY, mapping) {        // the Java type declaration cannot change
+                @Override
                 protected Object getValueFromSubject() {
                     return ((JavaTypeDeclarationToJDBCTypeMapping) this.subject).getJavaTypeDeclaration();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     throw new UnsupportedOperationException();
                 }
@@ -199,9 +216,11 @@ final class DatabasePlatformRepositoryJavaMappingsPropertiesPage extends Scrolla
 
         private PropertyValueModel buildJDBCTypeAdapter(JavaTypeDeclarationToJDBCTypeMapping mapping) {
             PropertyValueModel adapter = new PropertyAspectAdapter(JavaTypeDeclarationToJDBCTypeMapping.JDBC_TYPE_PROPERTY, mapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((JavaTypeDeclarationToJDBCTypeMapping) this.subject).getJDBCType();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     throw new UnsupportedOperationException();
                 }

@@ -48,6 +48,7 @@ public interface MWJoinFetchableMapping {
             super(mwModelString, externalString, new Integer(toplinkJoinFetchOption));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object mapping) {
             ((ForeignReferenceMapping) mapping).setJoinFetch(((Integer) getTopLinkModelOption()).intValue());
         }

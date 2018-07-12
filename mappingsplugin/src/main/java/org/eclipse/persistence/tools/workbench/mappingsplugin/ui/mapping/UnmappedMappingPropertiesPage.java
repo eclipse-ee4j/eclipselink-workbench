@@ -34,6 +34,7 @@ public final class UnmappedMappingPropertiesPage
         super(context);
     }
 
+    @Override
     protected void initializeLayout() {
         this.add(this.buildTitlePanel(), BorderLayout.PAGE_START);
     }

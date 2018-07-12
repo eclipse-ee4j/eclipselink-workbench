@@ -34,6 +34,7 @@ public class ExhaustivePartialStringComparatorEngine
     /**
      * @see PartialStringComparatorEngine#match(StringHolder[], StringHolder[])
      */
+    @Override
     public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
         InternalStringHolderPair[] stringHolderPairs = this.buildStringHolderPairs(stringHolders1, stringHolders2);
         this.calculateScores(stringHolderPairs, stringHolders2);
@@ -133,6 +134,7 @@ public class ExhaustivePartialStringComparatorEngine
         }
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.partialStringComparator);
     }
@@ -182,28 +184,34 @@ public class ExhaustivePartialStringComparatorEngine
     private static class NullInternalStringHolderPair implements InternalStringHolderPair {
         private StringHolder stringHolder2;
 
+        @Override
         public StringHolder getStringHolder1() {
             return null;
         }
 
+        @Override
         public StringHolder getStringHolder2() {
             return this.stringHolder2;
         }
 
+        @Override
         public double getScore() {
             // return the lowest possible score
             return 0.0;
         }
 
+        @Override
         public void calculateScores(PartialStringComparator psc, StringHolder[] stringHolders2) {
             // do nothing
         }
 
+        @Override
         public double maxScore() {
             // return something less than the lowest possible score
             return -1;
         }
 
+        @Override
         public int setStringHolder2(StringHolder[] stringHolders2) {
             // all the remaining strings didn't match with any string;
             // so just take the first one
@@ -216,14 +224,17 @@ public class ExhaustivePartialStringComparatorEngine
             throw new IllegalStateException("'stringHolders2' is empty");
         }
 
+        @Override
         public void clearStringHolder2(int index) {
             // do nothing
         }
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
 
+        @Override
         public String toString() {
             StringBuffer sb = new StringBuffer(100);
             StringTools.buildSimpleToStringOn(this, sb);
@@ -265,18 +276,22 @@ public class ExhaustivePartialStringComparatorEngine
             this.maxScoreIndex = -1;
         }
 
+        @Override
         public StringHolder getStringHolder1() {
             return this.stringHolder1;
         }
 
+        @Override
         public StringHolder getStringHolder2() {
             return this.stringHolder2;
         }
 
+        @Override
         public double getScore() {
             return this.score;
         }
 
+        @Override
         public void calculateScores(PartialStringComparator psc, StringHolder[] stringHolders2) {
             String localString1 = this.stringHolder1.getString();
             double[] localScores = this.scores;
@@ -296,6 +311,7 @@ public class ExhaustivePartialStringComparatorEngine
             this.maxScoreIndex = localMaxScoreIndex;
         }
 
+        @Override
         public double maxScore() {
             if (this.maxScore == -1) {
                 this.recalculateMaxScoreAndIndex();
@@ -320,6 +336,7 @@ public class ExhaustivePartialStringComparatorEngine
             this.maxScoreIndex = localMaxScoreIndex;
         }
 
+        @Override
         public int setStringHolder2(StringHolder[] stringHolders2) {
             int index = this.maxScoreIndex;
             if (stringHolders2 == null) {
@@ -335,16 +352,19 @@ public class ExhaustivePartialStringComparatorEngine
             return index;
         }
 
+        @Override
         public void clearStringHolder2(int index) {
             this.scores[index] = -1;
             this.maxScore = -1;
             this.maxScoreIndex = -1;
         }
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.additionalInfo());
         }

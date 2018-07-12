@@ -67,6 +67,7 @@ public class SpinnerTableCellRenderer implements TableCellEditorAdapter.Renderer
 
     private ChangeListener buildChangeListener() {
         return new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 if (SpinnerTableCellRenderer.this.immediateEditListener != null) {
                     SpinnerTableCellRenderer.this.immediateEditListener.immediateEdit();
@@ -81,6 +82,7 @@ public class SpinnerTableCellRenderer implements TableCellEditorAdapter.Renderer
     /**
      * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
      */
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean hasFocus, int row, int column) {
         this.spinner.setComponentOrientation(table.getComponentOrientation());
         this.spinner.setFont(table.getFont());
@@ -164,6 +166,7 @@ public class SpinnerTableCellRenderer implements TableCellEditorAdapter.Renderer
     /**
      * @see TableCellEditorAdapter#getValue()
      */
+    @Override
     public Object getValue() {
         return this.spinner.getValue();
     }
@@ -171,10 +174,12 @@ public class SpinnerTableCellRenderer implements TableCellEditorAdapter.Renderer
     /**
      * @see TableCellEditorAdapter#setImmediateEditListener(TableCellEditorAdapter.ImmediateEditListener listener)
      */
+    @Override
     public void setImmediateEditListener(TableCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;
     }
 
+    @Override
     public void commit() {
         try {
             this.spinner.commitEdit();

@@ -14,7 +14,6 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.query.relational;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -28,10 +27,8 @@ import javax.swing.text.Document;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWStringQueryFormat;
-import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
-import org.eclipse.persistence.tools.workbench.uitools.app.TransformationPropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.swing.DocumentAdapter;
 
@@ -49,6 +46,7 @@ final class StringQueryFormatSubPanel
         super(queryFormatHolder, contextHolder);
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -108,9 +106,11 @@ final class StringQueryFormatSubPanel
 
     private PropertyValueModel buildQueryStringHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWStringQueryFormat.QUERY_STRING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWStringQueryFormat) subject).getQueryString();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWStringQueryFormat) subject).setQueryString((String) value);
             }

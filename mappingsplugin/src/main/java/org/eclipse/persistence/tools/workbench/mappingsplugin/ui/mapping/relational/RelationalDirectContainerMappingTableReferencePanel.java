@@ -34,10 +34,12 @@ final class RelationalDirectContainerMappingTableReferencePanel
         super(subjectHolder, contextHolder);
     }
 
+    @Override
     protected MWTable defaultNewReferenceSourceTable() {
         return this.mapping().getTargetTable();
     }
 
+    @Override
     protected MWTable defaultNewReferenceTargetTable() {
         Iterator candidateTables = this.mapping().getParentRelationalDescriptor().candidateTables();
         return candidateTables.hasNext() ? (MWTable) candidateTables.next() : null;

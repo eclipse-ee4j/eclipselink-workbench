@@ -28,6 +28,7 @@ final class MapAsRelationalDirectCollectionAction
     MapAsRelationalDirectCollectionAction(WorkbenchContext context) {
         super(context);
     }
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.directCollection");
@@ -36,6 +37,7 @@ final class MapAsRelationalDirectCollectionAction
         this.initializeToolTipText("MAP_AS_DIRECT_COLLECTION_ACTION.toolTipText");
     }
 
+    @Override
     protected Class mappingClass() {
         return MWRelationalDirectCollectionMapping.class;
     }

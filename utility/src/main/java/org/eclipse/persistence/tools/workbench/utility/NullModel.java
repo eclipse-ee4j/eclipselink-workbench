@@ -46,6 +46,7 @@ public class NullModel
     /**
      * @see Model#addStateChangeListener(org.eclipse.persistence.tools.workbench.utility.events.StateChangeListener)
      */
+    @Override
     public void addStateChangeListener(StateChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -53,6 +54,7 @@ public class NullModel
     /**
      * @see Model#removeStateChangeListener(org.eclipse.persistence.tools.workbench.utility.events.StateChangeListener)
      */
+    @Override
     public void removeStateChangeListener(StateChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -60,6 +62,7 @@ public class NullModel
     /**
      * @see Model#addPropertyChangeListener(java.beans.PropertyChangeListener)
      */
+    @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -67,6 +70,7 @@ public class NullModel
     /**
      * @see Model#addPropertyChangeListener(String, java.beans.PropertyChangeListener)
      */
+    @Override
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -74,6 +78,7 @@ public class NullModel
     /**
      * @see Model#removePropertyChangeListener(java.beans.PropertyChangeListener)
      */
+    @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -81,6 +86,7 @@ public class NullModel
     /**
      * @see Model#removePropertyChangeListener(String, java.beans.PropertyChangeListener)
      */
+    @Override
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -88,6 +94,7 @@ public class NullModel
     /**
      * @see Model#addCollectionChangeListener(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener)
      */
+    @Override
     public void addCollectionChangeListener(CollectionChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -95,6 +102,7 @@ public class NullModel
     /**
      * @see Model#addCollectionChangeListener(String, org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener)
      */
+    @Override
     public void addCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -102,6 +110,7 @@ public class NullModel
     /**
      * @see Model#removeCollectionChangeListener(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener)
      */
+    @Override
     public void removeCollectionChangeListener(CollectionChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -109,6 +118,7 @@ public class NullModel
     /**
      * @see Model#removeCollectionChangeListener(String, org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener)
      */
+    @Override
     public void removeCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -116,6 +126,7 @@ public class NullModel
     /**
      * @see Model#addListChangeListener(org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener)
      */
+    @Override
     public void addListChangeListener(ListChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -123,6 +134,7 @@ public class NullModel
     /**
      * @see Model#addListChangeListener(String, org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener)
      */
+    @Override
     public void addListChangeListener(String listName, ListChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -130,6 +142,7 @@ public class NullModel
     /**
      * @see Model#removeListChangeListener(org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener)
      */
+    @Override
     public void removeListChangeListener(ListChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -137,6 +150,7 @@ public class NullModel
     /**
      * @see Model#removeListChangeListener(String, org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener)
      */
+    @Override
     public void removeListChangeListener(String listName, ListChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -144,6 +158,7 @@ public class NullModel
     /**
      * @see Model#addTreeChangeListener(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeListener)
      */
+    @Override
     public void addTreeChangeListener(TreeChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -151,6 +166,7 @@ public class NullModel
     /**
      * @see Model#addTreeChangeListener(String, org.eclipse.persistence.tools.workbench.utility.events.TreeChangeListener)
      */
+    @Override
     public void addTreeChangeListener(String treeName, TreeChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -158,6 +174,7 @@ public class NullModel
     /**
      * @see Model#removeTreeChangeListener(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeListener)
      */
+    @Override
     public void removeTreeChangeListener(TreeChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -165,6 +182,7 @@ public class NullModel
     /**
      * @see Model#removeTreeChangeListener(String, org.eclipse.persistence.tools.workbench.utility.events.TreeChangeListener)
      */
+    @Override
     public void removeTreeChangeListener(String treeName, TreeChangeListener listener) {
         // ignore listeners - nothing ever changes
     }
@@ -175,6 +193,7 @@ public class NullModel
     /**
      * @see Object#clone()
      */
+    @Override
     public synchronized Object clone() {
         try {
             return super.clone();
@@ -186,6 +205,7 @@ public class NullModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

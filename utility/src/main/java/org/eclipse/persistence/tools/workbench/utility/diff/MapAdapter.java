@@ -48,6 +48,7 @@ public class MapAdapter
     /**
      * @see ContainerDifferentiator.Adapter#diffIsFatal(Object, Object)
      */
+    @Override
     public boolean diffIsFatal(Object object1, Object object2) {
         if ( ! (object1 instanceof Map)) {
             return true;
@@ -61,6 +62,7 @@ public class MapAdapter
     /**
      * @see ContainerDifferentiator.Adapter#containerClass()
      */
+    @Override
     public Class containerClass() {
         return Map.class;
     }
@@ -68,6 +70,7 @@ public class MapAdapter
     /**
      * @see ContainerDifferentiator.Adapter#size(Object)
      */
+    @Override
     public int size(Object container) {
         return ((Map) container).size();
     }
@@ -75,6 +78,7 @@ public class MapAdapter
     /**
      * @see ContainerDifferentiator.Adapter#iterator(Object)
      */
+    @Override
     public Iterator iterator(Object container) {
         return ((Map) container).entrySet().iterator();
     }
@@ -82,6 +86,7 @@ public class MapAdapter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "MapAdapter";
     }

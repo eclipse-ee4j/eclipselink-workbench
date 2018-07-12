@@ -82,6 +82,7 @@ abstract class AbstractEditorView {
 
     private PropertyChangeListener buildNodeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AbstractEditorView.this.nodeChanged((EditorNode) e.getNewValue());
             }

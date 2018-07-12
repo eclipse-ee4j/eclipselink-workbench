@@ -104,6 +104,7 @@ public class ClassDependencyGraph {
         return this.nodes.iterator();
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nodes.size() + '/' + this.allNodes.size() + " nodes)";
     }
@@ -215,6 +216,7 @@ public class ClassDependencyGraph {
             return this.referencingNodes.keySet().iterator();
         }
 
+        @Override
         public String toString() {
             return ClassTools.toStringClassNameForObject(this) + "(" + this.className + ")";
         }

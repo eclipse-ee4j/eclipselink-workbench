@@ -78,11 +78,13 @@ public class MWExpressionTests extends TestCase
         return (MWDirectToFieldMapping) ((MWTableDescriptor) getDescriptorWithShortName("Employee")).mappingNamed("lastName");
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.employeeProject = new EmployeeProject().getProject();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

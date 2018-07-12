@@ -79,6 +79,7 @@ public class ArrayListIteratorTests extends ArrayIteratorTests {
         assertEquals(i - 1, stream.previousIndex());
     }
 
+    @Override
     public void testNoSuchElementException() {
         boolean exCaught = false;
         ListIterator stream = this.buildListIterator();
@@ -127,10 +128,12 @@ public class ArrayListIteratorTests extends ArrayIteratorTests {
         return new ArrayListIterator(array);
     }
 
+    @Override
     Iterator buildIterator(Object[] array) {
         return new ArrayListIterator(array);
     }
 
+    @Override
     Iterator buildIterator(Object[] array, int start, int length) {
         return new ArrayListIterator(array, start, length);
     }

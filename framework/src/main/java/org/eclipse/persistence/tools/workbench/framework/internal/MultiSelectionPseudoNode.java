@@ -78,6 +78,7 @@ final class MultiSelectionPseudoNode
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.selectedNodesHolder = new SimpleListValueModel();
@@ -87,18 +88,23 @@ final class MultiSelectionPseudoNode
 
     private ListChangeListener buildBranchApplicationProblemsListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 MultiSelectionPseudoNode.this.branchProblemsChanged();
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 MultiSelectionPseudoNode.this.branchProblemsChanged();
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 MultiSelectionPseudoNode.this.branchProblemsChanged();
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 MultiSelectionPseudoNode.this.branchProblemsChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "branch app problems listener");
             }
@@ -108,10 +114,12 @@ final class MultiSelectionPseudoNode
 
     // ********** AbstractTreeNodeValueModel overrides **********
 
+    @Override
     public boolean equals(Object o) {
         return this == o;
     }
 
+    @Override
     public int hashCode() {
         return System.identityHashCode(this);
     }
@@ -123,10 +131,12 @@ final class MultiSelectionPseudoNode
      * this node does not have a value; do not call this method
      * willy-nilly on a collection of heterogeneous nodes  ~bjv
      */
+    @Override
     public Object getValue() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     protected String buildDisplayString() {
         return this.resourceRepository().getString("MULTI_SELECTION_DISPLAY_STRING");
     }
@@ -134,6 +144,7 @@ final class MultiSelectionPseudoNode
     /**
      * we don't have an icon
      */
+    @Override
     protected IconBuilder buildIconBuilder() {
         return IconBuilder.NULL_INSTANCE;
     }
@@ -141,6 +152,7 @@ final class MultiSelectionPseudoNode
     /**
      * we are never dirty
      */
+    @Override
     protected boolean buildDirtyFlag() {
         return false;
     }
@@ -148,6 +160,7 @@ final class MultiSelectionPseudoNode
     /**
      * increase visibility slightly for listener
      */
+    @Override
     protected void branchProblemsChanged() {
         super.branchProblemsChanged();
     }
@@ -155,6 +168,7 @@ final class MultiSelectionPseudoNode
     /**
      * delegate to the selected nodes
      */
+    @Override
     protected void addExclusiveApplicationProblemsTo(List list) {
         for (Iterator stream = this.selectedNodes(); stream.hasNext(); ) {
             ((ApplicationProblemContainer) stream.next()).addApplicationProblemsTo(list);
@@ -164,6 +178,7 @@ final class MultiSelectionPseudoNode
     /**
      * delegate to the selected nodes
      */
+    @Override
     public void addBranchApplicationProblemsTo(List list) {
         for (Iterator stream = this.selectedNodes(); stream.hasNext(); ) {
             ((ApplicationProblemContainer) stream.next()).addBranchApplicationProblemsTo(list);
@@ -173,10 +188,12 @@ final class MultiSelectionPseudoNode
     /**
      * should never be called...
      */
+    @Override
     public boolean containsBranchApplicationProblemFor(Problem problem) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void printBranchApplicationProblemsOn(IndentingPrintWriter writer) {
         if (this.branchApplicationProblemsSize() == 0) {
             return;
@@ -191,9 +208,11 @@ final class MultiSelectionPseudoNode
      * which is OK, but we don't have a value that we need to listen to;
      * our list of problems is driven by the list of selected nodes
      */
+    @Override
     protected void engageValueBranchProblems() {
         // do nothing since we don't have a value
     }
+    @Override
     protected void disengageValueBranchProblems() {
         // do nothing since we don't have a value
     }
@@ -203,18 +222,22 @@ final class MultiSelectionPseudoNode
      * which is OK, but we don't have a value that we need to listen to;
      * the icon and text never change
      */
+    @Override
     protected void engageValuePropertiesPageTitleIcon() {
         // nothing to engage
         this.rebuildPropertiesPageTitleIconBuilder();
         this.rebuildPropertiesPageTitleIcon();
     }
+    @Override
     protected void disengageValuePropertiesPageTitleIcon() {
         // nothing to disengage
     }
+    @Override
     protected void engageValuePropertiesPageTitleText() {
         // nothing to engage
         this.rebuildPropertiesPageTitleText();
     }
+    @Override
     protected void disengageValuePropertiesPageTitleText() {
         // nothing to disengage
     }
@@ -222,10 +245,12 @@ final class MultiSelectionPseudoNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         throw new UnsupportedOperationException();
     }
@@ -237,6 +262,7 @@ final class MultiSelectionPseudoNode
      * the workspace view should only have one multi-select node,
      * so we only need one properties page
      */
+    @Override
     public Component propertiesPage(WorkbenchContext workbenchContext) {
         if (this.propertiesPage == null) {
             WorkbenchContext ctx = this.buildLocalWorkbenchContext(workbenchContext);
@@ -246,6 +272,7 @@ final class MultiSelectionPseudoNode
         return this.propertiesPage;
     }
 
+    @Override
     public void releasePropertiesPage(Component page) {
         // do nothing
     }
@@ -270,6 +297,7 @@ final class MultiSelectionPseudoNode
         return (Iterator) this.selectedNodesHolder.getValue();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append("[multiple nodes]");
     }
@@ -290,6 +318,7 @@ final class MultiSelectionPseudoNode
             super(context);
         }
 
+        @Override
         protected Component buildPage() {
             JList listBox = SwingComponentFactory.buildList(this.buildSelectedNodesListModel());
             listBox.setBorder(BorderFactory.createEmptyBorder());

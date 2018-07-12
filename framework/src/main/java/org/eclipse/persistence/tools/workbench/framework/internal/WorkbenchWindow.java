@@ -482,11 +482,13 @@ final class WorkbenchWindow
 
     private FrameworkAction buildNewToolBarAction() {
         return new AbstractFrameworkAction(this.getContext()) {
+            @Override
             protected void initialize() {
                 this.initializeIcon("file");
                 this.initializeText("file.new");
                 this.initializeToolTipText("file.new.toolTipText");
             }
+            @Override
             protected void execute() {
                 // do nothing - the DropDownButton will display the pop-up menu
             }
@@ -519,6 +521,7 @@ final class WorkbenchWindow
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 WorkbenchWindow.this.treeSelectionChanged();
             }
@@ -671,6 +674,7 @@ final class WorkbenchWindow
 
     private StateChangeListener buildRecentFilesListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 WorkbenchWindow.this.recentFilesChanged();
             }
@@ -842,18 +846,23 @@ final class WorkbenchWindow
     private class LocalWorkbenchContext
         extends AbstractWorkbenchContext
     {
+        @Override
         public ApplicationContext getApplicationContext() {
             return WorkbenchWindow.this.applicationContext();
         }
+        @Override
         public Window getCurrentWindow() {
             return WorkbenchWindow.this;
         }
+        @Override
         public NavigatorSelectionModel getNavigatorSelectionModel() {
             return WorkbenchWindow.this.navigatorSelectionModel();
         }
+        @Override
         public ActionRepository getActionRepository() {
             return WorkbenchWindow.this.getActionRepository();
         }
+        @Override
         public Component getPropertiesPage() {
             return WorkbenchWindow.this.getPropertiesPage();
         }
@@ -861,9 +870,11 @@ final class WorkbenchWindow
 
 
     private class LocalWindowListener extends WindowAdapter  {
+        @Override
         public void windowClosing(WindowEvent e) {
             WorkbenchWindow.this.closing();
         }
+        @Override
         public void windowClosed(WindowEvent e) {
             WorkbenchWindow.this.closed();
         }

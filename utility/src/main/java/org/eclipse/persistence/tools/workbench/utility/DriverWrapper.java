@@ -94,6 +94,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#connect(String, java.util.Properties)
      */
+    @Override
     public Connection connect(String url, Properties info) throws SQLException {
         return this.driver.connect(url, info);
     }
@@ -101,6 +102,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#acceptsURL(String)
      */
+    @Override
     public boolean acceptsURL(String url) throws SQLException {
         return this.driver.acceptsURL(url);
     }
@@ -108,6 +110,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#getParentLogger()
      */
+    @Override
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return this.driver.getParentLogger();
     }
@@ -115,6 +118,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#getPropertyInfo(String, java.util.Properties)
      */
+    @Override
     public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
         return this.driver.getPropertyInfo(url, info);
     }
@@ -122,6 +126,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#getMajorVersion()
      */
+    @Override
     public int getMajorVersion() {
         return this.driver.getMajorVersion();
     }
@@ -129,6 +134,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#getMinorVersion()
      */
+    @Override
     public int getMinorVersion() {
         return this.driver.getMinorVersion();
     }
@@ -136,6 +142,7 @@ public class DriverWrapper implements Driver {
     /**
      * @see java.sql.Driver#jdbcCompliant()
      */
+    @Override
     public boolean jdbcCompliant() {
         return this.driver.jdbcCompliant();
     }

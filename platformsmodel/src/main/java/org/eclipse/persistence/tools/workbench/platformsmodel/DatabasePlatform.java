@@ -129,6 +129,7 @@ public final class DatabasePlatform
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.runtimePlatformClassName = this.defaultRuntimePlatformClassName();
@@ -254,6 +255,7 @@ public final class DatabasePlatform
     // ***** database types
     public Iterator databaseTypes() {
         return new CloneIterator(this.databaseTypes) {
+            @Override
             protected void remove(Object current) {
                 DatabasePlatform.this.removeDatabaseType((DatabaseType) current);
             }
@@ -338,6 +340,7 @@ public final class DatabasePlatform
      */
     private Iterator internalJDBCTypeToDatabaseTypeMappings() {
         return new CloneIterator(this.jdbcTypeToDatabaseTypeMappings) {
+            @Override
             protected void remove(Object current) {
                 DatabasePlatform.this.removeJDBCTypeToDatabaseTypeMapping((JDBCTypeToDatabaseTypeMapping) current);
             }
@@ -418,6 +421,7 @@ public final class DatabasePlatform
 
     private Iterator databaseTypeNames() {
         return new TransformationIterator(this.databaseTypes()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabaseType) next).getName();
             }
@@ -498,6 +502,7 @@ public final class DatabasePlatform
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#addChildrenTo(java.util.List)
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.databaseTypes) { children.addAll(this.databaseTypes); }
@@ -507,6 +512,7 @@ public final class DatabasePlatform
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#nodeRemoved(org.eclipse.persistence.tools.workbench.utility.Node)
      */
+    @Override
     public void nodeRemoved(org.eclipse.persistence.tools.workbench.utility.node.Node node) {
         super.nodeRemoved(node);
         for (Iterator stream = this.internalJDBCTypeToDatabaseTypeMappings(); stream.hasNext(); ) {
@@ -698,6 +704,7 @@ public final class DatabasePlatform
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
      */
+    @Override
     public String displayString() {
         return this.name;
     }
@@ -705,6 +712,7 @@ public final class DatabasePlatform
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }

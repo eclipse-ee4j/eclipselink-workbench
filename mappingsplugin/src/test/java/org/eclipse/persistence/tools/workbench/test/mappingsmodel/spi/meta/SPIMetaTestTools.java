@@ -157,6 +157,7 @@ public class SPIMetaTestTools {
 
     public static Iterator classNames(Class[] javaClasses) {
         return new TransformationIterator(new ArrayIterator(javaClasses)) {
+            @Override
             protected Object transform(Object next) {
                 return ((Class) next).getName();
             }
@@ -165,6 +166,7 @@ public class SPIMetaTestTools {
 
     public static Iterator classNames(ExternalClassDescription[] exTypes) {
         return new TransformationIterator(new ArrayIterator(exTypes)) {
+            @Override
             protected Object transform(Object next) {
                 return ((ExternalClassDescription) next).getName();
             }
@@ -177,6 +179,7 @@ public class SPIMetaTestTools {
 
     public static Iterator memberNames(Member[] javaMembers) {
         return new TransformationIterator(new ArrayIterator(javaMembers)) {
+            @Override
             protected Object transform(Object next) {
                 return ((Member) next).getName();
             }
@@ -185,6 +188,7 @@ public class SPIMetaTestTools {
 
     public static Iterator memberNames(ExternalMember[] exMembers) {
         return new TransformationIterator(new ArrayIterator(exMembers)) {
+            @Override
             protected Object transform(Object next) {
                 return ((ExternalMember) next).getName();
             }

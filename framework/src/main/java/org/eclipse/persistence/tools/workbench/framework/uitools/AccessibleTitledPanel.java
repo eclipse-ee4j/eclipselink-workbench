@@ -44,6 +44,7 @@ public class AccessibleTitledPanel
         super(layoutManager);
     }
 
+    @Override
     public AccessibleContext getAccessibleContext() {
         if (this.accessibleContext == null) {
             this.accessibleContext = new AccessibleAccessibleTitledPane();
@@ -100,6 +101,7 @@ public class AccessibleTitledPanel
         /**
          * Return the titled border text.
          */
+        @Override
         public String getTitledBorderText() {
             return traverseForTitleText(AccessibleTitledPanel.this);
         }
@@ -129,6 +131,7 @@ public class AccessibleTitledPanel
          * titles make really pretty inside borders but not very pretty outside
          * borders in compound border situations. It's rather arbitrary.
          */
+        @Override
         protected String getBorderTitle(Border border) {
             return this.getTitledBorderText();
         }

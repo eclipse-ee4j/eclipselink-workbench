@@ -36,6 +36,7 @@ public class SimpleStringHolder extends AbstractStringHolder {
     /**
      * @see StringHolder#getString()
      */
+    @Override
     public String getString() {
         return this.string;
     }

@@ -16,8 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
@@ -68,6 +66,7 @@ public abstract class MWExpression extends MWModel implements Undoable
 
     public abstract void clearExpressions();
 
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue)
     {
         if (propertyName == OPERATOR_TYPE_PROPERTY)

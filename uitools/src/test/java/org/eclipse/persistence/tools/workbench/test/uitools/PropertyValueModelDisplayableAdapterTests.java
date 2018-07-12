@@ -51,6 +51,7 @@ public class PropertyValueModelDisplayableAdapterTests
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.objectHolder = new SimplePropertyValueModel("foo");
@@ -59,10 +60,12 @@ public class PropertyValueModelDisplayableAdapterTests
 
     private Displayable buildDisplayableAdapter(PropertyValueModel pvm) {
         return new PropertyValueModelDisplayableAdapter(pvm) {
+            @Override
             public String displayString(Object obj) {
                 return (obj == null) ? "null" : ((String) obj).toUpperCase();
             }
 
+            @Override
             public Icon icon(Object obj) {
                 return (obj == null) ? null : new ImageIcon(((String) obj).getBytes());
             }
@@ -71,6 +74,7 @@ public class PropertyValueModelDisplayableAdapterTests
 
     private PropertyChangeListener buildListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyValueModelDisplayableAdapterTests.this.event = e;
             }
@@ -79,6 +83,7 @@ public class PropertyValueModelDisplayableAdapterTests
 
     private PropertyChangeListener buildDisplayStringListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 if (e.getPropertyName() == Displayable.DISPLAY_STRING_PROPERTY) {
                     PropertyValueModelDisplayableAdapterTests.this.displayStringEvent = e;
@@ -89,6 +94,7 @@ public class PropertyValueModelDisplayableAdapterTests
 
     private PropertyChangeListener buildIconListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 if (e.getPropertyName() == Displayable.ICON_PROPERTY) {
                     PropertyValueModelDisplayableAdapterTests.this.iconEvent = e;
@@ -97,6 +103,7 @@ public class PropertyValueModelDisplayableAdapterTests
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

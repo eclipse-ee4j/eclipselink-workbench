@@ -42,6 +42,7 @@ public final class EisTransformationMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
 
         return new XmlTransformationMappingPropertiesPage(getNodeHolder(), getWorkbenchContextHolder(), "mapping.eisTransformation");

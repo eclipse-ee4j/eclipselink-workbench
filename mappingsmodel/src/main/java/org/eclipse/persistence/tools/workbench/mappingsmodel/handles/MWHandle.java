@@ -72,6 +72,7 @@ public abstract class MWHandle  implements MWNode {
 
     // ********** containment hierarchy (parent/children) **********
 
+    @Override
     public final Node getParent() {
         return this.parent;
     }
@@ -80,6 +81,7 @@ public abstract class MWHandle  implements MWNode {
      * Set the object's parent in the containment hierarchy.
      * Most objects must have a parent.
      */
+    @Override
     public final void setParent(Node parent) {
         if (parent == null) {
             throw new NullPointerException();
@@ -88,19 +90,23 @@ public abstract class MWHandle  implements MWNode {
     }
 
     // handles do not have children
+    @Override
     public final Iterator children() {
         return NullIterator.instance();
     }
 
     // handles do not have children
+    @Override
     public final void setChildBackpointers() {
         // do nothing
     }
 
+    @Override
     public final boolean isDescendantOf(Node node) {
         return (this == node) || this.parent.isDescendantOf(node);
     }
 
+    @Override
     public final void addBranchReferencesTo(Collection branchReferences) {
         Node node = this.node();
         if (node != null) {
@@ -109,6 +115,7 @@ public abstract class MWHandle  implements MWNode {
     }
 
     // handles do not have children
+    @Override
     public final void addAllNodesTo(Collection nodes) {
         nodes.add(this);
     }
@@ -116,22 +123,27 @@ public abstract class MWHandle  implements MWNode {
 
     // ********** dirty flag support **********
 
+    @Override
     public final boolean isDirtyBranch() {
         return this.dirty;
     }
 
+    @Override
     public final void markBranchDirty() {
         throw new IllegalStateException("handles shouldn't have children");
     }
 
+    @Override
     public final void markEntireBranchDirty() {
         this.markDirty();
     }
 
+    @Override
     public final void cascadeMarkEntireBranchClean() {
         this.dirty = false;
     }
 
+    @Override
     public final void markBranchCleanIfPossible() {
         throw new IllegalStateException("handles shouldn't have children");
     }
@@ -144,10 +156,12 @@ public abstract class MWHandle  implements MWNode {
 
     // ********** change support **********
 
+    @Override
     public final ChangeNotifier getChangeNotifier() {
         return this.parent.getChangeNotifier();
     }
 
+    @Override
     public final void setChangeNotifier(ChangeNotifier changeNotifier) {
         throw new UnsupportedOperationException("Only root nodes implement #setChangeNotifier(ChangeNotifier): " + this);
     }
@@ -155,60 +169,72 @@ public abstract class MWHandle  implements MWNode {
 
     // ********** problems **********
 
+    @Override
     public final Node.Validator getValidator() {
         return this.parent.getValidator();
     }
 
+    @Override
     public final void setValidator(Node.Validator validator) {
         throw new UnsupportedOperationException("Only root nodes implement #setValidator(Node.Validator): " + this);
     }
 
     // handles will never have any problems, nor do they have any descendants
+    @Override
     public final ListIterator branchProblems() {
         return NullListIterator.instance();
     }
 
     // handles will never have any branch problems, nor do they have any descendants
+    @Override
     public final boolean hasBranchProblems() {
         return false;
     }
 
     // handles will never have any branch problems, nor do they have any descendants
+    @Override
     public final boolean containsBranchProblem(Problem problem) {
         return false;
     }
 
     // handles will never have any problems, their parents have the problems
+    @Override
     public final void validateBranch() {
         // do nothing
     }
 
     // handles will never have any problems, their parents have the problems
+    @Override
     public final boolean validateBranchInternal() {
         return false;
     }
 
     // handles will never have any branch problems, their parents have the problems
+    @Override
     public final void rebuildBranchProblems() {
         // do nothing
     }
 
     // handles will never have any problems, their parents have the problems
+    @Override
     public final void addBranchProblemsTo(List branchProblems) {
         // do nothing
     }
 
     // handles will never have any problems, their parents have the problems
+    @Override
     public final int branchProblemsSize() {
         return 0;
     }
 
     // handles will never have any problems, their parents have the problems
+    @Override
     public final void clearAllBranchProblems() {
         // do nothing
     }
 
     // handles will never have any problems, their parents have the problems
+    @Override
     public final boolean clearAllBranchProblemsInternal() {
         return false;
     }
@@ -216,6 +242,7 @@ public abstract class MWHandle  implements MWNode {
 
     // ********** convenience methods **********
 
+    @Override
     public final MWNode getMWParent() {
         return this.parent;
     }
@@ -227,6 +254,7 @@ public abstract class MWHandle  implements MWNode {
     // If Java ever allows us to override with a different return type, we can call this
     // getProject() and have MWRModel override and return an MWRProject.
     // Supposedly, this will happen in jdk 1.5....
+    @Override
     public final MWProject getProject() {
         return this.getMWParent().getProject();
     }
@@ -242,6 +270,7 @@ public abstract class MWHandle  implements MWNode {
      * Do NOT override this method.
      * Every model object should be able to return the class repository.
      */
+    @Override
     public final MWClassRepository getRepository() {
         return this.getProject().getClassRepository();
     }
@@ -263,6 +292,7 @@ public abstract class MWHandle  implements MWNode {
      * since that would probably drop any changes entered manually
      * by the user since the last refresh.
      */
+    @Override
     public final MWClass typeNamed(String typeName) {
         return this.getRepository().typeNamedInternal(typeName);
     }
@@ -283,6 +313,7 @@ public abstract class MWHandle  implements MWNode {
      * since that would probably drop any changes entered manually
      * by the user since the last refresh.
      */
+    @Override
     public final MWClass typeFor(Class javaClass) {
         return this.typeNamed(javaClass.getName());
     }
@@ -300,6 +331,7 @@ public abstract class MWHandle  implements MWNode {
      * a node that has been renamed, the handle must mark its branch
      * dirty so that the handle is saved with the new name.
      */
+    @Override
     public void nodeRenamed(Node node) {
         if ((this.node() != null) && this.node().isDescendantOf(node)) {
             this.markDirty();
@@ -310,6 +342,7 @@ public abstract class MWHandle  implements MWNode {
      * If the handle's node has been removed, or it is a descendant of
      * a node that has been removed, notify the scrubber.
      */
+    @Override
     public final void nodeRemoved(Node removedNode) {
         if ((this.node() != null) && this.node().isDescendantOf(removedNode)) {
             this.scrubber.nodeReferenceRemoved(this.node(), this);
@@ -317,16 +350,19 @@ public abstract class MWHandle  implements MWNode {
     }
 
     // synchronization is handled by the parent object, do not override
+    @Override
     public final void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         // do nothing
     }
 
     // synchronization is handled by the parent object, do not override
+    @Override
     public final void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         // do nothing
     }
 
     // synchronization is handled by the parent object, do not override
+    @Override
     public final void descriptorUnmapped(Collection mappings) {
         // do nothing
     }
@@ -351,6 +387,7 @@ public abstract class MWHandle  implements MWNode {
      * Do not override unless the handle is for a class or class sub-object
      *     (attribute, method, etc.)
      */
+    @Override
     public void resolveClassHandles() {
         // do nothing
     }
@@ -361,6 +398,7 @@ public abstract class MWHandle  implements MWNode {
      * Do not override unless the handle is for a descriptor or descriptor sub-object
      *     (mapping, xml data field, etc.)
      */
+    @Override
     public void resolveDescriptorHandles() {
         // do nothing
     }
@@ -371,6 +409,7 @@ public abstract class MWHandle  implements MWNode {
      * Do not override unless the handle is for a meta data object or sub-object
      *     (field, schema component, etc.)
      */
+    @Override
     public void resolveMetadataHandles() {
         // do nothing
     }
@@ -381,6 +420,7 @@ public abstract class MWHandle  implements MWNode {
      * Do not override unless the handle is for a meta data object or sub-object
      *     (column, schema component, etc.)
      */
+    @Override
     public void resolveColumnHandles() {
         // do nothing
     }
@@ -391,6 +431,7 @@ public abstract class MWHandle  implements MWNode {
      * Do not override unless the handle is for a meta data object or sub-object
      *     (field, schema component, etc.)
      */
+    @Override
     public void resolveReferenceHandles() {
         // do nothing
     }
@@ -401,10 +442,12 @@ public abstract class MWHandle  implements MWNode {
      * Do not override unless the handle is for a meta data object or sub-object
      *     (field, schema component, etc.)
      */
+    @Override
     public void resolveMethodHandles() {
         // do nothing
     }
 
+    @Override
     public void postProjectBuild() {
         if (this.scrubber == null) {
             throw new NullPointerException("This handle's 'scrubber' should have been set by its parent upon creation.");
@@ -417,12 +460,14 @@ public abstract class MWHandle  implements MWNode {
     /**
      * handles are not displayed
      */
+    @Override
     public final String displayString() {
         throw new UnsupportedOperationException();
     }
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         StringTools.buildSimpleToStringOn(this, sb);
@@ -454,9 +499,11 @@ public abstract class MWHandle  implements MWNode {
 
 
         NodeReferenceScrubber NULL_INSTANCE = new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 // do nothing
             }
+            @Override
             public String toString() {
                 return "NullReferenceScrubber";
             }

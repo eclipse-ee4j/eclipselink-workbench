@@ -105,6 +105,7 @@ final class EventListenersPane extends AbstractSubjectPanel
     {
         return new ListAspectAdapter(getSubjectHolder(), SessionAdapter.SESSION_EVENT_LISTENERS_CONFIGS_LIST)
         {
+            @Override
             protected ListIterator getValueFromSubject()
             {
                 SessionAdapter adapter = (SessionAdapter) this.subject;
@@ -127,6 +128,7 @@ final class EventListenersPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         AddRemoveListPanel eventListenersListPanel = buildEventListenerListPane();
@@ -147,6 +149,7 @@ final class EventListenersPane extends AbstractSubjectPanel
      */
     private class AddRemoveListAdapter implements AddRemoveListPanel.Adapter
     {
+        @Override
         public void addNewItem(ObjectListSelectionModel listSelectionModel)
         {
             SessionAdapter session = (SessionAdapter) subject();
@@ -168,6 +171,7 @@ final class EventListenersPane extends AbstractSubjectPanel
             }
         }
 
+        @Override
         public void removeSelectedItems(ObjectListSelectionModel listSelectionModel)
         {
             SessionAdapter adapter = (SessionAdapter) subject();
@@ -194,6 +198,7 @@ final class EventListenersPane extends AbstractSubjectPanel
                     AddRemoveListPanel.RIGHT);
         }
 
+        @Override
         protected String addButtonKey()
         {
             return "OPTIONS_EVENT_LISTENERS_ADD_BUTTON";
@@ -208,6 +213,7 @@ final class EventListenersPane extends AbstractSubjectPanel
             buttonPanel.add(removeButton);
         }
 
+        @Override
         protected String removeButtonKey()
         {
             return "OPTIONS_EVENT_LISTENERS_REMOVE_BUTTON";

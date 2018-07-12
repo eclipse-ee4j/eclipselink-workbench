@@ -43,10 +43,12 @@ public final class ServerLogAdapter extends LogAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new ServerLogConfig();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( "TODO: toString()");
@@ -62,14 +64,17 @@ public final class ServerLogAdapter extends LogAdapter {
     /**
      * Returns true if options are used.
      */
+    @Override
     public boolean optionsIsEnable() {
         return false;
     }
 
+    @Override
     public void enableOptions() {
         // do nothing
     }
 
+    @Override
     public void disableOptions() {
         // do nothing
     }

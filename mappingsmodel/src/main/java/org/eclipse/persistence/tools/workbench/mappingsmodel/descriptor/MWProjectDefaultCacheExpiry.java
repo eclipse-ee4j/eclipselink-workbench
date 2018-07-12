@@ -41,6 +41,7 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
     }
 
 
+    @Override
     public Date getDailyExpiryTime() {
         return getProjectCacheExpiry().getDailyExpiryTime();
     }
@@ -55,6 +56,7 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
         return false;
     }
 
+    @Override
     public void setDailyExpiryTime(Date dailyExpiryTime) {
         if (newExpiryTimeDifferent(dailyExpiryTime)) {
             getCachingPolicy().setUseProjectDefaultCacheExpiry(false);
@@ -62,6 +64,7 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
         }
     }
 
+    @Override
     public void setDailyExpiryTime(Calendar dailyExpiryTime) {
         if (valuesAreDifferent(dailyExpiryTime.getTime(), getDailyExpiryTime())) {
             getCachingPolicy().setUseProjectDefaultCacheExpiry(false);
@@ -69,10 +72,12 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
         }
     }
 
+    @Override
     public String getExpiryType() {
         return getProjectCacheExpiry().getExpiryType();
     }
 
+    @Override
     public void setExpiryType(String expiryType) {
         if (valuesAreDifferent(expiryType, getExpiryType())) {
             getCachingPolicy().setUseProjectDefaultCacheExpiry(false);
@@ -80,10 +85,12 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
         }
     }
 
+    @Override
     public boolean getUpdateReadTimeOnUpdate() {
         return getProjectCacheExpiry().getUpdateReadTimeOnUpdate();
     }
 
+    @Override
     public void setUpdateReadTimeOnUpdate(boolean updateReadTimeOnUpdate) {
         if (updateReadTimeOnUpdate != getUpdateReadTimeOnUpdate()) {
             getCachingPolicy().setUseProjectDefaultCacheExpiry(false);
@@ -92,10 +99,12 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
     }
 
 
+    @Override
     public Long getTimeToLiveExpiry() {
         return getProjectCacheExpiry().getTimeToLiveExpiry();
     }
 
+    @Override
     public void setTimeToLiveExpiry(Long timeToLiveExpiry) {
         if (timeToLiveExpiry != getTimeToLiveExpiry()) {
             getCachingPolicy().setUseProjectDefaultCacheExpiry(false);
@@ -107,6 +116,7 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
         return (MWDescriptorCachingPolicy) getParent();
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         if (getExpiryType() == CACHE_EXPIRY_NO_EXPIRY) {
             // Do nothing, default case
@@ -122,6 +132,7 @@ public final class MWProjectDefaultCacheExpiry extends MWModel implements MWCach
         }
     }
 
+    @Override
     public MWCacheExpiry getPersistedPolicy() {
         return null;
     }

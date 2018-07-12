@@ -48,8 +48,6 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.exceptions.EclipseLinkException;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
@@ -144,6 +142,7 @@ public final class MWDatabase
     /**
      * initialize transient state
      */
+    @Override
     public void initialize() {
         super.initialize();
         // the tables are not mapped directly
@@ -153,6 +152,7 @@ public final class MWDatabase
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.loginSpecs = new Vector();
@@ -198,6 +198,7 @@ public final class MWDatabase
 
     public Iterator loginSpecs() {
         return new CloneIterator(this.loginSpecs) {
+            @Override
             protected void remove(Object current) {
                 MWDatabase.this.removeLoginSpec((MWLoginSpec) current);
             }
@@ -246,6 +247,7 @@ public final class MWDatabase
 
     public Iterator loginSpecNames() {
         return new TransformationIterator(this.loginSpecs()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWLoginSpec) next).getName();
             }
@@ -283,6 +285,7 @@ public final class MWDatabase
 
     public Iterator tables() {
         return new CloneIterator(this.tables) {
+            @Override
             protected void remove(Object current) {
                 MWDatabase.this.removeTable((MWTable) current);
             }
@@ -381,6 +384,7 @@ public final class MWDatabase
      */
     public Iterator tableNames() {
         return new TransformationIterator(this.tables()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWTable) next).getName();
             }
@@ -458,6 +462,7 @@ public final class MWDatabase
     /**
      * 'connected' is a virtual property
      */
+    @Override
     protected void addTransientAspectNamesTo(Set transientAspectNames) {
         super.addTransientAspectNamesTo(transientAspectNames);
         transientAspectNames.add(CONNECTED_PROPERTY);
@@ -509,6 +514,7 @@ public final class MWDatabase
 
     // ********** model synchronization **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.loginSpecs) { children.addAll(this.loginSpecs); }
@@ -531,6 +537,7 @@ public final class MWDatabase
      * the database's descendants have NO references (handles)
      * to any models other than other descendants of the database
      */
+    @Override
     public void nodeRemoved(Node node) {
         if (node.isDescendantOf(this)) {
             super.nodeRemoved(node);
@@ -542,6 +549,7 @@ public final class MWDatabase
      * the database's descendants have NO references (handles)
      * to any models other than other descendants of the database
      */
+    @Override
     public void nodeRenamed(Node node) {
         if (node.isDescendantOf(this)) {
             super.nodeRenamed(node);
@@ -559,6 +567,7 @@ public final class MWDatabase
      * performance tuning: ignore this method - assume there are no
      * references to mappings in the database or its descendants
      */
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         // do nothing
     }
@@ -567,6 +576,7 @@ public final class MWDatabase
      * performance tuning: ignore this method - assume there are no
      * references to descriptors in the database or its descendants
      */
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         // do nothing
     }
@@ -575,6 +585,7 @@ public final class MWDatabase
      * performance tuning: ignore this method - assume there are no
      * references to mappings in the database or its descendants
      */
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         // do nothing
     }
@@ -841,6 +852,7 @@ public final class MWDatabase
 
     public Iterator runtimeTableDefinitions() {
         return new TransformationIterator(this.tables()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWTable) next).buildRuntimeTableDefinition();
             }
@@ -911,6 +923,7 @@ public final class MWDatabase
 
     // ********** printing and displaying **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getDatabasePlatform().getName());
         sb.append(" : ");
@@ -918,6 +931,7 @@ public final class MWDatabase
         sb.append(" tables");
     }
 
+    @Override
     public String displayString() {
         StringBuffer sb = new StringBuffer();
         sb.append("Database (");
@@ -929,22 +943,27 @@ public final class MWDatabase
 
     // ********** SubComponentContainer implementation **********
 
+    @Override
     public Iterator projectSubFileComponents() {
         return this.tables();
     }
 
+    @Override
     public void setProjectSubFileComponents(Collection subComponents) {
         this.tables = subComponents;
     }
 
+    @Override
     public Iterator originalProjectSubFileComponentNames() {
         return this.tableNames.iterator();
     }
 
+    @Override
     public void setOriginalProjectSubFileComponentNames(Collection originalSubComponentNames) {
         this.tableNames = originalSubComponentNames;
     }
 
+    @Override
     public boolean hasChangedMainProjectSaveFile() {
         if (this.isDirty()) {
             // the database itself is dirty
@@ -1088,9 +1107,11 @@ public final class MWDatabase
             this.connection = connection;
         }
         /** this is the only method of note */
+        @Override
         public Connection connect(Properties properties, Session session) {
             return this.connection;
         }
+        @Override
         public Object clone() {
             try {
                 return super.clone();
@@ -1098,9 +1119,11 @@ public final class MWDatabase
                 throw new InternalError();
             }
         }
+        @Override
         public String getConnectionDetails() {
             return "MWDatabase.LocalConnectorAdapter";
         }
+        @Override
         public void toString(PrintWriter writer) {
             writer.print(this.getConnectionDetails());
         }

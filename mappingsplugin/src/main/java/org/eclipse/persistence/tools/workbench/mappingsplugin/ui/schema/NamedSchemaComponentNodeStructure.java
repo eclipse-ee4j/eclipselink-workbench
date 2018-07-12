@@ -51,6 +51,7 @@ abstract class NamedSchemaComponentNodeStructure
 
     private PropertyChangeListener buildQNameListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 NamedSchemaComponentNodeStructure.this.qNameChanged();
             }
@@ -60,6 +61,7 @@ abstract class NamedSchemaComponentNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     void disengageComponent() {
         ((MWNamedSchemaComponent) this.getComponent()).getTargetNamespace().removePropertyChangeListener(MWNamespace.NAMESPACE_PREFIX_PROPERTY, this.qNameListener);
         super.disengageComponent();
@@ -83,10 +85,12 @@ abstract class NamedSchemaComponentNodeStructure
 
     SchemaComponentDetail buildNameDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "name";
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 return (MWNamedSchemaComponent) this.component;
             }
@@ -101,6 +105,7 @@ abstract class NamedSchemaComponentNodeStructure
 
     // **************** Displayable contract **********************************
 
+    @Override
     public String displayString() {
         MWNamedSchemaComponent namedComponent = (MWNamedSchemaComponent) this.getComponent();
         String designator = (namedComponent.isReference()) ? "ref" : "name";

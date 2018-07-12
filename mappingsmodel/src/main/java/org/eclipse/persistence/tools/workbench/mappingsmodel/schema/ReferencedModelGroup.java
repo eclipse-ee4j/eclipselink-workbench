@@ -42,10 +42,12 @@ public final class ReferencedModelGroup
 
     // **************** SchemaComponentReference contract *********************
 
+    @Override
     protected MWNamedSchemaComponent getReferencedComponent() {
         return this.modelGroupDef;
     }
 
+    @Override
     protected void resolveReference(String modelGroupDefNamespace, String modelGroupDefName) {
         this.modelGroupDef = (ModelGroupDefinition) this.getSchema().modelGroupDefinition(modelGroupDefNamespace, modelGroupDefName);
     }
@@ -53,10 +55,12 @@ public final class ReferencedModelGroup
 
     // **************** MWModelGroup contract ***********************************
 
+    @Override
     public String getCompositor() {
         return this.modelGroupDef.getModelGroup().getCompositor();
     }
 
+    @Override
     public boolean containsWildcard() {
         return this.modelGroupDef.getModelGroup().containsWildcard();
     }
@@ -64,22 +68,27 @@ public final class ReferencedModelGroup
 
     // **************** MWParticle contract ***********************************
 
+    @Override
     public int getMinOccurs() {
         return this.modelGroupDef.getModelGroup().getMinOccurs();
     }
 
+    @Override
     public int getMaxOccurs() {
         return this.modelGroupDef.getModelGroup().getMaxOccurs();
     }
 
+    @Override
     public boolean isDescriptorContextComponent() {
         return false;
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return this.modelGroupDef.compareSchemaOrder(element1, element2);
     }
 
+    @Override
     public boolean isEquivalentTo(XSParticleDecl xsParticle) {
         return xsParticle.getTerm() instanceof XSModelGroup;
     }
@@ -87,10 +96,12 @@ public final class ReferencedModelGroup
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public MWNamedSchemaComponent nestedNamedComponent(QName qName) {
         return this.modelGroupDef.nestedNamedComponent(qName);
     }
 
+    @Override
     public int totalElementCount() {
         return this.modelGroupDef.totalElementCount();
     }

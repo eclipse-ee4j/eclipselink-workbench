@@ -72,9 +72,11 @@ public class CompositeCollectionValueModel
 
     /** The transformer used when the #transform(Object) method is overridden. */
     private static final Transformer DISABLED_TRANSFORMER = new Transformer() {
+        @Override
         public Object transform(Object o) {
             throw new IllegalStateException("CompositeCollectionValueModel.transform(Object) was not implemented.");
         }
+        @Override
         public String toString() {
             return "Disabled Transformer";
         }
@@ -123,6 +125,7 @@ public class CompositeCollectionValueModel
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.components = new IdentityHashMap();
@@ -133,15 +136,19 @@ public class CompositeCollectionValueModel
 
     protected CollectionChangeListener buildComponentListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CompositeCollectionValueModel.this.componentItemsAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CompositeCollectionValueModel.this.componentItemsRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CompositeCollectionValueModel.this.componentCollectionChanged(e);
             }
+            @Override
             public String toString() {
                 return "component listener";
             }
@@ -154,12 +161,14 @@ public class CompositeCollectionValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return new CompositeIterator(this.buildCollectionsIterators());
     }
 
     protected Iterator buildCollectionsIterators() {
         return new TransformationIterator(this.collections.values().iterator()) {
+            @Override
             protected Object transform(Object next) {
                 return ((ArrayList) next).iterator();
             }
@@ -172,6 +181,7 @@ public class CompositeCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return this.size;
     }
@@ -182,6 +192,7 @@ public class CompositeCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#engageModel()
      */
+    @Override
     protected void engageModel() {
         super.engageModel();
         // synch our cache *after* we start listening to the wrapped collection,
@@ -195,6 +206,7 @@ public class CompositeCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#disengageModel()
      */
+    @Override
     protected void disengageModel() {
         super.disengageModel();
         // stop listening to the components...
@@ -212,6 +224,7 @@ public class CompositeCollectionValueModel
      * add their corresponding items to our cache.
      * @see CollectionValueModelWrapper#itemsAdded(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     protected void itemsAdded(CollectionChangeEvent e) {
         this.addComponentSources(e.items());
     }
@@ -248,6 +261,7 @@ public class CompositeCollectionValueModel
      * remove their corresponding items from our cache.
      * @see CollectionValueModelWrapper#itemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     protected void itemsRemoved(CollectionChangeEvent e) {
         this.removeComponentSources(e.items());
     }
@@ -284,6 +298,7 @@ public class CompositeCollectionValueModel
      * rebuild our cache.
      * @see CollectionValueModelWrapper#collectionChanged(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     protected void collectionChanged(CollectionChangeEvent e) {
         // copy the keys so we don't eat our own tail
         this.removeComponentSources(new ArrayList(this.components.keySet()).iterator());

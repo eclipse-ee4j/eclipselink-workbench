@@ -132,6 +132,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), Displayable.DISPLAY_STRING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 Nominative nominative = (Nominative) subject;
@@ -151,6 +152,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 if (e.getNewValue() != null)
@@ -222,6 +224,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -294,6 +297,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
          *
          * @param listSelectionModel The model containing the selected items
          */
+        @Override
         public void addNewItem(ObjectListSelectionModel listSelectionModel)
         {
             addNewSession();
@@ -304,6 +308,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
          *
          * @return "PROJECT_SESSIONS_RENAME_BUTTON"
          */
+        @Override
         public String optionalButtonKey()
         {
             return "PROJECT_SESSIONS_RENAME_BUTTON";
@@ -314,11 +319,13 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
          *
          * @param listSelectionModel The model containing the selected item
          */
+        @Override
         public void optionOnSelection(ObjectListSelectionModel selectionModel)
         {
             renameSession((SessionAdapter) selectionModel.getSelectedValue());
         }
 
+        @Override
         public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
             return listSelectionModel.getSelectedValuesSize() == 1;
         }
@@ -328,6 +335,7 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
          *
          * @param listSelectionModel The model containing the selected items
          */
+        @Override
         public void removeSelectedItems(ObjectListSelectionModel listSelectionModel)
         {
             Collection sessions = CollectionTools.collection(listSelectionModel.getSelectedValues());
@@ -352,11 +360,13 @@ public abstract class AbstractSessionsListPane extends AbstractSubjectPanel
                     AddRemoveListPanel.RIGHT);
         }
 
+        @Override
         protected String addButtonKey()
         {
             return "PROJECT_SESSIONS_ADD_BUTTON";
         }
 
+        @Override
         protected String removeButtonKey()
         {
             return "PROJECT_SESSIONS_REMOVE_BUTTON";

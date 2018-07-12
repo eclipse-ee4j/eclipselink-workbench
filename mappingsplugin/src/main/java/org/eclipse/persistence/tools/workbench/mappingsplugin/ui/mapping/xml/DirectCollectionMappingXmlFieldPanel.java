@@ -43,6 +43,7 @@ public final class DirectCollectionMappingXmlFieldPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         super.initializeLayout();
 
@@ -116,10 +117,12 @@ public final class DirectCollectionMappingXmlFieldPanel
 
     private PropertyValueModel buildUseSingleNodeValueHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWXmlField.USE_SINGLE_NODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlField) this.subject).usesSingleNode());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlField) this.subject).setUseSingleNode(((Boolean) value).booleanValue());
             }

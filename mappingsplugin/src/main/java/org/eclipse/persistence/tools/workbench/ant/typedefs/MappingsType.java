@@ -39,6 +39,7 @@ public abstract class MappingsType extends DataType {
         this.stringRepository = new DefaultStringRepository( AntExtensionBundle.class);
     }
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         StringTools.buildSimpleToStringOn( this, sb);

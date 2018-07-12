@@ -25,11 +25,13 @@ final class RemoveInheritedAttributesAction extends AbstractMapInheritedAttribut
         super(context);
     }
 
+    @Override
     protected void execute(MWMappingDescriptor descriptor) throws ClassNotFoundException
     {
         descriptor.removeInheritedAttributes();
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();

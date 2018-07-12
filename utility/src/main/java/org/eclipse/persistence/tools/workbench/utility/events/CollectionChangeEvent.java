@@ -137,6 +137,7 @@ public class CollectionChangeEvent extends EventObject {
         return new CollectionChangeEvent(newSource, newCollectionName, this.items);
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.collectionName);
     }

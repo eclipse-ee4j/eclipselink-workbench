@@ -36,6 +36,7 @@ final class SaveAsAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.saveAs");
@@ -44,6 +45,7 @@ final class SaveAsAction
         this.initializeAccelerator("file.saveAs.ACCELERATOR");
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = this.selectedProjectNodes();
         for (int i = projectNodes.length; i-- > 0; ) {

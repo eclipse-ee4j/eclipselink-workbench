@@ -67,6 +67,7 @@ abstract class SchemaComponentNode
 
     protected ListValueModel buildChildrenModel() {
         return new TransformationListValueModelAdapter(this.buildStructuralComponentsAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return SchemaComponentNode.this.buildLocalComponentNode((MWSchemaComponent) item);
             }
@@ -75,6 +76,7 @@ abstract class SchemaComponentNode
 
     protected ListValueModel buildStructuralComponentsAdapter() {
         return new ListCurator(this.component) {
+            @Override
             public Iterator getValueForRecord() {
                 return ((MWSchemaComponent) subject).structuralComponents();
             }
@@ -89,6 +91,7 @@ abstract class SchemaComponentNode
 
     protected PropertyChangeListener buildDisplayStringChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 SchemaComponentNode.this.fireStateChanged();
             }
@@ -105,10 +108,12 @@ abstract class SchemaComponentNode
 
     // **************** TreeNodeValueModel contract ***************************
 
+    @Override
     public TreeNodeValueModel getParent() {
         return this.parent;
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
@@ -116,8 +121,10 @@ abstract class SchemaComponentNode
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {}
 
+    @Override
     protected void disengageValue() {
         this.structure.disengageComponent();
     }
@@ -125,6 +132,7 @@ abstract class SchemaComponentNode
 
     // **************** ValueModel contract ***********************************
 
+    @Override
     public Object getValue() {
         return this.component;
     }
@@ -132,10 +140,12 @@ abstract class SchemaComponentNode
 
     // **************** Displayable contract **********************************
 
+    @Override
     public String displayString() {
         return this.structure.displayString();
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -143,6 +153,7 @@ abstract class SchemaComponentNode
 
     // **************** Comparable contract ***********************************
 
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }

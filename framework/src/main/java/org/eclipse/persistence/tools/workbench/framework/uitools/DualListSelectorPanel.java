@@ -31,10 +31,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicArrowButton;
 
 import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
@@ -134,6 +132,7 @@ public final class DualListSelectorPanel
 
     private Action buildSelectAction() {
         Action action = new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DualListSelectorPanel.this.selectItems();
             }
@@ -144,6 +143,7 @@ public final class DualListSelectorPanel
 
     private Action buildDeselectAction() {
         Action action = new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DualListSelectorPanel.this.deselectItems();
             }
@@ -317,10 +317,12 @@ public final class DualListSelectorPanel
      * models can be modified (which usually is NOT the case).
      */
     private class DefaultAdapter implements Adapter {
+        @Override
         public void select(Object item) {
             this.remove(DualListSelectorPanel.this.availableLVM, item);
             this.add(DualListSelectorPanel.this.selectedLVM, item);
         }
+        @Override
         public void deselect(Object item) {
             this.remove(DualListSelectorPanel.this.selectedLVM, item);
             this.add(DualListSelectorPanel.this.availableLVM, item);
@@ -491,6 +493,7 @@ public final class DualListSelectorPanel
             this.action = action;
         }
 
+        @Override
         public void mouseClicked(MouseEvent event) {
             if (event.getClickCount() == 2) {
                 this.action.actionPerformed(null);
@@ -512,6 +515,7 @@ public final class DualListSelectorPanel
             this.action = action;
         }
 
+        @Override
         public void valueChanged(ListSelectionEvent e) {
             if (e.getValueIsAdjusting()) {
                 return;

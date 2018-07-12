@@ -25,11 +25,13 @@ final class ReleaseNotesAction extends AbstractFrameworkAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.setIcon(EMPTY_ICON);
         this.initializeTextAndMnemonic("RELEASE_NOTES");
     }
 
+    @Override
     protected void execute() {
         this.helpManager().showTopic("rel.notes");
     }

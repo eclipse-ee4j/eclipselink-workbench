@@ -31,8 +31,6 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -85,6 +83,7 @@ public final class MWReference extends MWModel {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.targetTableHandle = new MWTableHandle(this, this.buildTargetTableScrubber());
@@ -143,6 +142,7 @@ public final class MWReference extends MWModel {
     // ********** column pairs
     public Iterator columnPairs() {
         return new CloneIterator(this.columnPairs) {
+            @Override
             protected void remove(Object current) {
                 MWReference.this.removeColumnPair((MWColumnPair) current);
             }
@@ -259,6 +259,7 @@ public final class MWReference extends MWModel {
 
     // ********** model synchronization support **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.targetTableHandle);
@@ -267,9 +268,11 @@ public final class MWReference extends MWModel {
 
     private NodeReferenceScrubber buildTargetTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWReference.this.setTargetTable(null);
             }
+            @Override
             public String toString() {
                 return "MWReference.buildTargetTableScrubber()";
             }
@@ -279,6 +282,7 @@ public final class MWReference extends MWModel {
 
     //************** problems ***************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if (this.columnPairs.isEmpty()) {
@@ -392,10 +396,12 @@ public final class MWReference extends MWModel {
 
     // ********** displaying and printing **********
 
+    @Override
     public String displayString() {
         return this.name;
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
         sb.append(" : ");

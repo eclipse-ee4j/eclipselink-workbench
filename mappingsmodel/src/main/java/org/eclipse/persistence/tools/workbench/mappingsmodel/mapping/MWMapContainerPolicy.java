@@ -63,6 +63,7 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
 
     // **************** Building and Initializing *************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.keyMethodHandle = new MWMethodHandle(this, this.buildKeyMethodScrubber());
@@ -85,6 +86,7 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
 
     // ************ accessors ***************
 
+    @Override
     public DefaultingContainerClass getDefaultingContainerClass() {
         return this.containerClass;
     }
@@ -105,24 +107,29 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
             NullIterator.instance();
     }
 
+    @Override
     public boolean usesSorting() {
         return false;
     }
 
+    @Override
     public void setUsesSorting(boolean sort) {
         // do nothing currently only applies to set container policies
     }
 
+    @Override
     public MWClass getComparatorClass() {
         return null;
     }
 
+    @Override
     public void setComparatorClass(MWClass comparatorClass) {
         // do nothing currently only applies to set container policies
     }
 
     // **************** Behavior **********************************************
 
+    @Override
     public void referenceDescriptorChanged(MWDescriptor newReferenceDescriptor) {
         if (newReferenceDescriptor == null
             || (getKeyMethod() != null && ! CollectionTools.contains(candidateKeyMethods(), getKeyMethod())))
@@ -131,6 +138,7 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
         }
     }
 
+    @Override
     public MWClass defaultContainerClass() {
         if (this.getMapContainerMapping().usesTransparentIndirection()) {
             return this.defaultIndirectContainerClass();
@@ -160,6 +168,7 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
 
     // ************** Containment Hierarchy ****************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.keyMethodHandle);
@@ -168,9 +177,11 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
 
     private NodeReferenceScrubber buildKeyMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMapContainerPolicy.this.setKeyMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWMapContainerPolicy.buildKeyMethodScrubber()";
             }
@@ -180,6 +191,7 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
 
     // ************** Problem Handling ****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
 
@@ -213,6 +225,7 @@ public final class MWMapContainerPolicy extends MWModel implements MWContainerPo
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public ContainerPolicy runtimeContainerPolicy() {
          ContainerPolicy containerPolicy = new MapContainerPolicy(getDefaultingContainerClass().getContainerClass().getName());
         String keyMethodName = this.getKeyMethod() != null ? this.getKeyMethod().getName() : null;

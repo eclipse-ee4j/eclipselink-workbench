@@ -43,6 +43,7 @@ public class AntExtensionBundle extends ListResourceBundle {
         { "notNotALoginSpec", "{0} doesn\'t denote a LoginSpec"},
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

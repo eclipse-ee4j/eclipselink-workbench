@@ -118,6 +118,7 @@ class ProjectReader {
         return this.readLegacyProject();
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.file);
     }

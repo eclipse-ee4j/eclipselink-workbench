@@ -79,9 +79,11 @@ final class ModifierComponentGroup {
 
     protected PropertyValueModel buildModifierAdapter(ValueModel modifiableHolder) {
         return new PropertyAspectAdapter(modifiableHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWModifiable) this.subject).getModifier();
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierAdapter(ValueModel)";
             }
@@ -94,12 +96,15 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildAccessLevelAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.ACCESS_LEVEL_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWModifier) this.subject).getAccessLevel();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWModifier) this.subject).setAccessLevel((String) value);
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildAccessLevelAdapter()";
             }
@@ -154,9 +159,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierPublicListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.publicAccessRadioButton.setEnabled(ModifierComponentGroup.this.publicShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierPublicListener()";
             }
@@ -190,9 +197,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierProtectedListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.protectedAccessRadioButton.setEnabled(ModifierComponentGroup.this.protectedShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierProtectedListener()";
             }
@@ -226,9 +235,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierDefaultListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.defaultAccessRadioButton.setEnabled(ModifierComponentGroup.this.defaultShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierDefaultListener()";
             }
@@ -262,9 +273,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierPrivateListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.privateAccessRadioButton.setEnabled(ModifierComponentGroup.this.privateShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierPrivateListener()";
             }
@@ -319,12 +332,15 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildAbstractAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isAbstract());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWModifier) this.subject).setAbstract(((Boolean) value).booleanValue());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildAbstractAdapter()";
             }
@@ -333,9 +349,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierAbstractListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.abstractCheckBox.setEnabled(ModifierComponentGroup.this.abstractShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierAbstractListener()";
             }
@@ -369,9 +387,11 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildFinalAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isFinal());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 boolean finalFlag = ((Boolean) value).booleanValue();
                 // verify the change
@@ -382,6 +402,7 @@ final class ModifierComponentGroup {
                     ModifierComponentGroup.this.getFinalCheckBox().setSelected( ! finalFlag);
                 }
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildFinalAdapter()";
             }
@@ -390,9 +411,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierFinalListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.finalCheckBox.setEnabled(ModifierComponentGroup.this.finalShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierFinalListener()";
             }
@@ -426,12 +449,15 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildNativeAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isNative());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWModifier) this.subject).setNative(((Boolean) value).booleanValue());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildNativeAdapter()";
             }
@@ -440,9 +466,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierNativeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.nativeCheckBox.setEnabled(ModifierComponentGroup.this.nativeShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierNativeListener()";
             }
@@ -476,9 +504,11 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildStaticAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isStatic());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 boolean staticFlag = ((Boolean) value).booleanValue();
                 // verify the change
@@ -489,6 +519,7 @@ final class ModifierComponentGroup {
                     ModifierComponentGroup.this.getStaticCheckBox().setSelected( ! staticFlag);
                 }
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildStaticAdapter()";
             }
@@ -497,9 +528,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierStaticListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.staticCheckBox.setEnabled(ModifierComponentGroup.this.staticShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierStaticListener()";
             }
@@ -533,12 +566,15 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildSynchronizedAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isSynchronized());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWModifier) this.subject).setSynchronized(((Boolean) value).booleanValue());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildSynchronizedAdapter()";
             }
@@ -547,9 +583,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierSynchronizedListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.synchronizedCheckBox.setEnabled(ModifierComponentGroup.this.synchronizedShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierSynchronizedListener()";
             }
@@ -583,12 +621,15 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildTransientAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isTransient());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWModifier) this.subject).setTransient(((Boolean) value).booleanValue());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildTransientAdapter()";
             }
@@ -597,9 +638,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierTransientListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.transientCheckBox.setEnabled(ModifierComponentGroup.this.transientShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierTransientListener()";
             }
@@ -633,12 +676,15 @@ final class ModifierComponentGroup {
 
     private PropertyValueModel buildVolatileAdapter() {
         return new PropertyAspectAdapter(this.modifierHolder, MWModifier.CODE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWModifier) this.subject).isVolatile());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWModifier) this.subject).setVolatile(((Boolean) value).booleanValue());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildVolatileAdapter()";
             }
@@ -647,9 +693,11 @@ final class ModifierComponentGroup {
 
     private PropertyChangeListener buildModifierVolatileListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ModifierComponentGroup.this.volatileCheckBox.setEnabled(ModifierComponentGroup.this.volatileShouldBeEnabled());
             }
+            @Override
             public String toString() {
                 return "ModifierComponentGroup.buildModifierVolatileListener()";
             }
@@ -683,9 +731,11 @@ final class ModifierComponentGroup {
         boolean verifyStaticChange(boolean newModifierIsStatic);
 
         Verifier NULL_INSTANCE = new Verifier() {
+            @Override
             public boolean verifyFinalChange(boolean newModifierIsFinal) {
                 return true;
             }
+            @Override
             public boolean verifyStaticChange(boolean newModifierIsStatic) {
                 return true;
             }
@@ -698,6 +748,7 @@ final class ModifierComponentGroup {
             super();
             this.title = title;
         }
+        @Override
         public Dimension getPreferredSize() {
             Dimension size = super.getPreferredSize();
 

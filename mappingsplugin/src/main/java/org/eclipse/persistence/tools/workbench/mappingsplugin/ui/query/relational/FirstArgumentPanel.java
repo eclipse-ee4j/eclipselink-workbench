@@ -123,6 +123,7 @@ final class FirstArgumentPanel extends AbstractPanel
 
     private PropertyValueModel buildQueryableHolder() {
         return new PropertyAspectAdapter(this.argumentHolder, MWQueryableArgument.QUERYABLE_ARGUMENT_ELEMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWQueryableArgument) subject).displayString();
             }
@@ -131,6 +132,7 @@ final class FirstArgumentPanel extends AbstractPanel
 
     private ActionListener buildEditQueryKeyAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 editQueryKey();
             }

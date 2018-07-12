@@ -25,6 +25,7 @@ public final class EisInheritancePolicyPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected String helpTopicIdPrefix() {
         return "descriptor.eis";
     }

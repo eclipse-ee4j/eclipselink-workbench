@@ -113,6 +113,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
         super(parent);
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();
@@ -120,6 +121,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
         initializePolicyDescriptors();
     }
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
@@ -127,6 +129,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
         this.cachingPolicy = buildCachingPolicy();
     }
 
+    @Override
     protected void addChildrenTo(List children)
     {
         super.addChildrenTo(children);
@@ -195,6 +198,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
 
     private class AfterLoadPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (!descriptor.getAfterLoadingPolicy().isActive()) {
                 descriptor.addAfterLoadingPolicy();
@@ -204,6 +208,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
 
     private class CopyPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (!descriptor.getCopyPolicy().isActive()) {
                 descriptor.addCopyPolicy();
@@ -213,6 +218,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
 
     private class InstantiationPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (!descriptor.getInstantiationPolicy().isActive()) {
                 descriptor.addInstantiationPolicy();
@@ -222,6 +228,7 @@ public abstract class MWProjectDefaultsPolicy extends MWModel
 
     private class InheritancePolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (!descriptor.getInheritancePolicy().isActive()) {
                 descriptor.addInheritancePolicy();

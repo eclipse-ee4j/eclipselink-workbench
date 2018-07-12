@@ -44,12 +44,14 @@ final class EisOneToOneSelectionInteractionPropertiesPage extends ScrollableProp
 
     private PropertyValueModel buildInteractionHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWEisReferenceMapping.SELECTION_INTERACTION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisReferenceMapping) this.subject).getSelectionInteraction();
             }
         };
     }
 
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -105,12 +107,14 @@ final class EisOneToOneSelectionInteractionPropertiesPage extends ScrollableProp
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWEisOneToOneMapping.USE_DESCRIPTOR_READ_OBJECT_INTERACTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisOneToOneMapping mapping = (MWEisOneToOneMapping) this.subject;
                 return Boolean.valueOf(mapping.usesDescriptorReadObjectInteraction());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisOneToOneMapping mapping = (MWEisOneToOneMapping) this.subject;
@@ -122,6 +126,7 @@ final class EisOneToOneSelectionInteractionPropertiesPage extends ScrollableProp
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(buildUseDescriptorReadObjectInteractionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null) return Boolean.FALSE;

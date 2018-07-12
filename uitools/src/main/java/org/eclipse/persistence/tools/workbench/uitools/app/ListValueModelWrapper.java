@@ -54,6 +54,7 @@ public abstract class ListValueModelWrapper
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.listChangeListener = this.buildListChangeListener();
@@ -62,24 +63,30 @@ public abstract class ListValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
 
     protected ListChangeListener buildListChangeListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ListValueModelWrapper.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ListValueModelWrapper.this.itemsRemoved(e);
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ListValueModelWrapper.this.itemsReplaced(e);
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ListValueModelWrapper.this.listChanged(e);
             }
+            @Override
             public String toString() {
                 return "list change listener";
             }
@@ -93,6 +100,7 @@ public abstract class ListValueModelWrapper
      * Extend to start listening to the nested model if necessary.
      * @see Model#addListChangeListener(ListChangeListener)
      */
+    @Override
     public synchronized void addListChangeListener(ListChangeListener listener) {
         if (this.hasNoListChangeListeners(VALUE)) {
             this.engageModel();
@@ -104,6 +112,7 @@ public abstract class ListValueModelWrapper
      * Extend to start listening to the nested model if necessary.
      * @see Model#addListChangeListener(String, ListChangeListener)
      */
+    @Override
     public synchronized void addListChangeListener(String listName, ListChangeListener listener) {
         if (listName == VALUE && this.hasNoListChangeListeners(VALUE)) {
             this.engageModel();
@@ -115,6 +124,7 @@ public abstract class ListValueModelWrapper
      * Extend to stop listening to the nested model if necessary.
      * @see Model#removeListChangeListener(ListChangeListener)
      */
+    @Override
     public synchronized void removeListChangeListener(ListChangeListener listener) {
         super.removeListChangeListener(listener);
         if (this.hasNoListChangeListeners(VALUE)) {
@@ -126,6 +136,7 @@ public abstract class ListValueModelWrapper
      * Extend to stop listening to the nested model if necessary.
      * @see Model#removeListChangeListener(String, ListChangeListener)
      */
+    @Override
     public synchronized void removeListChangeListener(String listName, ListChangeListener listener) {
         super.removeListChangeListener(listName, listener);
         if (listName == VALUE && this.hasNoListChangeListeners(VALUE)) {
@@ -153,6 +164,7 @@ public abstract class ListValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.listHolder);
     }

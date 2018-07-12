@@ -27,6 +27,7 @@ abstract class MapAsRelationalDirectMapping extends MapAsDirectAction {
         super(context);
     }
 
+    @Override
     protected String[] selectedPropertyNames() {
         return new String[] {MWConverterMapping.CONVERTER_PROPERTY};
     }
@@ -37,6 +38,7 @@ abstract class MapAsRelationalDirectMapping extends MapAsDirectAction {
     /**
      * return whether the specified node is already morphed
      */
+    @Override
     protected boolean nodeIsMorphed(MappingNode mappingNode) {
         return super.nodeIsMorphed(mappingNode) &&
                 ((MWDirectMapping) mappingNode.getMapping()).getConverter().getType() == this.converterType();

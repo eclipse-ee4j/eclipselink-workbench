@@ -30,16 +30,19 @@ public final class DirectToXmlTypeMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_DIRECT_TO_XML_MAPPING_NODE";
     }
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".directToXmlType";
     }
 
+    @Override
     protected String buildIconKey() {
         return ((MWDirectToXmlTypeMapping) getMapping()).iconKey();
     }
@@ -47,6 +50,7 @@ public final class DirectToXmlTypeMappingNode extends MappingNode {
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DirectToXmlTypePropertiesPage.class;
     }

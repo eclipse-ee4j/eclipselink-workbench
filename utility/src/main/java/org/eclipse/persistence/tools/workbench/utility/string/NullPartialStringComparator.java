@@ -47,6 +47,7 @@ public final class NullPartialStringComparator
     /**
      * @see PartialStringComparator#compare(String, String)
      */
+    @Override
     public double compare(String s1, String s2) {
         return 0;
     }
@@ -54,6 +55,7 @@ public final class NullPartialStringComparator
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

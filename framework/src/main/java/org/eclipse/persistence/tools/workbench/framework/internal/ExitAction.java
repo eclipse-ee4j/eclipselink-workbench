@@ -32,12 +32,14 @@ final class ExitAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("EXIT_ACTION");
         this.initializeIcon("EXIT");
         this.initializeToolTipText("EXIT_ACTION.TOOL_TIP");
     }
 
+    @Override
     public void execute() {
         nodeManager.exit(this.getWorkbenchContext());
     }

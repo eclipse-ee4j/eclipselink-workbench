@@ -69,6 +69,7 @@ public class ServerPlatformManager extends SCPlatformManager {
         this.configs.put( id, configClassName);
     }
 
+    @Override
     protected void buidPlatforms() {
 
         this.addPlatform( NO_SERVER_ID, "org.eclipse.persistence.platform.server.NoServerPlatform");
@@ -93,9 +94,11 @@ public class ServerPlatformManager extends SCPlatformManager {
         this.addConfig( CUSTOM_SERVER_ID, "org.eclipse.persistence.internal.sessions.factories.model.platform.CustomServerPlatformConfig");
     }
 
+    @Override
     public Iterator platformShortNames() {
 
         return new TransformationIterator( this.platformIds()) {
+            @Override
             protected Object transform( Object next) {
                 String id = ( String)next;
 
@@ -116,6 +119,7 @@ public class ServerPlatformManager extends SCPlatformManager {
 
     public Iterator configShortNames() {
         return new TransformationIterator( this.configNames()) {
+            @Override
             protected Object transform( Object next) {
                 return ClassTools.shortNameForClassNamed(( String)next);
             }

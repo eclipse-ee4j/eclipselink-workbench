@@ -135,6 +135,7 @@ public class RdbmsPoolLoginPropertiesPage extends ScrollablePropertiesPage
         return new PropertyAspectAdapter(getSelectionHolder(),
                                                     ConnectionPoolAdapter.LOGIN_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ConnectionPoolAdapter pool = (ConnectionPoolAdapter) subject;

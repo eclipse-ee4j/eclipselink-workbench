@@ -84,6 +84,7 @@ public final class MWColumnPairHandle extends MWHandle {
         this.columnPair = columnPair;
     }
 
+    @Override
     protected Node node() {
         return this.getColumnPair();
     }
@@ -93,10 +94,12 @@ public final class MWColumnPairHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER column pair should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.columnPair.compareTo(((MWColumnPairHandle) o).columnPair);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.columnPair == null) {
             sb.append("null");
@@ -110,6 +113,7 @@ public final class MWColumnPairHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
 

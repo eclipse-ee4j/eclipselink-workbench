@@ -31,9 +31,11 @@ public interface StringConverter {
     StringConverter DEFAULT_INSTANCE =
         new StringConverter() {
             // simply return the object's #toString() result
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? null : o.toString();
             }
+            @Override
             public String toString() {
                 return "DefaultStringConverter";
             }

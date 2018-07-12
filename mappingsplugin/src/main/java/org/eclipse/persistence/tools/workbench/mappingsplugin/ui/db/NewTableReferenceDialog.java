@@ -103,6 +103,7 @@ public class NewTableReferenceDialog
 
     // ************ Initialization *************
 
+    @Override
     protected void initialize() {
         super.initialize();
         setTitle(resourceRepository().getString("NEW_REFERENCE_DIALOG.title"));
@@ -110,14 +111,17 @@ public class NewTableReferenceDialog
         //setPreferredSize(275, 300);
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.referenceNameTextField;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.newReference";
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -236,13 +240,16 @@ public class NewTableReferenceDialog
 
     private DocumentListener buildReferenceNameDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 updateOKButton();
                 updateErrorMessage();
             }
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 changedUpdate(e);
             }
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 changedUpdate(e);
             }
@@ -263,6 +270,7 @@ public class NewTableReferenceDialog
 
     private ActionListener buildTableListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 updateReferenceName();
                 updateOKButton();
@@ -396,6 +404,7 @@ public class NewTableReferenceDialog
         return true;
     }
 
+    @Override
     protected void prepareToShow() {
         updateReferenceName();
         super.prepareToShow();

@@ -91,6 +91,7 @@ final class SessionBrokerTabbedPropertiesPage extends TabbedPropertiesPage
         return "SESSION_OPTIONS_TAB_TITLE";
     }
 
+    @Override
     protected void initializeTabs()
     {
         addTab(buildGeneralPropertiesPage(),    buildGeneralPropertiesPageTitle());
@@ -127,6 +128,7 @@ final class SessionBrokerTabbedPropertiesPage extends TabbedPropertiesPage
             return "SESSION_SESSIONS_TAB_TITLE";
         }
 
+        @Override
         protected JTabbedPane buildTabbedPane()
         {
             JTabbedPane tabbedPane = super.buildTabbedPane();
@@ -134,11 +136,13 @@ final class SessionBrokerTabbedPropertiesPage extends TabbedPropertiesPage
             return tabbedPane;
         }
 
+        @Override
         protected Component buildTitlePanel()
         {
             return new JComponent() {};
         }
 
+        @Override
         protected void initializeTabs()
         {
             addTab(buildSessionsPropertiesPage(),       0, buildSessionsPropertiesPageTitle());

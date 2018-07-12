@@ -44,17 +44,20 @@ public class UnknownAttribute extends Attribute {
     /**
      * Store the info in a byte array for possible later use.
      */
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         int length = this.getLength();
         this.info = new byte[length];
         stream.read(this.info);
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         this.writeHexStringOn(this.info, writer);
         writer.println();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -63,6 +66,7 @@ public class UnknownAttribute extends Attribute {
         return this.info;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         this.appendHexStringTo(this.info, sb);
     }

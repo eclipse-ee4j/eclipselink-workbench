@@ -22,14 +22,12 @@ import java.util.Vector;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWTypeDeclaration;
 import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.NullIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.exceptions.ConversionException;
 import org.eclipse.persistence.internal.helper.ConversionManager;
@@ -112,6 +110,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.indicatorType = new MWTypeDeclaration(this, this.typeFor(DEFAULT_INDICATOR_TYPE));
@@ -119,6 +118,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
         this.classNameIsIndicator = false;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.classIndicatorValues) { children.addAll(this.classIndicatorValues); }
@@ -130,6 +130,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
 
     // *************** accessors **************
 
+    @Override
     public String getType() {
         return CLASS_INDICATOR_FIELD_TYPE;
     }
@@ -312,6 +313,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
     }
 
 
+    @Override
     public void rebuildClassIndicatorValues(Collection descriptors) {
         for (Iterator i = classIndicatorValues(); i.hasNext();) {
             MWClassIndicatorValue indicatorValue = (MWClassIndicatorValue) i.next();
@@ -323,6 +325,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
         setDescriptorsAvailableForIndicatorDictionary(descriptors.iterator());
     }
 
+    @Override
     public void setDescriptorsAvailableForIndicatorDictionary(Iterator descriptors) {
         if (classNameIsIndicator()) {
             setIndicatorType(null);
@@ -335,6 +338,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
         }
     }
 
+    @Override
     public void setDescriptorsAvailableForIndicatorDictionaryForTopLink(Iterator descriptors) {
         if (classNameIsIndicator()) {
             setIndicatorType(null);
@@ -373,6 +377,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
 
     // ************* Runtime Conversion ***********
 
+    @Override
     public void adjustRuntimeInheritancePolicy(InheritancePolicy runtimeInheritancePolicy) {
         Iterator indicatorValues = includedClassIndicatorValues();
         while (indicatorValues.hasNext()) {
@@ -386,6 +391,7 @@ public abstract class MWClassIndicatorFieldPolicy extends MWAbstractClassIndicat
 
     // ************* TopLink only methods ***********
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         // convert the values because they are converted to strings when written out

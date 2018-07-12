@@ -72,11 +72,13 @@ public class RdbmsReadPoolLoginPropertiesPageTest extends AbstractReadPoolPanelT
                                              COMPONENT_CHECK_BOX);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(RdbmsReadPoolLoginPropertiesPage.class, getNodeHolder());
     }
 
+    @Override
     protected boolean canContinueTestingDuplicateMnemonic()
     {
         ReadConnectionPoolAdapter pool = getConnectionPool();
@@ -92,6 +94,7 @@ public class RdbmsReadPoolLoginPropertiesPageTest extends AbstractReadPoolPanelT
         return oldCanContinue;
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Read Connection Pool - General Tab Test";

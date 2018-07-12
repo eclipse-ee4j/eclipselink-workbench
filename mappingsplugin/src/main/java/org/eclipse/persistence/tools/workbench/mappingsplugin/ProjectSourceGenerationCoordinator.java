@@ -284,10 +284,12 @@ public final class ProjectSourceGenerationCoordinator {
             //setMinimumWidth(250);
         }
 
+        @Override
         protected String helpTopicId() {
             return "dialog.projectSourceClassName";
         }
 
+        @Override
         protected Component buildMainPanel() {
             JPanel mainPanel = new JPanel(new GridBagLayout());
 
@@ -324,6 +326,7 @@ public final class ProjectSourceGenerationCoordinator {
             return mainPanel;
         }
 
+        @Override
         protected Component initialFocusComponent() {
             return this.projectClassNameTextField;
         }
@@ -342,14 +345,17 @@ public final class ProjectSourceGenerationCoordinator {
 
         private DocumentListener buildProjectClassNameDocumentListener() {
             return new DocumentListener() {
+                @Override
                 public void insertUpdate(DocumentEvent de) {
                     projectClassNameChange();
                 }
 
+                @Override
                 public void removeUpdate(DocumentEvent de) {
                     projectClassNameChange();
                 }
 
+                @Override
                 public void changedUpdate(DocumentEvent de) {
                     projectClassNameChange();
                 }

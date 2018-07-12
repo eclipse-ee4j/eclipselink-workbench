@@ -46,6 +46,7 @@ public class ReadOnlyCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return this.value.size();
     }
@@ -56,6 +57,7 @@ public class ReadOnlyCollectionValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.value.iterator();
     }

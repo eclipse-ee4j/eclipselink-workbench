@@ -114,6 +114,7 @@ public class ChainIteratorTests extends TestCase {
     private ChainIterator.Linker buildLinker() {
         // chain up the class's hierarchy
         return new ChainIterator.Linker() {
+            @Override
             public Object nextLink(Object currentLink) {
                 return ((Class) currentLink).getSuperclass();
             }
@@ -123,6 +124,7 @@ public class ChainIteratorTests extends TestCase {
     private Iterator buildInnerChainIterator(Class startLink) {
         // chain up the class's hierarchy
         return new ChainIterator(startLink) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return ((Class) currentLink).getSuperclass();
             }

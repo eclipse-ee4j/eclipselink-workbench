@@ -61,6 +61,7 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Enter a Database Session Name:";
     }
@@ -72,6 +73,7 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
         this.openWindow();
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel propertyTestingPanel = new JPanel( new BorderLayout());
@@ -121,10 +123,12 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
     private CollectionValueModel buildClassCollectionAdapter() {
 
         return new CollectionAspectAdapter( subjectHolder(), TopLinkSessionsAdapter.SESSIONS_COLLECTION)         {
+            @Override
             protected Iterator getValueFromSubject() {
 
                 return (( TopLinkSessionsAdapter)subject).sessions();
             }
+            @Override
             protected int sizeFromSubject() {
                 return (( TopLinkSessionsAdapter)subject).sessionsSize();
             }
@@ -135,6 +139,7 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
     {
         return new AddRemoveListPanel.Adapter() {
 
+            @Override
             public void addNewItem( ObjectListSelectionModel listSelectionModel) {
 
                 String text =  SCToplinkSessionsUITest.this.textField().getText();
@@ -144,6 +149,7 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
                 }
             }
 
+            @Override
             public void removeSelectedItems( ObjectListSelectionModel listSelectionModel) {
 
                 Object[] selectedValues = listSelectionModel.getSelectedValues();
@@ -164,6 +170,7 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
         return this.subjectHolder;
     }
 
+    @Override
     protected void setUp() {
 
         super.setUp();
@@ -177,6 +184,7 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
         return this.textField;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -184,13 +192,17 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
         windowW = 500;
     }
 
+    @Override
     protected void printModel() {
 
         System.out.println( this.subject.toString());
     }
 
+    @Override
     protected void resetProperty() {}
+    @Override
     protected void clearModel() {}
+    @Override
     protected void restoreModel() {}
 
     protected void saveModel() {
@@ -225,11 +237,13 @@ public class SCToplinkSessionsUITest extends SCAbstractUITest {
     /**
      * Re-Use Restore button for Saving
      */
+    @Override
     protected JButton buildRestoreModelButton() {
         return new JButton( this.buildSaveAction());
     }
     private Action buildSaveAction() {
         Action action = new AbstractAction("Save...") {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 SCToplinkSessionsUITest.this.saveModel();
             }

@@ -30,7 +30,8 @@ public PersonImpl() {
  * Creation date: (6/1/00 2:53:26 PM)
  * @return org.eclipse.persistence.tools.workbench.test.models.contact.Contact
  */
-public Contact getContact() {
+    @Override
+    public Contact getContact() {
     return contact;
 }
 /**
@@ -46,7 +47,8 @@ public int getId() {
  * Creation date: (6/1/00 2:53:26 PM)
  * @param newContact org.eclipse.persistence.tools.workbench.test.models.contact.Contact
  */
-public void setContact(Contact newContact) {
+    @Override
+    public void setContact(Contact newContact) {
     contact = newContact;
 }
 /**

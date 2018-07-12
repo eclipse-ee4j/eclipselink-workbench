@@ -40,18 +40,22 @@ class OrderingAttributeDialog extends AttributeItemDialog {
         super(query, (MWAttributeItem) item, traversableFilter, chooseableFilter, context);
     }
 
+    @Override
     protected String titleKey() {
         return "ORDERING_ATTRIBUTES_DIALOG_TITLE";
     }
 
+    @Override
     protected String editTitleKey() {
         return "ORDERING_ATTRIBUTES_EDIT_DIALOG_TITLE";
     }
 
+    @Override
     protected String helpTopicId() {
         return "descriptor.queryManager.query.orderingAttributes";
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -85,6 +89,7 @@ class OrderingAttributeDialog extends AttributeItemDialog {
         return panel;
     }
 
+    @Override
     protected void initializeEditMode(MWAttributeItem attributeItem) {
         super.initializeEditMode(attributeItem);
         initializeOrderComboBox(attributeItem);
@@ -111,19 +116,23 @@ class OrderingAttributeDialog extends AttributeItemDialog {
     }
 
 
+    @Override
     protected int attributeItemsSize() {
         return ((MWOrderableQuery) getQuery()).orderingItemsSize();
     }
 
 
+    @Override
     protected int indexOfAttributeItem(MWAttributeItem attributeItem) {
         return ((MWOrderableQuery) getQuery()).indexOfOrderingItem((Ordering) attributeItem);
     }
 
+    @Override
     protected void removeAttributeItem(int index) {
         ((MWOrderableQuery) getQuery()).removeOrderingItem(index);
     }
 
+    @Override
     protected void addAttributeItem(int index, Iterator queryables, Iterator allowsNulls) {
         Ordering item = ((MWOrderableQuery) getQuery()).addOrderingItem(index, queryables, allowsNulls);
         item.setAscending(isAscending());

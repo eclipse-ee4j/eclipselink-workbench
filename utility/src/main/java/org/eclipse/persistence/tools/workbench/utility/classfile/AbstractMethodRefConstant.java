@@ -46,6 +46,7 @@ public abstract class AbstractMethodRefConstant extends MemberRefConstant {
         return this.name().equals(Method.STATIC_INITIALIZER_NAME);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         this.getReturnDescriptor().accept(visitor);
         FieldType[] ptds = this.getParameterDescriptors();

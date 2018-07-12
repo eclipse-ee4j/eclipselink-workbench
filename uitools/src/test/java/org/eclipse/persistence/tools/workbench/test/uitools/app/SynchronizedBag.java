@@ -43,6 +43,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#add(java.lang.Object)
      */
+    @Override
     public boolean add(Object o) {
         return this.synchBag.add(o);
     }
@@ -50,6 +51,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#addAll(java.util.Collection)
      */
+    @Override
     public boolean addAll(Collection c) {
         return this.synchBag.addAll(c);
     }
@@ -57,6 +59,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#clear()
      */
+    @Override
     public void clear() {
         this.synchBag.clear();
     }
@@ -64,6 +67,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#contains(java.lang.Object)
      */
+    @Override
     public boolean contains(Object o) {
         return this.synchBag.contains(o);
     }
@@ -71,6 +75,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#containsAll(java.util.Collection)
      */
+    @Override
     public boolean containsAll(Collection c) {
         return this.synchBag.containsAll(c);
     }
@@ -78,6 +83,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#isEmpty()
      */
+    @Override
     public boolean isEmpty() {
         return this.synchBag.isEmpty();
     }
@@ -85,6 +91,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#iterator()
      */
+    @Override
     public Iterator iterator() {
         return this.synchBag.iterator();
     }
@@ -92,6 +99,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#remove(java.lang.Object)
      */
+    @Override
     public boolean remove(Object o) {
         return this.synchBag.remove(o);
     }
@@ -99,6 +107,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#removeAll(java.util.Collection)
      */
+    @Override
     public boolean removeAll(Collection c) {
         return this.synchBag.removeAll(c);
     }
@@ -106,6 +115,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#retainAll(java.util.Collection)
      */
+    @Override
     public boolean retainAll(Collection c) {
         return this.synchBag.retainAll(c);
     }
@@ -113,6 +123,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#size()
      */
+    @Override
     public int size() {
         return this.synchBag.size();
     }
@@ -120,6 +131,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#toArray()
      */
+    @Override
     public Object[] toArray() {
         return this.synchBag.toArray();
     }
@@ -127,6 +139,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.Collection#toArray(java.lang.Object[])
      */
+    @Override
     public Object[] toArray(Object[] a) {
         return this.synchBag.toArray(a);
     }
@@ -137,6 +150,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener#itemsAdded(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     public void itemsAdded(CollectionChangeEvent e) {
         for (Iterator stream = e.items(); stream.hasNext(); ) {
             this.synchBag.add(stream.next());
@@ -146,6 +160,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener#itemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     public void itemsRemoved(CollectionChangeEvent e) {
         for (Iterator stream = e.items(); stream.hasNext(); ) {
             this.synchBag.remove(stream.next());
@@ -155,6 +170,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeListener#collectionChanged(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     public void collectionChanged(CollectionChangeEvent e) {
         this.synchBag.clear();
         CollectionTools.addAll(this.synchBag, (Iterator) ((CollectionValueModel) e.getSource()).getValue());
@@ -166,6 +182,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.List#equals(java.lang.Object)
      */
+    @Override
     public boolean equals(Object o) {
         return this.synchBag.equals(o);
     }
@@ -173,6 +190,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.util.List#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.synchBag.hashCode();
     }
@@ -180,6 +198,7 @@ class SynchronizedBag implements Bag, CollectionChangeListener {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return this.synchBag.toString();
     }

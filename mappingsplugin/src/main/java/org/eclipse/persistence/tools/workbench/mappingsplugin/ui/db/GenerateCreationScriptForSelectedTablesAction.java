@@ -26,11 +26,13 @@ final class GenerateCreationScriptForSelectedTablesAction extends AbstractGenera
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("SELECTED_TABLES_LABEL");
     }
 
+    @Override
     protected Collection buildTables() {
         return this.selectedMWTables();
     }

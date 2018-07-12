@@ -114,6 +114,7 @@ public class ExceptionHandler {
         return this.catchType;
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.description() + ')';
     }

@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relatio
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorInheritancePolicy;
@@ -63,24 +62,29 @@ public final class MWAggregateDescriptor extends MWRelationalClassDescriptor
 
     // ********** MWRelationalDescriptor implementation **********
 
+    @Override
     public Iterator associatedTables() {
         return NullIterator.instance();
     }
 
+    @Override
     public int associatedTablesSize() {
         return 0;
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
     }
 
     // ********** MWMappingDescriptor overrides **********
 
+    @Override
     public void addMapping(MWMapping mapping) {
         super.addMapping(mapping);
         this.getProject().recalculateAggregatePathsToColumn(this);
     }
 
+    @Override
     public void removeMapping(MWMapping mapping) {
         super.removeMapping(mapping);
         this.getProject().recalculateAggregatePathsToColumn(this);
@@ -94,14 +98,17 @@ public final class MWAggregateDescriptor extends MWRelationalClassDescriptor
 
     //************** morphing support ***************
 
+    @Override
     public MWAggregateDescriptor asMWAggregateDescriptor() {
         return this;
     }
 
+    @Override
     public void initializeOn(MWDescriptor newDescriptor) {
         ((MWRelationalDescriptor) newDescriptor).initializeFromMWAggregateDescriptor(this);
     }
 
+    @Override
     protected void initializeFromMWMappingDescriptor(MWMappingDescriptor oldDescriptor) {
         super.initializeFromMWMappingDescriptor(oldDescriptor);
         Iterator mappings = mappings();
@@ -112,6 +119,7 @@ public final class MWAggregateDescriptor extends MWRelationalClassDescriptor
         getInheritancePolicy().parentDescriptorMorphedToAggregate();
     }
 
+    @Override
     public void initializeFromMWRelationalClassDescriptor(MWRelationalClassDescriptor oldDescriptor) {
         super.initializeFromMWRelationalClassDescriptor(oldDescriptor);
 
@@ -120,27 +128,32 @@ public final class MWAggregateDescriptor extends MWRelationalClassDescriptor
         }
     }
 
+    @Override
     public boolean isAggregateDescriptor() {
         return true;
     }
 
 
+    @Override
     public void applyAdvancedPolicyDefaults(MWProjectDefaultsPolicy defaultsPolicy) {
         defaultsPolicy.applyAdvancedPolicyDefaults(this);
     }
 
     //******************* Problem Handling *******************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkReferences(newProblems);
         this.checkSharedAggregates(newProblems);
     }
 
+    @Override
     protected void checkMultipleMappingsWriteField(List newProblems) {
         // override this method to do nothing
     }
 
+    @Override
     protected String multipleMappingsWriteFieldProblemResourceStringKey() {
         throw new UnsupportedOperationException();
     }
@@ -203,6 +216,7 @@ public final class MWAggregateDescriptor extends MWRelationalClassDescriptor
 
     // **************** runtime conversion **********
 
+    @Override
     protected ClassDescriptor buildBasicRuntimeDescriptor() {
         RelationalDescriptor descriptor = new RelationalDescriptor();
         descriptor.descriptorIsAggregate();
@@ -210,6 +224,7 @@ public final class MWAggregateDescriptor extends MWRelationalClassDescriptor
         return descriptor;
     }
 
+    @Override
     protected void adjustUserDefinedQueryKeys(ClassDescriptor runtimeDescriptor) {
         for (Iterator queryKeys = userDefinedQueryKeys(); queryKeys.hasNext();) {
             MWUserDefinedQueryKey queryKey = (MWUserDefinedQueryKey) queryKeys.next();

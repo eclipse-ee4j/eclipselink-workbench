@@ -39,18 +39,22 @@ public class SourceFileAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.sourceFileIndex = stream.readU2();
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         writer.println(this.sourceFileName());
     }
 
+    @Override
     public String sourceFileName() {
         return this.constantPool().getUTF8String(this.sourceFileIndex);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -59,6 +63,7 @@ public class SourceFileAttribute extends Attribute {
         return this.sourceFileIndex;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.sourceFileName());
     }

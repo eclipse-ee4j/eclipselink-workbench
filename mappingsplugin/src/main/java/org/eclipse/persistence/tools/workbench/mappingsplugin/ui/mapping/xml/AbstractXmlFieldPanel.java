@@ -37,6 +37,7 @@ public abstract class AbstractXmlFieldPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         this.setBorder(
             BorderFactory.createCompoundBorder(

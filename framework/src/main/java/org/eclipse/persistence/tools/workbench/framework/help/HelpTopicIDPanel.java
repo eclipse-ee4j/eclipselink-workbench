@@ -73,6 +73,7 @@ final class HelpTopicIDPanel extends JPanel {
 
     private PropertyChangeListener buildHelpTopicIDListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 HelpTopicIDPanel.this.setLabelText(evt.getNewValue());
             }
@@ -81,6 +82,7 @@ final class HelpTopicIDPanel extends JPanel {
 
     private PropertyChangeListener buildHelpTopicIDIsValidHolderListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 HelpTopicIDPanel.this.setLabelIcon(evt.getNewValue());
             }

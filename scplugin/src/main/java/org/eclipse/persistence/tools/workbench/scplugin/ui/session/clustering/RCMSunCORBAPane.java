@@ -59,6 +59,7 @@ final class RCMSunCORBAPane extends AbstractTransportManagerPane
     /**
      * Initializes this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();

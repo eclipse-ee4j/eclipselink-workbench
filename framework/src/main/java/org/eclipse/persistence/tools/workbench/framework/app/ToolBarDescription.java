@@ -51,6 +51,7 @@ public class ToolBarDescription implements GroupContainerDescription
     /**
      * Returns the <code>JToolBar</code> represented by this description.
      */
+    @Override
     public Component component()
     {
         JToolBar toolBar = new JToolBar();
@@ -66,6 +67,7 @@ public class ToolBarDescription implements GroupContainerDescription
      * Returns an ordered list of <code>ToolBarButtons</code> including seperators
      * contained in this <code>JToolBar</code>.
      */
+    @Override
     public ListIterator components()
     {
         ArrayList items = new ArrayList();
@@ -92,6 +94,7 @@ public class ToolBarDescription implements GroupContainerDescription
      * a group of tool bar buttons.  Default implemented parameter would be
      * <code>ToolBarButtonGroupDescription</code>.
      */
+    @Override
     public void add(ComponentGroupDescription buttonGroup)
     {
         this.buttonGroups.add(buttonGroup);
@@ -102,6 +105,7 @@ public class ToolBarDescription implements GroupContainerDescription
      * a group of tool bar buttons.  Default implemented parameter would be
      * <code>ToolBarButtonGroupDescription</code>.
      */
+    @Override
     public void remove(ComponentGroupDescription buttonGroup)
     {
         this.buttonGroups.remove(buttonGroup);
@@ -110,6 +114,7 @@ public class ToolBarDescription implements GroupContainerDescription
      * Returns all of the <code>FrameworkActions</code> contained in this tool bar
      * represented by its buttons and sub menus.
      */
+    @Override
     public Iterator actions()
     {
         ArrayList actionIterators = new ArrayList();
@@ -127,6 +132,7 @@ public class ToolBarDescription implements GroupContainerDescription
      * Updates the contents of this tool bar based upon the actions contained
      * in the given <code>FrameworkAction</code> Collection.
      */
+    @Override
     public void updateOn(Collection frameworkActions)
     {
         for (Iterator groups = this.buttonGroups.iterator(); groups.hasNext();)
@@ -139,11 +145,13 @@ public class ToolBarDescription implements GroupContainerDescription
      * Merges the contents of this tool bar based upon the actions described in
      * the given <code>ActionContainer</code>.
      */
+    @Override
     public void mergeWith(ActionContainer toolBarDescription)
     {
         updateOn(CollectionTools.collection(toolBarDescription.actions()));
     }
 
+    @Override
     public boolean hasComponents()
     {
         return this.buttonGroups.size() > 0;

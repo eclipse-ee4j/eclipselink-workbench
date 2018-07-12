@@ -91,6 +91,7 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
         super(tableNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.targetTablesHolder = RelationalProjectComponentFactory.buildExtendedTablesHolder(getSelectionHolder());
@@ -100,6 +101,7 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
         this.rowSelectionModel = buildRowSelectionModel();
 
         getSelectionHolder().addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (ReferencesPropertiesPage.this.table.isEditing()) {
                     ReferencesPropertiesPage.this.table.getCellEditor().cancelCellEditing();
@@ -126,9 +128,11 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
     private CollectionValueModel buildReferencesAdapter() {
         return new CollectionAspectAdapter(getSelectionHolder(), MWTable.REFERENCES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTable) this.subject).references();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWTable) this.subject).referencesSize();
             }
@@ -156,6 +160,7 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ReferencesPropertiesPage.this.rowSelectionChanged();
@@ -172,6 +177,7 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
         this.renameAction.setEnabled(referenceSelected);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -275,11 +281,13 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
     private Action buildAddAction() {
         FrameworkAction action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("ADD_REFERENCE_BUTTON_TEXT");
                 initializeMnemonic("ADD_REFERENCE_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ReferencesPropertiesPage.this.addReference();
             }
@@ -323,11 +331,13 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
     private Action buildRemoveAction() {
         this.removeAction = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("REMOVE_REFERENCE_BUTTON_TEXT");
                 initializeMnemonic("REMOVE_REFERENCE_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ReferencesPropertiesPage.this.removeReference();
             }
@@ -364,11 +374,13 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
     private Action buildRenameAction() {
         this.renameAction = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("RENAME_REFERENCE_BUTTON_TEXT");
                 initializeMnemonic("RENAME_REFERENCE_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ReferencesPropertiesPage.this.renameReference();
             }
@@ -465,14 +477,17 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case REFERENCE_NAME_COLUMN:    return Object.class;
@@ -482,10 +497,12 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index != REFERENCE_NAME_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWReference reference = (MWReference) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -499,9 +516,11 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildReferenceNameAdapter(MWReference reference) {
             return new PropertyAspectAdapter(MWReference.NAME_PROPERTY, reference) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWReference) this.subject).getName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWReference) this.subject).setName((String) value);
                 }
@@ -510,9 +529,11 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildTargetTableAdapter(MWReference reference) {
             PropertyValueModel propertyValueModel =  new PropertyAspectAdapter(MWReference.TARGET_TABLE_PROPERTY, reference) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWReference) this.subject).getTargetTable();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWReference) this.subject).setTargetTable((MWTable) value);
                 }
@@ -522,9 +543,11 @@ public class ReferencesPropertiesPage extends ScrollablePropertiesPage {
 
         private PropertyValueModel buildOnDatabaseAdapter(MWReference reference) {
             return new PropertyAspectAdapter(MWReference.ON_DATABASE_PROPERTY, reference) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWReference) this.subject).isOnDatabase());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWReference) this.subject).setOnDatabase(((Boolean) value).booleanValue());
                 }

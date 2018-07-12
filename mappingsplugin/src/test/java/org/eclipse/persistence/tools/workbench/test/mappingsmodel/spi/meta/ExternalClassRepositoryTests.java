@@ -42,6 +42,7 @@ public abstract class ExternalClassRepositoryTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.factory = this.buildFactory();
@@ -55,6 +56,7 @@ public abstract class ExternalClassRepositoryTests extends TestCase {
 
     protected abstract ExternalClassRepository systemRepositoryFor(ExternalClassRepository repository) throws Exception;
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -147,8 +149,10 @@ public abstract class ExternalClassRepositoryTests extends TestCase {
         final String testArrayName = "testArray";
         final Class testArrayType = (new Object[0]).getClass();
         ClasspathTestTool tool = new ClasspathTestTool(ClassTools.shortClassNameForObject(this) + "." + this.getName()) {
+            @Override
             protected SourceExtender buildSourceExtender() {
                 return new SourceExtender() {
+                    @Override
                     public void extendSourceOn(IndentingPrintWriter pw, int version) {
                         pw.print("public " + testArrayType.getComponentType().getName() + "[] " + testArrayName + ";");
                     }
@@ -259,6 +263,7 @@ public abstract class ExternalClassRepositoryTests extends TestCase {
 
     private Iterator classNames(Iterator externalClassDescriptions) {
         return new TransformationIterator(externalClassDescriptions) {
+            @Override
             protected Object transform(Object next) {
                 return ((ExternalClassDescription) next).getName();
             }

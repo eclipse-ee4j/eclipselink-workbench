@@ -31,9 +31,11 @@ public interface LegacyProjectReadCallback {
 
     LegacyProjectReadCallback NULL_INSTANCE =
         new LegacyProjectReadCallback() {
+            @Override
             public void checkLegacyRead(String schemaVersion) {
                 // do nothing - allowing the legacy project read to continue
             }
+            @Override
             public String toString() {
                 return "NullLegacyProjectReadCallback";
             }

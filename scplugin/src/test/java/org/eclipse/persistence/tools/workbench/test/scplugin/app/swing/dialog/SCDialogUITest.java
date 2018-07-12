@@ -62,6 +62,7 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
         initialize();
     }
 
+    @Override
     protected void setUp() {
         super.setUp();
 
@@ -101,6 +102,7 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
         return new ResourceRepositoryWrapper( frameworkRepository, getResourceRepositoryClass(), new SCPluginIconResourceFileNameMap());
     }
 
+    @Override
     protected void openWindow() {
 
         currentWindow.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE);
@@ -118,11 +120,14 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
     {
         return SCPluginResourceBundle.class;
     }
+    @Override
     protected abstract String windowTitle();
 
+    @Override
     protected WindowListener buildWindowListener() {
 
         return new WindowAdapter() {
+            @Override
             public void windowClosing( WindowEvent e) {
                 e.getWindow().setVisible( false);
                 System.exit( 0);
@@ -130,6 +135,7 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
 
         JPanel mainPanel = new JPanel( new BorderLayout());
@@ -140,6 +146,7 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
 
     protected abstract Component buildTestingPanel();
 
+    @Override
     protected Component buildControlPanel() {
 
         JPanel controlPanel = new JPanel( new GridLayout( 1, 0));
@@ -148,12 +155,14 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
         return controlPanel;
     }
 
+    @Override
     protected JButton buildClearModelButton() {
         return new JButton( this.buildClearModelAction());
     }
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SCDialogUITest.this.clearModel();
             }
@@ -162,12 +171,14 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
         return action;
     }
 
+    @Override
     protected JButton buildPrintModelButton() {
         return new JButton( this.buildPrintModelAction());
     }
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction( "print model") {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 SCDialogUITest.this.printModel();
             }
@@ -184,21 +195,26 @@ public abstract class SCDialogUITest extends SCAbstractUITest {
         return currentWindow;
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
         // TODO Auto-generated method stub
         return null;
     }
+    @Override
     protected void resetProperty() {
         // TODO Auto-generated method stub
     }
+    @Override
     protected void restoreModel() {
         // TODO Auto-generated method stub
     }
 
+    @Override
     protected void clearModel() {
         // TODO Auto-generated method stub
     }
 
+    @Override
     protected void printModel() {
         System.out.println( this.topLinkSessions().toString());
     }

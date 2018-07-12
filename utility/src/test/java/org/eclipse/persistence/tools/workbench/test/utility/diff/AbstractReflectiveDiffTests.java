@@ -41,6 +41,7 @@ public abstract class AbstractReflectiveDiffTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.differentiator = this.buildDifferentiator();
@@ -64,6 +65,7 @@ public abstract class AbstractReflectiveDiffTests extends TestCase {
 
     protected abstract ReflectiveDifferentiator employeeDifferentiator();
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -316,6 +318,7 @@ public abstract class AbstractReflectiveDiffTests extends TestCase {
 
     protected Differentiator buildCustomSalaryDifferentiator() {
         return new Differentiator() {
+            @Override
             public Diff diff(Object object1, Object object2) {
                 float salary1 = ((Float) object1).floatValue();
                 float salary2 = ((Float) object2).floatValue();
@@ -324,9 +327,11 @@ public abstract class AbstractReflectiveDiffTests extends TestCase {
                 }
                 return EqualityDifferentiator.instance().diff(object1, object2);
             }
+            @Override
             public Diff keyDiff(Object object1, Object object2) {
                 return this.diff(object1, object2);
             }
+            @Override
             public boolean comparesValueObjects() {
                 return true;
             }

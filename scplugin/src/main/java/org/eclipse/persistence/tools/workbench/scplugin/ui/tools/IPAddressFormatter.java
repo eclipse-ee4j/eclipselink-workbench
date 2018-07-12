@@ -49,6 +49,7 @@ public class IPAddressFormatter extends JFormattedTextField.AbstractFormatter
      * @return An <code>IPAddress</code> encapsulating the given string
      * @throws ParseException The IP address is not a valid
      */
+    @Override
     public Object stringToValue(String ipAddress) throws ParseException
     {
         return new IPAddress(ipAddress);
@@ -65,6 +66,7 @@ public class IPAddressFormatter extends JFormattedTextField.AbstractFormatter
      * "0.0.0.0"
      * @throws ParseException The IP address is not a valid
      */
+    @Override
     public String valueToString(Object value) throws ParseException
     {
         if (value == null)

@@ -34,6 +34,7 @@ public class StaticValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.objectHolder = this.buildObjectHolder();
@@ -41,12 +42,14 @@ public class StaticValueModelTests extends TestCase {
 
     private ValueModel buildObjectHolder() {
         return new AbstractReadOnlyPropertyValueModel() {
+            @Override
             public Object getValue() {
                 return "foo";
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

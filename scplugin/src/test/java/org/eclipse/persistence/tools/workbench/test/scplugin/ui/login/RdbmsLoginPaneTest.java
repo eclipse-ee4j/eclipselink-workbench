@@ -108,11 +108,13 @@ public class RdbmsLoginPaneTest extends AbstractLoginPaneTest
         testFocusTransferByMnemonic("CONNECTION_RDBMS_DRIVER_URL_COMBO_BOX", COMPONENT_COMBO_BOX);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         throw new IllegalAccessException();
     }
 
+    @Override
     protected String windowTitle()
     {
         return "RDBMS Login Pane";

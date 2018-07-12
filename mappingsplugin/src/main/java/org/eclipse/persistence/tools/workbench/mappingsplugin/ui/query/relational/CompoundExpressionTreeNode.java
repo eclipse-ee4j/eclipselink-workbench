@@ -62,6 +62,7 @@ final class CompoundExpressionTreeNode extends ExpressionTreeNode
         return node;
     }
 
+    @Override
     public void initializeChildren()
     {
         Iterator expressions = getCompoundExpression().expressions();
@@ -73,30 +74,36 @@ final class CompoundExpressionTreeNode extends ExpressionTreeNode
         }
     }
 
+    @Override
     protected void engageListeners()
     {
         getCompoundExpression().addListChangeListener(this);
         getCompoundExpression().addPropertyChangeListener(this);
     }
 
+    @Override
       public void itemsReplaced(ListChangeEvent event) {
           //do nothing for now
       }
+    @Override
       public void itemsAdded(ListChangeEvent event) {
           for (Iterator stream = event.items(); stream.hasNext(); ) {
             addNodeForExpression((MWExpression) stream.next());
           }
       }
 
+    @Override
       public void itemsRemoved(ListChangeEvent event) {
          ExpressionTreeNode node = (ExpressionTreeNode) getChildAt(event.getIndex());
         node.disengageListeners();
         getModel().removeNodeFromParent(node);
       }
 
+    @Override
       public void listChanged(ListChangeEvent event) {
       }
 
+    @Override
     public void propertyChange(PropertyChangeEvent evt)
     {
         String propertyName = evt.getPropertyName();
@@ -106,6 +113,7 @@ final class CompoundExpressionTreeNode extends ExpressionTreeNode
         }
     }
 
+    @Override
     protected void disengageListeners()
     {
         getCompoundExpression().removeListChangeListener(this);

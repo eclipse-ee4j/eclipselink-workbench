@@ -84,6 +84,7 @@ public final class ClassChooserTools
     {
         classRepositoryHolder.addPropertyChangeListener(ValueModel.VALUE, new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 button.setEnabled(e.getNewValue() != null);
@@ -114,7 +115,8 @@ public final class ClassChooserTools
             // If the selection holder is not a SimplePropertyValueModel but a
             // PropertyAspectAdapter, we make sure it has a listener to it so that
             // the subject has been engaged and setValueFromSubject() is called
-            PropertyChangeListener fakeListener = new PropertyChangeListener() { public void propertyChange(PropertyChangeEvent e) {} };
+            PropertyChangeListener fakeListener = new PropertyChangeListener() {@Override
+ public void propertyChange(PropertyChangeEvent e) {} };
             selectionHolder.addPropertyChangeListener(PropertyValueModel.VALUE, fakeListener);
 
             ClassChooserDialog dialog = ClassChooserDialog.createDialog(repository, context);
@@ -163,6 +165,7 @@ public final class ClassChooserTools
             this.selectionHolder = selectionHolder;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             promptForType

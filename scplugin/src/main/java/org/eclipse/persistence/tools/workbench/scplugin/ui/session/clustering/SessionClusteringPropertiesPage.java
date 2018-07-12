@@ -96,6 +96,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
     {
         return new CollectionAspectAdapter(getSelectionHolder(), null)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 return new ArrayIterator(new Object[] {Boolean.TRUE, Boolean.FALSE});
@@ -155,6 +156,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
 
         return new PropertyAspectAdapter(getSelectionHolder(), propertyNames)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter session = (SessionAdapter) subject;
@@ -183,6 +185,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
 
         return new PropertyAspectAdapter(getSelectionHolder(), propertyNames)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter adapter = (SessionAdapter) subject;
@@ -194,6 +197,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
                 return Boolean.valueOf(adapter.hasRemoteCommandManager());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 SessionAdapter adapter = (SessionAdapter) subject;
@@ -223,6 +227,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
 
         return new Transformer()
         {
+            @Override
             public Object transform(Object value)
             {
                 SessionAdapter session = (SessionAdapter) selection();
@@ -294,6 +299,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
 
@@ -346,6 +352,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
         {
             return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.REMOTE_COMMAND_MANAGER_CONFIG_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     SessionAdapter adapter = (SessionAdapter) subject;
@@ -360,6 +367,7 @@ public final class SessionClusteringPropertiesPage extends ScrollablePropertiesP
          * @param value The value used to retrieve a pane
          * @return {@link RemoteCommandManagerPane}
          */
+        @Override
         public Object transform(Object value)
         {
             if (this.pane == null)

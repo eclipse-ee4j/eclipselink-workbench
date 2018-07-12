@@ -69,6 +69,7 @@ public class CombinedClassDescriptionRepository
      * not need to be refreshed.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository#refreshClassDescriptions()
      */
+    @Override
     public void refreshClassDescriptions() {
         this.typeNames = null;
         this.repository.refreshExternalClassDescriptions();
@@ -78,6 +79,7 @@ public class CombinedClassDescriptionRepository
      * Filter the repository's combined types.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository#classDescriptions()
      */
+    @Override
     public Iterator classDescriptions() {
         return this.filteredCombinedTypes(this.repository.combinedTypes());
     }
@@ -112,6 +114,7 @@ public class CombinedClassDescriptionRepository
      */
     protected Iterator filteredCombinedTypes(Iterator combinedTypes) {
         return new FilteringIterator(combinedTypes) {
+            @Override
             protected boolean accept(Object o) {
                 return CombinedClassDescriptionRepository.this.accept(((ClassDescription) o).getName());
             }

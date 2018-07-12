@@ -50,11 +50,13 @@ public class EnclosingMethodAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.classIndex = stream.readU2();
         this.methodIndex = stream.readU2();
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         this.printFullyQualifiedMethodDeclarationOn(writer);
         writer.println();
@@ -83,6 +85,7 @@ public class EnclosingMethodAttribute extends Attribute {
         writer.print(')');
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         this.getMethodReturnDescriptor().accept(visitor);
@@ -135,6 +138,7 @@ public class EnclosingMethodAttribute extends Attribute {
         return this.methodIndex;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.fullyQualifiedSignature());
     }

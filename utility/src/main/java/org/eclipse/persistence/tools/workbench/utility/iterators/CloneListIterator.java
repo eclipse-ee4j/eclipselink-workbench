@@ -76,6 +76,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.nestedListIterator.hasNext();
     }
@@ -83,6 +84,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#next()
      */
+    @Override
     public Object next() {
         // allow the nested iterator to throw an exception before we modify the index
         Object next = this.nestedListIterator.next();
@@ -94,6 +96,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#remove()
      */
+    @Override
     public void remove() {
         // allow the nested iterator to throw an exception before we modify the original list
         this.nestedListIterator.remove();
@@ -108,6 +111,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int nextIndex() {
         return this.nestedListIterator.nextIndex();
     }
@@ -115,6 +119,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previousIndex()
      */
+    @Override
     public int previousIndex() {
         return this.nestedListIterator.previousIndex();
     }
@@ -122,6 +127,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasPrevious()
      */
+    @Override
     public boolean hasPrevious() {
         return this.nestedListIterator.hasPrevious();
     }
@@ -129,6 +135,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previous()
      */
+    @Override
     public Object previous() {
         // allow the nested iterator to throw an exception before we modify the index
         Object previous = this.nestedListIterator.previous();
@@ -140,6 +147,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#add(java.lang.Object)
      */
+    @Override
     public void add(Object o) {
         // allow the nested iterator to throw an exception before we modify the original list
         this.nestedListIterator.add(o);
@@ -150,6 +158,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#set(java.lang.Object)
      */
+    @Override
     public void set(Object o) {
         // allow the nested iterator to throw an exception before we modify the original list
         this.nestedListIterator.set(o);
@@ -196,6 +205,7 @@ public class CloneListIterator implements ListIterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }
@@ -228,15 +238,19 @@ public class CloneListIterator implements ListIterator {
 
         Mutator READ_ONLY_INSTANCE =
             new Mutator() {
+                @Override
                 public void add(int index, Object o) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public void remove(int index) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public void set(int index, Object o) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public String toString() {
                     return "ReadOnlyListMutator";
                 }

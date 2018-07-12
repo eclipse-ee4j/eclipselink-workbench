@@ -52,6 +52,7 @@ public final class EisQueriesPropertiesPage
     }
 
 
+    @Override
     protected Component buildPage() {
         setName(resourceRepository().getString("QUERIES_PANEL_NAME"));
 
@@ -171,26 +172,32 @@ public final class EisQueriesPropertiesPage
         return panel;
     }
 
+    @Override
     protected PropertyValueModel buildQueryManagerHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRootEisDescriptor) this.subject).getQueryManager();
             }
         };
     }
 
+    @Override
     protected QueryGeneralPanel getQueryGeneralPanel() {
         return this.queryPropertiesPanel.getQueryGeneralPanel();
     }
 
+    @Override
     protected JTabbedPane getQueryTabbedPane() {
         return this.queryPropertiesPanel.getQueryTabbedPane();
     }
 
     private QuickViewPanel buildQuickViewPanel() {
         return new QuickViewPanel(getQueryHolder(), getWorkbenchContextHolder()) {
+            @Override
             protected QuickViewSectionFactory buildSectionFactory(Node node) {
                 return new QuickViewSectionFactory() {
+                    @Override
                     public QuickViewSection[] buildSections() {
                         return new QuickViewSection[] {
                                 new ParametersQuickViewSection(
@@ -206,6 +213,7 @@ public final class EisQueriesPropertiesPage
 
     private Transformer buildQueryTypeTransformer() {
         return new Transformer() {
+            @Override
             public Object transform(Object o) {
                 if (o == null) {
                     return EisQueriesPropertiesPage.this.emptyPanel;

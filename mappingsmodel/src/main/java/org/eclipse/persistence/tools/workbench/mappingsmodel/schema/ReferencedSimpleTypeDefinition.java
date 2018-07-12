@@ -49,14 +49,17 @@ public final class ReferencedSimpleTypeDefinition
 
     // **************** MWSimpleTypeDefinition contract ***********************
 
+    @Override
     public String getVariety() {
         return this.simpleType.getVariety();
     }
 
+    @Override
     public MWSimpleTypeDefinition getItemType() {
         return this.simpleType.getItemType();
     }
 
+    @Override
     public ListIterator memberTypes() {
         return this.simpleType.memberTypes();
     }
@@ -64,14 +67,17 @@ public final class ReferencedSimpleTypeDefinition
 
     // **************** MWSchemaTypeDefinition contract ***********************
 
+    @Override
     public MWSchemaTypeDefinition getBaseType() {
         return this.simpleType.getBaseType();
     }
 
+    @Override
     public boolean isComplex() {
         return false;
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return this.simpleType.baseBuiltInTypes();
     }
@@ -79,10 +85,12 @@ public final class ReferencedSimpleTypeDefinition
 
     // **************** SchemaComponentReference contract *********************
 
+    @Override
     protected MWNamedSchemaComponent getReferencedComponent() {
         return this.simpleType;
     }
 
+    @Override
     protected void resolveReference(String simpleTypeNamespace, String simpleTypeName) {
         this.simpleType = (ExplicitSimpleTypeDefinition) this.getSchema().simpleType(simpleTypeNamespace, simpleTypeName);
     }
@@ -90,6 +98,7 @@ public final class ReferencedSimpleTypeDefinition
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadName(String name, String namespace) {
         if (name == null) {
             name = "anySimpleType";

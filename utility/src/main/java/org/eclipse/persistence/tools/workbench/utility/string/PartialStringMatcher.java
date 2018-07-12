@@ -52,6 +52,7 @@ public interface PartialStringMatcher {
          */
         Comparator DEFAULT_COMPARATOR =
             new Comparator() {
+                @Override
                 public int compare(Object o1, Object o2) {
                     double score1 = ((StringHolderScore) o1).getScore();
                     double score2 = ((StringHolderScore) o2).getScore();
@@ -74,18 +75,22 @@ public interface PartialStringMatcher {
             this.score = score;
         }
 
+        @Override
         public StringHolder getStringHolder() {
             return this.stringHolder;
         }
 
+        @Override
         public double getScore() {
             return this.score;
         }
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, "\"" + this.stringHolder.getString() + "\" : " + this.score);
         }

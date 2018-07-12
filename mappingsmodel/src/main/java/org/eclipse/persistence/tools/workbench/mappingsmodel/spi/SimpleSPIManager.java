@@ -34,6 +34,7 @@ public class SimpleSPIManager implements SPIManager {
     /**
      * @see SPIManager#getExternalClassRepositoryFactory()
      */
+    @Override
     public ExternalClassRepositoryFactory getExternalClassRepositoryFactory() {
         return this.externalClassRepositoryFactory;
     }
@@ -45,6 +46,7 @@ public class SimpleSPIManager implements SPIManager {
     /**
      * @see SPIManager#getExternalDatabaseFactory()
      */
+    @Override
     public ExternalDatabaseFactory getExternalDatabaseFactory() {
         return this.externalDatabaseFactory;
     }

@@ -40,6 +40,7 @@ public final class AutomapAction extends AbstractEnablableFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("AUTOMAP_ACTION");
@@ -47,10 +48,12 @@ public final class AutomapAction extends AbstractEnablableFrameworkAction {
         this.initializeIcon("automap");
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return ((MappingsApplicationNode) selectedNode).isAutoMappable();
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = this.selectedProjectNodes();
         for (int i = 0; i < projectNodes.length; i++) {
@@ -120,6 +123,7 @@ public final class AutomapAction extends AbstractEnablableFrameworkAction {
             "AUTOMAP_STATUS_DIALOG_TITLE",
             "dialog.automap"
         ) {
+            @Override
             protected CellRendererAdapter buildNodeRenderer(Object value) {
                 return (value instanceof ApplicationNode) ?
                     this.buildApplicationNodeAdapter()
@@ -128,12 +132,15 @@ public final class AutomapAction extends AbstractEnablableFrameworkAction {
             }
             private CellRendererAdapter buildApplicationNodeAdapter() {
                 return new AbstractCellRendererAdapter() {
+                    @Override
                     public String buildAccessibleName(Object value) {
                         return ((ApplicationNode) value).accessibleName();
                     }
+                    @Override
                     public Icon buildIcon(Object value) {
                         return ((ApplicationNode) value).icon();
                     }
+                    @Override
                     public String buildText(Object value) {
                         return ((ApplicationNode) value).displayString();
                     }

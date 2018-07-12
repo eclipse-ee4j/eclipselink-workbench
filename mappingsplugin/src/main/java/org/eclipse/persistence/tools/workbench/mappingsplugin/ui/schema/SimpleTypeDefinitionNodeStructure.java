@@ -35,6 +35,7 @@ final class SimpleTypeDefinitionNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     protected ListIterator componentDetails() {
         return new CompositeListIterator(this.nameDetails(), this.typeDetails());
     }
@@ -42,6 +43,7 @@ final class SimpleTypeDefinitionNodeStructure
 
     // **************** NamedSchemaComponentNodeStructure contract ************
 
+    @Override
     Integer topLevelOrderIndex() {
         return new Integer(4);
     }
@@ -58,10 +60,12 @@ final class SimpleTypeDefinitionNodeStructure
 
     private SchemaComponentDetail buildVarietyDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "variety";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return ((MWSimpleTypeDefinition) this.component).getVariety();
             }
@@ -84,10 +88,12 @@ final class SimpleTypeDefinitionNodeStructure
 
     private SchemaComponentDetail buildBaseTypeDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "  base";
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 return ((MWSimpleTypeDefinition) this.component).getBaseType();
             }
@@ -96,10 +102,12 @@ final class SimpleTypeDefinitionNodeStructure
 
     private SchemaComponentDetail buildItemTypeDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "  itemType";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 String valueFromComponent = super.getValueFromComponent();
 
@@ -110,6 +118,7 @@ final class SimpleTypeDefinitionNodeStructure
                 return valueFromComponent;
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 MWSimpleTypeDefinition itemType = ((MWSimpleTypeDefinition) this.component).getItemType();
                 return (itemType.getName() == null) ? itemType.getBaseType() : itemType;
@@ -119,6 +128,7 @@ final class SimpleTypeDefinitionNodeStructure
 
     private ListIterator buildMemberTypeDetails() {
         return new TransformationListIterator(((MWSimpleTypeDefinition) this.getComponent()).memberTypes()) {
+            @Override
             protected Object transform(Object next) {
                 return SimpleTypeDefinitionNodeStructure.this.buildMemberTypeDetail((MWSimpleTypeDefinition) next);
             }
@@ -127,10 +137,12 @@ final class SimpleTypeDefinitionNodeStructure
 
     private SchemaComponentDetail buildMemberTypeDetail(final MWSimpleTypeDefinition memberType) {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "  memberType";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 String valueFromComponent = super.getValueFromComponent();
 
@@ -141,6 +153,7 @@ final class SimpleTypeDefinitionNodeStructure
                 return valueFromComponent;
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 return (memberType.getName() == null) ? memberType.getBaseType() : memberType;
             }

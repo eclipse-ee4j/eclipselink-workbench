@@ -43,6 +43,7 @@ public class IgnoreErrorSet extends MappingsType implements Cloneable {
         this.setProject( ignoreErrorSet.getProject());
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -121,6 +122,7 @@ public class IgnoreErrorSet extends MappingsType implements Cloneable {
      * @param r the reference to another IgnoreErrorSet.
      * @exception BuildException if an error occurs.
      */
+    @Override
     public void setRefid( Reference r) throws BuildException {
         if ( this.ignoreErrors.size() != 0) {
             throw tooManyAttributes();
@@ -129,6 +131,7 @@ public class IgnoreErrorSet extends MappingsType implements Cloneable {
     }
 
     private static final String CR = System.getProperty("line.separator");
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 

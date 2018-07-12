@@ -72,12 +72,14 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.referenceDescriptorHandle = new MWDescriptorHandle(this, this.buildReferenceDescriptorScrubber());
         this.privateOwned = false;
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
         if (this.getInstanceVariable().isEjb20Attribute()) {
@@ -99,10 +101,12 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     // **************** Accessors ***************
 
+    @Override
     public MWDescriptor getReferenceDescriptor() {
         return this.referenceDescriptorHandle.getDescriptor();
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor newValue) {
         Object oldValue = this.referenceDescriptorHandle.getDescriptor();
         this.referenceDescriptorHandle.setDescriptor(newValue);
@@ -117,22 +121,27 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
             getProject().notifyExpressionsToRecalculateQueryables();
     }
 
+    @Override
     public boolean isReferenceMapping(){
         return true;
     }
 
+    @Override
     public boolean usesNoIndirection() {
         return this.indirectionType == NO_INDIRECTION;
     }
 
+    @Override
     public boolean usesValueHolderIndirection() {
         return this.indirectionType == VALUE_HOLDER_INDIRECTION;
     }
 
+    @Override
     public void setUseValueHolderIndirection() {
         setIndirectionType(VALUE_HOLDER_INDIRECTION);
     }
 
+    @Override
     public void setUseNoIndirection() {
         setIndirectionType(NO_INDIRECTION);
     }
@@ -149,10 +158,12 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     // **************** private owned ***************
 
+    @Override
     public boolean isPrivateOwned() {
         return this.privateOwned;
     }
 
+    @Override
     public void setPrivateOwned(boolean newValue) {
         boolean oldValue = this.privateOwned;
         this.privateOwned = newValue;
@@ -161,18 +172,21 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     //********* mapping morphing support *********
 
+    @Override
     protected void initializeFromMWReferenceObjectMapping(MWReferenceObjectMapping oldMapping) {
         super.initializeFromMWReferenceObjectMapping(oldMapping);
 
         this.setReferenceDescriptor(oldMapping.getReferenceDescriptor());
     }
 
+    @Override
     protected void initializeFromMWReferenceMapping(MWReferenceMapping oldMapping) {
         super.initializeFromMWReferenceMapping(oldMapping);
 
         this.setPrivateOwned(oldMapping.isPrivateOwned());
     }
 
+    @Override
     protected void initializeFromMWIndirectableMapping(MWIndirectableMapping oldMapping) {
         super.initializeFromMWIndirectableMapping(oldMapping);
 
@@ -186,6 +200,7 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     // ************** Automap Support *****************************************
 
+    @Override
     public void automap() {
         super.automap();
         this.automapReferenceDescriptor();
@@ -280,6 +295,7 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     //********* containment hierarchy *********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.referenceDescriptorHandle);
@@ -287,15 +303,18 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     private NodeReferenceScrubber buildReferenceDescriptorScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAbstractReferenceMapping.this.setReferenceDescriptor(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractReferenceMapping.buildReferenceDescriptorScrubber()";
             }
         };
     }
 
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         super.descriptorReplaced(oldDescriptor, newDescriptor);
         if (this.getReferenceDescriptor() == oldDescriptor) {
@@ -305,6 +324,7 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     // ************** Problem Handling *************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkReferenceDescriptor(newProblems);
@@ -374,6 +394,7 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     //********* Runtime conversion *********
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         ForeignReferenceMapping runtimeMapping = (ForeignReferenceMapping) super.runtimeMapping();
 
@@ -396,6 +417,7 @@ public abstract class MWAbstractReferenceMapping extends MWMapping
 
     //********* Displaying *********
 
+    @Override
     public void toString(StringBuffer sb) {
         if (getInstanceVariable() == null) {
             sb.append("<no instance variable>");

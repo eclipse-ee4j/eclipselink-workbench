@@ -31,7 +31,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileSystemView;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
@@ -113,6 +112,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 addProject(AbstractSessionMultipleProjectsPane.this.selectionModel);
@@ -130,6 +130,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
     {
         return new CollectionAspectAdapter(getSubjectHolder(), DatabaseSessionAdapter.ADDITIONAL_PROJECTS_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
@@ -179,6 +180,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 Object[] selectedValues = AbstractSessionMultipleProjectsPane.this.selectionModel.getSelectedValues();
@@ -202,6 +204,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
     {
         this.selectionModel.addListSelectionListener(new ListSelectionListener()
         {
+            @Override
             public void valueChanged(ListSelectionEvent e)
             {
                 if (e.getValueIsAdjusting())
@@ -217,6 +220,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
      *
      * @return The container with all its widgets
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -298,6 +302,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
             return resourceRepository().getIcon(file.exists() ? (file.isDirectory() ? "folder" : "file") : "file");
         }
 
+        @Override
         public Icon buildIcon(Object value)
         {
             if (value instanceof ProjectXMLAdapter)
@@ -306,6 +311,7 @@ abstract class AbstractSessionMultipleProjectsPane extends AbstractSubjectPanel
             return resourceRepository().getIcon("class.public");
         }
 
+        @Override
         public String buildText(Object value)
         {
             String name = ((ProjectAdapter) value).getName();

@@ -460,6 +460,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
 
     protected Action buildOKAction() {
         return new AbstractAction(this.buildOKText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AbstractDialog.this.okPressed();
             }
@@ -513,6 +514,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
 
     protected Action buildCancelAction() {
         return new AbstractAction(this.buildCancelText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AbstractDialog.this.cancelPressed();
             }
@@ -553,6 +555,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
 
     protected Action buildHelpAction() {
         return new AbstractAction(this.buildHelpText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AbstractDialog.this.helpPressed();
             }
@@ -610,6 +613,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
      * Surround show() with calls to register and unregister
      * the dialog with the help system.
      */
+    @Override
     public void show() {
         if (! this.built) {
             this.initializeContentPane();
@@ -638,6 +642,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
      */
     protected WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowOpened(WindowEvent e) {
                 AbstractDialog.this.windowOpened();
             }
@@ -656,6 +661,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
     /**
      * Unregister the dialog after disposing of it.
      */
+    @Override
     public void dispose() {
         super.dispose();
     }
@@ -728,6 +734,7 @@ public abstract class AbstractDialog extends JDialog implements SwingConstants {
      */
     public static Runnable buildDialogLauncher(final Dialog d) {
         return new Runnable() {
+            @Override
             public void run() {
                 d.show();
             }

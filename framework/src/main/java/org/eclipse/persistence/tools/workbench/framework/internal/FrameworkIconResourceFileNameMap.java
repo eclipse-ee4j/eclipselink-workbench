@@ -71,6 +71,7 @@ public final class FrameworkIconResourceFileNameMap extends AbstractIconResource
         {"mw.about", "logo/MappingWorkbench.about.gif"},
     };
 
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

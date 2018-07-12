@@ -53,6 +53,7 @@ public class FilteringCollectionValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.collectionHolder = new SimpleCollectionValueModel(buildCollection());
@@ -67,12 +68,14 @@ public class FilteringCollectionValueModelTests extends TestCase {
 
     private Filter buildFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((String) o).startsWith("b");
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -207,13 +210,16 @@ public class FilteringCollectionValueModelTests extends TestCase {
 
     private CollectionChangeListener buildListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 FilteringCollectionValueModelTests.this.addEvent = e;
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 FilteringCollectionValueModelTests.this.removeEvent = e;
             }
 
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 FilteringCollectionValueModelTests.this.collectionChangedEvent = e;
 
@@ -223,13 +229,16 @@ public class FilteringCollectionValueModelTests extends TestCase {
 
     private CollectionChangeListener buildFilteredListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 FilteringCollectionValueModelTests.this.filteredAddEvent = e;
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 FilteringCollectionValueModelTests.this.filteredRemoveEvent = e;
             }
 
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 FilteringCollectionValueModelTests.this.filteredCollectionChangedEvent = e;
 
@@ -274,6 +283,7 @@ public class FilteringCollectionValueModelTests extends TestCase {
 
     private Filter buildFilter2() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((TestItem) o).name.startsWith("b");
             }

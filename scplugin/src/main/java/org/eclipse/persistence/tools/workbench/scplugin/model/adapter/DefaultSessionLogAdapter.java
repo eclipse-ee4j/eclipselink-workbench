@@ -78,6 +78,7 @@ public final class DefaultSessionLogAdapter extends LogAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new DefaultSessionLogConfig();
     }
@@ -148,6 +149,7 @@ public final class DefaultSessionLogAdapter extends LogAdapter {
         this.firePropertyChanged( LOG_LEVEL_PROPERTY, old, logLevel);
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( this.getFileName());
@@ -163,6 +165,7 @@ public final class DefaultSessionLogAdapter extends LogAdapter {
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo( branchProblems);

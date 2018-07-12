@@ -549,14 +549,17 @@ public class StatusDialog extends AbstractDialog
             this.children = children;
         }
 
+        @Override
         public Iterator children() {
             return this.children.iterator();
         }
 
+        @Override
         public Object getItem() {
             return this.item;
         }
 
+        @Override
         public Iterator status() {
             return this.status.iterator();
         }

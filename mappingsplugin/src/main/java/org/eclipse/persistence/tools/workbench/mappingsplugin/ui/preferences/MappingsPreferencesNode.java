@@ -36,6 +36,7 @@ public class MappingsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.insert(new ClassPreferencesNode(this.getPreferencesContext()), 0);
@@ -45,6 +46,7 @@ public class MappingsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildPropertiesPage()
      */
+    @Override
     protected Component buildPropertiesPage() {
         return new MappingsPreferencesPage(this.getPreferencesContext());
     }
@@ -52,6 +54,7 @@ public class MappingsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildDisplayString()
      */
+    @Override
     protected String buildDisplayString() {
         return this.resourceRepository().getString("PREFERENCES.MAPPINGS");
     }
@@ -59,6 +62,7 @@ public class MappingsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.PreferencesNode#helpTopicId()
      */
+    @Override
     public String helpTopicId() {
         return "preferences.mappings";
     }

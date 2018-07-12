@@ -153,6 +153,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(PseudoLogginOptionsModel.LOG_OPTIONS_PROPERTY, this.pseudoModel)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 PseudoLogginOptionsModel model = (PseudoLogginOptionsModel) subject;
@@ -173,6 +174,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationPropertyValueModel(buildLoggingTypeSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -195,6 +197,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationPropertyValueModel(buildLogAdapterHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(value != null);
@@ -212,12 +215,14 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.LOG_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter session = (SessionAdapter) subject;
                 return session.getLog();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 SessionAdapter session = (SessionAdapter) subject;
@@ -252,6 +257,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationPropertyValueModel(buildLoggingTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return (value != null) ? value.getClass() : null;
@@ -269,6 +275,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), SessionAdapter.LOG_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionAdapter session = (SessionAdapter) subject;
@@ -298,6 +305,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(buildLogHolder(), LogAdapter.LOG_OPTIONS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LogAdapter log = (LogAdapter) subject;
@@ -308,6 +316,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
                 return null;
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LogAdapter log = (LogAdapter) subject;
@@ -325,6 +334,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
 
         return new TransformationPropertyValueModel(adapter)
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(value != null);
@@ -337,6 +347,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -454,6 +465,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 SessionLoggingPropertiesPage.this.pseudoModel.setParentNode((AbstractNodeModel) e.getNewValue());
@@ -471,6 +483,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationPropertyValueModel(buildLogHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -495,6 +508,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationPropertyValueModel(buildLoggingTypeSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -510,6 +524,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
      *
      * @param nodeHolder The holder of the subject, which is <code>SessionAdapter</code>
      */
+    @Override
     protected void initialize(PropertyValueModel nodeHolder)
     {
         super.initialize(nodeHolder);
@@ -539,6 +554,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
         {
             return new PropertyChangeListener()
             {
+                @Override
                 public void propertyChange(PropertyChangeEvent e)
                 {
                     if (SessionAdapter.LOG_CONFIG_PROPERTY.equals(e.getPropertyName()))
@@ -555,6 +571,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
             };
         }
 
+        @Override
         protected void checkParent(Node parent)
         {
             // The parent is set/unset dynamically
@@ -567,6 +584,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
             session.getLog().removePropertyChangeListener(LogAdapter.LOG_OPTIONS_PROPERTY, this.listener);
         }
 
+        @Override
         public String displayString()
         {
             return null;
@@ -579,6 +597,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
             session.getLog().addPropertyChangeListener(LogAdapter.LOG_OPTIONS_PROPERTY, this.listener);
         }
 
+        @Override
         public ChangeNotifier getChangeNotifier()
         {
             return this.changeNotifier;
@@ -589,11 +608,13 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
             return this.logOptions;
         }
 
+        @Override
         public Validator getValidator()
         {
             return this.validator;
         }
 
+        @Override
         protected void initialize()
         {
             super.initialize();
@@ -680,6 +701,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
         {
             return new PropertyAspectAdapter(getSubjectHolder(), DefaultSessionLogAdapter.FILE_NAME_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject;
@@ -688,6 +710,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
                     return Boolean.valueOf(DefaultSessionLogAdapter.DEFAULT_LOG_FILE.equals(fileName));
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject;
@@ -732,6 +755,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
         {
             return new TransformationPropertyValueModel(buildLogFileHolder())
             {
+                @Override
                 protected Object transform(Object value)
                 {
                     if (value == null)
@@ -752,6 +776,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
         {
             return new PropertyAspectAdapter(getSubjectHolder(), DefaultSessionLogAdapter.FILE_NAME_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject;
@@ -763,6 +788,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
                     return fileName;
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject;
@@ -823,12 +849,14 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
         {
             return new PropertyAspectAdapter(getSubjectHolder(), DefaultSessionLogAdapter.LOG_LEVEL_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject;
                     return log.getLogLevel();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject;
@@ -840,6 +868,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
         /**
          * Initializes the layout of this pane.
          */
+        @Override
         protected void initializeLayout()
         {
             GridBagConstraints constraints = new GridBagConstraints();
@@ -938,6 +967,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
                         JFileChooser.FILES_ONLY);
             }
 
+            @Override
             protected File getFileChooserDefaultDirectory()
             {
                 DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject();
@@ -963,6 +993,7 @@ public final class SessionLoggingPropertiesPage extends ScrollablePropertiesPage
                 return new File(preferences().get("location", saveDirectory.getPath()));
             }
 
+            @Override
             public void setEnabled(boolean enabled)
             {
                 DefaultSessionLogAdapter log = (DefaultSessionLogAdapter) subject();

@@ -39,6 +39,7 @@ public class TransactionalProjectDefaultsPropertiesPage extends ProjectDefaultsP
         super(projectNodeHolder, contextHolder);
     }
 
+    @Override
     protected List buildAdvancedPropertyHolders()
     {
         List holders = super.buildAdvancedPropertyHolders();
@@ -50,6 +51,7 @@ public class TransactionalProjectDefaultsPropertiesPage extends ProjectDefaultsP
         return holders;
     }
 
+    @Override
     protected Component buildCachingDefaultsPanel()
     {
         ProjectCachingPolicyPanel panel = new ProjectCachingPolicyPanel
@@ -71,6 +73,7 @@ public class TransactionalProjectDefaultsPropertiesPage extends ProjectDefaultsP
     {
         return new TransformationPropertyValueModel(getSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)

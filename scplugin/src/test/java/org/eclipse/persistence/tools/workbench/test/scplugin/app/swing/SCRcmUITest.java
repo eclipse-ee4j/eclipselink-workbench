@@ -32,6 +32,7 @@ public abstract class SCRcmUITest extends SCAbstractUITest {
         super();
     }
 
+    @Override
     protected void setUp() {
 
         super.setUp();
@@ -51,14 +52,17 @@ public abstract class SCRcmUITest extends SCAbstractUITest {
         return this.subjectHolder;
     }
 
+    @Override
     protected void clearModel() {
         this.subjectHolder.setValue( null);
     }
 
+    @Override
     protected void restoreModel() {
         this.subjectHolder.setValue( subject());
     }
 
+    @Override
     protected void printModel() {
         System.out.println( subject());
     }

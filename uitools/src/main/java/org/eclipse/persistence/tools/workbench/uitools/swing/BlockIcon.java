@@ -53,6 +53,7 @@ public class BlockIcon
 
     // ********** Icon implementation **********
 
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         Color oldColor = g.getColor();
         g.setColor(this.color);
@@ -60,10 +61,12 @@ public class BlockIcon
         g.setColor(oldColor);
     }
 
+    @Override
     public int getIconWidth() {
         return this.width;
     }
 
+    @Override
     public int getIconHeight() {
         return this.height;
     }

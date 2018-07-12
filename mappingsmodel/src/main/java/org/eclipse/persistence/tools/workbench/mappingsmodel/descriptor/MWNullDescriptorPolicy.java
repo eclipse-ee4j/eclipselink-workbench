@@ -33,22 +33,27 @@ public final class MWNullDescriptorPolicy
         super(parent);
     }
 
+    @Override
     public MWMappingDescriptor getOwningDescriptor() {
         return (MWMappingDescriptor) this.getParent();
     }
 
+    @Override
     public void dispose() {
     }
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return null;
     }
 
+    @Override
     public boolean isActive()
     {
         return false;
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         //nothing to set on the runtime descriptor
     }
@@ -57,11 +62,13 @@ public final class MWNullDescriptorPolicy
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         // Do nothing.  Null policy.
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         // Do nothing.  Null policy.
     }

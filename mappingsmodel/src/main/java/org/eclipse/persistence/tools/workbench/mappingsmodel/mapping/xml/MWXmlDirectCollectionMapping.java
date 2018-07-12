@@ -18,7 +18,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWContainerMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWDirectCollectionMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWDirectContainerMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXpathContext;
@@ -54,10 +53,12 @@ public final class MWXmlDirectCollectionMapping
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWXmlDirectCollectionMapping(this);
     }
 
+    @Override
     protected void initializeFromMWXpathedMapping(MWXpathedMapping oldMapping) {
         super.initializeFromMWXpathedMapping(oldMapping);
         this.getXmlField().setXpath(oldMapping.getXmlField().getXpath());
@@ -72,10 +73,12 @@ public final class MWXmlDirectCollectionMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return this.xmlDescriptor().buildDefaultRuntimeDirectCollectionMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AbstractCompositeDirectCollectionMapping runtimeMapping = (AbstractCompositeDirectCollectionMapping) super.runtimeMapping();
         if (!xmlDescriptor().isEisDescriptor()) {

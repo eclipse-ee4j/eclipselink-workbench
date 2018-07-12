@@ -32,11 +32,7 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.NullIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.indirection.ValueHolder;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
@@ -175,6 +171,7 @@ public final class MWClassAttribute extends MWModel
     /**
      * initalize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.modifier = new MWModifier(this);
@@ -183,6 +180,7 @@ public final class MWClassAttribute extends MWModel
     /**
      * some state is determined by the declaring type
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
 
@@ -233,6 +231,7 @@ public final class MWClassAttribute extends MWModel
         }
     }
 
+    @Override
     public MWModifier getModifier() {
         return this.modifier;
     }
@@ -462,82 +461,102 @@ public final class MWClassAttribute extends MWModel
 
     // ********** Modifiable implementation **********
 
+    @Override
     public boolean supportsAbstract() {
         return false;
     }
 
+    @Override
     public boolean canBeSetAbstract() {
         return false;
     }
 
+    @Override
     public boolean canBeSetFinal() {
         return ! this.getModifier().isVolatile();
     }
 
+    @Override
     public boolean supportsInterface() {
         return false;
     }
 
+    @Override
     public boolean canBeSetInterface() {
         return false;
     }
 
+    @Override
     public boolean supportsNative() {
         return false;
     }
 
+    @Override
     public boolean canBeSetNative() {
         return false;
     }
 
+    @Override
     public boolean canBeSetPackage() {
         return true;
     }
 
+    @Override
     public boolean canBeSetPrivate() {
         return true;
     }
 
+    @Override
     public boolean canBeSetProtected() {
         return true;
     }
 
+    @Override
     public boolean canBeSetPublic() {
         return true;
     }
 
+    @Override
     public boolean canBeSetStatic() {
         return true;
     }
 
+    @Override
     public boolean supportsStrict() {
         return false;
     }
 
+    @Override
     public boolean canBeSetStrict() {
         return false;
     }
 
+    @Override
     public boolean supportsSynchronized() {
         return false;
     }
 
+    @Override
     public boolean canBeSetSynchronized() {
         return false;
     }
 
+    @Override
     public boolean supportsTransient() {
         return true;
     }
 
+    @Override
     public boolean canBeSetTransient() {
         return true;
     }
 
+    @Override
     public boolean supportsVolatile() {
         return true;
     }
 
+    @Override
     public boolean canBeSetVolatile() {
         return ! this.getModifier().isFinal();
     }
@@ -545,6 +564,7 @@ public final class MWClassAttribute extends MWModel
     // 'final' and 'volatile' are mutually exclusive
     private static final int ALLOWED_MODIFIERS_FLAGS = Modifier.FINAL | Modifier.VOLATILE;
 
+    @Override
     public void modifierChanged(int oldCode, int newCode) {
         this.firePropertyChanged(MODIFIER_CODE_PROPERTY, oldCode, newCode);
         if (MWModifier.anyFlagsAreDifferent(ALLOWED_MODIFIERS_FLAGS, oldCode, newCode)) {
@@ -552,6 +572,7 @@ public final class MWClassAttribute extends MWModel
         }
     }
 
+    @Override
     public void accessLevelChanged(String oldValue, String newValue) {
         this.firePropertyChanged(MODIFIER_ACCESS_LEVEL_PROPERTY, oldValue, newValue);
     }
@@ -1522,6 +1543,7 @@ public final class MWClassAttribute extends MWModel
 
     // ********** problems ***********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         // @see #addDescriptorProblemsTo(List)
@@ -1676,6 +1698,7 @@ public final class MWClassAttribute extends MWModel
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.modifier);
@@ -1693,9 +1716,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildGetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setGetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildGetMethodScrubber()";
             }
@@ -1704,9 +1729,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildSetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setSetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildSetMethodScrubber()";
             }
@@ -1715,9 +1742,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildValueGetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setValueGetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildValueGetMethodScrubber()";
             }
@@ -1726,9 +1755,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildValueSetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setValueSetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildValueSetMethodScrubber()";
             }
@@ -1737,9 +1768,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildAddMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setAddMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildAddMethodScrubber()";
             }
@@ -1748,9 +1781,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildRemoveMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setRemoveMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildRemoveMethodScrubber()";
             }
@@ -1759,9 +1794,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildValueTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setValueType(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildValueTypeScrubber()";
             }
@@ -1770,9 +1807,11 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildItemTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setItemType(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildItemTypeScrubber()";
             }
@@ -1781,15 +1820,18 @@ public final class MWClassAttribute extends MWModel
 
     private NodeReferenceScrubber buildKeyTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassAttribute.this.setKeyType(null);
             }
+            @Override
             public String toString() {
                 return "MWClassAttribute.buildKeyTypeScrubber()";
             }
         };
     }
 
+    @Override
     public void nodeRenamed(Node node) {
         super.nodeRenamed(node);
         if (this.getType() == node) {
@@ -1800,10 +1842,12 @@ public final class MWClassAttribute extends MWModel
 
     // ********** displaying and printing **********
 
+    @Override
     public String displayString() {
         return this.getName();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getName());
     }

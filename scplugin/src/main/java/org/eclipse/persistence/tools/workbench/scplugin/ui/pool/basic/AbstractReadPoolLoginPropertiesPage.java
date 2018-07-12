@@ -19,9 +19,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
@@ -171,6 +168,7 @@ abstract class AbstractReadPoolLoginPropertiesPage extends ScrollablePropertiesP
 
         return new PropertyAspectAdapter(getSelectionHolder(), propertyNames)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ReadConnectionPoolAdapter pool = (ReadConnectionPoolAdapter) subject;
@@ -190,6 +188,7 @@ abstract class AbstractReadPoolLoginPropertiesPage extends ScrollablePropertiesP
     {
         return new Transformer()
         {
+            @Override
             public Object transform(Object value)
             {
                 if ((value != null) && (Boolean) value)
@@ -304,12 +303,14 @@ abstract class AbstractReadPoolLoginPropertiesPage extends ScrollablePropertiesP
     {
         return new PropertyAspectAdapter(getSelectionHolder(), ReadConnectionPoolAdapter.USE_NON_TRANSACTIONAL_READ_LOGIN_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ReadConnectionPoolAdapter pool = (ReadConnectionPoolAdapter) subject;
                 return Boolean.valueOf(pool.usesNonTransactionalReadLogin());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ReadConnectionPoolAdapter pool = (ReadConnectionPoolAdapter) subject;

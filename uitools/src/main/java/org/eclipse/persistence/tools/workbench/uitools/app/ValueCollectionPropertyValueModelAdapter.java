@@ -70,6 +70,7 @@ public class ValueCollectionPropertyValueModelAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.valueCollectionListener = this.buildValueCollectionListener();
@@ -81,21 +82,26 @@ public class ValueCollectionPropertyValueModelAdapter
      */
     protected CollectionChangeListener buildValueCollectionListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 ValueCollectionPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 ValueCollectionPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 ValueCollectionPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public String toString() {
                 return "value collection listener: " + Arrays.asList(ValueCollectionPropertyValueModelAdapter.this.collectionNames);
             }
         };
     }
 
+    @Override
     protected void startListeningToValue() {
         Model v = (Model) this.value;
         for (int i = this.collectionNames.length; i-- > 0; ) {
@@ -103,6 +109,7 @@ public class ValueCollectionPropertyValueModelAdapter
         }
     }
 
+    @Override
     protected void stopListeningToValue() {
         Model v = (Model) this.value;
         for (int i = this.collectionNames.length; i-- > 0; ) {

@@ -47,11 +47,13 @@ final class TableLockingPolicyPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.optimisticLockingPolicyTypeModel = buildOptimisticLockingPolicyTypeValueHolder();
     }
 
+    @Override
     protected Component buildPage() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -183,6 +185,7 @@ final class TableLockingPolicyPropertiesPage
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(getLockingPolicyTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -216,10 +219,12 @@ final class TableLockingPolicyPropertiesPage
     private PropertyValueModel buildOptimisticLockingPolicyTypeValueHolder() {
         return new PropertyAspectAdapter(getLockingPolicyHolder(),
                     MWTableDescriptorLockingPolicy.OPTIMISTIC_LOCKING_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptorLockingPolicy) subject).getOptimisticLockingType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptorLockingPolicy) subject).setOptimisticLockingType((String) value);
             }

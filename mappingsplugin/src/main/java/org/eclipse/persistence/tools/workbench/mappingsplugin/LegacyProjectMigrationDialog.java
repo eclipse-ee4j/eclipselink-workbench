@@ -43,11 +43,13 @@ public final class LegacyProjectMigrationDialog extends AbstractDialog {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.saveLater = false;
     }
 
+    @Override
     protected Component buildMainPanel() {
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -80,14 +82,17 @@ public final class LegacyProjectMigrationDialog extends AbstractDialog {
 
     // ********** opening **********
 
+    @Override
     protected String helpTopicId() {
         return "dialog.projectLegacyMigration";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return getButtonFor(getOKAction());
     }
 
+    @Override
     protected Iterator buildCustomActions() {
         Collection customActions = new ArrayList();
         customActions.add(buildSaveLaterAction());
@@ -96,6 +101,7 @@ public final class LegacyProjectMigrationDialog extends AbstractDialog {
 
     // ********** OK action **********
 
+    @Override
     protected String buildOKText() {
         return this.resourceRepository().getString("PROJECT_LEGACY_MIGRATION_DIALOG_SAVE_NOW");
     }
@@ -104,6 +110,7 @@ public final class LegacyProjectMigrationDialog extends AbstractDialog {
 
     protected Action buildSaveLaterAction() {
         return new AbstractAction(this.buildSaveLaterText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 LegacyProjectMigrationDialog.this.saveLaterPressed();
             }
@@ -120,6 +127,7 @@ public final class LegacyProjectMigrationDialog extends AbstractDialog {
 
     }
 
+    @Override
     public boolean wasConfirmed() {
         // return true if the user clicked either "save now" or "save later"
         return super.wasConfirmed() || this.saveLater;

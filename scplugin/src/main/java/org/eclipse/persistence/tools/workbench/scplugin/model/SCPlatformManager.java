@@ -57,6 +57,7 @@ public abstract class SCPlatformManager {
 
     public Iterator platformShortNames() {
         return new TransformationIterator( this.platformNames()) {
+            @Override
             protected Object transform( Object next) {
                 return ClassTools.shortNameForClassNamed(( String)next);
             }

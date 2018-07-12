@@ -28,14 +28,17 @@ public abstract class MWXmlMappingFactory
 {
     // **************** Factory methods ***************************************
 
+    @Override
     public MWDirectMapping createDirectMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWXmlDirectMapping((MWXmlDescriptor) descriptor, attribute, name);
     }
 
+    @Override
     public MWDirectCollectionMapping createDirectCollectionMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWXmlDirectCollectionMapping((MWXmlDescriptor) descriptor, attribute, name);
     }
 
+    @Override
     public MWDirectMapMapping createDirectMapMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         throw new UnsupportedOperationException("this is not yet supported, but will be in the future");
     }
@@ -48,6 +51,7 @@ public abstract class MWXmlMappingFactory
         return new MWCompositeCollectionMapping((MWXmlDescriptor) descriptor, attribute, name);
     }
 
+    @Override
     public MWTransformationMapping createTransformationMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWXmlTransformationMapping((MWXmlDescriptor) descriptor, attribute, name);
     }

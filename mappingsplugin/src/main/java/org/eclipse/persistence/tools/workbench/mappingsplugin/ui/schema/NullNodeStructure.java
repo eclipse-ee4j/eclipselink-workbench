@@ -32,6 +32,7 @@ final class NullNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     public String displayString() {
         return "null";
     }
@@ -39,10 +40,12 @@ final class NullNodeStructure
 
     // **************** ParticleTermNodeStructure contract ********************
 
+    @Override
     public void disengageParticle() {
         this.disengageComponent();
     }
 
+    @Override
     public ListIterator details(ListIterator particleDetails) {
         return NullListIterator.instance();
     }

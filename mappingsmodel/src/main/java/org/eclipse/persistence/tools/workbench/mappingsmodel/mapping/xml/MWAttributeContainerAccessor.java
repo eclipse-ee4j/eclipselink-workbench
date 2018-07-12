@@ -48,6 +48,7 @@ public final class MWAttributeContainerAccessor extends MWContainerAccessor {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parentNode) {
         super.initialize(parentNode);
         this.accessorAttributeHandle = new MWAttributeHandle(this, this.buildAccessorAttributeScrubber());
@@ -55,9 +56,11 @@ public final class MWAttributeContainerAccessor extends MWContainerAccessor {
 
     private NodeReferenceScrubber buildAccessorAttributeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAttributeContainerAccessor.this.setAccessorAttribute(null);
             }
+            @Override
             public String toString() {
                 return "MWAttributeContainerAccessor.buildAccessorAttributeScrubber()";
             }
@@ -80,6 +83,7 @@ public final class MWAttributeContainerAccessor extends MWContainerAccessor {
 
     // **************** Containment hierarchy ****************************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.accessorAttributeHandle);
@@ -102,10 +106,12 @@ public final class MWAttributeContainerAccessor extends MWContainerAccessor {
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void adjustRuntimeMapping(AbstractCompositeObjectMapping mapping) {
         ((XMLCompositeObjectMapping)mapping).setContainerAttributeName(getAccessorAttribute().getName());
     }
 
+    @Override
     public void adjustRuntimeMapping(AbstractCompositeCollectionMapping mapping) {
         ((XMLCompositeCollectionMapping)mapping).setContainerAttributeName(getAccessorAttribute().getName());
     }

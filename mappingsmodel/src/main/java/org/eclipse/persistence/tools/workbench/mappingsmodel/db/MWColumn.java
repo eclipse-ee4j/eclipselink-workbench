@@ -25,9 +25,7 @@ import org.eclipse.persistence.tools.workbench.platformsmodel.DatabaseType;
 import org.eclipse.persistence.tools.workbench.platformsmodel.JavaTypeDeclaration;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.internal.helper.DatabaseField;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.tools.schemaframework.FieldDefinition;
@@ -124,6 +122,7 @@ public final class MWColumn
     /**
      * the database type handle is not mapped directly
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.databaseTypeHandle = new DatabaseTypeHandle(this);
@@ -132,6 +131,7 @@ public final class MWColumn
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         DatabaseType dbType = this.defaultDatabaseType();
@@ -320,6 +320,7 @@ public final class MWColumn
 
     // ********** behavior **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.databaseTypeHandle);
@@ -395,6 +396,7 @@ public final class MWColumn
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if (this.getDatabaseType().requiresSize() && (this.size == 0)) {
@@ -409,6 +411,7 @@ public final class MWColumn
      * used by UI components common to O-R and O-X
      * (mappings, locking policy, etc.)
      */
+    @Override
     public String fieldName() {
         return this.qualifiedName();
     }
@@ -417,6 +420,7 @@ public final class MWColumn
      * used by runtime conversions common to O-R and O-X
      * (mappings, locking policy, etc.)
      */
+    @Override
     public DatabaseField runtimeField() {
         return new DatabaseField(this.qualifiedName());
     }
@@ -518,10 +522,12 @@ public final class MWColumn
 
     // ********** displaying and printing **********
 
+    @Override
     public String displayString() {
         return this.qualifiedName();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.qualifiedName());
     }
@@ -558,6 +564,7 @@ public final class MWColumn
     /**
      * fix any possible "corruption"
      */
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (this.primaryKey) {

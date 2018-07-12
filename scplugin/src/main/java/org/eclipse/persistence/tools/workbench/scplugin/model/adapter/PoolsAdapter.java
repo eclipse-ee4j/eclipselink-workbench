@@ -65,6 +65,7 @@ final class PoolsAdapter extends SCAdapter {
      * to the specified collection.
      * @see #children()
      */
+    @Override
     protected void addChildrenTo( List children) {
         super.addChildrenTo( children);
 
@@ -82,6 +83,7 @@ final class PoolsAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new PoolsConfig();
     }
@@ -203,6 +205,7 @@ final class PoolsAdapter extends SCAdapter {
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -214,12 +217,14 @@ final class PoolsAdapter extends SCAdapter {
      * ReadConnectionPool, WriteConnectionPool, and SequenceConnectionPool
      * are stored in their corresponding instance variable.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
     }
     /**
      * Initializes this adapter from the specified config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -264,6 +269,7 @@ final class PoolsAdapter extends SCAdapter {
 
         return CollectionTools.collection(new TransformationIterator(pools())
         {
+            @Override
             protected Object transform(Object next) {
                 return (( ConnectionPoolAdapter) next).getName();
             }

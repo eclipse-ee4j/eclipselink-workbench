@@ -66,12 +66,14 @@ public final class MWXmlDirectMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.xmlField = new MWXmlField(this);
         this.isCdata = false;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.xmlField);
@@ -80,6 +82,7 @@ public final class MWXmlDirectMapping
 
     // **************** MWDirectMapping implementation ************************
 
+    @Override
     protected MWTypeConversionConverter buildTypeConversionConverter() {
         return new MWXmlTypeConversionConverter(this);
     }
@@ -87,6 +90,7 @@ public final class MWXmlDirectMapping
 
     // **************** MWXpathedMapping implementation  **********************
 
+    @Override
     public MWXmlField getXmlField() {
         return this.xmlField;
     }
@@ -94,10 +98,12 @@ public final class MWXmlDirectMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         if (this.getXmlField().isResolved()) {
             return this.getXmlField();
@@ -107,6 +113,7 @@ public final class MWXmlDirectMapping
         }
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenXpaths) {
         if (! this.isReadOnly() && ! this.getXmlField().getXpath().equals("")) {
             writtenXpaths.add(this.getXmlField());
@@ -116,24 +123,29 @@ public final class MWXmlDirectMapping
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -154,10 +166,12 @@ public final class MWXmlDirectMapping
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWXmlDirectMapping(this);
     }
 
+    @Override
     protected void initializeFromMWXpathedMapping(MWXpathedMapping oldMapping) {
         super.initializeFromMWXpathedMapping(oldMapping);
         this.getXmlField().setXpath(oldMapping.getXmlField().getXpath());
@@ -167,6 +181,7 @@ public final class MWXmlDirectMapping
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         // would like to add xpath problems first
         this.addXpathNotSpecifiedProblemTo(newProblems);
@@ -197,11 +212,13 @@ public final class MWXmlDirectMapping
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         this.xmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);
     }
@@ -209,10 +226,12 @@ public final class MWXmlDirectMapping
 
     // **************** Runtime Conversion ************************************
 
+    @Override
     public DatabaseMapping buildRuntimeMapping() {
         return this.xmlDescriptor().buildDefaultRuntimeDirectMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AbstractDirectMapping runtimeMapping = (AbstractDirectMapping) super.runtimeMapping();
         runtimeMapping.setField(this.getXmlField().runtimeField());

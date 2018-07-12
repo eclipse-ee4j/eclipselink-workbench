@@ -46,11 +46,13 @@ public class ComboBoxModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         // nothing yet...
     }
 
+    @Override
     protected void tearDown() throws Exception {
         // nothing yet...
         super.tearDown();
@@ -83,6 +85,7 @@ public class ComboBoxModelAdapterTests extends TestCase {
 
     private PropertyChangeListener buildSelectionListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 // do nothing...
             }

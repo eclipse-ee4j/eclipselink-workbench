@@ -36,28 +36,34 @@ public class Oracle10gTests extends Oracle9iTests {
     /**
      * the Oracle 10.1.0.5.0 server in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb5.ca.oracle.com";
     }
 
+    @Override
     protected String platformName() {
         return "Oracle10g";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "10.1.0.5.0";
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    BINARY_FLOAT_COL            BINARY_FLOAT,"); sb.append(CR);
         sb.append("    BINARY_DOUBLE_COL        BINARY_DOUBLE,"); sb.append(CR);
         super.appendColumnsToTableDDL(sb);
     }
 
+    @Override
     protected int varraySize() {
         return 2817;
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // BINARY_FLOAT
         this.verifyColumnAttribute(metaDataMap, "BINARY_FLOAT_COL", "TABLE_CAT", null);

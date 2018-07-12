@@ -51,10 +51,12 @@ public abstract class AbstractTypableXmlFieldPanel
 
     private PropertyValueModel buildTypedValueHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWXmlField.TYPED_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlField) this.subject).isTyped());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlField) this.subject).setTyped(((Boolean) value).booleanValue());
             }
@@ -68,6 +70,7 @@ public abstract class AbstractTypableXmlFieldPanel
 
     private ValueModel buildIsTextXpathHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWXmlField.XPATH_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlField) this.subject).isTextXpath());
             }

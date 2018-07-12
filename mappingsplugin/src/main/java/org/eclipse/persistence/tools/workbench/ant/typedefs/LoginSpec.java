@@ -43,6 +43,7 @@ public class LoginSpec extends MappingsType {
     /**
      * Initializes this new instance.
      */
+    @Override
     protected void initialize() {
         this.url = "";
         this.driverClass = "";
@@ -134,6 +135,7 @@ public class LoginSpec extends MappingsType {
      * @param r the reference to another LoginSpec.
      * @exception BuildException if an error occurs.
      */
+    @Override
     public void setRefid( Reference r) throws BuildException {
         if ( this.url.length() != 0) {
             throw tooManyAttributes();
@@ -142,6 +144,7 @@ public class LoginSpec extends MappingsType {
     }
 
     private static final String CR = System.getProperty("line.separator");
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 

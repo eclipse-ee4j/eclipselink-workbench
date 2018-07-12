@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.test.mappingsmodel.meta;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.AbstractSet;
 import java.util.Iterator;
 
@@ -62,6 +61,7 @@ public class MWClassRepositoryTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.project = this.buildProject();
@@ -72,6 +72,7 @@ public class MWClassRepositoryTests extends TestCase {
         return new MWRelationalProject(this.getClass().getName(), MappingsModelTestTools.buildSPIManager(), null);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -118,12 +119,15 @@ public class MWClassRepositoryTests extends TestCase {
 
     private CollectionChangeListener buildListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 MWClassRepositoryTests.this.eventType = "add";
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 MWClassRepositoryTests.this.eventType = "remove";
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 throw new RuntimeException("unexpected event");
             }
@@ -591,6 +595,7 @@ public class MWClassRepositoryTests extends TestCase {
 
     private Iterator classNames(Iterator externalClassDescriptions) {
         return new TransformationIterator(externalClassDescriptions) {
+            @Override
             protected Object transform(Object next) {
                 return ((ExternalClassDescription) next).getName();
             }

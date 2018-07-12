@@ -46,6 +46,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#getObject1()
      */
+    @Override
     public Object getObject1() {
         return this.object1;
     }
@@ -53,6 +54,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#getObject2()
      */
+    @Override
     public Object getObject2() {
         return this.object2;
     }
@@ -60,6 +62,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#identical()
      */
+    @Override
     public boolean identical() {
         return ! this.different();
     }
@@ -67,6 +70,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#different()
      */
+    @Override
     public boolean different() {
         // if any component diff is different, the entire diff is different
         for (int i = this.diffs.length; i-- > 0; ) {
@@ -80,6 +84,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#getDifferentiator()
      */
+    @Override
     public Differentiator getDifferentiator() {
         return this.differentiator;
     }
@@ -87,6 +92,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#getDescription()
      */
+    @Override
     public String getDescription() {
         if (this.identical()) {
             return "";
@@ -114,6 +120,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         // preserve the order of the component diffs
         int len = this.diffs.length;
@@ -139,6 +146,7 @@ public class CompositeDiff implements Diff {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return (this.identical()) ? NO_DIFFERENCE_DESCRIPTION : this.getDescription();
     }

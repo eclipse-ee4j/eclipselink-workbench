@@ -36,6 +36,7 @@ final class RelationalDirectMapConverterPropertiesPage
         super(converterMappingNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initializeLayout() {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -73,6 +74,7 @@ final class RelationalDirectMapConverterPropertiesPage
 
     private PropertyValueModel buildDirectValueConverterHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWDirectMapMapping.CONVERTER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDirectMapMapping) subject).getConverter();
             }
@@ -81,26 +83,32 @@ final class RelationalDirectMapConverterPropertiesPage
 
     private ConverterPanel.ConverterSetter buildDirectValueConverterSetter() {
         return new  ConverterPanel.ConverterSetter() {
+            @Override
             public String getType() {
                 return ((MWDirectMapMapping) selection()).getConverter().getType();
             }
 
+            @Override
             public void setNullConverter() {
                 ((MWDirectMapMapping) selection()).setNullConverter();
             }
 
+            @Override
             public void setObjectTypeConverter() {
                 ((MWDirectMapMapping) selection()).setObjectTypeConverter();
             }
 
+            @Override
             public void setSerializedObjectConverter() {
                 ((MWDirectMapMapping) selection()).setSerializedObjectConverter();
             }
 
+            @Override
             public void setTypeConversionConverter() {
                 ((MWDirectMapMapping) selection()).setTypeConversionConverter();
             }
 
+            @Override
             public String converterTypePropertyString() {
                 return MWDirectMapMapping.CONVERTER_PROPERTY;
             }
@@ -109,6 +117,7 @@ final class RelationalDirectMapConverterPropertiesPage
 
     private PropertyValueModel buildDirectKeyConverterHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWDirectMapMapping.DIRECT_KEY_CONVERTER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDirectMapMapping) subject).getDirectKeyConverter();
             }
@@ -117,26 +126,32 @@ final class RelationalDirectMapConverterPropertiesPage
 
     private ConverterPanel.ConverterSetter buildDirectKeyConverterSetter() {
         return new  ConverterPanel.ConverterSetter() {
+            @Override
             public String getType() {
                 return ((MWDirectMapMapping) selection()).getDirectKeyConverter().getType();
             }
 
+            @Override
             public void setNullConverter() {
                 ((MWDirectMapMapping) selection()).setNullDirectKeyConverter();
             }
 
+            @Override
             public void setObjectTypeConverter() {
                 ((MWDirectMapMapping) selection()).setObjectTypeDirectKeyConverter();
             }
 
+            @Override
             public void setSerializedObjectConverter() {
                 ((MWDirectMapMapping) selection()).setSerializedObjectDirectKeyConverter();
             }
 
+            @Override
             public void setTypeConversionConverter() {
                 ((MWDirectMapMapping) selection()).setTypeConversionDirectKeyConverter();
             }
 
+            @Override
             public String converterTypePropertyString() {
                 return MWDirectMapMapping.DIRECT_KEY_CONVERTER_PROPERTY;
             }

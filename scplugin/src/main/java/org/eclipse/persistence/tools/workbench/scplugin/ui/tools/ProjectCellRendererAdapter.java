@@ -59,6 +59,7 @@ public final class ProjectCellRendererAdapter extends AbstractCellRendererAdapte
      * the text is not sufficient, if <code>null</code> is returned, then the
      * text is used as the accessible text
      */
+    @Override
     public String buildAccessibleName(Object value)
     {
         TopLinkSessionsAdapter topLinkSessions = (TopLinkSessionsAdapter) value;
@@ -77,6 +78,7 @@ public final class ProjectCellRendererAdapter extends AbstractCellRendererAdapte
      * @param value The object to be represented by an icon, if one is required
      * @return An icon representing the given object or <code>null</code>
      */
+    @Override
     public Icon buildIcon(Object value)
     {
         return repository.getIcon("SESSIONS_CONFIGURATION");
@@ -89,6 +91,7 @@ public final class ProjectCellRendererAdapter extends AbstractCellRendererAdapte
      * @param value The object to be represented by a string
      * @return A string representation of the given object
      */
+    @Override
     public String buildText(Object value)
     {
         TopLinkSessionsAdapter topLinkSessions = (TopLinkSessionsAdapter) value;

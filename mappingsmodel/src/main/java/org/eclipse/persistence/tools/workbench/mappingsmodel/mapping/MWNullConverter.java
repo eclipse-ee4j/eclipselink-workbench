@@ -35,14 +35,17 @@ public final class MWNullConverter
     // ************** MWConverter implementation *************
 
     /** Should ONLY be used in one place - the UI */
+    @Override
     public String accessibleNameKey() {
         return "ACCESSIBLE_DIRECT_TO_FIELD_MAPPING_NODE";
     }
 
+    @Override
     public String getType() {
         return NO_CONVERTER;
     }
 
+    @Override
     public String iconKey() {
         return "mapping.directToField";
     }
@@ -50,6 +53,7 @@ public final class MWNullConverter
 
     // **************** Runtime Conversion ****************
 
+    @Override
     public Converter runtimeConverter(DatabaseMapping mapping) {
         return null;
     }
@@ -57,6 +61,7 @@ public final class MWNullConverter
 
     // **************** TopLink Methods ***************************************
 
+    @Override
     public /* package-protected */ MWConverter getValueForTopLink() {
         return null;
     }

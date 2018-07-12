@@ -117,6 +117,7 @@ public class XmlClassIndicatorDictionarySubPanel
 
     private PropertyChangeListener buildUseXSITypeListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setVisible(evt.getNewValue() == Boolean.FALSE);
             }

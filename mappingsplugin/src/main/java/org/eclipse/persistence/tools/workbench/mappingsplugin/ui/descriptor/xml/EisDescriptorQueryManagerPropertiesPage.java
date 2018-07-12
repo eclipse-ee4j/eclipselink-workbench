@@ -38,6 +38,7 @@ public class EisDescriptorQueryManagerPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel selectionNodeHolder) {
         super.initialize(selectionNodeHolder);
         this.queryManagerHolder = this.buildQueryManagerHolder();
@@ -45,12 +46,14 @@ public class EisDescriptorQueryManagerPropertiesPage
 
     protected ValueModel buildQueryManagerHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisDescriptor) this.subject).getQueryManager();
             }
         };
     }
 
+    @Override
     protected void initializeLayout() {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
         tabbedPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));

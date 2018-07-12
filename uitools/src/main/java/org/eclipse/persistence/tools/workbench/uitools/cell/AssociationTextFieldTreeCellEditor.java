@@ -36,6 +36,7 @@ public class AssociationTextFieldTreeCellEditor extends TextFieldTreeCellEditor 
      * and the association's value should be updated with what
      * is currently in the text editor.
      */
+    @Override
     public boolean stopCellEditing() {
         ((AssociationTextFieldTreeCellRenderer) this.renderer).updateAssociationValue();
         return super.stopCellEditing();

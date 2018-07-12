@@ -37,6 +37,7 @@ public class ClasspathClassDescription {
         return this.classpathEntry;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.className + " - " + this.classpathEntry);
     }
@@ -45,9 +46,11 @@ public class ClasspathClassDescription {
     // ********** adapter **********
 
     public static class Adapter extends DefaultClassDescriptionAdapter {
+        @Override
         public String className(Object classDescription) {
             return ((ClasspathClassDescription) classDescription).getClassName();
         }
+        @Override
         public String additionalInfo(Object classDescription) {
             return ((ClasspathClassDescription) classDescription).getClasspathEntry();
         }

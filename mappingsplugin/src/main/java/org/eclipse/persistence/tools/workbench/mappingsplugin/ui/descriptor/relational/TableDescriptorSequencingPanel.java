@@ -34,7 +34,6 @@ import org.eclipse.persistence.tools.workbench.framework.ui.chooser.DefaultListC
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.uitools.GroupBox;
 import org.eclipse.persistence.tools.workbench.framework.uitools.Pane;
-import org.eclipse.persistence.tools.workbench.framework.uitools.RegexpDocument;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
@@ -84,10 +83,12 @@ final class TableDescriptorSequencingPanel
 
     private PropertyValueModel buildUseSequencingHolder() {
         return new PropertyAspectAdapter(this.relationalDescriptorHolder, MWTableDescriptor.USES_SEQUENCING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWTableDescriptor) this.subject).usesSequencing());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptor) this.subject).setUsesSequencing(((Boolean) value).booleanValue());
             }
@@ -96,10 +97,12 @@ final class TableDescriptorSequencingPanel
 
     private PropertyValueModel buildSequenceTableHolder() {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.relationalDescriptorHolder, MWTableDescriptor.SEQUENCE_NUMBER_TABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) this.subject).getSequenceNumberTable();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptor) this.subject).setSequenceNumberTable((MWTable) value);
             }
@@ -202,10 +205,12 @@ final class TableDescriptorSequencingPanel
 
     private PropertyValueModel buildSequencingNameHolder() {
         return new PropertyAspectAdapter(this.relationalDescriptorHolder, MWTableDescriptor.SEQUENCE_NUMBER_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) this.subject).getSequenceNumberName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptor) this.subject).setSequenceNumberName((String) value);
             }
@@ -236,6 +241,7 @@ final class TableDescriptorSequencingPanel
     private CachingComboBoxModel buildTableComboBoxModel() {
         return new ExtendedComboBoxModel(
                 new IndirectComboBoxModel(this.sequenceTableHolder, this.relationalDescriptorHolder) {
+            @Override
                     protected ListIterator listValueFromSubject(Object subject) {
                         return orderedTableChoices((MWRelationalDescriptor) subject);
                     }
@@ -250,6 +256,7 @@ final class TableDescriptorSequencingPanel
 
     private Comparator buildTableComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((MWTable) o1).getName().compareTo(((MWTable) o2).getName());
             }
@@ -266,6 +273,7 @@ final class TableDescriptorSequencingPanel
 
     private StringConverter buildTableStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTable) o).getName();
             }
@@ -310,10 +318,12 @@ final class TableDescriptorSequencingPanel
 
     private CollectionValueModel buildColumnsAdapter() {
         return new CollectionAspectAdapter(this.sequenceTableHolder, MWTable.COLUMNS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTable) this.subject).columns();
             }
 
+            @Override
             protected int sizeFromSubject() {
                 return ((MWTable) this.subject).columnsSize();
             }
@@ -322,6 +332,7 @@ final class TableDescriptorSequencingPanel
 
     private Comparator buildColumnComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((MWColumn) o1).getName().compareTo(((MWColumn) o2).getName());
             }
@@ -330,10 +341,12 @@ final class TableDescriptorSequencingPanel
 
     private PropertyValueModel buildSequenceColumnAdapter() {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.relationalDescriptorHolder, MWTableDescriptor.SEQUENCE_NUMBER_COLUMN_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) this.subject).getSequenceNumberColumn();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptor) this.subject).setSequenceNumberColumn((MWColumn) value);
             }
@@ -352,6 +365,7 @@ final class TableDescriptorSequencingPanel
 
     private StringConverter buildColumnStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWColumn) o).getName();
             }

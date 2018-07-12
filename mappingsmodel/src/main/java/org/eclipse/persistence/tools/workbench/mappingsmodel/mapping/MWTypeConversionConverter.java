@@ -60,14 +60,17 @@ public abstract class MWTypeConversionConverter extends MWTypeConverter {
 
     // ************** MWConverter implementation *************
 
+    @Override
     public String accessibleNameKey() {
         return "ACCESSIBLE_TYPE_CONVERSION_MAPPING_NODE";
     }
 
+    @Override
     public String getType() {
         return TYPE_CONVERSION_CONVERTER;
     }
 
+    @Override
     public String iconKey() {
         return "mapping.typeConversion";
     }
@@ -75,6 +78,7 @@ public abstract class MWTypeConversionConverter extends MWTypeConverter {
 
     // ************* Runtime Conversion *************
 
+    @Override
     public Converter runtimeConverter(DatabaseMapping mapping) {
         TypeConversionConverter converter = new TypeConversionConverter(mapping);
         converter.setDataClassName(ClassTools.classNameForTypeDeclaration(getDataType().typeName(), getDataType().getDimensionality()));

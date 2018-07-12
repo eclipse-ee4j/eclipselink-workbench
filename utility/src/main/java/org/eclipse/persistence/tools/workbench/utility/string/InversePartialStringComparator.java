@@ -32,6 +32,7 @@ public class InversePartialStringComparator
     /**
      * @see PartialStringComparator#compare(String, String)
      */
+    @Override
     public double compare(String s1, String s2) {
         return 1.0 - this.partialStringComparator.compare(s1, s2);
     }
@@ -39,6 +40,7 @@ public class InversePartialStringComparator
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.partialStringComparator);
     }

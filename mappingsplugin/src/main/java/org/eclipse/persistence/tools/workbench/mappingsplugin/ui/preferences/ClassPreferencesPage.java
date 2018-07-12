@@ -185,11 +185,13 @@ final class ClassPreferencesPage extends AbstractPanel {
     private BidiStringConverter buildConverter() {
         return new BidiStringConverter() {
             /** Cast the object to a string. */
+            @Override
             public String convertToString(Object o) {
                 return (String) o;
             }
 
             /** Return the correct option for the string, if it exists. */
+            @Override
             public Object convertToObject(String s) {
                 return s.intern();
             }

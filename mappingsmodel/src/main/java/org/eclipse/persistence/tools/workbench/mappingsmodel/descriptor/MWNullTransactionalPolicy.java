@@ -32,14 +32,17 @@ public final class MWNullTransactionalPolicy extends MWModel
         super(parent);
     }
 
+    @Override
     public MWQueryManager getQueryManager() {
         return null;
     }
 
+    @Override
     public MWRefreshCachePolicy getRefreshCachePolicy() {
         return null;
     }
 
+    @Override
     public MWCachingPolicy getCachingPolicy() {
         return this.cachingPolicy;
     }
@@ -48,40 +51,49 @@ public final class MWNullTransactionalPolicy extends MWModel
         throw new UnsupportedOperationException("Cannot modify a Null Transactional Policy");
     }
 
+    @Override
     public MWLockingPolicy getLockingPolicy() {
         return this.lockingPolicy;
     }
 
+    @Override
     public boolean isConformResultsInUnitOfWork() {
         return false;
     }
 
+    @Override
     public void setConformResultsInUnitOfWork(boolean conform){
         throw new UnsupportedOperationException("Cannot modify a Null Transactional Policy");
     }
 
+    @Override
     public boolean isReadOnly() {
         return false;
     }
 
+    @Override
     public void setReadOnly(boolean newValue) {
         throw new UnsupportedOperationException("A non-transactional descriptor cannot set the readOnly property");
     }
 
+    @Override
     public void descriptorInheritanceChanged() {
         // no op
     }
 
+    @Override
     public String getDescriptorAlias() {
         return null;
     }
 
+    @Override
     public void setDescriptorAlias(String descriptorAlias) {
         throw new UnsupportedOperationException("Cannot modify a Null Transactional Policy");
     }
 
     // ************ Runtime Conversion ***********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
 
     }
@@ -89,6 +101,7 @@ public final class MWNullTransactionalPolicy extends MWModel
 
     // ************ TopLink Methods ***********
 
+    @Override
     public MWAbstractTransactionalPolicy getValueForTopLink() {
         return null;
     }

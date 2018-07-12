@@ -36,6 +36,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#getObject1()
      */
+    @Override
     public Object getObject1() {
         return this.diff.getObject1();
     }
@@ -43,6 +44,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#getObject2()
      */
+    @Override
     public Object getObject2() {
         return this.diff.getObject2();
     }
@@ -50,6 +52,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#identical()
      */
+    @Override
     public boolean identical() {
         return this.diff.identical();
     }
@@ -57,6 +60,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#different()
      */
+    @Override
     public boolean different() {
         return this.diff.different();
     }
@@ -64,6 +68,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#getDifferentiator()
      */
+    @Override
     public Differentiator getDifferentiator() {
         return this.differentiator;
     }
@@ -71,6 +76,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#getDescription()
      */
+    @Override
     public String getDescription() {
         if (this.diff.identical()) {
             return "";
@@ -84,6 +90,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         this.diff.appendDescription(pw);
     }
@@ -95,6 +102,7 @@ public abstract class DiffWrapper implements Diff {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return (this.identical()) ? NO_DIFFERENCE_DESCRIPTION : this.getDescription();
     }

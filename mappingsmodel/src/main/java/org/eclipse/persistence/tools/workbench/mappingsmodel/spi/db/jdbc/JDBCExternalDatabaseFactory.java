@@ -54,6 +54,7 @@ public final class JDBCExternalDatabaseFactory
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalDatabaseFactory#buildDatabase(java.sql.Connection)
      */
+    @Override
     public ExternalDatabase buildDatabase(Connection connection) {
         return new JDBCExternalDatabase(connection);
     }
@@ -61,6 +62,7 @@ public final class JDBCExternalDatabaseFactory
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, "singleton");
     }

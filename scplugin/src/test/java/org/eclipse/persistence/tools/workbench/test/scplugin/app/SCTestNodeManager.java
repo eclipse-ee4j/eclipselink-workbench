@@ -38,6 +38,7 @@ public class SCTestNodeManager implements NodeManager {
         this.addProjectNode( projectNode);
     }
 
+    @Override
     public void addProjectNode( ApplicationNode node) {
 
         int i = this.projectNodes.size();
@@ -45,11 +46,13 @@ public class SCTestNodeManager implements NodeManager {
         this.projectNodes.add( i, node);
     }
 
+    @Override
     public ApplicationNode[] projectNodesFor( Plugin plugin) {
 
         return (ApplicationNode[]) this.projectNodes.toArray(new ApplicationNode[this.projectNodes.size()]);
     }
 
+    @Override
     public TreeNodeValueModel getRootNode() {
         // TODO Auto-generated method stub
         return null;
@@ -60,11 +63,13 @@ public class SCTestNodeManager implements NodeManager {
         return null;
     }
 
+    @Override
     public boolean save(ApplicationNode node, WorkbenchContext workbenchContext) {
         return false;
     }
 
 
+    @Override
     public void removeProjectNode(ApplicationNode node) {
         // TODO Auto-generated method stub
 

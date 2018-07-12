@@ -191,10 +191,12 @@ public final class XpathChooserDialog
 
     private static PropertyValueModel buildDefaultXpathHolder(ValueModel xmlFieldHolder) {
         return new PropertyAspectAdapter(xmlFieldHolder, MWXmlField.XPATH_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlField) this.subject).getXpath();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlField) this.subject).setXpath((String) value);
             }
@@ -222,6 +224,7 @@ public final class XpathChooserDialog
 
     //***************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -251,6 +254,7 @@ public final class XpathChooserDialog
 
     private PropertyChangeListener buildSelectedXpathListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent pce) {
                 XpathChooserDialog.this.getOKAction().setEnabled(! "".equals(pce.getNewValue()));
             }
@@ -269,12 +273,14 @@ public final class XpathChooserDialog
 
     private StateChangeListener buildPositionListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 XpathChooserDialog.this.rebuildXpath();
             }
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -352,6 +358,7 @@ public final class XpathChooserDialog
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent tse) {
                 XpathChooserDialog.this.xpathTreeSelectionChanged();
             }
@@ -379,6 +386,7 @@ public final class XpathChooserDialog
 
     private PropertyValueModel buildSelectedXpathDisplayStringHolder() {
         return new TransformationPropertyValueModel(this.selectedXpathHolder) {
+            @Override
             protected Object transform(Object value) {
                 if ("".equals(value)) {
                     return  XpathChooserDialog.this.resourceRepository().getString("NONE_SELECTED");
@@ -393,11 +401,13 @@ public final class XpathChooserDialog
 
     // **************** AbstractDialog contract *******************************
 
+    @Override
     protected void okConfirmed() {
         this.xpathTrigger.accept();
         super.okConfirmed();
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.xpathChooser";
     }
@@ -441,6 +451,7 @@ public final class XpathChooserDialog
         this.selectedXpathHolder.setValue(newXpath);
     }
 
+    @Override
     public void show() {
         if (this.xmlField().schemaContext() == null) {
             this.showErrorDialog();
@@ -490,26 +501,32 @@ public final class XpathChooserDialog
 
         // **************** TreeModel contract ********************************
 
+        @Override
         public Object getRoot() {
             return this.contextNode;
         }
 
+        @Override
         public Object getChild(Object parent, int index) {
             return ((XpathTreeNode) parent).child(index);
         }
 
+        @Override
         public int getChildCount(Object parent) {
             return ((XpathTreeNode) parent).childrenSize();
         }
 
+        @Override
         public boolean isLeaf(Object node) {
             return ((XpathTreeNode) node).isLeaf();
         }
 
+        @Override
         public int getIndexOfChild(Object parent, Object child) {
             return ((XpathTreeNode) parent).childIndex((XpathTreeNode) child);
         }
 
+        @Override
         public void valueForPathChanged(TreePath path, Object newValue) {
             ElementNode elementNode = (ElementNode) path.getLastPathComponent();
             elementNode.setPosition((String) newValue);
@@ -557,6 +574,7 @@ public final class XpathChooserDialog
 
         // **************** RenderingNode contract ****************************
 
+        @Override
         public TreeCellRenderer getRenderer() {
             if (this.renderer == null) {
                 this.renderer = this.buildRenderer();
@@ -570,6 +588,7 @@ public final class XpathChooserDialog
 
         // **************** EditingNode contract ******************************
 
+        @Override
         public TreeCellEditor getEditor() {
             if (this.editor == null) {
                 this.editor = this.buildEditor();
@@ -648,6 +667,7 @@ public final class XpathChooserDialog
             this.xpathSpec = xpathSpec;
         }
 
+        @Override
         protected Iterator newChildren() {
             return new CompositeIterator(this.newTextChildren(), this.newComponentChildren());
         }
@@ -667,6 +687,7 @@ public final class XpathChooserDialog
 
         protected Iterator newComponentChildren() {
             return new TransformationIterator(SchemaContextNode.this.specXpathComponents()) {
+                @Override
                 protected Object transform(Object next) {
                     return SchemaContextNode.this.buildChildComponentNode((MWXpathableSchemaComponent) next);
                 }
@@ -675,6 +696,7 @@ public final class XpathChooserDialog
 
         private Iterator specXpathComponents() {
             return new FilteringIterator(this.xpathComponents()) {
+                @Override
                 protected boolean accept(Object o) {
                     if (o instanceof MWAttributeDeclaration) {
                         return SchemaContextNode.this.xpathSpec.mayUseSimpleData();
@@ -697,16 +719,20 @@ public final class XpathChooserDialog
 
         // **************** RenderingNode contract ****************************
 
+        @Override
         public Object getCellValue() {
             return this.contextComponent;
         }
 
+        @Override
         public TreeCellRenderer buildRenderer() {
             return new SimpleTreeCellRenderer() {
+                @Override
                 protected Icon buildIcon(Object value) {
                     return null;
                 }
 
+                @Override
                 protected String buildText(Object value) {
                     return "";
                 }
@@ -716,6 +742,7 @@ public final class XpathChooserDialog
 
         // **************** EditingNode contract ******************************
 
+        @Override
         protected TreeCellEditor buildEditor() {
             return NullTreeCellEditor.instance();
         }
@@ -723,6 +750,7 @@ public final class XpathChooserDialog
 
         // **************** Exposed *******************************************
 
+        @Override
         String xpathStepString() {
             return "";
         }
@@ -741,6 +769,7 @@ public final class XpathChooserDialog
 
         // **************** Internal ******************************************
 
+        @Override
         protected Iterator newChildren() {
             return NullIterator.instance();
         }
@@ -748,16 +777,20 @@ public final class XpathChooserDialog
 
         // **************** RenderingNode contract ****************************
 
+        @Override
         public Object getCellValue() {
             return null;
         }
 
+        @Override
         protected TreeCellRenderer buildRenderer() {
             return new SimpleTreeCellRenderer() {
+                @Override
                 protected Icon buildIcon(Object value) {
                     return null;
                 }
 
+                @Override
                 protected String buildText(Object value) {
                     return MWXmlField.TEXT;
                 }
@@ -767,6 +800,7 @@ public final class XpathChooserDialog
 
         // **************** EditingNode contract ******************************
 
+        @Override
         protected TreeCellEditor buildEditor() {
             return NullTreeCellEditor.instance();
         }
@@ -774,6 +808,7 @@ public final class XpathChooserDialog
 
         // **************** Exposed *******************************************
 
+        @Override
         String xpathStepString() {
             return MWXmlField.TEXT;
         }
@@ -815,6 +850,7 @@ public final class XpathChooserDialog
 
         // **************** RenderingNode contract ********************************
 
+        @Override
         public Object getCellValue() {
             // Since the component is displayed by the label, what we're returning here is the "additional" value.
             // On this level, there is no additional value.
@@ -824,10 +860,12 @@ public final class XpathChooserDialog
         /** For use in subclasses */
         protected SimpleTreeCellRenderer buildSimpleRenderer() {
             return new SimpleTreeCellRenderer() {
+                @Override
                 protected Icon buildIcon(Object value) {
                     return null;
                 }
 
+                @Override
                 protected String buildText(Object value) {
                     return XpathableComponentNode.this.displayString();
                 }
@@ -853,6 +891,7 @@ public final class XpathChooserDialog
 
         // **************** Internal ******************************************
 
+        @Override
         protected Iterator newChildren() {
             return NullIterator.instance();
         }
@@ -864,14 +903,17 @@ public final class XpathChooserDialog
 
         // **************** RenderingNode contract ****************************
 
+        @Override
         public TreeCellRenderer buildRenderer() {
             return this.buildSimpleRenderer();
         }
 
+        @Override
         public TreeCellEditor buildEditor() {
             return NullTreeCellEditor.instance();
         }
 
+        @Override
         protected String displayString() {
             return this.internalXpathStepString();
         }
@@ -879,6 +921,7 @@ public final class XpathChooserDialog
 
         // **************** Exposed *******************************************
 
+        @Override
         String xpathStepString() {
             return this.internalXpathStepString();
         }
@@ -921,6 +964,7 @@ public final class XpathChooserDialog
                  && CollectionTools.size(this.xpathComponent.xpathComponents()) == 0);
         }
 
+        @Override
         protected Iterator newChildren() {
             return new CompositeIterator(this.newTextChildren(), this.newComponentChildren());
         }
@@ -943,6 +987,7 @@ public final class XpathChooserDialog
 
         protected Iterator newComponentChildren() {
             return new TransformationIterator(ElementNode.this.specXpathComponents()) {
+                @Override
                 protected Object transform(Object next) {
                     return ElementNode.this.buildChildNode((MWXpathableSchemaComponent) next);
                 }
@@ -951,6 +996,7 @@ public final class XpathChooserDialog
 
         private Iterator specXpathComponents() {
             return new FilteringIterator(this.xpathComponents()) {
+                @Override
                 protected boolean accept(Object o) {
                     if (o instanceof MWAttributeDeclaration) {
                         return ElementNode.this.xpathSpec.mayUseSimpleData();
@@ -973,10 +1019,12 @@ public final class XpathChooserDialog
 
         // **************** RenderingNode contract ********************************
 
+        @Override
         public Object getCellValue() {
             return (this.position == 0) ? "all" : String.valueOf(this.position);
         }
 
+        @Override
         protected TreeCellRenderer buildRenderer() {
             if (this.canSetPosition()) {
                 return this.buildSpinnerRenderer();
@@ -988,6 +1036,7 @@ public final class XpathChooserDialog
 
         private SpinnerTreeCellRenderer buildSpinnerRenderer() {
             return new SpinnerTreeCellRenderer(this.displayString(), this.buildSpinnerModel()) {
+                @Override
                 protected JComponent buildComponent() {
                     JSpinner spinner = (JSpinner) super.buildComponent();
                     spinner.setPreferredSize(new Dimension(40, spinner.getPreferredSize().height));
@@ -1003,6 +1052,7 @@ public final class XpathChooserDialog
             return new ElementPositionSpinnerModel(this.position, this.minPosition(), this.maxPosition());
         }
 
+        @Override
         protected TreeCellEditor buildEditor() {
             if (this.canSetPosition()) {
                 return this.buildSpinnerEditor();
@@ -1016,6 +1066,7 @@ public final class XpathChooserDialog
             return new TreeCellEditorAdapter(this.buildSpinnerRenderer());
         }
 
+        @Override
         protected String displayString() {
             String displayString = this.xpathComponent.qName();
 
@@ -1066,6 +1117,7 @@ public final class XpathChooserDialog
         }
 
         /** Add position to internal xpath step string */
+        @Override
         String xpathStepString() {
             String xpathStepString = this.xpathComponent.qName();
 
@@ -1096,10 +1148,12 @@ public final class XpathChooserDialog
             this.max = max;
         }
 
+        @Override
         public Object getValue() {
             return (this.value == 0) ? "all" : String.valueOf(this.value);
         }
 
+        @Override
         public void setValue(Object value) {
             if ((value == null) || ! (value instanceof String)) {
                 throw new IllegalArgumentException("illegal value: " + value);
@@ -1119,6 +1173,7 @@ public final class XpathChooserDialog
             }
         }
 
+        @Override
         public Object getPreviousValue() {
             if (this.value == 0) {
                 return null;
@@ -1129,6 +1184,7 @@ public final class XpathChooserDialog
             }
         }
 
+        @Override
         public Object getNextValue() {
             if (this.value == this.max) {
                 return null;

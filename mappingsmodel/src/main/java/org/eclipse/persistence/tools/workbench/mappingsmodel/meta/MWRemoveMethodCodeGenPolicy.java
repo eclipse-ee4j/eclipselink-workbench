@@ -32,6 +32,7 @@ public final class MWRemoveMethodCodeGenPolicy
         this.isMappingPrivateOwned = isMappingPrivateOwned;
     }
 
+    @Override
     void insertArguments(NonreflectiveMethodDefinition methodDef)
     {
         if (getMethod().methodParametersSize() != 1)
@@ -52,6 +53,7 @@ public final class MWRemoveMethodCodeGenPolicy
      * if back pointer, add
      *     "<argument name>.<set method name>(null);"
      */
+    @Override
     protected void insertCollectionMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         if (methodDef.argumentNamesSize() != 1)
@@ -78,6 +80,7 @@ public final class MWRemoveMethodCodeGenPolicy
      *         -or-
      *     "((<attribute type>) <value get method>.remove(<argument name>)).<set method name>(null);"
      */
+    @Override
     protected void insertMapMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         if (methodDef.argumentNamesSize() != 1)

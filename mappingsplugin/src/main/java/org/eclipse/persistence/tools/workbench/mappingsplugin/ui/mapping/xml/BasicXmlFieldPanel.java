@@ -35,6 +35,7 @@ public final class BasicXmlFieldPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         super.initializeLayout();
 

@@ -60,6 +60,7 @@ public class AddRemoveListPanel extends AddRemovePanel {
         this(context, adapter,listModel, BOTTOM, initialAccessName);
     }
 
+    @Override
     protected void initialize(ListValueModel listModel) {
         super.initialize(listModel);
         this.list = SwingComponentFactory.buildList(new ListModelAdapter(listModel));
@@ -113,6 +114,7 @@ public class AddRemoveListPanel extends AddRemovePanel {
 
     }
 
+    @Override
     public JComponent getComponent() {
         return this.list;
     }
@@ -141,6 +143,7 @@ public class AddRemoveListPanel extends AddRemovePanel {
         this.list.setSelectedIndices(indices);
     }
 
+    @Override
     public void setSelectedValue(Object anObject, boolean shouldScroll) {
         this.list.setSelectedValue(anObject, shouldScroll);
     }

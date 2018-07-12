@@ -44,12 +44,14 @@ public class DateSpinnerModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.valueHolder = new SimplePropertyValueModel(new Date());
         this.spinnerModelAdapter = new DateSpinnerModelAdapter(this.valueHolder);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -58,6 +60,7 @@ public class DateSpinnerModelAdapterTests extends TestCase {
     public void testSetValueSpinnerModel() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 DateSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -72,6 +75,7 @@ public class DateSpinnerModelAdapterTests extends TestCase {
     public void testSetValueValueHolder() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 DateSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -89,6 +93,7 @@ public class DateSpinnerModelAdapterTests extends TestCase {
         this.valueHolder.setValue(newDate);
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 DateSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -129,6 +134,7 @@ public class DateSpinnerModelAdapterTests extends TestCase {
 
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 DateSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -146,6 +152,7 @@ public class DateSpinnerModelAdapterTests extends TestCase {
 
     // ********** inner class **********
     private class TestChangeListener implements ChangeListener {
+        @Override
         public void stateChanged(ChangeEvent e) {
             fail("unexpected event");
         }

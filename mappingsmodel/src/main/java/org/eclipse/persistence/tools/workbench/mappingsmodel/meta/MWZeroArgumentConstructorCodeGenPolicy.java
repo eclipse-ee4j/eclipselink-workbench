@@ -37,6 +37,7 @@ public final class MWZeroArgumentConstructorCodeGenPolicy
      * call "super();" first
      * then initialize all instance variables that need to be initialized
      */
+    @Override
     void insertMethodBody(NonreflectiveMethodDefinition methodDef) {
         if (!this.descriptor.getMWClass().getSuperclass().isObject()) {
             methodDef.addLine("super();");

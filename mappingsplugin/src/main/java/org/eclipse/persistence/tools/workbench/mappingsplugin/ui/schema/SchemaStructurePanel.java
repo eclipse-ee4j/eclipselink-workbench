@@ -52,6 +52,7 @@ class SchemaStructurePanel
         super(schemaNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.selectedSchemaComponentHolder = this.buildSelectedSchemaComponentHolder();
@@ -60,12 +61,14 @@ class SchemaStructurePanel
 
     private PropertyValueModel buildSelectedSchemaComponentHolder() {
         return new FilteringPropertyValueModel(new SimplePropertyValueModel()) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof SchemaComponentNode;
             }
         };
     }
 
+    @Override
     protected void initializeLayout() {
         this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         this.add(this.buildSplitPane(), BorderLayout.CENTER);
@@ -133,6 +136,7 @@ class SchemaStructurePanel
 
     private TreeSelectionListener buildTreeSelectionListener(final TreeSelectionModel treeSelectionModel) {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 Object selectedComponent = (treeSelectionModel.getSelectionCount() == 1) ?
                                             treeSelectionModel.getSelectionPath().getLastPathComponent() :
@@ -158,6 +162,7 @@ class SchemaStructurePanel
      */
     private PropertyChangeListener buildNodeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 resetNode((ApplicationNode) evt.getNewValue());
             }

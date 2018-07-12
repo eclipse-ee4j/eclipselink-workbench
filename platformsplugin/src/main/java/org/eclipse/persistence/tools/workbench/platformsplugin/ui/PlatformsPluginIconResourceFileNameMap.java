@@ -41,6 +41,7 @@ final class PlatformsPluginIconResourceFileNameMap extends AbstractIconResourceF
 
     };
 
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

@@ -42,11 +42,13 @@ public class CloneListIteratorTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.originalList = this.buildList();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -204,12 +206,15 @@ public class CloneListIteratorTests extends TestCase {
 
     private CloneListIterator.Mutator buildMutator() {
         return new CloneListIterator.Mutator() {
+            @Override
             public void add(int index, Object o) {
                 CloneListIteratorTests.this.originalList.add(index, o);
             }
+            @Override
             public void remove(int index) {
                 CloneListIteratorTests.this.originalList.remove(index);
             }
+            @Override
             public void set(int index, Object o) {
                 CloneListIteratorTests.this.originalList.set(index, o);
             }
@@ -226,12 +231,15 @@ public class CloneListIteratorTests extends TestCase {
 
     private ListIterator buildSubclass() {
         return new CloneListIterator(this.originalList) {
+            @Override
             protected void add(int currentIndex, Object o) {
                 CloneListIteratorTests.this.originalList.add(currentIndex, o);
             }
+            @Override
             protected void remove(int currentIndex) {
                 CloneListIteratorTests.this.originalList.remove(currentIndex);
             }
+            @Override
             protected void set(int currentIndex, Object o) {
                 CloneListIteratorTests.this.originalList.set(currentIndex, o);
             }
@@ -391,6 +399,7 @@ public class CloneListIteratorTests extends TestCase {
 
     private Runnable buildRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 CloneListIteratorTests.this.loopWithCloneListIterator();
             }

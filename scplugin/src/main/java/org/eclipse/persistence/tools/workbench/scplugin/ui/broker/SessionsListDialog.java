@@ -102,6 +102,7 @@ final class SessionsListDialog extends AbstractDialog
      *
      * @return The topic ID
      */
+    @Override
     protected String helpTopicId()
     {
         return "dialog.sessions";
@@ -112,6 +113,7 @@ final class SessionsListDialog extends AbstractDialog
      *
      * @return The fully initialize pane with its widgets
      */
+    @Override
     protected Component buildMainPanel()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -169,6 +171,7 @@ final class SessionsListDialog extends AbstractDialog
     {
         this.selectionModel.addListSelectionListener(new ListSelectionListener()
         {
+            @Override
             public void valueChanged(ListSelectionEvent e)
             {
                 if (e.getValueIsAdjusting())
@@ -182,6 +185,7 @@ final class SessionsListDialog extends AbstractDialog
     /**
      * Prepares this dialog to be shown on screen.
      */
+    @Override
     protected void prepareToShow()
     {
         super.prepareToShow();

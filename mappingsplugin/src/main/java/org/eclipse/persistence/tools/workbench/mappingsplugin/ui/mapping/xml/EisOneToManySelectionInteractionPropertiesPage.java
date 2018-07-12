@@ -31,12 +31,14 @@ final class EisOneToManySelectionInteractionPropertiesPage extends ScrollablePro
         addHelpTopicId(this, "mappings.eis.selectionInteraction");
     }
 
+    @Override
     protected Component buildPage(){
         return new InteractionPanel(getApplicationContext(), buildInteractionAdapter(), "mappings.eis.selectionInteraction");
     }
 
     private PropertyValueModel buildInteractionAdapter() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWEisReferenceMapping.SELECTION_INTERACTION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisReferenceMapping) this.subject).getSelectionInteraction();
             }

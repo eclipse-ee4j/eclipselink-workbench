@@ -40,16 +40,19 @@ public final class OXProjectNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return OXProjectTabbedPropertiesPage.class;
     }
 
+    @Override
     protected ProjectTabbedPropertiesPage buildProjectTabbedPanePropertiesPage(WorkbenchContext context) {
         return new OXProjectTabbedPropertiesPage(context);
     }
 
     // *********** AbstractApplicationNode overrides *************
 
+    @Override
     protected String buildIconKey() {
         return "project.ox";
     }
@@ -57,6 +60,7 @@ public final class OXProjectNode
 
     // *********** AbstractApplicationNode implementation ***********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_OX_PROJECT_NODE";
     }
@@ -64,6 +68,7 @@ public final class OXProjectNode
 
     // *********** ApplicationNode implementation *********
 
+    @Override
     protected void addToMenuDescription(GroupContainerDescription menuDescription, WorkbenchContext context) {
         menuDescription.add(this.buildClassActionGroup(context));
         menuDescription.add(this.buildCloseDeleteActionGroup(context));
@@ -75,8 +80,10 @@ public final class OXProjectNode
 
     // *********** ProjectNode implementation ***********
 
+    @Override
     protected DescriptorNodeBuilder buildDescriptorNodeBuilder() {
         return new DescriptorPackageNode.DescriptorNodeBuilder() {
+            @Override
             public DescriptorNode buildDescriptorNode(MWDescriptor descriptor, DescriptorPackageNode descriptorPackageNode) {
                 if (descriptor instanceof MWOXDescriptor) {
                     return new OXDescriptorNode((MWOXDescriptor) descriptor, descriptorPackageNode);

@@ -34,6 +34,7 @@ final class AddNewTableAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("table.add");
@@ -41,6 +42,7 @@ final class AddNewTableAction extends AbstractFrameworkAction {
         this.initializeToolTipText("ADD_NEW_TABLE_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         DatabaseNode databaseNode = (DatabaseNode) selectedNode;
         MWTable newTable = this.promptToCreateNewTableFor(databaseNode.getDatabase());

@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWCollectionContainerPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWContainerMapping;
@@ -26,7 +25,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWContainer
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWDirectCollectionMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWDirectContainerMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWListContainerPolicy;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWSetContainerPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWTypeConversionConverter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
@@ -36,7 +34,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXpathContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXpathSpec;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
-import org.eclipse.persistence.tools.workbench.utility.node.Problem;
 
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.foundation.AbstractCompositeDirectCollectionMapping;
@@ -101,6 +98,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
     }
 
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -119,6 +117,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
         this.containerPolicy = containerPolicy;
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -128,6 +127,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
         return containerPolicy;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -137,6 +137,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
         return containerPolicy;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -148,6 +149,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
 
     // **************** MWXpathedMapping implementation  **********************
 
+    @Override
     public MWXmlField getXmlField() {
         return this.xmlField;
     }
@@ -155,6 +157,7 @@ public abstract class MWAbstractXmlDirectCollectionMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         if (! "".equals(this.getXmlField().getXpath())) {
             return this.getXmlField();
@@ -171,30 +174,36 @@ public abstract class MWAbstractXmlDirectCollectionMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.xmlDescriptor().getSchemaContext();
     }
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return true;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -252,11 +261,13 @@ public abstract class MWAbstractXmlDirectCollectionMapping
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         this.xmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);
     }

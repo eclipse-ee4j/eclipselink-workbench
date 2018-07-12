@@ -19,7 +19,6 @@ import javax.swing.Icon;
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
 import org.eclipse.persistence.tools.workbench.framework.uitools.NoneSelectedCellRendererAdapter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWObjectTypeConverter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWTransformationMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWAggregateMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWManyToManyMapping;
@@ -50,10 +49,12 @@ public class MappingCellRendererAdapter extends NoneSelectedCellRendererAdapter 
         super(repository);
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         return resourceRepository().getIcon(iconKey((MWMapping) value));
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWMapping) value).getName();
     }
@@ -130,6 +131,7 @@ public class MappingCellRendererAdapter extends NoneSelectedCellRendererAdapter 
         }
     }
 
+    @Override
     public String buildAccessibleName(Object value) {
         MWMapping mapping = (MWMapping) value;
         StringBuffer sb = new StringBuffer();

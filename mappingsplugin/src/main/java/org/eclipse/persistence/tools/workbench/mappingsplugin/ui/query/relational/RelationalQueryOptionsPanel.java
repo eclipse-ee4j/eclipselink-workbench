@@ -62,6 +62,7 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private PropertyValueModel buildRelationalQueryHolder(PropertyValueModel queryHolder) {
         return new FilteringPropertyValueModel(queryHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWAbstractRelationalReadQuery;
             }
@@ -269,6 +270,7 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private ListCellRenderer buildCacheUsageRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (value == null) {
                     //null check for comboBox
@@ -282,6 +284,7 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private ListValueModel buildCacheUsageValueModel() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWAbstractRelationalReadQuery.cacheUsageOptions().toplinkOptions();
             }
@@ -290,10 +293,12 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private PropertyValueModel buildCacheUsagePropertyAdapter() {
         return new PropertyAspectAdapter(this.queryHolder, MWAbstractRelationalReadQuery.CACHE_USAGE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAbstractRelationalReadQuery) this.subject).getCacheUsage();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWAbstractRelationalReadQuery) this.subject).setCacheUsage((MWAbstractRelationalReadQuery.CacheUsageModel) value);
             }
@@ -311,6 +316,7 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private ListValueModel buildInMemoryQueryIndirectionValueModel() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWAbstractRelationalReadQuery.inMemoryQueryIndirectionPolicyOptions().toplinkOptions() ;
             }
@@ -319,10 +325,12 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private PropertyValueModel buildInMemoryQueryIndirectionPolicyPropertyAdapter() {
         return new PropertyAspectAdapter(this.queryHolder, MWAbstractRelationalReadQuery.IN_MEMORY_QUERY_INDIRECTION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAbstractRelationalReadQuery) this.subject).getInMemoryQueryIndirectionPolicy();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWAbstractRelationalReadQuery) this.subject).setInMemoryQueryIndirectionPolicy((MWAbstractRelationalReadQuery.InMemoryQueryIndirectionPolicyModel) value);
             }
@@ -331,6 +339,7 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private ListCellRenderer buildInMemoryQueryIndirectionPolicyRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 // need null check for combo-box
                 return value == null ? "" : resourceRepository().getString(((MWAbstractRelationalReadQuery.InMemoryQueryIndirectionPolicyModel) value).resourceKey());
@@ -350,6 +359,7 @@ final class RelationalQueryOptionsPanel extends AbstractPanel
 
     private ActionListener buildAdvancedOptionsAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 showAdvancedOptionsDialog();
             }

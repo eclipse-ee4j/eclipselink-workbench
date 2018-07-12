@@ -100,6 +100,7 @@ public class SortedListValueModelAdapter
      * Sort the internal list before
      * sending out change notification.
      */
+    @Override
     protected void postBuildList() {
         super.postBuildList();
         Collections.sort(this.list, this.comparator);
@@ -108,6 +109,7 @@ public class SortedListValueModelAdapter
     /**
      * the list will need to be sorted after the item is added
      */
+    @Override
     protected void itemsAdded(CollectionChangeEvent e) {
         // first add the items and notify our listeners...
         super.itemsAdded(e);

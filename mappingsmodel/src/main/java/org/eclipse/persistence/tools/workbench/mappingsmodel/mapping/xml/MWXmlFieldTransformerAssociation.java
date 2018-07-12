@@ -67,11 +67,13 @@ public final class MWXmlFieldTransformerAssociation
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.xmlField = new MWXmlField(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.xmlField);
@@ -84,6 +86,7 @@ public final class MWXmlFieldTransformerAssociation
         return this.xmlField;
     }
 
+    @Override
     public MWDataField getField() {
         return this.getXmlField();
     }
@@ -91,16 +94,19 @@ public final class MWXmlFieldTransformerAssociation
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
@@ -108,10 +114,12 @@ public final class MWXmlFieldTransformerAssociation
             // transformation mappings should be able to use both
             // direct and complex fields
 
+            @Override
             public boolean mayUseComplexData() {
                 return true;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -133,11 +141,13 @@ public final class MWXmlFieldTransformerAssociation
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         this.xmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);
     }
@@ -145,6 +155,7 @@ public final class MWXmlFieldTransformerAssociation
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.addXpathMissingProblemTo(currentProblems);

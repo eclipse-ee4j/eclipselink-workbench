@@ -27,6 +27,7 @@ final class ActivateDescriptorAction extends AbstractToggleFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();
@@ -35,6 +36,7 @@ final class ActivateDescriptorAction extends AbstractToggleFrameworkAction {
         initializeToolTipText("ACTIVATE_DESCRIPTOR_ACTION");
     }
 
+    @Override
     protected void execute() {
         boolean active = !isSelected();
         ApplicationNode[] nodes = this.selectedNodes();
@@ -43,14 +45,17 @@ final class ActivateDescriptorAction extends AbstractToggleFrameworkAction {
         }
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return true;
     }
 
+    @Override
     protected boolean shouldBeSelected(ApplicationNode selectedNode) {
         return ((DescriptorNode) selectedNode).getDescriptor().isActive();
     }
 
+    @Override
     protected String[] selectedPropertyNames() {
         return new String[] {MWDescriptor.ACTIVE_PROPERTY};
     }

@@ -45,6 +45,7 @@ public class SCExternalConnectionPoolingUITest extends SCDatabaseLoginUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Setup:";
     }
@@ -63,12 +64,14 @@ public class SCExternalConnectionPoolingUITest extends SCDatabaseLoginUITest {
     private PropertyValueModel buildBooleanHolder( ValueModel subjectHolder) {
 
         return new PropertyAspectAdapter( subjectHolder, DatabaseSessionAdapter.EXTERNAL_CONNECTION_POOLING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 LoginAdapter login = (LoginAdapter) subject;
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) login.getParent();
 
                 return Boolean.valueOf(session.usesExternalConnectionPooling());
             }
+            @Override
             protected void setValueOnSubject( Object value) {
                 LoginAdapter login = (LoginAdapter) subject;
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) login.getParent();
@@ -83,6 +86,7 @@ public class SCExternalConnectionPoolingUITest extends SCDatabaseLoginUITest {
         return new CheckBoxModelAdapter( booleanHolder);
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel taskListPanel = new JPanel( new GridLayout( 1, 0));
@@ -99,6 +103,7 @@ public class SCExternalConnectionPoolingUITest extends SCDatabaseLoginUITest {
         return checkBox;
     }
 
+    @Override
     protected void resetProperty() {
 
         subject().setUserName( "");

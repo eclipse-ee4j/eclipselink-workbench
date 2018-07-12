@@ -30,6 +30,7 @@ final class MapAsAnyObjectAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.anyObject");
@@ -41,14 +42,17 @@ final class MapAsAnyObjectAction
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWAnyObjectMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWOXDescriptor) descriptor).addAnyObjectMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWAnyObjectMapping.class;
     }

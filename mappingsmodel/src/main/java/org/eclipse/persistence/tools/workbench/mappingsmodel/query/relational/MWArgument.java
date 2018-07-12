@@ -16,10 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQuery;
-import org.eclipse.persistence.tools.workbench.utility.ClassTools;
-
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.oxm.XMLDescriptor;

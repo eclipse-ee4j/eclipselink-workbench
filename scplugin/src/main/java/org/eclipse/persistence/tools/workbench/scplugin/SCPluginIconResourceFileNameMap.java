@@ -52,6 +52,7 @@ public final class SCPluginIconResourceFileNameMap extends AbstractIconResourceF
         { "CONNECTION_POOL_WRITE",      "sc/ConnectionPool.write.gif"},
     };
 
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

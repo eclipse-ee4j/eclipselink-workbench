@@ -48,6 +48,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#add(Object)
      */
+    @Override
     public void add(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -55,6 +56,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return false;
     }
@@ -62,6 +64,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasPrevious()
      */
+    @Override
     public boolean hasPrevious() {
         return false;
     }
@@ -69,6 +72,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         throw new NoSuchElementException();
     }
@@ -76,6 +80,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int nextIndex() {
         return 0;
     }
@@ -83,6 +88,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previous()
      */
+    @Override
     public Object previous() {
         throw new NoSuchElementException();
     }
@@ -90,6 +96,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previousIndex()
      */
+    @Override
     public int previousIndex() {
         return -1;
     }
@@ -97,6 +104,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -104,6 +112,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#set(Object)
      */
+    @Override
     public void set(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -111,6 +120,7 @@ public final class NullListIterator implements ListIterator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

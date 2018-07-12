@@ -38,6 +38,7 @@ public class EisLockingPolicyPropertiesPage extends AbstractLockingPolicyPropert
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage()
     {
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -112,6 +113,7 @@ public class EisLockingPolicyPropertiesPage extends AbstractLockingPolicyPropert
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(getLockingPolicyTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
 

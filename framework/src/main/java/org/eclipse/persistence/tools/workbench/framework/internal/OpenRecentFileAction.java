@@ -55,6 +55,7 @@ final class OpenRecentFileAction
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (recentFile.exists()) {
             workbenchWindow.nodeManager().open(recentFile, workbenchWindow.getContext());

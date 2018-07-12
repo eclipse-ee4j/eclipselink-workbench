@@ -112,6 +112,7 @@ final class SampleProjectUnmappedVerifier extends AbstractAutomapVerifier
      *
      * @param project The root of the state object hierarchy
      */
+    @Override
     public void verify(MWProject project)
     {
         MWDescriptor descriptor;

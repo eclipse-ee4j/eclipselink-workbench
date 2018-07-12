@@ -60,6 +60,7 @@ public final class MWMethodBasedTransformer
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.methodHandle = new MWMethodHandle(this, this.buildMethodScrubber());
@@ -68,6 +69,7 @@ public final class MWMethodBasedTransformer
 
     // **************** Containment hierarchy *********************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.methodHandle);
@@ -75,9 +77,11 @@ public final class MWMethodBasedTransformer
 
     private NodeReferenceScrubber buildMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMethodBasedTransformer.this.setMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWMethodBasedTransformer.buildMethodScrubber()";
             }
@@ -104,10 +108,12 @@ public final class MWMethodBasedTransformer
 
     // **************** Aggregate Support *************************************
 
+    @Override
     public String fieldNameForRuntime() {
         return "METHOD_TRANSFORMER " + ((getMethod() == null) ? null : getMethod().getName());
     }
 
+    @Override
     public AggregateFieldDescription fullFieldDescription() {
         return getDescriptionForMethodSignature(getMethod());
     }
@@ -115,16 +121,19 @@ public final class MWMethodBasedTransformer
     private AggregateFieldDescription getDescriptionForMethodSignature(MWMethod method) {
         final String signature = (method == null) ? null : method.signature();
         return new AggregateFieldDescription() {
+            @Override
             public String getMessageKey() {
                 return "AGGREGATE_FIELD_DESCRIPTION_FOR_METHOD_BASED_TRANSFORMER";
             }
 
+            @Override
             public Object[] getMessageArguments() {
                 return new Object[] {signature};
             }
         };
     }
 
+    @Override
     public boolean fieldIsWritten() {
         return true;
     }
@@ -132,6 +141,7 @@ public final class MWMethodBasedTransformer
 
     // **************** UI support *********************************************
 
+    @Override
     public String transformerDisplayString() {
         MWMethod method = this.getMethod();
         return (method == null) ? null : method.shortSignature();
@@ -140,6 +150,7 @@ public final class MWMethodBasedTransformer
 
     // **************** Problems *********************************************
 
+    @Override
     public void addAttributeTransformerProblemsForMapping(List newProblems, MWTransformationMapping mapping) {
         // transformer method must be specified
         if (this.getMethod() == null) {
@@ -159,6 +170,7 @@ public final class MWMethodBasedTransformer
         }
     }
 
+    @Override
     public void addFieldTransformerProblemsForAssociation(List newProblems, MWFieldTransformerAssociation association) {
         // transformer method must be specified
         if (this.getMethod() == null) {
@@ -184,12 +196,14 @@ public final class MWMethodBasedTransformer
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void setRuntimeAttributeTransformer(AbstractTransformationMapping mapping) {
         if (this.getMethod() != null) {
             mapping.setAttributeTransformation(this.getMethod().getName());
         }
     }
 
+    @Override
     public void addRuntimeFieldTransformer(AbstractTransformationMapping mapping, DatabaseField runtimeField) {
         if (this.getMethod() != null) {
             mapping.addFieldTransformation(runtimeField, this.getMethod().getName());
@@ -199,6 +213,7 @@ public final class MWMethodBasedTransformer
 
     // **************** Misc. *************************************************
 
+    @Override
     public void toString(StringBuffer sb) {
         this.getMethod().toString(sb);
     }

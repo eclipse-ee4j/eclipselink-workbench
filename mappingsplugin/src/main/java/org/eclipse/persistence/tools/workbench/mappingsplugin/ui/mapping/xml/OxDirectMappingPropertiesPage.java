@@ -43,6 +43,7 @@ final class OxDirectMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildGeneralPanel() {
         return new OxDirectMappingGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }

@@ -135,6 +135,7 @@ final class NavigatorView {
 
     private PropertyChangeListener buildSelectionMenuDescriptionListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 NavigatorView.this.selectionMenuDescriptionChanged();
             }
@@ -196,6 +197,7 @@ final class NavigatorView {
      */
     private TreeCellRenderer buildTreeCellRenderer() {
         return new TreeCellRenderer() {
+            @Override
             public Component getTreeCellRendererComponent(JTree t, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus)     {
                 return new ApplicationNodeTreeCellRenderer().getTreeCellRendererComponent(t, value, selected, expanded, leaf, row, hasFocus);
             }
@@ -204,9 +206,11 @@ final class NavigatorView {
 
     private MouseListener buildMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 this.handleMouseEvent(e);
             }
+            @Override
             public void mouseReleased(MouseEvent e) {
                 this.handleMouseEvent(e);
             }
@@ -220,6 +224,7 @@ final class NavigatorView {
 
     private KeyListener buildKeyListener() {
         return new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
                 NavigatorView.this.keyPressed(e);
             }
@@ -232,15 +237,19 @@ final class NavigatorView {
 
     private TreeModelListener buildTreeModelListener() {
         return new TreeModelListener() {
+            @Override
             public void treeNodesChanged(TreeModelEvent e) {
                 NavigatorView.this.treeChanged();
             }
+            @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 NavigatorView.this.treeChanged();
             }
+            @Override
             public void treeNodesRemoved(TreeModelEvent e) {
                 NavigatorView.this.treeChanged();
             }
+            @Override
             public void treeStructureChanged(TreeModelEvent e) {
                 NavigatorView.this.treeChanged();
             }
@@ -404,6 +413,7 @@ final class NavigatorView {
         public NavigatorTree(TreeModel model) {
             super(model);
         }
+        @Override
         public String convertValueToText(Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             return (value == null) ? "" : ((Displayable) value).displayString();
         }
@@ -445,6 +455,7 @@ final class NavigatorView {
          * Pull the last node off of each selection path.
          * @see org.eclipse.persistence.tools.workbench.framework.app.NavigatorSelectionModel#getSelectedNodes()
          */
+        @Override
         public ApplicationNode[] getSelectedNodes() {
             TreePath[] paths = this.getSelectionPaths();
             int len = (paths == null) ? 0 : paths.length;
@@ -462,6 +473,7 @@ final class NavigatorView {
          * Gather up the "project" nodes for all of the currently selected "leaf" nodes.
          * @see org.eclipse.persistence.tools.workbench.framework.app.NavigatorSelectionModel#getSelectedProjectNodes()
          */
+        @Override
         public ApplicationNode[] getSelectedProjectNodes() {
             ApplicationNode[] selectedNodes = this.getSelectedNodes();
             Set selectedRootNodes = new HashSet(selectedNodes.length);
@@ -474,6 +486,7 @@ final class NavigatorView {
         /**
          * @see org.eclipse.persistence.tools.workbench.framework.app.NavigatorSelectionModel#pushExpansionState()
          */
+        @Override
         public void pushExpansionState() {
             this.expansionStates.push(this.currentExpansionState());
         }
@@ -481,6 +494,7 @@ final class NavigatorView {
         /**
          * @see org.eclipse.persistence.tools.workbench.framework.app.NavigatorSelectionModel#popAndRestoreExpansionState()
          */
+        @Override
         public void popAndRestoreExpansionState() {
             Collection expandedPaths = (Collection) this.expansionStates.pop();
             for (Iterator stream = expandedPaths.iterator(); stream.hasNext(); ) {
@@ -488,6 +502,7 @@ final class NavigatorView {
             }
         }
 
+        @Override
         public void popAndRestoreExpansionState(ApplicationNode oldNode, ApplicationNode morphedNode) {
             Collection expandedPaths = (Collection) this.expansionStates.pop();
             for (Iterator stream = expandedPaths.iterator(); stream.hasNext(); ) {
@@ -503,6 +518,7 @@ final class NavigatorView {
          * Scroll so the node is visible once it is selected.
          * @see org.eclipse.persistence.tools.workbench.framework.app.NavigatorSelectionModel#setSelectedNode(org.eclipse.persistence.tools.workbench.framework.app.ApplicationNode)
          */
+        @Override
         public void setSelectedNode(ApplicationNode node) {
             TreePath path = new TreePath(node.path());
             this.setSelectionPath(path);
@@ -512,6 +528,7 @@ final class NavigatorView {
         /**
          * Scroll so the paths are visible once they are selected
          */
+        @Override
         public void setSelectionPaths(TreePath[] paths) {
             super.setSelectionPaths(paths);
             for (int i = 0; i < paths.length; i++) {
@@ -523,6 +540,7 @@ final class NavigatorView {
          * Scroll so the node is visible once it is selected.
          * @see org.eclipse.persistence.tools.workbench.framework.app.NavigatorSelectionModel#expandNode(org.eclipse.persistence.tools.workbench.framework.app.ApplicationNode)
          */
+        @Override
         public void expandNode(ApplicationNode node) {
             this.tree.expandPath(new TreePath(node.path()));
         }
@@ -564,6 +582,7 @@ final class NavigatorView {
          * Ask the AccessibleNode for a description that can be different than
          * the regular text shown on the node.
          */
+        @Override
         protected String buildAccessibleName(Object value) {
             return ((AccessibleNode) value).accessibleName();
         }
@@ -571,6 +590,7 @@ final class NavigatorView {
         /**
          * Prepend the node's text with an asterisk if the node is dirty.
          */
+        @Override
         protected String buildText(Object value) {
             String text = super.buildText(value);
             if (text == null) {
@@ -582,6 +602,7 @@ final class NavigatorView {
         /**
          * ask Paul what this is for...
          */
+        @Override
         public Dimension getPreferredSize() {
             Dimension d = super.getPreferredSize();
             return new Dimension(d.width, d.height + 1);

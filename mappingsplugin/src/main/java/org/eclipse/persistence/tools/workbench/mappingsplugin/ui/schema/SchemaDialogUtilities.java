@@ -128,6 +128,7 @@ final class SchemaDialogUtilities
 
         private void showWaitCursor() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     context.getCurrentWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 }
@@ -136,6 +137,7 @@ final class SchemaDialogUtilities
 
         private void hideWaitCursor() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     context.getCurrentWindow().setCursor(Cursor.getDefaultCursor());
                 }
@@ -144,6 +146,7 @@ final class SchemaDialogUtilities
 
         private void updateMessage() throws InvocationTargetException, InterruptedException {
             EventQueue.invokeAndWait(new Runnable() {
+                @Override
                 public void run() {
                     String text = resourceRepository().getString("IMPORT_SCHEMA_DIALOG.WAIT_DIALOG.DESCRIPTION", currentSchema[0].getName());
                     waitDialog.setMessage(text);
@@ -153,12 +156,14 @@ final class SchemaDialogUtilities
 
         private Runnable buildWaitDialogLauncher() {
             return new Runnable() {
+                @Override
                 public void run() {
                     ReloadAllSchemasRunnable.this.waitDialog.setVisible(true);
                 }
             };
         }
 
+        @Override
         public void run() {
             try {
                 if (currentSchema[0] == null)
@@ -186,6 +191,7 @@ final class SchemaDialogUtilities
             catch (final ResourceException re) {
                 waitDialog.dispose();
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         SchemaDialogUtilities.showUrlLoadFailure(context.getCurrentWindow(), currentSchema[0].getName(), re, currentSchema[0].getSchemaSource());
                     }
@@ -198,6 +204,7 @@ final class SchemaDialogUtilities
             catch (final RuntimeException re) {
                 waitDialog.dispose();
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         SchemaDialogUtilities.showSchemaLoadFailure(context.getCurrentWindow(), currentSchema[0].getName(), re);
                     }

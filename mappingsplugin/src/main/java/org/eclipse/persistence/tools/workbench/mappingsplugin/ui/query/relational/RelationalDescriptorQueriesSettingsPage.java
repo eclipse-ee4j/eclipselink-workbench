@@ -49,18 +49,21 @@ extends ScrollablePropertiesPage
         super(relationalDescriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
     }
 
     private PropertyValueModel buildQueryManagerHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) subject).getQueryManager();
             }
         };
     }
 
+    @Override
     protected Component buildPage() {
         setName(resourceRepository().getString("SETTINGS_PANEL_NAME"));
 
@@ -199,10 +202,12 @@ extends ScrollablePropertiesPage
 
     private PropertyValueModel buildQueryTimeoutHolder() {
         return new PropertyAspectAdapter(buildQueryManagerHolder(), MWQueryManager.QUERY_TIMEOUT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWQueryManager) subject).getQueryTimeout();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWQueryManager) subject).setQueryTimeout((Integer) value);
             }
@@ -211,6 +216,7 @@ extends ScrollablePropertiesPage
 
     private PropertyValueModel buildQueryTimeoutBooleanHolder() {
         return new TransformationPropertyValueModel(buildQueryTimeoutHolder()) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null)
                     return null;
@@ -218,6 +224,7 @@ extends ScrollablePropertiesPage
                 return Boolean.valueOf(((Integer) value).intValue() > 0);
             }
 
+            @Override
             protected Object reverseTransform(Object value)
             {
                 if (Boolean.TRUE.equals(value)) {
@@ -242,6 +249,7 @@ extends ScrollablePropertiesPage
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(queryTimeoutHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null) {

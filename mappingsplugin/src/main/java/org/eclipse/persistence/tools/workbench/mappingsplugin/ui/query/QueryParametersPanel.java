@@ -136,16 +136,19 @@ public final class QueryParametersPanel
                     buildQueryParametersTableColumnAdapter(),
                     AddRemovePanel.RIGHT) {
 
+            @Override
             protected void updateOptionalButton(JButton optionalButton) {
                 boolean paramsSelected = getSelectionModel().getSelectedValuesSize() == 1;
                 updateButton(optionalButton, paramsSelected);
             }
 
+            @Override
             protected void updateRemoveButton(JButton removeButton) {
                 boolean paramsSelected = getSelectionModel().getSelectedValue() != null;
                 updateButton(removeButton, paramsSelected);
             }
 
+            @Override
             protected void updateAddButton(JButton addButton) {
             }
 
@@ -173,6 +176,7 @@ public final class QueryParametersPanel
 
     protected TableCellRenderer buildTypeRenderer() {
         return new SimpleTableCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return value == null ? null : ((MWClass) value).getName();
             }
@@ -181,34 +185,41 @@ public final class QueryParametersPanel
 
     private UpDownOptionAdapter buildParametersPanelAdapter() {
         return new UpDownOptionAdapter() {
+            @Override
             public void moveItemsDown(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     getQuery().moveParameterDown((MWQueryParameter) items[i]);
                 }
             }
 
+            @Override
             public void moveItemsUp(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     getQuery().moveParameterUp((MWQueryParameter) items[i]);
                 }
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 removeSelectedQueryParameters(listSelectionModel);
             }
 
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 addQueryParameter();
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 editSelectedQueryParameter((MWQueryParameter) listSelectionModel.getSelectedValue());
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public String optionalButtonKey() {
                 return "EDIT_PARAMETER_BUTTON";
             }
@@ -222,10 +233,12 @@ public final class QueryParametersPanel
 
     private ListValueModel buildQueryParametersHolder() {
         return new ListAspectAdapter(this.queryHolder, MWQuery.PARAMETERS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWAbstractQuery) this.subject).parameters();
             }
 
+            @Override
             protected int sizeFromSubject() {
                 return ((MWAbstractQuery) this.subject).parametersSize();
             }
@@ -309,14 +322,17 @@ public final class QueryParametersPanel
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case TYPE_COLUMN:                return Object.class;
@@ -326,10 +342,12 @@ public final class QueryParametersPanel
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWQueryParameter queryParameter = (MWQueryParameter) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -342,9 +360,11 @@ public final class QueryParametersPanel
 
         private PropertyValueModel buildTypeAdapter(MWQueryParameter queryParameter) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWQueryParameter.TYPE_PROPERTY, queryParameter) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWQueryParameter) this.subject).getType();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWQueryParameter) this.subject).setType((MWClass) value);
                 }
@@ -354,9 +374,11 @@ public final class QueryParametersPanel
 
         private PropertyValueModel buildNameAdapter(MWQueryParameter queryParameter) {
             return new PropertyAspectAdapter(MWQueryParameter.NAME_PROPERTY, queryParameter) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWQueryParameter) this.subject).getName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWQueryParameter) this.subject).setName((String) value);
                 }

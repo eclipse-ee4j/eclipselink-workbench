@@ -43,6 +43,7 @@ public class ExceptionsAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.count = stream.readU2();
         short cnt = this.count;
@@ -53,6 +54,7 @@ public class ExceptionsAttribute extends Attribute {
         }
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         short cnt = this.count;
         for (short i = 0; i < cnt; i++) {
@@ -64,6 +66,7 @@ public class ExceptionsAttribute extends Attribute {
         return this.constantPool().getClassConstant(this.exceptionIndexes[index]).name();
     }
 
+    @Override
     public String[] exceptionClassNames() {
         short cnt = this.count;
         if (cnt == 0) {
@@ -76,6 +79,7 @@ public class ExceptionsAttribute extends Attribute {
         return exceptionClassNames;
     }
 
+    @Override
     public void printThrowsClauseOn(PrintWriter writer) {
         short cnt = this.count;
         if (cnt == 0) {
@@ -90,6 +94,7 @@ public class ExceptionsAttribute extends Attribute {
         }
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -106,6 +111,7 @@ public class ExceptionsAttribute extends Attribute {
         return this.exceptionIndexes[index];
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.count);
         sb.append(" exception(s)");

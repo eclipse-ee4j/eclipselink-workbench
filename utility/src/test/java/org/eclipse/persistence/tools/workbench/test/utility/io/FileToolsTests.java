@@ -48,11 +48,13 @@ public class FileToolsTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.tempDir = this.buildTempDir();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
         this.deleteDir(this.tempDir);
@@ -165,6 +167,7 @@ public class FileToolsTests extends TestCase {
 
     private FileFilter buildFileFilter(final String prefix) {
         return new FileFilter() {
+            @Override
             public boolean accept(File file) {
                 return file.getName().startsWith(prefix);
             }

@@ -42,11 +42,8 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationI
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import org.eclipse.persistence.internal.security.JCEEncryptor;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeDirectCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
@@ -122,6 +119,7 @@ public final class MWLoginSpec
      */
     public static Iterator commonDriverClassNames() {
         return new TransformationIterator(driverSpecs()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DriverSpec) next).getDriverClassName();
             }
@@ -254,6 +252,7 @@ public final class MWLoginSpec
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.savePassword = false;
@@ -383,6 +382,7 @@ public final class MWLoginSpec
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
 
@@ -413,6 +413,7 @@ public final class MWLoginSpec
     /**
      * candidate URLs are hard-coded
      */
+    @Override
     protected void addTransientAspectNamesTo(Set transientAspectNames) {
         super.addTransientAspectNamesTo(transientAspectNames);
         transientAspectNames.add(CANDIDATE_URLS_COLLECTION);
@@ -433,6 +434,7 @@ public final class MWLoginSpec
      */
     public Iterator fullyQualifiedDriverClasspathFiles() {
         return new TransformationIterator(this.driverClasspathEntries()) {
+            @Override
             protected Object transform(Object next) {
                 File file = new File((String) next);
                 if ( ! file.isAbsolute()) {
@@ -525,10 +527,12 @@ public final class MWLoginSpec
 
     // ********** displaying and printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }
 
+    @Override
     public String displayString() {
         return this.name;
     }
@@ -609,6 +613,7 @@ public final class MWLoginSpec
             return this.urls[0];
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.driverClassName);
         }
@@ -635,6 +640,7 @@ public final class MWLoginSpec
             this.url = url;
         }
 
+        @Override
         public Connection connect(Properties properties, Session session) {
             try {
                 return this.driver.connect(this.url, properties);
@@ -643,6 +649,7 @@ public final class MWLoginSpec
             }
         }
 
+        @Override
         public Object clone() {
             try {
                 return super.clone();
@@ -651,10 +658,12 @@ public final class MWLoginSpec
             }
         }
 
+        @Override
         public String getConnectionDetails() {
             return "MWConnector: " + this.url;
         }
 
+        @Override
         public void toString(PrintWriter writer) {
             writer.println(this.getConnectionDetails());
         }

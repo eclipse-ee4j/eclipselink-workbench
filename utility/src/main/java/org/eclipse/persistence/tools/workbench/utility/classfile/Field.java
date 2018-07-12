@@ -56,10 +56,12 @@ public class Field extends Member {
         super(stream, pool);
     }
 
+    @Override
     short visibleAccessFlagsMask() {
         return VISIBLE_ACCESS_FLAGS_MASK;
     }
 
+    @Override
     public void printDeclarationOn(PrintWriter writer) {
         this.printModifierOn(writer);
         this.getFieldDescriptor().printDeclarationOn(writer);
@@ -103,6 +105,7 @@ public class Field extends Member {
         return ! this.isSynthetic();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         this.getFieldDescriptor().accept(visitor);

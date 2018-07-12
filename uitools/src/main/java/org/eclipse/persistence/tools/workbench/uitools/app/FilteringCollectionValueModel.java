@@ -102,6 +102,7 @@ public class FilteringCollectionValueModel
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.localFilter = this.buildLocalFilter();
@@ -115,6 +116,7 @@ public class FilteringCollectionValueModel
      */
     protected Filter buildLocalFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return FilteringCollectionValueModel.this.accept(o);
             }
@@ -127,6 +129,7 @@ public class FilteringCollectionValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.filteredItems.iterator();
     }
@@ -137,6 +140,7 @@ public class FilteringCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return this.filteredItems.size();
     }
@@ -147,6 +151,7 @@ public class FilteringCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#engageModel()
      */
+    @Override
     protected void engageModel() {
         super.engageModel();
         // synch our cache *after* we start listening to the nested collection,
@@ -157,6 +162,7 @@ public class FilteringCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#disengageModel()
      */
+    @Override
     protected void disengageModel() {
         super.disengageModel();
         // clear out the cache when we are not listening to the nested collection
@@ -166,6 +172,7 @@ public class FilteringCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#itemsAdded(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     protected void itemsAdded(CollectionChangeEvent e) {
         // filter the values before propagating the change event
         this.addItemsToCollection(this.filter(e.items()), this.filteredItems, VALUE);
@@ -174,6 +181,7 @@ public class FilteringCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#itemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     protected void itemsRemoved(CollectionChangeEvent e) {
         // do NOT filter the values, because they may no longer be
         // "accepted" and that might be why they were removed in the first place;
@@ -184,6 +192,7 @@ public class FilteringCollectionValueModel
     /**
      * @see CollectionValueModelWrapper#collectionChanged(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     protected void collectionChanged(CollectionChangeEvent e) {
         this.synchFilteredItems();
         this.fireCollectionChanged(VALUE);

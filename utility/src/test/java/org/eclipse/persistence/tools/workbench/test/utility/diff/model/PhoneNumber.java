@@ -70,6 +70,7 @@ public class PhoneNumber {
         this.comment = comment;
     }
 
+    @Override
     public String toString() {
         return "(" + this.areaCode + ") " + this.exchange + "-" + this.number + " x" + this.extension;
     }

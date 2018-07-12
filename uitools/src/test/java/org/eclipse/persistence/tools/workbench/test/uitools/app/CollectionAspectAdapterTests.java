@@ -57,6 +57,7 @@ public class CollectionAspectAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.subject1 = new TestSubject();
@@ -105,6 +106,7 @@ public class CollectionAspectAdapterTests extends TestCase {
     private CollectionAspectAdapter buildAspectAdapter(ValueModel subjectHolder) {
         return new CollectionAspectAdapter(subjectHolder, TestSubject.NAMES_COLLECTION) {
             // this is not a typical aspect adapter - the value is determined by the aspect name
+            @Override
             protected Iterator getValueFromSubject() {
                 if (this.collectionName == TestSubject.NAMES_COLLECTION) {
                     return ((TestSubject) this.subject).names();
@@ -114,6 +116,7 @@ public class CollectionAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.collectionName);
                 }
             }
+            @Override
             public void addItem(Object item) {
                 if (this.collectionName == TestSubject.NAMES_COLLECTION) {
                     ((TestSubject) this.subject).addName((String) item);
@@ -123,6 +126,7 @@ public class CollectionAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.collectionName);
                 }
             }
+            @Override
             public void removeItem(Object item) {
                 if (this.collectionName == TestSubject.NAMES_COLLECTION) {
                     ((TestSubject) this.subject).removeName((String) item);
@@ -137,12 +141,15 @@ public class CollectionAspectAdapterTests extends TestCase {
 
     private CollectionChangeListener buildValueChangeListener1() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CollectionAspectAdapterTests.this.value1Changed(e, ADD);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CollectionAspectAdapterTests.this.value1Changed(e, REMOVE);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CollectionAspectAdapterTests.this.value1Changed(e, CHANGE);
             }
@@ -154,6 +161,7 @@ public class CollectionAspectAdapterTests extends TestCase {
         this.event1Type = eventType;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

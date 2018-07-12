@@ -35,6 +35,7 @@ public class ReflectiveFieldDiff extends DiffWrapper implements Comparable {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         if (this.different()) {
             pw.print("The values in the field '");
@@ -50,6 +51,7 @@ public class ReflectiveFieldDiff extends DiffWrapper implements Comparable {
     /**
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         // sorted on field name
         return Collator.getInstance().compare(this.fieldName(), ((ReflectiveFieldDiff) o).fieldName());

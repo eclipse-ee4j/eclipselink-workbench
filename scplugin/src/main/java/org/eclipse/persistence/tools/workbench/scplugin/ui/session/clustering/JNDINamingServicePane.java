@@ -97,6 +97,7 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder())
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SCAdapter adapter = (SCAdapter) subject;
@@ -143,12 +144,14 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JNDINamingService.INITIAL_CONTEXT_FACTORY_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
                 return adapter.getInitialContextFactoryName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
@@ -179,12 +182,14 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JNDINamingService.JNDI_PASSWORD_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
                 return adapter.getPassword();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
@@ -215,12 +220,14 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JNDINamingService.JNDI_URL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
                 return adapter.getURL();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
@@ -251,12 +258,14 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JNDINamingService.JNDI_USER_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
                 return adapter.getUserName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JNDINamingService adapter = (JNDINamingService) subject;
@@ -268,6 +277,7 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         setBorder(BorderFactory.createCompoundBorder
@@ -423,6 +433,7 @@ class JNDINamingServicePane extends AbstractSubjectPanel
     {
         AbstractDialog dialog = new AbstractDialog(getWorkbenchContext(), resourceRepository().getString("JNDI_SHOW_PROPERTIES_TITLE"))
         {
+            @Override
             protected Component buildMainPanel()
             {
                 PropertyPane pane = new PropertyPane(getSubjectHolder(), getWorkbenchContextHolder());
@@ -431,6 +442,7 @@ class JNDINamingServicePane extends AbstractSubjectPanel
                 return pane;
             }
 
+            @Override
             protected String helpTopicId()
             {
                 return "dialog.jndiNamingService.properties";
@@ -446,6 +458,7 @@ class JNDINamingServicePane extends AbstractSubjectPanel
      */
     private class ShowPropertiesAction implements ActionListener
     {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             showProperties();

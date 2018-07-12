@@ -97,9 +97,11 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
 
     private PropertyChangeListener buildDateChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 DateSpinnerModelAdapter.this.synchronize(e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "date listener";
             }
@@ -117,6 +119,7 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
      * @see javax.swing.JSpinner.DefaultEditor(javax.swing.JSpinner)
      * @see javax.swing.SpinnerModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.getChangeListeners().length == 0) {
             // sorry about this "lateral" call to super  ~bjv
@@ -130,6 +133,7 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
      * The resulting event will be ignored: @see synchronize(Object).
      * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(Object value) {
         super.setValue(value);
         this.dateHolder.setValue(value);
@@ -139,6 +143,7 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
      * Extend to start listening to the underlying date if necessary.
      * @see javax.swing.SpinnerModel#addChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void addChangeListener(ChangeListener listener) {
         if (this.getChangeListeners().length == 0) {
             this.dateHolder.addPropertyChangeListener(ValueModel.VALUE, this.dateChangeListener);
@@ -151,6 +156,7 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
      * Extend to stop listening to the underlying date if appropriate.
      * @see javax.swing.SpinnerModel#removeChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void removeChangeListener(ChangeListener listener) {
         super.removeChangeListener(listener);
         if (this.getChangeListeners().length == 0) {
@@ -190,6 +196,7 @@ public class DateSpinnerModelAdapter extends SpinnerDateModel {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.dateHolder);
     }

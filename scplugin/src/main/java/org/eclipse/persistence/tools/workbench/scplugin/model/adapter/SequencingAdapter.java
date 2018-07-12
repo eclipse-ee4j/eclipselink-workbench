@@ -61,6 +61,7 @@ public class SequencingAdapter extends SCAdapter {
      * to the specified collection.
      * @see #children()
      */
+    @Override
     protected void addChildrenTo( List children) {
         super.addChildrenTo( children);
 
@@ -73,6 +74,7 @@ public class SequencingAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new SequencingConfig();
     }
@@ -297,6 +299,7 @@ public class SequencingAdapter extends SCAdapter {
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -306,6 +309,7 @@ public class SequencingAdapter extends SCAdapter {
     /**
      * Initializes this new model inst. var. and aggregates.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -314,6 +318,7 @@ public class SequencingAdapter extends SCAdapter {
         this.config().setSequenceConfigs( new Vector());
     }
 
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 
@@ -322,6 +327,7 @@ public class SequencingAdapter extends SCAdapter {
     /**
      * Initializes this adapter from the specified config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 

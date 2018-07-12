@@ -101,6 +101,7 @@ public class DefaultListChooser
     // **************** Browsing **********************************************
 
     /** Use a custom dialog to prompt the user for a selection. */
+    @Override
     protected void browse() {
         DefaultListChooserDialog dialog = this.buildDialog();
         dialog.show();
@@ -143,6 +144,7 @@ public class DefaultListChooser
 
     private ActionListener buildGoToListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultListChooser.this.goToSelectedItem();
             }

@@ -95,6 +95,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel selectionNodeHolder) {
         super.initialize(selectionNodeHolder);
         this.multiTableInfoPolicyHolder = buildMultiTableInfoPolicyHolder();
@@ -108,6 +109,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
         return "descriptor.multitable";
     }
 
+    @Override
     protected Component buildPage() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -206,6 +208,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     protected PropertyValueModel buildLabelPanelTextAdapter() {
         return new PropertyAspectAdapter(this.getPrimaryTableHolder(), MWTable.QUALIFIED_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTable) this.subject).getName();
             }
@@ -377,6 +380,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
     private PropertyValueModel buildMultiTableInfoPolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(),
                 MWTableDescriptor.MULTI_TABLE_INFO_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 MWDescriptorPolicy policy = ((MWTableDescriptor) this.subject).getMultiTableInfoPolicy();
                 return policy.isActive() ? policy : null;
@@ -387,6 +391,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
     private PropertyValueModel buildPrimaryTableHolder()  {
         return
             new PropertyAspectAdapter(getSelectionHolder(), MWTableDescriptor.PRIMARY_TABLE_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWTableDescriptor) this.subject).getPrimaryTable();
                 }
@@ -399,10 +404,12 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildPrimaryKeysHaveSameNameValueHolder() {
         return new PropertyAspectAdapter(getSelectedSecondaryTableAssocationHolder(), MWSecondaryTableHolder.PRIMARY_KEYS_HAVE_SAME_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWSecondaryTableHolder) this.subject).primaryKeysHaveSameName());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWSecondaryTableHolder) this.subject).setPrimaryKeysHaveSameName(((Boolean) value).booleanValue());
             }
@@ -415,12 +422,14 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildSelectedTableReferenceHolder() {
         return new PropertyAspectAdapter(this.selectedSecondaryTableHolder, MWSecondaryTableHolder.REFERENCE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWSecondaryTableHolder) this.subject).primaryKeysHaveSameName()) {
                     return null;
                 }
                 return ((MWSecondaryTableHolder) this.subject).getReference();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWSecondaryTableHolder) this.subject).setReference((MWReference) value);
             }
@@ -441,6 +450,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private ListValueModel buildSecondaryTablesAdapter() {
         return new TransformationListValueModelAdapter(this.buildSecondaryTableHoldersAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return ((MWSecondaryTableHolder) item).getTable();
             }
@@ -449,6 +459,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private CollectionValueModel buildSecondaryTableHoldersAdapter() {
         return new CollectionAspectAdapter(this.getMultiTableInfoPolicyHolder(), MWDescriptorMultiTableInfoPolicy.SECONDARY_TABLE_HOLDERS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWDescriptorMultiTableInfoPolicy) this.subject).secondaryTableHolders();
             }
@@ -457,6 +468,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private NodeSelector buildTableNodeSelector() {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 RelationalProjectNode projectNode = (RelationalProjectNode) navigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectTableNodeFor((MWTable) item, navigatorSelectionModel());
@@ -482,6 +494,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private CachingComboBoxModel buildSelectedTableReferenceComboboxModel() {
         return new IndirectComboBoxModel(this.selectedTableReferenceSelectionHolder, this.selectedSecondaryTableHolder) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return MultiTableInfoPropertiesPage.this.orderedReferenceChoices(((MWSecondaryTableHolder) subject).getTable());
             }
@@ -494,6 +507,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private ValueModel buildPrimaryKeyButtonEnabler() {
         return new TransformationPropertyValueModel(this.selectedSecondaryTableHolder) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value != null);
             }
@@ -501,6 +515,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
     }
     private ValueModel buildReferencePanelEnabler() {
         return new TransformationPropertyValueModel(this.primaryKeysHaveSameNameValueHolder) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null) {
                     return Boolean.FALSE;
@@ -512,6 +527,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private ComponentEnabler buildMultiTableSelectionPanelEnabler(Component[] components) {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(getPrimaryTableHolder()) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value != null);
             }
@@ -551,6 +567,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
      */
     private class TableSelectionAdapter implements AddRemoveListPanel.Adapter
     {
+        @Override
         public void addNewItem(ObjectListSelectionModel listSelectionModel)
         {
 
@@ -565,6 +582,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
             }
         }
 
+        @Override
         public void removeSelectedItems(ObjectListSelectionModel listSelectionModel)
         {
             removeAssociatedTables(CollectionTools.collection(listSelectionModel.getSelectedValues()));
@@ -576,6 +594,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
      */
     private class TableCellRenderer extends SimpleListCellRenderer
     {
+        @Override
         protected String buildText(Object value)
         {
             return ((MWTable)value).getName();
@@ -602,6 +621,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
             this.listPanel = listPanel;
         }
 
+        @Override
         public void valueChanged(ListSelectionEvent e)
         {
             if (e.getValueIsAdjusting())
@@ -643,6 +663,7 @@ public class MultiTableInfoPropertiesPage extends ScrollablePropertiesPage {
 
     private StringConverter buildTableStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return ((MWTable) o).getName();
             }

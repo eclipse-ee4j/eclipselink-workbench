@@ -25,6 +25,7 @@ public class TableCellRendererAdapter extends NoneSelectedCellRendererAdapter {
         super(repository);
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWTable) value).getName();
     }

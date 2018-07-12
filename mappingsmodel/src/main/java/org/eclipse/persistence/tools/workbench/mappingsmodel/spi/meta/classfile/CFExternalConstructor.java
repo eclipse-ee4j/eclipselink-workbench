@@ -40,6 +40,7 @@ final class CFExternalConstructor
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getName()
      */
+    @Override
     public String getName() {
         return this.getConstructor().constructorName();
     }
@@ -47,6 +48,7 @@ final class CFExternalConstructor
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalConstructor#getExceptionTypes()
      */
+    @Override
     public ExternalClassDescription[] getExceptionTypes() {
         return this.buildClassDescriptionArray(this.getConstructor().exceptionClassNames());
     }
@@ -54,6 +56,7 @@ final class CFExternalConstructor
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalConstructor#getParameterTypes()
      */
+    @Override
     public ExternalClassDescription[] getParameterTypes() {
         return this.buildClassDescriptionArray(this.getConstructor().javaParameterTypeNames());
     }

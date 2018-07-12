@@ -56,6 +56,7 @@ public class MappingStringHolder extends ObjectStringHolder {
     // ********** constants **********
 
     public static final StringConverter DEFAULT_STRING_CONVERTER = new StringConverter() {
+        @Override
         public String convertToString(Object o) {
             return ((MWMapping) o).getName().toLowerCase();
         }

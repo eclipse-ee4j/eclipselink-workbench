@@ -38,16 +38,11 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationI
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.expressions.ExpressionBuilder;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
 import org.eclipse.persistence.sessions.Record;
-import org.eclipse.persistence.sessions.Session;
 import org.eclipse.persistence.internal.codegen.NonreflectiveMethodDefinition;
 
 /**
@@ -148,6 +143,7 @@ public final class MWMethod
     /**
      * initialize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.modifier = new MWModifier(this);
@@ -156,6 +152,7 @@ public final class MWMethod
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.returnTypeDeclaration = this.buildDefaultReturnTypeDeclaration();
@@ -198,6 +195,7 @@ public final class MWMethod
 
 
     // ***** modifier
+    @Override
     public MWModifier getModifier() {
         return this.modifier;
     }
@@ -260,9 +258,11 @@ public final class MWMethod
     // ***** methodParameters
     public ListIterator methodParameters() {
         return new CloneListIterator(this.methodParameters) {
+            @Override
             protected void remove(int index) {
                 MWMethod.this.removeMethodParameter(index);
             }
+            @Override
             public String toString() {
                 return "MWMethod.methodParameters()";
             }
@@ -337,9 +337,11 @@ public final class MWMethod
     // ***** exceptionTypes
     private Iterator exceptionTypeHandles() {
         return new CloneIterator(this.exceptionTypeHandles) {
+            @Override
             protected void remove(Object current) {
                 MWMethod.this.removeExceptionTypeHandle((MWClassHandle) current);
             }
+            @Override
             public String toString() {
                 return "MWMethod.exceptionTypeHandles()";
             }
@@ -353,9 +355,11 @@ public final class MWMethod
 
     public Iterator exceptionTypes() {
         return new TransformationIterator(this.exceptionTypeHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWClassHandle) next).getType();
             }
+            @Override
             public String toString() {
                 return "MWMethod.exceptionTypes()";
             }
@@ -468,10 +472,12 @@ public final class MWMethod
 
     // ********** Modifiable implementation **********
 
+    @Override
     public boolean supportsAbstract() {
         return true;
     }
 
+    @Override
     public boolean canBeSetAbstract() {
         if (this.isConstructor()) {
             return false;
@@ -497,6 +503,7 @@ public final class MWMethod
         return this.getDeclaringType().isAbstract();
     }
 
+    @Override
     public boolean canBeSetFinal() {
         if (this.isConstructor()) {
             return false;
@@ -507,18 +514,22 @@ public final class MWMethod
         return true;
     }
 
+    @Override
     public boolean supportsInterface() {
         return false;
     }
 
+    @Override
     public boolean canBeSetInterface() {
         return false;
     }
 
+    @Override
     public boolean supportsNative() {
         return true;
     }
 
+    @Override
     public boolean canBeSetNative() {
         if (this.isConstructor()) {
             return false;
@@ -532,22 +543,27 @@ public final class MWMethod
         return true;
     }
 
+    @Override
     public boolean canBeSetPackage() {
         return true;
     }
 
+    @Override
     public boolean canBeSetPrivate() {
         return ! this.isAbstract();
     }
 
+    @Override
     public boolean canBeSetProtected() {
         return true;
     }
 
+    @Override
     public boolean canBeSetPublic() {
         return true;
     }
 
+    @Override
     public boolean canBeSetStatic() {
         if (this.isConstructor()) {
             return false;
@@ -558,10 +574,12 @@ public final class MWMethod
         return true;
     }
 
+    @Override
     public boolean supportsStrict() {
         return true;
     }
 
+    @Override
     public boolean canBeSetStrict() {
         if (this.isConstructor()) {
             return false;
@@ -575,10 +593,12 @@ public final class MWMethod
         return true;
     }
 
+    @Override
     public boolean supportsSynchronized() {
         return true;
     }
 
+    @Override
     public boolean canBeSetSynchronized() {
         if (this.isConstructor()) {
             return false;
@@ -589,18 +609,22 @@ public final class MWMethod
         return true;
     }
 
+    @Override
     public boolean supportsTransient() {
         return false;
     }
 
+    @Override
     public boolean canBeSetTransient() {
         return false;
     }
 
+    @Override
     public boolean supportsVolatile() {
         return false;
     }
 
+    @Override
     public boolean canBeSetVolatile() {
         return false;
     }
@@ -619,6 +643,7 @@ public final class MWMethod
             Modifier.STRICT |
             Modifier.SYNCHRONIZED;
 
+    @Override
     public void modifierChanged(int oldCode, int newCode) {
         this.firePropertyChanged(MODIFIER_CODE_PROPERTY, oldCode, newCode);
         this.firePropertyChanged(MWMethod.SIGNATURE_PROPERTY, "modifier");    // don't waste time building the signature - it's ignored
@@ -634,6 +659,7 @@ public final class MWMethod
         this.modifier.allowedModifiersChanged();
     }
 
+    @Override
     public void accessLevelChanged(String oldValue, String newValue) {
         this.firePropertyChanged(MODIFIER_ACCESS_LEVEL_PROPERTY, oldValue, newValue);
     }
@@ -1127,6 +1153,7 @@ public final class MWMethod
     /**
      * containment hierarchy
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.modifier);
@@ -1140,9 +1167,11 @@ public final class MWMethod
 
     private NodeReferenceScrubber buildAccessedAttributeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMethod.this.setAccessedAttribute(null);
             }
+            @Override
             public String toString() {
                 return "MWMethod.buildAccessedAttributeScrubber()";
             }
@@ -1158,15 +1187,18 @@ public final class MWMethod
 
     private NodeReferenceScrubber buildExceptionTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMethod.this.removeExceptionTypeHandle((MWClassHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWMethod.buildExceptionTypeScrubber()";
             }
         };
     }
 
+    @Override
     public void nodeRenamed(Node node) {
         super.nodeRenamed(node);
         if (this.isConstructor()) {
@@ -1230,6 +1262,7 @@ public final class MWMethod
      * override to sort constructors first, then sort by signature
      * @see MWRPersistentObject.compareTo(Object)
      */
+    @Override
     public int compareTo(Object object) {
         MWMethod otherMethod = null;
         try {
@@ -1253,10 +1286,12 @@ public final class MWMethod
     /**
      * return the fully-qualified signature
      */
+    @Override
     public String displayString() {
         return this.signature();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.shortSignature());
     }

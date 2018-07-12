@@ -88,6 +88,7 @@ public abstract class AbstractAdapterTest extends TestCase
 
         URLClassLoader loader = new URLClassLoader( new URL[ 0], getClass().getClassLoader()) {
 
+        @Override
         public URL findResource( String name) {
                 try {
                     if(  name.equals( topLinkSessionsPath.getPath())) {

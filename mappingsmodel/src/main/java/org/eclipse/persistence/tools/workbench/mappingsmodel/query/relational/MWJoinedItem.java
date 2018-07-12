@@ -60,6 +60,7 @@ public final class MWJoinedItem extends MWAttributeItem {
 
     // ****************** MWQueryItem implementation ************
 
+    @Override
     public void removeSelfFromParent() {
         ((MWAbstractRelationalReadQuery) getParentQuery()).removeJoinedItem(this);
     }
@@ -67,6 +68,7 @@ public final class MWJoinedItem extends MWAttributeItem {
 
     // ****************** Problem Handling************
 
+    @Override
     public Problem queryableNullProblem() {
         return buildProblem(
                 ProblemConstants.QUERYABLE_NULL_FOR_JOINED_ITEM,
@@ -74,10 +76,12 @@ public final class MWJoinedItem extends MWAttributeItem {
                 new Integer(((MWAbstractRelationalReadQuery) getParentQuery()).indexOfJoinedItem(this) + 1));
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         return buildProblem(ProblemConstants.QUERYABLE_NOT_VALID_FOR_READ_QUERY_JOINED_READ_ITEM, queryable.displayString(), getParentQuery().signature());
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return queryable.isValidForJoinedAttribute();
     }
@@ -85,6 +89,7 @@ public final class MWJoinedItem extends MWAttributeItem {
 
     // ****************** Runtime Conversion ************
 
+    @Override
     protected void adjustRuntimeQuery(ObjectLevelReadQuery readQuery) {
         readQuery.addJoinedAttribute(getQueryableArgument().runtimeExpression(readQuery.getExpressionBuilder()));
     }

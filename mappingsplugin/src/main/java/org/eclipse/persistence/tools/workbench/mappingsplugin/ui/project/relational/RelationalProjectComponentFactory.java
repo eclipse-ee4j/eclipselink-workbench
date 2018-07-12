@@ -65,9 +65,11 @@ public class RelationalProjectComponentFactory extends SwingComponentFactory {
      */
     private static ValueModel buildDatabaseAdapter(PropertyValueModel mwModelHolder) {
         return new TransformationPropertyValueModel(mwModelHolder) {
+            @Override
             protected Object transform(Object value) {
                 return (value == null) ? null : ((MWModel) value).getDatabase();
             }
+            @Override
             protected Object reverseTransform(Object value) {
                 throw new UnsupportedOperationException();
             }
@@ -101,9 +103,11 @@ public class RelationalProjectComponentFactory extends SwingComponentFactory {
      */
     private static CollectionValueModel buildTablesAdapter(ValueModel databaseHolder) {
         return new CollectionAspectAdapter(databaseHolder, MWDatabase.TABLES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWDatabase) this.subject).tables();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWDatabase) this.subject).tablesSize();
             }
@@ -117,6 +121,7 @@ public class RelationalProjectComponentFactory extends SwingComponentFactory {
 
     public static NodeSelector buildTableNodeSelector(final WorkbenchContextHolder contextHolder) {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 RelationalProjectNode projectNode = (RelationalProjectNode) contextHolder.getWorkbenchContext().getNavigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectTableNodeFor((MWTable) item, contextHolder.getWorkbenchContext().getNavigatorSelectionModel());

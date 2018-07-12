@@ -23,9 +23,7 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.internal.helper.ConversionManager;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
@@ -67,6 +65,7 @@ public final class MWClassIndicatorValue extends MWModel {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.descriptorValueHandle = new MWDescriptorHandle(this, this.buildDescriptorValueScrubber());
@@ -118,6 +117,7 @@ public final class MWClassIndicatorValue extends MWModel {
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.descriptorValueHandle);
@@ -125,9 +125,11 @@ public final class MWClassIndicatorValue extends MWModel {
 
     private NodeReferenceScrubber buildDescriptorValueScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClassIndicatorValue.this.descriptorRemoved();
             }
+            @Override
             public String toString() {
                 return "MWClassIndicatorValue.buildDescriptorValueScrubber()";
             }
@@ -141,6 +143,7 @@ public final class MWClassIndicatorValue extends MWModel {
         this.getPolicy().removeIndicator(this);
     }
 
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         super.descriptorReplaced(oldDescriptor, newDescriptor);
         if (this.getDescriptorValue() == oldDescriptor) {
@@ -151,6 +154,7 @@ public final class MWClassIndicatorValue extends MWModel {
 
     // ********** behavior **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getIndicatorValue());
         sb.append(" -> ");
@@ -164,6 +168,7 @@ public final class MWClassIndicatorValue extends MWModel {
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkClassIndicatorValue(newProblems);
@@ -216,6 +221,7 @@ public final class MWClassIndicatorValue extends MWModel {
         this.indicatorValue = indicatorValue;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         this.include = true;

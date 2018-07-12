@@ -59,6 +59,7 @@ final class XmlSessionProjectPane extends AbstractSessionProjectlPane
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 edit();
@@ -72,16 +73,19 @@ final class XmlSessionProjectPane extends AbstractSessionProjectlPane
      *
      * @return A new <code>PropertyValueModel</code>
      */
+    @Override
     protected PropertyValueModel buildPrimaryProjectNameHolder()
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseSessionAdapter.PRIMARY_PROJECT_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
                 return session.getPrimaryProjectName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
@@ -95,6 +99,7 @@ final class XmlSessionProjectPane extends AbstractSessionProjectlPane
      *
      * @return A new <code>JButton</code>, cannot be <code>null</code>
      */
+    @Override
     protected JButton buildEditButton()
     {
         JButton button = buildButton("SESSION_PROJECT_BROWSE_BUTTON");
@@ -154,11 +159,13 @@ final class XmlSessionProjectPane extends AbstractSessionProjectlPane
      */
     private class XmlFileFilter extends FileFilter
     {
+        @Override
         public boolean accept(File file)
         {
             return file.isDirectory() || ".xml".equalsIgnoreCase(FileTools.extension(file));
         }
 
+        @Override
         public String getDescription()
         {
             return resourceRepository().getString("SESSION_PROJECT_ADVANCED_FILE_CHOOSER_DESCRIPTION");

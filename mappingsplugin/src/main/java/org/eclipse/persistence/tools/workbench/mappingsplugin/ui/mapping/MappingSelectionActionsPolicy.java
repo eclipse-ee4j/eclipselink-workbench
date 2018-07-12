@@ -61,6 +61,7 @@ public abstract class MappingSelectionActionsPolicy
 
     // **************** SelectionActionsPolicy contract ***********************
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         RootMenuDescription menuDesc = new RootMenuDescription();
 
@@ -122,6 +123,7 @@ public abstract class MappingSelectionActionsPolicy
             super(context);
         }
 
+        @Override
         protected void initialize() {
             super.initialize();
             this.initializeIcon("remove");
@@ -129,6 +131,7 @@ public abstract class MappingSelectionActionsPolicy
             this.initializeToolTipText("REMOVE_ACTION.toolTipText");
         }
 
+        @Override
         protected void execute() {
             if ( ! this.confirmRemoval()) {
                 return;
@@ -149,6 +152,7 @@ public abstract class MappingSelectionActionsPolicy
             );
         }
 
+        @Override
         protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
             return true;
         }

@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 public class MWTableGenerationPolicy extends MWModel {
@@ -79,6 +78,7 @@ public class MWTableGenerationPolicy extends MWModel {
 
     //********** display methods ***********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append("Default PK Name=");
         sb.append(this.getDefaultPrimaryKeyName());

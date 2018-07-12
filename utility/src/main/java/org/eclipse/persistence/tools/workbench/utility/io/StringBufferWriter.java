@@ -51,6 +51,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.io.Writer#write(int)
      */
+    @Override
     public void write(int c) {
         this.sb.append((char) c);
     }
@@ -58,6 +59,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.io.Writer#write(char[], int, int)
      */
+    @Override
     public void write(char cbuf[], int off, int len) {
         if (len != 0) {
             this.sb.append(cbuf, off, len);
@@ -67,6 +69,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.io.Writer#write(java.lang.String)
      */
+    @Override
     public void write(String str) {
         this.sb.append(str);
     }
@@ -74,6 +77,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.io.Writer#write(java.lang.String, int, int)
      */
+    @Override
     public void write(String str, int off, int len)  {
         this.sb.append(str.substring(off, off + len));
     }
@@ -81,6 +85,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return this.sb.toString();
     }
@@ -95,6 +100,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.io.Writer#flush()
      */
+    @Override
     public void flush() {
         // do nothing
     }
@@ -102,6 +108,7 @@ public class StringBufferWriter extends Writer {
     /**
      * @see java.io.Writer#close()
      */
+    @Override
     public void close() {
         // do nothing
     }

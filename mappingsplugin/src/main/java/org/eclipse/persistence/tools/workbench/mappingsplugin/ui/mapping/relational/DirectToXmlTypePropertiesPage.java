@@ -55,6 +55,7 @@ final class DirectToXmlTypePropertiesPage extends TitledPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.parentDescriptorHolder = buildParentDescriptorHolder();
@@ -64,6 +65,7 @@ final class DirectToXmlTypePropertiesPage extends TitledPropertiesPage {
         return "mapping.directToXmlType";
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -154,6 +156,7 @@ final class DirectToXmlTypePropertiesPage extends TitledPropertiesPage {
 
     private PropertyValueModel buildParentDescriptorHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDirectToXmlTypeMapping) subject).getParentDescriptor();
             }
@@ -183,9 +186,11 @@ final class DirectToXmlTypePropertiesPage extends TitledPropertiesPage {
 
     private PropertyValueModel buildReadWholeDocumentAdapter() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWDirectToXmlTypeMapping.READ_WHOLE_DOCUMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWDirectToXmlTypeMapping) subject).isReadWholeDocument());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDirectToXmlTypeMapping) subject).setReadWholeDocument(((Boolean) value).booleanValue());
             }

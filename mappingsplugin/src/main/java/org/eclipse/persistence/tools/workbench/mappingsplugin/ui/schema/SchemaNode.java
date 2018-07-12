@@ -74,6 +74,7 @@ class SchemaNode
 
     private ValueModel buildSchemaNameHolder() {
         return new PropertyAspectAdapter(this.schemaHolder, MWXmlSchema.NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlSchema) this.subject).getName();
             }
@@ -82,6 +83,7 @@ class SchemaNode
 
     private PropertyChangeListener buildSchemaNamePropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 SchemaNode.this.firePropertyChanged(Displayable.DISPLAY_STRING_PROPERTY, evt.getOldValue(), evt.getNewValue());
                 SchemaNode.this.fireStateChanged();
@@ -95,6 +97,7 @@ class SchemaNode
 
     protected ListValueModel buildComponentNodesAdapter() {
         return new TransformationListValueModelAdapter(this.buildStructuralComponentsAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return SchemaNode.this.buildComponentNode((MWNamedSchemaComponent) item);
             }
@@ -107,6 +110,7 @@ class SchemaNode
 
     protected ListValueModel buildStructuralComponentsAdapter() {
         return new ListCurator(this.schemaHolder) {
+            @Override
             public Iterator getValueForRecord() {
                 return ((MWXmlSchema) subject).structuralComponents();
             }
@@ -116,6 +120,7 @@ class SchemaNode
 
     // **************** ValueModel contract ***********************************
 
+    @Override
     public Object getValue() {
         return this.schemaHolder.getValue();
     }
@@ -123,10 +128,12 @@ class SchemaNode
 
     // **************** TreeNodeValueModel contract ***************************
 
+    @Override
     public TreeNodeValueModel getParent() {
         return null;
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
@@ -134,10 +141,12 @@ class SchemaNode
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         schemaNameHolder.addPropertyChangeListener(ValueModel.VALUE, schemaNameListener);
     }
 
+    @Override
     protected void disengageValue() {
         schemaNameHolder.removePropertyChangeListener(ValueModel.VALUE, schemaNameListener);
     }
@@ -145,6 +154,7 @@ class SchemaNode
 
     // **************** Comparable contract ***********************************
 
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -152,11 +162,13 @@ class SchemaNode
 
     // **************** Displayable contract **********************************
 
+    @Override
     public String displayString() {
         String schemaName = (this.schema() == null) ? "" : this.schema().getName();
         return "schema: " + schemaName;
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -177,6 +189,7 @@ class SchemaNode
     /**
      * @see AbstractTreeNodeValueModel#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (o == null) {
             return false;
@@ -191,6 +204,7 @@ class SchemaNode
     /**
      * @see AbstractTreeNodeValueModel#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.schemaHolder.hashCode();
     }
@@ -198,6 +212,7 @@ class SchemaNode
     /**
      * @see AbstractTreeNodeValueModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.schemaHolder);
     }

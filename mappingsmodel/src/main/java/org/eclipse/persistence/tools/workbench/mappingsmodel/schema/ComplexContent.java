@@ -49,6 +49,7 @@ public final class ComplexContent
 
     // **************** Initialization ****************************************
 
+    @Override
     protected /* private-protected */ void initialize(Node parent) {
         super.initialize(parent);
         this.particle = new NullParticle(this);
@@ -58,6 +59,7 @@ public final class ComplexContent
         this.mixedFlag = mixed;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.particle);
@@ -66,6 +68,7 @@ public final class ComplexContent
 
     // **************** Behavior **********************************************
 
+    @Override
     void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {
         if (this.particle instanceof MWElementDeclaration) {
             directlyOwnedComponents.add(this.particle);
@@ -75,10 +78,12 @@ public final class ComplexContent
         }
     }
 
+    @Override
     boolean hasTextContent() {
         return this.mixedFlag == true;
     }
 
+    @Override
     boolean containsWildcard() {
         if (this.particle instanceof Wildcard) {
             return true;
@@ -91,6 +96,7 @@ public final class ComplexContent
         }
     }
 
+    @Override
     int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return this.particle.compareSchemaOrder(element1, element2);
     }
@@ -98,10 +104,12 @@ public final class ComplexContent
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public Iterator structuralComponents() {
         return new SingleElementIterator(this.particle);
     }
 
+    @Override
     public Iterator descriptorContextComponents() {
         if (this.particle.isDescriptorContextComponent()) {
             return new SingleElementIterator(this.particle);
@@ -112,6 +120,7 @@ public final class ComplexContent
     }
 
     // NOTE: If anyone is upset by use of "instanceof" here, please give me suggestions - pwf
+    @Override
     public Iterator xpathComponents() {
         if (this.particle instanceof MWElementDeclaration) {
             return new SingleElementIterator(this.particle);
@@ -122,6 +131,7 @@ public final class ComplexContent
     }
 
     // NOTE: If anyone is upset by use of "instanceof" here, please give me suggestions - pwf
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         if (this.particle instanceof MWElementDeclaration) {
             MWElementDeclaration element = (MWElementDeclaration) this.particle;
@@ -140,6 +150,7 @@ public final class ComplexContent
     }
 
     // NOTE: If anyone is upset by use of "instanceof" here, please give me suggestions - pwf
+    @Override
     public int totalElementCount() {
         if (this.particle instanceof MWElementDeclaration) {
             return 1;
@@ -152,6 +163,7 @@ public final class ComplexContent
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject schemaObject) {
         super.reloadInternal(schemaObject);
         XSParticleDecl particleNode = (XSParticleDecl)((XSComplexTypeDecl)schemaObject).getParticle();
@@ -166,6 +178,7 @@ public final class ComplexContent
         }
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
         this.particle.resolveReferences();

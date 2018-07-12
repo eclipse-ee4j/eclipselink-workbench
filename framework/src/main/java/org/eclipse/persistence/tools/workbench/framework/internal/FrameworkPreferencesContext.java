@@ -52,6 +52,7 @@ final class FrameworkPreferencesContext
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ApplicationContext#getApplication()
      */
+    @Override
     public Application getApplication() {
         return application;
     }
@@ -59,6 +60,7 @@ final class FrameworkPreferencesContext
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ApplicationContext#getPreferences()
      */
+    @Override
     public Preferences getPreferences() {
         return application.getRootPreferences();
     }
@@ -66,6 +68,7 @@ final class FrameworkPreferencesContext
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ApplicationContext#getResourceRepository()
      */
+    @Override
     public ResourceRepository getResourceRepository() {
         return application.getResourceRepository();
     }
@@ -73,6 +76,7 @@ final class FrameworkPreferencesContext
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext#getNodeManager()
      */
+    @Override
     public NodeManager getNodeManager() {
         return application.getNodeManager();
     }
@@ -80,6 +84,7 @@ final class FrameworkPreferencesContext
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ApplicationContext#getHelpManager()
      */
+    @Override
     public HelpManager getHelpManager() {
         return application.getHelpManager();
     }
@@ -90,6 +95,7 @@ final class FrameworkPreferencesContext
     /**
      * @see PreferencesContext#getBufferTrigger()
      */
+    @Override
     public ValueModel getBufferTrigger() {
         return bufferTrigger;
     }

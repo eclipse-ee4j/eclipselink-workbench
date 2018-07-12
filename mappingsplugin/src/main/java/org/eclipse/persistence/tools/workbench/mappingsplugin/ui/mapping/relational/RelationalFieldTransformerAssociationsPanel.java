@@ -40,8 +40,10 @@ final class RelationalFieldTransformerAssociationsPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected ActionListener buildAddFieldTransformerAssociationAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWRelationalTransformationMapping transformationMapping =
                     (MWRelationalTransformationMapping) RelationalFieldTransformerAssociationsPanel.this.getSubjectHolder().getValue();
@@ -57,8 +59,10 @@ final class RelationalFieldTransformerAssociationsPanel
         };
     }
 
+    @Override
     protected ActionListener buildEditFieldTransformerAssociationAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWRelationalTransformationMapping transformationMapping =
                     (MWRelationalTransformationMapping) RelationalFieldTransformerAssociationsPanel.this.getSubjectHolder().getValue();

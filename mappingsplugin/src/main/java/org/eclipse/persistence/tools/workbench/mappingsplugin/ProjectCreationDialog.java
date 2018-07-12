@@ -76,11 +76,13 @@ public final class ProjectCreationDialog extends AbstractValidatingDialog {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         getOKAction().setEnabled(false);
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -150,12 +152,15 @@ public final class ProjectCreationDialog extends AbstractValidatingDialog {
 
         nameTextField.getDocument().addDocumentListener(
             new DocumentListener() {
+                @Override
                 public void insertUpdate(DocumentEvent e) {
                     updateDialog();
                 }
+                @Override
                 public void removeUpdate(DocumentEvent e) {
                     updateDialog();
                 }
+                @Override
                 public void changedUpdate(DocumentEvent e) {
                     updateDialog();
                 }
@@ -287,6 +292,7 @@ public final class ProjectCreationDialog extends AbstractValidatingDialog {
         platformLabel.setLabelFor(databasePlatformChooser);
 
         relationalRadioButton.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 databasePlatformChooser.setEnabled(relationalRadioButton.isSelected());
                 platformLabel.setEnabled(relationalRadioButton.isSelected());
@@ -340,6 +346,7 @@ public final class ProjectCreationDialog extends AbstractValidatingDialog {
 
 
         eisRadioButton.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 adapterComboBox.setEnabled(eisRadioButton.isSelected());
                 adapterLabel.setEnabled(eisRadioButton.isSelected());
@@ -395,10 +402,12 @@ public final class ProjectCreationDialog extends AbstractValidatingDialog {
 
     // ********** opening **********
 
+    @Override
     protected String helpTopicId() {
         return "dialog.projectCreation";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return nameTextField;
     }

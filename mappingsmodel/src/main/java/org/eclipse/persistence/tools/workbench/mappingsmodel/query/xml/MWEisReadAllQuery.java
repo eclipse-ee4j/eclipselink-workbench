@@ -50,16 +50,19 @@ public final class MWEisReadAllQuery
 
     // ******************* Morphing *******************
 
+    @Override
     public String queryType() {
         return READ_ALL_QUERY;
     }
 
+    @Override
     public MWReadAllQuery asReadAllQuery() {
         return this;
     }
 
     // **************** Runtime Conversion ****************
 
+    @Override
     protected ObjectLevelReadQuery buildRuntimeQuery() {
         return new ReadAllQuery();
     }

@@ -133,6 +133,7 @@ public final class PlatformsPluginResourceBundle extends ListResourceBundle {
 
     };
 
+    @Override
     protected Object[][] getContents() {
         return contents;
     }

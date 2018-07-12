@@ -56,6 +56,7 @@ final class WorkbenchSaveAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.treeSelectionListener = buildTreeSelectionListener();
@@ -76,6 +77,7 @@ final class WorkbenchSaveAction
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 synchronized (WorkbenchSaveAction.this) {
                     WorkbenchSaveAction.this.update();
@@ -86,6 +88,7 @@ final class WorkbenchSaveAction
 
     private PropertyChangeListener buildDirtyListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 WorkbenchSaveAction.this.updateEnabledState();
             }
@@ -94,6 +97,7 @@ final class WorkbenchSaveAction
 
     private WindowListener buildWorkbenchWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 WorkbenchSaveAction.this.workbenchWindowClosed();
             }
@@ -139,6 +143,7 @@ final class WorkbenchSaveAction
         this.selectedProjectNodes = null;
     }
 
+    @Override
     protected void execute() {
         for (int i = this.selectedProjectNodes.length; i-- > 0; ) {
             this.nodeManager.save(this.selectedProjectNodes[i], getWorkbenchContext());

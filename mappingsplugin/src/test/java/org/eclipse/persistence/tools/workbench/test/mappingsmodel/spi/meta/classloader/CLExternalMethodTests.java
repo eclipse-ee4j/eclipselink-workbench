@@ -34,6 +34,7 @@ public class CLExternalMethodTests extends ExternalMethodTests {
         super(name);
     }
 
+    @Override
     protected ExternalClassRepository buildRepository() {
         return CLExternalClassRepositoryFactory.instance().buildClassRepository(new File[0]);
     }

@@ -68,6 +68,7 @@ public final class XmlSchemaRepositoryNode
     // **************** Initialization ****************************************
 
     /** Overridden from AbstractTreeNode */
+    @Override
     protected /*private-protected*/ ApplicationContext expandContext(ApplicationContext context) {
         return super.expandContext(context).buildExpandedResourceRepositoryContext(UiSchemaResourceBundle.class);
     }
@@ -75,6 +76,7 @@ public final class XmlSchemaRepositoryNode
 
     // *********** ProjectChildNode implementation *********
 
+    @Override
     public int getProjectNodeChildPriority() {
         return 1;
     }
@@ -93,6 +95,7 @@ public final class XmlSchemaRepositoryNode
 
     // **************** TreeNodeValueModel contract ***************************
 
+    @Override
     public ListValueModel getChildrenModel() {
         if (this.childrenModel == null) {
             this.childrenModel = this.buildChildrenModel();
@@ -111,6 +114,7 @@ public final class XmlSchemaRepositoryNode
 
     private ListChangeListener buildChildrenModelListener() {
         return new ListChangeAdapter() {
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 for (Iterator stream = e.items(); stream.hasNext(); ) {
                     ((XmlSchemaNode) stream.next()).disposePropertiesPages();
@@ -127,6 +131,7 @@ public final class XmlSchemaRepositoryNode
     // wrap the schemas in nodes
     protected ListValueModel buildNodeWrapperAdapter() {
         return new TransformationListValueModelAdapter(this.buildNodeChildrenAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return new XmlSchemaNode((MWXmlSchema) item, XmlSchemaRepositoryNode.this);
             }
@@ -136,9 +141,11 @@ public final class XmlSchemaRepositoryNode
     // the collection of schemas can change
     protected CollectionValueModel buildNodeChildrenAdapter() {
         return new CollectionAspectAdapter(this, MWXmlSchemaRepository.SCHEMAS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWXmlSchemaRepository) this.subject).schemas();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWXmlSchemaRepository) this.subject).schemasSize();
             }
@@ -148,27 +155,32 @@ public final class XmlSchemaRepositoryNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
         return "xmlSchemaRepository";
     }
 
     // **************** AbstractApplicationNode contract **********************
 
+    @Override
     protected String buildDisplayString() {
         return this.resourceRepository().getString("SCHEMA_REPOSITORY_NODE_DISPLAY_STRING");
     }
 
+    @Override
     protected String buildIconKey() {
         return "file.xml.multi";
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return XmlSchemaRepositoryPanel.class;
     }
 
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext localContext = buildLocalWorkbenchContext(workbenchContext);
@@ -184,6 +196,7 @@ public final class XmlSchemaRepositoryNode
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext localContext = buildLocalWorkbenchContext(workbenchContext);
@@ -213,6 +226,7 @@ public final class XmlSchemaRepositoryNode
             super(context);
         }
 
+        @Override
         protected void initialize() {
             this.initializeTextAndMnemonic("IMPORT_SCHEMA_ACTION");
             //this.setAccelerator(getResourceRepository().getAccelerator("???"));
@@ -221,6 +235,7 @@ public final class XmlSchemaRepositoryNode
             this.setEnabled(true);
         }
 
+        @Override
         protected void execute(ApplicationNode selectedNode) {
             MWXmlSchema schema =
                 new ImportSchemaDialog(
@@ -241,6 +256,7 @@ public final class XmlSchemaRepositoryNode
             super(context);
         }
 
+        @Override
         protected void initialize() {
             this.initializeTextAndMnemonic("REIMPORT_ALL_SCHEMAS_ACTION");
             //this.setAccelerator(getResourceRepository().getAccelerator("???"));
@@ -249,6 +265,7 @@ public final class XmlSchemaRepositoryNode
             this.setEnabled(true);
         }
 
+        @Override
         protected void execute(ApplicationNode selectedNode) {
             Iterator schemasIterator = ((XmlSchemaRepositoryNode) selectedNode).getSchemaRepository().schemas();
             if (schemasIterator.hasNext()) {

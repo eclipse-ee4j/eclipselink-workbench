@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DefaultSessionLogAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LogAdapter;
-import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.ListValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
@@ -51,6 +50,7 @@ public class SCLoggingLevelUITest extends SCSessionUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Select a Logging Level:";
     }
@@ -74,6 +74,7 @@ public class SCLoggingLevelUITest extends SCSessionUITest {
         return new ComboBoxModelAdapter( listHolder, selectionHolder);
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel propertyListPanel = new JPanel( new GridLayout( 1, 0));
@@ -88,6 +89,7 @@ public class SCLoggingLevelUITest extends SCSessionUITest {
         return comboBox;
     }
 
+    @Override
     protected void printModel() {
         LogAdapter log = subject().getLog();
         String level = ( log instanceof  DefaultSessionLogAdapter) ?
@@ -96,13 +98,16 @@ public class SCLoggingLevelUITest extends SCSessionUITest {
         System.out.println( "subject.log( "+ level + " )");
     }
 
+    @Override
     protected void resetProperty() {
 
         (( DefaultSessionLogAdapter)subject().getLog()).setLogLevel( DefaultSessionLogAdapter.INFO_LOG_LEVEL);
     }
+    @Override
     protected void clearModel() {
         logHolder.setValue( null);
     }
+    @Override
     protected void restoreModel() {
         logHolder.setValue( subject().getLog());
     }
@@ -117,9 +122,11 @@ public class SCLoggingLevelUITest extends SCSessionUITest {
 
         return new PropertyAspectAdapter( subjectHolder, DefaultSessionLogAdapter.LOG_LEVEL_PROPERTY) {
 
+            @Override
             protected Object getValueFromSubject() {
                 return (( DefaultSessionLogAdapter)subject).getLogLevel();
             }
+            @Override
             protected void setValueOnSubject( Object value) {
                     (( DefaultSessionLogAdapter)subject).setLogLevel(( String)value);
             }

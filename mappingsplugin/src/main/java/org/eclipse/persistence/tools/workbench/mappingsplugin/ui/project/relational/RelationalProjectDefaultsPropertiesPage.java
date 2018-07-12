@@ -47,6 +47,7 @@ public class RelationalProjectDefaultsPropertiesPage extends TransactionalProjec
         super(projectNodeHolder, contextHolder);
     }
 
+    @Override
     protected List buildAdvancedPropertyHolders()
     {
         List holders =  super.buildAdvancedPropertyHolders();
@@ -59,6 +60,7 @@ public class RelationalProjectDefaultsPropertiesPage extends TransactionalProjec
         return holders;
     }
 
+    @Override
     protected JPanel buildNamedQueriesPanel()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -112,11 +114,13 @@ public class RelationalProjectDefaultsPropertiesPage extends TransactionalProjec
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWRelationalProjectDefaultsPolicy.QUERIES_BIND_ALL_PARAMETERS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return Boolean.valueOf(((MWRelationalProjectDefaultsPolicy) subject).shouldQueriesBindAllParameters());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWRelationalProjectDefaultsPolicy) subject).setQueriesBindAllParameters(((Boolean) value).booleanValue());
@@ -138,11 +142,13 @@ public class RelationalProjectDefaultsPropertiesPage extends TransactionalProjec
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWRelationalProjectDefaultsPolicy.QUERIES_CACHE_ALL_STATEMENTS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return Boolean.valueOf(((MWRelationalProjectDefaultsPolicy) subject).shouldQueriesCacheAllStatements());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWRelationalProjectDefaultsPolicy) subject).setQueriesCacheAllStatements(((Boolean) value).booleanValue());

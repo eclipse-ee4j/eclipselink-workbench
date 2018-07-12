@@ -61,6 +61,7 @@ public class ReadWriteTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         TestTools.setUpOracleProxy();        // we need this for the EJB projects
@@ -164,6 +165,7 @@ public class ReadWriteTests extends TestCase {
      */
     private DiffEngine.Log buildDiffEngineLog() {
         return new DiffEngine.Log() {
+            @Override
             public void log(Diff diff) {
                 Object object = diff.getObject1();
                 if (object instanceof MWMethod) {
@@ -173,6 +175,7 @@ public class ReadWriteTests extends TestCase {
                     }
                 }
             }
+            @Override
             public void close() {
                 // do nothing
             }

@@ -14,7 +14,6 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.xml;
 
-import org.eclipse.persistence.tools.workbench.framework.action.FrameworkAction;
 import org.eclipse.persistence.tools.workbench.framework.action.ToggleFrameworkAction;
 import org.eclipse.persistence.tools.workbench.framework.app.GroupContainerDescription;
 import org.eclipse.persistence.tools.workbench.framework.app.MenuGroupDescription;
@@ -50,10 +49,12 @@ abstract class EisDescriptorNode extends XmlDescriptorNode
         super(descriptor, parentNode);
     }
 
+    @Override
     protected XmlMappingSelectionActionsPolicy buildMappingSelectionActionsPolicy() {
         return new EisMappingSelectionActionsPolicy(getMappingsPlugin());
     }
 
+    @Override
     protected MappingNode buildMappingNode(MWMapping mapping) {
         if (mapping instanceof MWEisOneToOneMapping) {
             return new EisOneToOneMappingNode(
@@ -87,10 +88,12 @@ abstract class EisDescriptorNode extends XmlDescriptorNode
         return super.buildMappingNode(mapping);
     }
 
+    @Override
     public String mappingHelpTopicPrefix() {
         return "mapping.eis";
     }
 
+    @Override
     public Class propertiesPageClassForCompositeCollectionMapping() {
         return EisCompositeCollectionMappingPropertiesPage.class;
     }
@@ -100,14 +103,17 @@ abstract class EisDescriptorNode extends XmlDescriptorNode
         return EisCompositeObjectMappingPropertiesPage.class;
     }
 
+    @Override
     public Class propertiesPageClassForTransformationMapping() {
         return EisTransformationMappingPropertiesPage.class;
     }
 
+    @Override
     protected boolean supportsDescriptorMorphing() {
         return true;
     }
 
+    @Override
     protected MenuGroupDescription buildDescriptorTypeMenuGroupDescription(WorkbenchContext workbenchContext) {
         MenuGroupDescription typeDesc = new MenuGroupDescription();
         typeDesc.add(this.getEisRootDescriptorAction(workbenchContext));
@@ -115,6 +121,7 @@ abstract class EisDescriptorNode extends XmlDescriptorNode
         return typeDesc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -138,6 +145,7 @@ abstract class EisDescriptorNode extends XmlDescriptorNode
         return new EisCompositeDescriptorAction(workbenchContext);
     }
 
+    @Override
     protected MappingNode buildUnmappedMappingNode(MWClassAttribute attribute) {
         ApplicationContext ctx2 = this.getApplicationContext().buildExpandedResourceRepositoryContext(UiMappingXmlBundle.class);
         return new UnmappedMappingNode(attribute, ctx2, new EisMappingSelectionActionsPolicy(getMappingsPlugin()), this);

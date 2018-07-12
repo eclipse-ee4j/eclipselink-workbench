@@ -26,11 +26,13 @@ class CreateAllTablesOnDatabaseAction extends AbstractCreateTablesOnDatabaseActi
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("ALL_TABLES_LABEL");
     }
 
+    @Override
     protected Collection buildTables() {
         return this.allMWTables();
     }

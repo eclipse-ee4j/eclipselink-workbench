@@ -65,27 +65,34 @@ public interface StringRepository {
      */
     StringRepository NULL_INSTANCE =
         new StringRepository() {
+            @Override
             public boolean hasString(String key) {
                 return key == null;
             }
+            @Override
             public String getString(String key) {
                 return this.getString(key, new Object[0]);
             }
+            @Override
             public String getString(String key, Object argument) {
                 return this.getString(key, new Object[] {argument});
             }
+            @Override
             public String getString(String key, Object argument1, Object argument2) {
                 return this.getString(key, new Object[] {argument1, argument2});
             }
+            @Override
             public String getString(String key, Object argument1, Object argument2, Object argument3) {
                 return this.getString(key, new Object[] {argument1, argument2, argument3});
             }
+            @Override
             public String getString(String key, Object[] arguments) {
                 if (key == null) {
                     return EMPTY_STRING;
                 }
                 throw new MissingStringException("Missing string: " + key, key);
             }
+            @Override
             public String toString() {
                 return "NullStringRepository";
             }

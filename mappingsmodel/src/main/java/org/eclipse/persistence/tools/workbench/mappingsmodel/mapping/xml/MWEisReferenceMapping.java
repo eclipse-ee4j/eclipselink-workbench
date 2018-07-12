@@ -30,7 +30,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMappingHa
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWAbstractReferenceMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWAbstractTableReferenceMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.xml.MWEisInteraction;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWSchemaContextComponent;
@@ -82,6 +81,7 @@ public abstract class MWEisReferenceMapping
     // **************** Initialization ****************************************
 
     /** initialize persistent state */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.xmlFieldPairs = new Vector();
@@ -100,6 +100,7 @@ public abstract class MWEisReferenceMapping
 
     // **************** Reference descriptor **********************************
 
+    @Override
     public boolean descriptorIsValidReferenceDescriptor(MWDescriptor descriptor) {
         return ((MWEisDescriptor) descriptor).isRootDescriptor();
     }
@@ -107,37 +108,45 @@ public abstract class MWEisReferenceMapping
 
     // **************** Xml field pairs ***************************************
 
+    @Override
     public int xmlFieldPairsSize() {
         return this.xmlFieldPairs.size();
     }
 
+    @Override
     public ListIterator xmlFieldPairs() {
         return new CloneListIterator(this.xmlFieldPairs);
     }
 
+    @Override
     public MWXmlFieldPair xmlFieldPairAt(int index) {
         return (MWXmlFieldPair) this.xmlFieldPairs.get(index);
     }
 
+    @Override
     public MWXmlFieldPair addFieldPair(String sourceXpath, String targetXpath) {
         MWXmlFieldPair xmlFieldPair = new MWXmlFieldPair(this, sourceXpath, targetXpath);
         this.addFieldPair(xmlFieldPair);
         return xmlFieldPair;
     }
 
+    @Override
     public void addFieldPair(MWXmlFieldPair xmlFieldPair) {
         this.addItemToList(this.xmlFieldPairsSize(), xmlFieldPair, this.xmlFieldPairs, XML_FIELD_PAIRS_LIST);
     }
 
     /** Builds an empty field pair, but does not add it */
+    @Override
     public MWXmlFieldPair buildEmptyFieldPair() {
         return new MWXmlFieldPair(this);
     }
 
+    @Override
     public void removeXmlFieldPair(MWXmlFieldPair xmlFieldPair) {
         this.removeNodeFromList(this.xmlFieldPairs.indexOf(xmlFieldPair), this.xmlFieldPairs, XML_FIELD_PAIRS_LIST);
     }
 
+    @Override
     public void clearXmlFieldPairs() {
         this.clearList(this.xmlFieldPairs, XML_FIELD_PAIRS_LIST);
     }
@@ -145,6 +154,7 @@ public abstract class MWEisReferenceMapping
 
     // **************** Maintain bidirectional relationship *******************
 
+    @Override
     public boolean maintainsBidirectionalRelationship() {
         return this.maintainsBidirectionalRelationship;
     }
@@ -162,6 +172,7 @@ public abstract class MWEisReferenceMapping
 
     // **************** Relationship partner mapping **************************
 
+    @Override
     public MWMapping getRelationshipPartnerMapping() {
         return this.relationshipPartnerMappingHandle.getMapping();
     }
@@ -172,6 +183,7 @@ public abstract class MWEisReferenceMapping
         firePropertyChanged(RELATIONSHIP_PARTNER_MAPPING_PROPERTY, old, relationshipPartnerMapping);
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor newReferenceDescriptor) {
         if (getReferenceDescriptor() != newReferenceDescriptor) {
             setRelationshipPartnerMapping(null);
@@ -179,6 +191,7 @@ public abstract class MWEisReferenceMapping
         super.setReferenceDescriptor(newReferenceDescriptor);
     }
 
+    @Override
     public boolean isValidRelationshipPartner() {
         return true;
     }
@@ -202,10 +215,12 @@ public abstract class MWEisReferenceMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.eisDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         for (Iterator stream = this.xmlFieldPairs(); stream.hasNext(); ) {
             MWXmlField xmlField = ((MWXmlFieldPair) stream.next()).getSourceXmlField();
@@ -218,6 +233,7 @@ public abstract class MWEisReferenceMapping
         return null;
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenXpaths) {
         if (this.isReadOnly()) {
             return;
@@ -235,6 +251,7 @@ public abstract class MWEisReferenceMapping
     // **************** MWXpathContext contract (for field pairs) *************
 
     /** Return true if a source field may use a collection xpath */
+    @Override
     public abstract boolean sourceFieldMayUseCollectionXpath();
 
 
@@ -253,12 +270,14 @@ public abstract class MWEisReferenceMapping
             null : (MWRootEisDescriptor) this.referenceEisDescriptor();
     }
 
+    @Override
     public MWEisDescriptor referenceDescriptor() {
         return (this.getReferenceDescriptor() == null) ? null : (MWEisDescriptor) this.getReferenceDescriptor();
     }
 
     // *********** morphing ************
 
+    @Override
     protected void initializeFromMWEisReferenceMapping(MWEisReferenceMapping oldMapping) {
         super.initializeFromMWEisReferenceMapping(oldMapping);
 
@@ -280,6 +299,7 @@ public abstract class MWEisReferenceMapping
 
     //********* model synchronization support *********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.xmlFieldPairs) { children.addAll(this.xmlFieldPairs); }
@@ -296,15 +316,18 @@ public abstract class MWEisReferenceMapping
 
     private NodeReferenceScrubber buildRelationshipPartnerMappingScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWEisReferenceMapping.this.setRelationshipPartnerMapping(null);
             }
+            @Override
             public String toString() {
                 return "MWEisReferenceMapping.buildRelationshipPartnerMappingScrubber()";
             }
         };
     }
 
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         super.mappingReplaced(oldMapping, newMapping);
         if (oldMapping == getRelationshipPartnerMapping()) {
@@ -313,6 +336,7 @@ public abstract class MWEisReferenceMapping
     }
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         for (Iterator stream = this.xmlFieldPairs(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).resolveXpaths();
@@ -320,6 +344,7 @@ public abstract class MWEisReferenceMapping
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         for (Iterator stream = this.xmlFieldPairs(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).schemaChanged(change);
@@ -329,6 +354,7 @@ public abstract class MWEisReferenceMapping
 
     // ************** Problem Handling **************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkDuplicateSourceXpath(newProblems);
@@ -336,6 +362,7 @@ public abstract class MWEisReferenceMapping
         this.checkRelationshipPartner(newProblems);
     }
 
+    @Override
     protected String referenceDescriptorInvalidProblemString() {
         return ProblemConstants.MAPPING_REFERENCE_DESCRIPTOR_NOT_ROOT;
     }
@@ -426,6 +453,7 @@ public abstract class MWEisReferenceMapping
 
     // **************** Runtime Conversion ***************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         ForeignReferenceMapping mapping = (ForeignReferenceMapping) super.runtimeMapping();
 

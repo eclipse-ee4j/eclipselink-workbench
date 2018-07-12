@@ -43,6 +43,7 @@ final class XmlTransformationMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         // Done in initializeLayout(String)
     }

@@ -28,7 +28,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.mappings.VariableOneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.sessions.Record;
 
 public final class MWColumnQueryKeyPair extends MWModel
     implements AggregateRuntimeFieldNameGenerator
@@ -55,6 +54,7 @@ public final class MWColumnQueryKeyPair extends MWModel
         this.queryKeyName = targetQueryKeyName;
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.columnHandle = new MWColumnHandle(this, this.buildColumnScrubber());
@@ -63,6 +63,7 @@ public final class MWColumnQueryKeyPair extends MWModel
 
     //    ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.columnHandle);
@@ -78,9 +79,11 @@ public final class MWColumnQueryKeyPair extends MWModel
 
     private NodeReferenceScrubber buildColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWColumnQueryKeyPair.this.setColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWColumnQueryKeyPair.buildColumnScrubber()";
             }
@@ -113,26 +116,32 @@ public final class MWColumnQueryKeyPair extends MWModel
 
     //    ********** Aggregate Support **********
 
+    @Override
     public String fieldNameForRuntime() {
         return "QUERY_KEY " + getQueryKeyName();
     }
 
+    @Override
     public AggregateFieldDescription fullFieldDescription() {
         return new AggregateFieldDescription() {
+            @Override
             public String getMessageKey() {
                 return "AGGREGATE_FIELD_DESCRIPTION_FOR_FIELD_QUERY_KEY_ASSOCIATION";
             }
 
+            @Override
             public Object[] getMessageArguments() {
                 return new Object[] {getQueryKeyName()};
             }
         };
     }
 
+    @Override
     public boolean fieldIsWritten() {
         return true;
     }
 
+    @Override
     public MWDescriptor owningDescriptor() {
         throw new UnsupportedOperationException();
     }
@@ -153,6 +162,7 @@ public final class MWColumnQueryKeyPair extends MWModel
 
     // ********** displaying and printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getColumn() == null ? "null" : getColumn().getName());
         sb.append("=>");

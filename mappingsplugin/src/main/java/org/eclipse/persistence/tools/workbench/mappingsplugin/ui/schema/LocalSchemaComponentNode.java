@@ -32,6 +32,7 @@ final class LocalSchemaComponentNode
 
     // **************** Initialization ****************************************
 
+    @Override
     protected SchemaComponentNodeStructure buildStructure(MWSchemaComponent component) {
         SchemaComponentNodeStructure structure;
 

@@ -43,6 +43,7 @@ public class DatabaseSessionTests extends TestCase {
         super( name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
 
@@ -56,6 +57,7 @@ public class DatabaseSessionTests extends TestCase {
         databaseSession = getDatabaseSessionNamed( "SC-EmployeeTest");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

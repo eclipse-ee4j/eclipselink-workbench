@@ -61,6 +61,7 @@ public class PropertyCollectionValueModelAdapter
         // until we have listeners ourselves...
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.propertyChangeListener = this.buildPropertyChangeListener();
@@ -69,6 +70,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
@@ -79,9 +81,11 @@ public class PropertyCollectionValueModelAdapter
      */
     protected PropertyChangeListener buildPropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyCollectionValueModelAdapter.this.valueChanged(e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "property change listener";
             }
@@ -94,6 +98,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.value == null) {
             return NullIterator.instance();
@@ -107,6 +112,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see CollectionValueModel#addItem(Object)
      */
+    @Override
     public void addItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -114,6 +120,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see CollectionValueModel#addItems(java.util.Collection)
      */
+    @Override
     public void addItems(Collection items) {
         throw new UnsupportedOperationException();
     }
@@ -121,6 +128,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see CollectionValueModel#removeItem(Object)
      */
+    @Override
     public void removeItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -128,6 +136,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see CollectionValueModel#removeItems(java.util.Collection)
      */
+    @Override
     public void removeItems(Collection items) {
         throw new UnsupportedOperationException();
     }
@@ -135,6 +144,7 @@ public class PropertyCollectionValueModelAdapter
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return (this.value == null) ? 0 : 1;
     }
@@ -146,6 +156,7 @@ public class PropertyCollectionValueModelAdapter
      * Override to start listening to the value holder if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public void addCollectionChangeListener(CollectionChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModel();
@@ -157,6 +168,7 @@ public class PropertyCollectionValueModelAdapter
      * Override to start listening to the value holder if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public void addCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         if (collectionName == VALUE && this.hasNoListeners()) {
             this.engageModel();
@@ -168,6 +180,7 @@ public class PropertyCollectionValueModelAdapter
      * Override to stop listening to the value holder if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public void removeCollectionChangeListener(CollectionChangeListener listener) {
         super.removeCollectionChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -179,6 +192,7 @@ public class PropertyCollectionValueModelAdapter
      * Override to stop listening to the value holder if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public void removeCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         super.removeCollectionChangeListener(collectionName, listener);
         if (collectionName == VALUE && this.hasNoListeners()) {
@@ -231,6 +245,7 @@ public class PropertyCollectionValueModelAdapter
         }
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.valueHolder);
     }

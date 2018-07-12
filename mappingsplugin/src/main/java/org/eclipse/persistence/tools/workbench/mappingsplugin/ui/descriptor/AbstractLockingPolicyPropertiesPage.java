@@ -32,9 +32,7 @@ import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePrope
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorLockingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWLockingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
-import org.eclipse.persistence.tools.workbench.uitools.ComponentVisibilityEnabler;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.TransformationPropertyValueModel;
@@ -58,6 +56,7 @@ public abstract class AbstractLockingPolicyPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.lockingPolicyHolder = buildLockingPolicyHolder();
@@ -66,6 +65,7 @@ public abstract class AbstractLockingPolicyPropertiesPage
 
     private PropertyValueModel buildLockingPolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()){
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWMappingDescriptor) this.subject).getLockingPolicy();
             }
@@ -74,10 +74,12 @@ public abstract class AbstractLockingPolicyPropertiesPage
 
     private PropertyValueModel buildLockingPolicyTypeValueHolder() {
         return new PropertyAspectAdapter(buildLockingPolicyHolder(), MWLockingPolicy.LOCKING_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorLockingPolicy) this.subject).getLockingType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) this.subject).setLockingType((String) value);
             }
@@ -152,6 +154,7 @@ public abstract class AbstractLockingPolicyPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder())
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWMappingDescriptor) this.subject).getTransactionalPolicy();
@@ -171,10 +174,12 @@ public abstract class AbstractLockingPolicyPropertiesPage
 
     private PropertyValueModel buildWaitForLockModel() {
         return new PropertyAspectAdapter(getLockingPolicyHolder(), MWDescriptorLockingPolicy.WAIT_FOR_LOCK_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWDescriptorLockingPolicy) this.subject).shouldWaitForLock());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) this.subject).setWaitForLock(((Boolean) value).booleanValue());
             }
@@ -186,6 +191,7 @@ public abstract class AbstractLockingPolicyPropertiesPage
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(getLockingPolicyTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
 

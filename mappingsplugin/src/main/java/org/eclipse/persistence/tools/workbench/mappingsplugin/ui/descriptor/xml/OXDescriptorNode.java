@@ -56,6 +56,7 @@ public final class OXDescriptorNode extends XmlDescriptorNode {
         super(descriptor, parentNode);
     }
 
+    @Override
     protected XmlMappingSelectionActionsPolicy buildMappingSelectionActionsPolicy() {
         return new OXMappingSelectionActionsPolicy(getMappingsPlugin());
     }
@@ -63,26 +64,31 @@ public final class OXDescriptorNode extends XmlDescriptorNode {
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public String helpTopicID() {
         return "descriptor.ox";
     }
 
+    @Override
     public String buildIconKey() {
         return "descriptor.ox";
     }
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected boolean supportsDescriptorMorphing() {
         return false;
     }
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_XML_DESCRIPTOR_NODE";
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return OXDescriptorTabbedPropertiesPage.class;
     }
@@ -90,10 +96,12 @@ public final class OXDescriptorNode extends XmlDescriptorNode {
 
     // ********** DescriptorNode overrides **********
 
+    @Override
     public boolean supportsEventsPolicy() {
         return false;
     }
 
+    @Override
     protected MappingNode buildMappingNode(MWMapping mapping) {
         if (mapping instanceof MWAnyObjectMapping) {
             return new AnyObjectMappingNode((MWAnyObjectMapping) mapping, this.buildMappingSelectionActionsPolicy(), this);
@@ -127,6 +135,7 @@ public final class OXDescriptorNode extends XmlDescriptorNode {
         }
     }
 
+    @Override
     protected MappingNode buildUnmappedMappingNode(MWClassAttribute attribute) {
         ApplicationContext ctx2 = this.getApplicationContext().buildExpandedResourceRepositoryContext(UiMappingXmlBundle.class);
         return new UnmappedMappingNode(attribute, ctx2, new OXMappingSelectionActionsPolicy(getMappingsPlugin()), this);
@@ -134,6 +143,7 @@ public final class OXDescriptorNode extends XmlDescriptorNode {
 
     // ********** XmlDescriptorNode overrides **********
 
+    @Override
     public Class propertiesPageClassForCompositeCollectionMapping() {
         return OXCompositeCollectionMappingPropertiesPage.class;
     }
@@ -143,6 +153,7 @@ public final class OXDescriptorNode extends XmlDescriptorNode {
         return OXCompositeObjectMappingPropertiesPage.class;
     }
 
+    @Override
     public Class propertiesPageClassForTransformationMapping() {
         return OXTransformationMappingPropertiesPage.class;
     }

@@ -67,21 +67,25 @@ public final class MWDirectMapContainerPolicy extends MWModel implements MWConta
 
     // **************** Building and Initializing *************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.containerClass = new DefaultingContainerClass(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.containerClass);
     }
 
+    @Override
     public DefaultingContainerClass getDefaultingContainerClass() {
         return this.containerClass;
     }
 
     //TODO copied from MWMapContainerPolicy
+    @Override
     public MWClass defaultContainerClass() {
         if (this.getMapping().usesTransparentIndirection()) {
             return this.defaultIndirectContainerClass();
@@ -116,28 +120,34 @@ public final class MWDirectMapContainerPolicy extends MWModel implements MWConta
         return getMapping().getInstanceVariable();
     }
 
+    @Override
     public boolean usesSorting() {
         return false;
     }
 
+    @Override
     public void setUsesSorting(boolean sort) {
         // do nothing currently only applies to set container policies
     }
 
+    @Override
     public void referenceDescriptorChanged(MWDescriptor newReferenceDescriptor) {
         // this should probably never be called
     }
 
+    @Override
     public MWClass getComparatorClass() {
         return null;
     }
 
+    @Override
     public void setComparatorClass(MWClass comparatorClass) {
         // do nothing currently only applies to set container policies
     }
 
     // **************** Problem Handling **************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         MWClass containerType = this.getDefaultingContainerClass().getContainerClass();
@@ -149,6 +159,7 @@ public final class MWDirectMapContainerPolicy extends MWModel implements MWConta
 
     // **************** Runtime Conversion ************************************
 
+    @Override
     public ContainerPolicy runtimeContainerPolicy() {
         MappedKeyMapContainerPolicy containerPolicy = new MappedKeyMapContainerPolicy();
         containerPolicy.setContainerClassName(getDefaultingContainerClass().getContainerClass().getName());

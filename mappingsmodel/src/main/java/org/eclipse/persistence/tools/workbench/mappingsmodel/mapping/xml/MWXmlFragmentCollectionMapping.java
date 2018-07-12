@@ -39,6 +39,7 @@ public final class MWXmlFragmentCollectionMapping extends MWAbstractXmlDirectCol
 
     // **************** Morphing **********************************************
 
+    @Override
     public MWXmlFragmentCollectionMapping asMWXmlFragmentCollectionMapping() {
         return this;
     }

@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
@@ -52,10 +51,8 @@ import org.eclipse.persistence.tools.workbench.utility.string.SimplePartialStrin
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringMatcher.StringHolderScore;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.AggregateObjectMapping;
 import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -88,6 +85,7 @@ public final class MWAggregateMapping
 
     //************** initialization *******************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.pathsToFields = new Vector();
@@ -97,6 +95,7 @@ public final class MWAggregateMapping
 
     //************** containment hierarchy *******************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.pathsToFields) { children.addAll(this.pathsToFields); }
@@ -105,15 +104,18 @@ public final class MWAggregateMapping
 
     private NodeReferenceScrubber buildReferenceDescriptorScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAggregateMapping.this.setReferenceDescriptor(null);
             }
+            @Override
             public String toString() {
                 return "MWAggregateMapping.buildReferenceDescriptorScrubber()";
             }
         };
     }
 
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         if (this.getReferenceDescriptor() == oldDescriptor) {
             this.setReferenceDescriptor(newDescriptor);
@@ -160,10 +162,12 @@ public final class MWAggregateMapping
         return result;
     }
 
+    @Override
     public MWDescriptor getReferenceDescriptor() {
         return this.referenceDescriptorHandle.getDescriptor();
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor referenceDescriptor) {
         Object oldValue = getReferenceDescriptor();
         this.referenceDescriptorHandle.setDescriptor(referenceDescriptor);
@@ -181,6 +185,7 @@ public final class MWAggregateMapping
             getProject().notifyExpressionsToRecalculateQueryables();
     }
 
+    @Override
     public boolean descriptorIsValidReferenceDescriptor(MWDescriptor descriptor) {
         return ((MWRelationalDescriptor) descriptor).isAggregateDescriptor();
     }
@@ -190,16 +195,19 @@ public final class MWAggregateMapping
     /**
      * IMPORTANT:  See MWRMapping class comment.
      */
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWAggregateMapping(this);
     }
 
+    @Override
     protected void initializeFromMWReferenceObjectMapping(MWReferenceObjectMapping oldMapping) {
         super.initializeFromMWReferenceObjectMapping(oldMapping);
 
         this.setReferenceDescriptor(oldMapping.getReferenceDescriptor());
     }
 
+    @Override
     public MWAggregateMapping asMWAggregateMapping() {
         return this;
     }
@@ -308,6 +316,7 @@ public final class MWAggregateMapping
      * Used for code gen.
      * See MWRMapping.initialValue()
      */
+    @Override
     public String initialValue(MWClassCodeGenPolicy classCodeGenPolicy) {
         String initialValue = super.initialValue(classCodeGenPolicy);
 
@@ -335,14 +344,17 @@ public final class MWAggregateMapping
 
 
     // ************** MWQueryable implementation **************
+    @Override
     public boolean allowsChildren() {
         return true;
     }
 
+    @Override
     public boolean isLeaf(Filter queryableFilter) {
         return subQueryableElements(queryableFilter).size() == 0;
     }
 
+    @Override
     public List subQueryableElements(Filter queryableFilter) {
         List subQueryableElements = new ArrayList();
         if (getReferenceDescriptor() != null) {
@@ -352,35 +364,43 @@ public final class MWAggregateMapping
         return subQueryableElements;
     }
 
+    @Override
     public MWQueryable subQueryableElementAt(int index, Filter queryableFilter) {
         return (MWQueryable) subQueryableElements(queryableFilter).get(index);
     }
 
 
+    @Override
     public boolean isTraversableForReadAllQueryOrderable() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForBatchReadAttribute() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForJoinedAttribute() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForQueryExpression() {
         return true;
     }
 
+    @Override
     public boolean isValidForQueryExpression() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForReportQueryAttribute() {
         return true;
     }
 
+    @Override
     public String iconKey() {
         return "mapping.aggregate";
     }
@@ -388,6 +408,7 @@ public final class MWAggregateMapping
 
     // ************* Automap Support *************************
 
+    @Override
     public void automap() {
         super.automap();
         this.automapReferenceDescriptor();
@@ -485,6 +506,7 @@ public final class MWAggregateMapping
 
     //************** Problem Handling *******************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkReferenceDescriptorIsValid(newProblems);
@@ -538,6 +560,7 @@ public final class MWAggregateMapping
 
     // **************** MWRelationalMapping implementation *****************
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         for (Iterator stream = pathsToFields(); stream.hasNext(); ) {
             MWAggregatePathToColumn pathToField = (MWAggregatePathToColumn) stream.next();
@@ -549,10 +572,12 @@ public final class MWAggregateMapping
 
     //************** Runtime Conversion *******************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new AggregateObjectMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AggregateObjectMapping runtimeMapping = (AggregateObjectMapping) super.runtimeMapping();
 

@@ -48,6 +48,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#write(int)
      */
+    @Override
     public void write(int c) throws IOException {
         this.writer1.write(c);
         this.writer2.write(c);
@@ -56,6 +57,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#write(char[])
      */
+    @Override
     public void write(char[] cbuf) throws IOException {
         this.writer1.write(cbuf);
         this.writer2.write(cbuf);
@@ -64,6 +66,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#write(char[], int, int)
      */
+    @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
         this.writer1.write(cbuf, off, len);
         this.writer2.write(cbuf, off, len);
@@ -72,6 +75,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#write(java.lang.String)
      */
+    @Override
     public void write(String str) throws IOException {
         this.writer1.write(str);
         this.writer2.write(str);
@@ -80,6 +84,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#write(java.lang.String, int, int)
      */
+    @Override
     public void write(String str, int off, int len) throws IOException {
         this.writer1.write(str, off, len);
         this.writer2.write(str, off, len);
@@ -88,6 +93,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#flush()
      */
+    @Override
     public void flush() throws IOException {
         this.writer1.flush();
         this.writer2.flush();
@@ -96,6 +102,7 @@ public class TeeWriter extends Writer {
     /**
      * @see java.io.Writer#close()
      */
+    @Override
     public void close() throws IOException {
         this.writer1.close();
         this.writer2.close();

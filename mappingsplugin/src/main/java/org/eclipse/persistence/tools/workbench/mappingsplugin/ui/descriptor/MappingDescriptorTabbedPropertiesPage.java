@@ -44,6 +44,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         super(context);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.transactionalPolicyHolder = buildTransactionalPolicyHolder();
@@ -51,12 +52,14 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
 
     protected PropertyValueModel buildTransactionalPolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             public Object getValueFromSubject() {
                 return ((MWMappingDescriptor) this.subject) .getTransactionalPolicy();
             }
         };
     }
 
+    @Override
     protected void initializeTabs()
     {
         addTab(buildCopyPolicyValueModel(), CopyPolicyPropertiesPage.EDITOR_WEIGHT,
@@ -82,6 +85,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.COPY_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWMappingDescriptor desc = (MWMappingDescriptor)subject;
@@ -98,6 +102,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.AFTER_LOADING_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWMappingDescriptor desc = (MWMappingDescriptor)subject;
@@ -114,6 +119,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.INSTANTIATION_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWMappingDescriptor desc = (MWMappingDescriptor)subject;
@@ -132,6 +138,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return  buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.INHERITANCE_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWMappingDescriptor desc = (MWMappingDescriptor)subject;
@@ -145,6 +152,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return  buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.EVENTS_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWMappingDescriptor desc = (MWMappingDescriptor)subject;
@@ -156,6 +164,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
     protected PropertyValueModel buildDescriptorPolicyBooleanValueModel(PropertyValueModel valueModel)
     {
         return new TransformationPropertyValueModel(valueModel) {
+            @Override
             protected Object transform(Object value)
             {
                 // if the given policy is not active or the policy is null
@@ -170,6 +179,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return new ComponentBuilder()
         {
             private CopyPolicyPropertiesPage copyPolicyPage;
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (copyPolicyPage == null)
@@ -186,6 +196,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return new ComponentBuilder()
         {
             private InstantiationPolicyPropertiesPage instantiationPolicyPage;
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (instantiationPolicyPage == null)
@@ -202,6 +213,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return new ComponentBuilder()
         {
             private AfterLoadingPropertiesPage afterLoadingPolicyPage;
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (afterLoadingPolicyPage == null)
@@ -221,6 +233,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
 
         PropertyAspectAdapter cachingPolicyHolder = new PropertyAspectAdapter(this.transactionalPolicyHolder)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 return ((MWTransactionalPolicy) this.subject).getCachingPolicy();
@@ -229,6 +242,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
 
         return new TransformationPropertyValueModel(cachingPolicyHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -253,6 +267,7 @@ public abstract class MappingDescriptorTabbedPropertiesPage extends TabbedProper
         return new ComponentBuilder()
         {
             private EventsPolicyPropertiesPage eventsPolicyPropertiesPage;
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (eventsPolicyPropertiesPage == null)

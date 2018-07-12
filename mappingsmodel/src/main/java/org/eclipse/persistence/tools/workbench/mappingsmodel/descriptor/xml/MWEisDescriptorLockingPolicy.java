@@ -56,20 +56,24 @@ public final class MWEisDescriptorLockingPolicy
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.versionXmlField = new MWXmlField(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.versionXmlField);
     }
 
+    @Override
     public MWDataField getVersionLockField() {
         return this.versionXmlField;
     }
 
+    @Override
     public void setVersionLockField(MWDataField newLockField) {
         throw new UnsupportedOperationException("the xml field itself should be modified");
     }
@@ -77,24 +81,29 @@ public final class MWEisDescriptorLockingPolicy
 
     // **************** MWXpathContext implementation *************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.eisDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -111,6 +120,7 @@ public final class MWEisDescriptorLockingPolicy
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void checkLockFieldSpecifiedForLockingPolicy(List newProblems) {
         if(getLockingType() != NO_LOCKING && getVersionLockField() == null) {
             newProblems.add(buildProblem(ProblemConstants.DESCRIPTOR_LOCKING_VERSION_LOCK_FIELD_NOT_SPECIFIED));
@@ -121,11 +131,13 @@ public final class MWEisDescriptorLockingPolicy
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         this.versionXmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.versionXmlField.schemaChanged(change);
     }
@@ -133,6 +145,7 @@ public final class MWEisDescriptorLockingPolicy
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor)
     {
         super.adjustRuntimeDescriptor(runtimeDescriptor);

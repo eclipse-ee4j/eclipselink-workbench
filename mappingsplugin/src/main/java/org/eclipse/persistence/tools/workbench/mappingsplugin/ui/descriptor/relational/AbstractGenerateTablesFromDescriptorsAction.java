@@ -86,6 +86,7 @@ abstract class AbstractGenerateTablesFromDescriptorsAction extends AbstractFrame
             Collections.singletonList(status),
             "AUTO_GENERATING_TABLE_DEFINITIONS_STATUS_DIALOG_TITLE")
         {
+            @Override
             protected CellRendererAdapter buildNodeRenderer(Object value) {
                 if (value instanceof MWProject) {
                     return new ProjectCellRendererAdapter(resourceRepository());
@@ -97,6 +98,7 @@ abstract class AbstractGenerateTablesFromDescriptorsAction extends AbstractFrame
 
                 if (value instanceof MWError) {
                     return new MWErrorCellRendererAdapter() {
+                        @Override
                         public Icon buildIcon(Object value) {
                             MWError error = (MWError) value;
 

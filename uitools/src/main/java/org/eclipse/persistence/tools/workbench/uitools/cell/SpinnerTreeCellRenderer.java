@@ -94,6 +94,7 @@ public class SpinnerTreeCellRenderer
 
     // ********** initialization **********
 
+    @Override
     protected JComponent buildComponent() {
         JSpinner spinner = new JSpinner();
         spinner.addChangeListener(this.buildChangeListener());
@@ -102,6 +103,7 @@ public class SpinnerTreeCellRenderer
 
     private ChangeListener buildChangeListener() {
         return new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 if (SpinnerTreeCellRenderer.this.immediateEditListener != null) {
                     SpinnerTreeCellRenderer.this.immediateEditListener.immediateEdit();
@@ -137,6 +139,7 @@ public class SpinnerTreeCellRenderer
      * Tweak the color of the spinner editor since it does not
      * "inherit" the colors of its container.
      */
+    @Override
     protected void setForeground(Color c) {
         super.setForeground(c);
         this.editor().setForeground(c);
@@ -146,11 +149,13 @@ public class SpinnerTreeCellRenderer
      * Tweak the color of the spinner editor since it does not
      * "inherit" the colors of its container.
      */
+    @Override
     protected void setBackground(Color c) {
         super.setBackground(c);
         this.editor().setBackground(c);
     }
 
+    @Override
     protected void setValue(Object value) {
         this.getSpinner().setValue(value);
     }
@@ -161,6 +166,7 @@ public class SpinnerTreeCellRenderer
     /**
      * @see TreeCellEditorAdapter#getValue()
      */
+    @Override
     public Object getValue() {
         return this.getSpinner().getValue();
     }
@@ -168,6 +174,7 @@ public class SpinnerTreeCellRenderer
     /**
      * @see TreeCellEditorAdapter#setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener)
      */
+    @Override
     public void setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;
     }

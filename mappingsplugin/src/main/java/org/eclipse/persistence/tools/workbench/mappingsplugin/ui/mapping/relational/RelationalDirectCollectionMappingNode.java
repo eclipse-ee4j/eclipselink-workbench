@@ -30,6 +30,7 @@ public final class RelationalDirectCollectionMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_DIRECT_COLLECTION_MAPPING_NODE";
     }
@@ -37,10 +38,12 @@ public final class RelationalDirectCollectionMappingNode extends MappingNode {
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".directCollection";
     }
 
+    @Override
     protected String buildIconKey() {
         return ((MWRelationalDirectCollectionMapping) getMapping()).iconKey();
     }
@@ -48,6 +51,7 @@ public final class RelationalDirectCollectionMappingNode extends MappingNode {
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return RelationalDirectCollectionMappingTabbedPropertiesPage.class;
     }

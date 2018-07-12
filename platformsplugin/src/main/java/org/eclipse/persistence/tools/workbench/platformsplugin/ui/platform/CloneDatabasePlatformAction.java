@@ -29,6 +29,7 @@ final class CloneDatabasePlatformAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("CLONE_DATABASE_PLATFORM");
         // no accelerator
@@ -36,6 +37,7 @@ final class CloneDatabasePlatformAction extends AbstractFrameworkAction {
         this.initializeToolTipText("CLONE_DATABASE_PLATFORM.TOOL_TIP");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         DatabasePlatform platform = ((DatabasePlatformNode) selectedNode).getDatabasePlatform();
         platform.getRepository().clone(platform);

@@ -12,7 +12,6 @@
 
 package foo;
 
-import org.eclipse.persistence.exceptions.DatabaseException;
 import org.eclipse.persistence.sessions.DatabaseSession;
 import org.eclipse.persistence.sessions.Project;
 

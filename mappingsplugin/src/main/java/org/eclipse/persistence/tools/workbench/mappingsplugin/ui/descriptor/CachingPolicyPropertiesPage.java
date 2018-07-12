@@ -77,6 +77,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
         return "descriptor.identity";
     }
 
+    @Override
     protected void initialize(PropertyValueModel selectionNodeHolder) {
         super.initialize(selectionNodeHolder);
         this.cachingPolicyHolder = buildCachingPolicyHolder();
@@ -88,6 +89,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildNonNullCachingPolicyHolder() {
         return new FilteringPropertyValueModel(this.cachingPolicyHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return (value instanceof MWNullCachingPolicy) ? false : true;
             }
@@ -96,6 +98,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildCachingPolicyHolder() {
         return new PropertyAspectAdapter(buildTransactionalPolicyHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTransactionalPolicy) this.subject).getCachingPolicy();
             }
@@ -104,6 +107,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildTransactionalPolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTransactionalDescriptor) this.subject).getTransactionalPolicy();
             }
@@ -112,12 +116,14 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildProjectDefaultCachingPolicyHolder() {
         return new PropertyAspectAdapter(this.nonNullCachingPolicyHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getProject().getDefaultsPolicy().getCachingPolicy();
             }
         };
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -206,6 +212,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
                 1      // Step size
         );
         defaultCacheSizeCheckBox.addItemListener(new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     cacheSizeSpinner.setModel(projectCacheSizeModel);
@@ -323,11 +330,13 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ValueModel buildCacheTypeHolderBooleanModel() {
         PropertyValueModel cacheTypeHolderModel = new PropertyAspectAdapter(this.cachingPolicyHolder, MWDescriptorCachingPolicy.CACHE_TYPE_HOLDER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorCachingPolicy) this.subject).getCacheTypeHolder();
             }
         };
         return new TransformationPropertyValueModel(cacheTypeHolderModel) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null) {
                     return Boolean.FALSE;
@@ -339,11 +348,13 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ValueModel buildCacheSizeHolderBooleanModel() {
         PropertyValueModel cacheSizeHolderModel = new PropertyAspectAdapter(this.cachingPolicyHolder, MWDescriptorCachingPolicy.CACHE_SIZE_HOLDER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorCachingPolicy) this.subject).getCacheSizeHolder();
             }
         };
         return new TransformationPropertyValueModel(cacheSizeHolderModel) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null) {
                     return Boolean.FALSE;
@@ -355,6 +366,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyChangeListener buildProjectDefaultListener(final JComboBox comboBox) {
        return new PropertyChangeListener(){
+           @Override
            public void propertyChange(PropertyChangeEvent evt) {
                //repainting the comboBox because the rendering changes when
                //the project value is changed.
@@ -365,6 +377,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyChangeListener buildUpdateCacheCoordinationComboBox(final JComboBox comboBox, final PropertyValueModel cacheIsolationHolder, final PropertyValueModel projectCachingIsolationHolder) {
        return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 CacheIsolationOption option = (CacheIsolationOption) cacheIsolationHolder.getValue();
                 if (option != null) {
@@ -394,10 +407,12 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
                 MWDescriptorCachingPolicy.CACHE_TYPE_HOLDER_PROPERTY,
                 MWDescriptorCachingPolicy.DESCRIPTOR_INHERITANCE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCachingPolicy) this.subject).setCacheType((CacheTypeOption) value);
             }
@@ -406,6 +421,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListValueModel buildCacheTypeCollectionHolder() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWDescriptorCachingPolicy.cacheTypeOptions().toplinkOptions();
             }
@@ -414,6 +430,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListCellRenderer buildCacheTypeOptionRenderer(final PropertyValueModel projectCacheTypeHolder) {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (((CacheTypeOption) value).getMWModelOption() == MWCachingPolicy.CACHE_TYPE_PROJECT_DEFAULT) {
                     if (projectCacheTypeHolder.getValue() == null) {
@@ -431,6 +448,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildProjectDefaultCachingTypeHolder() {
         return new PropertyAspectAdapter(this.projectDefaultCachingPolicyHolder, MWCachingPolicy.CACHE_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheType();
             }
@@ -446,10 +464,12 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
                 MWDescriptorCachingPolicy.CACHE_TYPE_HOLDER_PROPERTY,
                 MWDescriptorCachingPolicy.DESCRIPTOR_INHERITANCE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((MWCachingPolicy) this.subject).getCacheSize());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCachingPolicy) this.subject).setCacheSize(((Integer) value).intValue());
             }
@@ -458,9 +478,11 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildProjectCacheSizeHolder() {
         return new PropertyAspectAdapter(this.projectDefaultCachingPolicyHolder, MWCachingPolicy.CACHE_SIZE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((MWCachingPolicy) this.subject).getCacheSize());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 if (((Integer) value).intValue() !=  ((MWDescriptorCachingPolicy) cachingPolicyHolder.getValue()).getProject().getDefaultsPolicy().getCachingPolicy().getCacheSize()) {
                     ((MWDescriptorCachingPolicy) cachingPolicyHolder.getValue()).setDontUseProjectDefaultCacheSize(((Integer) value).intValue());
@@ -480,10 +502,12 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
                    MWDescriptorCachingPolicy.CACHE_SIZE_HOLDER_PROPERTY,
                 MWDescriptorCachingPolicy.DESCRIPTOR_INHERITANCE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWDescriptorCachingPolicy) this.subject).getCacheSizeHolder().usesProjectDefaultCacheSize());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorCachingPolicy) this.subject).setUseProjectDefaultCacheSize(((Boolean) value).booleanValue());
             }
@@ -494,10 +518,12 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildCacheIsolationHolder() {
         return new PropertyAspectAdapter(this.nonNullCachingPolicyHolder, MWCachingPolicy.CACHE_ISOLATION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheIsolation();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCachingPolicy) this.subject).setCacheIsolation((CacheIsolationOption) value);
             }
@@ -506,6 +532,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListValueModel buildCacheIsolationCollectionHolder() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWDescriptorCachingPolicy.cacheIsolationOptions().toplinkOptions();
             }
@@ -514,6 +541,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListCellRenderer buildCacheIsolationOptionRenderer(final PropertyValueModel projectCacheIsolationHolder) {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (((CacheIsolationOption) value).getMWModelOption() == MWCachingPolicy.CACHE_ISOLATION_PROJECT_DEFAULT) {
                     if (projectCacheIsolationHolder.getValue() == null) {
@@ -531,6 +559,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildProjectDefaultCacheIsolationHolder() {
         return new PropertyAspectAdapter(this.projectDefaultCachingPolicyHolder, MWCachingPolicy.CACHE_ISOLATION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheIsolation();
             }
@@ -542,10 +571,12 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildCacheCoordinationHolder() {
         return new PropertyAspectAdapter(this.nonNullCachingPolicyHolder, MWCachingPolicy.CACHE_COORDINATION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheCoordination();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCachingPolicy) this.subject).setCacheCoordination((CacheCoordinationOption) value);
             }
@@ -554,6 +585,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListValueModel buildCacheCoordinationCollectionHolder() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWDescriptorCachingPolicy.cacheCoordinationOptions().toplinkOptions();
             }
@@ -562,6 +594,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListCellRenderer buildCacheCoordinationOptionRenderer(final PropertyValueModel projectCacheCoordinationHolder) {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (((CacheCoordinationOption) value).getMWModelOption() == MWCachingPolicy.CACHE_COORDINATION_PROJECT_DEFAULT) {
                     if (projectCacheCoordinationHolder.getValue() == null) {
@@ -579,6 +612,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildProjectDefaultCacheCoordinationHolder() {
         return new PropertyAspectAdapter(this.projectDefaultCachingPolicyHolder, MWCachingPolicy.CACHE_COORDINATION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheCoordination();
             }
@@ -590,10 +624,12 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildExistenceCheckingHolder() {
         return new PropertyAspectAdapter(this.nonNullCachingPolicyHolder, MWCachingPolicy.EXISTENCE_CHECKING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getExistenceChecking();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCachingPolicy) this.subject).setExistenceChecking((ExistenceCheckingOption) value);
             }
@@ -602,6 +638,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListValueModel buildExistenceCheckingCollectionHolder() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWDescriptorCachingPolicy.existenceCheckingOptions().toplinkOptions();
             }
@@ -610,6 +647,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ListCellRenderer buildExistenceCheckingOptionRenderer(final PropertyValueModel projectExistenceCheckingHolder) {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (((ExistenceCheckingOption) value).getMWModelOption() == MWCachingPolicy.EXISTENCE_CHECKING_PROJECT_DEFAULT) {
                     if (projectExistenceCheckingHolder.getValue() == null) {
@@ -627,6 +665,7 @@ public final class CachingPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private PropertyValueModel buildProjectDefaultExistenceCheckingHolder() {
         return new PropertyAspectAdapter(this.projectDefaultCachingPolicyHolder, MWCachingPolicy.EXISTENCE_CHECKING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getExistenceChecking();
             }

@@ -32,7 +32,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relation
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryManager;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadAllQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadObjectQuery;
-import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 /**
  * This class holds any custom sql the user has created.
@@ -161,14 +160,17 @@ public final class MWRelationalQueryManager extends MWQueryManager {
         return (MWReportQuery) this.addQuery(new MWReportQuery(this, queryName));
     }
 
+    @Override
     public MWReadAllQuery buildReadAllQuery(String queryName) {
         return new MWRelationalReadAllQuery(this, queryName);
     }
 
+    @Override
     public MWReadObjectQuery buildReadObjectQuery(String queryName) {
         return new MWRelationalReadObjectQuery(this, queryName);
     }
 
+    @Override
     public boolean supportsReportQueries() {
         return true;
     }
@@ -410,6 +412,7 @@ public final class MWRelationalQueryManager extends MWQueryManager {
     }
 
     //Conversion methods
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptor(runtimeDescriptor);
 

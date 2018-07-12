@@ -136,6 +136,7 @@ public final class JDBCType
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
      */
+    @Override
     public String displayString() {
         return this.name;
     }
@@ -143,6 +144,7 @@ public final class JDBCType
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }

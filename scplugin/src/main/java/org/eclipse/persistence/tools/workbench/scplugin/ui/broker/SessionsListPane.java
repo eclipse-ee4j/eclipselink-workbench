@@ -73,6 +73,7 @@ final class SessionsListPane extends AbstractSessionsListPane
     /**
      * Requests to add unmanaged sessions to the edited session brokers.
      */
+    @Override
     protected void addNewSession()
     {
         CollectionValueModel itemHolder = buildUnmanagedSessionsCollectionHolder();
@@ -131,6 +132,7 @@ final class SessionsListPane extends AbstractSessionsListPane
      *
      * @return A new <code>AddRemoveListPanel</code>
      */
+    @Override
     protected AddRemoveListPanel buildSessionListPane()
     {
         AddRemoveListPanel panel = super.buildSessionListPane();
@@ -144,15 +146,18 @@ final class SessionsListPane extends AbstractSessionsListPane
      *
      * @return A new <code>CollectionValueModel</code>
      */
+    @Override
     protected CollectionValueModel buildSessionsCollectionHolder()
     {
         return new CollectionAspectAdapter(getSubjectHolder(), SessionBrokerAdapter.SESSIONS_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 return ((SessionBrokerAdapter) subject).sessions();
             }
 
+            @Override
             protected int sizeFromSubject()
             {
                 return ((SessionBrokerAdapter) subject).sessionsSize();
@@ -199,6 +204,7 @@ final class SessionsListPane extends AbstractSessionsListPane
         // Holder of the SessionBrokerAdapter's parent: TopLinkSessionsAdapter
         PropertyAspectAdapter parentHolder = new PropertyAspectAdapter(getSubjectHolder(), "")
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SessionBrokerAdapter broker = (SessionBrokerAdapter) subject;
@@ -209,6 +215,7 @@ final class SessionsListPane extends AbstractSessionsListPane
         // Holder of the sessions collection
         CollectionAspectAdapter collectionHolder = new CollectionAspectAdapter(parentHolder, TopLinkSessionsAdapter.SESSIONS_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 TopLinkSessionsAdapter topLinkSessions = (TopLinkSessionsAdapter) subject;
@@ -219,16 +226,19 @@ final class SessionsListPane extends AbstractSessionsListPane
         // Listen to any change in the collection and update the enable state of the Add button
         collectionHolder.addCollectionChangeListener(CollectionAspectAdapter.VALUE, new CollectionChangeListener()
         {
+            @Override
             public void collectionChanged(CollectionChangeEvent e)
             {
                 updateAddButtonEnableState(panel);
             }
 
+            @Override
             public void itemsAdded(CollectionChangeEvent e)
             {
                 updateAddButtonEnableState(panel);
             }
 
+            @Override
             public void itemsRemoved(CollectionChangeEvent e)
             {
                 updateAddButtonEnableState(panel);
@@ -244,6 +254,7 @@ final class SessionsListPane extends AbstractSessionsListPane
      * @param sessions The {@link SessionAdapter}s to be removed from the edited
      * session broker
      */
+    @Override
     protected void removeSessions(Collection sessions)
     {
         SessionBrokerAdapter broker = (SessionBrokerAdapter) subject();

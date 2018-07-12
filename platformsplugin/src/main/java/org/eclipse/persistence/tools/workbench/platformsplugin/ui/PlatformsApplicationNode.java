@@ -47,6 +47,7 @@ public abstract class PlatformsApplicationNode
      * The default implementation caches properties pages in the
      * platforms plug-in. The cache key is determined by subclasses.
      */
+    @Override
     public Component propertiesPage(WorkbenchContext context) {
         WorkbenchContext localContext = this.buildLocalWorkbenchContext(context);
         AbstractPropertiesPage propertiesPage = (AbstractPropertiesPage) this.getPlatformsPlugin().getPropertiesPage(this.propertiesPageClass());
@@ -82,6 +83,7 @@ public abstract class PlatformsApplicationNode
      * The default implementation caches properties pages in the
      * platforms plug-in. The cache key is determined by subclasses.
      */
+    @Override
     public void releasePropertiesPage(Component propertiesPage) {
         this.releasePropertiesPage((AbstractPropertiesPage) propertiesPage);
     }

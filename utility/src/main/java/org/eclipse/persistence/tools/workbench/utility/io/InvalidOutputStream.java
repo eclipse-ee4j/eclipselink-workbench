@@ -52,6 +52,7 @@ public final class InvalidOutputStream
      * Throw an exception.
      * @see java.io.OutputStream#write(int)
      */
+    @Override
     public void write(int b) {
         // we don't throw an IOException because that is swallowed by PrintStream
         throw new UnsupportedOperationException();
@@ -60,6 +61,7 @@ public final class InvalidOutputStream
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

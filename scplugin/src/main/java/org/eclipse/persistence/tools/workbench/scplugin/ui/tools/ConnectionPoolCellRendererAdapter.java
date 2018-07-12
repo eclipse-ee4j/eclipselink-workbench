@@ -97,6 +97,7 @@ public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendere
      * the text is not sufficient, if <code>null</code> is returned, then the
      * text is used as the accessible text
      */
+    @Override
     public String buildAccessibleName(Object value)
     {
         ConnectionPoolAdapter pool = (ConnectionPoolAdapter) value;
@@ -111,6 +112,7 @@ public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendere
      * @param value The object to be represented by an icon, if one is required
      * @return An icon representing the given object or <code>null</code>
      */
+    @Override
     public Icon buildIcon(Object value)
     {
         ConnectionPoolAdapter pool = (ConnectionPoolAdapter) value;
@@ -124,6 +126,7 @@ public final class ConnectionPoolCellRendererAdapter extends AbstractCellRendere
      * @param value The object to be represented by a string
      * @return A string representation of the given object
      */
+    @Override
     public String buildText(Object value)
     {
         ConnectionPoolAdapter pool = (ConnectionPoolAdapter) value;

@@ -44,10 +44,12 @@ abstract class DescriptorClassCodeGenPolicy
         initialize();
     }
 
+    @Override
     protected MWClass getMWClass() {
         return getDescriptor().getMWClass();
     }
 
+    @Override
     public MWMethodCodeGenPolicy getMethodCodeGenPolicy(MWMethod method)
     {
         if (method.isZeroArgumentConstructor())
@@ -78,6 +80,7 @@ abstract class DescriptorClassCodeGenPolicy
         }
     }
 
+    @Override
     public void addAccessorCodeGenPolicy(MWMethod method, MWMethodCodeGenPolicy methodCodeGenPolicy)
     {
         this.accessorCodeGenPolicies.put(method, methodCodeGenPolicy);

@@ -42,6 +42,7 @@ public class ApplicationContextWorkbenchContext
     /**
      * @see WorkbenchContext#getApplicationContext()
      */
+    @Override
     public ApplicationContext getApplicationContext() {
         return this.applicationContext;
     }

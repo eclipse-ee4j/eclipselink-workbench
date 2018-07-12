@@ -45,6 +45,7 @@ public abstract class AbstractToggleFrameworkAction
         super(context);
     }
 
+    @Override
     public void setUp() {
         super.setUp();
         updateSelectionState();
@@ -80,16 +81,19 @@ public abstract class AbstractToggleFrameworkAction
     protected abstract boolean shouldBeSelected(ApplicationNode selectedNode);
 
 
+    @Override
     public void setSelected(boolean selectionState) {
         boolean oldValue = this.selectionState;
         this.selectionState = selectionState;
         firePropertyChange(TOGGLE_STATE_PROPERTY, Boolean.valueOf(oldValue), Boolean.valueOf(this.selectionState));
     }
 
+    @Override
     public boolean isSelected() {
         return this.selectionState;
     }
 
+    @Override
     protected void engageListeners(AbstractApplicationNode node) {
         super.engageListeners(node);
         engageValueSelected(node);
@@ -99,6 +103,7 @@ public abstract class AbstractToggleFrameworkAction
         this.engageValue(node, this.selectedPropertyNames(), getSelectionStateListener());
     }
 
+    @Override
     protected void disengageListeners(AbstractApplicationNode node) {
         super.disengageListeners(node);
         disengageValueSelected(node);
@@ -117,6 +122,7 @@ public abstract class AbstractToggleFrameworkAction
 
     protected PropertyChangeListener buildSelectionStateListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 updateSelectionState();
             }

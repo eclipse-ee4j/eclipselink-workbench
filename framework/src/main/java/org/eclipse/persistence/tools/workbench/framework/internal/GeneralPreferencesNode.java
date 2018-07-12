@@ -37,6 +37,7 @@ final class GeneralPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.insert(HelpFacade.buildHelpPreferencesNode(this.getPreferencesContext()), 0);
@@ -45,6 +46,7 @@ final class GeneralPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildPropertiesPage()
      */
+    @Override
     protected Component buildPropertiesPage() {
         return new GeneralPreferencesPage(this.getPreferencesContext());
     }
@@ -52,6 +54,7 @@ final class GeneralPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildDisplayString()
      */
+    @Override
     protected String buildDisplayString() {
         return this.resourceRepository().getString("PREFERENCES.GENERAL");
     }
@@ -59,6 +62,7 @@ final class GeneralPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.PreferencesNode#helpTopicId()
      */
+    @Override
     public String helpTopicId() {
         return "preferences.general";
     }

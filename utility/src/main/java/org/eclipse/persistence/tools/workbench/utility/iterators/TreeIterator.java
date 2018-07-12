@@ -91,6 +91,7 @@ public class TreeIterator implements Iterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         if (this.currentIterator.hasNext()) {
             return true;
@@ -107,6 +108,7 @@ public class TreeIterator implements Iterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.currentIterator.hasNext()) {
             return this.nextInternal();
@@ -133,6 +135,7 @@ public class TreeIterator implements Iterator {
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         this.currentIterator.remove();
     }
@@ -147,6 +150,7 @@ public class TreeIterator implements Iterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.currentIterator + ')';
     }
@@ -169,6 +173,7 @@ public interface Midwife {
     Midwife NULL_INSTANCE =
         new Midwife() {
             // return no children
+            @Override
             public Iterator children(Object next) {
                 return NullIterator.instance();
             }

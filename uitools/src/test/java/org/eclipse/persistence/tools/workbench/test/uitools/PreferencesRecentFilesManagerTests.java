@@ -38,6 +38,7 @@ public class PreferencesRecentFilesManagerTests extends PreferencesTestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.stateChangeEventFired = false;
@@ -46,6 +47,7 @@ public class PreferencesRecentFilesManagerTests extends PreferencesTestCase {
 
     private StateChangeListener buildListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 PreferencesRecentFilesManagerTests.this.stateChangeEventFired = true;
             }

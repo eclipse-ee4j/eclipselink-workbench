@@ -32,10 +32,12 @@ public class MethodCellRendererAdapter extends NoneSelectedCellRendererAdapter {
         super(repository);
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWMethod) value).shortSignatureWithReturnType();
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         if (((MWMethod) value).getModifier().isPackage()) {
             return resourceRepository().getIcon("method.default");

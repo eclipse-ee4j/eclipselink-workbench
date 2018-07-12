@@ -24,9 +24,7 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWQueryItem;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.queries.ObjectLevelReadQuery;
@@ -58,6 +56,7 @@ public final class MWQueryParameter
         this.typeHandle.setType(type);
     }
 
+    @Override
     protected void initialize(Node parentNode) {
         super.initialize(parentNode);
         this.typeHandle = new MWClassHandle(this, this.buildTypeScrubber());
@@ -66,6 +65,7 @@ public final class MWQueryParameter
 
     //    ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.typeHandle);
@@ -73,9 +73,11 @@ public final class MWQueryParameter
 
     private NodeReferenceScrubber buildTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWQueryParameter.this.setType(null);
             }
+            @Override
             public String toString() {
                 return "MWQueryParameter.buildTypeScrubber()";
             }
@@ -121,6 +123,7 @@ public final class MWQueryParameter
 
     //    ********** MWQueryItem implementation **********
 
+    @Override
     public void removeSelfFromParent() {
         this.getQuery().removeParameter(this);
     }
@@ -135,10 +138,12 @@ public final class MWQueryParameter
 
     // ********** display methods **********
 
+    @Override
     public String displayString() {
         return this.getName();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getName());
     }

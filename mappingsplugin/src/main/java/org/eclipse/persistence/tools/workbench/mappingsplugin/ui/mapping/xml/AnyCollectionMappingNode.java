@@ -32,6 +32,7 @@ public final class AnyCollectionMappingNode
 
     // **************** MappingNode contract **********************************
 
+    @Override
     protected String buildIconKey() {
         return "mapping.anyCollection";
     }
@@ -39,6 +40,7 @@ public final class AnyCollectionMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_ANY_COLLECTION_MAPPING_NODE";
     }
@@ -46,6 +48,7 @@ public final class AnyCollectionMappingNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
 //        return this.getDescriptorNode().mappingHelpTopicPrefix() + ".anyCollection";
         return "mapping.anyCollection"; // For 10.1.3
@@ -54,6 +57,7 @@ public final class AnyCollectionMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return AnyCollectionMappingPropertiesPage.class;
     }

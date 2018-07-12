@@ -42,6 +42,7 @@ public class WindowWorkbenchContext
     /**
      * @see WorkbenchContextWrapper#getCurrentWindow()
      */
+    @Override
     public Window getCurrentWindow() {
         return this.window;
     }

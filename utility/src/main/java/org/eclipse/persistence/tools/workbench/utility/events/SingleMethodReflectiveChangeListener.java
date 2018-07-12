@@ -45,6 +45,7 @@ class SingleMethodReflectiveChangeListener
 
     // ********** StateChangeListener implementation **********
 
+    @Override
     public void stateChanged(StateChangeEvent e) {
         if (this.methodIsZeroArgument) {
             ClassTools.invokeMethod(this.method, this.target, EMPTY_STATE_CHANGE_EVENT_ARRAY);
@@ -56,6 +57,7 @@ class SingleMethodReflectiveChangeListener
 
     // ********** PropertyChangeListener implementation **********
 
+    @Override
     public void propertyChange(PropertyChangeEvent e) {
         if (this.methodIsZeroArgument) {
             ClassTools.invokeMethod(this.method, this.target, EMPTY_PROPERTY_CHANGE_EVENT_ARRAY);

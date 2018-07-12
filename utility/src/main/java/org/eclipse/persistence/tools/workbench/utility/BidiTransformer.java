@@ -34,13 +34,16 @@ public interface BidiTransformer extends Transformer {
     BidiTransformer NULL_INSTANCE =
         new BidiTransformer() {
             // simply return the object, unchanged
+            @Override
             public Object transform(Object o) {
                 return o;
             }
             // simply return the object, unchanged
+            @Override
             public Object reverseTransform(Object o) {
                 return o;
             }
+            @Override
             public String toString() {
                 return "NullBidiTransformer";
             }

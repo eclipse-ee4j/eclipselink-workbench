@@ -100,6 +100,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // try to prevent backdoor modification of the lists
         return new ReadOnlyListIterator(
@@ -117,6 +118,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#addItem(int, Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         this.addItems(index, Collections.singletonList(item));
     }
@@ -124,6 +126,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#addItems(int, java.util.List)
      */
+    @Override
     public void addItems(int index, List items) {
         if (items.size() == 0) {
             return;
@@ -141,6 +144,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         int prefixSize = this.prefix.size();
         if (index < prefixSize) {
@@ -155,6 +159,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         if (length == 0) {
             return Collections.EMPTY_LIST;
@@ -172,6 +177,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#replaceItem(int, Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         int prefixSize = this.prefix.size();
         if (index < prefixSize) {
@@ -186,6 +192,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#replaceItems(int, java.util.List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         if (items.size() == 0) {
             return Collections.EMPTY_LIST;
@@ -203,6 +210,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         int prefixSize = this.prefix.size();
         if (index < prefixSize) {
@@ -217,6 +225,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.prefix.size() + this.listHolder.size() + this.suffix.size();
     }
@@ -227,6 +236,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModelWrapper#itemsAdded(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     protected void itemsAdded(ListChangeEvent e) {
         this.fireItemsAdded(e.cloneWithSource(this, VALUE, this.prefix.size()));
     }
@@ -234,6 +244,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModelWrapper#itemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     protected void itemsRemoved(ListChangeEvent e) {
         this.fireItemsRemoved(e.cloneWithSource(this, VALUE, this.prefix.size()));
     }
@@ -241,6 +252,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModelWrapper#itemsReplaced(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     protected void itemsReplaced(ListChangeEvent e) {
         this.fireItemsReplaced(e.cloneWithSource(this, VALUE, this.prefix.size()));
     }
@@ -248,6 +260,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see ListValueModelWrapper#listChanged(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     protected void listChanged(ListChangeEvent e) {
         this.fireListChanged(VALUE);
     }
@@ -258,6 +271,7 @@ public class ExtendedListValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.prefix);
         sb.append(" ");

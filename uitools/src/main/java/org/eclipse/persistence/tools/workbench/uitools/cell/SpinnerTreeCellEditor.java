@@ -60,6 +60,7 @@ public class SpinnerTreeCellEditor extends AbstractCellEditor implements TreeCel
 
     protected ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 // when the spinner's text field fires an action event, we stop editing
                 SpinnerTreeCellEditor.this.stopCellEditing();
@@ -72,6 +73,7 @@ public class SpinnerTreeCellEditor extends AbstractCellEditor implements TreeCel
     /**
      * @see javax.swing.CellEditor#getCellEditorValue()
      */
+    @Override
     public Object getCellEditorValue() {
         return this.renderer.getValue();
     }
@@ -79,6 +81,7 @@ public class SpinnerTreeCellEditor extends AbstractCellEditor implements TreeCel
     /**
      * @see javax.swing.CellEditor#isCellEditable(java.util.EventObject)
      */
+    @Override
     public boolean isCellEditable(EventObject e) {
         if (e instanceof MouseEvent) {
             return ((MouseEvent) e).getClickCount() >= 2;    // force double-click
@@ -92,6 +95,7 @@ public class SpinnerTreeCellEditor extends AbstractCellEditor implements TreeCel
     /**
      * @see javax.swing.tree.TreeCellEditor#getTreeCellEditorComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int)
      */
+    @Override
     public Component getTreeCellEditorComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row) {
         return this.renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, true);
     }

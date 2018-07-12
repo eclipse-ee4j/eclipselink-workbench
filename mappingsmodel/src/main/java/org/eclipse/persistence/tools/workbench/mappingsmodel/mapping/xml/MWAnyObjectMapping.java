@@ -61,9 +61,11 @@ public final class MWAnyObjectMapping
 
     private NodeReferenceScrubber buildElementTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAnyObjectMapping.this.setElementType(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractCompositeMapping.buildElementTypeScrubber()";
             }
@@ -78,10 +80,12 @@ public final class MWAnyObjectMapping
 
     // **************** Element type ******************************************
 
+    @Override
     public MWComplexTypeDefinition getElementType() {
         return (MWComplexTypeDefinition) this.elementTypeHandle.getComponent();
     }
 
+    @Override
     public void setElementType(MWComplexTypeDefinition newElementType) {
         MWComplexTypeDefinition oldElementType = this.getElementType();
         this.elementTypeHandle.setComponent(newElementType);
@@ -90,6 +94,7 @@ public final class MWAnyObjectMapping
 
     // **************** MWXpathContext implementation *************************
 
+    @Override
     protected boolean mayUseCollectionData() {
         return false;
     }
@@ -101,6 +106,7 @@ public final class MWAnyObjectMapping
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWAnyObjectMapping(this);
     }
@@ -108,6 +114,7 @@ public final class MWAnyObjectMapping
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addXmlFieldProblemsTo(List newProblems) {
         super.addXmlFieldProblemsTo(newProblems);
         this.addXmlFieldNotSingularProblemTo(newProblems);
@@ -122,10 +129,12 @@ public final class MWAnyObjectMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new XMLAnyObjectMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         XMLAnyObjectMapping runtimeMapping = (XMLAnyObjectMapping) super.runtimeMapping();
         runtimeMapping.setField(this.getXmlField().runtimeField());

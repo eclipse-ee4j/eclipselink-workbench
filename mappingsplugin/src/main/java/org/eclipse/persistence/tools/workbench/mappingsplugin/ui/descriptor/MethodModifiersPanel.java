@@ -34,6 +34,7 @@ final class MethodModifiersPanel extends AbstractSubjectPanel {
         super(methodHolder, context);
     }
 
+    @Override
     protected void initializeLayout() {
         // labeled border
         this.setBorder(BorderFactory.createTitledBorder(this.resourceRepository().getString("MODIFIER_PANEL_TITLE")));

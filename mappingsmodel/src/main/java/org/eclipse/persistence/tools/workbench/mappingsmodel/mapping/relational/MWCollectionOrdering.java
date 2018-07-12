@@ -59,6 +59,7 @@ public final class MWCollectionOrdering extends MWModel {
         return (MWCollectionMapping) this.getParent();
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.queryKeyHandle = new MWQueryKeyHandle(this, this.buildQueryKeyScrubber());
@@ -91,6 +92,7 @@ public final class MWCollectionOrdering extends MWModel {
 
     //**************** Model Synchronization ************
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.queryKeyHandle);
@@ -98,9 +100,11 @@ public final class MWCollectionOrdering extends MWModel {
 
     private NodeReferenceScrubber buildQueryKeyScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWCollectionOrdering.this.setQueryKey(null);
             }
+            @Override
             public String toString() {
                 return "MWCollectionMapping.buildQueryKeyScrubber()";
             }
@@ -111,6 +115,7 @@ public final class MWCollectionOrdering extends MWModel {
      * Need to check if the query key we're holding on to has been removed by
      * umapping action, this could be the case if its an auto-generated one.
      */
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         super.descriptorUnmapped(mappings);
         for (Iterator stream = mappings.iterator(); stream.hasNext(); ) {
@@ -126,6 +131,7 @@ public final class MWCollectionOrdering extends MWModel {
 
     //**************** Problem Handling ************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkQueryKey(currentProblems);
@@ -154,6 +160,7 @@ public final class MWCollectionOrdering extends MWModel {
 
     //**************** Display Methods ************
 
+    @Override
     public void toString(StringBuffer sb) {
         if (getQueryKey() != null) {
             sb.append(this.getQueryKey().getName());

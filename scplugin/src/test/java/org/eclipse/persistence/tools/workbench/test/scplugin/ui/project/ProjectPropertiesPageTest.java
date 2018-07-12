@@ -59,37 +59,45 @@ public class ProjectPropertiesPageTest extends SCAbstractPanelTest
 //                                             COMPONENT_LIST);
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder(ApplicationNode projectNode)
     {
         return new SimplePropertyValueModel(projectNode);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return new ProjectPropertiesPage(new ShellWorkbenchContext(((ProjectNode) getNodeHolder().getValue()).getApplicationContext()));
     }
 
+    @Override
     protected SCAdapter buildSelection()
     {
         return getTopLinkSessions();
     }
 
+    @Override
     protected void clearModel()
     {
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected void restoreModel()
     {
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Test Project Page";

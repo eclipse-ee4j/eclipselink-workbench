@@ -14,7 +14,6 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.xml;
 
-import org.eclipse.persistence.tools.workbench.framework.action.FrameworkAction;
 import org.eclipse.persistence.tools.workbench.framework.action.ToggleFrameworkAction;
 import org.eclipse.persistence.tools.workbench.framework.app.GroupContainerDescription;
 import org.eclipse.persistence.tools.workbench.framework.app.MenuDescription;
@@ -41,6 +40,7 @@ public abstract class XmlMappingSelectionActionsPolicy
 
     // **************** Mapping toolbar ***************************************
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext context) {
         GroupContainerDescription toolBarDescription = new ToolBarDescription();
         toolBarDescription.add(buildMapAsToolBarGroup(context));
@@ -91,6 +91,7 @@ public abstract class XmlMappingSelectionActionsPolicy
 
     // **************** Mapping menu ******************************************
 
+    @Override
     protected void addToMapAsMenuDescription(MenuDescription menuDescription, WorkbenchContext context) {
         menuDescription.add(buildMapAsMenuGroup(context));
     }

@@ -18,13 +18,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWColumnHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWFieldTransformerAssociation;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWTransformer;
@@ -32,7 +30,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethod;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.internal.helper.DatabaseField;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -74,6 +71,7 @@ public final class MWRelationalFieldTransformerAssociation
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.columnHandle = new MWColumnHandle(this, this.buildColumnScrubber());
@@ -82,6 +80,7 @@ public final class MWRelationalFieldTransformerAssociation
 
     // **************** Containment hierarchy *****************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.columnHandle);
@@ -89,9 +88,11 @@ public final class MWRelationalFieldTransformerAssociation
 
     private NodeReferenceScrubber buildColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalFieldTransformerAssociation.this.setColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalFieldTransformerAssociation.buildColumnScrubber()";
             }
@@ -111,11 +112,13 @@ public final class MWRelationalFieldTransformerAssociation
         this.firePropertyChanged(FIELD_PROPERTY, old, column);
     }
 
+    @Override
     protected void setFieldTransformer(MWTransformer fieldTransformer) {
         super.setFieldTransformer(fieldTransformer);
         this.getProject().recalculateAggregatePathsToColumn(this.getParentDescriptor());
     }
 
+    @Override
     public String fieldName() {
         if (this.relationalDescriptor().isAggregateDescriptor()) {
             return this.getFieldTransformer().fieldNameForRuntime();
@@ -123,6 +126,7 @@ public final class MWRelationalFieldTransformerAssociation
         return super.fieldName();
     }
 
+    @Override
     public MWDataField getField() {
         return this.getColumn();
     }
@@ -141,6 +145,7 @@ public final class MWRelationalFieldTransformerAssociation
 
     // **************** Problems *********************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if (! this.relationalDescriptor().isAggregateDescriptor() && this.getColumn() == null) {
@@ -168,6 +173,7 @@ public final class MWRelationalFieldTransformerAssociation
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseField runtimeField() {
         if (this.relationalDescriptor().isAggregateDescriptor()) {
             return new DatabaseField(getMapping().getName() + "->" + getFieldTransformer().fieldNameForRuntime());

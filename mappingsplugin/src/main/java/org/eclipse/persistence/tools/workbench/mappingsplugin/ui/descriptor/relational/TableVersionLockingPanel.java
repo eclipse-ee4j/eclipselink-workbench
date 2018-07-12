@@ -49,6 +49,7 @@ final class TableVersionLockingPanel extends VersionLockingPanel {
         super(lockingPolicyHolder, contextHolder);
     }
 
+    @Override
     protected JPanel buildVersionLockingFieldChooser()
     {
         Pane lockingPanel = new Pane(new GridBagLayout());
@@ -106,10 +107,12 @@ final class TableVersionLockingPanel extends VersionLockingPanel {
 
     private PropertyValueModel buildLockingFieldSelectionHolder() {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(getSubjectHolder(), MWTableDescriptorLockingPolicy.VERSION_LOCKING_COLUMN_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorLockingPolicy) this.subject).getVersionLockField();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) this.subject).setVersionLockField((MWDataField)value);
             }
@@ -127,6 +130,7 @@ final class TableVersionLockingPanel extends VersionLockingPanel {
 
     private PropertyValueModel buildDescriptorHolder() {
         return new PropertyAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTransactionalPolicy) ((MWTableDescriptorLockingPolicy) subject).getParent()).getParent();
             }
@@ -135,6 +139,7 @@ final class TableVersionLockingPanel extends VersionLockingPanel {
 
     private StringConverter buildColumnStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWColumn) o).qualifiedName();
             }

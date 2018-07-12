@@ -159,9 +159,11 @@ public class ClassChooserPanel extends AbstractPanel {
 
     private PropertyValueModel buildClassNameHolder() {
         return new TransformationPropertyValueModel(this.selectionHolder) {
+            @Override
             protected Object transform(Object value) {
                 return (value == null) ? "" : ClassChooserPanel.this.classDescriptionAdapter.className(value).replace('$', '.');
             }
+            @Override
             protected Object reverseTransform(Object value) {
                 throw new UnsupportedOperationException();
             }
@@ -174,6 +176,7 @@ public class ClassChooserPanel extends AbstractPanel {
      */
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ClassChooserPanel.this.promptUserToSelectClass();
             }
@@ -223,6 +226,7 @@ public class ClassChooserPanel extends AbstractPanel {
 
     // ********** public API **********
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         for (int i = this.getComponentCount(); i-- > 0; ) {

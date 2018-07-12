@@ -40,13 +40,16 @@ public interface StringMatcher {
 
     StringMatcher NULL_INSTANCE =
         new StringMatcher() {
+            @Override
             public void setPatternString(String patternString) {
                 // ignore the pattern string
             }
+            @Override
             public boolean matches(String string) {
                 // everything is a match
                 return true;
             }
+            @Override
             public String toString() {
                 return "NullStringMatcher";
             }

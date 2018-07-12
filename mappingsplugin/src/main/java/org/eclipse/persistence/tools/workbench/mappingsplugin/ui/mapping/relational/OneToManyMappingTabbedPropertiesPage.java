@@ -36,6 +36,7 @@ final class OneToManyMappingTabbedPropertiesPage extends TabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(new OneToManyGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()),        "ONE_TO_MANY_GENERAL_TAB_TITLE");
         addTab(new OneToManyTableReferencePropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "ONE_TO_MANY_TABLE_REFERENCE_TAB_TITLE");

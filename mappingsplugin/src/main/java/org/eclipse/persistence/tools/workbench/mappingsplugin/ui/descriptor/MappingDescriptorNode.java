@@ -28,7 +28,6 @@ import org.eclipse.persistence.tools.workbench.framework.app.ToolBarDescription;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
@@ -99,6 +98,7 @@ public abstract class MappingDescriptorNode
         super(descriptor, parentNode);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.mappingsListener = this.buildMappingsListener();
@@ -112,15 +112,19 @@ public abstract class MappingDescriptorNode
 
     private CollectionChangeListener buildMappingsListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 MappingDescriptorNode.this.mappingsAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 MappingDescriptorNode.this.mappingsRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 MappingDescriptorNode.this.mappingsChanged(e);
             }
+            @Override
             public String toString() {
                 return "mappings listener";
             }
@@ -129,17 +133,21 @@ public abstract class MappingDescriptorNode
 
     private CollectionChangeListener buildAttributesListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 MappingDescriptorNode.this.attributesAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 MappingDescriptorNode.this.attributesRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 // since we listen to the model directly, and not through an
                 // adapter, this "event" should never happen  ~bjv
                 throw new UnsupportedOperationException();
             }
+            @Override
             public String toString() {
                 return "attributes listener";
             }
@@ -148,9 +156,11 @@ public abstract class MappingDescriptorNode
 
     private PropertyChangeListener buildAttributeModifierListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 MappingDescriptorNode.this.attributeModifierChanged(e);
             }
+            @Override
             public String toString() {
                 return "attribute modifier listener";
             }
@@ -159,9 +169,11 @@ public abstract class MappingDescriptorNode
 
     private PropertyChangeListener buildUnknownPrimaryKeyListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 MappingDescriptorNode.this.unknownPrimaryKeyChanged(e);
             }
+            @Override
             public String toString() {
                 return "unknown primary key listener";
             }
@@ -237,6 +249,7 @@ public abstract class MappingDescriptorNode
      */
     private Iterator unmappedAttributes(Iterator attributes) {
         return new FilteringIterator(attributes) {
+            @Override
             protected boolean accept(Object o) {
                 MWMappingDescriptor descriptor = MappingDescriptorNode.this.getMappingDescriptor();
                 return descriptor.mappingForAttribute((MWClassAttribute) o) == null;
@@ -314,6 +327,7 @@ public abstract class MappingDescriptorNode
      */
     private Iterator attributes(Iterator mappings) {
         return new TransformationIterator(mappings) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWMapping) next).getInstanceVariable();
             }
@@ -439,10 +453,12 @@ public abstract class MappingDescriptorNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     protected void engageValue() {
         super.engageValue();
 
@@ -472,6 +488,7 @@ public abstract class MappingDescriptorNode
         attribute.addPropertyChangeListener(MWModifiable.MODIFIER_CODE_PROPERTY, this.attributeModifierListener);
     }
 
+    @Override
     protected void disengageValue() {
         MWMappingDescriptor descriptor = this.getMappingDescriptor();
         MWClass type = descriptor.getMWClass();
@@ -504,6 +521,7 @@ public abstract class MappingDescriptorNode
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected boolean supportsAdvancedProperties() {
         return true;
     }
@@ -511,6 +529,7 @@ public abstract class MappingDescriptorNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         return new ToolBarDescription();
     }

@@ -36,6 +36,7 @@ public final class RemoveAction extends AbstractFrameworkAction {
         initializeIcon(iconKey);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -43,6 +44,7 @@ public final class RemoveAction extends AbstractFrameworkAction {
         initializeToolTipText("REMOVE_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] selectedNodes = selectedNodes();
         if (selectedNodes.length == 1) {

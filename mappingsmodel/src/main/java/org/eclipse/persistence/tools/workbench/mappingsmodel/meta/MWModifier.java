@@ -20,8 +20,6 @@ import java.lang.reflect.Modifier;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.internal.codegen.AccessLevel;
 
 
@@ -82,6 +80,7 @@ public final class MWModifier extends MWModel {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {    // private-protected
         super.initialize(parent);
         this.code = defaultCode();
@@ -531,10 +530,12 @@ public final class MWModifier extends MWModel {
 
     // ********** displaying and printing **********
 
+    @Override
     public String displayString() {
         return Modifier.toString(this.code);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.displayString());
     }

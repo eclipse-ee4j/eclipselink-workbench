@@ -21,13 +21,9 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWTableDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWTransactionalProjectCachingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWTransactionalProjectDefaultsPolicy;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.sessions.Project;
 
@@ -76,6 +72,7 @@ public final class MWRelationalProjectDefaultsPolicy extends MWTransactionalProj
         this.queriesBindAllParameters = true;
     }
 
+    @Override
     protected void initializePolicyDescriptors()
     {
         super.initializePolicyDescriptors();
@@ -107,6 +104,7 @@ public final class MWRelationalProjectDefaultsPolicy extends MWTransactionalProj
         firePropertyChanged(QUERIES_CACHE_ALL_STATEMENTS_PROPERTY, oldValue, this.queriesCacheAllStatements);
     }
 
+    @Override
     protected void adjustRuntimeProject(Project project)
     {
         project.getLogin().setShouldBindAllParameters(
@@ -117,6 +115,7 @@ public final class MWRelationalProjectDefaultsPolicy extends MWTransactionalProj
 
     private class MultiTableInfoPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (((MWRelationalClassDescriptor) descriptor).supportsMultitablePolicy()) {
                 ((MWTableDescriptor) descriptor).addMultiTableInfoPolicy();
@@ -126,6 +125,7 @@ public final class MWRelationalProjectDefaultsPolicy extends MWTransactionalProj
 
     private class InterfaceAliasPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (((MWRelationalClassDescriptor) descriptor).supportsInterfaceAliasPolicy()) {
                 ((MWTableDescriptor) descriptor).addInterfaceAliasPolicy();
@@ -133,6 +133,7 @@ public final class MWRelationalProjectDefaultsPolicy extends MWTransactionalProj
         }
     }
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkCacheAllStatementsAndBindAllParameters(currentProblems);

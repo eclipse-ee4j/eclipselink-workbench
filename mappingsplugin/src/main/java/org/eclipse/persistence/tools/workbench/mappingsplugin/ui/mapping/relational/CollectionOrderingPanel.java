@@ -69,6 +69,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
         return (MWCollectionMapping) getSubjectHolder().getValue();
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -118,6 +119,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
 
     private UpDownAdapter buildTablePanelAdapter() {
         return new UpDownAdapter() {
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 Object[] selectedValues = listSelectionModel.getSelectedValues();
                 for (int i = 0; i < selectedValues.length; i++) {
@@ -125,6 +127,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
                 }
             }
 
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 if (getCollectionMapping().getReferenceDescriptor() != null) {
                     Collection queryKeys = getCollectionMapping().getReferenceDescriptor().getAllQueryKeysIncludingInherited();
@@ -141,12 +144,14 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
 
             }
 
+            @Override
             public void moveItemsDown(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     getCollectionMapping().moveOrderingDown((MWCollectionOrdering) items[i]);
                 }
             }
 
+            @Override
             public void moveItemsUp(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     getCollectionMapping().moveOrderingUp((MWCollectionOrdering) items[i]);
@@ -158,10 +163,12 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
 
     private ListValueModel buildOrderingsListModel() {
         return new ListAspectAdapter(getSubjectHolder(), MWCollectionMapping.ORDERINGS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWCollectionMapping) this.subject).orderings();
             }
 
+            @Override
             protected int sizeFromSubject() {
                 return ((MWCollectionMapping) this.subject).orderingsSize();
             }
@@ -192,6 +199,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
 
     private NodeSelector buildOrderingSelector() {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 RelationalProjectNode projectNode = (RelationalProjectNode) navigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectQueryKey(((MWCollectionOrdering) item).getQueryKey(), getWorkbenchContext());
@@ -221,9 +229,11 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
 
         private PropertyValueModel buildQueryKeyAdapter(MWCollectionOrdering ordering) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWCollectionOrdering.QUERY_KEY_PROPERTY, ordering) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWCollectionOrdering) this.subject).getQueryKey();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWCollectionOrdering) this.subject).setQueryKey((MWQueryKey) value);
                 }
@@ -234,14 +244,17 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
         private PropertyValueModel buildOrderAdapter(MWCollectionOrdering ordering) {
             return new TransformationPropertyValueModel(
                     new PropertyAspectAdapter(MWCollectionOrdering.ASCENDING_PROPERTY, ordering) {
+                        @Override
                         protected Object getValueFromSubject() {
                             return Boolean.valueOf(((MWCollectionOrdering) this.subject).isAscending());
                         }
+                        @Override
                         protected void setValueOnSubject(Object value) {
                             ((MWCollectionOrdering) this.subject).setAscending(((Boolean) value).booleanValue());
                         }
                     },
                     new BidiTransformer() {
+                        @Override
                         public Object reverseTransform(Object o) {
 
                             if (o == null) {
@@ -253,6 +266,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
                             return Boolean.FALSE;
                         }
 
+                        @Override
                         public Object transform(Object o) {
                             if (((Boolean) o).equals(Boolean.TRUE)) {
                                 return OrderingsColumnAdapter.this.resourceRepository.getString("ASCENDING_OPTION");
@@ -262,6 +276,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
                     });
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWCollectionOrdering ordering = (MWCollectionOrdering) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -272,6 +287,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
             return result;
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case QUERY_KEY_COLUMN:      return Object.class;
@@ -280,14 +296,17 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
             }
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return true;
         }
@@ -295,6 +314,7 @@ final class CollectionOrderingPanel extends AbstractSubjectPanel
 
     private CachingComboBoxModel buildQueryKeyComboBoxModel() {
         return new IndirectComboBoxModel(new SimplePropertyValueModel(), this.getSubjectHolder()) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return CollectionOrderingPanel.this.orderedQueryKeyChoices((MWCollectionMapping) subject);
             }

@@ -32,11 +32,13 @@ public class SCSessionCreationDialogUITest extends SCDialogUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
 
         return "Session Creation Dialog Test";
     }
 
+    @Override
     protected Component buildTestingPanel() {
 
         JPanel testPanel = new JPanel( new GridLayout( 1, 0));
@@ -79,6 +81,7 @@ public class SCSessionCreationDialogUITest extends SCDialogUITest {
         this.openWindow();
     }
 
+    @Override
     protected void setUp() {
         super.setUp();
 

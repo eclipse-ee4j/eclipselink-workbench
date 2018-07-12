@@ -42,6 +42,7 @@ public class RedirectedPreferencesApplicationContext extends ApplicationContextW
     /**
      * @see ApplicationContextWrapper#getPreferences()
      */
+    @Override
     public Preferences getPreferences() {
         return this.delegatePreferences().node(this.path);
     }

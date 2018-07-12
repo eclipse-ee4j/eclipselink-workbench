@@ -51,12 +51,14 @@ public class JavaTypeDeclarationTests extends TestCase {
         super(name);
     }
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.repository = TestDatabasePlatformRepositoryFactory.instance().createRepository().getJDBCTypeRepository();
         this.jdbcType = this.repository.jdbcTypeForCode(Types.VARCHAR);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

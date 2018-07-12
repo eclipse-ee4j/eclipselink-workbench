@@ -54,6 +54,7 @@ public abstract class PreferencesContextWrapper
     /**
      * @see ApplicationContext#getApplication()
      */
+    @Override
     public Application getApplication() {
         return this.delegate.getApplication();
     }
@@ -61,6 +62,7 @@ public abstract class PreferencesContextWrapper
     /**
      * @see ApplicationContext#getPreferences()
      */
+    @Override
     public Preferences getPreferences() {
         return this.delegate.getPreferences();
     }
@@ -68,6 +70,7 @@ public abstract class PreferencesContextWrapper
     /**
      * @see ApplicationContext#getResourceRepository()
      */
+    @Override
     public ResourceRepository getResourceRepository() {
         return this.delegate.getResourceRepository();
     }
@@ -75,6 +78,7 @@ public abstract class PreferencesContextWrapper
     /**
      * @see ApplicationContext#getNodeManager()
      */
+    @Override
     public NodeManager getNodeManager() {
         return this.delegate.getNodeManager();
     }
@@ -82,6 +86,7 @@ public abstract class PreferencesContextWrapper
     /**
      * @see ApplicationContext#getHelpManager()
      */
+    @Override
     public HelpManager getHelpManager() {
         return this.delegate.getHelpManager();
     }
@@ -92,6 +97,7 @@ public abstract class PreferencesContextWrapper
     /**
      * @see PreferencesContext#getBufferTrigger()
      */
+    @Override
     public ValueModel getBufferTrigger() {
         return this.delegate.getBufferTrigger();
     }

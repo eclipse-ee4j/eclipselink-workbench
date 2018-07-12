@@ -62,6 +62,7 @@ public class PreferencesCollectionValueModelTests extends PreferencesTestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.expectedValues = new HashMap();
@@ -79,12 +80,15 @@ public class PreferencesCollectionValueModelTests extends PreferencesTestCase {
 
     private CollectionChangeListener buildCollectionChangeListener() {
         return new CollectionChangeListener() {
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 this.logEvent(e);
             }
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 this.logEvent(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 this.logEvent(e);
             }
@@ -99,6 +103,7 @@ public class PreferencesCollectionValueModelTests extends PreferencesTestCase {
 
     private PropertyChangeListener buildItemListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 throw new IllegalStateException("unexpected this.event: " + e);
             }
@@ -215,9 +220,11 @@ public class PreferencesCollectionValueModelTests extends PreferencesTestCase {
 
     private NodeChangeListener buildParentNodeChangeListener() {
         return new NodeChangeListener() {
+            @Override
             public void childAdded(NodeChangeEvent e) {
                 throw new IllegalStateException("unexpected this.event: " + e);
             }
+            @Override
             public void childRemoved(NodeChangeEvent e) {
                 if (e.getChild() == PreferencesCollectionValueModelTests.this.testNode) {
                     PreferencesCollectionValueModelTests.this.preferencesAdapter.removeCollectionChangeListener(ValueModel.VALUE, PreferencesCollectionValueModelTests.this.listener);

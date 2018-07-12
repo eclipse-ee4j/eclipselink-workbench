@@ -56,6 +56,7 @@ public final class DatabasePlatformNode
         super(platform, parent, plugin, context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.childrenModel = this.buildChildrenModel();
@@ -73,6 +74,7 @@ public final class DatabasePlatformNode
     // transform the platform's collection of database types into nodes
     private ListValueModel buildDatabaseTypeNodeAdapter() {
         return new TransformationListValueModelAdapter(this.buildDatabaseTypesAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return DatabasePlatformNode.this.buildDatabaseTypeNode((DatabaseType) item);
             }
@@ -86,9 +88,11 @@ public final class DatabasePlatformNode
     // convert the platform's collection of database types to a CollectionValueModel
     private CollectionValueModel buildDatabaseTypesAdapter() {
         return new CollectionAspectAdapter(this, DatabasePlatform.DATABASE_TYPES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).databaseTypes();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabasePlatform) this.subject).databaseTypesSize();
             }
@@ -98,14 +102,17 @@ public final class DatabasePlatformNode
 
     // ********** PlatformsApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DatabasePlatformTabbedPropertiesPage.class;
     }
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
         return new DatabasePlatformTabbedPropertiesPage(context);
     }
 
+    @Override
     public String helpTopicID() {
         return "database.platform";
     }
@@ -113,14 +120,17 @@ public final class DatabasePlatformNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return DATABASE_PLATFORM_DISPLAY_STRING_PROPERTY_NAMES;
     }
 
+    @Override
     protected String buildIconKey() {
         return "DATABASE_PLATFORM";
     }
@@ -128,6 +138,7 @@ public final class DatabasePlatformNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
 
@@ -147,6 +158,7 @@ public final class DatabasePlatformNode
         return menu;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
 

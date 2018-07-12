@@ -47,11 +47,13 @@ public class RdbmsPoolLoginPropertiesPageTest extends AbstractPoolPanelTest
         runTestCase(new RdbmsLoginPaneTest(this, getNodeHolder(), (DatabaseLoginAdapter) pool.getLogin()));
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(RdbmsPoolLoginPropertiesPage.class, getNodeHolder());
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Connection Pool Login Tab Test";

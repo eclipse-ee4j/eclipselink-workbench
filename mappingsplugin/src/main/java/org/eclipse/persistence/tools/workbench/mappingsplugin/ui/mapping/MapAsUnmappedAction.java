@@ -31,6 +31,7 @@ public final class MapAsUnmappedAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.unmapped");
@@ -39,14 +40,17 @@ public final class MapAsUnmappedAction
         this.initializeToolTipText("MAP_AS_UNMAPPED_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         throw new UnsupportedOperationException("use morphNode(MappingNode) directly");
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         throw new UnsupportedOperationException("use morphNode(MappingNode) directly");
     }
 
+    @Override
     protected MappingNode morphNode(MappingNode mappingNode) {
         if (this.nodeIsMorphed(mappingNode)) {
             return mappingNode;
@@ -63,10 +67,12 @@ public final class MapAsUnmappedAction
         throw new IllegalStateException("mapping node not found: " + attribute);
     }
 
+    @Override
     protected boolean nodeIsMorphed(MappingNode mappingNode) {
         return ! mappingNode.isMapped();
     }
 
+    @Override
     protected Class mappingClass() {
         throw new UnsupportedOperationException();
     }

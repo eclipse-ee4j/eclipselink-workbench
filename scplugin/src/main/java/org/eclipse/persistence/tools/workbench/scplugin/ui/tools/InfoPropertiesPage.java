@@ -67,6 +67,7 @@ public class InfoPropertiesPage extends ScrollablePropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -77,9 +78,11 @@ public class InfoPropertiesPage extends ScrollablePropertiesPage
 
         // Message pane
         this.infoLabel = new LabelArea() {
+            @Override
             public boolean isFocusable() {
                 return true;
             }
+            @Override
             public boolean isRequestFocusEnabled() {
                 return true;
             }

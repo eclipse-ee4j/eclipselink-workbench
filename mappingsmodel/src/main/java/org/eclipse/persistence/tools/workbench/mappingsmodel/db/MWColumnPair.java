@@ -24,7 +24,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.No
 import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalForeignKeyColumnPair;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.tools.schemaframework.ForeignKeyConstraint;
@@ -63,6 +62,7 @@ public final class MWColumnPair extends MWModel {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.sourceColumnHandle = new MWColumnHandle(this, this.buildSourceColumnScrubber());
@@ -153,6 +153,7 @@ public final class MWColumnPair extends MWModel {
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if ((this.getSourceColumn() == null) || (this.getTargetColumn() == null)) {
@@ -163,6 +164,7 @@ public final class MWColumnPair extends MWModel {
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.sourceColumnHandle);
@@ -171,9 +173,11 @@ public final class MWColumnPair extends MWModel {
 
     private NodeReferenceScrubber buildSourceColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWColumnPair.this.setSourceColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWColumnPair.buildSourceColumnScrubber()";
             }
@@ -182,9 +186,11 @@ public final class MWColumnPair extends MWModel {
 
     private NodeReferenceScrubber buildTargetColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWColumnPair.this.setTargetColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWColumnPair.buildTargetColumnScrubber()";
             }
@@ -235,10 +241,12 @@ public final class MWColumnPair extends MWModel {
 
     // ********** displaying and printing **********
 
+    @Override
     public String displayString() {
         return this.getName();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         super.toString(sb);
         this.printColumnNameOn(this.getSourceColumn(), sb);

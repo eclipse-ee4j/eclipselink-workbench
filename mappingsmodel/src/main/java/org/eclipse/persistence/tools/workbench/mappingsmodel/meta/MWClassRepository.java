@@ -54,13 +54,8 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationI
 import org.eclipse.persistence.tools.workbench.utility.iterators.TreeIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeDirectCollectionMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
-import org.eclipse.persistence.sessions.Record;
-import org.eclipse.persistence.sessions.Session;
 
 /**
  * This is the factory and repository for all the class "descriptions"
@@ -201,6 +196,7 @@ public final class MWClassRepository
     /**
      * initialize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
     }
@@ -208,6 +204,7 @@ public final class MWClassRepository
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.types = new Hashtable();
@@ -426,9 +423,11 @@ public final class MWClassRepository
      */
     Iterator externalClassDescriptionsNamed(final String name) {
         return new FilteringIterator(this.externalClassDescriptions()) {
+            @Override
             public boolean accept(Object next) {
                 return ((ExternalClassDescription) next).getName().equals(name);
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.externalClassDescriptionsNamed(String)";
             }
@@ -483,10 +482,12 @@ public final class MWClassRepository
     private Iterator uniqueTypes(Iterator originalTypes) {
         return new FilteringIterator(originalTypes) {
             private Set usedNames = new HashSet(10000);    // this will be big...
+            @Override
             protected boolean accept(Object next) {
                 // @see java.util.Set#add(Object)
                 return this.usedNames.add(((ClassDescription) next).getName());
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.uniqueTypes(Iterator)";
             }
@@ -500,9 +501,11 @@ public final class MWClassRepository
      */
     private Iterator referenceTypes(Iterator originalTypes) {
         return new FilteringIterator(originalTypes) {
+            @Override
             protected boolean accept(Object next) {
                 return ! MWClass.nonReferenceClassNamesContains(((ClassDescription) next).getName());
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.referenceTypes(Iterator)";
             }
@@ -542,6 +545,7 @@ public final class MWClassRepository
      */
     private Iterator fullyQualifiedClasspathFiles() {
         return new TransformationIterator(this.classpathEntries()) {
+            @Override
             protected Object transform(Object next) {
                 File file = new File((String) next);
                 if ( ! file.isAbsolute()) {
@@ -549,6 +553,7 @@ public final class MWClassRepository
                 }
                 return file;
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.fullyQualifiedClasspathFiles()";
             }
@@ -560,9 +565,11 @@ public final class MWClassRepository
      */
     public Iterator fullyQualifiedClasspathEntries() {
         return new TransformationIterator(this.fullyQualifiedClasspathFiles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((File) next).getAbsolutePath();
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.fullyQualifiedClasspathEntries()";
             }
@@ -591,9 +598,11 @@ public final class MWClassRepository
      */
     public Iterator allSubclassesOf(MWClass type) {
         return new TreeIterator(type) {
+            @Override
             protected Iterator children(Object next) {
                 return ((MWClass) next).subclasses();
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.allSubclassesOf(MWClass)";
             }
@@ -734,10 +743,12 @@ public final class MWClassRepository
      */
     public Iterator primitiveTypes() {
         return new TransformationIterator(MWClass.primitiveClassNames()) {
+            @Override
             protected Object transform(Object next) {
                 // the primitives are always fully populated
                 return MWClassRepository.this.typeNamedInternal((String) next);
             }
+            @Override
             public String toString() {
                 return "MWClassRepository.primitiveTypes()";
             }
@@ -769,6 +780,7 @@ public final class MWClassRepository
     /**
      * containment hierarchy
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.types) { children.addAll(this.types.values()); }
@@ -958,6 +970,7 @@ public final class MWClassRepository
      * the repository's descendants have NO references (handles)
      * to any models other than other descendants of the repository
      */
+    @Override
     public void nodeRemoved(Node node) {
         if (node.isDescendantOf(this)) {
             super.nodeRemoved(node);
@@ -969,6 +982,7 @@ public final class MWClassRepository
      * the repository's descendants have NO references (handles)
      * to any models other than other descendants of the repository
      */
+    @Override
     public void nodeRenamed(Node node) {
         if (node.isDescendantOf(this)) {
             super.nodeRenamed(node);
@@ -980,6 +994,7 @@ public final class MWClassRepository
      * performance tuning: ignore this method - assume there are no
      * references to mappings in the class repository or its descendants
      */
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         // do nothing
     }
@@ -988,6 +1003,7 @@ public final class MWClassRepository
      * performance tuning: ignore this method - assume there are no
      * references to descriptors in the database or its descendants
      */
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         // do nothing
     }
@@ -996,6 +1012,7 @@ public final class MWClassRepository
      * performance tuning: ignore this method - assume there are no
      * references to mappings in the class repository or its descendants
      */
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         // do nothing
     }
@@ -1003,6 +1020,7 @@ public final class MWClassRepository
 
     // ********** displaying and printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.types.size());
         sb.append(" types/");
@@ -1013,22 +1031,27 @@ public final class MWClassRepository
 
     // ********** SubComponentContainer implementation **********
 
+    @Override
     public Iterator projectSubFileComponents() {
         return this.userTypes();
     }
 
+    @Override
     public void setProjectSubFileComponents(Collection subComponents) {
         this.setTypes(subComponents);
     }
 
+    @Override
     public Iterator originalProjectSubFileComponentNames() {
         return this.userTypeNames.iterator();
     }
 
+    @Override
     public void setOriginalProjectSubFileComponentNames(Collection originalSubComponentNames) {
         this.userTypeNames = originalSubComponentNames;
     }
 
+    @Override
     public boolean hasChangedMainProjectSaveFile() {
         if (this.isDirty()) {
             // the repository itself is dirty
@@ -1138,6 +1161,7 @@ public final class MWClassRepository
      * reset the "stub" interfaces because they are faulted in during
      * #postProjectBuild() as "normal" classes;
      */
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         this.configureImpliedStubInterfaces();

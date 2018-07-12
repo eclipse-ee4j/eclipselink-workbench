@@ -70,21 +70,25 @@ public class ConnectionCountPaneTest extends SCAbstractPanelTest
         testFocusTransferByMnemonic("CONNECTION_POOL_MAXIMUM_CONNECTIONS_SPINNER", COMPONENT_SPINNER);
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder(ApplicationNode projectNode)
     {
         return new SimplePropertyValueModel(poolNode);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     protected SCAdapter buildSelection()
     {
         return getConnectionPool();
     }
 
+    @Override
     protected void clearModel()
     {
     }
@@ -101,18 +105,22 @@ public class ConnectionCountPaneTest extends SCAbstractPanelTest
         session.setExternalConnectionPooling(false);
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected void restoreModel()
     {
     }
 
+    @Override
     protected String windowTitle()
     {
         return "ConnectionCountPane Test";

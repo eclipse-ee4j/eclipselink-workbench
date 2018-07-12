@@ -42,6 +42,7 @@ public class ArrayDiffTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.differentiator = OrderedContainerDifferentiator.forArrays();
@@ -59,6 +60,7 @@ public class ArrayDiffTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

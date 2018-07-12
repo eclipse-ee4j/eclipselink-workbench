@@ -62,6 +62,7 @@ public class SCClassRepository extends AbstractNodeModel
      * @param index The index of insertion
      * @param entries The entries to be added
      */
+    @Override
     public void addClasspathEntries(int index, List entries)
     {
         addItemsToList(index, entries, classpathEntries, CLASSPATH_ENTRIES_LIST);
@@ -74,6 +75,7 @@ public class SCClassRepository extends AbstractNodeModel
      * @param index The index of insertion
      * @param entry The entry to be added
      */
+    @Override
     public void addClasspathEntry(int index, String entry)
     {
         addItemToList(index, entry, classpathEntries, CLASSPATH_ENTRIES_LIST);
@@ -85,6 +87,7 @@ public class SCClassRepository extends AbstractNodeModel
      *
      * @return An iteration over the entries
      */
+    @Override
     public ListIterator classpathEntries()
     {
         return new ReadOnlyListIterator(classpathEntries);
@@ -95,6 +98,7 @@ public class SCClassRepository extends AbstractNodeModel
      *
      * @return The count of entries
      */
+    @Override
     public int classpathEntriesSize()
     {
         return classpathEntries.size();
@@ -105,6 +109,7 @@ public class SCClassRepository extends AbstractNodeModel
      *
      * @return Empty string
      */
+    @Override
     public String displayString()
     {
         return "";
@@ -142,6 +147,7 @@ public class SCClassRepository extends AbstractNodeModel
      * @param index The index of the entry to retrieve
      * @return The desired entry
      */
+    @Override
     public String getClasspathEntry(int index)
     {
         return (String) classpathEntries.get(index);
@@ -150,6 +156,7 @@ public class SCClassRepository extends AbstractNodeModel
     /**
      * Notifies this object it has been build.
      */
+    @Override
     protected void initialize()
     {
         super.initialize();
@@ -176,6 +183,7 @@ public class SCClassRepository extends AbstractNodeModel
      * @return An iteration of core classes and classes on the sessions.xml's
      * classpath
      */
+    @Override
     public Iterator classDescriptions()
     {
         return new CompositeIterator(coreClassNames(), types());
@@ -184,6 +192,7 @@ public class SCClassRepository extends AbstractNodeModel
     /**
      * Refreshes the collection of "meta-classes" in the repository.
      */
+    @Override
     public void refreshClassDescriptions()
     {
     }
@@ -194,6 +203,7 @@ public class SCClassRepository extends AbstractNodeModel
      * @param index The position of the entry to be removed
      * @return The entry that was removed
      */
+    @Override
     public String removeClasspathEntry(int index)
     {
         markEntireBranchDirty();
@@ -207,6 +217,7 @@ public class SCClassRepository extends AbstractNodeModel
      * @param newEntry The new entry to replace the old one
      * @return The old entry
      */
+    @Override
     public String replaceClasspathEntry(int index, String newEntry)
     {
         markEntireBranchDirty();
@@ -231,6 +242,7 @@ public class SCClassRepository extends AbstractNodeModel
      *
      * @param buffer The buffer used to add extra information
      */
+    @Override
     public void toString(StringBuffer buffer)
     {
         buffer.append("classpathEntries=");

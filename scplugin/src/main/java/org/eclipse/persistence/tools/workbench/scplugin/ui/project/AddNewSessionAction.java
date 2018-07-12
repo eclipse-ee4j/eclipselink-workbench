@@ -35,6 +35,7 @@ public class AddNewSessionAction extends AbstractFrameworkAction {
         this.selectNode = selectNode;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "ADD_SESSION");
@@ -44,6 +45,7 @@ public class AddNewSessionAction extends AbstractFrameworkAction {
         this.initializeToolTipText( "ADD_SESSION.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         TopLinkSessionsAdapter sessions = (TopLinkSessionsAdapter) selectedNode.getValue();
@@ -67,6 +69,7 @@ public class AddNewSessionAction extends AbstractFrameworkAction {
     /**
      * make this public???
      */
+    @Override
     public void execute() {
         super.execute();
     }

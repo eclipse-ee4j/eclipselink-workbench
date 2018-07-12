@@ -73,6 +73,7 @@ final class RunnableProjectLoader implements Runnable {
      * launch the dialog, open the project file, add the node to the node
      * manager, and shut down the dialog
      */
+    @Override
     public void run() {
         try {
             this.run2();
@@ -111,6 +112,7 @@ final class RunnableProjectLoader implements Runnable {
 
     private Runnable buildDialogLauncher(final Dialog d) {
         return new Runnable() {
+            @Override
             public void run() {
                 d.show();
             }
@@ -149,6 +151,7 @@ final class RunnableProjectLoader implements Runnable {
             this.context = context;
         }
 
+        @Override
         public void run() {
             if ( ! EventQueue.isDispatchThread()) {
                 throw new IllegalStateException("this method must be executed in the AWT event dispatcher thread");

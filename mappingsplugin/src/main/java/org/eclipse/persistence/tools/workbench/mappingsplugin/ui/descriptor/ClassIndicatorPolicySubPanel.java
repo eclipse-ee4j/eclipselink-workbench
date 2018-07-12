@@ -82,11 +82,13 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
 
     protected abstract void initializeLayout(Collection isRootListeners);
 
+    @Override
     public void updateRootStatus(boolean newValue) {
         this.isRoot = newValue;
         this.updateEnablementStatus();
     }
 
+    @Override
     public void updateIndicatorFieldStatus(boolean newValue) {
         this.isIndicatorField = newValue;
         this.updateEnablementStatus();
@@ -95,6 +97,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
     protected void addExtractionMethodListener(final ExtractionMethodListener listener) {
         getPolicyTypeModel().addPropertyChangeListener(
             new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     boolean enabled = evt.getNewValue() == MWClassIndicatorPolicy.CLASS_EXTRACTION_METHOD_TYPE;
                     listener.updateExtractionMethodStatus(enabled);
@@ -107,6 +110,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
     protected void addIndicatorFieldListener(final IndicatorFieldListener listener) {
         getPolicyTypeModel().addPropertyChangeListener(
             new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     boolean enabled = evt.getNewValue() == MWClassIndicatorPolicy.CLASS_INDICATOR_FIELD_TYPE;
                     listener.updateIndicatorFieldStatus(enabled);
@@ -119,6 +123,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
     protected void addIndicatorDictionaryListener(final IndicatorDictionaryListener listener) {
         getUseNameModel().addPropertyChangeListener(
             new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     boolean enabled = evt.getNewValue() == Boolean.FALSE;
                     listener.updateIndicatorDictionaryStatus(enabled);
@@ -137,6 +142,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
 
     protected PropertyValueModel buildClassIndicatorPolicyHolder() {
         return new PropertyAspectAdapter(inheritancePolicyHolder, MWDescriptorInheritancePolicy.CLASS_INDICATOR_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject(){
                 return ((MWDescriptorInheritancePolicy)this.subject).getClassIndicatorPolicy();
             }
@@ -145,6 +151,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
 
     private PropertyValueModel buildClassIndicatorPolicyTypeAdapter() {
         return new PropertyAspectAdapter(inheritancePolicyHolder, MWDescriptorInheritancePolicy.CLASS_INDICATOR_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWDescriptorInheritancePolicy) this.subject).getClassIndicatorPolicy() == null) {
                     return null;
@@ -152,6 +159,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
                 return ((MWDescriptorInheritancePolicy) this.subject).getClassIndicatorPolicy().getType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 if ((String) value == MWClassIndicatorPolicy.CLASS_EXTRACTION_METHOD_TYPE) {
                     ((MWDescriptorInheritancePolicy) this.subject).useClassExtractionMethodIndicatorPolicy();
@@ -165,9 +173,11 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
 
     private PropertyValueModel buildUseClassNameAsIndicatorHolder() {
         return new PropertyAspectAdapter(getClassIndicatorFieldPolicyHolder(), MWClassIndicatorFieldPolicy.CLASS_NAME_IS_INDICATOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWClassIndicatorFieldPolicy) subject).classNameIsIndicator());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassIndicatorFieldPolicy) subject).setClassNameIsIndicator(((Boolean)value).booleanValue());
             }
@@ -231,6 +241,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
 
     private PropertyValueModel buildClassExtractionMethodIndirectionPolicyHolder() {
         return new FilteringPropertyValueModel(this.classIndicatorPolicyHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWClassIndicatorExtractionMethodPolicy;
             }
@@ -239,6 +250,7 @@ public abstract class ClassIndicatorPolicySubPanel extends AbstractPanel impleme
 
     private PropertyValueModel buildClassIndicatorFieldPolicyHolder() {
         return new FilteringPropertyValueModel(this.classIndicatorPolicyHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWClassIndicatorFieldPolicy;
             }

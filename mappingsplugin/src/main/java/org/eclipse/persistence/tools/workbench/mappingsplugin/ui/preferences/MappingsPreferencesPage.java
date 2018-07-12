@@ -53,10 +53,12 @@ final class MappingsPreferencesPage extends AbstractPanel
 
     private void applyConverter(PreferencePropertyValueModel adapter) {
         adapter.setConverter(new BidiStringConverter() {
+            @Override
             public Object convertToObject(String value) {
                 return convertToString(value);
             }
 
+            @Override
             public String convertToString(Object value) {
                 if (YES_OPTION.equals(value)) {
                     return YES_OPTION;

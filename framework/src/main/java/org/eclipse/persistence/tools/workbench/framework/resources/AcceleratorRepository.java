@@ -39,15 +39,18 @@ public interface AcceleratorRepository {
      */
     AcceleratorRepository NULL_INSTANCE =
         new AcceleratorRepository() {
+            @Override
             public boolean hasAccelerator(String key) {
                 return key == null;
             }
+            @Override
             public KeyStroke getAccelerator(String key) {
                 if (key == null) {
                     return null;
                 }
                 throw new MissingAcceleratorException("Missing accelerator: " + key, key);
             }
+            @Override
             public String toString() {
                 return "NullAcceleratorRepository";
             }

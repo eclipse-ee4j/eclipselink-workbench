@@ -114,11 +114,13 @@ public class RdbmsOptionsPropertiesPageTest extends AbstractSessionPanelTest
         testFocusTransferByMnemonic("LOGIN_TRIM_STRING_CHECK_BOX", COMPONENT_CHECK_BOX);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage("org.eclipse.persistence.tools.workbench.scplugin.ui.session.login.RdbmsOptionsPropertiesPage", getNodeHolder());
     }
 
+    @Override
     protected boolean canContinueTestingDuplicateMnemonic()
     {
         if (index == 0)
@@ -130,14 +132,17 @@ public class RdbmsOptionsPropertiesPageTest extends AbstractSessionPanelTest
         return index++ == 0;
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Testing Login Options Page";

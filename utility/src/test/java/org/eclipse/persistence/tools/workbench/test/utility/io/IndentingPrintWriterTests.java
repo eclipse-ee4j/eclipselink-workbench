@@ -40,6 +40,7 @@ public class IndentingPrintWriterTests extends TestCase {
         super(name);
     }
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.sw1 = new StringWriter();
@@ -48,6 +49,7 @@ public class IndentingPrintWriterTests extends TestCase {
         this.ipw2 = new IndentingPrintWriter(this.sw2, "    ");    // indent with 4 spaces instead of a tab
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

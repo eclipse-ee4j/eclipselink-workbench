@@ -31,6 +31,7 @@ final class DeleteDatabaseTypeAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("DELETE_DATABASE_TYPE");
         // no accelerator
@@ -38,6 +39,7 @@ final class DeleteDatabaseTypeAction extends AbstractFrameworkAction {
         this.initializeToolTipText("DELETE_DATABASE_TYPE.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         int response = JOptionPane.showConfirmDialog(
                         this.currentWindow(),
@@ -50,6 +52,7 @@ final class DeleteDatabaseTypeAction extends AbstractFrameworkAction {
         }
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         DatabaseType databaseType = ((DatabaseTypeNode) selectedNode).getDatabaseType();
         databaseType.getPlatform().removeDatabaseType(databaseType);

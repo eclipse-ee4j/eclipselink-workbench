@@ -36,25 +36,30 @@ public class ShellWorkbenchContext extends AbstractWorkbenchContext {
         this.applicationContext = applicationContext;
     }
 
+    @Override
     public ApplicationContext getApplicationContext() {
         return this.applicationContext;
     }
 
+    @Override
     public ActionRepository getActionRepository() {
         throw new UnsupportedOperationException("This WorkbenchContext holds only an ApplicationContext." + CR +
                 "It does not have access to an action repository.");
     }
 
+    @Override
     public Window getCurrentWindow() {
         throw new UnsupportedOperationException("This WorkbenchContext holds only an ApplicationContext." + CR +
                 "It does not have access to a current window.");
     }
 
+    @Override
     public NavigatorSelectionModel getNavigatorSelectionModel() {
         throw new UnsupportedOperationException("This WorkbenchContext holds only an ApplicationContext." + CR +
                 "It does not have access to a navigator.");
     }
 
+    @Override
     public Component getPropertiesPage() {
         throw new UnsupportedOperationException("This WorkbenchContext holds only an ApplicationContext." + CR +
         "It does not have access to a properties page.");

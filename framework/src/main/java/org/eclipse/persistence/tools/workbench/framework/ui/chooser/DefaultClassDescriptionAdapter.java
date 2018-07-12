@@ -45,6 +45,7 @@ public class DefaultClassDescriptionAdapter
      * is simply the fully-qualified class name.
      * @see ClassDescriptionAdapter#className(Object)
      */
+    @Override
     public String className(Object classDescription) {
         return (String) classDescription;
     }
@@ -52,6 +53,7 @@ public class DefaultClassDescriptionAdapter
     /**
      * @see ClassDescriptionAdapter#packageName(Object)
      */
+    @Override
     public String packageName(Object classDescription) {
         return ClassTools.packageNameForClassNamed(this.className(classDescription));
     }
@@ -59,6 +61,7 @@ public class DefaultClassDescriptionAdapter
     /**
      * @see ClassDescriptionAdapter#shortClassName(Object)
      */
+    @Override
     public String shortClassName(Object classDescription) {
         return ClassTools.shortNameForClassNamed(this.className(classDescription));
     }
@@ -66,6 +69,7 @@ public class DefaultClassDescriptionAdapter
     /**
      * @see ClassDescriptionAdapter#additionalInfo(Object)
      */
+    @Override
     public String additionalInfo(Object classDescription) {
         return null;
     }

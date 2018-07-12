@@ -42,6 +42,7 @@ public class ValueStatePropertyValueModelAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.valueStateListener = this.buildValueStateListener();
@@ -49,9 +50,11 @@ public class ValueStatePropertyValueModelAdapter
 
     protected StateChangeListener buildValueStateListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 ValueStatePropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public String toString() {
                 return "value state listener";
             }
@@ -61,10 +64,12 @@ public class ValueStatePropertyValueModelAdapter
 
     // ********** behavior **********
 
+    @Override
     protected void startListeningToValue() {
         ((Model) this.value).addStateChangeListener(this.valueStateListener);
     }
 
+    @Override
     protected void stopListeningToValue() {
         ((Model) this.value).removeStateChangeListener(this.valueStateListener);
     }

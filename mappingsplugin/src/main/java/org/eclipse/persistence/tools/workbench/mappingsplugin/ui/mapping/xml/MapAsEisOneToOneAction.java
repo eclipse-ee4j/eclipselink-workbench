@@ -29,6 +29,7 @@ final class MapAsEisOneToOneAction extends ChangeMappingTypeAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeIcon("mapping.eisOneToOne");
@@ -38,14 +39,17 @@ final class MapAsEisOneToOneAction extends ChangeMappingTypeAction
     }
 
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWEisOneToOneMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWEisDescriptor) descriptor).addEisOneToOneMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWEisOneToOneMapping.class;
     }

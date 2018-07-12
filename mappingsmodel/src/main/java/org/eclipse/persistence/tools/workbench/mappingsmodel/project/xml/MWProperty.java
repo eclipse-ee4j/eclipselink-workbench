@@ -58,6 +58,7 @@ public class MWProperty extends MWModel {
         this.firePropertyChanged(VALUE_PROPERTY, old, value);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.key);
         sb.append("=");

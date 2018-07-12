@@ -30,10 +30,12 @@ final class GenerateDescriptorsFromSelectedTablesAction extends AbstractFramewor
         super(context);
     }
 
+    @Override
     protected void initialize() {
         initializeTextAndMnemonic("SELECTED_TABLES");
     }
 
+    @Override
     protected void execute() {
         RelationalProjectNode projectNode = (RelationalProjectNode) selectedNodes()[0].getProjectRoot();
         DescriptorGenerationCoordinator coordinator = new DescriptorGenerationCoordinator(getWorkbenchContext());
@@ -42,6 +44,7 @@ final class GenerateDescriptorsFromSelectedTablesAction extends AbstractFramewor
 
     private Iterator tables(Iterator selectedTableNodes) {
         return new TransformationIterator(selectedTableNodes) {
+            @Override
             protected Object transform(Object next) {
                 return ((TableNode) next).getTable();
             }

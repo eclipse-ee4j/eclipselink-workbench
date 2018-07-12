@@ -204,6 +204,7 @@ public class FileChooserPanel
 
     private ActionListener buildFileActionListener(final int fileSelectionMode) {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 FileChooserPanel.this.promptForFile(fileSelectionMode);
             }
@@ -213,6 +214,7 @@ public class FileChooserPanel
 
     // ********** public API **********
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         Component[] components = this.getComponents();
@@ -221,6 +223,7 @@ public class FileChooserPanel
         }
     }
 
+    @Override
     public void requestFocus() {
         this.getComponent(1).requestFocus(); // 1 for the text field
     }
@@ -314,9 +317,11 @@ public class FileChooserPanel
 
     public class SimpleFileHolder implements FileHolder {
         private File file;
+        @Override
         public File getFile() {
             return this.file;
         }
+        @Override
         public void setFile(File file) {
             this.file = file;
         }

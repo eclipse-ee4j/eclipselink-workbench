@@ -62,11 +62,13 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCacheExpiry.CACHE_EXPIRY_TYPE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWCacheExpiry) this.subject).getExpiryType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCacheExpiry) this.subject).setExpiryType((String) value);
@@ -78,6 +80,7 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(buildCacheExpiryTypHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -94,11 +97,13 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCacheExpiry.DAILY_EXPIRY_TIME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWCacheExpiry) this.subject).getDailyExpiryTime();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCacheExpiry) this.subject).setDailyExpiryTime((Date) value);
@@ -143,6 +148,7 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(buildCacheExpiryTypHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -159,11 +165,13 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCacheExpiry.TIME_TO_LIVE_EXPIRY_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWCacheExpiry) this.subject).getTimeToLiveExpiry();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCacheExpiry) this.subject).setTimeToLiveExpiry((Long) value);
@@ -204,6 +212,7 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(buildCacheExpiryTypHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -221,11 +230,13 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCacheExpiry.UPDATE_READ_TIME_ON_UPDATE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return Boolean.valueOf(((MWCacheExpiry) this.subject).getUpdateReadTimeOnUpdate());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCacheExpiry) this.subject).setUpdateReadTimeOnUpdate(((Boolean) value).booleanValue());
@@ -233,6 +244,7 @@ final class ProjectCacheExpiryPanel extends AbstractSubjectPanel
         };
     }
 
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();

@@ -52,6 +52,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.tree.TreeCellEditor#getTreeCellEditorComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int)
      */
+    @Override
     public Component getTreeCellEditorComponent(JTree tree, Object value, boolean isSelected, boolean expanded, boolean leaf, int row) {
         throw new UnsupportedOperationException();
     }
@@ -59,6 +60,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#cancelCellEditing()
      */
+    @Override
     public void cancelCellEditing() {
         // do nothing
     }
@@ -66,6 +68,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#stopCellEditing()
      */
+    @Override
     public boolean stopCellEditing() {
         return false;
     }
@@ -73,6 +76,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#getCellEditorValue()
      */
+    @Override
     public Object getCellEditorValue() {
         return null;
     }
@@ -80,6 +84,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#isCellEditable(java.util.EventObject)
      */
+    @Override
     public boolean isCellEditable(EventObject anEvent) {
         return false;
     }
@@ -87,6 +92,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#shouldSelectCell(java.util.EventObject)
      */
+    @Override
     public boolean shouldSelectCell(EventObject anEvent) {
         return false;
     }
@@ -94,6 +100,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#addCellEditorListener(javax.swing.event.CellEditorListener)
      */
+    @Override
     public void addCellEditorListener(CellEditorListener l) {
         // we don't fire any events, so ignore any listeners
     }
@@ -101,6 +108,7 @@ public final class NullTreeCellEditor implements TreeCellEditor {
     /**
      * @see javax.swing.CellEditor#removeCellEditorListener(javax.swing.event.CellEditorListener)
      */
+    @Override
     public void removeCellEditorListener(CellEditorListener l) {
         // we don't fire any events, so ignore any listeners
     }

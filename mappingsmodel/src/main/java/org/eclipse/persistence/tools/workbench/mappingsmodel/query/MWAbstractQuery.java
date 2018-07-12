@@ -113,6 +113,7 @@ public abstract class MWAbstractQuery
             super(mwModelString, externalString, new Short(topLinkModelOption));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object query) {
             ((ObjectLevelReadQuery) query).setLockMode(((Short) getTopLinkModelOption()).shortValue());
         }
@@ -137,6 +138,7 @@ public abstract class MWAbstractQuery
             super(mwModelString, externalString, new Short(topLinkModelOption));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object query) {
             ((ObjectLevelReadQuery) query).setDistinctState(((Short) getTopLinkModelOption()).shortValue());
         }
@@ -324,6 +326,7 @@ public abstract class MWAbstractQuery
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) { //private-protected
         super.initialize(parent);
         this.parameters = new Vector();
@@ -344,6 +347,7 @@ public abstract class MWAbstractQuery
         this.name = name;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.parameters) { children.addAll(this.parameters); }
@@ -353,10 +357,12 @@ public abstract class MWAbstractQuery
 
     // ************* MWQuery Implementation ************
 
+    @Override
     public MWMappingDescriptor getOwningDescriptor() {
         return ((MWQueryManager) getParent()).getOwningDescriptor();
     }
 
+    @Override
     public String signature() {
         StringBuffer sb = new StringBuffer(100);
         sb.append(this.getName());
@@ -375,6 +381,7 @@ public abstract class MWAbstractQuery
      * if the query's signature has changed the query
      * has effectively been "renamed"
      */
+    @Override
     public void signatureChanged() {
         this.getProject().nodeRenamed(this);
         firePropertyChanged(MWQuery.SIGNATURE_PROPERTY, this.signature());
@@ -383,6 +390,7 @@ public abstract class MWAbstractQuery
 
     // ************* Morphing ************
 
+    @Override
     public Iterator queryTypes() {
         List list = new ArrayList();
         list.add(READ_ALL_QUERY);
@@ -391,6 +399,7 @@ public abstract class MWAbstractQuery
         return list.iterator();
     }
 
+    @Override
     public MWReadAllQuery asReadAllQuery() {
         getQueryManager().removeQuery(this);
         MWReadAllQuery newQuery = getQueryManager().addReadAllQuery(getName());
@@ -398,6 +407,7 @@ public abstract class MWAbstractQuery
         return newQuery;
     }
 
+    @Override
     public MWReadObjectQuery asReadObjectQuery() {
         getQueryManager().removeQuery(this);
         MWReadObjectQuery newQuery = getQueryManager().addReadObjectQuery(getName());
@@ -449,10 +459,12 @@ public abstract class MWAbstractQuery
 
     // ************ name ***********
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public void setName(String name) {
         Object old = this.name;
         this.name = name;
@@ -464,6 +476,7 @@ public abstract class MWAbstractQuery
 
     // ********** parameters **********
 
+    @Override
     public MWQueryParameter addParameter(MWClass type) {
         return addParameter(type, NameTools.uniqueNameFor(PARAMETER_NAME_PREFIX, parameterNames()));
     }
@@ -484,6 +497,7 @@ public abstract class MWAbstractQuery
         fireItemAdded(PARAMETERS_LIST, index,  parameter);
     }
 
+    @Override
     public void removeParameter(MWQueryParameter parameter) {
         this.removeNodeFromList(this.parameters.indexOf(parameter), this.parameters, PARAMETERS_LIST);
         signatureChanged();
@@ -500,22 +514,27 @@ public abstract class MWAbstractQuery
     }
 
 
+    @Override
     public ListIterator parameters() {
         return new CloneListIterator(this.parameters);
     }
 
+    @Override
     public int parametersSize() {
         return this.parameters.size();
     }
 
+    @Override
     public int getParameterIndex(MWQueryParameter parameter) {
         return this.parameters.indexOf(parameter);
     }
 
+    @Override
     public MWQueryParameter getParameter(int index) {
         return (MWQueryParameter) this.parameters.get(index);
     }
 
+    @Override
     public MWQueryParameter getParameterNamed(String name) {
         Iterator parameterIterator = this.parameters.iterator();
         while (parameterIterator.hasNext()) {
@@ -526,8 +545,10 @@ public abstract class MWAbstractQuery
         return null;
     }
 
+    @Override
     public Iterator parameterNames() {
         return new TransformationListIterator(parameters()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWQueryParameter) next).getName();
             }
@@ -549,10 +570,12 @@ public abstract class MWAbstractQuery
 
     // ********** maximum rows **********
 
+    @Override
     public int getMaximumRows() {
         return this.maximumRows;
     }
 
+    @Override
     public void setMaximumRows(int maximumRows) {
         int old = this.maximumRows;
         this.maximumRows = maximumRows;
@@ -561,10 +584,12 @@ public abstract class MWAbstractQuery
 
     // ********** first result **********
 
+    @Override
     public int getFirstResult() {
         return this.firstResult;
     }
 
+    @Override
     public void setFirstResult(int firstResult) {
         int old = this.firstResult;
         this.firstResult = firstResult;
@@ -573,10 +598,12 @@ public abstract class MWAbstractQuery
 
     // ********** query timeout **********
 
+    @Override
     public Integer getQueryTimeout() {
         return this.queryTimeout;
     }
 
+    @Override
     public void setQueryTimeout(Integer queryTimeout) {
         Integer oldQueryTimeout = getQueryTimeout();
         this.queryTimeout = queryTimeout;
@@ -585,10 +612,12 @@ public abstract class MWAbstractQuery
 
     // ********** exclusive connection **********
 
+    @Override
     public boolean isExclusiveConnection() {
         return this.exclusiveConnection;
     }
 
+    @Override
     public void setExclusiveConnection(boolean exclusiveConnection) {
         boolean old = this.exclusiveConnection;
         this.exclusiveConnection = exclusiveConnection;
@@ -597,10 +626,12 @@ public abstract class MWAbstractQuery
 
     // ********** cache query results **********
 
+    @Override
     public boolean isCacheQueryResults() {
         return this.cacheQueryResults;
     }
 
+    @Override
     public void setCacheQueryResults(boolean cacheQueryResults) {
         boolean old = isCacheQueryResults();
         this.cacheQueryResults = cacheQueryResults;
@@ -609,10 +640,12 @@ public abstract class MWAbstractQuery
 
     // ********** outer join all subclasses **********
 
+    @Override
     public boolean isOuterJoinAllSubclasses() {
         return this.outerJoinAllSubclasses;
     }
 
+    @Override
     public void setOuterJoinAllSubclasses(boolean outerJoinAllSubclasses) {
         boolean old = isOuterJoinAllSubclasses();
         this.outerJoinAllSubclasses = outerJoinAllSubclasses;
@@ -621,10 +654,12 @@ public abstract class MWAbstractQuery
 
     // ************* distinct state ***********
 
+    @Override
     public DistinctStateModel getDistinctState() {
         return this.distinctState;
     }
 
+    @Override
     public void setDistinctState(DistinctStateModel model) {
         Object old = this.distinctState;
         this.distinctState = model;
@@ -652,10 +687,12 @@ public abstract class MWAbstractQuery
 
     // ************* locking ***********
 
+    @Override
     public LockingModel getLocking() {
         return this.lockMode;
     }
 
+    @Override
     public void setLocking(LockingModel model) {
         LockingModel oldLocking = this.lockMode;
         this.lockMode = model;
@@ -686,10 +723,12 @@ public abstract class MWAbstractQuery
 
     // ************ displaying ************
 
+    @Override
     public String displayString() {
         return this.signature();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(signature());
     }
@@ -697,6 +736,7 @@ public abstract class MWAbstractQuery
 
     // ********* Runtime Conversion ***********
 
+    @Override
     public DatabaseQuery runtimeQuery() {
         ObjectLevelReadQuery runtimeQuery = buildRuntimeQuery();
         runtimeQuery.setName(getName());
@@ -729,6 +769,7 @@ public abstract class MWAbstractQuery
     protected abstract ObjectLevelReadQuery buildRuntimeQuery();
 
 
+    @Override
     public void adjustFromRuntime(ObjectLevelReadQuery runtimeQuery) {
         this.parameters = new Vector();
         Iterator argIt = runtimeQuery.getArguments().iterator();

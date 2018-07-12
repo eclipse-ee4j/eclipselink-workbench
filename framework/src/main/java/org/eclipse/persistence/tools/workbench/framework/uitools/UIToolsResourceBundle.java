@@ -69,6 +69,7 @@ public final class UIToolsResourceBundle extends ListResourceBundle {
 
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

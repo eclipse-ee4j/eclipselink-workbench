@@ -89,6 +89,7 @@ public class FileChooser extends JFileChooser {
     /**
      * override to add the "make relative" check box if appropriate
      */
+    @Override
     protected JDialog createDialog(Component parent) throws HeadlessException {
         JDialog dialog = super.createDialog(parent);
         // we only add the check box if a root file is specified
@@ -115,6 +116,7 @@ public class FileChooser extends JFileChooser {
 
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 FileChooser.this.convertToRelativePath = ((JCheckBox) e.getSource()).isSelected();
             }
@@ -127,6 +129,7 @@ public class FileChooser extends JFileChooser {
     /**
      * override to set internal flag indicating whether the dialog is visible
      */
+    @Override
     public int showDialog(Component parent, String approveButtonText) throws HeadlessException {
         this.dialogIsVisible = true;
         int result = super.showDialog(parent, approveButtonText);
@@ -137,6 +140,7 @@ public class FileChooser extends JFileChooser {
     /**
      * override to make the selected file relative if appropriate
      */
+    @Override
     public File getSelectedFile() {
         File selectedFile = super.getSelectedFile();
         selectedFile = checkForDuplicateEntry(selectedFile);
@@ -146,6 +150,7 @@ public class FileChooser extends JFileChooser {
     /**
      * override to make the selected files relative if appropriate
      */
+    @Override
     public File[] getSelectedFiles() {
         File[] files = super.getSelectedFiles();
 
@@ -179,6 +184,7 @@ public class FileChooser extends JFileChooser {
     /**
      * override to make the new selected file absolute if appropriate
      */
+    @Override
     public void setSelectedFile(File file) {
         super.setSelectedFile(this.convertToAbsoluteFile(file));
     }
@@ -186,6 +192,7 @@ public class FileChooser extends JFileChooser {
     /**
      * override to make the new selected files absolute if appropriate
      */
+    @Override
     public void setSelectedFiles(File[] files) {
         super.setSelectedFiles(this.convertToAbsoluteFiles(files));
     }

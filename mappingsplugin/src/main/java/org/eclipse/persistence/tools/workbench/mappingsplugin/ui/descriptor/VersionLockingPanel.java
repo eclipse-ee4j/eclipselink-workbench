@@ -45,6 +45,7 @@ public abstract class VersionLockingPanel extends AbstractSubjectPanel {
         super(lockingPolicyHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.optimisticVersionLockingPolicyTypeModel = buildOptimisticVersionLockingPolicyTypeValueHolder();
@@ -54,16 +55,19 @@ public abstract class VersionLockingPanel extends AbstractSubjectPanel {
     private PropertyValueModel buildOptimisticVersionLockingPolicyTypeValueHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(),
                 MWDescriptorLockingPolicy.OPTIMISTIC_VERSION_LOCKING_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorLockingPolicy) subject).getOptimisticVersionLockingType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) subject).setOptimisticVersionLockingType((String) value);
             }
         };
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -179,10 +183,12 @@ public abstract class VersionLockingPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildStoreVersionInCacheModel() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWDescriptorLockingPolicy.STORE_IN_CACHE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWDescriptorLockingPolicy) subject).shouldStoreVersionInCache());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) subject).setStoreInCache(((Boolean) value).booleanValue());
             }
@@ -192,6 +198,7 @@ public abstract class VersionLockingPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildVersionLockingPanelEnabler(Component[] components) {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(this.optimisticVersionLockingPolicyTypeModel) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value != null);
             }

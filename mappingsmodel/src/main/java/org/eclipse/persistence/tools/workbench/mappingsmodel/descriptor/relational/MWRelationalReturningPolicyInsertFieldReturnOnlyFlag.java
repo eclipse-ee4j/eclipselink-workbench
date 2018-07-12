@@ -23,7 +23,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWReturn
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWColumnHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWRelationalFieldTransformerAssociation;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
@@ -51,6 +50,7 @@ public class MWRelationalReturningPolicyInsertFieldReturnOnlyFlag
         this.columnHandle.setColumn(column);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.columnHandle = new MWColumnHandle(this, this.buildColumnScrubber());
@@ -59,6 +59,7 @@ public class MWRelationalReturningPolicyInsertFieldReturnOnlyFlag
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.columnHandle);
@@ -66,9 +67,11 @@ public class MWRelationalReturningPolicyInsertFieldReturnOnlyFlag
 
     private NodeReferenceScrubber buildColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalReturningPolicyInsertFieldReturnOnlyFlag.this.columnRemoved();
             }
+            @Override
             public String toString() {
                 return "MWRelationalReturningPolicyInsertFieldReturnOnlyFlag.buildColumnScrubber()";
             }
@@ -88,6 +91,7 @@ public class MWRelationalReturningPolicyInsertFieldReturnOnlyFlag
 
     // ********** MWReturningPolicyInsertFieldReturnOnlyFlag implementation **********
 
+    @Override
     public MWDataField getField() {
         return this.columnHandle.getColumn();
     }
@@ -95,6 +99,7 @@ public class MWRelationalReturningPolicyInsertFieldReturnOnlyFlag
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if ( ! CollectionTools.contains(((MWTableDescriptor) this.getOwningDescriptor()).allAssociatedColumns(), this.getField())) {

@@ -67,12 +67,14 @@ public class QueryParameterDialog extends AbstractValidatingDialog {
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return query.getRepository();
             }
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         return new MainPanel(new DefaultWorkbenchContextHolder(this.getWorkbenchContext()));
     }
@@ -85,18 +87,21 @@ public class QueryParameterDialog extends AbstractValidatingDialog {
 
     private DocumentListener buildParameterNameDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 if (isVisible()) {
                     updateDialogState();
                 }
             }
 
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 if (isVisible()) {
                     updateDialogState();
                 }
             }
 
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 if (isVisible()) {
                     updateDialogState();
@@ -117,10 +122,12 @@ public class QueryParameterDialog extends AbstractValidatingDialog {
         return this.parameterNameField.getText();
     }
 
+    @Override
     protected String helpTopicId() {
         return "descriptor.queryManager.general.parameters.addParameter";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return parameterNameField;
     }

@@ -100,6 +100,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 
@@ -115,6 +116,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo( branchProblems);
@@ -124,6 +126,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -138,6 +141,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 
@@ -170,6 +174,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
         this.managedByBroker = false;
     }
 
+    @Override
     protected void postInitializationFromModel() {
         super.postInitializationFromModel();
         if( configVersionIsPre10g()) {
@@ -211,6 +216,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getName() {
 
         return this.session().getName();
@@ -226,6 +232,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
         this.firePropertyChanged( NAME_PROPERTY, old, name);
     }
 
+    @Override
     public String displayString() {
 
         return this.getName();
@@ -441,6 +448,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
         return ( SessionConfig)this.getModel();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( this.getName());
@@ -542,6 +550,7 @@ public abstract class SessionAdapter extends SCAdapter implements Nominative {
         this.firePropertyChanged( SESSION_CUSTOMIZER_CLASS_PROPERTY, old, name);
     }
 
+    @Override
     protected void initializeDefaults() {
 
         super.initializeDefaults();

@@ -115,6 +115,7 @@ public class AWTExceptionHandler {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }
@@ -137,9 +138,11 @@ public class AWTExceptionHandler {
 
         GlobalHandler DEFAULT_INSTANCE =
             new GlobalHandler() {
+                @Override
                 public void handle(Throwable t) {
                     t.printStackTrace();
                 }
+                @Override
                 public String toString() {
                     return "DefaultGlobalHandler";
                 }

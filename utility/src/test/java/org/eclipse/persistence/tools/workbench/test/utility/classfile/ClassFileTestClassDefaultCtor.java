@@ -19,6 +19,7 @@ package org.eclipse.persistence.tools.workbench.test.utility.classfile;
  */
 public class ClassFileTestClassDefaultCtor {
 
+    @Override
     public String toString() {
         return "a " + this.getClass().getName();
     }

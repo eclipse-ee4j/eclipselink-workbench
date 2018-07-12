@@ -58,6 +58,7 @@ public final class BooleanCellRendererAdapter extends AbstractCellRendererAdapte
      * @param value The value to decorate, which is a <code>Booleam</code> value
      * @return The localized string decorating the given value
      */
+    @Override
     public String buildText(Object value)
     {
         if (Boolean.TRUE.equals(value)) {

@@ -47,6 +47,7 @@ public class RenameDialog extends AbstractValidatingDialog {
             this.sessionNames = sessionNames;
     }
 
+    @Override
     protected void initialize() {
             super.initialize();
             getOKAction().setEnabled( false);
@@ -56,6 +57,7 @@ public class RenameDialog extends AbstractValidatingDialog {
         return new DocumentAdapter(stringHolder);
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
         setTitle( resourceRepository().getString( "RENAME_DIALOG_TITLE"));
@@ -96,14 +98,16 @@ public class RenameDialog extends AbstractValidatingDialog {
         panel.add(nameTextField, constraints);
         nameLabel.setLabelFor(nameTextField);
 
-        nameTextField.getDocument().addDocumentListener(
-           new DocumentListener() {
+        nameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
                public void insertUpdate( DocumentEvent e) {
                    updateOKAction();
                }
+            @Override
                public void removeUpdate( DocumentEvent e) {
                    updateOKAction();
                }
+            @Override
                public void changedUpdate( DocumentEvent e) {
                }
            }
@@ -133,16 +137,19 @@ public class RenameDialog extends AbstractValidatingDialog {
 
 //       ********** opening **********
 
+    @Override
     protected String helpTopicId() {
         return "dialog.renameSession";
     }
 
+    @Override
     protected void prepareToShow() {
 
         super.prepareToShow();
         nameTextField.selectAll();
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return nameTextField;
     }

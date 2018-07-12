@@ -38,6 +38,7 @@ public final class State {
         return this.name;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.abbreviation);
     }

@@ -55,6 +55,7 @@ public class CheckBoxTreeCellEditor extends AbstractCellEditor implements TreeCe
 
     protected ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 // when the check box fires an action event, we stop editing
                 CheckBoxTreeCellEditor.this.stopCellEditing();
@@ -67,6 +68,7 @@ public class CheckBoxTreeCellEditor extends AbstractCellEditor implements TreeCe
     /**
      * @see javax.swing.CellEditor#getCellEditorValue()
      */
+    @Override
     public Object getCellEditorValue() {
         return this.renderer.getValue();
     }
@@ -77,6 +79,7 @@ public class CheckBoxTreeCellEditor extends AbstractCellEditor implements TreeCe
     /**
      * @see javax.swing.tree.TreeCellEditor#getTreeCellEditorComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int)
      */
+    @Override
     public Component getTreeCellEditorComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row) {
         return this.renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, true);
     }

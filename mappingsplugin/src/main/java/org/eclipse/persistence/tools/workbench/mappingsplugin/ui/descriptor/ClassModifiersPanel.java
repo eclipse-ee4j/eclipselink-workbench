@@ -33,6 +33,7 @@ final class ClassModifiersPanel extends AbstractSubjectPanel {
         super(typeHolder, applicationContext);
     }
 
+    @Override
     protected void initializeLayout() {
         // labeled border
         this.setBorder(

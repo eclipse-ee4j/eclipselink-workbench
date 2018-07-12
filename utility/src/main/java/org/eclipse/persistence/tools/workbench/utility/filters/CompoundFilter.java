@@ -62,6 +62,7 @@ public abstract class CompoundFilter
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -73,6 +74,7 @@ public abstract class CompoundFilter
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if ( ! (o instanceof CompoundFilter)) {
             return false;
@@ -85,6 +87,7 @@ public abstract class CompoundFilter
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.filter1.hashCode() ^ this.filter2.hashCode();
     }
@@ -92,6 +95,7 @@ public abstract class CompoundFilter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.filter1 + " " + this.operatorString() + " " + this.filter2);
     }

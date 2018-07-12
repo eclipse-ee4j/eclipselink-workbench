@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWDescriptorQueryParameterHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
@@ -24,7 +23,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.No
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryParameter;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.internal.expressions.ParameterExpression;
@@ -64,11 +62,13 @@ public final class MWQueryParameterArgument extends MWArgument {
         this.queryParameterHandle.setQueryParameter(parameter);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.queryParameterHandle = new MWDescriptorQueryParameterHandle(this, this.buildQueryParameterScrubber());
     }
 
+    @Override
     public String getType() {
         return PARAMETER_TYPE;
     }
@@ -84,6 +84,7 @@ public final class MWQueryParameterArgument extends MWArgument {
 
     //*********** problem support ****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkParameter(currentProblems);
@@ -101,6 +102,7 @@ public final class MWQueryParameterArgument extends MWArgument {
 
     // ********** model synchronization support **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.queryParameterHandle);
@@ -108,9 +110,11 @@ public final class MWQueryParameterArgument extends MWArgument {
 
     private NodeReferenceScrubber buildQueryParameterScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWQueryParameterArgument.this.setQueryParameter(null);
             }
+            @Override
             public String toString() {
                 return "MWQueryParameterArgument.buildQueryParameterScrubber()";
             }
@@ -121,12 +125,14 @@ public final class MWQueryParameterArgument extends MWArgument {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.query.Restorable#undoChange(String, Object)
      */
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue)
     {
         if (propertyName == QUERY_PARAMETER_PROPERTY)
             setQueryParameter((MWQueryParameter) oldValue);
     }
 
+    @Override
     public String displayString()
     {
         if (getQueryParameter() == null)
@@ -134,6 +140,7 @@ public final class MWQueryParameterArgument extends MWArgument {
         return getQueryParameter().getName();
     }
 
+    @Override
     public void toString(StringBuffer sb)
     {
         super.toString(sb);
@@ -154,6 +161,7 @@ public final class MWQueryParameterArgument extends MWArgument {
 
     // ********** Conversion to Runtime **********
 
+    @Override
     Expression runtimeExpression(ExpressionBuilder builder) {
         return builder.getParameter(getQueryParameter().getName());
     }

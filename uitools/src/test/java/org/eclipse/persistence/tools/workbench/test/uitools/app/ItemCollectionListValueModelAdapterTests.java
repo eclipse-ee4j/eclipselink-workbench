@@ -58,6 +58,7 @@ public class ItemCollectionListValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.foo = new Junk("foo");
@@ -72,6 +73,7 @@ public class ItemCollectionListValueModelAdapterTests extends TestCase {
         this.harry = new Junk("harry");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -230,18 +232,22 @@ private class Junk extends AbstractModel implements Displayable {
         this.removeItemFromCollection(stuffItem, this.stuff, STUFF_COLLECTION);
     }
 
+    @Override
     public String displayString() {
         return toString();
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
 
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
 
+    @Override
     public String toString() {
         return "Junk(" + this.stuff + ")";
     }

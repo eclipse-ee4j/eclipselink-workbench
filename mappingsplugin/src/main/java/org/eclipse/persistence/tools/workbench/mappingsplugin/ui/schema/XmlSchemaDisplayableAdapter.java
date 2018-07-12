@@ -49,6 +49,7 @@ public class XmlSchemaDisplayableAdapter
 
     private PropertyChangeListener buildPropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 firePropertyChanged(DISPLAY_STRING_PROPERTY, displayString((String) evt.getOldValue()), displayString((String) evt.getNewValue()));
             }
@@ -58,10 +59,12 @@ public class XmlSchemaDisplayableAdapter
 
     // **************** Displayable contract **********************************
 
+    @Override
     public String displayString() {
         return this.displayString(this.schema.getName());
     }
 
+    @Override
     public Icon icon() {
         return this.resourceRepository.getIcon("file.xml");
     }
@@ -69,6 +72,7 @@ public class XmlSchemaDisplayableAdapter
 
     // **************** Comparable contract ***********************************
 
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }

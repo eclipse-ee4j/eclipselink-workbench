@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
@@ -78,6 +77,7 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.aboutToInsertMethodHandle = new MWMethodHandle(this, this.buildAboutToInsertMethodScrubber());
@@ -243,10 +243,12 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** MWAbstractDescriptorPolicy implementation **********
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
 
+    @Override
     public boolean isActive() {
         return true;
     }
@@ -254,6 +256,7 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.aboutToInsertMethodHandle);
@@ -274,9 +277,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildAboutToInsertMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setAboutToInsertMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildAboutToInsertMethodScrubber()";
             }
@@ -285,9 +290,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildAboutToUpdateMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setAboutToUpdateMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildAboutToUpdateMethodScrubber()";
             }
@@ -296,9 +303,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostBuildMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostBuildMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostBuildMethodScrubber()";
             }
@@ -307,9 +316,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostDeletingMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostDeletingMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostDeletingMethodScrubber()";
             }
@@ -318,9 +329,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostCloneMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostCloneMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostCloneMethodScrubber()";
             }
@@ -329,9 +342,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostInsertMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostInsertMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostInsertMethodScrubber()";
             }
@@ -340,9 +355,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostMergeMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostMergeMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostMergeMethodScrubber()";
             }
@@ -351,9 +368,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostRefreshMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostRefreshMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostRefreshMethodScrubber()";
             }
@@ -362,9 +381,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostWritingMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostWritingMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostWritingMethodScrubber()";
             }
@@ -373,9 +394,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPostUpdateMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPostUpdateMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPostUpdateMethodScrubber()";
             }
@@ -384,9 +407,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPreDeletingMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPreDeletingMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPreDeletingMethodScrubber()";
             }
@@ -395,9 +420,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPreInsertMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPreInsertMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPreInsertMethodScrubber()";
             }
@@ -406,9 +433,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPreUpdateMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPreUpdateMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPreUpdateMethodScrubber()";
             }
@@ -417,9 +446,11 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildPreWritingMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorEventsPolicy.this.setPreWritingMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorEventsPolicy.buildPreWritingMethodScrubber()";
             }
@@ -429,6 +460,7 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** converstion to runtime **********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         DescriptorEventManager manager = (DescriptorEventManager) runtimeDescriptor.getEventManager();
         if (getAboutToInsertMethod() != null){
@@ -478,6 +510,7 @@ public final class MWDescriptorEventsPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkPostBuildMethod(problems);

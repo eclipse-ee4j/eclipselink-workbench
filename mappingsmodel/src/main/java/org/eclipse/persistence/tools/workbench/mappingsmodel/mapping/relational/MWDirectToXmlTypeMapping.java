@@ -62,6 +62,7 @@ public final class MWDirectToXmlTypeMapping
         super(parent, attribute, name);
     }
 
+    @Override
     public String iconKey() {
         return "mapping.directToXmlType";
     }
@@ -82,10 +83,12 @@ public final class MWDirectToXmlTypeMapping
 
     // **************** Morphing ****************
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWDirectToXmlTypeMapping(this);
     }
 
+    @Override
     public MWDirectToXmlTypeMapping asMWDirectToXmlTypeMapping() {
         return this;
     }
@@ -93,6 +96,7 @@ public final class MWDirectToXmlTypeMapping
 
     // **************** Runtime Conversion ****************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         DirectToXMLTypeMapping mapping = (DirectToXMLTypeMapping) super.runtimeMapping();
         mapping.setShouldReadWholeDocument(isReadWholeDocument());
@@ -100,6 +104,7 @@ public final class MWDirectToXmlTypeMapping
         return mapping;
     }
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new DirectToXMLTypeMapping();
     }
@@ -107,6 +112,7 @@ public final class MWDirectToXmlTypeMapping
 
     //************* Problem Handling ************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkDatabasePlatform(newProblems);

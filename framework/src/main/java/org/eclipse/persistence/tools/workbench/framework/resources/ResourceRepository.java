@@ -30,45 +30,59 @@ public interface ResourceRepository
 
     ResourceRepository NULL_INSTANCE =
         new ResourceRepository() {
+            @Override
             public boolean hasString(String key) {
                 return StringRepository.NULL_INSTANCE.hasString(key);
             }
+            @Override
             public String getString(String key, Object argument) {
                 return StringRepository.NULL_INSTANCE.getString(key, argument);
             }
+            @Override
             public String getString(String key, Object argument1, Object argument2) {
                 return StringRepository.NULL_INSTANCE.getString(key, argument1, argument2);
             }
+            @Override
             public String getString(String key, Object argument1, Object argument2, Object argument3) {
                 return StringRepository.NULL_INSTANCE.getString(key, argument1, argument2, argument3);
             }
+            @Override
             public String getString(String key, Object[] arguments) {
                 return StringRepository.NULL_INSTANCE.getString(key, arguments);
             }
+            @Override
             public String getString(String key) {
                 return StringRepository.NULL_INSTANCE.getString(key);
             }
+            @Override
             public boolean hasMnemonic(String key) {
                 return MnemonicRepository.NULL_INSTANCE.hasMnemonic(key);
             }
+            @Override
             public int getMnemonic(String key) {
                 return MnemonicRepository.NULL_INSTANCE.getMnemonic(key);
             }
+            @Override
             public int getMnemonicIndex(String key) {
                 return MnemonicRepository.NULL_INSTANCE.getMnemonicIndex(key);
             }
+            @Override
             public boolean hasAccelerator(String key) {
                 return AcceleratorRepository.NULL_INSTANCE.hasAccelerator(key);
             }
+            @Override
             public KeyStroke getAccelerator(String key) {
                 return AcceleratorRepository.NULL_INSTANCE.getAccelerator(key);
             }
+            @Override
             public Icon getIcon(String key) {
                 return IconRepository.NULL_INSTANCE.getIcon(key);
             }
+            @Override
             public boolean hasIcon(String key) {
                 return IconRepository.NULL_INSTANCE.hasIcon(key);
             }
+            @Override
             public String toString() {
                 return "NullResourceRepository";
             }

@@ -122,6 +122,7 @@ public class ClassDependencyGraphPanel extends JPanel {
 
     private PropertyChangeListener buildGraphHolderListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ClassDependencyGraphPanel.this.graphChanged();
             }
@@ -134,6 +135,7 @@ public class ClassDependencyGraphPanel extends JPanel {
 
     private ClassDescriptionAdapter buildClassDependencyGraphNodeAdapter() {
         return new DefaultClassDescriptionAdapter() {
+            @Override
             public String className(Object classDescription) {
                 return ((ClassDependencyGraph.Node) classDescription).getClassName();
             }
@@ -156,6 +158,7 @@ public class ClassDependencyGraphPanel extends JPanel {
 
     private TreeSelectionListener buildMiddleTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 ClassDependencyGraphPanel.this.middleTreeSelectionChanged(e);
             }

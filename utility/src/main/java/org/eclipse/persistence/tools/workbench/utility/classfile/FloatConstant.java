@@ -39,20 +39,24 @@ public class FloatConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.value = Float.intBitsToFloat(stream.readU4());
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" value: ");
         writer.println(this.value);
     }
 
+    @Override
     public String description() {
         return "float";
     }
 
+    @Override
     public void printFieldInitializationClauseOn(PrintWriter writer) {
         writer.print(this.value);
         writer.print('F');
@@ -62,10 +66,12 @@ public class FloatConstant extends Constant {
         return this.value;
     }
 
+    @Override
     public Object value() {
         return new Float(this.value);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

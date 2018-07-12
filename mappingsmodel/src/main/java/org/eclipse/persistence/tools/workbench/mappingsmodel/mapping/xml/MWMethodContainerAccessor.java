@@ -52,6 +52,7 @@ public final class MWMethodContainerAccessor extends MWContainerAccessor {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.accessorGetMethodHandle = new MWMethodHandle(this, this.buildGetMethodScrubber());
@@ -81,6 +82,7 @@ public final class MWMethodContainerAccessor extends MWContainerAccessor {
 
     // **************** Containment hierarchy *********************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.accessorGetMethodHandle);
@@ -89,9 +91,11 @@ public final class MWMethodContainerAccessor extends MWContainerAccessor {
 
     private NodeReferenceScrubber buildGetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMethodContainerAccessor.this.setAccessorGetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWMethodContainerAccessor.buildGetMethodScrubber()";
             }
@@ -100,9 +104,11 @@ public final class MWMethodContainerAccessor extends MWContainerAccessor {
 
     private NodeReferenceScrubber buildSetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMethodContainerAccessor.this.setAccessorSetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWMethodContainerAccessor.buildSetMethodScrubber()";
             }
@@ -156,11 +162,13 @@ public final class MWMethodContainerAccessor extends MWContainerAccessor {
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void adjustRuntimeMapping(AbstractCompositeObjectMapping mapping) {
         ((XMLCompositeObjectMapping)mapping).setContainerGetMethodName(getAccessorGetMethod().getName());
         ((XMLCompositeObjectMapping)mapping).setContainerSetMethodName(getAccessorSetMethod().getName());
     }
 
+    @Override
     public void adjustRuntimeMapping(AbstractCompositeCollectionMapping mapping) {
         ((XMLCompositeCollectionMapping)mapping).setContainerGetMethodName(getAccessorGetMethod().getName());
         ((XMLCompositeCollectionMapping)mapping).setContainerSetMethodName(getAccessorSetMethod().getName());

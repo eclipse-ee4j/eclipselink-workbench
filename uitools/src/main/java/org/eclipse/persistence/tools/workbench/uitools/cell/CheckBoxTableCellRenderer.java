@@ -95,6 +95,7 @@ public class CheckBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
 
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (CheckBoxTableCellRenderer.this.immediateEditListener != null) {
                     CheckBoxTableCellRenderer.this.immediateEditListener.immediateEdit();
@@ -109,6 +110,7 @@ public class CheckBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     /**
      * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
      */
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean hasFocus, int row, int column) {
         this.checkBox.setHorizontalAlignment(SwingConstants.CENTER);
         this.checkBox.setComponentOrientation(table.getComponentOrientation());
@@ -187,6 +189,7 @@ public class CheckBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     /**
      * @see TableCellEditorAdapter
      */
+    @Override
     public Object getValue() {
         return Boolean.valueOf(this.checkBox.isSelected());
     }
@@ -194,10 +197,12 @@ public class CheckBoxTableCellRenderer implements TableCellEditorAdapter.Rendere
     /**
      * @see TableCellEditorAdapter
      */
+    @Override
     public void setImmediateEditListener(ImmediateEditListener listener) {
         this.immediateEditListener = listener;
     }
 
+    @Override
     public void commit() {
         // Nothing to commit
     }

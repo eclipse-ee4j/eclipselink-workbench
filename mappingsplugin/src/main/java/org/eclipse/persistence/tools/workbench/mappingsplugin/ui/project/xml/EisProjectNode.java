@@ -41,10 +41,12 @@ public final class EisProjectNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return EisProjectTabbedPropertiesPage.class;
     }
 
+    @Override
     protected ProjectTabbedPropertiesPage buildProjectTabbedPanePropertiesPage(WorkbenchContext context) {
         return new EisProjectTabbedPropertiesPage(context);
     }
@@ -52,6 +54,7 @@ public final class EisProjectNode
 
     // *********** AbstractApplicationNode implementation ***********
 
+    @Override
     protected String buildIconKey() {
         return "project.eis";
     }
@@ -59,6 +62,7 @@ public final class EisProjectNode
 
     // *********** AbstractApplicationNode implementation ***********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_EIS_PROJECT_NODE";
     }
@@ -66,6 +70,7 @@ public final class EisProjectNode
 
     // *********** ApplicationNode implementation *********
 
+    @Override
     protected void addToMenuDescription(GroupContainerDescription menuDescription, WorkbenchContext context) {
         menuDescription.add(this.buildClassActionGroup(context));
         menuDescription.add(this.buildCloseDeleteActionGroup(context));
@@ -77,8 +82,10 @@ public final class EisProjectNode
 
     // *********** ProjectNode implementation ***********
 
+    @Override
     protected DescriptorNodeBuilder buildDescriptorNodeBuilder() {
         return new DescriptorPackageNode.DescriptorNodeBuilder() {
+            @Override
             public DescriptorNode buildDescriptorNode(MWDescriptor descriptor, DescriptorPackageNode descriptorPackageNode) {
                 if (descriptor instanceof MWRootEisDescriptor) {
                     return new EisRootDescriptorNode((MWRootEisDescriptor) descriptor, descriptorPackageNode);

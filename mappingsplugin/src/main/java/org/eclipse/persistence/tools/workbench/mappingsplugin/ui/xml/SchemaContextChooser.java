@@ -135,6 +135,7 @@ public final class SchemaContextChooser
 
     private ActionListener buildBrowseAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 SchemaContextChooser.this.promptToSelectSchemaContext();
             }
@@ -174,6 +175,7 @@ public final class SchemaContextChooser
             super(schemaContextComponentHolder);
         }
 
+        @Override
         protected void initialize() {
             super.initialize();
             this.speakerListener = this.buildSpeakerListener();
@@ -182,6 +184,7 @@ public final class SchemaContextChooser
 
         private PropertyChangeListener buildSpeakerListener() {
             return new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     SchemaContextDisplayStringValueModel.this.displayStringChanged();
                 }
@@ -239,6 +242,7 @@ public final class SchemaContextChooser
         /**
          * @see ValueModel#getValue()
          */
+        @Override
         public Object getValue() {
             return this.displayString;
         }
@@ -249,6 +253,7 @@ public final class SchemaContextChooser
         /**
          * @see PropertyValueModel#setValue(java.lang.Object)
          */
+        @Override
         public void setValue(Object value) {
                 throw new UnsupportedOperationException();
         }
@@ -256,12 +261,14 @@ public final class SchemaContextChooser
 
         // ********** PropertyValueModelWrapper implementation **********
 
+        @Override
         protected void engageValueHolder() {
             super.engageValueHolder();
             this.engageNewSchemaContext();
             this.synchronizeDisplayString();
         }
 
+        @Override
         protected void disengageValueHolder() {
             this.disengageOldSchemaContext();
             super.disengageValueHolder();
@@ -271,6 +278,7 @@ public final class SchemaContextChooser
         /**
          * @see PropertyValueModelWrapper#valueChanged(java.beans.PropertyChangeEvent)
          */
+        @Override
         protected void valueChanged(PropertyChangeEvent e) {
             this.disengageOldSchemaContext();
             this.engageNewSchemaContext();

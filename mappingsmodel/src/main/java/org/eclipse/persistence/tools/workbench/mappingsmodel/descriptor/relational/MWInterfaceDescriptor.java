@@ -23,7 +23,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWQueryKey;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
@@ -80,6 +79,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.implementorHandles = new Vector();
@@ -91,6 +91,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
     // ***** implementors
     private Iterator implementorHandles() {
         return new CloneIterator(this.implementorHandles) {
+            @Override
             protected void remove(Object current) {
                 MWInterfaceDescriptor.this.removeImplementorHandle((MWDescriptorHandle) current);
             }
@@ -104,8 +105,10 @@ public final class MWInterfaceDescriptor extends MWDescriptor
         this.getProject().implementorsChangedFor(this);
     }
 
+    @Override
     public Iterator implementors() {
         return new TransformationIterator(this.implementorHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWDescriptorHandle) next).getDescriptor();
             }
@@ -189,6 +192,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     public Iterator allQueryKeyNames(Iterator iterator) {
         return new TransformationIterator(iterator) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWQueryKey) next).getName();
             }
@@ -206,6 +210,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.implementorHandles) { children.addAll(this.implementorHandles); }
@@ -220,9 +225,11 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     private NodeReferenceScrubber buildImplementorScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWInterfaceDescriptor.this.removeImplementorHandle((MWDescriptorHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWInterfaceDescriptor.buildImplementorScrubber()";
             }
@@ -231,6 +238,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     //TODO If a descriptor is made aggregate, do we actually want to remove it,
     //shouldn't we just have problems, aggregates are not allowed as implementors
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         super.descriptorReplaced(oldDescriptor, newDescriptor);
         if (this.hasImplementor(oldDescriptor)) {
@@ -244,10 +252,12 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     // ********** MWDescriptor Implementation **********
 
+    @Override
     public void initializeOn(MWDescriptor newDescriptor) {
         ((MWRelationalDescriptor) newDescriptor).initializeFromMWInterfaceDescriptor(this);
     }
 
+    @Override
     protected void refreshClass(MWClassRefreshPolicy refreshPolicy)
         throws ExternalClassNotFoundException, InterfaceDescriptorCreationException
     {
@@ -258,27 +268,33 @@ public final class MWInterfaceDescriptor extends MWDescriptor
         }
     }
 
+    @Override
     public void applyAdvancedPolicyDefaults(MWProjectDefaultsPolicy defaultsPolicy) {
         //do nothing, advanced properites do not apply to interface descriptors
     }
 
+    @Override
     public void unmap() {
         super.unmap();
         this.clearImplementors();
     }
 
+    @Override
     public boolean canHaveInheritance() {
         return false;
     }
 
+    @Override
     public MWInheritancePolicy getInheritancePolicy() {
         return nullInheritancePolicy;
     }
 
+    @Override
      public boolean hasDefinedInheritance() {
         return false;
     }
 
+    @Override
     public boolean hasActiveInstantiationPolicy() {
         return false;
     }
@@ -286,22 +302,27 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     // ********** MWRelationalDescriptor implementation **********
 
+    @Override
     public Iterator allQueryKeys() {
         return this.getAllQueryKeys().iterator();
     }
 
+    @Override
     public Iterator allQueryKeysIncludingInherited() {
         return allQueryKeys();
     }
 
+    @Override
     public Iterator allQueryKeyNames() {
         return new TransformationIterator(allQueryKeys()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWQueryKey) next).getName();
             }
         };
     }
 
+    @Override
     public MWQueryKey queryKeyNamed(String name) {
         for (Iterator stream = this.allQueryKeys(); stream.hasNext(); ) {
             MWQueryKey queryKey = (MWQueryKey) stream.next();
@@ -312,91 +333,112 @@ public final class MWInterfaceDescriptor extends MWDescriptor
         return null;
     }
 
+    @Override
     public MWQueryKey queryKeyNamedIncludingInherited(String name) {
         return queryKeyNamed(name);
     }
 
+    @Override
     public Iterator associatedTables() {
         return NullIterator.instance();
     }
 
+    @Override
     public int associatedTablesSize() {
         return 0;
     }
 
+    @Override
     public MWTable getPrimaryTable() {
         return null;
     }
 
+    @Override
     public Iterator associatedTablesIncludingInherited() {
         return this.associatedTables();
     }
 
+    @Override
     public int associatedTablesIncludingInheritedSize() {
         return this.associatedTablesSize();
     }
 
+    @Override
     public Iterator candidateTables() {
         return this.associatedTables();
     }
 
+    @Override
     public int candidateTablesSize() {
         return this.associatedTablesSize();
     }
 
+    @Override
     public Iterator candidateTablesIncludingInherited() {
         return this.candidateTables();
     }
 
+    @Override
     public int candidateTablesIncludingInheritedSize() {
         return this.candidateTablesSize();
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         // do nothing
     }
 
+    @Override
     public List getQueryables(Filter queryableFilter) {
         return Collections.EMPTY_LIST;
     }
 
+    @Override
     public boolean isTableDescriptor() {
         return false;
     }
 
+    @Override
     public boolean isAggregateDescriptor() {
         return false;
     }
 
+    @Override
     public Collection buildAggregateFieldNameGenerators() {
         return Collections.EMPTY_SET;
     }
 
+    @Override
     public void initializeFromMWAggregateDescriptor(MWAggregateDescriptor oldDescriptor) {
     //    super.initializeFromMWAggregateDescriptor(oldDescriptor);
         this.initializeFromMWRelationalClassDescriptor(oldDescriptor);
     }
 
+    @Override
     public void initializeFromMWRelationalClassDescriptor(MWRelationalClassDescriptor oldDescriptor) {
     //    super.initializeFromMWRelationalClassDescriptor(oldDescriptor);
         this.initializeFromMWMappingDescriptor(oldDescriptor);
     }
 
+    @Override
     public void initializeFromMWTableDescriptor(MWTableDescriptor oldDescriptor) {
     //    super.initializeFromMWTableDescriptor(oldDescriptor);
         this.initializeFromMWRelationalClassDescriptor(oldDescriptor);
     }
 
+    @Override
     public void initializeFromMWInterfaceDescriptor(MWInterfaceDescriptor oldDescriptor) {
     //    super.initializeFromMWInterfaceDescriptor(oldDescriptor);
        this.initializeFromMWDescriptor(oldDescriptor);
     }
 
 
+    @Override
     public MWAggregateDescriptor asMWAggregateDescriptor() {
         throw new RuntimeException("Can't change an interface descriptor to an aggregate descriptor unless the type is not an interface.");
     }
 
+    @Override
     public MWTableDescriptor asMWTableDescriptor() throws InterfaceDescriptorCreationException {
         if (getMWClass().isInterface()) {
             throw new RuntimeException("Can't change an interface descriptor to a class descriptor unless the type is not an interface.");
@@ -406,10 +448,12 @@ public final class MWInterfaceDescriptor extends MWDescriptor
         return newDescriptor;
     }
 
+    @Override
     public MWInterfaceDescriptor asMWInterfaceDescriptor() {
         return this;
     }
 
+    @Override
     public boolean isInterfaceDescriptor() {
         return true;
     }
@@ -417,6 +461,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     // *************** Problem Handling **************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkImplementors(newProblems);
@@ -434,6 +479,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
 
     // ********** Runtime Conversion **********
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         ClassDescriptor runtimeDescriptor = super.buildRuntimeDescriptor();
 
@@ -448,6 +494,7 @@ public final class MWInterfaceDescriptor extends MWDescriptor
         return runtimeDescriptor;
     }
 
+    @Override
     protected ClassDescriptor buildBasicRuntimeDescriptor() {
         RelationalDescriptor descriptor = new RelationalDescriptor();
         descriptor.setJavaClassName(getMWClass().getName());

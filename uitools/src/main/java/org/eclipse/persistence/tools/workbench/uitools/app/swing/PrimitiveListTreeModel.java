@@ -106,6 +106,7 @@ public abstract class PrimitiveListTreeModel extends DefaultTreeModel {
      * Override to change the underlying model instead of changing the node directly.
      * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath, java.lang.Object)
      */
+    @Override
     public void valueForPathChanged(TreePath path, Object newValue) {
         TreeNode node = (TreeNode) path.getLastPathComponent();
         int index = ((TreeNode) this.getRoot()).getIndex(node);
@@ -116,6 +117,7 @@ public abstract class PrimitiveListTreeModel extends DefaultTreeModel {
      * Extend to start listening to the underlying model if necessary.
      * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void addTreeModelListener(TreeModelListener l) {
         if (this.getTreeModelListeners().length == 0) {
             this.listHolder.addListChangeListener(ValueModel.VALUE, this.listChangeListener);
@@ -128,6 +130,7 @@ public abstract class PrimitiveListTreeModel extends DefaultTreeModel {
      * Extend to stop listening to the underlying model if appropriate.
      * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {
         super.removeTreeModelListener(l);
         if (this.getTreeModelListeners().length == 0) {
@@ -196,6 +199,7 @@ public abstract class PrimitiveListTreeModel extends DefaultTreeModel {
 
 private class PrimitiveListChangeListener implements ListChangeListener {
 
+    @Override
     public void itemsAdded(ListChangeEvent e) {
         int i = e.getIndex();
         for (ListIterator stream = e.items(); stream.hasNext(); ) {
@@ -203,12 +207,14 @@ private class PrimitiveListChangeListener implements ListChangeListener {
         }
     }
 
+    @Override
     public void itemsRemoved(ListChangeEvent e) {
         for (int i = 0; i < e.size(); i++) {
             PrimitiveListTreeModel.this.removeNode(e.getIndex());
         }
     }
 
+    @Override
     public void itemsReplaced(ListChangeEvent e) {
         int i = e.getIndex();
         for (ListIterator stream = e.items(); stream.hasNext(); ) {
@@ -216,6 +222,7 @@ private class PrimitiveListChangeListener implements ListChangeListener {
         }
     }
 
+    @Override
     public void listChanged(ListChangeEvent e) {
         PrimitiveListTreeModel.this.synchronizeList();
     }

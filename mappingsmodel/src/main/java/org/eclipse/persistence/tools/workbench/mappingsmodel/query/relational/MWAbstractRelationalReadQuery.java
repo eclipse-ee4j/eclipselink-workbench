@@ -20,22 +20,15 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.TopLinkOption;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.TopLinkOptionSet;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWAbstractReadQuery;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryParameter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadQuery;
 import org.eclipse.persistence.tools.workbench.utility.TriStateBoolean;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneListIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.descriptors.InheritancePolicy;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
-import org.eclipse.persistence.mappings.TransformationMapping;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
@@ -43,7 +36,6 @@ import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.queries.DatabaseQuery;
 import org.eclipse.persistence.queries.ObjectLevelReadQuery;
-import org.eclipse.persistence.sessions.Record;
 
 public abstract class MWAbstractRelationalReadQuery
     extends MWAbstractReadQuery
@@ -74,6 +66,7 @@ public abstract class MWAbstractRelationalReadQuery
             super(mwModelString, externalString, new Integer(topLinkModelOption));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object query) {
             ((ObjectLevelReadQuery) query).setCacheUsage(((Integer) getTopLinkModelOption()).intValue());
         }
@@ -85,6 +78,7 @@ public abstract class MWAbstractRelationalReadQuery
             super(mwModelString, externalString, new Integer(topLinkModelOption));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object query) {
             ((ObjectLevelReadQuery) query).getInMemoryQueryIndirectionPolicy().setPolicy(((Integer) getTopLinkModelOption()).intValue());
         }
@@ -169,6 +163,7 @@ public abstract class MWAbstractRelationalReadQuery
         super(queryManager, name);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         inMemoryQueryIndirectionPolicy = (InMemoryQueryIndirectionPolicyModel) inMemoryQueryIndirectionPolicyOptions().topLinkOptionForMWModelOption(THROW_INDIRECTION_EXCEPTION);
@@ -176,6 +171,7 @@ public abstract class MWAbstractRelationalReadQuery
         cacheUsage = (CacheUsageModel) cacheUsageOptions().topLinkOptionForMWModelOption(UNDEFINED_CACHE_USAGE);
     }
 
+    @Override
     protected void initialize(String name) {
         super.initialize(name);
         this.relationalOptions = new MWRelationalSpecificQueryOptions(this);
@@ -188,6 +184,7 @@ public abstract class MWAbstractRelationalReadQuery
         }
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.relationalOptions);
@@ -197,11 +194,13 @@ public abstract class MWAbstractRelationalReadQuery
 
     // ************ Morphing ************
 
+    @Override
     public void initializeFrom(MWRelationalQuery query) {
         super.initializeFrom(query);
         getRelationalOptions().initializeFrom(query.getRelationalOptions());
     }
 
+    @Override
     public void initializeFrom(MWReadQuery query) {
         super.initializeFrom(query);
         initializeFrom((MWRelationalQuery) query);
@@ -210,12 +209,14 @@ public abstract class MWAbstractRelationalReadQuery
 
     // ************ accessors ************
 
+    @Override
     public MWRelationalSpecificQueryOptions getRelationalOptions() {
         return this.relationalOptions;
     }
 
     // ************ Cache Usage ************
 
+    @Override
     public CacheUsageModel getCacheUsage() {
         return this.cacheUsage;
     }
@@ -231,6 +232,7 @@ public abstract class MWAbstractRelationalReadQuery
         return null;
     }
 
+    @Override
     public void setCacheUsage(CacheUsageModel model) {
         CacheUsageModel oldCacheUsage = this.cacheUsage;
         this.cacheUsage = model;
@@ -247,11 +249,13 @@ public abstract class MWAbstractRelationalReadQuery
 
     // ************ In memory query indirection ************
 
+    @Override
     public InMemoryQueryIndirectionPolicyModel getInMemoryQueryIndirectionPolicy() {
         return this.inMemoryQueryIndirectionPolicy;
     }
 
 
+    @Override
     public void setInMemoryQueryIndirectionPolicy(InMemoryQueryIndirectionPolicyModel inMemoryQueryIndirectionPolicyModel) {
         InMemoryQueryIndirectionPolicyModel oldQueryPolicy = this.inMemoryQueryIndirectionPolicy;
         this.inMemoryQueryIndirectionPolicy = inMemoryQueryIndirectionPolicyModel;
@@ -346,48 +350,59 @@ public abstract class MWAbstractRelationalReadQuery
 
     // ********** queryFormat **********
 
+    @Override
     public String getQueryFormatType() {
         return this.relationalOptions.getQueryFormatType();
     }
 
+    @Override
     public void setQueryFormatType(String type) {
         this.relationalOptions.setQueryFormatType(type);
     }
 
+    @Override
     public MWQueryFormat getQueryFormat() {
         return this.relationalOptions.getQueryFormat();
     }
 
+    @Override
     public TriStateBoolean isCacheStatement() {
         return this.relationalOptions.isCacheStatement();
     }
 
+    @Override
     public void setCacheStatement(TriStateBoolean cacheStatement) {
         this.relationalOptions.setCacheStatement(cacheStatement);
     }
 
+    @Override
     public TriStateBoolean isBindAllParameters() {
         return this.relationalOptions.isBindAllParameters();
     }
 
+    @Override
     public void setBindAllParameters(TriStateBoolean bindAllParameters) {
         this.relationalOptions.setBindAllParameters(bindAllParameters);
     }
 
+    @Override
     public boolean isPrepare() {
         return this.relationalOptions.isPrepare();
     }
 
+    @Override
     public void setPrepare(boolean bindAllParameters) {
         this.relationalOptions.setPrepare(bindAllParameters);
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         this.relationalOptions.notifyExpressionsToRecalculateQueryables();
     }
 
     // ************ runtime conversion **************
 
+    @Override
     public DatabaseQuery runtimeQuery() {
         ObjectLevelReadQuery runtimeQuery = (ObjectLevelReadQuery) super.runtimeQuery();
 
@@ -403,6 +418,7 @@ public abstract class MWAbstractRelationalReadQuery
         return runtimeQuery;
     }
 
+    @Override
     public void adjustFromRuntime(ObjectLevelReadQuery runtimeQuery) {
         super.adjustFromRuntime(runtimeQuery);
 

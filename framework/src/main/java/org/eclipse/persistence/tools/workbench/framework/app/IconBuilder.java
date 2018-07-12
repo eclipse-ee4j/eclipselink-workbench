@@ -38,20 +38,24 @@ public interface IconBuilder {
      * built by this IconBuilder.
      * @see Object#equals(Object)
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * @see #equals(Object)
      * @see Object#hashCode()
      */
+    @Override
     int hashCode();
 
 
     IconBuilder NULL_INSTANCE =
         new IconBuilder() {
+            @Override
             public Icon buildIcon() {
                 return EmptyIcon.NULL_INSTANCE;
             }
+            @Override
             public String toString() {
                 return "NullIconBuilder";
             }

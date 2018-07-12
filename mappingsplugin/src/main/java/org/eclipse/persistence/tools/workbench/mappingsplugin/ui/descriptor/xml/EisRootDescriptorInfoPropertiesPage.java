@@ -43,10 +43,12 @@ final class EisRootDescriptorInfoPropertiesPage
         return "eisRootDescriptor.descriptorInfo";
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));

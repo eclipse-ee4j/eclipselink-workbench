@@ -87,6 +87,7 @@ public abstract class MWAttributeItem
         this.queryableArgument = queryableArgument;
     }
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.queryableArgument);
@@ -96,10 +97,12 @@ public abstract class MWAttributeItem
         return this.queryableArgument;
     }
 
+    @Override
     public MWQuery getParentQuery() {
         return (MWQuery) getParent();
     }
 
+    @Override
     public void propertyChanged(Undoable container, String propertyName, Object oldValue, Object newValue) {
             //do nothing
     }
@@ -107,6 +110,7 @@ public abstract class MWAttributeItem
 
     // ****************** Problem Handling************
 
+    @Override
     public void addQueryableNullProblemTo(List currentProblems) {
         currentProblems.add(queryableNullProblem());
     }
@@ -119,6 +123,7 @@ public abstract class MWAttributeItem
     protected abstract void adjustRuntimeQuery(ObjectLevelReadQuery readQuery);
 
 
+    @Override
     public String displayString() {
         return getQueryableArgument().displayString();
     }

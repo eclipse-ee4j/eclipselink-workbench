@@ -214,6 +214,7 @@ public class CompositeIcon
      * VERTICAL: The width of the widest icon.
      * @see javax.swing.Icon#getIconWidth()
      */
+    @Override
     public int getIconWidth() {
         Icon[] localIcons = this.icons;
         int iconsLength = localIcons.length;
@@ -258,6 +259,7 @@ public class CompositeIcon
      * HORIZONTAL: The height of the tallest icon.
      * @see javax.swing.Icon#getIconHeight()
      */
+    @Override
     public int getIconHeight() {
         Icon[] localIcons = this.icons;
         int iconsLength = localIcons.length;
@@ -299,6 +301,7 @@ public class CompositeIcon
     /**
      * @see javax.swing.Icon#paintIcon(java.awt.Component, java.awt.Graphics, int, int)
      */
+    @Override
     public void paintIcon(Component component, Graphics g, int x, int y) {
         if (this.orientation == HORIZONTAL) {
             this.paintIconHorizontally(component, g, x, y);
@@ -649,6 +652,7 @@ public class CompositeIcon
      * Clone the arrays so they are not shared.
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         CompositeIcon clone;
         try {
@@ -670,6 +674,7 @@ public class CompositeIcon
     /**
      * @see javax.accessibility.Accessible#getAccessibleContext()
      */
+    @Override
     public AccessibleContext getAccessibleContext() {
         if (this.accessibleContext == null) {
             this.accessibleContext = new AccessibleCompositeIcon();
@@ -683,6 +688,7 @@ public class CompositeIcon
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "CompositeIcon(" + this.icons.length + " icons)";
     }
@@ -959,6 +965,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getAccessibleRole()
          */
+        @Override
         public AccessibleRole getAccessibleRole() {
             return AccessibleRole.ICON;
         }
@@ -966,6 +973,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getAccessibleStateSet()
          */
+        @Override
         public AccessibleStateSet getAccessibleStateSet() {
             return null;
         }
@@ -973,6 +981,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getAccessibleParent()
          */
+        @Override
         public Accessible getAccessibleParent() {
             return null;
         }
@@ -980,6 +989,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getAccessibleIndexInParent()
          */
+        @Override
         public int getAccessibleIndexInParent() {
             return -1;
         }
@@ -987,6 +997,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getAccessibleChildrenCount()
          */
+        @Override
         public int getAccessibleChildrenCount() {
             Icon[] localIcons = CompositeIcon.this.icons;
             int len = localIcons.length;
@@ -1002,6 +1013,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getAccessibleChild(int)
          */
+        @Override
         public Accessible getAccessibleChild(int index) {
             Icon[] localIcons = CompositeIcon.this.icons;
             int len = localIcons.length;
@@ -1021,6 +1033,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleContext#getLocale()
          */
+        @Override
         public Locale getLocale() {
             return null;
         }
@@ -1028,6 +1041,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleIcon#getAccessibleIconDescription()
          */
+        @Override
         public String getAccessibleIconDescription() {
             return CompositeIcon.this.getDescription();
         }
@@ -1035,6 +1049,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleIcon#setAccessibleIconDescription(java.lang.String)
          */
+        @Override
         public void setAccessibleIconDescription(String description) {
             CompositeIcon.this.setDescription(description);
         }
@@ -1042,6 +1057,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleIcon#getAccessibleIconHeight()
          */
+        @Override
         public int getAccessibleIconHeight() {
             return CompositeIcon.this.getIconHeight();
         }
@@ -1049,6 +1065,7 @@ public class CompositeIcon
         /**
          * @see javax.accessibility.AccessibleIcon#getAccessibleIconWidth()
          */
+        @Override
         public int getAccessibleIconWidth() {
             return CompositeIcon.this.getIconWidth();
         }

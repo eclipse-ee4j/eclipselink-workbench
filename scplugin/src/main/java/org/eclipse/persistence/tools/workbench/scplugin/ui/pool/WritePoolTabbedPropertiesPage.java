@@ -22,6 +22,7 @@ public class WritePoolTabbedPropertiesPage extends PoolTabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         this.addTab( this.buildGeneralPropertiesPage(), this.buildGeneralPropertiesPageTitle());
     }

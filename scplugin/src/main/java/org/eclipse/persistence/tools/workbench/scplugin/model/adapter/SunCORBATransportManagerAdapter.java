@@ -50,6 +50,7 @@ public final class SunCORBATransportManagerAdapter extends TransportManagerAdapt
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         return new SunCORBATransportManagerConfig();

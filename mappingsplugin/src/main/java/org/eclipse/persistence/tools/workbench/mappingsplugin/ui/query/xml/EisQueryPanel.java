@@ -22,7 +22,6 @@ import javax.swing.JTabbedPane;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.xml.MWAbstractEisReadQuery;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.query.QueryGeneralPanel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
@@ -80,6 +79,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.ObjectListSelec
 
     private PropertyValueModel buildInteractionHolder() {
         return new PropertyAspectAdapter(this.queryHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAbstractEisReadQuery) this.subject).getEisInteraction();
             }
@@ -88,6 +88,7 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.ObjectListSelec
 
     protected PropertyValueModel buildComponentEnablerBooleanHolder() {
         return new PropertyAspectAdapter(this.queryHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(true);
             }

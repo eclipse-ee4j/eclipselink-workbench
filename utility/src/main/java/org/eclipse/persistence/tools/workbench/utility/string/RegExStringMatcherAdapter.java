@@ -62,6 +62,7 @@ public class RegExStringMatcherAdapter
     /**
      * @see StringMatcher#setPatternString(String)
      */
+    @Override
     public void setPatternString(String patternString) {
         this.setPatternString(patternString, 0);
     }
@@ -69,6 +70,7 @@ public class RegExStringMatcherAdapter
     /**
      * @see StringMatcher#matches(String)
      */
+    @Override
     public synchronized boolean matches(String string) {
         return this.pattern.matcher(string).matches();
     }

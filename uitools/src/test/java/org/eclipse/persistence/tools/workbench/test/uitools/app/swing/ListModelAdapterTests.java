@@ -50,11 +50,13 @@ public class ListModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         // nothing yet...
     }
 
+    @Override
     protected void tearDown() throws Exception {
         // nothing yet...
         super.tearDown();
@@ -152,6 +154,7 @@ public class ListModelAdapterTests extends TestCase {
     private Comparator buildCustomComparator() {
         // sort with reverse order
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((Comparable) o2).compareTo(o1);
             }

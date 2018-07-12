@@ -57,11 +57,13 @@ public class MWOXTransactionalPolicy extends MWAbstractTransactionalPolicy {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.primaryKeyPolicy = new MWXmlPrimaryKeyPolicy(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.primaryKeyPolicy);
@@ -83,6 +85,7 @@ public class MWOXTransactionalPolicy extends MWAbstractTransactionalPolicy {
 
     // *************** Runtime Conversion ********************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         this.primaryKeyPolicy.adjustRuntimeDescriptor(runtimeDescriptor);
     }

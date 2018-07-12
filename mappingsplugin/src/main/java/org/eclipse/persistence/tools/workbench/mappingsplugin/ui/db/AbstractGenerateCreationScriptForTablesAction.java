@@ -36,6 +36,7 @@ abstract class AbstractGenerateCreationScriptForTablesAction extends AbstractTab
      */
     protected abstract Collection buildTables();
 
+    @Override
     protected void execute() {
         try {
             this.checkDevelopmentLoginSpec("CREATE_ON_DATABASE_DIALOG.title");
@@ -46,6 +47,7 @@ abstract class AbstractGenerateCreationScriptForTablesAction extends AbstractTab
         String ddl = this.database().ddlFor(this.buildTables());
         TextAreaDialog ddlDialog =
             new TextAreaDialog(ddl, "dialog.sqlCreationScript", this.getWorkbenchContext()) {
+            @Override
                 protected JTextArea buildTextArea() {
                     JTextArea textArea = super.buildTextArea();
                     textArea.setLineWrap(true);
@@ -57,10 +59,12 @@ abstract class AbstractGenerateCreationScriptForTablesAction extends AbstractTab
         ddlDialog.show();
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return this.database().isConnected();
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {MWDatabase.CONNECTED_PROPERTY};
     }

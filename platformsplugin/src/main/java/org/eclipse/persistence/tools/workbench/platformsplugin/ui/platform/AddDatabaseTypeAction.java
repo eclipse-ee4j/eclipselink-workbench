@@ -35,6 +35,7 @@ final class AddDatabaseTypeAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("ADD_DATABASE_TYPE");
         // no accelerator
@@ -42,6 +43,7 @@ final class AddDatabaseTypeAction extends AbstractFrameworkAction {
         this.initializeToolTipText("ADD_DATABASE_TYPE.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         // turn off the "timer" because we are going to display a dialog
         this.currentWindow().setCursor(Cursor.getDefaultCursor());
@@ -85,6 +87,7 @@ final class AddDatabaseTypeAction extends AbstractFrameworkAction {
 
     private Iterator existingTypeNames(DatabasePlatform platform) {
         return new TransformationIterator(platform.databaseTypes()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabaseType) next).getName();
             }

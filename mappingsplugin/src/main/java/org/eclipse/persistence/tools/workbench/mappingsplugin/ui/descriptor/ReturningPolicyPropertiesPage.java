@@ -46,11 +46,13 @@ public abstract class ReturningPolicyPropertiesPage extends ScrollableProperties
 
     private PropertyValueModel buildReturningPolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWTransactionalDescriptor.RETURNING_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 MWDescriptorPolicy policy = ((MWTransactionalDescriptor) this.subject).getReturningPolicy();
                 return policy.isActive() ? policy : null;
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTransactionalDescriptor) value).addReturningPolicy();
             }
@@ -62,6 +64,7 @@ public abstract class ReturningPolicyPropertiesPage extends ScrollableProperties
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

@@ -24,6 +24,7 @@ public final class MWGetMethodCodeGenPolicy
         super(method, attribute, classCodeGenPolicy);
     }
 
+    @Override
     void insertArguments(NonreflectiveMethodDefinition methodDef)
     {
         // should have no arguments
@@ -32,6 +33,7 @@ public final class MWGetMethodCodeGenPolicy
     /**
      * Return "return this.<attribute name>;"
      */
+    @Override
     void insertMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         methodDef.addLine("return this." + getAccessedAttribute().getName() + ";");

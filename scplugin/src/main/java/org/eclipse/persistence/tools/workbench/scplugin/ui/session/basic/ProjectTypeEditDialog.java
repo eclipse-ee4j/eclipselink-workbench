@@ -130,6 +130,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 ClassChooserTools.promptForType
@@ -218,6 +219,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildMainPanel()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -316,12 +318,14 @@ final class ProjectTypeEditDialog extends AbstractDialog
     {
         return new PropertyAspectAdapter(ProjectTypeEditor.PROJECT_CLASS_PROPERTY, projectType)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ProjectTypeEditor projectType = (ProjectTypeEditor) subject;
                 return projectType.getProjectClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ProjectTypeEditor projectType = (ProjectTypeEditor) subject;
@@ -340,6 +344,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
     {
         return new TransformationPropertyValueModel(buildProjectTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(! Boolean.TRUE.equals(value));
@@ -351,12 +356,14 @@ final class ProjectTypeEditDialog extends AbstractDialog
     {
         return new PropertyAspectAdapter(ProjectTypeEditor.PROJECT_TYPE_XML_PROPERTY, projectType)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ProjectTypeEditor projectType = (ProjectTypeEditor) subject;
                 return Boolean.valueOf(projectType.isProjectTypeXml());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ProjectTypeEditor projectType = (ProjectTypeEditor) subject;
@@ -381,12 +388,14 @@ final class ProjectTypeEditDialog extends AbstractDialog
     {
         return new PropertyAspectAdapter(ProjectTypeEditor.PROJECT_XML_PROPERTY, projectType)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ProjectTypeEditor projectType = (ProjectTypeEditor) subject;
                 return projectType.getProjectXml();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ProjectTypeEditor projectType = (ProjectTypeEditor) subject;
@@ -405,6 +414,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 addProjectXML();
@@ -427,6 +437,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
      *
      * @return
      */
+    @Override
     protected String helpTopicId()
     {
         return helpTopicId;
@@ -438,6 +449,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
      *
      * @return Either the text field of the XML or the Class widgets
      */
+    @Override
     protected Component initialFocusComponent()
     {
         if (databaseSession.isPrimaryProjectXml())
@@ -463,6 +475,7 @@ final class ProjectTypeEditDialog extends AbstractDialog
     /**
      *
      */
+    @Override
     public void okConfirmed()
     {
         super.okConfirmed();
@@ -577,11 +590,13 @@ final class ProjectTypeEditDialog extends AbstractDialog
      */
     private class XmlFileFilter extends FileFilter
     {
+        @Override
         public boolean accept(File file)
         {
             return file.isDirectory() || ".xml".equalsIgnoreCase(FileTools.extension(file));
         }
 
+        @Override
         public String getDescription()
         {
             return resourceRepository().getString("SESSION_PROJECT_ADVANCED_FILE_CHOOSER_DESCRIPTION");

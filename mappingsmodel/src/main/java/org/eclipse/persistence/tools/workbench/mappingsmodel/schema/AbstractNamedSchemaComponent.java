@@ -70,6 +70,7 @@ public abstract class AbstractNamedSchemaComponent
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.namespaceUrl = "";
@@ -78,14 +79,17 @@ public abstract class AbstractNamedSchemaComponent
 
     // **************** MWNamedSchemaComponent contract ***********************
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public String getNamespaceUrl() {
         return this.namespaceUrl;
     }
 
+    @Override
     public MWNamespace getTargetNamespace() {
         return this.getParentNamespace();
     }
@@ -93,19 +97,23 @@ public abstract class AbstractNamedSchemaComponent
     /**
      * return an iterator of components from this one up to the top named component
      */
+    @Override
     public Iterator namedComponentChain() {
         return new ChainIterator(this) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return ((MWNamedSchemaComponent) currentLink).parentNamedComponent();
             }
         };
     }
 
+    @Override
     public boolean directlyOwns(MWNamedSchemaComponent nestedComponent) {
         return this.directlyOwnedComponents().contains(nestedComponent);
     }
 
     /** No-op implementation */
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {}
 
     private Collection directlyOwnedComponents() {
@@ -114,6 +122,7 @@ public abstract class AbstractNamedSchemaComponent
         return directlyOwnedComponents;
     }
 
+    @Override
     public String qName() {
         String qName = this.getName();
         String prefix = this.getSchema().namespacePrefixForUrl(this.getNamespaceUrl());
@@ -128,6 +137,7 @@ public abstract class AbstractNamedSchemaComponent
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject schemaObject) {
         super.reloadInternal(schemaObject);
         if (schemaObject instanceof XSParticleDecl) {
@@ -150,6 +160,7 @@ public abstract class AbstractNamedSchemaComponent
 
     // **************** AbstractModel contract ********************************
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append("name = " + this.name);
     }

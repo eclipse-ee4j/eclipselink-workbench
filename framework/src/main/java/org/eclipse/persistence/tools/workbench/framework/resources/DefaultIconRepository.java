@@ -70,6 +70,7 @@ public class DefaultIconRepository implements IconRepository {
      /**
      * @see IconRepository#hasIcon(String)
      */
+    @Override
     public boolean hasIcon(String key) {
         return (key == null) ||
                 this.cache.containsKey(key) ||
@@ -79,6 +80,7 @@ public class DefaultIconRepository implements IconRepository {
     /**
      * @see IconRepository#getIcon(String)
      */
+    @Override
     public synchronized Icon getIcon(String key) {
         // allow clients to request a "non-icon"
         if (key == null) {
@@ -132,6 +134,7 @@ public class DefaultIconRepository implements IconRepository {
         return this.resourceFileNames;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this);
     }

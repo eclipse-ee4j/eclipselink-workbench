@@ -29,6 +29,7 @@ public class ListChangeAdapter implements ListChangeListener {
     /**
      * @see ListChangeListener#itemsAdded(ListChangeEvent)
      */
+    @Override
     public void itemsAdded(ListChangeEvent e) {
         // do nothing
     }
@@ -36,6 +37,7 @@ public class ListChangeAdapter implements ListChangeListener {
     /**
      * @see ListChangeListener#itemsRemoved(ListChangeEvent)
      */
+    @Override
     public void itemsRemoved(ListChangeEvent e) {
         // do nothing
     }
@@ -43,6 +45,7 @@ public class ListChangeAdapter implements ListChangeListener {
     /**
      * @see ListChangeListener#itemsReplaced(ListChangeEvent)
      */
+    @Override
     public void itemsReplaced(ListChangeEvent e) {
         // do nothing
     }
@@ -50,6 +53,7 @@ public class ListChangeAdapter implements ListChangeListener {
     /**
      * @see ListChangeListener#listChanged(ListChangeEvent)
      */
+    @Override
     public void listChanged(ListChangeEvent e) {
         // do nothing
     }

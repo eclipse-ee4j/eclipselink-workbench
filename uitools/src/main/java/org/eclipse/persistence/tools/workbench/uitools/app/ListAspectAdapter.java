@@ -97,6 +97,7 @@ public abstract class ListAspectAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.listChangeListener = this.buildListChangeListener();
@@ -108,18 +109,23 @@ public abstract class ListAspectAdapter
     protected ListChangeListener buildListChangeListener() {
         // transform the subject's list change events into VALUE list change events
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ListAspectAdapter.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ListAspectAdapter.this.itemsRemoved(e);
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ListAspectAdapter.this.itemsReplaced(e);
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ListAspectAdapter.this.listChanged(e);
             }
+            @Override
             public String toString() {
                 return "list change listener: " + ListAspectAdapter.this.listName;
             }
@@ -134,6 +140,7 @@ public abstract class ListAspectAdapter
      * This should be a *list iterator* on the list.
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.subject == null) {
             return NullListIterator.instance();
@@ -158,6 +165,7 @@ public abstract class ListAspectAdapter
      * Insert the specified item in the subject's list aspect at the specified index.
      * @see ListValueModel#addItem(int, Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -166,6 +174,7 @@ public abstract class ListAspectAdapter
      * Insert the specified items in the subject's list aspect at the specified index.
      * @see ListValueModel#addItems(int, java.util.List)
      */
+    @Override
     public void addItems(int index, List items) {
         for (int i = 0; i < items.size(); i++) {
             this.addItem(index + i, items.get(i));
@@ -176,6 +185,7 @@ public abstract class ListAspectAdapter
      * Remove the item at the specified index in the subject's list aspect.
      * @see ListValueModel#removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         throw new UnsupportedOperationException();
     }
@@ -184,6 +194,7 @@ public abstract class ListAspectAdapter
      * Remove the items at the specified index in the subject's list aspect.
      * @see ListValueModel#removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         List removedItems = new ArrayList(length);
         for (int i = 0; i < length; i++) {
@@ -196,6 +207,7 @@ public abstract class ListAspectAdapter
      * Replace the item at the specified index of the subject's list aspect.
      * @see ListValueModel#replaceItem(int, Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -204,6 +216,7 @@ public abstract class ListAspectAdapter
      * Replace the items at the specified index of the subject's list aspect.
      * @see ListValueModel#replaceItems(int, java.util.List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         List replacedItems = new ArrayList(items.size());
         for (int i = 0; i < items.size(); i++) {
@@ -216,6 +229,7 @@ public abstract class ListAspectAdapter
      * Return the item at the specified index of the subject's list aspect.
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         return CollectionTools.get((ListIterator) this.getValue(), index);
     }
@@ -224,6 +238,7 @@ public abstract class ListAspectAdapter
      * Return the size of the subject's list aspect.
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.subject == null ? 0 : this.sizeFromSubject();
     }
@@ -243,6 +258,7 @@ public abstract class ListAspectAdapter
     /**
      * @see AspectAdapter#hasListeners()
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyListChangeListeners(VALUE);
     }
@@ -250,6 +266,7 @@ public abstract class ListAspectAdapter
     /**
      * @see AspectAdapter#fireAspectChange(Object, Object)
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.fireListChanged(VALUE);
     }
@@ -257,6 +274,7 @@ public abstract class ListAspectAdapter
     /**
      * @see AspectAdapter#engageNonNullSubject()
      */
+    @Override
     protected void engageNonNullSubject() {
         if (this.listName != null) {
             ((Model) this.subject).addListChangeListener(this.listName, this.listChangeListener);
@@ -266,6 +284,7 @@ public abstract class ListAspectAdapter
     /**
      * @see AspectAdapter#disengageNonNullSubject()
      */
+    @Override
     protected void disengageNonNullSubject() {
         if (this.listName != null) {
             ((Model) this.subject).removeListChangeListener(this.listName, this.listChangeListener);
@@ -275,6 +294,7 @@ public abstract class ListAspectAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.listName);
     }

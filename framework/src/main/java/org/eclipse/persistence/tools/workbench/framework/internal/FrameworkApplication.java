@@ -428,6 +428,7 @@ public final class FrameworkApplication
      */
     private PreferenceChangeListener buildNetworkSettingsListener() {
         return new PreferenceChangeListener() {
+            @Override
             public void preferenceChange(PreferenceChangeEvent e) {
                 String key = e.getKey();
                 if (key.equals(HTTP_PROXY_HOST_PREFERENCE)) {
@@ -478,6 +479,7 @@ public final class FrameworkApplication
      */
     private Runnable buildInitializeSynchronizedHelpManagerRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 FrameworkApplication.this.initializeSynchronizedHelpManager();
             }
@@ -502,6 +504,7 @@ public final class FrameworkApplication
      */
     private Command buildInitializeHelpManagerCommand() {
         return new Command() {
+            @Override
             public void execute() {
                 FrameworkApplication.this.initializeHelpManager();
             }
@@ -795,9 +798,11 @@ public final class FrameworkApplication
         // allow all the outstanding UI events to be handled before shutting down
         EventQueue.invokeLater(
                 new Runnable() {
+                    @Override
                     public void run() {
                         System.exit(0);
                     }
+                    @Override
                     public String toString() {
                         return "runnable shutdown";
                     }
@@ -827,6 +832,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Application#isFirstExecution()
      */
+    @Override
     public boolean isFirstExecution() {
         return this.firstExecution;
     }
@@ -835,6 +841,7 @@ public final class FrameworkApplication
      * Allow the user to force "development mode" via a command line argument, "-dev".
      * @see org.eclipse.persistence.tools.workbench.framework.AbstractApplication#isDevelopmentMode()
      */
+    @Override
     public boolean isDevelopmentMode() {
         return this.developmentMode || super.isDevelopmentMode();
     }
@@ -845,6 +852,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults#defaultSpecificationTitle()
      */
+    @Override
     public String defaultSpecificationTitle() {
         return "EclipseLink Workbench";
     }
@@ -852,6 +860,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults#defaultSpecificationVendor()
      */
+    @Override
     public String defaultSpecificationVendor() {
         return "";
     }
@@ -859,6 +868,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults#defaultReleaseDesignation()
      */
+    @Override
     public String defaultReleaseDesignation() {
         return "Version 1.0.0";
     }
@@ -866,6 +876,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults#defaultLibraryDesignation()
      */
+    @Override
     public String defaultLibraryDesignation() {
         return "Workbench";
     }
@@ -873,6 +884,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults#defaultSpecificationVersion()
      */
+    @Override
     public String defaultSpecificationVersion() {
         return "1.0.0";
     }
@@ -880,6 +892,7 @@ public final class FrameworkApplication
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults#defaultImplementationVersion()
      */
+    @Override
     public String defaultImplementationVersion() {
         return this.defaultSpecificationVersion();
     }
@@ -894,18 +907,23 @@ public final class FrameworkApplication
     private class RootApplicationContext
         extends AbstractApplicationContext
     {
+        @Override
         public Application getApplication() {
             return FrameworkApplication.this;
         }
+        @Override
         public HelpManager getHelpManager() {
             return FrameworkApplication.this.getHelpManager();
         }
+        @Override
         public NodeManager getNodeManager() {
             return FrameworkApplication.this.getNodeManager();
         }
+        @Override
         public Preferences getPreferences() {
             return FrameworkApplication.this.getRootPreferences();
         }
+        @Override
         public ResourceRepository getResourceRepository() {
             return FrameworkApplication.this.getResourceRepository();
         }
@@ -940,9 +958,11 @@ public final class FrameworkApplication
         RootPreferencesNode(PreferencesContext context) {
             super(context);
         }
+        @Override
         protected Component buildPropertiesPage() {
             return null;
         }
+        @Override
         protected String buildDisplayString() {
             return null;
         }

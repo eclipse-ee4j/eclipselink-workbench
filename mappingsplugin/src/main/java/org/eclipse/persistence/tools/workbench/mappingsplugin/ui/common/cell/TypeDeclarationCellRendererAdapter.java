@@ -29,6 +29,7 @@ public class TypeDeclarationCellRendererAdapter extends NoneSelectedCellRenderer
     }
 
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWTypeDeclaration) value).displayStringWithPackage();
     }
@@ -37,6 +38,7 @@ public class TypeDeclarationCellRendererAdapter extends NoneSelectedCellRenderer
         return true;
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         MWClass mwClass = ((MWTypeDeclaration) value).getType();
 

@@ -38,6 +38,7 @@ final class TopLevelSchemaComponentNode
 
     // **************** Initialization ****************************************
 
+    @Override
     protected SchemaComponentNodeStructure buildStructure(MWSchemaComponent component) {
         SchemaComponentNodeStructure structure;
 
@@ -67,6 +68,7 @@ final class TopLevelSchemaComponentNode
 
     // **************** Comparable contract ***********************************
 
+    @Override
     public int compareTo(Object o) {
         return TopLevelSchemaComponentNodeComparator.compare(this, o);
     }

@@ -44,12 +44,14 @@ public class CheckBoxModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.booleanHolder = new SimplePropertyValueModel(Boolean.TRUE);
         this.buttonModelAdapter = new CheckBoxModelAdapter(this.booleanHolder);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -58,6 +60,7 @@ public class CheckBoxModelAdapterTests extends TestCase {
     public void testSetSelected() throws Exception {
         this.eventFired = false;
         this.buttonModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 CheckBoxModelAdapterTests.this.eventFired = true;
             }
@@ -70,6 +73,7 @@ public class CheckBoxModelAdapterTests extends TestCase {
     public void testSetValue() throws Exception {
         this.eventFired = false;
         this.buttonModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 CheckBoxModelAdapterTests.this.eventFired = true;
             }
@@ -83,6 +87,7 @@ public class CheckBoxModelAdapterTests extends TestCase {
     public void testDefaultValue() throws Exception {
         this.eventFired = false;
         this.buttonModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 CheckBoxModelAdapterTests.this.eventFired = true;
             }
@@ -125,6 +130,7 @@ public class CheckBoxModelAdapterTests extends TestCase {
 
 
 private class TestChangeListener implements ChangeListener {
+    @Override
     public void stateChanged(ChangeEvent e) {
         fail("unexpected event");
     }

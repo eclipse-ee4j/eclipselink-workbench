@@ -31,6 +31,7 @@ final class ModelGroupDefinitionNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     protected ListIterator componentDetails() {
         return this.nameDetails();
     }
@@ -38,6 +39,7 @@ final class ModelGroupDefinitionNodeStructure
 
     // **************** NamedSchemaComponentNodeStructure contract ************
 
+    @Override
     Integer topLevelOrderIndex() {
         return new Integer(1);
     }

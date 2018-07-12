@@ -179,6 +179,7 @@ public class InterfaceDescriptorPropertiesPage extends TitledPropertiesPage {
 
     private AddRemoveListPanel.Adapter buildAddRemoveAdapter() {
         return new AddRemoveListPanel.Adapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
 
                 ClassDescriptionRepository repository = buildClassDescriptionRepository();
@@ -215,18 +216,22 @@ public class InterfaceDescriptorPropertiesPage extends TitledPropertiesPage {
 
             private ClassDescriptionAdapter buildClassDescriptionAdapter() {
                 ClassDescriptionAdapter adapter = new ClassDescriptionAdapter() {
+                    @Override
                     public String additionalInfo(Object classDescription) {
                         return null;
                     }
 
+                    @Override
                     public String className(Object classDescription) {
                         return ((MWDescriptor) classDescription).getMWClass().getName();
                     }
 
+                    @Override
                     public String packageName(Object classDescription) {
                         return ((MWDescriptor) classDescription).packageName();
                     }
 
+                    @Override
                     public String shortClassName(Object classDescription) {
                         return ((MWDescriptor) classDescription).shortName();
                     }
@@ -236,6 +241,7 @@ public class InterfaceDescriptorPropertiesPage extends TitledPropertiesPage {
 
             private ClassDescriptionRepository buildClassDescriptionRepository() {
                 ClassDescriptionRepository repository = new ClassDescriptionRepository() {
+                    @Override
                     public Iterator classDescriptions() {
                         List implementors = new ArrayList();
                         MWInterfaceDescriptor interfaceDescriptor = (MWInterfaceDescriptor) selection();
@@ -250,12 +256,14 @@ public class InterfaceDescriptorPropertiesPage extends TitledPropertiesPage {
                         return implementors.iterator();
                     }
 
+                    @Override
                     public void refreshClassDescriptions() {
                     }
                 };
                 return repository;
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 MWInterfaceDescriptor interfaceDescriptor = (MWInterfaceDescriptor) selection();
 
@@ -305,10 +313,13 @@ public class InterfaceDescriptorPropertiesPage extends TitledPropertiesPage {
             @Override
             protected CollectionChangeListener buildCollectionChangeListener() {
                 return new CollectionChangeListener() {
+                    @Override
                     public void itemsAdded(CollectionChangeEvent e) {
                         fireCollectionChanged(VALUE);                    }
+                    @Override
                     public void itemsRemoved(CollectionChangeEvent e) {
                         fireCollectionChanged(VALUE);                    }
+                    @Override
                     public void collectionChanged(CollectionChangeEvent e) {
                         fireCollectionChanged(VALUE);
                     }

@@ -18,8 +18,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -60,6 +58,7 @@ final class DescriptorGenerationDialog extends AbstractValidatingDialog {
         return this.packageNameTextField.getText();
     }
 
+    @Override
     protected String helpTopicId() {
         return    "dialog.descriptorGeneration";
     }
@@ -74,6 +73,7 @@ final class DescriptorGenerationDialog extends AbstractValidatingDialog {
         setTitle(resourceRepository().getString(titleString));
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -148,12 +148,15 @@ final class DescriptorGenerationDialog extends AbstractValidatingDialog {
 
     protected DocumentListener buildPackageNameDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 DescriptorGenerationDialog.this.packageNameDocumentChanged();
             }
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 DescriptorGenerationDialog.this.packageNameDocumentChanged();
             }
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 // this probably will never happen...
             }
@@ -188,11 +191,13 @@ final class DescriptorGenerationDialog extends AbstractValidatingDialog {
         return false;
     }
 
+    @Override
     protected void setErrorMessageKey(String key) {
         super.setErrorMessageKey(key);
         this.getOKAction().setEnabled(false);
     }
 
+    @Override
     protected void clearErrorMessage() {
         super.clearErrorMessage();
         this.getOKAction().setEnabled(true);

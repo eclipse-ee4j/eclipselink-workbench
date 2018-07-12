@@ -88,19 +88,23 @@ public class SessionOptionsPropertiesPageTest extends AbstractSessionPanelTest
                                              COMPONENT_TEXT_FIELD);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage("org.eclipse.persistence.tools.workbench.scplugin.ui.session.basic.SessionOptionsPropertiesPage", getNodeHolder());
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Testing Session Options Page";

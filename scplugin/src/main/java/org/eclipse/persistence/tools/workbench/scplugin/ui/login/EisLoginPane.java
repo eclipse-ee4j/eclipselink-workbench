@@ -97,12 +97,14 @@ public class EisLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), EISLoginAdapter.CONNECTION_FACTORY_URL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 EISLoginAdapter login = (EISLoginAdapter) subject;
                 return login.getConnectionFactoryURL();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 EISLoginAdapter login = (EISLoginAdapter) subject;
@@ -149,12 +151,14 @@ public class EisLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), EISLoginAdapter.CONNECTION_SPEC_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 EISLoginAdapter login = (EISLoginAdapter) subject;
                 return login.getConnectionSpecClassName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 EISLoginAdapter login = (EISLoginAdapter) subject;
@@ -166,6 +170,7 @@ public class EisLoginPane extends AbstractLoginPane
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();

@@ -49,6 +49,7 @@ public class SwitcherPanelTests extends TestCase
     {
         return new PropertyAspectAdapter(ModelTest.NAME_PROPERTY, modelTest)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((ModelTest) this.subject).getName();
@@ -60,6 +61,7 @@ public class SwitcherPanelTests extends TestCase
     {
         return new TransformationPropertyValueModel(buildPropertyAdapter(modelTest))
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -83,6 +85,7 @@ public class SwitcherPanelTests extends TestCase
 
         return new TransformationPropertyValueModel(buildPropertyAdapter(modelTest))
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)

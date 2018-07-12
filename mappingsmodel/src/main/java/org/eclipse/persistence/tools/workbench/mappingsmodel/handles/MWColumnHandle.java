@@ -19,8 +19,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 /**
@@ -83,6 +81,7 @@ public final class MWColumnHandle extends MWHandle {
         this.column = column;
     }
 
+    @Override
     protected Node node() {
         return this.getColumn();
     }
@@ -92,10 +91,12 @@ public final class MWColumnHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER column should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.column.compareTo(((MWColumnHandle) o).column);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.column == null) {
             sb.append("null");
@@ -109,6 +110,7 @@ public final class MWColumnHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void resolveColumnHandles() {
         super.resolveColumnHandles();
 

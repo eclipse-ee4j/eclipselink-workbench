@@ -53,6 +53,7 @@ public class SortedListValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.wrappedCollection = new HashBag();
@@ -60,6 +61,7 @@ public class SortedListValueModelAdapterTests extends TestCase {
         this.adapter = new SortedListValueModelAdapter(this.wrappedCollectionHolder);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -79,7 +81,9 @@ public class SortedListValueModelAdapterTests extends TestCase {
 
     public void testGetValue() {
         this.adapter.addListChangeListener(ValueModel.VALUE, new TestListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {/* OK */}
+            @Override
             public void itemsReplaced(ListChangeEvent e) {/* OK */}
         });
         this.wrappedCollectionHolder.addItem("foo");
@@ -128,8 +132,11 @@ public class SortedListValueModelAdapterTests extends TestCase {
 
     public void testListSynch() {
         this.adapter.addListChangeListener(ValueModel.VALUE, new TestListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {/* OK */}
+            @Override
             public void itemsRemoved(ListChangeEvent e) {/* OK */}
+            @Override
             public void itemsReplaced(ListChangeEvent e) {/* OK */}
         });
         this.wrappedCollectionHolder.addItem("foo");
@@ -182,15 +189,19 @@ public class SortedListValueModelAdapterTests extends TestCase {
     }
 
 private class TestListChangeListener implements ListChangeListener {
+    @Override
     public void itemsAdded(ListChangeEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void itemsRemoved(ListChangeEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void itemsReplaced(ListChangeEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void listChanged(ListChangeEvent e) {
         fail("unexpected event");
     }

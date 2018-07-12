@@ -50,10 +50,12 @@ public final class MWCompositeEisDescriptor
     }
 
 
+    @Override
     public MWCompositeEisDescriptor asCompositeEisDescriptor() {
         return this;
     }
 
+    @Override
     public void applyAdvancedPolicyDefaults(MWProjectDefaultsPolicy defaultsPolicy) {
         defaultsPolicy.applyAdvancedPolicyDefaults(this);
     }
@@ -63,6 +65,7 @@ public final class MWCompositeEisDescriptor
         //do nothing, locking not supported
     }
 
+    @Override
     public boolean isRootDescriptor() {
         return false;
     }

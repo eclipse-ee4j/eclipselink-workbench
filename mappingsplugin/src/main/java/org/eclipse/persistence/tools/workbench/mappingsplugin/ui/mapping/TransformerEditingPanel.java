@@ -200,6 +200,7 @@ public final class TransformerEditingPanel
 
     private StringConverter buildMWMethodStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWMethod) o).shortSignatureWithReturnType();
             }
@@ -221,6 +222,7 @@ public final class TransformerEditingPanel
     private ListCellRenderer buildMethodRenderer() {
         return new AdaptableListCellRenderer(
             new MethodCellRendererAdapter(this.resourceRepository()) {
+                @Override
                 protected Icon buildNonNullValueIcon(Object value) {
                     return null;
                 }
@@ -283,6 +285,7 @@ public final class TransformerEditingPanel
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return TransformerEditingPanel.this.transformerSpec.classRepository();
             }
@@ -291,6 +294,7 @@ public final class TransformerEditingPanel
 
     private PropertyChangeListener buildComponentEnablingListener(final Component component, final String enabledValue) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() == enabledValue);
             }

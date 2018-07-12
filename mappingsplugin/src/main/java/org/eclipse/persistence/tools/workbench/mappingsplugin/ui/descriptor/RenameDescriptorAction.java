@@ -35,6 +35,7 @@ final class RenameDescriptorAction extends AbstractFrameworkAction {
         super(context.buildExpandedResourceRepositoryContext(UiDescriptorBundle.class));
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -42,6 +43,7 @@ final class RenameDescriptorAction extends AbstractFrameworkAction {
         this.initializeToolTipText("RENAME_DESCRIPTOR_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute(final ApplicationNode selectedNode) {
         // if the descriptor's package changes, the node's path will change;
         // so hold the descriptor and search for its node after the rename is complete
@@ -83,6 +85,7 @@ final class RenameDescriptorAction extends AbstractFrameworkAction {
 
     private Collection buildPackageNames(MWProject project) {
         Iterator packageNames = new FilteringIterator(project.packageNames()) {
+            @Override
             protected boolean accept(Object packageName) {
                 return ((String) packageName).length() > 0;
             }

@@ -62,6 +62,7 @@ final class RelationalReadAllQueryPanel
 
     private Filter buildOrderingChooseableFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((MWQueryable) o).isValidForReadAllQueryOrderable();
             }
@@ -70,6 +71,7 @@ final class RelationalReadAllQueryPanel
 
     private Filter buildOrderingTraversableFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((MWQueryable) o).isTraversableForReadAllQueryOrderable();
             }
@@ -107,6 +109,7 @@ final class RelationalReadAllQueryPanel
 
     protected QuickViewPanel.QuickViewItem buildBatchReadAttributeQuickViewItem(MWBatchReadItem queryItem) {
         return new QueryQuickViewItem(queryItem) {
+            @Override
             public void select() {
                 RelationalReadAllQueryPanel.this.tabbedPane.setSelectedComponent(RelationalReadAllQueryPanel.this.queryOptimizationPanel);
                 RelationalReadAllQueryPanel.this.queryOptimizationPanel.selectBatchReadItem((MWBatchReadItem) getValue());
@@ -115,6 +118,7 @@ final class RelationalReadAllQueryPanel
     }
     protected QuickViewPanel.QuickViewItem buildJoinedAttributeQuickViewItem(MWJoinedItem queryItem) {
         return new QueryQuickViewItem(queryItem) {
+            @Override
             public void select() {
                 RelationalReadAllQueryPanel.this.tabbedPane.setSelectedComponent(RelationalReadAllQueryPanel.this.queryOptimizationPanel);
                 RelationalReadAllQueryPanel.this.queryOptimizationPanel.selectJoinedItem((MWJoinedItem) getValue());
@@ -124,6 +128,7 @@ final class RelationalReadAllQueryPanel
 
     protected QuickViewPanel.QuickViewItem buildOrderingAttributeQuickViewItem(Ordering queryItem) {
         return new QueryQuickViewItem(queryItem) {
+            @Override
             public void select() {
                 RelationalReadAllQueryPanel.this.tabbedPane.setSelectedComponent(RelationalReadAllQueryPanel.this.queryOrderingPanel);
                 RelationalReadAllQueryPanel.this.queryOrderingPanel.select((MWQueryItem) getValue());

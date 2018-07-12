@@ -48,6 +48,7 @@ public abstract class MWContainerAccessorCodeGenPolicy
         return this.backPointerAttribute.getSetMethod();
     }
 
+    @Override
     void insertMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         if (getAccessedAttribute().isAssignableToMap())

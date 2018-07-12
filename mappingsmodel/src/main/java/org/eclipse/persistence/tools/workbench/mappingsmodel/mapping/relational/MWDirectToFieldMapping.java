@@ -14,9 +14,7 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWColumnHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWConverter;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWConverterMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWDirectMapping;
@@ -25,14 +23,12 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribu
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational.MWRelationalProject;
 import org.eclipse.persistence.tools.workbench.utility.filters.Filter;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.mappings.converters.SerializedObjectConverter;
 import org.eclipse.persistence.mappings.converters.TypeConversionConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
 
 public final class MWDirectToFieldMapping
     extends MWRelationalDirectMapping
@@ -51,47 +47,58 @@ public final class MWDirectToFieldMapping
     // **************** MWQueryable implementation ***************
 
     /** Direct mappings can never have sub queryable elements */
+    @Override
     public boolean allowsChildren() {
         return false;
     }
 
+    @Override
     public boolean allowsOuterJoin() {
         return allowsChildren();
     }
 
     /** A direct mapping will always be a leaf */
+    @Override
     public boolean isLeaf(Filter queryableFilter) {
         return true;
     }
 
+    @Override
     public boolean isTraversableForReadAllQueryOrderable() {
         return true;
     }
 
+    @Override
     public boolean isValidForReadAllQueryOrderable() {
         return true;
     }
 
+    @Override
     public boolean isValidForReportQueryAttribute() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForReportQueryAttribute() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForQueryExpression() {
         return true;
     }
 
+    @Override
     public boolean isValidForQueryExpression() {
         return true;
     }
 
+    @Override
     public String iconKey() {
         return getConverter().iconKey();
     }
 
+    @Override
      public MWMappingDescriptor getParentDescriptor() {
         return (MWMappingDescriptor) getParent();
     }
@@ -103,6 +110,7 @@ public final class MWDirectToFieldMapping
 
     // ***************** Morphing ******************
 
+    @Override
     public MWDirectMapping asMWDirectMapping() {
         if (!getConverter().getType().equals(MWConverter.NO_CONVERTER)) {
             this.setNullConverter();
@@ -110,6 +118,7 @@ public final class MWDirectToFieldMapping
         return this;
     }
 
+    @Override
     public MWDirectMapping asMWObjectTypeMapping() {
         if (!getConverter().getType().equals(MWConverter.OBJECT_TYPE_CONVERTER)) {
             this.setObjectTypeConverter();
@@ -117,6 +126,7 @@ public final class MWDirectToFieldMapping
         return this;
     }
 
+    @Override
     public MWDirectMapping asMWTypeConversionMapping() {
         if (!getConverter().getType().equals(MWConverter.TYPE_CONVERSION_CONVERTER)) {
             this.setTypeConversionConverter();
@@ -124,6 +134,7 @@ public final class MWDirectToFieldMapping
         return this;
     }
 
+    @Override
     public MWDirectMapping asMWSerializedMapping() {
         if (!getConverter().getType().equals(MWConverter.SERIALIZED_OBJECT_CONVERTER)) {
             this.setSerializedObjectConverter();
@@ -133,11 +144,13 @@ public final class MWDirectToFieldMapping
     }
 
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWDirectToFieldMapping(this);
     }
 
 
+    @Override
     protected void initializeFromMWConverterMapping(MWConverterMapping converterMapping) {
         // only initialize my converter if I already have the same type of converter
         if (this.getConverter().getType() == converterMapping.getConverter().getType()) {
@@ -147,6 +160,7 @@ public final class MWDirectToFieldMapping
 
     // **************** Runtime Conversion ****************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         if (((MWRelationalProject) getProject()).isGenerateDeprecatedDirectMappings()) {
             if (getConverter().getType().equals((MWConverter.NO_CONVERTER))) {
@@ -176,6 +190,7 @@ public final class MWDirectToFieldMapping
 
     //********** display methods **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getName());
         sb.append(" => ");

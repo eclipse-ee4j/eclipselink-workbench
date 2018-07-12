@@ -62,6 +62,7 @@ public class ProjectExporterTests extends RelationalProjectRunnerTests {
         assertEquals( status, 0);
     }
 
+    @Override
     protected MWProject buildProject() throws Exception {
 
         return new EmployeeProject().getProject();

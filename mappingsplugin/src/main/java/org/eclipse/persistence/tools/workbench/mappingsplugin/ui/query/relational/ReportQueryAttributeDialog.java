@@ -54,34 +54,42 @@ final class ReportQueryAttributeDialog extends AttributeItemDialog {
         this.itemNameTextField = new JTextField();
     }
 
+    @Override
     protected String helpTopicId() {
         return "descriptor.queryManager.report.attributes";
     }
 
+    @Override
     protected String titleKey() {
         return "REPORT_QUERY_ATTRIBUTES_DIALOG_TITLE";
     }
 
+    @Override
     protected String editTitleKey() {
         return "REPORT_QUERY_ATTRIBUTES_EDIT_DIALOG_TITLE";
     }
 
+    @Override
     protected Filter buildChooseableFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((MWQueryable) o).isValidForReportQueryAttribute();
             }
         };
     }
 
+    @Override
     protected Filter buildTraversableFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((MWQueryable) o).isTraversableForReportQueryAttribute();
             }
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -116,6 +124,7 @@ final class ReportQueryAttributeDialog extends AttributeItemDialog {
 
         this.functionComboBox.setEditable(true);
         this.functionComboBox.addItemListener(new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 updateOKButton();
                 calculateItemName();
@@ -173,18 +182,21 @@ final class ReportQueryAttributeDialog extends AttributeItemDialog {
         return this.itemNameTextField.getText();
     }
 
+    @Override
     protected void initializeEditMode(MWAttributeItem attributeItem) {
         super.initializeEditMode(attributeItem);
         this.functionComboBox.setSelectedItem(((MWReportAttributeItem) attributeItem).getFunction());
         this.itemNameTextField.setText(((MWReportAttributeItem) attributeItem).getName());
     }
 
+    @Override
     protected void treeSelectionChanged(TreeSelectionEvent e) {
         super.treeSelectionChanged(e);
         calculateItemName();
     }
 
 
+    @Override
     protected void updateOKButton() {
         if (getFunction() == MWReportAttributeItem.COUNT_FUNCTION
                 && getQueryableTree().getSelectionCount() == 0) {
@@ -219,24 +231,29 @@ final class ReportQueryAttributeDialog extends AttributeItemDialog {
     }
 
 
+    @Override
     protected int attributeItemsSize() {
         return ((MWReportQuery) getQuery()).attributeItemsSize();
     }
 
+    @Override
     protected int indexOfAttributeItem(MWAttributeItem attributeItem) {
         return ((MWReportQuery) getQuery()).indexOfAttributeItem((MWReportAttributeItem) attributeItem);
     }
 
+    @Override
     protected void addAttributeItem(int index, Iterator queryables,
             Iterator allowsNulls) {
         MWReportAttributeItem attributeItem = ((MWReportQuery) getQuery()).addAttributeItem(index, getItemName(), queryables, allowsNulls);
         attributeItem.setFunction(getFunction());
     }
 
+    @Override
     protected void removeAttributeItem(int index) {
         ((MWReportQuery) getQuery()).removeAttributeItem(index);
     }
 
+    @Override
     protected boolean preConfirm() {
         TreePath selectionPath = getQueryableTree().getSelectionPath();
         if (selectionPath == null) {

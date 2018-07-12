@@ -50,10 +50,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.descriptors.InheritancePolicy;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
@@ -98,6 +94,7 @@ public abstract class MWDescriptor extends MWModel
     /**
      * initialize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.legacyValuesMap = new HashMap();
@@ -106,6 +103,7 @@ public abstract class MWDescriptor extends MWModel
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.mwClassHandle = new MWClassHandle(this, this.buildMWClassScrubber());
@@ -121,6 +119,7 @@ public abstract class MWDescriptor extends MWModel
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.mwClassHandle);
@@ -129,9 +128,11 @@ public abstract class MWDescriptor extends MWModel
 
     private NodeReferenceScrubber buildMWClassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptor.this.setMWClass(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptor.buildMWClassScrubber()";
             }
@@ -168,6 +169,7 @@ public abstract class MWDescriptor extends MWModel
         this.firePropertyChanged(MW_CLASS_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
@@ -365,6 +367,7 @@ public abstract class MWDescriptor extends MWModel
      * themselves and their branches.
      * @see AbstractNodeModel.validateBranch()
      */
+    @Override
     public boolean validateBranchInternal() {
         return this.isActive() ?
             super.validateBranchInternal()
@@ -372,6 +375,7 @@ public abstract class MWDescriptor extends MWModel
             this.clearAllBranchProblemsInternal();
     }
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkForFinalSuperClass(currentProblems);
@@ -445,6 +449,7 @@ public abstract class MWDescriptor extends MWModel
 
     //*************** Display Methods **************
 
+    @Override
     public String displayString() {
         return getMWClass().shortName();
     }
@@ -459,6 +464,7 @@ public abstract class MWDescriptor extends MWModel
         return this.getMWClass().shortName() + " (" + packageName + ")";
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(getName());
     }

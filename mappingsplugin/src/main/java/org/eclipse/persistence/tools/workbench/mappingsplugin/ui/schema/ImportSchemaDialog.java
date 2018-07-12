@@ -53,6 +53,7 @@ class ImportSchemaDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -61,6 +62,7 @@ class ImportSchemaDialog
         this.getOKAction().setEnabled(false);
     }
 
+    @Override
     protected Component buildMainPanel() {
         this.schemaPanel = this.buildSchemaPanel();
         return this.schemaPanel;
@@ -74,6 +76,7 @@ class ImportSchemaDialog
 
     private PropertyValueModel buildSchemaRepositoryHolder() {
         return new AbstractReadOnlyPropertyValueModel() {
+            @Override
             public Object getValue() {
                 return ImportSchemaDialog.this.schemaRepository;
             }
@@ -82,6 +85,7 @@ class ImportSchemaDialog
 
     private PropertyChangeListener buildSchemaPropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ImportSchemaDialog.this.updateForErrors();
             }
@@ -91,6 +95,7 @@ class ImportSchemaDialog
 
     // **************** AbstractDialog contract *******************************
 
+    @Override
     protected String helpTopicId() {
         return "dialog.addSchema";
     }
@@ -104,6 +109,7 @@ class ImportSchemaDialog
     }
     //overriding so that the dialog is not packed, this allows
     //the setSize in initialize to take effect
+    @Override
     protected void prepareToShow() {
         this.setLocationRelativeTo(this.getParent());
     }
@@ -184,6 +190,7 @@ class ImportSchemaDialog
         return true;
     }
 
+    @Override
     protected boolean preConfirm() {
         startImportationThread();
         //     Returns false, we'll close the dialog once the validation is complete
@@ -268,6 +275,7 @@ class ImportSchemaDialog
     /**
      * loosen the access level a bit
      */
+    @Override
     protected void okConfirmed() {
         super.okConfirmed();
     }
@@ -293,6 +301,7 @@ class ImportSchemaDialog
 
         private void showWaitCursor() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     ImportSchemaDialog.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     getWorkbenchContext().getCurrentWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -302,6 +311,7 @@ class ImportSchemaDialog
 
         private void hideWaitCursor() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     ImportSchemaDialog.this.setCursor(Cursor.getDefaultCursor());
                     getWorkbenchContext().getCurrentWindow().setCursor(Cursor.getDefaultCursor());
@@ -316,12 +326,14 @@ class ImportSchemaDialog
 
         private void disposeImportSchemaDialog() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     ImportSchemaDialog.this.okConfirmed();
                 }
             });
         }
 
+        @Override
         public void run() {
             try {
                 MWXmlSchema schema = importSchema();
@@ -329,6 +341,7 @@ class ImportSchemaDialog
             }
             catch (final ResourceException re) {
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         ImportSchemaDialog.this.showUrlLoadFailure(ImportationRunnable.this.schemaCreator.getSchemaName(), re);
                     }
@@ -337,6 +350,7 @@ class ImportSchemaDialog
             // In XDK version 9.0.4 only RuntimeExceptons are thrown
             catch (final RuntimeException re) {
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         ImportSchemaDialog.this.showSchemaLoadFailure(ImportationRunnable.this.schemaCreator.getSchemaName(), re);
                     }
@@ -374,10 +388,12 @@ class ImportSchemaDialog
             this.schemaName = schemaName;
         }
 
+        @Override
         public String getSchemaName() {
             return this.schemaName;
         }
 
+        @Override
         public String getFileName() {
             return this.fileName;
         }
@@ -388,6 +404,7 @@ class ImportSchemaDialog
             super(schemaName, fileName);
         }
 
+        @Override
         public MWXmlSchema createSchema() throws RuntimeException, ResourceException {
             return ImportSchemaDialog.this.schemaRepository.createSchemaFromClasspath(this.schemaName, this.fileName);
         }
@@ -398,6 +415,7 @@ class ImportSchemaDialog
             super(schemaName, fileName);
         }
 
+        @Override
         public MWXmlSchema createSchema() throws RuntimeException, ResourceException {
             return ImportSchemaDialog.this.schemaRepository.createSchemaFromFile(this.schemaName, this.fileName);
         }
@@ -408,6 +426,7 @@ class ImportSchemaDialog
             super(schemaName, fileName);
         }
 
+        @Override
         public MWXmlSchema createSchema() throws RuntimeException, ResourceException {
             return ImportSchemaDialog.this.schemaRepository.createSchemaFromUrl(this.schemaName, this.fileName);
         }

@@ -45,6 +45,7 @@ public class TransformationPropertyValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.objectHolder = new SimplePropertyValueModel("foo");
@@ -53,15 +54,18 @@ public class TransformationPropertyValueModelTests extends TestCase {
 
     private BidiTransformer buildTransformer() {
         return new BidiTransformer() {
+            @Override
             public Object transform(Object o) {
                 return (o == null) ? null : ((String) o).toUpperCase();
             }
+            @Override
             public Object reverseTransform(Object o) {
                 return (o == null) ? null : ((String) o).toLowerCase();
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -172,6 +176,7 @@ public class TransformationPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 TransformationPropertyValueModelTests.this.event = e;
             }
@@ -180,6 +185,7 @@ public class TransformationPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildTransformationListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 TransformationPropertyValueModelTests.this.transformationEvent = e;
             }

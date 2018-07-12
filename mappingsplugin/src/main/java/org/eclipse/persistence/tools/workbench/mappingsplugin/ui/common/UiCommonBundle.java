@@ -82,6 +82,7 @@ public class UiCommonBundle
 
     };
 
+    @Override
     public Object[][] getContents()
     {
         return contents;

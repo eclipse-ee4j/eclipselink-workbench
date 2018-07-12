@@ -33,6 +33,7 @@ final class NewWindowAction
         this.application = application;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -41,6 +42,7 @@ final class NewWindowAction
         this.setEnabled(true);
     }
 
+    @Override
     protected void execute() {
         this.application.openNewWindow((WorkbenchWindow) currentWindow());
     }

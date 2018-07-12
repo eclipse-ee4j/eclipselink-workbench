@@ -81,9 +81,6 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.CompositeIterat
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -158,6 +155,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
     /**
      * initialize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.legacyValuesMap = new HashMap();
@@ -166,6 +164,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.attributeHandle = new MWAttributeHandle(this, this.buildAttributeScrubber());
@@ -194,6 +193,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
         firePropertyChanged(ATTRIBUTE_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public String getName(){
         return this.name;
     }
@@ -275,6 +275,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     private Iterator candidateGetMethodIterators() {
         return new TransformationIterator(this.declaringClassesForCandidateAccessorMethods()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWClass) next).candidateTopLinkGetMethods();
             }
@@ -297,6 +298,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     private Iterator candidateSetMethodIterators() {
         return new TransformationIterator(this.declaringClassesForCandidateAccessorMethods()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWClass) next).candidateTopLinkSetMethods();
             }
@@ -372,6 +374,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     // **************** Containment hierarchy ***************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.attributeHandle);
@@ -381,9 +384,11 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     private NodeReferenceScrubber buildAttributeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMapping.this.attributeRemoved();
             }
+            @Override
             public String toString() {
                 return "MWMapping.buildAttributeScrubber()";
             }
@@ -399,9 +404,11 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     private NodeReferenceScrubber buildGetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMapping.this.setGetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWMapping.buildGetMethodScrubber()";
             }
@@ -410,9 +417,11 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     private NodeReferenceScrubber buildSetMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMapping.this.setSetMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWMapping.buildSetMethodScrubber()";
             }
@@ -422,6 +431,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     // **************** Convenience methods ***************
 
+    @Override
     public MWMappingDescriptor getParentDescriptor() {
         return (MWMappingDescriptor) this.getParent();
     }
@@ -854,65 +864,82 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     // ********** MWQueryable implementation **********
 
+    @Override
     public boolean allowsChildren() {
         return false;
     }
 
+    @Override
     public boolean allowsOuterJoin() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForBatchReadAttribute() {
         return false;
     }
+    @Override
     public boolean isValidForBatchReadAttribute() {
         return false;
     }
 
+    @Override
     public boolean isLeaf(Filter queryableFilter) {
         return true;
     }
 
+    @Override
     public MWQueryable subQueryableElementAt(int index, Filter queryableFilter) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public List subQueryableElements(Filter queryableFilter) {
         return Collections.EMPTY_LIST;
     }
 
+    @Override
     public boolean usesAnyOf() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForJoinedAttribute() {
         return false;
     }
+    @Override
     public boolean isValidForJoinedAttribute() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForReadAllQueryOrderable() {
         return false;
     }
+    @Override
     public boolean isValidForReadAllQueryOrderable() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForReportQueryAttribute() {
         return false;
     }
+    @Override
     public boolean isValidForReportQueryAttribute() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForQueryExpression() {
         return false;
     }
+    @Override
     public boolean isValidForQueryExpression() {
         return false;
     }
 
+    @Override
     public String iconKey() {
         throw new UnsupportedOperationException();
     }
@@ -943,6 +970,7 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
 
     //************** Problem Handling ***************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkGetMethod(currentProblems);
@@ -1073,10 +1101,12 @@ public abstract class MWMapping extends MWModel implements MWQueryable {
             this.getName();
     }
 
+    @Override
     public String displayString() {
         return this.getName();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getName());
     }

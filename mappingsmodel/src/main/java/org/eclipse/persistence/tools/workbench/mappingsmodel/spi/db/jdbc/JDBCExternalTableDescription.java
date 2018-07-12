@@ -85,6 +85,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTableDescription#getCatalogName()
      */
+    @Override
     public String getCatalogName() {
         return this.catalogName;
     }
@@ -92,6 +93,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTableDescription#getSchemaName()
      */
+    @Override
     public String getSchemaName() {
         return this.schemaName;
     }
@@ -99,6 +101,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTableDescription#getName()
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -106,6 +109,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTableDescription#getQualifiedName()
      */
+    @Override
     public String getQualifiedName() {
         return this.qualifiedName;
     }
@@ -113,6 +117,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTableDescription#getTable()
      */
+    @Override
     public ExternalTable getTable() {
         if (this.externalTable == null) {
             this.externalTable = this.buildExternalTable();
@@ -123,6 +128,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.TableDescription#getAdditionalInfo()
      */
+    @Override
     public String getAdditionalInfo() {
         try {
             return this.metaData().getURL();
@@ -153,6 +159,7 @@ final class JDBCExternalTableDescription implements ExternalTableDescription {
         return this.database;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.qualifiedName);
     }

@@ -199,6 +199,7 @@ public final class FileTools {
 
     private static Iterator filesIn(File[] files) {
         return new FilteringIterator(new ArrayIterator(files)) {
+            @Override
             protected boolean accept(Object next) {
                 return ((File) next).isFile();
             }
@@ -225,6 +226,7 @@ public final class FileTools {
 
     private static Iterator directoriesIn(File[] files) {
         return new FilteringIterator(new ArrayIterator(files)) {
+            @Override
             protected boolean accept(Object next) {
                 return ((File) next).isDirectory();
             }
@@ -291,6 +293,7 @@ public final class FileTools {
     private static Iterator directoriesInTrees(Iterator directories) {
         return new CompositeIterator(
             new TransformationIterator(directories) {
+                @Override
                 protected Object transform(Object next) {
                     return FileTools.directoriesInTree((File) next);
                 }
@@ -507,6 +510,7 @@ public final class FileTools {
      */
     public static Iterator canonicalFiles(Iterator files) {
         return new TransformationIterator(files) {
+            @Override
             protected Object transform(Object next) {
                 return canonicalFile((File) next);
             }
@@ -534,6 +538,7 @@ public final class FileTools {
      */
     public static Iterator canonicalFileNames(Iterator fileNames) {
         return new TransformationIterator(fileNames) {
+            @Override
             protected Object transform(Object next) {
                 return canonicalFileName((String) next);
             }
@@ -824,6 +829,7 @@ public final class FileTools {
      */
     public static Iterator filter(Iterator files, final FileFilter fileFilter) {
         return new FilteringIterator(files) {
+            @Override
             protected boolean accept(Object next) {
                 return fileFilter.accept((File) next);
             }

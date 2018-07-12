@@ -157,6 +157,7 @@ public class ComponentVisibilityEnabler extends ComponentEnabler
      *
      * @param visible The new visible state the components need to have
      */
+    @Override
     protected void updateEnableState(boolean visible)
     {
         for (Iterator iter = components(); iter.hasNext();)

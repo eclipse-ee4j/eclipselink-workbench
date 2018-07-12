@@ -62,6 +62,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel descriptorNodeHolder) {
         super.initialize(descriptorNodeHolder);
         this.inheritancePolicyHolder = buildInheritancePolicyHolder();
@@ -85,6 +86,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
     protected void addRootListener(final RootListener listener) {
         getIsRootHolder().addPropertyChangeListener(
             new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     boolean enabled = Boolean.TRUE.equals(evt.getNewValue());
                     listener.updateRootStatus(enabled);
@@ -116,6 +118,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
 
     protected PropertyChangeListener buildIsChildListener(final Container container) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 boolean enabled = Boolean.FALSE.equals(evt.getNewValue());
                 setEverythingEnabled(container, enabled);
@@ -133,9 +136,11 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
 
     protected PropertyValueModel buildIsRootHolder() {
         return new PropertyAspectAdapter(this.inheritancePolicyHolder, MWDescriptorInheritancePolicy.IS_ROOT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWDescriptorInheritancePolicy)subject).isRoot());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorInheritancePolicy)subject).setIsRoot(((Boolean)value).booleanValue());
             }
@@ -145,6 +150,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
 
     private PropertyValueModel buildProjectHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptor) subject).getProject();
             }
@@ -163,6 +169,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
 
     private static StringConverter buildDescriptorStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWDescriptor) o).shortName();
             }
@@ -184,6 +191,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
     private CachingComboBoxModel buildParentDescriptorComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildParentDescriptorHolder(), this.inheritancePolicyHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return InheritancePolicyPropertiesPage.this.sortedCandidateParentDescriptors((MWDescriptorInheritancePolicy) subject);
                 }
@@ -193,10 +201,12 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
 
     private PropertyValueModel buildParentDescriptorHolder() {
         return new PropertyAspectAdapter(this.inheritancePolicyHolder, MWDescriptorInheritancePolicy.PARENT_DESCRIPTOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorInheritancePolicy) subject).getParentDescriptor();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorInheritancePolicy) subject).setParentDescriptor((MWMappingDescriptor) value);
             }
@@ -213,6 +223,7 @@ public abstract class InheritancePolicyPropertiesPage extends ScrollableProperti
 
     private PropertyValueModel buildInheritancePolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.INHERITANCE_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject(){
                 MWDescriptorPolicy policy = ((MWMappingDescriptor) this.subject).getInheritancePolicy();
                 return policy.isActive() ? policy : null;

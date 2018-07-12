@@ -56,6 +56,7 @@ public abstract class CollectionValueModelWrapper
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.collectionChangeListener = this.buildCollectionChangeListener();
@@ -64,21 +65,26 @@ public abstract class CollectionValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
 
     protected CollectionChangeListener buildCollectionChangeListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CollectionValueModelWrapper.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CollectionValueModelWrapper.this.itemsRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CollectionValueModelWrapper.this.collectionChanged(e);
             }
+            @Override
             public String toString() {
                 return "collection change listener";
             }
@@ -92,6 +98,7 @@ public abstract class CollectionValueModelWrapper
      * Extend to start listening to the nested model if necessary.
      * @see Model#addCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public synchronized void addCollectionChangeListener(CollectionChangeListener listener) {
         if (this.hasNoCollectionChangeListeners(VALUE)) {
             this.engageModel();
@@ -103,6 +110,7 @@ public abstract class CollectionValueModelWrapper
      * Extend to start listening to the nested model if necessary.
      * @see Model#addCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public synchronized void addCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         if (collectionName == VALUE && this.hasNoCollectionChangeListeners(VALUE)) {
             this.engageModel();
@@ -114,6 +122,7 @@ public abstract class CollectionValueModelWrapper
      * Extend to stop listening to the nested model if necessary.
      * @see Model#removeCollectionChangeListener(CollectiontChangeListener)
      */
+    @Override
     public synchronized void removeCollectionChangeListener(CollectionChangeListener listener) {
         super.removeCollectionChangeListener(listener);
         if (this.hasNoCollectionChangeListeners(VALUE)) {
@@ -125,6 +134,7 @@ public abstract class CollectionValueModelWrapper
      * Extend to stop listening to the nested model if necessary.
      * @see Model#removeCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public synchronized void removeCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         super.removeCollectionChangeListener(collectionName, listener);
         if (collectionName == VALUE && this.hasNoCollectionChangeListeners(VALUE)) {
@@ -139,6 +149,7 @@ public abstract class CollectionValueModelWrapper
      * wrappers cannot be modified - the underlying model must be modified directly
      * @see CollectionValueModel#addItem(Object)
      */
+    @Override
     public void addItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -146,6 +157,7 @@ public abstract class CollectionValueModelWrapper
     /**
      * @see CollectionValueModel#addItems(java.util.Collection)
      */
+    @Override
     public void addItems(Collection items) {
         for (Iterator stream = items.iterator(); stream.hasNext(); ) {
             this.addItem(stream.next());
@@ -156,6 +168,7 @@ public abstract class CollectionValueModelWrapper
      * wrappers cannot be modified - the underlying model must be modified directly
      * @see CollectionValueModel#removeItem(Object)
      */
+    @Override
     public void removeItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -163,6 +176,7 @@ public abstract class CollectionValueModelWrapper
     /**
      * @see CollectionValueModel#removeItems(java.util.Collection)
      */
+    @Override
     public void removeItems(Collection items) {
         for (Iterator stream = items.iterator(); stream.hasNext(); ) {
             this.removeItem(stream.next());
@@ -189,6 +203,7 @@ public abstract class CollectionValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.collectionHolder);
     }

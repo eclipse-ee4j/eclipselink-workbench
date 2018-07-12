@@ -34,6 +34,7 @@ public class DefaultApplicationProblem implements ApplicationProblem {
     /**
      * @see ApplicationProblem#getSource()
      */
+    @Override
     public ApplicationNode getSource() {
         return this.source;
     }
@@ -41,6 +42,7 @@ public class DefaultApplicationProblem implements ApplicationProblem {
     /**
      * @see ApplicationProblem#getMessageCode()
      */
+    @Override
     public String getMessageCode() {
         return this.messageCode;
     }
@@ -48,6 +50,7 @@ public class DefaultApplicationProblem implements ApplicationProblem {
     /**
      * @see ApplicationProblem#getMessage()
      */
+    @Override
     public String getMessage() {
         return this.message;
     }
@@ -55,6 +58,7 @@ public class DefaultApplicationProblem implements ApplicationProblem {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.ApplicationProblem#printOn(org.eclipse.persistence.tools.workbench.utility.IndentingPrintWriter)
      */
+    @Override
     public void printOn(IndentingPrintWriter writer) {
         writer.print(this.messageCode);
         writer.print(" - ");

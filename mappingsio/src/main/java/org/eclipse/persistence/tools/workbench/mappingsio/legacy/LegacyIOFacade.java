@@ -18,8 +18,6 @@ import java.io.File;
 import java.util.prefs.Preferences;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational.MWRelationalProject;
-import org.eclipse.persistence.tools.workbench.utility.io.FileTools;
 
 
 /**

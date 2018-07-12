@@ -17,20 +17,17 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 import java.text.NumberFormat;
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWTypeDeclaration;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.node.Problem;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.exceptions.ConversionException;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.internal.expressions.ConstantExpression;
 import org.eclipse.persistence.internal.helper.ConversionManager;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
@@ -70,6 +67,7 @@ public final class MWLiteralArgument extends MWArgument {
         super(expression);
     }
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
@@ -77,6 +75,7 @@ public final class MWLiteralArgument extends MWArgument {
         this.value =  "";
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.type);
@@ -86,12 +85,14 @@ public final class MWLiteralArgument extends MWArgument {
         return (MWBasicExpression) getParent();
     }
 
+    @Override
     public String getType() {
         return LITERAL_TYPE;
     }
 
 
     //certain operators only can only take a String for the type (Like, Not Like)
+    @Override
     public void operatorTypeChanged()
     {
         if (getBasicExpression().operatorIsStringType())
@@ -109,6 +110,7 @@ public final class MWLiteralArgument extends MWArgument {
         return this.value;
     }
 
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue)
     {
         if (propertyName == TYPE_PROPERTY)
@@ -133,11 +135,13 @@ public final class MWLiteralArgument extends MWArgument {
         getBasicExpression().getRootCompoundExpression().propertyChanged(this, VALUE_PROPERTY, oldValue, value);
     }
 
+    @Override
     public String displayString()
     {
         return "\"" + getValue() +"\"";
     }
 
+    @Override
     public void toString(StringBuffer sb)
     {
         super.toString(sb);
@@ -169,6 +173,7 @@ public final class MWLiteralArgument extends MWArgument {
     }
 
     //Conversion to Runtime
+    @Override
     Expression runtimeExpression(ExpressionBuilder builder) {
         return new ConstantExpression(value(), builder);
     }
@@ -203,6 +208,7 @@ public final class MWLiteralArgument extends MWArgument {
         return argument;
     }
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
 

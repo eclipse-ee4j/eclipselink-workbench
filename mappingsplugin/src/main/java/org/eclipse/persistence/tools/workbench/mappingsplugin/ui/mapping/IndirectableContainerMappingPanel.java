@@ -72,6 +72,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
     {
         return new TransformationPropertyValueModel(buildIndirectionTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (MWIndirectableContainerMapping.VALUE_HOLDER_INDIRECTION.equals(value))
@@ -89,6 +90,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
     {
         return new TransformationPropertyValueModel(buildIndirectionTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(! MWIndirectableContainerMapping.NO_INDIRECTION.equals(value));
@@ -100,6 +102,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWIndirectableContainerMapping.INDIRECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWIndirectableContainerMapping mapping = (MWIndirectableContainerMapping) subject;
@@ -113,6 +116,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
                 return MWIndirectableContainerMapping.NO_INDIRECTION;
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWIndirectableContainerMapping mapping = (MWIndirectableContainerMapping) subject;
@@ -139,6 +143,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
     {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(getSubjectHolder(), MWIndirectableContainerMapping.INDIRECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWIndirectableContainerMapping mapping = (MWIndirectableContainerMapping) subject;
@@ -152,6 +157,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
                 return MWIndirectableContainerMapping.NO_INDIRECTION;
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWIndirectableContainerMapping mapping = (MWIndirectableContainerMapping) subject;
@@ -169,6 +175,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
 
         return new TransformationPropertyValueModel(adapter)
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(! MWIndirectableContainerMapping.NO_INDIRECTION.equals(value));
@@ -181,6 +188,7 @@ public final class IndirectableContainerMappingPanel extends AbstractSubjectPane
         return new RadioButtonModelAdapter(valueHolder, Boolean.TRUE);
     }
 
+    @Override
     protected void initializeLayout()
     {
         JCheckBox useIndirectionCheckBox = buildCheckBox

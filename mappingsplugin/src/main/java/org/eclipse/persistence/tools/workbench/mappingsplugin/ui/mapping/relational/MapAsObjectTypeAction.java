@@ -26,6 +26,7 @@ final class MapAsObjectTypeAction extends MapAsRelationalDirectMapping {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.objectType");
@@ -34,12 +35,14 @@ final class MapAsObjectTypeAction extends MapAsRelationalDirectMapping {
         this.initializeToolTipText("MAP_AS_OBJECT_TYPE_ACTION.toolTipText");
     }
 
+    @Override
     protected MappingNode morphNode(MappingNode selectedNode) {
         MappingNode mappingNode = super.morphNode(selectedNode);
         ((MWDirectMapping) mappingNode.getMapping()).setObjectTypeConverter();
         return mappingNode;
     }
 
+    @Override
     protected String converterType() {
         return MWConverter.OBJECT_TYPE_CONVERTER;
     }

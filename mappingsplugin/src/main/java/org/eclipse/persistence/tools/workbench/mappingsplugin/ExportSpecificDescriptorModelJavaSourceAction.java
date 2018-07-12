@@ -32,6 +32,7 @@ public class ExportSpecificDescriptorModelJavaSourceAction extends AbstractFrame
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("EXPORT_MODEL_JAVA_SOURCE_DESCRIPTOR");
@@ -40,6 +41,7 @@ public class ExportSpecificDescriptorModelJavaSourceAction extends AbstractFrame
         this.initializeIcon("GENERATE_JAVA");
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = selectedProjectNodes();
         for (int i = 0; i < projectNodes.length; i++) {

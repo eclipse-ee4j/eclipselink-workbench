@@ -65,6 +65,7 @@ public final class ContainerAccessorEditingDialog extends
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -84,6 +85,7 @@ public final class ContainerAccessorEditingDialog extends
 
     private PropertyChangeListener buildValidatingListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ContainerAccessorEditingDialog.this.updateErrorMessage();
                 ContainerAccessorEditingDialog.this.updateOKAction();
@@ -113,12 +115,14 @@ public final class ContainerAccessorEditingDialog extends
     }
 
     /** Overridden to set error flag */
+    @Override
     protected void setErrorMessage(String message) {
         super.setErrorMessage(message);
         this.noError = (message == null);
     }
 
     /** Overridden to clear error flag */
+    @Override
     protected void clearErrorMessage() {
         super.clearErrorMessage();
         this.noError = true;
@@ -128,10 +132,12 @@ public final class ContainerAccessorEditingDialog extends
         this.getOKAction().setEnabled(this.noError);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.editAccessor";
     }
 
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         setSize(Math.max(500, getWidth()), getHeight());
@@ -186,6 +192,7 @@ public final class ContainerAccessorEditingDialog extends
 
         // **************** Accessor type **********************************
 
+        @Override
         public PropertyValueModel accessorTypeHolder() {
             if (this.accessorTypeHolder == null) {
                 this.accessorTypeHolder = this.buildAccessorTypeHolder();
@@ -207,6 +214,7 @@ public final class ContainerAccessorEditingDialog extends
             return new SimplePropertyValueModel(accessorType);
         }
 
+        @Override
         public String accessorType() {
             return (String) this.accessorTypeHolder().getValue();
         }
@@ -214,6 +222,7 @@ public final class ContainerAccessorEditingDialog extends
 
         // **************** Accessor get method *****************************
 
+        @Override
         public PropertyValueModel accessorGetMethodHolder() {
             if (this.getMethodHolder == null) {
                 this.getMethodHolder = this.buildGetMethodHolder();
@@ -228,12 +237,14 @@ public final class ContainerAccessorEditingDialog extends
 
         protected abstract PropertyValueModel buildInternalGetMethodHolder();
 
+        @Override
         public MWMethod accessorGetMethod() {
             return (MWMethod) this.accessorGetMethodHolder().getValue();
         }
 
         // **************** Accessor set method *****************************
 
+        @Override
         public PropertyValueModel accessorSetMethodHolder() {
             if (this.setMethodHolder == null) {
                 this.setMethodHolder = this.buildSetMethodHolder();
@@ -248,12 +259,14 @@ public final class ContainerAccessorEditingDialog extends
 
         protected abstract PropertyValueModel buildInternalSetMethodHolder();
 
+        @Override
         public MWMethod accessorSetMethod() {
             return (MWMethod) this.accessorSetMethodHolder().getValue();
         }
 
         // **************** Accessor attribute *********************************
 
+        @Override
         public PropertyValueModel accessorAttributeHolder() {
             if (this.attributeHolder == null) {
                 this.attributeHolder = this.buildAttributeHolder();
@@ -268,6 +281,7 @@ public final class ContainerAccessorEditingDialog extends
 
         protected abstract PropertyValueModel buildInternalAttributeHolder();
 
+        @Override
         public MWClassAttribute accessorAttribute() {
             return (MWClassAttribute) this.accessorAttributeHolder().getValue();
         }
@@ -281,6 +295,7 @@ public final class ContainerAccessorEditingDialog extends
 
         // **************** Editing *******************************************
 
+        @Override
         public void commit() {
             if (this.accessorType() == ACCESSOR_METHODS) {
                 this.getMethodTrigger.accept();
@@ -307,16 +322,20 @@ public final class ContainerAccessorEditingDialog extends
             return this.compositeMapping;
         }
 
+        @Override
         public Iterator candidateAccessorMethods() {
             return this.compositeMapping().candidateAccessorMethods();
         }
 
+        @Override
         public Iterator candidateAccessorAttributes() {
             return this.compositeMapping().candidateAccessorAttributes();
         }
 
+        @Override
         protected PropertyValueModel buildInternalGetMethodHolder() {
             return new PropertyAspectAdapter(MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY, this.compositeMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWContainerAccessor accessor = ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
 
@@ -328,14 +347,17 @@ public final class ContainerAccessorEditingDialog extends
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAbstractCompositeMapping) this.subject).setContainerAccessorGetMethod((MWMethod) value);
                 }
             };
         }
 
+        @Override
         protected PropertyValueModel buildInternalSetMethodHolder() {
             return new PropertyAspectAdapter(MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY, this.compositeMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWContainerAccessor accessor = ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
 
@@ -347,14 +369,17 @@ public final class ContainerAccessorEditingDialog extends
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAbstractCompositeMapping) this.subject).setContainerAccessorSetMethod((MWMethod) value);
                 }
             };
         }
 
+        @Override
         protected PropertyValueModel buildInternalAttributeHolder() {
             return new PropertyAspectAdapter(MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY, this.compositeMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWContainerAccessor accessor = ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
 
@@ -366,6 +391,7 @@ public final class ContainerAccessorEditingDialog extends
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAbstractCompositeMapping) this.subject).setContainerAccessorAttribute(((MWClassAttribute) value));
                 }
@@ -389,16 +415,20 @@ public final class ContainerAccessorEditingDialog extends
             return this.compositeMapping;
         }
 
+        @Override
         public Iterator candidateAccessorMethods() {
             return this.compositeMapping().candidateAccessorMethods();
         }
 
+        @Override
         public Iterator candidateAccessorAttributes() {
             return this.compositeMapping().candidateAccessorAttributes();
         }
 
+        @Override
         protected PropertyValueModel buildInternalGetMethodHolder() {
             return new PropertyAspectAdapter(MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY, this.compositeMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWContainerAccessor accessor = ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
 
@@ -410,14 +440,17 @@ public final class ContainerAccessorEditingDialog extends
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAbstractCompositeMapping) this.subject).setContainerAccessorGetMethod((MWMethod) value);
                 }
             };
         }
 
+        @Override
         protected PropertyValueModel buildInternalSetMethodHolder() {
             return new PropertyAspectAdapter(MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY, this.compositeMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWContainerAccessor accessor = ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
 
@@ -429,14 +462,17 @@ public final class ContainerAccessorEditingDialog extends
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAbstractCompositeMapping) this.subject).setContainerAccessorSetMethod((MWMethod) value);
                 }
             };
         }
 
+        @Override
         protected PropertyValueModel buildInternalAttributeHolder() {
             return new PropertyAspectAdapter(MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY, this.compositeMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWContainerAccessor accessor = ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
 
@@ -448,6 +484,7 @@ public final class ContainerAccessorEditingDialog extends
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWAbstractCompositeMapping) this.subject).setContainerAccessorAttribute(((MWClassAttribute) value));
                 }

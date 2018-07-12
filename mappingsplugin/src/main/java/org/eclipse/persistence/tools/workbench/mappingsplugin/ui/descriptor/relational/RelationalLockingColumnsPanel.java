@@ -70,6 +70,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout()
     {
 
@@ -108,10 +109,12 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
 
     private AddRemoveListPanel.Adapter buildPrimaryKeysAddRemoveAdapter() {
         return new AddRemoveListPanel.Adapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 listSelectionModel.setSelectedValues(addColumnLockingColumns());
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 removeColumnLockingColumns(listSelectionModel.getSelectedValues());
             }
@@ -121,6 +124,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
     /**
      * Overide since this panel should be treated as a single Component.
      */
+    @Override
     public void setEnabled(boolean enabled)
     {
         super.setEnabled(enabled);
@@ -164,6 +168,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
     {
         return new CollectionAspectAdapter(getSubjectHolder(), MWTableDescriptorLockingPolicy.COLUMN_LOCK_COLUMNS_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 return ((MWTableDescriptorLockingPolicy) this.subject).columnLockColumns();
@@ -187,6 +192,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
     /**
      * broaden access a bit
      */
+    @Override
     protected ValueModel getSubjectHolder() {
         return super.getSubjectHolder();
     }
@@ -214,6 +220,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
             super(context);
         }
 
+        @Override
         protected void initialize()
         {
             super.initialize();
@@ -235,6 +242,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
 
         private CollectionValueModel buildAllColumnsCollectionHolder() {
             return new CompositeCollectionValueModel(buildSortedTablesHolder()) {
+                @Override
                 protected CollectionValueModel transform(Object value) {
                     return new ListCollectionValueModelAdapter(buildSortedColumnsHolder((MWTable) value));
                 }
@@ -251,6 +259,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
 
         private CollectionValueModel buildTablesHolder() {
             return new CollectionAspectAdapter(getSubjectHolder()) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return ((MWTableDescriptorLockingPolicy) this.subject).getOwningTableDescriptor().associatedTables();
                 }
@@ -267,9 +276,11 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
 
         private CollectionAspectAdapter buildColumnsHolder(MWTable table) {
             return new CollectionAspectAdapter(MWTable.COLUMNS_COLLECTION, table) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return ((MWTable) this.subject).columns();
                 }
+                @Override
                 protected int sizeFromSubject() {
                     return ((MWTable) this.subject).columnsSize();
                 }
@@ -284,6 +295,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
 
         private ListSelectionListener buildSelectionListener() {
             return new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         LockingColumnDialog.this.selectionChanged();
@@ -296,6 +308,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
             this.getOKAction().setEnabled(! this.lockingColumnsSelectionModel.isSelectionEmpty());
         }
 
+        @Override
         protected Component buildMainPanel() {
             JList list = SwingComponentFactory.buildList(this.lockingColumnsModel);
             list.setSelectionModel(this.lockingColumnsSelectionModel);
@@ -315,6 +328,7 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
          */
         protected MouseListener buildListMouseListener() {
             return new MouseAdapter() {
+                @Override
                 public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() == 2) {
                         LockingColumnDialog.this.clickOK();
@@ -326,10 +340,12 @@ public class RelationalLockingColumnsPanel extends AbstractSubjectPanel
         /**
          * broaden access a bit
          */
+        @Override
         protected void clickOK() {
             super.clickOK();
         }
 
+        @Override
         protected String helpTopicId() {
             return RelationalLockingColumnsPanel.this.helpTopicId();
         }

@@ -39,6 +39,7 @@ public final class MWXmlFragmentMapping extends MWAbstractXmlDirectMapping {
 
     // **************** Morphing **********************************************
 
+    @Override
     public MWXmlFragmentMapping asMWXmlFragmentMapping() {
         return this;
     }

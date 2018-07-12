@@ -45,6 +45,7 @@ final class AddEjbQueryDialog extends AddQueryDialog {
         super(context, supportsReportQuery);
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel messagePanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -99,6 +100,7 @@ final class AddEjbQueryDialog extends AddQueryDialog {
         return messagePanel;
     }
 
+    @Override
     protected JPanel buildNamePanel() {
         JPanel namePanel = super.buildNamePanel();
 
@@ -193,6 +195,7 @@ final class AddEjbQueryDialog extends AddQueryDialog {
         return buttonPanel;
     }
 
+    @Override
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
         if (source == this.namedQueryRadioButton) {
@@ -262,11 +265,13 @@ final class AddEjbQueryDialog extends AddQueryDialog {
             setQueryType(MWQuery.READ_ALL_QUERY);
         }
     }
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         this.finderRadioButton.doClick();
     }
 
+    @Override
     public String getQueryName() {
         if (this.topLinkReservedFinderRadioButton.isSelected())
             return (String) this.nameComboBox.getSelectedItem();

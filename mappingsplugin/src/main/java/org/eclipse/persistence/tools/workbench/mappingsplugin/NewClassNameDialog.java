@@ -110,6 +110,7 @@ public final class NewClassNameDialog
     private static Iterator descriptorNamesInPackage(String packageName, MWProject project) {
         Iterator descriptors = project.descriptorsInPackage(packageName);
         return new TransformationIterator(descriptors) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWDescriptor) next).shortName();
             }
@@ -119,16 +120,19 @@ public final class NewClassNameDialog
 
     // ********** initialization **********
 
+    @Override
     protected String helpTopicId() {
         return "dialog.createNewClass";
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.shortClassNameHolder = new SimplePropertyValueModel("");
         this.setTitle(this.resourceRepository().getString("NEW_CLASS_NAME_DIALOG_TITLE"));
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -224,6 +228,7 @@ public final class NewClassNameDialog
         return (JTextField) comboBox.getEditor().getEditorComponent();
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.shortClassNameTextField;
     }
@@ -240,12 +245,15 @@ public final class NewClassNameDialog
 
     private DocumentListener buildShortClassNameDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 this.validateClassName();
             }
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 this.validateClassName();
             }
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 this.validateClassName();
             }
@@ -257,6 +265,7 @@ public final class NewClassNameDialog
         };
     }
 
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         this.shortClassNameHolder.setValue(this.initialShortClassName);
@@ -359,6 +368,7 @@ public final class NewClassNameDialog
 
     private Iterator descriptorNames() {
         return new TransformationIterator(this.project.descriptors()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWDescriptor) next).getName();
             }
@@ -367,6 +377,7 @@ public final class NewClassNameDialog
 
     private Iterator descriptorNamesToLowerCase() {
         return new TransformationIterator(this.descriptorNames()) {
+            @Override
             protected Object transform(Object next) {
                 return ((String) next).toLowerCase();
             }

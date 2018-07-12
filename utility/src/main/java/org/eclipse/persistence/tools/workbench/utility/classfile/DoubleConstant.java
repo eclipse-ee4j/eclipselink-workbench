@@ -40,20 +40,24 @@ public class DoubleConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.value = stream.readDouble();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" value: ");
         writer.println(this.value);
     }
 
+    @Override
     public String description() {
         return "double";
     }
 
+    @Override
     public void printFieldInitializationClauseOn(PrintWriter writer) {
         writer.print(this.value);
         writer.print('D');
@@ -63,14 +67,17 @@ public class DoubleConstant extends Constant {
         return this.value;
     }
 
+    @Override
     boolean consumesTwoPoolEntries() {
         return true;
     }
 
+    @Override
     public Object value() {
         return new Double(this.value);
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

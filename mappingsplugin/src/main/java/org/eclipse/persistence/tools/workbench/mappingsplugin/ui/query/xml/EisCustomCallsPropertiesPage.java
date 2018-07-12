@@ -55,11 +55,13 @@ public final class EisCustomCallsPropertiesPage
         super(queryManagerHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.selectedInteractionHolder = new SimplePropertyValueModel();
     }
 
+    @Override
     protected void initializeLayout() {
         // TODO - wtf?
         this.setName("Calls");
@@ -133,6 +135,7 @@ public final class EisCustomCallsPropertiesPage
 
     private ListValueModel buildInteractionListValue() {
         return new ListAspectAdapter(this.getSubjectHolder()) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWEisQueryManager) this.subject).interactions();
             }
@@ -141,6 +144,7 @@ public final class EisCustomCallsPropertiesPage
 
     private ListSelectionListener buildInteractionListSelectionListener(final JList interactionList) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -154,6 +158,7 @@ public final class EisCustomCallsPropertiesPage
 
     private ListCellRenderer buildInteractionListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return EisCustomCallsPropertiesPage.this.buildDisplayText((MWEisInteraction) value);
             }
@@ -198,6 +203,7 @@ public final class EisCustomCallsPropertiesPage
 
     private PropertyValueModel buildEnablerHolder() {
         return new TransformationPropertyValueModel(this.selectedInteractionHolder) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null)
                     return null;

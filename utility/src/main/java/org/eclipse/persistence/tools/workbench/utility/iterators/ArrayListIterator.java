@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.utility.iterators;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 
 
 /**
@@ -54,6 +53,7 @@ public class ArrayListIterator
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int nextIndex() {
         return this.nextIndex;
     }
@@ -61,6 +61,7 @@ public class ArrayListIterator
     /**
      * @see java.util.ListIterator#previousIndex()
      */
+    @Override
     public int previousIndex() {
         return this.nextIndex - 1;
     }
@@ -68,6 +69,7 @@ public class ArrayListIterator
     /**
      * @see java.util.ListIterator#hasPrevious()
      */
+    @Override
     public boolean hasPrevious() {
         return this.nextIndex > this.minIndex;
     }
@@ -75,6 +77,7 @@ public class ArrayListIterator
     /**
      * @see java.util.ListIterator#previous()
      */
+    @Override
     public Object previous() {
         if (this.hasPrevious()) {
             return this.array[--this.nextIndex];
@@ -85,6 +88,7 @@ public class ArrayListIterator
     /**
      * @see java.util.ListIterator#add(java.lang.Object)
      */
+    @Override
     public void add(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -92,6 +96,7 @@ public class ArrayListIterator
     /**
      * @see java.util.ListIterator#set(java.lang.Object)
      */
+    @Override
     public void set(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -99,6 +104,7 @@ public class ArrayListIterator
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return super.toString();
     }

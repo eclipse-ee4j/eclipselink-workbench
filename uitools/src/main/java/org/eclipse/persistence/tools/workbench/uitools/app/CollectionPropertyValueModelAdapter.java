@@ -72,6 +72,7 @@ public abstract class CollectionPropertyValueModelAdapter
         this.collectionHolder = collectionHolder;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         // our value is null when we are not listening to the collection holder
@@ -82,21 +83,26 @@ public abstract class CollectionPropertyValueModelAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
 
     protected CollectionChangeListener buildCollectionChangeListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CollectionPropertyValueModelAdapter.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CollectionPropertyValueModelAdapter.this.itemsRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CollectionPropertyValueModelAdapter.this.collectionChanged(e);
             }
+            @Override
             public String toString() {
                 return "collection change listener";
             }
@@ -110,6 +116,7 @@ public abstract class CollectionPropertyValueModelAdapter
      * Return the cached value.
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.value;
     }
@@ -120,6 +127,7 @@ public abstract class CollectionPropertyValueModelAdapter
     /**
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         throw new UnsupportedOperationException();
     }
@@ -131,6 +139,7 @@ public abstract class CollectionPropertyValueModelAdapter
      * Extend to start listening to the wrapped collection if necessary.
      * @see Model#addPropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModel();
@@ -142,6 +151,7 @@ public abstract class CollectionPropertyValueModelAdapter
      * Extend to start listening to the wrapped collection if necessary.
      * @see Model#addPropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         if (propertyName == VALUE && this.hasNoListeners()) {
             this.engageModel();
@@ -153,6 +163,7 @@ public abstract class CollectionPropertyValueModelAdapter
      * Extend to stop listening to the wrapped collection if necessary.
      * @see Model#removePropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
         super.removePropertyChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -164,6 +175,7 @@ public abstract class CollectionPropertyValueModelAdapter
      * Extend to stop listening to the wrapped collection if necessary.
      * @see Model#removePropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         super.removePropertyChangeListener(propertyName, listener);
         if (propertyName == VALUE && this.hasNoListeners()) {
@@ -219,6 +231,7 @@ public abstract class CollectionPropertyValueModelAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.collectionHolder);
     }

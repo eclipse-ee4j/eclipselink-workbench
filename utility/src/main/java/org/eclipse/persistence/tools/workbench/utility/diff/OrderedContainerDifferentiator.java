@@ -39,6 +39,7 @@ public class OrderedContainerDifferentiator
     /** used as a placeholder when the containers are different sizes */
     static final Object UNDEFINED_ELEMENT =
         new Object() {
+            @Override
             public String toString() {
                 return "<undefined>";
             }
@@ -102,6 +103,7 @@ public class OrderedContainerDifferentiator
     /**
      * @see Differentiator#diff(Object, Object)
      */
+    @Override
     public Diff diff(Object object1, Object object2) {
         return this.diff(object1, object2, DifferentiatorAdapter.NORMAL);
     }
@@ -109,6 +111,7 @@ public class OrderedContainerDifferentiator
     /**
      * @see Differentiator#keyDiff(Object, Object)
      */
+    @Override
     public Diff keyDiff(Object object1, Object object2) {
         return this.diff(object1, object2, DifferentiatorAdapter.KEY);
     }
@@ -162,6 +165,7 @@ public class OrderedContainerDifferentiator
      * this will probably never be called, but we'll try 'false' for now
      * @see Differentiator#comparesValueObjects()
      */
+    @Override
     public boolean comparesValueObjects() {
         return false;
     }
@@ -217,6 +221,7 @@ public class OrderedContainerDifferentiator
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.elementDifferentiator);
     }
@@ -257,18 +262,23 @@ public class OrderedContainerDifferentiator
 
         Adapter INVALID_INSTANCE =
             new Adapter() {
+                @Override
                 public boolean diffIsFatal(Object object1, Object object2) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public Class containerClass() {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public int size(Object container) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public Object get(Object container, int index) {
                     throw new UnsupportedOperationException();
                 }
+                @Override
                 public String toString() {
                     return "InvalidAdapter";
                 }

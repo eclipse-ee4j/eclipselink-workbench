@@ -62,6 +62,7 @@ public abstract class MWTransformer extends MWModel
 
     // **************** Aggregate Support *************************************
 
+    @Override
     public MWDescriptor owningDescriptor() {
         throw new UnsupportedOperationException();
     }

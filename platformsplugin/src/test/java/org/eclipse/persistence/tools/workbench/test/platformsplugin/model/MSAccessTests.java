@@ -33,6 +33,7 @@ public class MSAccessTests extends PlatformTests {
         super(name);
     }
 
+    @Override
     protected Connection buildConnection() throws Exception {
         try {
             return super.buildConnection();
@@ -45,10 +46,12 @@ public class MSAccessTests extends PlatformTests {
         }
     }
 
+    @Override
     protected String driverClassName() {
         return "sun.jdbc.odbc.JdbcOdbcDriver";
     }
 
+    @Override
     protected String connectionURL() {
         return "jdbc:odbc:" + this.odbcDataSourceName();
     }
@@ -57,10 +60,12 @@ public class MSAccessTests extends PlatformTests {
         return "MW";
     }
 
+    @Override
     protected String platformName() {
         return "Microsoft Access";
     }
 
+    @Override
     protected void verifyVersionNumber() throws Exception {
         // we're not too worried about which version of Access we're running against
     }
@@ -69,10 +74,12 @@ public class MSAccessTests extends PlatformTests {
      * Access barfs if a schema pattern is passed to
      * DatabaseMetaData#getColumns()
      */
+    @Override
     protected String schemaPattern() {
         return null;
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         // types from MS Access Help
         sb.append("    TEXT_COL                TEXT,"); sb.append(CR);
@@ -106,6 +113,7 @@ public class MSAccessTests extends PlatformTests {
         sb.append("    VARCHAR_20_COL        VARCHAR(20)"); sb.append(CR);
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // TEXT
 //        this.verifyColumnAttribute(metaDataMap, "TEXT_COL", "TABLE_CAT", null);        // the catalog is the local file name

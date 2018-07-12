@@ -39,6 +39,7 @@ final class EisProjectTabbedPropertiesPage extends ProjectTabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(buildProjectGeneralPropertiesPage(),    "GENERAL_TAB_TITLE");
         addTab(buildProjectConnectionPropertiesPage(), "CONNECTION_TAB_TITLE");
@@ -50,6 +51,7 @@ final class EisProjectTabbedPropertiesPage extends ProjectTabbedPropertiesPage {
         return new XmlProjectOptionsPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected Component buildProjectDefaultsPropertiesPage()
     {
         return new TransactionalProjectDefaultsPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());

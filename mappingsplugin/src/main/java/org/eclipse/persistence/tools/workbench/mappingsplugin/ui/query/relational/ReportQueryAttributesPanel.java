@@ -53,11 +53,14 @@ final class ReportQueryAttributesPanel
         super(queryHolder, contextHolder);
     }
 
+    @Override
     protected ListValueModel buildAttributesHolder() {
         return new ListAspectAdapter(getQueryHolder(), MWReportQuery.ATTRIBUTE_ITEMS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWReportQuery) this.subject).attributeItems();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWReportQuery) this.subject).attributeItemsSize();
             }
@@ -65,25 +68,31 @@ final class ReportQueryAttributesPanel
     }
 
 
+    @Override
     protected AddRemovePanel.UpDownOptionAdapter buildAttributesPanelAdapter() {
         return new AddRemovePanel.UpDownOptionAdapter() {
 
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 addAttribute();
             }
 
+            @Override
             public String optionalButtonKey() {
                 return "REPORT_QUERY_ATTRIBUTES_LIST_EDIT_BUTTON";
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 editSelectedAttribute((MWReportAttributeItem) listSelectionModel.getSelectedValue());
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 Object[] selectedValues = listSelectionModel.getSelectedValues();
                 for (int i = 0; i < selectedValues.length; i++) {
@@ -91,12 +100,14 @@ final class ReportQueryAttributesPanel
                 }
             }
 
+            @Override
             public void moveItemsDown(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                    ((MWReportQuery) getQuery()).moveAttributeItemDown((MWReportAttributeItem) items[i]);
                 }
             }
 
+            @Override
             public void moveItemsUp(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     ((MWReportQuery) getQuery()).moveAttributeItemUp((MWReportAttributeItem) items[i]);
@@ -109,6 +120,7 @@ final class ReportQueryAttributesPanel
         editSelectedAttribute(null);
     }
 
+    @Override
     AttributeItemDialog buildAttributeItemDialog(MWAttributeItem item) {
         return new ReportQueryAttributeDialog((MWReportQuery) getQuery(), (MWReportAttributeItem) item, getWorkbenchContext());
     }
@@ -121,26 +133,32 @@ final class ReportQueryAttributesPanel
         return new ComboBoxTableCellRenderer(this.buildFunctionComboBoxModel());
     }
 
+    @Override
     protected PropertyValueModel buildQueryHolder(PropertyValueModel queryHolder) {
         return new FilteringPropertyValueModel(queryHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWReportQuery;
             }
         };
     }
 
+    @Override
     protected String helpTopicId() {
         return "query.report.attributes";
     }
 
+    @Override
     String listTitleKey() {
          return "REPORT_QUERY_ATTRIBUTES_LIST";
     }
 
+    @Override
     protected boolean panelEnabled(MWQueryFormat queryFormat) {
         return queryFormat.reportAttributesAllowed();
     }
 
+    @Override
     protected AddRemovePanel buildAddRemovePanel() {
         final AddRemoveTablePanel tablePanel =  new AddRemoveTablePanel(
                 getApplicationContext(),
@@ -152,6 +170,7 @@ final class ReportQueryAttributesPanel
         tablePanel.setBorder(buildTitledBorder(listTitleKey()));
         SwingComponentFactory.addDoubleClickMouseListener(tablePanel.getComponent(),
                 new DoubleClickMouseListener() {
+            @Override
                     public void mouseDoubleClicked(MouseEvent e) {
                         editSelectedAttribute((MWAttributeItem) tablePanel.getSelectionModel().getSelectedValue());
                     }
@@ -173,6 +192,7 @@ final class ReportQueryAttributesPanel
 
         column = table.getColumnModel().getColumn(AttributeItemsColumnAdapter.ATTRIBUTE_COLUMN);
         column.setCellRenderer(new SimpleTableCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (value != null) {
                     return ((MWQueryableArgument) value).displayString();
@@ -211,6 +231,7 @@ final class ReportQueryAttributesPanel
         private PropertyValueModel buildAttributeAdapter(MWReportAttributeItem item) {
             // TODO we need some change notifications from MWQueryableArgument and MWQueryableArgumentElement
             return new PropertyAspectAdapter(EMPTY_STRING_ARRAY, item) {    // the queryableArgument never changes
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWReportAttributeItem) this.subject).getQueryableArgument();
                 }
@@ -219,9 +240,11 @@ final class ReportQueryAttributesPanel
 
         private PropertyValueModel buildFunctionAdapter(MWReportAttributeItem item) {
             return new PropertyAspectAdapter(MWReportAttributeItem.FUNCTION_PROPERTY, item) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWReportAttributeItem) this.subject).getFunction();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWReportAttributeItem) this.subject).setFunction((String) value);
                 }
@@ -230,15 +253,18 @@ final class ReportQueryAttributesPanel
 
         private PropertyValueModel buildItemNameAdapter(MWReportAttributeItem item) {
             return new PropertyAspectAdapter(MWReportAttributeItem.NAME_PROPERTY, item) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWReportAttributeItem) this.subject).getName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWReportAttributeItem) this.subject).setName((String) value);
                 }
             };
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWReportAttributeItem attributeItem = (MWReportAttributeItem) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -250,6 +276,7 @@ final class ReportQueryAttributesPanel
             return result;
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case ITEM_NAME_COLUMN:            return Object.class;
@@ -259,14 +286,17 @@ final class ReportQueryAttributesPanel
             }
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index == FUNCTION_COLUMN;
         }

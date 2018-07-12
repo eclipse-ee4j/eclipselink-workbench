@@ -37,20 +37,24 @@ public final class InterfaceDescriptorNode
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected boolean supportsAdvancedProperties() {
         return false;
     }
 
+    @Override
     protected boolean supportsDescriptorMorphing() {
         return false;
     }
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public String helpTopicID() {
         return "descriptor.interface";
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context)
     {
         GroupContainerDescription desc =  super.buildMenuDescription(context);
@@ -73,15 +77,18 @@ public final class InterfaceDescriptorNode
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         return new ToolBarDescription();
     }
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_INTERFACE_DESCRIPTOR_NODE";
     }
 
+    @Override
     public String buildIconKey() {
         return "descriptor.interface";
     }
@@ -89,6 +96,7 @@ public final class InterfaceDescriptorNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return InterfaceDescriptorPropertiesPage.class;
     }

@@ -31,14 +31,17 @@ final class BasicClassCodeGenPolicy
         this.mwClass = mwClass;
     }
 
+    @Override
     protected MWClass getMWClass() {
         return this.mwClass;
     }
 
+    @Override
     public MWMethodCodeGenPolicy getMethodCodeGenPolicy(MWMethod method) {
         return new MWDefaultMethodCodeGenPolicy(method, this);
     }
 
+    @Override
     public void addAccessorCodeGenPolicy(MWMethod method, MWMethodCodeGenPolicy methodCodeGenPolicy) {
         throw new UnsupportedOperationException();
     }

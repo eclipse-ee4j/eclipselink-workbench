@@ -134,6 +134,7 @@ public class EisPoolLoginPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), ConnectionPoolAdapter.LOGIN_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ConnectionPoolAdapter pool = (ConnectionPoolAdapter) subject;
@@ -147,6 +148,7 @@ public class EisPoolLoginPropertiesPage extends ScrollablePropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

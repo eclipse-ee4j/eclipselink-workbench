@@ -56,6 +56,7 @@ public class JBossPlatformAdapter extends ServerPlatformAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new JBossPlatformConfig();
     }

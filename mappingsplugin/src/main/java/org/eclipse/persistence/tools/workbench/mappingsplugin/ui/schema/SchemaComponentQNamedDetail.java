@@ -28,6 +28,7 @@ abstract class SchemaComponentQNamedDetail
         super(component);
     }
 
+    @Override
     protected void initialize(MWSchemaComponent component) {
         super.initialize(component);
         this.engageComponent(this.getQNamedComponent());
@@ -41,12 +42,14 @@ abstract class SchemaComponentQNamedDetail
 
     private PropertyChangeListener buildNamespacePrefixChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 SchemaComponentQNamedDetail.this.valueChanged();
             }
         };
     }
 
+    @Override
     protected String getValueFromComponent() {
         return this.getQName();
     }

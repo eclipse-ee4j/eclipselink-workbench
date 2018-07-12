@@ -34,6 +34,7 @@ final class XmlSchemaPanel
         super(new SimplePropertyValueModel(node), new DefaultWorkbenchContextHolder(context));
     }
 
+    @Override
     protected void initializeTabs() {
         this.addTab(this.buildSchemaDocumentInfoPanel(), "SCHEMA_DOCUMENT_INFO_PANEL_TAB");
         this.addTab(this.buildSchemaStructurePanel(), "SCHEMA_STRUCTURE_PANEL_TAB");

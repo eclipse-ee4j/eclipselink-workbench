@@ -21,7 +21,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXm
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWCompositeCollectionMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWCompositeObjectMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlDirectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlTransformationMapping;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.DescriptorPackageNode;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.MappingDescriptorNode;
@@ -40,6 +39,7 @@ public abstract class XmlDescriptorNode
         super(descriptor, parentNode);
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         GroupContainerDescription desc = super.buildMenuDescription(context);
         context = buildLocalWorkbenchContext(context);
@@ -74,6 +74,7 @@ public abstract class XmlDescriptorNode
 
     protected abstract XmlMappingSelectionActionsPolicy buildMappingSelectionActionsPolicy();
 
+    @Override
     protected MappingNode buildMappingNode(MWMapping mapping) {
         if (mapping instanceof MWCompositeObjectMapping) {
             return new CompositeObjectMappingNode(
@@ -101,6 +102,7 @@ public abstract class XmlDescriptorNode
         }
     }
 
+    @Override
     public String mappingHelpTopicPrefix() {
         return "mapping.xml";
     }

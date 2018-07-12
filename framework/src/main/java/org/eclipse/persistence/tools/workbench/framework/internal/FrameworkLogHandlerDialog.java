@@ -119,6 +119,7 @@ final class FrameworkLogHandlerDialog
      * The main panel merely consists of a label or two.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildMainPanel()
      */
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridLayout(0, 1));
 
@@ -142,6 +143,7 @@ final class FrameworkLogHandlerDialog
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#helpTopicId()
      */
+    @Override
     protected String helpTopicId() {
         return "dialog.unexpectedError";
     }
@@ -150,6 +152,7 @@ final class FrameworkLogHandlerDialog
      * No need for a Cancel button.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#cancelButtonIsVisible()
      */
+    @Override
     protected boolean cancelButtonIsVisible() {
         return false;
     }
@@ -158,6 +161,7 @@ final class FrameworkLogHandlerDialog
      * Allow the user to see the stack trace, if appropriate.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildCustomActions()
      */
+    @Override
     protected Iterator buildCustomActions() {
         if (this.logRecord.getThrown() == null) {
             return super.buildCustomActions();
@@ -168,6 +172,7 @@ final class FrameworkLogHandlerDialog
 
     private Action buildStackTraceAction() {
         return new AbstractAction(this.buildStackTraceText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 FrameworkLogHandlerDialog.this.displayStackTrace();
             }
@@ -212,18 +217,23 @@ final class FrameworkLogHandlerDialog
 
         private ApplicationContext buildApplicationContext() {
             return new AbstractApplicationContext() {
+                @Override
                 public Application getApplication() {
                     return LocalWorkbenchContext.this.application;
                 }
+                @Override
                 public HelpManager getHelpManager() {
                     return LocalWorkbenchContext.this.application.getHelpManager();
                 }
+                @Override
                 public NodeManager getNodeManager() {
                     return LocalWorkbenchContext.this.application.getNodeManager();
                 }
+                @Override
                 public Preferences getPreferences() {
                     return LocalWorkbenchContext.this.application.getRootPreferences();
                 }
+                @Override
                 public ResourceRepository getResourceRepository() {
                     return LocalWorkbenchContext.this.application.getResourceRepository();
                 }
@@ -246,21 +256,26 @@ final class FrameworkLogHandlerDialog
         public ResourceRepository getResourceRepository() {
             return this.application.getResourceRepository();
         }
+        @Override
         public ApplicationContext getApplicationContext() {
             return this.applicationContext;
         }
 
         // WorkbenchContext
+        @Override
         public ActionRepository getActionRepository() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public Window getCurrentWindow() {
             // the window can be null...
             return this.window;
         }
+        @Override
         public NavigatorSelectionModel getNavigatorSelectionModel() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public Component getPropertiesPage() {
             throw new UnsupportedOperationException();
         }

@@ -51,6 +51,7 @@ public class SimpleListValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.listHolder = new SimpleListValueModel(this.buildList());
@@ -79,6 +80,7 @@ public class SimpleListValueModelTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -216,18 +218,22 @@ public class SimpleListValueModelTests extends TestCase {
 
     private ListChangeListener buildListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 SimpleListValueModelTests.this.eventType = ADD;
                 SimpleListValueModelTests.this.event = e;
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 SimpleListValueModelTests.this.eventType = REMOVE;
                 SimpleListValueModelTests.this.event = e;
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 SimpleListValueModelTests.this.eventType = REPLACE;
                 SimpleListValueModelTests.this.event = e;
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 SimpleListValueModelTests.this.eventType = CHANGE;
                 SimpleListValueModelTests.this.event = e;

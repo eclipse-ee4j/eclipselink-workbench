@@ -77,6 +77,7 @@ public class QuadrantIcon implements Icon {
     /**
      * @see javax.swing.Icon#paintIcon(java.awt.Component, java.awt.Graphics, int, int)
      */
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         int x_off = x + this.widthOffset;
         int x_mid = x + this.widthMiddle;
@@ -110,6 +111,7 @@ public class QuadrantIcon implements Icon {
     /**
      * @see javax.swing.Icon#getIconWidth()
      */
+    @Override
     public int getIconWidth() {
         return this.width;
     }
@@ -117,6 +119,7 @@ public class QuadrantIcon implements Icon {
     /**
      * @see javax.swing.Icon#getIconHeight()
      */
+    @Override
     public int getIconHeight() {
         return this.height;
     }

@@ -132,6 +132,7 @@ public class SimpleStringMatcher
     /**
      * @see StringMatcher#setPatternString(String)
      */
+    @Override
     public synchronized void setPatternString(String patternString) {
         this.patternString = patternString;
         this.rebuildPattern();
@@ -140,6 +141,7 @@ public class SimpleStringMatcher
     /**
      * Return whether the specified string matches the pattern.
      */
+    @Override
     public synchronized boolean matches(String string) {
         return this.pattern.matcher(string).matches();
     }
@@ -150,6 +152,7 @@ public class SimpleStringMatcher
     /**
      * @see Filter#accept(Object)
      */
+    @Override
     public synchronized boolean accept(Object o) {
         return this.matches(this.stringConverter.convertToString(o));
     }

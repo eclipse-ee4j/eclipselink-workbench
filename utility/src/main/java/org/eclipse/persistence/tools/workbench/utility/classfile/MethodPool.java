@@ -114,6 +114,7 @@ public class MethodPool implements Member.Pool {
         }
     }
 
+    @Override
     public ClassFile getClassFile() {
         return this.classFile;
     }
@@ -126,6 +127,7 @@ public class MethodPool implements Member.Pool {
         return this.methods[index];
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.count + " method(s))";
     }

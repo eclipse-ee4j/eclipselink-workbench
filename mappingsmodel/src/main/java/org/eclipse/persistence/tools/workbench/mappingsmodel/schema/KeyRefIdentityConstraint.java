@@ -42,6 +42,7 @@ public final class KeyRefIdentityConstraint
         return descriptor;
     }
 
+    @Override
     void reload(org.apache.xerces.impl.xs.identity.IdentityConstraint idConstraint) {
         super.reload(idConstraint);
 

@@ -27,12 +27,14 @@ public interface DifferentiatorAdapter {
 
 
     DifferentiatorAdapter NORMAL = new DifferentiatorAdapter() {
+        @Override
         public Diff diff(Differentiator differentiator, Object object1, Object object2) {
             return differentiator.diff(object1, object2);
         }
     };
 
     DifferentiatorAdapter KEY = new DifferentiatorAdapter() {
+        @Override
         public Diff diff(Differentiator differentiator, Object object1, Object object2) {
             return differentiator.keyDiff(object1, object2);
         }

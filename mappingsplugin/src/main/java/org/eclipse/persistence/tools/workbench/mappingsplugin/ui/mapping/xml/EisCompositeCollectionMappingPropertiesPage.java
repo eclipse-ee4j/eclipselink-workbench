@@ -59,6 +59,7 @@ public final class EisCompositeCollectionMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
 
         this.mainPanel = new JPanel(new GridBagLayout());
@@ -165,6 +166,7 @@ public final class EisCompositeCollectionMappingPropertiesPage
 
     private ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCompositeCollectionMapping) this.subject).getXmlField();
             }

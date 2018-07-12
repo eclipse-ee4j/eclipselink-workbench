@@ -225,6 +225,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void addActionListener(ActionListener listener)
         {
             delegate.addActionListener(listener);
@@ -233,6 +234,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void addChangeListener(ChangeListener listener)
         {
             delegate.addChangeListener(listener);
@@ -241,6 +243,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void addItemListener(ItemListener listener)
         {
             delegate.addItemListener(listener);
@@ -249,6 +252,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public String getActionCommand()
         {
             return delegate.getActionCommand();
@@ -267,6 +271,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public int getMnemonic()
         {
             return delegate.getMnemonic();
@@ -275,6 +280,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public Object[] getSelectedObjects()
         {
             return delegate.getSelectedObjects();
@@ -293,6 +299,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public boolean isArmed()
         {
             return delegate.isArmed();
@@ -301,6 +308,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public boolean isEnabled()
         {
             return delegate.isEnabled();
@@ -320,6 +328,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public boolean isPressed()
         {
             return delegate.isPressed();
@@ -328,6 +337,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public boolean isRollover()
         {
             return delegate.isRollover();
@@ -336,6 +346,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public boolean isSelected()
         {
             return delegate.isSelected();
@@ -366,6 +377,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void removeActionListener(ActionListener listener)
         {
             delegate.removeActionListener(listener);
@@ -374,6 +386,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void removeChangeListener(ChangeListener listener)
         {
             delegate.removeChangeListener(listener);
@@ -382,6 +395,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void removeItemListener(ItemListener listener)
         {
             delegate.removeItemListener(listener);
@@ -390,6 +404,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setActionCommand(String actionCommand)
         {
             delegate.setActionCommand(actionCommand);
@@ -398,6 +413,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setArmed(boolean armed)
         {
             delegate.setArmed(armed);
@@ -406,6 +422,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setEnabled(boolean enabled)
         {
             delegate.setEnabled(enabled);
@@ -414,6 +431,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setGroup(ButtonGroup group)
         {
             delegate.setGroup(group);
@@ -422,6 +440,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setMnemonic(int mnemonic)
         {
             delegate.setMnemonic(mnemonic);
@@ -430,6 +449,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setPressed(boolean pressed)
         {
             if ((isPressed() != pressed) && isEnabled())
@@ -450,6 +470,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setRollover(boolean rollover)
         {
             delegate.setRollover(rollover);
@@ -458,6 +479,7 @@ public class TriStateCheckBox extends JCheckBox
         /*
          * (non-Javadoc)
          */
+        @Override
         public void setSelected(boolean selected)
         {
             delegate.setSelected(selected);

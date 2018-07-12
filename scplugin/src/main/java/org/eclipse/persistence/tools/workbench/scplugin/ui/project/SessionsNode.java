@@ -49,6 +49,7 @@ public abstract class SessionsNode extends SCApplicationNode {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.childrenModel = this.buildChildrenModel();
@@ -66,6 +67,7 @@ public abstract class SessionsNode extends SCApplicationNode {
 
     protected ListValueModel buildChildrenNodeWrapper() {
         return new TransformationListValueModelAdapter( this.buildSessionsAspectAdapter()) {
+            @Override
             protected Object transformItem( Object item) {
                 return SessionsNode.this.buildChildNode(( SessionAdapter) item);
             }
@@ -87,6 +89,7 @@ public abstract class SessionsNode extends SCApplicationNode {
     }
 
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }

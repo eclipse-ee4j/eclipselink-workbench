@@ -48,6 +48,7 @@ public final class PlatformsPluginFactory
 
     // ********** PluginFactory implementation **********
 
+    @Override
     public Plugin createPlugin(ApplicationContext context) {
         return new PlatformsPlugin();
     }

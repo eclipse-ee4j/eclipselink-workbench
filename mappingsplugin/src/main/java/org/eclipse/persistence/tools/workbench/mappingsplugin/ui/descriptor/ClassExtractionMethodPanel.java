@@ -53,6 +53,7 @@ final class ClassExtractionMethodPanel extends AbstractSubjectPanel implements R
         super(classExtractionMethodIndicatorPolicy, context);
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -76,6 +77,7 @@ final class ClassExtractionMethodPanel extends AbstractSubjectPanel implements R
 
     private ValueModel buildMWClassHolder() {
         return new PropertyAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorInheritancePolicy) ((MWClassIndicatorPolicy) this.subject).getParent()).getOwningDescriptor().getMWClass();
             }
@@ -103,6 +105,7 @@ final class ClassExtractionMethodPanel extends AbstractSubjectPanel implements R
 
     private CachingComboBoxModel buildClassExtractionMethodComboBoxModel() {
         return new IndirectComboBoxModel(this.buildClassExtractionMethodChooserPropertyAdapter(), this.buildMWClassHolder()) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return ClassExtractionMethodPanel.this.orderedClassExtractionMethodChoices((MWClass) subject);
             }
@@ -123,10 +126,12 @@ final class ClassExtractionMethodPanel extends AbstractSubjectPanel implements R
 
     private PropertyValueModel buildClassExtractionMethodChooserPropertyAdapter() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWClassIndicatorExtractionMethodPolicy.METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassIndicatorExtractionMethodPolicy) this.subject).getClassExtractionMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassIndicatorExtractionMethodPolicy) this.subject).setClassExtractionMethod((MWMethod) value);
             }
@@ -136,17 +141,20 @@ final class ClassExtractionMethodPanel extends AbstractSubjectPanel implements R
 
     private ValueModel buildUseClassExtractionMethodHolder() {
         return new PropertyAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Object buildValue() {
                 return this.subject == null ? Boolean.FALSE : Boolean.TRUE;
             }
         };
     }
 
+    @Override
     public void updateRootStatus(boolean newValue) {
         this.isRoot = newValue;
         this.updateEnablementStatus();
     }
 
+    @Override
     public void updateExtractionMethodStatus(boolean newValue) {
         this.isExtractionMethod = newValue;
         this.updateEnablementStatus();

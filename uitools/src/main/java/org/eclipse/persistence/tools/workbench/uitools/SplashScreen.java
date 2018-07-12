@@ -96,6 +96,7 @@ public final class SplashScreen
     /**
      * Display the splash screen and wait for a timeout.
      */
+    @Override
     public void run() {
         setVisible(true);
 

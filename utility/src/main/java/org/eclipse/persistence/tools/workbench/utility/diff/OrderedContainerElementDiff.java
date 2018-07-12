@@ -31,6 +31,7 @@ public class OrderedContainerElementDiff extends DiffWrapper {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         if (this.different()) {
             pw.print("The values at index ");

@@ -52,6 +52,7 @@ public class IndirectComboBoxModelTests
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.basicList = this.buildBasicList();
@@ -87,6 +88,7 @@ public class IndirectComboBoxModelTests
         return listValue;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -168,6 +170,7 @@ public class IndirectComboBoxModelTests
 
     private ComboBoxModel buildComboBoxModel() {
         return new IndirectComboBoxModel(this.selectedItemHolder, this.listSubjectHolder) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return ((IndirectComboBoxModelTests) subject).listValue();
             }
@@ -176,14 +179,17 @@ public class IndirectComboBoxModelTests
 
     private ListDataListener buildListDataListener() {
         return new ListDataListener() {
+            @Override
             public void intervalAdded(ListDataEvent e) {
                 IndirectComboBoxModelTests.this.event = e;
             }
 
+            @Override
             public void intervalRemoved(ListDataEvent e) {
                 IndirectComboBoxModelTests.this.event = e;
             }
 
+            @Override
             public void contentsChanged(ListDataEvent e) {
                 IndirectComboBoxModelTests.this.event = e;
             }

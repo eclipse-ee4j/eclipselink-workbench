@@ -23,10 +23,6 @@ import java.util.Vector;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassIndicatorFieldPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWColumnHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
@@ -35,12 +31,7 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.No
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
-import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
-
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.mappings.AggregateObjectMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -81,6 +72,7 @@ public final class MWAggregatePathToColumn extends MWModel {
         super(mapping);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.mappingHandles = new Vector();
@@ -161,6 +153,7 @@ public final class MWAggregatePathToColumn extends MWModel {
 
     // ************** Containment hierarchy ***************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.mappingHandles) { children.addAll(this.mappingHandles); }
@@ -169,9 +162,11 @@ public final class MWAggregatePathToColumn extends MWModel {
 
     private NodeReferenceScrubber buildColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAggregatePathToColumn.this.setColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWAggregatePathToColumn.buildColumnScrubber()";
             }
@@ -185,6 +180,7 @@ public final class MWAggregatePathToColumn extends MWModel {
     // MWProject.recalculateAggregatePathsToColumn(MWMappingDescriptor)
     // ~bjv (per kfm)
 
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         super.mappingReplaced(oldMapping, newMapping);
         // like #nodeRemoved(Node), above, we don't worry about 'mappingHandles' here;
@@ -237,6 +233,7 @@ public final class MWAggregatePathToColumn extends MWModel {
         return sw.getBuffer().toString();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getPathDescription());
         sb.append(" -> ");
@@ -253,6 +250,7 @@ public final class MWAggregatePathToColumn extends MWModel {
         return sb.toString();
     }
 
+    @Override
     public int compareTo(Object o) {
         MWAggregatePathToColumn otherPathFieldAssociation = (MWAggregatePathToColumn) o;
         return Collator.getInstance().compare(getPathDescription() + getAggregateRuntimeFieldNameGenerator().fieldNameForRuntime(),
@@ -371,6 +369,7 @@ public final class MWAggregatePathToColumn extends MWModel {
         this.columnHandle = ((columnHandle == null) ? new MWColumnHandle(this, scrubber) : columnHandle.setScrubber(scrubber));
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (this.fieldDescription == null) {

@@ -34,6 +34,7 @@ public class CLExternalFieldTests extends ExternalFieldTests {
         super(name);
     }
 
+    @Override
     protected ExternalClassRepository buildRepository() {
         return CLExternalClassRepositoryFactory.instance().buildClassRepository(new File[0]);
     }

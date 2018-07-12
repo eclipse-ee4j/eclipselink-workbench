@@ -61,6 +61,7 @@ public final class DatabaseNode
         super(database, parent, plugin, context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.childrenModel = this.buildChildrenModel();
@@ -79,6 +80,7 @@ public final class DatabaseNode
     // wrap the tables in table nodes
     protected ListValueModel buildDatabaseNodeAdapter() {
         return new TransformationListValueModelAdapter(this.buildTablesAspectAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return new TableNode((MWTable) item, DatabaseNode.this);
             }
@@ -88,9 +90,11 @@ public final class DatabaseNode
     // the list of tables can change
     protected CollectionValueModel buildTablesAspectAdapter() {
         return new CollectionAspectAdapter(this, MWDatabase.TABLES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWDatabase) this.subject).tables();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWDatabase) this.subject).tablesSize();
             }
@@ -101,6 +105,7 @@ public final class DatabaseNode
 
     // *********** ProjectNode.Child implementation *********
 
+    @Override
     public int getProjectNodeChildPriority() {
         return 1;
     }
@@ -108,14 +113,17 @@ public final class DatabaseNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     public String helpTopicID() {
         return "database";
     }
 
+    @Override
     public String buildIconKey() {
         return this.getDatabase().isConnected() ? "database.connected" : "database";
     }
@@ -139,10 +147,12 @@ public final class DatabaseNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return DATABASE_DISPLAY_STRING_PROPERTY_NAMES;
     }
 
+    @Override
     protected String[] iconPropertyNames() {
         return DATABASE_ICON_PROPERTY_NAMES;
     }
@@ -150,6 +160,7 @@ public final class DatabaseNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DatabasePropertiesPage.class;
     }
@@ -161,6 +172,7 @@ public final class DatabaseNode
         return (MWDatabase) this.getValue();
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         WorkbenchContext localContext = this.buildLocalWorkbenchContext(workbenchContext);
 
@@ -180,6 +192,7 @@ public final class DatabaseNode
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         WorkbenchContext localContext = this.buildLocalWorkbenchContext(workbenchContext);
 

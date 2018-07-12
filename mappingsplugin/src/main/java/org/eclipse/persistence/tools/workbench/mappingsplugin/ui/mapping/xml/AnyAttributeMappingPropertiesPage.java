@@ -226,6 +226,7 @@ public final class AnyAttributeMappingPropertiesPage extends TitledPropertiesPag
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWModel) AnyAttributeMappingPropertiesPage.this.selection()).getRepository();
             }

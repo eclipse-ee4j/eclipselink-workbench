@@ -543,6 +543,7 @@ public final class SCPluginResourceBundle extends ListResourceBundle {
         { "HELP.tooltip", "Help for the selected item(s)" },
     };
 
+    @Override
     protected Object[][] getContents() {
         return contents;
     }

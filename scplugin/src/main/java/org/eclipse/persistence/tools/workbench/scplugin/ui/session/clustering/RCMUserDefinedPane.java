@@ -89,12 +89,14 @@ final class RCMUserDefinedPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), UserDefinedTransportManagerAdapter.TRANSPORT_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 UserDefinedTransportManagerAdapter adapter = (UserDefinedTransportManagerAdapter) subject;
                 return adapter.getTransportClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 UserDefinedTransportManagerAdapter adapter = (UserDefinedTransportManagerAdapter) subject;
@@ -113,6 +115,7 @@ final class RCMUserDefinedPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), "")
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 SCAdapter adapter = (SCAdapter) subject;
@@ -140,6 +143,7 @@ final class RCMUserDefinedPane extends AbstractTransportManagerPane
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();

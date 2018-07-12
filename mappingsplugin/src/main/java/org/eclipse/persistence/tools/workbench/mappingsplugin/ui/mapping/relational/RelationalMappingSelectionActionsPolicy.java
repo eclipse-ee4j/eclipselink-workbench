@@ -40,6 +40,7 @@ public final class RelationalMappingSelectionActionsPolicy
 
     // **************** SelectionActionsPolicy contract ***********************
 
+    @Override
     protected void addToMapAsMenuDescription(MenuDescription menuDescription, WorkbenchContext context)
     {
         MenuGroupDescription mappingGroup = new MenuGroupDescription();
@@ -62,6 +63,7 @@ public final class RelationalMappingSelectionActionsPolicy
         menuDescription.add(mappingGroup);
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext context)
     {
 

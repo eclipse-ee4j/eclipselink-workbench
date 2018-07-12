@@ -25,10 +25,12 @@ final class ExamplesAction extends AbstractFrameworkAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("EXAMPLES");
     }
 
+    @Override
     protected void execute() {
         this.helpManager().showTopic("eclipselink_examples");
     }

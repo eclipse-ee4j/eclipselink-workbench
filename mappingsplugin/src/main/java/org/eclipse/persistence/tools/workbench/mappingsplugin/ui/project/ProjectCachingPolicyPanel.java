@@ -66,6 +66,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     {
         return new TransformationPropertyValueModel(buildCacheIsolationSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -79,6 +80,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     private ListValueModel buildCacheCoordinationListHolder()
     {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWTransactionalProjectCachingPolicy.cacheCoordinationOptions().toplinkOptions();
             }
@@ -89,12 +91,14 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCachingPolicy.CACHE_COORDINATION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWCachingPolicy policy = (MWCachingPolicy) subject;
                 return policy.getCacheCoordination();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWCachingPolicy policy = (MWCachingPolicy) subject;
@@ -112,6 +116,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     private ListValueModel buildCacheIsolationListHolder()
     {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWTransactionalProjectCachingPolicy.cacheIsolationOptions().toplinkOptions();
             }
@@ -122,12 +127,14 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCachingPolicy.CACHE_ISOLATION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWCachingPolicy policy = (MWCachingPolicy) subject;
                 return policy.getCacheIsolation();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWCachingPolicy policy = (MWCachingPolicy) subject;
@@ -140,11 +147,13 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCachingPolicy.CACHE_SIZE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return new Integer(((MWCachingPolicy) subject).getCacheSize());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCachingPolicy) subject).setCacheSize(((Number) value).intValue());
@@ -173,6 +182,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     private ListValueModel buildCacheTypeListHolder()
     {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWTransactionalProjectCachingPolicy.cacheTypeOptions().toplinkOptions();
             }
@@ -183,11 +193,13 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCachingPolicy.CACHE_TYPE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWCachingPolicy) subject).getCacheType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCachingPolicy) subject).setCacheType((MWCachingPolicy.CacheTypeOption)value);
@@ -204,6 +216,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     private ListValueModel buildExistenceCheckingListHolder()
     {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return MWTransactionalProjectCachingPolicy.existenceCheckingOptions().toplinkOptions();
             }
@@ -214,11 +227,13 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWCachingPolicy.EXISTENCE_CHECKING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWCachingPolicy) this.subject).getExistenceChecking();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ((MWCachingPolicy) this.subject).setExistenceChecking((ExistenceCheckingOption) value);
@@ -226,6 +241,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
         };
     }
 
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -365,6 +381,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
 
     private ListCellRenderer buildToplinkOptionRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return resourceRepository().getString(((TopLinkOption) value).resourceKey());
             }
@@ -373,6 +390,7 @@ final class ProjectCachingPolicyPanel extends AbstractSubjectPanel
 
     private PropertyValueModel buildCacheExpiryHolder() {
         return new PropertyAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheExpiry();
             }

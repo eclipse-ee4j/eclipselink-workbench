@@ -55,6 +55,7 @@ public final class SessionBrokerAdapter extends SessionAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new SessionBrokerConfig();
     }
@@ -73,6 +74,7 @@ public final class SessionBrokerAdapter extends SessionAdapter {
         return ( TopLinkSessionsAdapter)this.getParent();
     }
 
+    @Override
     public boolean isBroker() {
         return true;
     }
@@ -160,6 +162,7 @@ public final class SessionBrokerAdapter extends SessionAdapter {
         return removedSessions;
     }
 
+    @Override
     void externalTransactionControllerClassChanged() {
 
         for( Iterator iter = sessions(); iter.hasNext(); ) {
@@ -170,6 +173,7 @@ public final class SessionBrokerAdapter extends SessionAdapter {
         }
     }
 
+    @Override
     protected void setManaged( boolean managed) {
 
         throw new IllegalStateException();
@@ -178,6 +182,7 @@ public final class SessionBrokerAdapter extends SessionAdapter {
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         CollectionTools.addAll( children, sessions());
@@ -185,6 +190,7 @@ public final class SessionBrokerAdapter extends SessionAdapter {
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo(branchProblems);

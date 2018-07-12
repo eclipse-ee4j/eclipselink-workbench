@@ -65,14 +65,17 @@ public class TableNameDialog
         this.shortNameTextField = new JTextField(initialShortName, 30);
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.catalogTextField;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.newTable";
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -183,12 +186,15 @@ public class TableNameDialog
 
     private DocumentListener buildDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 // do nothing
             }
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 TableNameDialog.this.getOKAction().setEnabled(e.getDocument().getLength() != 0);
             }
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 TableNameDialog.this.getOKAction().setEnabled(e.getDocument().getLength() != 0);
             }
@@ -198,6 +204,7 @@ public class TableNameDialog
     /**
      * broaden access to method a bit
      */
+    @Override
     protected Action getOKAction() {
         return super.getOKAction();
     }

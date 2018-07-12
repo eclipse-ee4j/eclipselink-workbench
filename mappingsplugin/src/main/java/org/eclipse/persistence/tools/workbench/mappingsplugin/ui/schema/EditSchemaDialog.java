@@ -58,6 +58,7 @@ final class EditSchemaDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -66,6 +67,7 @@ final class EditSchemaDialog
         this.getOKAction().setEnabled(false);
     }
 
+    @Override
     protected Iterator buildCustomActions() {
         this.reimportAction = this.buildReimportAction();
         return new SingleElementIterator(this.reimportAction);
@@ -73,6 +75,7 @@ final class EditSchemaDialog
 
     private Action buildReimportAction() {
         Action action = new AbstractAction(this.buildReimportText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 EditSchemaDialog.this.reimportSchema();
             }
@@ -85,6 +88,7 @@ final class EditSchemaDialog
         return this.resourceRepository().getString("EDIT_SCHEMA_DIALOG.REIMPORT_TEXT");
     }
 
+    @Override
     protected Component buildMainPanel() {
         this.schemaPanel = this.buildSchemaPanel();
         return this.schemaPanel;
@@ -99,6 +103,7 @@ final class EditSchemaDialog
 
     private PropertyValueModel buildSchemaRepositoryHolder() {
         return new AbstractReadOnlyPropertyValueModel() {
+            @Override
             public Object getValue() {
                 return EditSchemaDialog.this.schema.schemaRepository();
             }
@@ -107,6 +112,7 @@ final class EditSchemaDialog
 
     private PropertyChangeListener buildSchemaPropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 EditSchemaDialog.this.updateForErrors();
             }
@@ -116,6 +122,7 @@ final class EditSchemaDialog
 
     // **************** AbstractDialog contract *******************************
 
+    @Override
     protected String helpTopicId() {
         return "dialog.schemaProperties";
     }
@@ -127,6 +134,7 @@ final class EditSchemaDialog
         this.show();
     }
 
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         updateForErrors();
@@ -216,6 +224,7 @@ final class EditSchemaDialog
         return true;
     }
 
+    @Override
     protected void okConfirmed() {
         this.setSchemaValues();
         super.okConfirmed();
@@ -287,6 +296,7 @@ final class EditSchemaDialog
 
         private void showWaitCursor() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     EditSchemaDialog.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     getWorkbenchContext().getCurrentWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -296,6 +306,7 @@ final class EditSchemaDialog
 
         private void hideWaitCursor() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     EditSchemaDialog.this.setCursor(Cursor.getDefaultCursor());
                     getWorkbenchContext().getCurrentWindow().setCursor(Cursor.getDefaultCursor());
@@ -305,12 +316,14 @@ final class EditSchemaDialog
 
         private void disposeImportSchemaDialog() {
             EventQueue.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     EditSchemaDialog.this.okConfirmed();
                 }
             });
         }
 
+        @Override
         public void run() {
             try {
                 reloadSchema();
@@ -318,6 +331,7 @@ final class EditSchemaDialog
             }
             catch (final ResourceException re) {
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         EditSchemaDialog.this.showUrlLoadFailure(EditSchemaDialog.this.schema.getName(), re);
                     }
@@ -326,6 +340,7 @@ final class EditSchemaDialog
             // In XDK version 9.0.4 only RuntimeExceptons are thrown
             catch (final RuntimeException re) {
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         EditSchemaDialog.this.showSchemaLoadFailure(EditSchemaDialog.this.schema.getName(), re);
                     }

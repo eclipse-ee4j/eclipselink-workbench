@@ -36,6 +36,7 @@ final class PrimitiveExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ClassDescription#getAdditionalInfo()
      */
+    @Override
     public String getAdditionalInfo() {
         return "";
     }
@@ -44,6 +45,7 @@ final class PrimitiveExternalClassDescription
      * "int", "float", "void", etc.
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ClassDescription#getName()
      */
+    @Override
     public String getName() {
         return this.primitiveClass.getName();
     }
@@ -51,6 +53,7 @@ final class PrimitiveExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#getArrayDepth()
      */
+    @Override
     public int getArrayDepth() {
         return 0;
     }
@@ -59,6 +62,7 @@ final class PrimitiveExternalClassDescription
      * "int", "float", "void", etc.
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#getElementTypeName()
      */
+    @Override
     public String getElementTypeName() {
         return this.primitiveClass.getName();
     }
@@ -66,6 +70,7 @@ final class PrimitiveExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#getExternalClass()
      */
+    @Override
     public synchronized ExternalClass getExternalClass() throws ExternalClassNotFoundException {
         return this.externalClass;
     }
@@ -73,6 +78,7 @@ final class PrimitiveExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#isSynthetic()
      */
+    @Override
     public boolean isSynthetic() {
         return false;
     }
@@ -80,6 +86,7 @@ final class PrimitiveExternalClassDescription
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

@@ -49,6 +49,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Enter a Mapping Project Class:";
     }
@@ -60,6 +61,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
         this.openWindow();
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel propertyTestingPanel = new JPanel( new BorderLayout());
@@ -109,6 +111,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
     private CollectionValueModel buildClassCollectionAdapter() {
 
         return new CollectionAspectAdapter( subjectHolder(), DatabaseSessionAdapter.ADDITIONAL_PROJECTS_COLLECTION)         {
+            @Override
             protected Iterator getValueFromSubject() {
 
                 return (( DatabaseSessionAdapter)subject).additionalProjects();
@@ -120,6 +123,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
     {
         return new AddRemoveListPanel.Adapter() {
 
+            @Override
             public void addNewItem( ObjectListSelectionModel listSelectionModel) {
 
                 String text =  SCProjectClassListUITest.this.textField().getText();
@@ -127,6 +131,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
                     (( DatabaseSessionAdapter)subject()).addProjectClassNamed( text);
             }
 
+            @Override
             public void removeSelectedItems( ObjectListSelectionModel listSelectionModel) {
 
                 DatabaseSessionAdapter session = ( DatabaseSessionAdapter)subject();
@@ -143,6 +148,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
         return this.textField;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -150,6 +156,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
         windowW = 500;
     }
 
+    @Override
     protected void printModel() {
         System.out.println( "subject.classMappingProject( ");
         for( Iterator i = (( DatabaseSessionAdapter)subject()).additionalProjects(); i.hasNext(); ) {
@@ -158,6 +165,7 @@ public class SCProjectClassListUITest extends SCSessionUITest {
         System.out.println( " )");
     }
 
+    @Override
     protected void resetProperty() {
 
     }

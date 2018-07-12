@@ -44,6 +44,7 @@ public abstract class Project implements Serializable, ProjectInterface {
         this.description = "";
         this.teamLeader = new ValueHolder();
     }
+    @Override
     public String getDescription()
     {
         return description;
@@ -52,14 +53,17 @@ public abstract class Project implements Serializable, ProjectInterface {
     /**
      * Return the persistent identifier of the receiver.
      */
+    @Override
     public BigDecimal getId()
     {
         return id;
     }
+    @Override
     public String getName()
     {
         return name;
     }
+    @Override
     public EmployeeInterface getTeamLeader()
     {
         return (EmployeeInterface) teamLeader.getValue();
@@ -79,6 +83,7 @@ public abstract class Project implements Serializable, ProjectInterface {
     public void preDelete(DescriptorEvent event)
     {
     }
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
@@ -91,10 +96,12 @@ public abstract class Project implements Serializable, ProjectInterface {
     {
         this.id = id;
     }
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
+    @Override
     public void setTeamLeader(EmployeeInterface teamLeader)
     {
         this.teamLeader.setValue(teamLeader);

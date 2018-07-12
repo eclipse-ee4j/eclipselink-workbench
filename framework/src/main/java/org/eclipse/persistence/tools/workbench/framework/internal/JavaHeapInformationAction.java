@@ -47,6 +47,7 @@ final class JavaHeapInformationAction
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.action.AbstractFrameworkAction#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("JAVA_HEAP_INFO");
@@ -55,6 +56,7 @@ final class JavaHeapInformationAction
     /**
      * ignore the selected nodes
      */
+    @Override
     protected void execute() {
         this.totalMemoryLabel = new JLabel();
         this.freeMemoryLabel = new JLabel();
@@ -91,6 +93,7 @@ final class JavaHeapInformationAction
 
     private Action buildGCAction() {
         Action action = new AbstractAction("Collect Garbage") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 JavaHeapInformationAction.this.gc();
             }

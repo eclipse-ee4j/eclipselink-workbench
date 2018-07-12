@@ -42,6 +42,7 @@ public class XMLToolsWriteTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.testDocument = XMLTools.newDocument();
@@ -50,6 +51,7 @@ public class XMLToolsWriteTests extends TestCase {
         XMLTools.addSimpleTextNode(this.rootNode, "element-0", "foo");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

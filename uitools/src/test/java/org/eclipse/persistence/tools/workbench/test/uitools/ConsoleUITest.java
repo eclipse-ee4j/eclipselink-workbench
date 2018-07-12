@@ -59,6 +59,7 @@ public class ConsoleUITest {
 
     private Action buildOpenAction() {
         return new AbstractAction("open") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ConsoleUITest.this.open();
             }
@@ -71,6 +72,7 @@ public class ConsoleUITest {
 
     private Action buildOutAction() {
         return new AbstractAction("out") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ConsoleUITest.this.testOut();
             }
@@ -83,6 +85,7 @@ public class ConsoleUITest {
 
     private Action buildErrAction() {
         return new AbstractAction("err") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ConsoleUITest.this.testErr();
             }
@@ -95,6 +98,7 @@ public class ConsoleUITest {
 
     private Action buildCloseAction() {
         return new AbstractAction("close") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ConsoleUITest.this.close();
             }

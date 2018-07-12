@@ -49,6 +49,7 @@ public class ItemStateListValueModelAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.itemStateListener = this.buildItemStateListener();
@@ -56,9 +57,11 @@ public class ItemStateListValueModelAdapter
 
     protected StateChangeListener buildItemStateListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 ItemStateListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public String toString() {
                 return "item state listener";
             }
@@ -68,10 +71,12 @@ public class ItemStateListValueModelAdapter
 
     // ********** behavior **********
 
+    @Override
     protected void startListeningToItem(Model item) {
         item.addStateChangeListener(this.itemStateListener);
     }
 
+    @Override
     protected void stopListeningToItem(Model item) {
         item.removeStateChangeListener(this.itemStateListener);
     }

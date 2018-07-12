@@ -35,6 +35,7 @@ public class ANDFilterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.andFilter = new ANDFilter(buildMinFilter(1), buildMaxFilter(10));
@@ -42,6 +43,7 @@ public class ANDFilterTests extends TestCase {
 
     private static Filter buildMinFilter(double min) {
         return new SimpleFilter(new Double(min)) {
+            @Override
             public boolean accept(Object next) {
                 double minValue = ((Number) this.criterion).doubleValue();
                 double value = ((Number) next).doubleValue();
@@ -52,6 +54,7 @@ public class ANDFilterTests extends TestCase {
 
     private static Filter buildMaxFilter(double max) {
         return new SimpleFilter(new Double(max)) {
+            @Override
             public boolean accept(Object next) {
                 double maxValue = ((Number) this.criterion).doubleValue();
                 double value = ((Number) next).doubleValue();
@@ -62,6 +65,7 @@ public class ANDFilterTests extends TestCase {
 
     private static Filter buildEvenFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object next) {
                 int value = ((Number) next).intValue();
                 return (value & 1) == 0;
@@ -69,6 +73,7 @@ public class ANDFilterTests extends TestCase {
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

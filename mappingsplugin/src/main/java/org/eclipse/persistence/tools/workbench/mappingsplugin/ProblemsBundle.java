@@ -480,6 +480,7 @@ public class ProblemsBundle extends ListResourceBundle
 
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

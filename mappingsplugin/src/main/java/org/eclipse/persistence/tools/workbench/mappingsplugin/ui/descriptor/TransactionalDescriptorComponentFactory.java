@@ -53,10 +53,12 @@ public class TransactionalDescriptorComponentFactory extends SwingComponentFacto
 
     private static PropertyValueModel buildReadOnlyAdapter(ValueModel transactionalDescriptorHolder) {
         return new PropertyAspectAdapter(transactionalDescriptorHolder, MWTransactionalPolicy.READ_ONLY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWTransactionalDescriptor) subject).getTransactionalPolicy().isReadOnly());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTransactionalDescriptor) subject).getTransactionalPolicy().setReadOnly(((Boolean) value).booleanValue());
             }
@@ -82,10 +84,12 @@ public class TransactionalDescriptorComponentFactory extends SwingComponentFacto
 
     private static PropertyValueModel buildConformResultsInUnitOfWorkAdapter(PropertyValueModel transactionalDescriptorHolder) {
         return new PropertyAspectAdapter(transactionalDescriptorHolder, MWTransactionalPolicy.CONFORM_RESULTS_IN_UNIT_OF_WORK_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWTransactionalDescriptor) subject).getTransactionalPolicy().isConformResultsInUnitOfWork());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTransactionalDescriptor) subject).getTransactionalPolicy().setConformResultsInUnitOfWork(((Boolean) value).booleanValue());
             }
@@ -105,6 +109,7 @@ public class TransactionalDescriptorComponentFactory extends SwingComponentFacto
 
     private static PropertyValueModel buildRefreshCachePolicyHolder(PropertyValueModel transactionalDescriptorHolder) {
         return new PropertyAspectAdapter(transactionalDescriptorHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTransactionalDescriptor) subject).getTransactionalPolicy().getRefreshCachePolicy();
             }
@@ -121,10 +126,12 @@ public class TransactionalDescriptorComponentFactory extends SwingComponentFacto
 
     private static PropertyValueModel buildDescriptorAliasHolder(ValueModel mappingDescriptorHolder) {
         return new PropertyAspectAdapter(buildTransactionalPolicyHolder(mappingDescriptorHolder), MWTransactionalPolicy.DESCRIPTOR_ALIAS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTransactionalPolicy) this.subject).getDescriptorAlias();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTransactionalPolicy) this.subject).setDescriptorAlias((String) value);
             }
@@ -133,6 +140,7 @@ public class TransactionalDescriptorComponentFactory extends SwingComponentFacto
 
     private static PropertyValueModel buildTransactionalPolicyHolder(ValueModel mappingDescriptorHolder) {
         return new PropertyAspectAdapter(mappingDescriptorHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWMappingDescriptor) this.subject).getTransactionalPolicy();
             }

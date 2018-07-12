@@ -64,6 +64,7 @@ public class ChainIterator
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.nextLink != null;
     }
@@ -71,6 +72,7 @@ public class ChainIterator
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.nextLink == null) {
             throw new NoSuchElementException();
@@ -83,6 +85,7 @@ public class ChainIterator
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -97,6 +100,7 @@ public class ChainIterator
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nextLink + ')';
     }
@@ -119,6 +123,7 @@ public interface Linker {
     Linker NULL_INSTANCE =
         new Linker() {
             // simply return null, indicating the chain is ended
+            @Override
             public Object nextLink(Object currentLink) {
                 return null;
             }

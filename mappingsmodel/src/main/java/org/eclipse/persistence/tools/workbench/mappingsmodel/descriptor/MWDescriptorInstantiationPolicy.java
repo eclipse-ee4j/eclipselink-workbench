@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWClassHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
@@ -28,7 +27,6 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -67,6 +65,7 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.policyType = DEFAULT_CONSTRUCTOR;
@@ -144,6 +143,7 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
         return CollectionTools.contains(this.getFactoryType().allMethods(), this.getFactoryMethod());
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getPolicyType());
     }
@@ -151,6 +151,7 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.useMethodHandle);
@@ -161,9 +162,11 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     private NodeReferenceScrubber buildUseMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorInstantiationPolicy.this.setUseMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorInstantiationPolicy.buildUseMethodScrubber()";
             }
@@ -172,9 +175,11 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     private NodeReferenceScrubber buildFactoryMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorInstantiationPolicy.this.setFactoryMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorInstantiationPolicy.buildFactoryMethodScrubber()";
             }
@@ -183,9 +188,11 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     private NodeReferenceScrubber buildInstantiationMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorInstantiationPolicy.this.setInstantiationMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorInstantiationPolicy.buildInstantiationMethodScrubber()";
             }
@@ -194,9 +201,11 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     private NodeReferenceScrubber buildFactoryTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorInstantiationPolicy.this.setFactoryType(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorInstantiationPolicy.buildFactoryTypeScrubber()";
             }
@@ -206,6 +215,7 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     // ********** run-time **********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         String policyType = getPolicyType();
         if (policyType == MWDescriptorInstantiationPolicy.DEFAULT_CONSTRUCTOR) {
@@ -244,10 +254,12 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     // ********** MWAbstractDescriptorPolicy implementation **********
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
 
+    @Override
     public boolean isActive() {
         return true;
     }
@@ -255,6 +267,7 @@ public final class MWDescriptorInstantiationPolicy extends MWAbstractDescriptorP
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkDefaultConstructor(problems);

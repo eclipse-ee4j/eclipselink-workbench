@@ -32,6 +32,7 @@ public final class EisDirectCollectionMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_XML_DIRECT_COLLECTION_MAPPING_NODE";
     }
@@ -39,6 +40,7 @@ public final class EisDirectCollectionMappingNode
 
     // **************** MappingNode contract **********************************
 
+    @Override
     protected String buildIconKey() {
         return "mapping.xmlDirectCollection";
     }
@@ -46,6 +48,7 @@ public final class EisDirectCollectionMappingNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
 //        return getDescriptorNode().mappingHelpTopicPrefix() + ".directCollection";
         return getDescriptorNode().mappingHelpTopicPrefix() + "DirectCollection"; // For 10.1.3
@@ -54,6 +57,7 @@ public final class EisDirectCollectionMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return EisDirectCollectionMappingPropertiesPage.class;
     }

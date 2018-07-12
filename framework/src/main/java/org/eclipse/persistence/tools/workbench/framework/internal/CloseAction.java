@@ -35,6 +35,7 @@ final class CloseAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.close");
@@ -43,6 +44,7 @@ final class CloseAction
         this.initializeAccelerator("file.close.ACCELERATOR");
     }
 
+    @Override
     protected void execute() {
         this.nodeManager.close(this.selectedProjectNodes(), this.getWorkbenchContext());
     }

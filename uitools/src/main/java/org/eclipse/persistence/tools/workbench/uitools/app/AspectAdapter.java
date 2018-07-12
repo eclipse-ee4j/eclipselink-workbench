@@ -89,6 +89,7 @@ public abstract class AspectAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.subjectChangeListener = this.buildSubjectChangeListener();
@@ -97,6 +98,7 @@ public abstract class AspectAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
@@ -106,9 +108,11 @@ public abstract class AspectAdapter
      */
     protected PropertyChangeListener buildSubjectChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AspectAdapter.this.subjectChanged();
             }
+            @Override
             public String toString() {
                 return "subject change listener";
             }
@@ -205,6 +209,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addStateChangeListener(StateChangeListener)
      */
+    @Override
     public synchronized void addStateChangeListener(StateChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModels();
@@ -216,6 +221,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeStateChangeListener(StateChangeListener)
      */
+    @Override
     public synchronized void removeStateChangeListener(StateChangeListener listener) {
         super.removeStateChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -227,6 +233,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addPropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModels();
@@ -238,6 +245,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addPropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         if (propertyName == VALUE && this.hasNoListeners()) {
             this.engageModels();
@@ -249,6 +257,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removePropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
         super.removePropertyChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -260,6 +269,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removePropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         super.removePropertyChangeListener(propertyName, listener);
         if (propertyName == VALUE && this.hasNoListeners()) {
@@ -271,6 +281,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public synchronized void addCollectionChangeListener(CollectionChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModels();
@@ -282,6 +293,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public synchronized void addCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         if (collectionName == VALUE && this.hasNoListeners()) {
             this.engageModels();
@@ -293,6 +305,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public synchronized void removeCollectionChangeListener(CollectionChangeListener listener) {
         super.removeCollectionChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -304,6 +317,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public synchronized void removeCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         super.removeCollectionChangeListener(collectionName, listener);
         if (collectionName == VALUE && this.hasNoListeners()) {
@@ -315,6 +329,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addListChangeListener(ListChangeListener)
      */
+    @Override
     public synchronized void addListChangeListener(ListChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModels();
@@ -326,6 +341,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addListChangeListener(String, ListChangeListener)
      */
+    @Override
     public synchronized void addListChangeListener(String listName, ListChangeListener listener) {
         if (listName == VALUE && this.hasNoListeners()) {
             this.engageModels();
@@ -337,6 +353,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeListChangeListener(ListChangeListener)
      */
+    @Override
     public synchronized void removeListChangeListener(ListChangeListener listener) {
         super.removeListChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -348,6 +365,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeListChangeListener(String, ListChangeListener)
      */
+    @Override
     public synchronized void removeListChangeListener(String listName, ListChangeListener listener) {
         super.removeListChangeListener(listName, listener);
         if (listName == VALUE && this.hasNoListeners()) {
@@ -359,6 +377,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addTreeChangeListener(TreeChangeListener)
      */
+    @Override
     public synchronized void addTreeChangeListener(TreeChangeListener listener) {
         if (this.hasNoListeners()) {
             this.engageModels();
@@ -370,6 +389,7 @@ public abstract class AspectAdapter
      * Extend to start listening to the models if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addTreeChangeListener(String, TreeChangeListener)
      */
+    @Override
     public synchronized void addTreeChangeListener(String treeName, TreeChangeListener listener) {
         if (treeName == VALUE && this.hasNoListeners()) {
             this.engageModels();
@@ -381,6 +401,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeTreeChangeListener(TreeChangeListener)
      */
+    @Override
     public synchronized void removeTreeChangeListener(TreeChangeListener listener) {
         super.removeTreeChangeListener(listener);
         if (this.hasNoListeners()) {
@@ -392,6 +413,7 @@ public abstract class AspectAdapter
      * Extend to stop listening to the models if appropriate.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removeTreeChangeListener(String, TreeChangeListener)
      */
+    @Override
     public synchronized void removeTreeChangeListener(String treeName, TreeChangeListener listener) {
         super.removeTreeChangeListener(treeName, listener);
         if (treeName == VALUE && this.hasNoListeners()) {

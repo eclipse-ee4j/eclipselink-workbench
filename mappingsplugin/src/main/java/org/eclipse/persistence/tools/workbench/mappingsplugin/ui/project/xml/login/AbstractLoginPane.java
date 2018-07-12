@@ -23,7 +23,6 @@ import javax.swing.text.Document;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWLoginSpec;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassRepository;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.xml.MWEisLoginSpec;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.xml.MWEisProject;
@@ -57,6 +56,7 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     protected final ClassRepositoryHolder buildClassRepositoryHolder()
     {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWEisProject) subject()).getClassRepository();
             }
@@ -85,12 +85,14 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWEisLoginSpec.PASSWORD_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisLoginSpec loginSpec = ((MWEisProject) subject).getEisLoginSpec();
                 return loginSpec.getPassword();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisLoginSpec loginSpec = ((MWEisProject) subject).getEisLoginSpec();
@@ -123,10 +125,12 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
 
     private PropertyValueModel buildSavePasswordPropertyAdapter() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWEisLoginSpec.SAVE_PASSWORD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 MWEisLoginSpec loginSpec = ((MWEisProject) subject).getEisLoginSpec();
                 return Boolean.valueOf(loginSpec.isSavePassword());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 MWEisLoginSpec loginSpec = ((MWEisProject) subject).getEisLoginSpec();
                 loginSpec.setSavePassword(((Boolean) value).booleanValue());
@@ -156,12 +160,14 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWEisLoginSpec.USER_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisLoginSpec loginSpec = ((MWEisProject) subject).getEisLoginSpec();
                 return loginSpec.getUserName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisLoginSpec loginSpec = ((MWEisProject) subject).getEisLoginSpec();
@@ -188,6 +194,7 @@ abstract class AbstractLoginPane extends AbstractSubjectPanel
     * @param enabled <code>true<code> if this component and its children should
     * be enabled, <code>false<code> otherwise
     */
+    @Override
     public final void setEnabled(boolean enabled)
     {
         if (isEnabled() == enabled)

@@ -80,22 +80,27 @@ public class SimpleWorkbenchContext
     protected ApplicationContext buildApplicationContext() {
         return new AbstractApplicationContext() {
 
+            @Override
             public Application getApplication() {
                 return SimpleWorkbenchContext.this.application;
             }
 
+            @Override
             public Preferences getPreferences() {
                 return SimpleWorkbenchContext.this.preferences;
             }
 
+            @Override
             public ResourceRepository getResourceRepository() {
                 return SimpleWorkbenchContext.this.resourceRepository;
             }
 
+            @Override
             public NodeManager getNodeManager() {
                 return SimpleWorkbenchContext.this.nodeManager;
             }
 
+            @Override
             public HelpManager getHelpManager() {
                 return SimpleWorkbenchContext.this.helpManager;
             }
@@ -145,6 +150,7 @@ public class SimpleWorkbenchContext
     /**
      * @see WorkbenchContext#getApplicationContext()
      */
+    @Override
     public ApplicationContext getApplicationContext() {
         return this.applicationContext;
     }
@@ -152,6 +158,7 @@ public class SimpleWorkbenchContext
     /**
      * @see WorkbenchContext#getCurrentWindow()
      */
+    @Override
     public Window getCurrentWindow() {
         return this.currentWindow;
     }
@@ -159,6 +166,7 @@ public class SimpleWorkbenchContext
     /**
      * @see WorkbenchContext#getNavigatorSelectionModel()
      */
+    @Override
     public NavigatorSelectionModel getNavigatorSelectionModel() {
         return this.navigatorSelectionModel;
     }
@@ -166,6 +174,7 @@ public class SimpleWorkbenchContext
     /**
      * @see WorkbenchContext#getActionRepository()
      */
+    @Override
     public ActionRepository getActionRepository() {
         return this.actionRepository;
     }
@@ -173,6 +182,7 @@ public class SimpleWorkbenchContext
     /**
      * @see WorkbenchContext#getPropertiesPage()
      */
+    @Override
     public Component getPropertiesPage() {
         return this.propertiesPage;
     }

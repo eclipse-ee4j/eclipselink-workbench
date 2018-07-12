@@ -79,10 +79,12 @@ public final class XpathChooser
 
     private PropertyValueModel buildXpathHolder(ValueModel xmlFieldHolder) {
         return new PropertyAspectAdapter(xmlFieldHolder, MWXmlField.XPATH_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlField) this.subject).getXpath();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlField) this.subject).setXpath((String) value);
             }
@@ -136,6 +138,7 @@ public final class XpathChooser
 
     private Accessible buildLabeler() {
         return new Accessible() {
+            @Override
             public AccessibleContext getAccessibleContext() {
                 if (XpathChooser.this.labeler != null) {
                     return XpathChooser.this.labeler.getAccessibleContext();
@@ -149,6 +152,7 @@ public final class XpathChooser
 
     private ActionListener buildBrowseAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 XpathChooser.this.promptToSelectXpath();
             }
@@ -183,6 +187,7 @@ public final class XpathChooser
      * @see javax.swing.JComponent#setEnabled(boolean)
      * Overwritten to allow dissabling of the browse button and text field
      */
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
 

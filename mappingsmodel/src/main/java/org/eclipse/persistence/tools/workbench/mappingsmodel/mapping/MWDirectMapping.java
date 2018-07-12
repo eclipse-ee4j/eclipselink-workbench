@@ -17,18 +17,13 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.mapping;
 import java.util.List;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWRelationalTypeConversionConverter;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWTypeDeclaration;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.foundation.AbstractDirectMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.sessions.Record;
 
 public abstract class MWDirectMapping
     extends MWMapping
@@ -57,12 +52,14 @@ public abstract class MWDirectMapping
     // **************** Initialization ****************************************
 
     /** initialize persistent state */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.nullValuePolicy = new MWNullNullValuePolicy(this);
         this.converter = new MWNullConverter(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.converter);
@@ -100,28 +97,33 @@ public abstract class MWDirectMapping
 
     // **************** Converter *********************************************
 
+    @Override
     public MWConverter getConverter() {
         return this.converter;
     }
 
+    @Override
     public MWNullConverter setNullConverter() {
         MWNullConverter nullConverter = new MWNullConverter(this);
         this.setConverter(nullConverter);
         return nullConverter;
     }
 
+    @Override
     public MWObjectTypeConverter setObjectTypeConverter() {
         MWObjectTypeConverter objectTypeConverter = new MWObjectTypeConverter(this);
         this.setConverter(objectTypeConverter);
         return objectTypeConverter;
     }
 
+    @Override
     public MWSerializedObjectConverter setSerializedObjectConverter() {
         MWSerializedObjectConverter serializedObjectConverter = new MWSerializedObjectConverter(this);
         this.setConverter(serializedObjectConverter);
         return serializedObjectConverter;
     }
 
+    @Override
     public MWTypeConversionConverter setTypeConversionConverter() {
         MWTypeConversionConverter typeConversionConverter = buildTypeConversionConverter();
         this.setConverter(typeConversionConverter);
@@ -140,6 +142,7 @@ public abstract class MWDirectMapping
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeFromMWDirectMapping(MWDirectMapping oldMapping) {
         super.initializeFromMWDirectMapping(oldMapping);
 
@@ -151,6 +154,7 @@ public abstract class MWDirectMapping
         }
     }
 
+    @Override
     protected void initializeFromMWConverterMapping(MWConverterMapping converterMapping) {
         super.initializeFromMWConverterMapping(converterMapping);
 
@@ -159,6 +163,7 @@ public abstract class MWDirectMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AbstractDirectMapping mapping = (AbstractDirectMapping) super.runtimeMapping();
         this.nullValuePolicy.adjustRuntimeMapping(mapping);

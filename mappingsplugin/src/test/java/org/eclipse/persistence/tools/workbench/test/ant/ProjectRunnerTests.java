@@ -46,6 +46,7 @@ public abstract class ProjectRunnerTests extends TestCase {
      * Setup the temp directory in resource.
      * Generates a MWP.
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
 
@@ -59,6 +60,7 @@ public abstract class ProjectRunnerTests extends TestCase {
         projectFileName= this.buildAndWriteProject( project);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
 

@@ -31,6 +31,7 @@ public class DbaseTests extends PlatformTests {
         super(name);
     }
 
+    @Override
     protected Connection buildConnection() throws Exception {
         try {
             return super.buildConnection();
@@ -43,10 +44,12 @@ public class DbaseTests extends PlatformTests {
         }
     }
 
+    @Override
     protected String driverClassName() {
         return "sun.jdbc.odbc.JdbcOdbcDriver";
     }
 
+    @Override
     protected String connectionURL() {
         return "jdbc:odbc:" + this.odbcDataSourceName();
     }
@@ -55,14 +58,17 @@ public class DbaseTests extends PlatformTests {
         return "MW dBASE";
     }
 
+    @Override
     protected String platformName() {
         return "dBASE";
     }
 
+    @Override
     protected void verifyVersionNumber() throws Exception {
         // we're not too worried about which version of dBASE we're running against
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    BINARY_COL            BINARY,"); sb.append(CR);
         sb.append("    BINARY_20_COL        BINARY(20),"); sb.append(CR);
@@ -75,6 +81,7 @@ public class DbaseTests extends PlatformTests {
         sb.append("    NUMERIC_COL            NUMERIC"); sb.append(CR);
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // the dBASE driver does not return any meta-data
     }

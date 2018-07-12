@@ -128,6 +128,7 @@ public class RdbmsReadPoolLoginPropertiesPage extends AbstractReadPoolLoginPrope
      *
      * @return {@link EisLoginPane}
      */
+    @Override
     protected JComponent buildLoginPane()
     {
         GridBagConstraints constraints = new GridBagConstraints();

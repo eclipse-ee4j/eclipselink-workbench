@@ -36,6 +36,7 @@ public class NOTFilterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.notFilter = new NOTFilter(buildPositiveFilter());
@@ -43,13 +44,16 @@ public class NOTFilterTests extends TestCase {
 
     private static Filter buildPositiveFilter() {
         class LocalFilter implements Filter, Serializable {
+            @Override
             public boolean accept(Object next) {
                 double value = ((Number) next).doubleValue();
                 return value > 0;
             }
+            @Override
             public boolean equals(Object obj) {
                 return this.getClass() == obj.getClass();
             }
+            @Override
             public int hashCode() {
                 return 789;
             }
@@ -57,6 +61,7 @@ public class NOTFilterTests extends TestCase {
         return new LocalFilter();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

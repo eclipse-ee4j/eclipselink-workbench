@@ -101,6 +101,7 @@ public abstract class MWMappingDescriptor
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.mappings = new Vector();
@@ -112,6 +113,7 @@ public abstract class MWMappingDescriptor
         this.instantiationPolicy     = new MWNullDescriptorPolicy(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.mappings) { children.addAll(this.mappings); }
@@ -132,9 +134,11 @@ public abstract class MWMappingDescriptor
 
     private NodeReferenceScrubber buildInheritedAttributeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWMappingDescriptor.this.removeInheritedAttributeHandle((MWAttributeHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWMappingDescriptor.buildInheritedAttributeScrubber()";
             }
@@ -144,6 +148,7 @@ public abstract class MWMappingDescriptor
     /**
      * Overridden from MWRDescriptor
      */
+    @Override
     public MWClassRefreshPolicy buildMWClassRefreshPolicy()
     {
         return DefaultMWClassRefreshPolicy.instance();
@@ -336,10 +341,12 @@ public abstract class MWMappingDescriptor
 
     public abstract MWMappingFactory mappingFactory();
 
+    @Override
     public Iterator mappings() {
         return new CloneIterator(this.mappings);
     }
 
+    @Override
     public int mappingsSize() {
         return this.mappings.size();
     }
@@ -349,6 +356,7 @@ public abstract class MWMappingDescriptor
     {
         return new FilteringIterator(this.mappings())
         {
+            @Override
             protected boolean accept(Object next)
             {
                 return ((MWMapping) next).isTableReferenceMapping();
@@ -394,6 +402,7 @@ public abstract class MWMappingDescriptor
         return null;
     }
 
+    @Override
     public MWMapping mappingNamed(String name) {
         if (name == null) {
             throw new NullPointerException();
@@ -443,6 +452,7 @@ public abstract class MWMappingDescriptor
     }
 
 
+    @Override
     public Collection writableMappingsForField( MWDataField field ) {
         // Answer all mappings that map to the database field
 
@@ -460,6 +470,7 @@ public abstract class MWMappingDescriptor
 
     public Iterator attributes() {
         return new TransformationIterator(mappings()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWMapping) next).getInstanceVariable();
             }
@@ -470,6 +481,7 @@ public abstract class MWMappingDescriptor
     //TODO should this remove advanced properties as well?
     //what about regular descriptor settings like sequencingPolicy?
     //should we prompt the user and make it a preference whether to remove the advanced props?
+    @Override
     public void unmap() {
         super.unmap();
         Collection mappingsCopy = new ArrayList(this.mappings);
@@ -485,6 +497,7 @@ public abstract class MWMappingDescriptor
     /**
      * Note that these methods cascade up the hierarchy tree.
      */
+    @Override
     protected void initializeFromMWMappingDescriptor(MWMappingDescriptor oldDescriptor) {
         super.initializeFromMWMappingDescriptor(oldDescriptor);
 
@@ -551,6 +564,7 @@ public abstract class MWMappingDescriptor
 
     private Iterator inheritedAttributeHandles() {
         return new CloneIterator(this.inheritedAttributeHandles) {
+            @Override
             protected void remove(Object current) {
                 MWMappingDescriptor.this.removeInheritedAttributeHandle((MWAttributeHandle) current);
             }
@@ -564,12 +578,14 @@ public abstract class MWMappingDescriptor
 
     public Iterator inheritedAttributes() {
         return new TransformationIterator(this.inheritedAttributeHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWAttributeHandle) next).getAttribute();
             }
         };
     }
 
+    @Override
     public int inheritedAttributesSize() {
         return this.inheritedAttributeHandles.size();
     }
@@ -663,6 +679,7 @@ public abstract class MWMappingDescriptor
 
     // ********** Inheritance *************************************************
 
+    @Override
     public MWInheritancePolicy getInheritancePolicy() {
         return this.inheritancePolicy;
     }
@@ -705,29 +722,35 @@ public abstract class MWMappingDescriptor
         firePropertyChanged(INHERITANCE_POLICY_PROPERTY, oldInheritancePolicy, newInheritancePolicy);
     }
 
+    @Override
     public boolean canHaveInheritance() {
         return true;
     }
 
+    @Override
     public boolean hasDefinedInheritance() {
         MWInheritancePolicy ip = this.getInheritancePolicy();
         return ip.isRoot() || (ip.getParentDescriptor() != null);
     }
 
+    @Override
     public boolean hasActiveInstantiationPolicy() {
         return getInstantiationPolicy().isActive();
     }
 
     /** Use this method if other descriptor settings or policies depend upon inheritance */
+    @Override
     void inheritanceChanged() {
         super.inheritanceChanged();
         this.inheritancePolicy.descriptorInheritanceChanged();
     }
 
+    @Override
     public Iterator mappingsIncludingInherited() {
         return new CloneListIterator(getMappingsIncludingInherited());
     }
 
+    @Override
     protected List getMappingsIncludingInherited() {
         List allMappings = new Vector();
 
@@ -758,6 +781,7 @@ public abstract class MWMappingDescriptor
     //*************** Problem Handling *************
 
     /** Check for any problems and add them to the specified collection. */
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkMultipleMappingsWriteField(newProblems);
@@ -831,6 +855,7 @@ public abstract class MWMappingDescriptor
 
     // ********** Automap Support **********
 
+    @Override
     protected void automapInternal() {
         super.automapInternal();
         this.getInheritancePolicy().automap();        // find a "type" column
@@ -846,6 +871,7 @@ public abstract class MWMappingDescriptor
 
     // ********** Runtime Conversion **********
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         ClassDescriptor runtimeDescriptor = super.buildRuntimeDescriptor();
 
@@ -874,6 +900,7 @@ public abstract class MWMappingDescriptor
     /** The default comparator - no sorting is done */
     protected Comparator orderedMappingComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return 0;
             }

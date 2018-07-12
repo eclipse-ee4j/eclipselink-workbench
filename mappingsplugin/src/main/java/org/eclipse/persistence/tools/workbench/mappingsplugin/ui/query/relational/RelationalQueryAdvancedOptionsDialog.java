@@ -51,10 +51,12 @@ final class RelationalQueryAdvancedOptionsDialog extends QueryAdvancedOptionsDia
     }
 
 
+    @Override
     protected String helpTopicId() {
         return "dialog.relationalQueryAdvancedOptions";
     }
 
+    @Override
     protected Component buildMainPanel() {
 
         JPanel panel = new JPanel(new GridBagLayout());

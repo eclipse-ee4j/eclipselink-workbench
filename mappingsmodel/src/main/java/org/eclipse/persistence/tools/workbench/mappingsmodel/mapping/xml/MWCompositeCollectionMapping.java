@@ -21,7 +21,6 @@ import org.eclipse.persistence.internal.helper.DatabaseField;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.foundation.AbstractCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWCollectionContainerPolicy;
@@ -60,6 +59,7 @@ public final class MWCompositeCollectionMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
 
@@ -80,6 +80,7 @@ public final class MWCompositeCollectionMapping
         }
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.containerPolicy);
@@ -88,6 +89,7 @@ public final class MWCompositeCollectionMapping
 
     // **************** Container policy **************************************
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -98,6 +100,7 @@ public final class MWCompositeCollectionMapping
         firePropertyChanged(CONTAINER_POLICY_PROPERTY, oldValue, containerPolicy);
     }
 
+    @Override
     public MWMapContainerPolicy setMapContainerPolicy() {
         if (this.containerPolicy instanceof MWMapContainerPolicy) {
             return (MWMapContainerPolicy) this.containerPolicy;
@@ -107,6 +110,7 @@ public final class MWCompositeCollectionMapping
         return cp;
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -116,6 +120,7 @@ public final class MWCompositeCollectionMapping
         return cp;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -125,6 +130,7 @@ public final class MWCompositeCollectionMapping
         return cp;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -142,12 +148,14 @@ public final class MWCompositeCollectionMapping
         return NullIterator.instance();
     }
 
+    @Override
     public boolean usesTransparentIndirection() {
         return false;
     }
 
     // **************** MWXpathContext implementation *************************
 
+    @Override
     protected boolean mayUseCollectionData() {
         return true;
     }
@@ -159,10 +167,12 @@ public final class MWCompositeCollectionMapping
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWCompositeCollectionMapping(this);
     }
 
+    @Override
     public void initializeFromMWAnyCollectionMapping(MWAnyCollectionMapping oldMapping) {
         super.initializeFromMWAnyCollectionMapping(oldMapping);
         this.getContainerPolicy().getDefaultingContainerClass().setContainerClass(oldMapping.getContainerPolicy().getDefaultingContainerClass().getContainerClass());
@@ -171,10 +181,12 @@ public final class MWCompositeCollectionMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return this.xmlDescriptor().buildDefaultRuntimeCompositeCollectionMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AbstractCompositeCollectionMapping runtimeMapping =
             (AbstractCompositeCollectionMapping) super.runtimeMapping();

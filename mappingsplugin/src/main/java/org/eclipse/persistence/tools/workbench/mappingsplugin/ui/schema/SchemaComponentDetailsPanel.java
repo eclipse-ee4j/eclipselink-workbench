@@ -87,6 +87,7 @@ final class SchemaComponentDetailsPanel
 
     private ListValueModel buildDetailsAdapter() {
         return new ListAspectAdapter(this.schemaComponentNodeHolder) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((SchemaComponentNode) this.subject).details();
             }
@@ -109,22 +110,27 @@ final class SchemaComponentDetailsPanel
         private static final int DETAIL_VALUE_COLUMN     = 1;
 
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return "";
         }
 
+        @Override
         public Class getColumnClass(int index) {
             return String.class;
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             SchemaComponentDetail detail = (SchemaComponentDetail) subject;
             PropertyValueModel[] cellModels = new PropertyValueModel[COLUMN_COUNT];
@@ -138,6 +144,7 @@ final class SchemaComponentDetailsPanel
         private PropertyValueModel buildDetailNameAdapter(final SchemaComponentDetail detail) {
             //TODO not positive, but don't think we should be using a read only propertyValueModel here.
             return new AbstractReadOnlyPropertyValueModel() {
+                @Override
                 public Object getValue() {
                     return detail.getName();
                 }
@@ -146,6 +153,7 @@ final class SchemaComponentDetailsPanel
 
         private PropertyValueModel buildDetailValueAdapter(SchemaComponentDetail detail) {
             return new PropertyAspectAdapter(SchemaComponentDetail.VALUE_PROPERTY, detail) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((SchemaComponentDetail) this.subject).getValue();
                 }

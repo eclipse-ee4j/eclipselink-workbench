@@ -43,10 +43,12 @@ public final class ReferencedComplexTypeDefinition
 
     // **************** SchemaComponentReference contract *********************
 
+    @Override
     protected MWNamedSchemaComponent getReferencedComponent() {
         return this.complexType;
     }
 
+    @Override
     protected void resolveReference(String complexTypeNamespace, String complexTypeName) {
         this.complexType = (ExplicitComplexTypeDefinition) this.getSchema().complexType(complexTypeNamespace, complexTypeName);
     }
@@ -54,14 +56,17 @@ public final class ReferencedComplexTypeDefinition
 
     // **************** MWComplexTypeDefinition contract **********************
 
+    @Override
     public boolean isAbstract() {
         return this.complexType.isAbstract();
     }
 
+    @Override
     public String getDerivationMethod() {
         return this.complexType.getDerivationMethod();
     }
 
+    @Override
     public int attributeCount() {
         return this.complexType.attributeCount();
     }
@@ -69,14 +74,17 @@ public final class ReferencedComplexTypeDefinition
 
     // **************** MWSchemaTypeDefiniton contract ************************
 
+    @Override
     public MWSchemaTypeDefinition getBaseType() {
         return this.complexType.getBaseType();
     }
 
+    @Override
     public boolean isComplex() {
         return true;
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return this.complexType.baseBuiltInTypes();
     }
@@ -84,14 +92,17 @@ public final class ReferencedComplexTypeDefinition
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public MWNamedSchemaComponent nestedNamedComponent(QName qName) {
         return this.complexType.nestedNamedComponent(qName);
     }
 
+    @Override
     public int totalElementCount() {
         return this.complexType.totalElementCount();
     }
 
+    @Override
     protected void reloadName(String name, String namespace) {
         if (name == null) {
             name = "anyType";

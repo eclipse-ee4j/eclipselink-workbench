@@ -46,6 +46,7 @@ final class DirectToFieldMappingPanel extends ScrollablePropertiesPage {
         super(mappingNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.parentDescriptorHolder = buildParentDescriptorHolder();
@@ -59,6 +60,7 @@ final class DirectToFieldMappingPanel extends ScrollablePropertiesPage {
         return "mapping.directToField";
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -153,6 +155,7 @@ final class DirectToFieldMappingPanel extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildParentDescriptorHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDirectToFieldMapping) subject).getParentDescriptor();
             }
@@ -161,6 +164,7 @@ final class DirectToFieldMappingPanel extends ScrollablePropertiesPage {
 
     private ValueModel buildDatabaseFieldChooserEnablerModel() {
         return new PropertyAspectAdapter(parentDescriptorHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(!((MWRelationalDescriptor) subject).isAggregateDescriptor());
             }

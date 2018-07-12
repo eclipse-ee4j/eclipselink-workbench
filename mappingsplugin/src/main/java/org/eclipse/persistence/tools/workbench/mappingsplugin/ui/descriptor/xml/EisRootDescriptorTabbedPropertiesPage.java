@@ -46,6 +46,7 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         super.initializeTabs();
         addTab(new EisRootDescriptorInfoPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "DESCRIPTOR_INFO_TAB");
@@ -62,16 +63,19 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
                 new EisReturningPolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "EIS_ROOT_DESCRIPTOR_RETURNING_TAB");
     }
 
+    @Override
     protected Component buildInheritancePolicyPropertiesPage() {
         return new EisInheritancePolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected ComponentBuilder buildInheritancePolicyPageBuilder()
     {
         return new ComponentBuilder()
         {
             private XmlInheritancePolicyPropertiesPage inheritancePolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (inheritancePolicyPage == null)
@@ -89,6 +93,7 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
         {
             private EisLockingPolicyPropertiesPage lockingPolicyPropertiesPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (lockingPolicyPropertiesPage == null)
@@ -105,6 +110,7 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
         return  buildDescriptorPolicyBooleanValueModel(
             new PropertyAspectAdapter( getSelectionHolder(), MWRootEisDescriptor.RETURNING_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 return ((MWRootEisDescriptor) subject).getReturningPolicy();
@@ -118,6 +124,7 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
         {
             private EisReturningPolicyPropertiesPage returningPage;
 
+            @Override
             public Component buildComponent( PropertyValueModel nodeHolder)
             {
                 if( returningPage == null)
@@ -137,6 +144,7 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
         return  buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWRootEisDescriptor.INTERFACE_ALIAS_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWRootEisDescriptor desc = (MWRootEisDescriptor)subject;
@@ -154,6 +162,7 @@ final class EisRootDescriptorTabbedPropertiesPage extends MappingDescriptorTabbe
         {
             private InterfaceAliasPolicyPage interfaceAliasPolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (interfaceAliasPolicyPage == null)

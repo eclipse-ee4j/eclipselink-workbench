@@ -390,14 +390,17 @@ public final class InteractionPanel extends AbstractPanel {
             this.COLUMN_NAME_KEYS = columnNameKeys;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case ARGUMENT_NAME_COLUMN:    return String.class;
@@ -407,10 +410,12 @@ public final class InteractionPanel extends AbstractPanel {
             }
         }
 
+        @Override
         public boolean isColumnEditable(int columnIndex) {
             return true;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWEisInteraction.ArgumentPair argumentPair = (MWEisInteraction.ArgumentPair)subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -423,9 +428,11 @@ public final class InteractionPanel extends AbstractPanel {
 
         private PropertyValueModel buildArgumentNameAdapter(MWEisInteraction.ArgumentPair argumentPair) {
             return new PropertyAspectAdapter(MWEisInteraction.ArgumentPair.ARGUMENT_NAME_PROPERTY, argumentPair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWEisInteraction.ArgumentPair)subject).getArgumentName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWEisInteraction.ArgumentPair)subject).setArgumentName((String)value);
                 }
@@ -434,9 +441,11 @@ public final class InteractionPanel extends AbstractPanel {
 
         private PropertyValueModel buildArgumentFieldNameAdapter(MWEisInteraction.ArgumentPair argumentPair) {
             return new PropertyAspectAdapter(MWEisInteraction.ArgumentPair.ARGUMENT_FIELD_NAME_PROPERTY, argumentPair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWEisInteraction.ArgumentPair)subject).getArgumentFieldName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWEisInteraction.ArgumentPair)subject).setArgumentFieldName((String)value);
                 }
@@ -449,10 +458,12 @@ public final class InteractionPanel extends AbstractPanel {
     //*******  Function Name
     private PropertyValueModel buildFunctionNameHolder() {
         return new PropertyAspectAdapter(this.eisInteractionHolder, MWEisInteraction.FUNCTION_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisInteraction) this.subject).getFunctionName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWEisInteraction) this.subject).setFunctionName((String)value);
             }
@@ -466,10 +477,12 @@ public final class InteractionPanel extends AbstractPanel {
     //*******  Input Record Name
     private PropertyValueModel buildInputRecordNameHolder() {
         return new PropertyAspectAdapter(this.eisInteractionHolder, MWEisInteraction.INPUT_RECORD_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisInteraction)subject).getInputRecordName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWEisInteraction)subject).setInputRecordName((String)value);
             }
@@ -483,10 +496,12 @@ public final class InteractionPanel extends AbstractPanel {
     //*******  Input Root Element Name
     private PropertyValueModel buildInputRootElementNameHolder() {
         return new PropertyAspectAdapter(this.eisInteractionHolder, MWEisInteraction.INPUT_ROOT_ELEMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisInteraction)subject).getInputRootElementName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWEisInteraction)subject).setInputRootElementName((String)value);
             }
@@ -500,10 +515,12 @@ public final class InteractionPanel extends AbstractPanel {
     //*******  Input Result Path
     private PropertyValueModel buildInputResultPathHolder() {
         return new PropertyAspectAdapter(this.eisInteractionHolder, MWEisInteraction.INPUT_RESULT_PATH_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisInteraction)subject).getInputResultPath();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWEisInteraction)subject).setInputResultPath((String)value);
             }
@@ -517,10 +534,12 @@ public final class InteractionPanel extends AbstractPanel {
     //*******  Output Result Path
     private PropertyValueModel buildOutputResultPathHolder() {
         return new PropertyAspectAdapter(this.eisInteractionHolder, MWEisInteraction.OUTPUT_RESULT_PATH_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisInteraction)subject).getOutputResultPath();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWEisInteraction)subject).setOutputResultPath((String)value);
             }
@@ -534,6 +553,7 @@ public final class InteractionPanel extends AbstractPanel {
     protected ListSelectionListener buildListSelectionHandler()
     {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     updateRemoveArgumentButton();
@@ -558,6 +578,7 @@ public final class InteractionPanel extends AbstractPanel {
     protected ActionListener buildAddArgumentAction()
     {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 if(ae.getSource() == addInputArgumentButton) {
                     addInputArgument();
@@ -574,6 +595,7 @@ public final class InteractionPanel extends AbstractPanel {
     protected ActionListener buildRemoveArgumentAction()
      {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 if(ae.getSource() == removeInputArgumentButton) {
                     removeSelectedInputArguments();
@@ -705,6 +727,7 @@ public final class InteractionPanel extends AbstractPanel {
 
     private ListValueModel buildInputArgumentsAdapter() {
         return new ListAspectAdapter(eisInteractionHolder, MWEisInteraction.INPUT_ARGUMENTS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWEisInteraction)subject).inputArguments();
             }
@@ -726,6 +749,7 @@ public final class InteractionPanel extends AbstractPanel {
 
     private ListValueModel buildPropertiesAdapter() {
         return new ListAspectAdapter(eisInteractionHolder, MWEisInteraction.PROPERTIES_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWEisInteraction)subject).properties();
             }
@@ -747,6 +771,7 @@ public final class InteractionPanel extends AbstractPanel {
 
     private ListValueModel buildOutputArgumentsAdapter() {
         return new ListAspectAdapter(eisInteractionHolder, MWEisInteraction.OUTPUT_ARGUMENTS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWEisInteraction)subject).outputArguments();
             }
@@ -775,6 +800,7 @@ public final class InteractionPanel extends AbstractPanel {
             this.add(removeButton);
         }
 
+        @Override
         protected void updateEnableStateOfChildren(boolean enabled) {
             getComponent(0).setEnabled(enabled);
             getComponent(1).setEnabled(enabled && (table.getSelectedRowCount() > 0));

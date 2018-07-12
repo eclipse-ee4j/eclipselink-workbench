@@ -95,8 +95,10 @@ public class MultipleClassChooserDialogUITest {
         /**
          * filter out all the "local" and "anonymous" classes
          */
+        @Override
         protected Filter classNameFilter() {
             return new Filter() {
+                @Override
                 public boolean accept(Object o) {
                     return ClassTools.classNamedIsDeclarable((String) o);
                 }

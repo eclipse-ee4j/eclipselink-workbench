@@ -41,6 +41,7 @@ public class TransformerCellRendererAdapter
 
     // **************** CellRendererAdapter contract **************************
 
+    @Override
     public Icon buildIcon(Object value) {
         MWTransformer transformer = (MWTransformer) value;
         String text = this.buildText(transformer);
@@ -56,10 +57,12 @@ public class TransformerCellRendererAdapter
         throw new IllegalArgumentException("unknown transformer: " + transformer);
     }
 
+    @Override
     public String buildText(Object value) {
         return ((MWTransformer) value).transformerDisplayString();
     }
 
+    @Override
     public String buildToolTipText(Object value) {
         MWTransformer transformer = (MWTransformer) value;
         String text = this.buildText(transformer);

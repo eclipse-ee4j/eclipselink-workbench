@@ -41,6 +41,7 @@ final class CLExternalMethod
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMethod#getExceptionTypes()
      */
+    @Override
     public ExternalClassDescription[] getExceptionTypes() {
         return this.buildClassDescriptionArray(this.getMethod().getExceptionTypes());
     }
@@ -48,6 +49,7 @@ final class CLExternalMethod
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMethod#getParameterTypes()
      */
+    @Override
     public ExternalClassDescription[] getParameterTypes() {
         return this.buildClassDescriptionArray(this.getMethod().getParameterTypes());
     }
@@ -55,6 +57,7 @@ final class CLExternalMethod
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMethod#getReturnType()
      */
+    @Override
     public ExternalClassDescription getReturnType() {
         return this.classDescriptionFor(this.getMethod().getReturnType());
     }

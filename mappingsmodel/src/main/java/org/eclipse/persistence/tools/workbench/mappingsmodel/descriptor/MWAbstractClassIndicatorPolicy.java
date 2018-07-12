@@ -23,8 +23,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXm
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlNode;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 public abstract class MWAbstractClassIndicatorPolicy
@@ -48,14 +46,17 @@ public abstract class MWAbstractClassIndicatorPolicy
 
     // ************* MWClassIndicatorPolicy implementation *************
 
+    @Override
     public void setDescriptorsAvailableForIndicatorDictionary(Iterator descriptors) {
         //do nothing
     }
 
+    @Override
     public void setDescriptorsAvailableForIndicatorDictionaryForTopLink(Iterator descriptors) {
         //do nothing
     }
 
+    @Override
     public void rebuildClassIndicatorValues(Collection descriptors) {
         //do nothing
     }
@@ -63,6 +64,7 @@ public abstract class MWAbstractClassIndicatorPolicy
 
     // ************* aggregate support *************
 
+    @Override
     public void addToAggregateFieldNameGenerators(Collection generators) {
         //don't add self to Collection, overridden in MWRelationalClassIndicatorFieldPolicy
     }
@@ -76,6 +78,7 @@ public abstract class MWAbstractClassIndicatorPolicy
 
     // ************* Model Synchronization *************
 
+    @Override
     public void parentDescriptorMorphedToAggregate() {
         //do nothing
     }
@@ -83,6 +86,7 @@ public abstract class MWAbstractClassIndicatorPolicy
 
     // ************* Automap Support *************
 
+    @Override
     public void automap() {
         //do nothing
     }
@@ -90,6 +94,7 @@ public abstract class MWAbstractClassIndicatorPolicy
 
     // ************* Runtime Conversion *************
 
+    @Override
     public void adjustRuntimeInheritancePolicy(org.eclipse.persistence.descriptors.InheritancePolicy runtimeInheritancePolicy) {
         //do nothing
     }
@@ -97,6 +102,7 @@ public abstract class MWAbstractClassIndicatorPolicy
 
     // ************* Persistence *************
 
+    @Override
     public MWAbstractClassIndicatorPolicy getValueForTopLink() {
         return this;
     }
@@ -105,11 +111,13 @@ public abstract class MWAbstractClassIndicatorPolicy
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         //do nothing
     }
 
     /** @see MWXmlNode.schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         //do nothing
     }

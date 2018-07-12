@@ -31,10 +31,12 @@ public class Sybase12_5Tests extends Sybase12_0Tests {
         super(name);
     }
 
+    @Override
     protected String[] driverJARNames() {
         return new String[] {"jconn3.jar"};
     }
 
+    @Override
     protected String driverClassName() {
         return "com.sybase.jdbc3.jdbc.SybDriver";
     }
@@ -42,14 +44,17 @@ public class Sybase12_5Tests extends Sybase12_0Tests {
     /**
      * the Sybase Adaptive Server Enterprise 12.5 in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb2.ca.oracle.com";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "12.5.2";
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("DATE_COL                    DATE NULL,"); sb.append(CR);
         sb.append("TIME_COL                    TIME NULL,"); sb.append(CR);
@@ -60,6 +65,7 @@ public class Sybase12_5Tests extends Sybase12_0Tests {
         super.appendColumnsToTableDDL(sb);
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // DATE
         this.verifyColumnAttribute(metaDataMap, "DATE_COL", "TABLE_CAT", this.userName());

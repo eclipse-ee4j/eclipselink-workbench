@@ -73,6 +73,7 @@ public class LineNumber {
         visitor.visit(this);
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.lineNumber + ':' + this.startPC + ')';
     }

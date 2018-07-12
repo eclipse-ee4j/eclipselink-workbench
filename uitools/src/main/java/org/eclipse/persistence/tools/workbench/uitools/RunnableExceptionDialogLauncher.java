@@ -36,6 +36,7 @@ public final class RunnableExceptionDialogLauncher implements Runnable {
         this.title = title;
     }
 
+    @Override
     public void run() {
         if ( ! EventQueue.isDispatchThread()) {
             throw new IllegalStateException("this method must be executed in the AWT event dispatcher thread");

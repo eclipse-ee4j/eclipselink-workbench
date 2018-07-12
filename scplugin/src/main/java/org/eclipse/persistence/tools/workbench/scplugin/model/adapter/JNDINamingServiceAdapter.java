@@ -53,6 +53,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new JNDINamingServiceConfig();
     }
@@ -66,6 +67,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -77,6 +79,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Initializes default value.
      */
+    @Override
     protected void initializeDefaults() {
 
         this.setInitialContextFactoryName( XMLSessionConfigProject.INITIAL_CONTEXT_FACTORY_NAME_DEFAULT);
@@ -86,6 +89,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize() {
 
         super.initialize();
@@ -95,6 +99,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Returns this URL.
      */
+    @Override
     public String getURL() {
 
         return this.namingService().getURL();
@@ -102,6 +107,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Sets config model.
      */
+    @Override
     public void setURL( String url) {
 
         Object old = this.namingService().getURL();
@@ -111,6 +117,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Returns this UserName.
      */
+    @Override
     public String getUserName() {
 
         return this.namingService().getUsername();
@@ -118,6 +125,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Sets config model.
      */
+    @Override
     public void setUserName( String name) {
 
         Object old = this.namingService().getUsername();
@@ -127,6 +135,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Returns this Password.
      */
+    @Override
     public String getPassword() {
 
         return this.namingService().getPassword();
@@ -134,6 +143,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Sets config model.
      */
+    @Override
     public void setPassword( String pw) {
 
         Object old = this.namingService().getPassword();
@@ -157,6 +167,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Returns this InitialContextFactoryName.
      */
+    @Override
     public String getInitialContextFactoryName() {
 
         return this.namingService().getInitialContextFactoryName();
@@ -164,6 +175,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Sets config model.
      */
+    @Override
     public void setInitialContextFactoryName( String name) {
 
         Object old = this.namingService().getInitialContextFactoryName();
@@ -173,6 +185,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Returns an iterator on this collection of properties.
      */
+    @Override
     public Iterator properties() {
 
         return this.getProperties().iterator();
@@ -180,6 +193,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Returns an iterator on this collection of properties.
      */
+    @Override
     public int propertySize() {
 
         return this.getProperties().size();
@@ -216,6 +230,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Adds the given properties and fire notification.
      */
+    @Override
     public PropertyAdapter addProperty( String name, String value) {
 
         PropertyAdapter property = this.buildPropertyAdapter( name, value);
@@ -226,6 +241,7 @@ final class JNDINamingServiceAdapter extends SCAdapter
     /**
      * Removes the given properties and fire notification.
      */
+    @Override
     public void removeProperty( PropertyAdapter property) {
 
         this.getPropertyConfigs().remove( property.propertyConfig());

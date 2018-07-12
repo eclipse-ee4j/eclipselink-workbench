@@ -27,6 +27,7 @@ public class TreeCellRendererUITest extends TreeCellEditorUITest {
         super();
     }
 
+    @Override
     protected boolean isEditable() {
         return false;
     }

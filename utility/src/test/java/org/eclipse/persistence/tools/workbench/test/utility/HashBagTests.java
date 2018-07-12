@@ -39,6 +39,7 @@ public class HashBagTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.bag = this.buildBag();
@@ -60,6 +61,7 @@ public class HashBagTests extends TestCase {
         return b;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

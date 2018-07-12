@@ -70,6 +70,7 @@ public class ValueListPropertyValueModelAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.valueListListener = this.buildValueListListener();
@@ -81,24 +82,30 @@ public class ValueListPropertyValueModelAdapter
      */
     protected ListChangeListener buildValueListListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ValueListPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ValueListPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ValueListPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ValueListPropertyValueModelAdapter.this.valueAspectChanged();
             }
+            @Override
             public String toString() {
                 return "value list listener: " + Arrays.asList(ValueListPropertyValueModelAdapter.this.listNames);
             }
         };
     }
 
+    @Override
     protected void startListeningToValue() {
         Model v = (Model) this.value;
         for (int i = this.listNames.length; i-- > 0; ) {
@@ -106,6 +113,7 @@ public class ValueListPropertyValueModelAdapter
         }
     }
 
+    @Override
     protected void stopListeningToValue() {
         Model v = (Model) this.value;
         for (int i = this.listNames.length; i-- > 0; ) {

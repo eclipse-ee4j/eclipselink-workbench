@@ -36,6 +36,7 @@ final class GoToAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -43,6 +44,7 @@ final class GoToAction
         this.initializeAccelerator("GO_TO.ACCELERATOR");
     }
 
+    @Override
     protected void execute() {
         NodeChooserDialog dialog = NodeChooserDialog.createDialog(this.xxx(), this.getWorkbenchContext());
         dialog.show();

@@ -46,6 +46,7 @@ public class ThinBevelBorder extends BevelBorder {
     /**
      * @see javax.swing.border.BevelBorder#getBorderInsets(java.awt.Component)
      */
+    @Override
     public Insets getBorderInsets(Component c) {
         return new Insets(1, 1, 1, 1);
     }
@@ -53,6 +54,7 @@ public class ThinBevelBorder extends BevelBorder {
     /**
      * @see javax.swing.border.BevelBorder#getBorderInsets(java.awt.Component, java.awt.Insets)
      */
+    @Override
     public Insets getBorderInsets(Component c, Insets insets) {
         insets.left = insets.top = insets.right = insets.bottom = 1;
         return insets;
@@ -61,6 +63,7 @@ public class ThinBevelBorder extends BevelBorder {
     /**
      * @see javax.swing.border.BevelBorder#paintRaisedBevel(java.awt.Component, java.awt.Graphics, int, int, int, int)
      */
+    @Override
     protected void paintRaisedBevel(Component c, Graphics g, int x, int y, int width, int height) {
         Color oldColor = g.getColor();
         int h = height;
@@ -84,6 +87,7 @@ public class ThinBevelBorder extends BevelBorder {
     /**
      * @see javax.swing.border.BevelBorder#paintLoweredBevel(java.awt.Component, java.awt.Graphics, int, int, int, int)
      */
+    @Override
     protected void paintLoweredBevel(Component c, Graphics g, int x, int y, int width, int height) {
         Color oldColor = g.getColor();
         int h = height;

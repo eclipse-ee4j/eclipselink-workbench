@@ -60,6 +60,7 @@ public final class ComboBoxModelWithDefaultHandler implements ComboBoxModel
     /*
      * (non-Javadoc)
      */
+    @Override
     public void addListDataListener(ListDataListener listener)
     {
         delegate.addListDataListener(listener);
@@ -88,6 +89,7 @@ public final class ComboBoxModelWithDefaultHandler implements ComboBoxModel
     /*
      * (non-Javadoc)
      */
+    @Override
     public Object getElementAt(int index)
     {
         return delegate.getElementAt(index);
@@ -96,6 +98,7 @@ public final class ComboBoxModelWithDefaultHandler implements ComboBoxModel
     /*
      * (non-Javadoc)
      */
+    @Override
     public Object getSelectedItem()
     {
         return delegate.getSelectedItem();
@@ -104,6 +107,7 @@ public final class ComboBoxModelWithDefaultHandler implements ComboBoxModel
     /*
      * (non-Javadoc)
      */
+    @Override
     public int getSize()
     {
         return delegate.getSize();
@@ -112,6 +116,7 @@ public final class ComboBoxModelWithDefaultHandler implements ComboBoxModel
     /*
      * (non-Javadoc)
      */
+    @Override
     public void removeListDataListener(ListDataListener listener)
     {
         delegate.removeListDataListener(listener);
@@ -120,6 +125,7 @@ public final class ComboBoxModelWithDefaultHandler implements ComboBoxModel
     /*
      * (non-Javadoc)
      */
+    @Override
     public void setSelectedItem(Object item)
     {
         if (!defaultValue().equals(item))

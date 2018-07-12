@@ -40,16 +40,19 @@ public class ClassConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.nameIndex = stream.readU2();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" name: ");
         writer.println(this.name());
     }
 
+    @Override
     public String description() {
         return "class";
     }
@@ -99,10 +102,12 @@ public class ClassConstant extends Constant {
         return this.nameIndex;
     }
 
+    @Override
     public Object value() {
         return this.name();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         this.getFieldDescriptor().accept(visitor);

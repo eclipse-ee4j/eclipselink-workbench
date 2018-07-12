@@ -42,12 +42,14 @@ public class NumberSpinnerModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.valueHolder = new SimplePropertyValueModel(new Integer(0));
         this.spinnerModelAdapter = new NumberSpinnerModelAdapter(this.valueHolder, -33, 33, 1);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -56,6 +58,7 @@ public class NumberSpinnerModelAdapterTests extends TestCase {
     public void testSetValueSpinnerModel() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 NumberSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -68,6 +71,7 @@ public class NumberSpinnerModelAdapterTests extends TestCase {
     public void testSetValueValueHolder() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 NumberSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -81,6 +85,7 @@ public class NumberSpinnerModelAdapterTests extends TestCase {
     public void testDefaultValue() throws Exception {
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 NumberSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -120,6 +125,7 @@ public class NumberSpinnerModelAdapterTests extends TestCase {
 
         this.eventFired = false;
         this.spinnerModelAdapter.addChangeListener(new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 NumberSpinnerModelAdapterTests.this.eventFired = true;
             }
@@ -133,6 +139,7 @@ public class NumberSpinnerModelAdapterTests extends TestCase {
 
     // ********** inner class **********
     private class TestChangeListener implements ChangeListener {
+        @Override
         public void stateChanged(ChangeEvent e) {
             fail("unexpected event");
         }
