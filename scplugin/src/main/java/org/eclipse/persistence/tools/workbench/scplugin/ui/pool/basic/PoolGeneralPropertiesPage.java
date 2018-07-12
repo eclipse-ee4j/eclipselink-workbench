@@ -66,6 +66,7 @@ public class PoolGeneralPropertiesPage extends ScrollablePropertiesPage
      *
      * @return The fully initialized container
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

@@ -50,6 +50,7 @@ public abstract class AbstractTreeModel implements TreeModel, Serializable {
     /**
      * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void addTreeModelListener(TreeModelListener l) {
         this.listenerList.add(TreeModelListener.class, l);
     }
@@ -57,6 +58,7 @@ public abstract class AbstractTreeModel implements TreeModel, Serializable {
     /**
      * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {
         this.listenerList.remove(TreeModelListener.class, l);
     }

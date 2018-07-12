@@ -65,10 +65,12 @@ public class CustomServerPlatformAdapter extends ServerPlatformAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new CustomServerPlatformConfig();
     }
 
+    @Override
     public boolean isCustom() {
 
         return true;
@@ -76,6 +78,7 @@ public class CustomServerPlatformAdapter extends ServerPlatformAdapter {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getServerClassName() {
 
         return this.platformConfig().getServerClassName();
@@ -111,6 +114,7 @@ public class CustomServerPlatformAdapter extends ServerPlatformAdapter {
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo(branchProblems);

@@ -35,6 +35,7 @@ public final class MWAddMethodCodeGenPolicy
      * However, it is possible for this not to be the case, so we check
      * and generate nothing if this assumption proves not to be accurate.
      */
+    @Override
     void insertArguments(NonreflectiveMethodDefinition methodDef)
     {
         int assumedArgumentSize = 1;  // for collections
@@ -65,6 +66,7 @@ public final class MWAddMethodCodeGenPolicy
      *         bar.setFoo(this);
      *  }"
      */
+    @Override
     protected void insertCollectionMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         if (methodDef.argumentNamesSize() != 1)
@@ -94,6 +96,7 @@ public final class MWAddMethodCodeGenPolicy
      *         bar.setFoo(this);
      *  }"
      */
+    @Override
     protected void insertMapMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         if (methodDef.argumentNamesSize() != 2)

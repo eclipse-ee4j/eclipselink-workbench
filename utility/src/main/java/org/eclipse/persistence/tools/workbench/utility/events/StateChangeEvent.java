@@ -34,6 +34,7 @@ public class StateChangeEvent
         super(source);
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this);
     }

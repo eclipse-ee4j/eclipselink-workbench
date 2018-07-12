@@ -106,6 +106,7 @@ public final class MWSetContainerPolicy
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.containerClass = new DefaultingContainerClass(this);
@@ -114,15 +115,18 @@ public final class MWSetContainerPolicy
 
     private NodeReferenceScrubber buildComparatorTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 setComparatorClass(null);
             }
+            @Override
             public String toString() {
                 return "MWSetContainerPolicy.buildComparatorTypeScrubber()";
             }
         };
     }
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.containerClass);
@@ -132,6 +136,7 @@ public final class MWSetContainerPolicy
 
     // ************ accessors ***************
 
+    @Override
     public DefaultingContainerClass getDefaultingContainerClass() {
         return this.containerClass;
     }
@@ -148,20 +153,24 @@ public final class MWSetContainerPolicy
         return ((MWMapping) getParent()).getInstanceVariable();
     }
 
+    @Override
     public boolean usesSorting() {
         return usesSorting;
     }
 
+    @Override
     public void setUsesSorting(boolean sort) {
         boolean oldValue = this.usesSorting;
         this.usesSorting = sort;
         firePropertyChanged(SORT_PROPERTY, oldValue, this.usesSorting);
     }
 
+    @Override
     public MWClass getComparatorClass() {
         return comparatorClass.getType();
     }
 
+    @Override
     public void setComparatorClass(MWClass comparatorClass) {
         MWClass oldValue = this.comparatorClass.getType();
         this.comparatorClass.setType(comparatorClass);
@@ -170,6 +179,7 @@ public final class MWSetContainerPolicy
 
     // **************** Behavior **********************************************
 
+    @Override
     public MWClass defaultContainerClass() {
         if (this.getContainerMapping().usesTransparentIndirection()) {
             return this.defaultIndirectContainerClass();
@@ -198,12 +208,14 @@ public final class MWSetContainerPolicy
         return typeFor(IndirectSet.class);
     }
 
+    @Override
     public void referenceDescriptorChanged(MWDescriptor newReferenceDescriptor) {
         //nothing to do
     }
 
     // ************** Problem Handling ****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         MWClass containerType = this.getDefaultingContainerClass().getContainerClass();
@@ -225,6 +237,7 @@ public final class MWSetContainerPolicy
 
     // **************** Runtime conversion *****************
 
+    @Override
     public ContainerPolicy runtimeContainerPolicy() {
         return new CollectionContainerPolicy(getDefaultingContainerClass().getContainerClass().getName());
     }

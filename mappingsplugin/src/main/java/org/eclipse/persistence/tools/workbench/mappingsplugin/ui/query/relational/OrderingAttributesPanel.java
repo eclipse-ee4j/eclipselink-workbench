@@ -32,7 +32,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MW
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWOrderableQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWQueryFormat;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWQueryableArgument;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWReportAttributeItem;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.Ordering;
 import org.eclipse.persistence.tools.workbench.uitools.app.FilteringPropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ListAspectAdapter;
@@ -60,22 +59,27 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
         this.chooseableFilter = chooseableFilter;
     }
 
+    @Override
     protected PropertyValueModel buildQueryHolder(PropertyValueModel queryHolder) {
         return new FilteringPropertyValueModel(queryHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWOrderableQuery;
             }
         };
     }
 
+    @Override
     protected String helpTopicId() {
         return "query.orderingAttributes";
     }
 
+    @Override
     String listTitleKey() {
         return "ORDERING_ATTRIBUTES_LIST";
     }
 
+    @Override
     protected AddRemovePanel buildAddRemovePanel() {
         final AddRemoveTablePanel tablePanel =  new AddRemoveTablePanel(
                 getApplicationContext(),
@@ -87,6 +91,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
         tablePanel.setBorder(buildTitledBorder(listTitleKey()));
         SwingComponentFactory.addDoubleClickMouseListener(tablePanel.getComponent(),
                 new DoubleClickMouseListener() {
+            @Override
                     public void mouseDoubleClicked(MouseEvent e) {
                         editSelectedAttribute((MWAttributeItem) tablePanel.getSelectionModel().getSelectedValue());
                     }
@@ -97,6 +102,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
         return tablePanel;
     }
 
+    @Override
     protected boolean panelEnabled(MWQueryFormat queryFormat) {
         return queryFormat.orderingAttributesAllowed();
     }
@@ -113,6 +119,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
 
         column = table.getColumnModel().getColumn(OrderingAttributesColumnAdapter.ATTRIBUTE_COLUMN);
         column.setCellRenderer(new SimpleTableCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (value != null) {
                     return ((MWQueryableArgument) value).displayString();
@@ -135,24 +142,30 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
     }
 
 
+    @Override
     AddRemovePanel.UpDownOptionAdapter buildAttributesPanelAdapter() {
         return new AddRemoveListPanel.UpDownOptionAdapter() {
+            @Override
             public String optionalButtonKey() {
                 return "ORDERING_ATTRIBUTES_LIST_EDIT_BUTTON";
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 editSelectedAttribute((MWAttributeItem) listSelectionModel.getSelectedValue());
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 addOrderingItem();
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
 
                 Object[] selectedValues = listSelectionModel.getSelectedValues();
@@ -161,12 +174,14 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
                 }
             }
 
+            @Override
             public void moveItemsDown(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                    ((MWOrderableQuery) getQuery()).moveOrderingItemDown((Ordering) items[i]);
                 }
             }
 
+            @Override
             public void moveItemsUp(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     ((MWOrderableQuery) getQuery()).moveOrderingItemUp((Ordering) items[i]);
@@ -177,11 +192,14 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
     }
 
 
+    @Override
     protected ListValueModel buildAttributesHolder() {
         return new ListAspectAdapter(getQueryHolder(), MWOrderableQuery.ORDERING_ITEMS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWOrderableQuery) this.subject).orderingItems();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWOrderableQuery) this.subject).orderingItemsSize();
             }
@@ -192,6 +210,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
         editSelectedAttribute(null);
     }
 
+    @Override
     AttributeItemDialog buildAttributeItemDialog(MWAttributeItem item) {
         return new OrderingAttributeDialog(
                     (MWOrderableQuery) getQuery(),
@@ -233,6 +252,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
         private PropertyValueModel buildAttributeAdapter(MWAttributeItem item) {
             // TODO we need some change notifications from MWQueryableArgument and MWQueryableArgumentElement
             return new PropertyAspectAdapter(EMPTY_STRING_ARRAY, item) {    // the queryableArgument never changes
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWAttributeItem) this.subject).getQueryableArgument();
                 }
@@ -242,14 +262,17 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
         private PropertyValueModel buildOrderAdapter(Ordering item) {
             return new TransformationPropertyValueModel(
                     new PropertyAspectAdapter(Ordering.ASCENDING_PROPERTY, item) {
+                @Override
                         protected Object getValueFromSubject() {
                             return Boolean.valueOf(((Ordering) this.subject).isAscending());
                         }
+                @Override
                         protected void setValueOnSubject(Object value) {
                             ((Ordering) this.subject).setAscending(((Boolean) value).booleanValue());
                         }
                     },
                     new BidiTransformer() {
+                @Override
                         public Object reverseTransform(Object o) {
                             if (o != null && ((String) o).equals(OrderingAttributesColumnAdapter.this.resourceRepository.getString("ASCENDING_BUTTON"))) {
                                 return Boolean.TRUE;
@@ -257,6 +280,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
                             return Boolean.FALSE;
                         }
 
+                @Override
                         public Object transform(Object o) {
                             if (((Boolean) o).equals(Boolean.TRUE)) {
                                 return OrderingAttributesColumnAdapter.this.resourceRepository.getString("ASCENDING_BUTTON");
@@ -266,6 +290,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
                     });
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             Ordering attributeItem = (Ordering) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -276,6 +301,7 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
             return result;
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case ATTRIBUTE_COLUMN:        return Object.class;
@@ -284,14 +310,17 @@ class OrderingAttributesPanel extends AbstractAttributeItemsPanel {
             }
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index == ORDER_COLUMN;
         }

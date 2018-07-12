@@ -14,13 +14,10 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryParameter;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.queries.DatabaseQuery;
-import org.eclipse.persistence.queries.ObjectLevelReadQuery;
 
 /**
  * Used by MWQuery if the format EJBQL is chosen
@@ -46,21 +43,25 @@ public final class MWEJBQLQueryFormat
         super(parent, queryString);
     }
 
+    @Override
     String getType() {
         return MWRelationalQuery.EJBQL_FORMAT;
     }
 
+    @Override
     public boolean batchReadAttributesAllowed() {
         return true;
     }
 
     // **************** Conversion ********************************************
 
+    @Override
     void convertToRuntime(DatabaseQuery runtimeQuery)
     {
         runtimeQuery.setEJBQLString(getQueryString());
     }
 
+    @Override
     void convertFromRuntime(DatabaseQuery runtimeQuery)
     {
         if (runtimeQuery.getEJBQLString() != null) {
@@ -68,6 +69,7 @@ public final class MWEJBQLQueryFormat
         }
     }
 
+    @Override
     String getRuntimeParameterName(MWQueryParameter parameter)
     {
         return String.valueOf(getQuery().getParameterIndex(parameter) + 1);

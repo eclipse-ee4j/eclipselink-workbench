@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWTableDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQuery;
@@ -25,8 +24,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryable;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.node.Problem;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.expressions.ExpressionOperator;
@@ -80,12 +77,14 @@ public final class MWBasicExpression
         super(parent, operator);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.firstArgument);
         children.add(this.secondArgument);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.firstArgument = createDefaultQueryableArgument();
@@ -103,12 +102,14 @@ public final class MWBasicExpression
         return new MWQueryableArgument(this, queryable);
     }
 
+    @Override
     void recalculateQueryables()
     {
         getFirstArgument().recalculateQueryables();
         getSecondArgument().recalculateQueryables();
     }
 
+    @Override
     public String displayString()
     {
         //should not use operatorType here for the display string, this is not resource bundled
@@ -123,21 +124,25 @@ public final class MWBasicExpression
         return this.firstArgument;
     }
 
+    @Override
     public String getIndex()
     {
         return getParentCompoundExpression().getIndex() + Integer.toString(getParentCompoundExpression().getIndexOf(this)) +".";
     }
 
+    @Override
     public MWQuery getParentQuery()
     {
             return getParentCompoundExpression().getParentQuery();
     }
 
+    @Override
     public MWCompoundExpression getParentCompoundExpression()
     {
         return (MWCompoundExpression) getParent();
     }
 
+    @Override
     public MWCompoundExpression getRootCompoundExpression()
     {
         return getParentCompoundExpression().getRootCompoundExpression();
@@ -190,10 +195,12 @@ public final class MWBasicExpression
     }
 
 
+    @Override
     public void clearExpressions() {
         //do nothing because a BasicExpression has no sub expressions
     }
 
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue)
     {
         super.undoChange(propertyName, oldValue, newValue);
@@ -205,6 +212,7 @@ public final class MWBasicExpression
         }
     }
 
+    @Override
     public void propertyChanged(Undoable container, String propertyName, Object oldValue, Object newValue) {
         getRootCompoundExpression().propertyChanged(container, propertyName, oldValue, newValue);
     }
@@ -239,6 +247,7 @@ public final class MWBasicExpression
         return false;
     }
 
+    @Override
     public void setOperatorType(String operatorType) {
         String oldOperatorType = this.getOperatorType();
 
@@ -271,11 +280,13 @@ public final class MWBasicExpression
 
     // **************** problem support *****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkReferenceMappingQueryableChosenWithoutUnaryOperatorChosen(currentProblems);
     }
 
+    @Override
     public void addQueryableNullProblemTo(List currentProblems) {
        currentProblems.add(queryableNullProblem());
     }
@@ -287,10 +298,12 @@ public final class MWBasicExpression
                                  lineNumber, queryName);
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         return buildProblem(ProblemConstants.DESCRIPTOR_QUERY_EXPRESSION_QUERY_KEY_NOT_VALID, queryable.displayString(), getParentQuery().signature());
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return queryable.isValidForQueryExpression();
     }
@@ -317,6 +330,7 @@ public final class MWBasicExpression
     }
 
 
+    @Override
     public void toString(StringBuffer sb) {
         super.toString(sb);
         sb.append("firstArgument = " );
@@ -356,6 +370,7 @@ public final class MWBasicExpression
 
     // ***************** Runtime Conversion ***********
 
+    @Override
     Expression buildRuntimeExpression(ExpressionBuilder builder) {
         Expression firstExpression = getFirstArgument().runtimeExpression(builder);
         Expression secondExpression = getSecondArgument().runtimeExpression(builder);

@@ -15,10 +15,8 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml;
 import java.util.List;
 
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorLockingPolicy;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWLockingPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWSchemaContextComponent;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlField;
@@ -61,9 +59,11 @@ implements MWXmlNode, MWXpathContext {
         return (MWOXDescriptor) ((MWTransactionalPolicy) this.getParent()).getParent();
     }
 
+    @Override
     public void resolveXpaths() {
     }
 
+    @Override
     public void schemaChanged(SchemaChange change) {
     }
 
@@ -71,17 +71,21 @@ implements MWXmlNode, MWXpathContext {
     protected void checkLockFieldSpecifiedForLockingPolicy(List newProblems) {
     }
 
+    @Override
     public MWDataField getVersionLockField() {
         return null;
     }
 
+    @Override
     public void setVersionLockField(MWDataField newLockField) {
     }
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return oxDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return null;
     }

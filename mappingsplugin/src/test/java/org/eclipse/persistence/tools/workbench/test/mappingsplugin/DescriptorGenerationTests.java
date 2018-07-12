@@ -58,11 +58,13 @@ public class DescriptorGenerationTests
 
     // **************** test set up, tear down stuff **************************
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         buildProject();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

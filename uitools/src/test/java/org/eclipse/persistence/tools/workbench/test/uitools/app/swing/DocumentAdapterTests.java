@@ -44,12 +44,14 @@ public class DocumentAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.stringHolder = new SimplePropertyValueModel("0123456789");
         this.documentAdapter = new DocumentAdapter(this.stringHolder);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -58,6 +60,7 @@ public class DocumentAdapterTests extends TestCase {
     public void testRemove() throws Exception {
         this.eventFired = false;
         this.documentAdapter.addDocumentListener(new TestDocumentListener() {
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 DocumentAdapterTests.this.eventFired = true;
                 assertEquals(EventType.REMOVE, e.getType());
@@ -75,6 +78,7 @@ public class DocumentAdapterTests extends TestCase {
     public void testInsert() throws Exception {
         this.eventFired = false;
         this.documentAdapter.addDocumentListener(new TestDocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 DocumentAdapterTests.this.eventFired = true;
                 assertEquals(EventType.INSERT, e.getType());
@@ -92,6 +96,7 @@ public class DocumentAdapterTests extends TestCase {
     public void testSetValue() throws Exception {
         this.eventFired = false;
         this.documentAdapter.addDocumentListener(new TestDocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 DocumentAdapterTests.this.eventFired = true;
                 assertEquals(EventType.INSERT, e.getType());
@@ -100,6 +105,7 @@ public class DocumentAdapterTests extends TestCase {
                 assertEquals(0, e.getOffset());
                 assertEquals(3, e.getLength());
             }
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 assertEquals(EventType.REMOVE, e.getType());
                 assertEquals(DocumentAdapterTests.this.documentAdapter, e.getDocument());
@@ -143,12 +149,15 @@ public class DocumentAdapterTests extends TestCase {
 
 
 private class TestDocumentListener implements DocumentListener {
+    @Override
     public void changedUpdate(DocumentEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void insertUpdate(DocumentEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void removeUpdate(DocumentEvent e) {
         fail("unexpected event");
     }

@@ -38,6 +38,7 @@ final class OneToManyTableReferencePanel
     /**
      * the reference source is one of the "reference" descriptor's tables
      */
+    @Override
     protected MWTable defaultNewReferenceSourceTable() {
         MWRelationalDescriptor descriptor = (MWRelationalDescriptor) this.mapping().getReferenceDescriptor();
         if (descriptor == null) {
@@ -50,6 +51,7 @@ final class OneToManyTableReferencePanel
     /**
      * the reference target is one of the "parent" descriptor's tables
      */
+    @Override
     protected MWTable defaultNewReferenceTargetTable() {
         Iterator candidateTables = this.mapping().getParentRelationalDescriptor().candidateTables();
         return candidateTables.hasNext() ? (MWTable) candidateTables.next() : null;

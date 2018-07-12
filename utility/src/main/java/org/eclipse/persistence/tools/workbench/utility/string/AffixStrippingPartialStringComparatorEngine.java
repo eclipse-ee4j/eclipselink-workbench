@@ -104,6 +104,7 @@ public class AffixStrippingPartialStringComparatorEngine
         this.wrapperFactory = wrapperFactory;
     }
 
+    @Override
     public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
         return this.unwrap(this.engine.match(this.wrap(stringHolders1), this.wrap(stringHolders2)));
     }
@@ -181,6 +182,7 @@ public class AffixStrippingPartialStringComparatorEngine
                 ((StringHolderWrapper) stringHolder).getStringHolder();
     }
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         StringTools.buildSimpleToStringOn(this, sb);
@@ -224,10 +226,12 @@ public class AffixStrippingPartialStringComparatorEngine
             this.factor = factor;
         }
 
+        @Override
         public int thresholdCountFor(StringHolder[] stringHolders) {
             return (int) (stringHolders.length * this.factor);
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.factor);
         }
@@ -246,10 +250,12 @@ public class AffixStrippingPartialStringComparatorEngine
             this.count = count;
         }
 
+        @Override
         public int thresholdCountFor(StringHolder[] stringHolders) {
             return this.count;
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.count);
         }
@@ -263,18 +269,22 @@ public class AffixStrippingPartialStringComparatorEngine
         void toString(StringBuffer sb);
 
         StringHolderWrapperFactory PREFIX = new StringHolderWrapperFactory() {
+            @Override
             public StringHolderWrapper buildStringHolderWrapper(StringHolder stringHolder) {
                 return StringHolderWrapper.forPrefixStripping(stringHolder);
             }
+            @Override
             public void toString(StringBuffer sb) {
                 sb.append("PREFIX");
             }
         };
 
         StringHolderWrapperFactory SUFFIX = new StringHolderWrapperFactory() {
+            @Override
             public StringHolderWrapper buildStringHolderWrapper(StringHolder stringHolder) {
                 return StringHolderWrapper.forSuffixStripping(stringHolder);
             }
+            @Override
             public void toString(StringBuffer sb) {
                 sb.append("SUFFIX");
             }
@@ -306,6 +316,7 @@ public class AffixStrippingPartialStringComparatorEngine
             this.string = null;
         }
 
+        @Override
         public String getString() {
             if (this.string == null) {
                 this.string = this.buildString();
@@ -333,6 +344,7 @@ public class AffixStrippingPartialStringComparatorEngine
             }
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.buildString());
         }
@@ -344,18 +356,22 @@ public class AffixStrippingPartialStringComparatorEngine
             char outsideChar(String string, int affixLength);
 
             AffixPolicy PREFIX = new AffixPolicy() {
+                @Override
                 public String buildString(String string, int affixLength) {
                     return string.substring(affixLength);
                 }
+                @Override
                 public char outsideChar(String string, int affixLength) {
                     return string.charAt(affixLength);
                 }
             };
 
             AffixPolicy SUFFIX = new AffixPolicy() {
+                @Override
                 public String buildString(String string, int affixLength) {
                     return string.substring(0, string.length() - affixLength);
                 }
+                @Override
                 public char outsideChar(String string, int affixLength) {
                     return string.charAt(string.length() - affixLength - 1);
                 }

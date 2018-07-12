@@ -36,6 +36,7 @@ final class ElementDeclarationNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     protected ListIterator componentDetails() {
         return new CompositeListIterator(this.nameDetails(), this.elementDetails());
     }
@@ -43,16 +44,19 @@ final class ElementDeclarationNodeStructure
 
     // **************** NamedSchemaComponentNodeStructure contract ************
 
+    @Override
     Integer topLevelOrderIndex() {
         return new Integer(0);
     }
 
     // **************** ParticleTermNodeStructure contract ********************
 
+    @Override
     public void disengageParticle() {
         this.disengageComponent();
     }
 
+    @Override
     public ListIterator details(ListIterator particleDetails) {
         return new CompositeListIterator(this.nameDetails(), particleDetails, this.elementDetails());
     }
@@ -75,10 +79,12 @@ final class ElementDeclarationNodeStructure
 
     SchemaComponentDetail buildTypeDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "type";
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 MWSchemaTypeDefinition type = ((MWElementDeclaration) this.component).getType();
                 return (type.getName() == null) ? null : type;
@@ -88,10 +94,12 @@ final class ElementDeclarationNodeStructure
 
     SchemaComponentDetail buildSubstitutionGroupDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "substitutionGroup";
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 return ((MWElementDeclaration) this.component).getSubstitutionGroup();
             }
@@ -100,10 +108,12 @@ final class ElementDeclarationNodeStructure
 
     SchemaComponentDetail buildAbstractDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "abstract";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return String.valueOf(((MWElementDeclaration) this.component).isAbstract());
             }
@@ -112,10 +122,12 @@ final class ElementDeclarationNodeStructure
 
     SchemaComponentDetail buildDefaultDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "default";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 String defaultValue = ((MWElementDeclaration) this.component).getDefaultValue();
                 return (defaultValue == null) ? "" : defaultValue;
@@ -125,10 +137,12 @@ final class ElementDeclarationNodeStructure
 
     SchemaComponentDetail buildFixedDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "fixed";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 String fixedValue = ((MWElementDeclaration) this.component).getFixedValue();
                 return (fixedValue == null) ? "" : fixedValue;
@@ -138,10 +152,12 @@ final class ElementDeclarationNodeStructure
 
     SchemaComponentDetail buildNillableDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "nillable";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return String.valueOf(((MWElementDeclaration) this.component).isNillable());
             }

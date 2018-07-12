@@ -36,6 +36,7 @@ public class TriStateBooleanCellRendererAdapter
         this.stringRepository = stringRepository;
     }
 
+    @Override
     public String buildText(Object value) {
         if (TriStateBoolean.TRUE.equals(value)) {
             return this.trueString();

@@ -46,6 +46,7 @@ public abstract class XmlProjectNode
 
     // **************** Initialization ****************************************
 
+    @Override
     protected ApplicationContext expandContext(ApplicationContext context) {
         return super.expandContext(context).
                 buildExpandedResourceRepositoryContext(UiXmlBundle.class).
@@ -56,6 +57,7 @@ public abstract class XmlProjectNode
 
     // ********** ProjectNode implementation **********
 
+    @Override
     public String getCannotAutomapDescriptorsStringKey() {
         return "XML_PROJECT_UNAUTOMAPPABLE";
     }
@@ -63,10 +65,12 @@ public abstract class XmlProjectNode
 
     // ************ ProjectNode implementation **********
 
+    @Override
     protected DescriptorPackageNode buildDescriptorPackageNodeFor(MWDescriptor descriptor) {
         return new XmlDescriptorPackageNode(descriptor.packageName(), this, this.getDescriptorNodeBuilder());
     }
 
+    @Override
     protected Child buildMetaDataRepositoryNode() {
         return new XmlSchemaRepositoryNode(this.getXmlProject().getSchemaRepository(), this);
     }
@@ -79,6 +83,7 @@ public abstract class XmlProjectNode
 
     // *********** ProjectNode implementation *********
 
+    @Override
     protected GroupContainerDescription buildExportMenuDescription(WorkbenchContext context) {
 
         MenuDescription menuDesc =
@@ -99,10 +104,12 @@ public abstract class XmlProjectNode
         return menuDesc;
     }
 
+    @Override
     public boolean supportsExportProjectJavaSource() {
         return false;
     }
 
+    @Override
     public boolean supportsExportTableCreatorJavaSource() {
         return false;
     }

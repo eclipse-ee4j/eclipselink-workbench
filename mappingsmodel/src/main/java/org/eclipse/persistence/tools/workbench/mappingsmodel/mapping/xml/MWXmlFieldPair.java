@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWEisDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWSchemaContextComponent;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlField;
@@ -66,12 +65,14 @@ public final class MWXmlFieldPair
     // **************** Initialization ****************************************
 
     /** initialize persistent state */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.sourceXmlField = new MWXmlField(this);
         this.targetXmlField = new MWXmlField(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.sourceXmlField);
@@ -95,6 +96,7 @@ public final class MWXmlFieldPair
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         if (xmlField == this.getTargetXmlField()) {
             MWXmlDescriptor xmlReferenceDescriptor = this.xmlReferenceDescriptor();
@@ -105,20 +107,24 @@ public final class MWXmlFieldPair
         }
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec(xmlField);
     }
 
     protected MWXpathSpec buildXpathSpec(final MWXmlField xmlField) {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return MWXmlFieldPair.this.mayUseCollectionXpath(xmlField);
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -152,12 +158,14 @@ public final class MWXmlFieldPair
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         this.sourceXmlField.resolveXpaths();
         this.targetXmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.sourceXmlField.schemaChanged(change);
         this.targetXmlField.schemaChanged(change);
@@ -166,6 +174,7 @@ public final class MWXmlFieldPair
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.addSourceFieldMissingProblemTo(currentProblems);

@@ -50,6 +50,7 @@ public abstract class FieldTransformerAssociationEditingDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setTitle(this.resourceRepository().getString("FIELD_TRANSFORMER_ASSOCIATION_EDITING_DIALOG.TITLE"));
@@ -67,6 +68,7 @@ public abstract class FieldTransformerAssociationEditingDialog
 
     private PropertyChangeListener buildValidatingListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 FieldTransformerAssociationEditingDialog.this.updateMessage();
                 FieldTransformerAssociationEditingDialog.this.updateOKAction();
@@ -107,12 +109,14 @@ public abstract class FieldTransformerAssociationEditingDialog
     }
 
     /** Overridden to set error flag */
+    @Override
     protected void setErrorMessage(String message) {
         super.setErrorMessage(message);
         this.noError = (message == null);
     }
 
     /** Overridden to clear error flag */
+    @Override
     protected void clearErrorMessage() {
         super.clearErrorMessage();
         this.noError = true;
@@ -122,6 +126,7 @@ public abstract class FieldTransformerAssociationEditingDialog
         this.getOKAction().setEnabled(this.noError);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.editFieldTransformerAssociation";
     }
@@ -164,6 +169,7 @@ public abstract class FieldTransformerAssociationEditingDialog
 
         // **************** FieldTransformerAssociationSpec impl **************
 
+        @Override
         public TransformerSpec transformerSpec() {
             return this.transformerEditor;
         }
@@ -171,6 +177,7 @@ public abstract class FieldTransformerAssociationEditingDialog
 
         // **************** Editing *******************************************
 
+        @Override
         public void commit() {
             this.transformerEditor.commit();
         }

@@ -41,10 +41,12 @@ final class ReportQueryAdvancedOptionsDialog extends QueryAdvancedOptionsDialog 
         super(query, context);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.reportQueryadvancedOptions";
     }
 
+    @Override
     protected Component buildMainPanel() {
 
         JPanel panel = new JPanel(new GridBagLayout());

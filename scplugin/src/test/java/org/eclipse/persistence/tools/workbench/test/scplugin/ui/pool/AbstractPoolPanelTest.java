@@ -40,6 +40,7 @@ public abstract class AbstractPoolPanelTest extends SCAbstractPanelTest
         super(name);
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder(ApplicationNode projectNode)
     {
         ServerSessionAdapter session = (ServerSessionAdapter) getTopLinkSessions().sessionNamed("SC-ServerSessionTest");
@@ -48,12 +49,14 @@ public abstract class AbstractPoolPanelTest extends SCAbstractPanelTest
         return new SimplePropertyValueModel(poolNode);
     }
 
+    @Override
     protected SCAdapter buildSelection()
     {
         ServerSessionAdapter session = (ServerSessionAdapter) getTopLinkSessions().sessionNamed("SC-ServerSessionTest");
         return session.poolNamed("MyConnectionPool");
     }
 
+    @Override
     protected void clearModel()
     {
     }
@@ -63,14 +66,17 @@ public abstract class AbstractPoolPanelTest extends SCAbstractPanelTest
         return (ConnectionPoolAdapter) getSelection();
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected void restoreModel()
     {
     }

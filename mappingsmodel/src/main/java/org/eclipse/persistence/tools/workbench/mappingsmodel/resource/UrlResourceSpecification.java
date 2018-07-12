@@ -53,10 +53,12 @@ public final class UrlResourceSpecification
 
     // **************** ResourceSpecification contract ************************
 
+    @Override
     public String getSourceKey() {
         return KEY;
     }
 
+    @Override
     protected URL resourceUrl()
         throws ResourceException
     {

@@ -130,6 +130,7 @@ public class LocalVariable {
         return this.index;
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.name() + ')';
     }

@@ -88,6 +88,7 @@ public class TreeChangeEvent extends EventObject {
         return this.path;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.treeName);
     }

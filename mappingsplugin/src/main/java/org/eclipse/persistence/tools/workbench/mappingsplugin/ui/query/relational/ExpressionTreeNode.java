@@ -54,6 +54,7 @@ abstract class ExpressionTreeNode
            this.model = model;
        }
 
+    @Override
     public String toString() {
            return ((MWExpression)getUserObject()).getIndex() + ((MWExpression)getUserObject()).displayString();
        }

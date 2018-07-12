@@ -54,6 +54,7 @@ public class MWTypeDeclarationTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.project = this.buildProject();
@@ -106,6 +107,7 @@ public class MWTypeDeclarationTests extends TestCase {
         return new MWRelationalProject(this.getClass().getName(), MappingsModelTestTools.buildSPIManager(), null);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

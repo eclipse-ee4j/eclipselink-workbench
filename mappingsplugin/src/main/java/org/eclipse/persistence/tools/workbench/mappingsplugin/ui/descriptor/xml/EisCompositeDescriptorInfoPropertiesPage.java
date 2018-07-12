@@ -36,6 +36,7 @@ final class EisCompositeDescriptorInfoPropertiesPage extends ScrollablePropertie
         super(eisDescriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));

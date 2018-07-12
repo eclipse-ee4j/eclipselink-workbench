@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWClassHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
@@ -28,7 +27,6 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 
@@ -56,6 +54,7 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
     // ********** initialization **********
 
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.postLoadMethodHandle = new MWMethodHandle(this, this.buildPostLoadMethodScrubber());
@@ -64,6 +63,7 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.postLoadMethodHandle);
@@ -72,9 +72,11 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
 
     private NodeReferenceScrubber buildPostLoadMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorAfterLoadingPolicy.this.setPostLoadMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorAfterLoadingPolicy.buildPostLoadMethodScrubber()";
             }
@@ -83,9 +85,11 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
 
     private NodeReferenceScrubber buildPostLoadMethodClassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorAfterLoadingPolicy.this.setPostLoadMethodClass(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorAfterLoadingPolicy.buildPostLoadMethodClassScrubber()";
             }
@@ -118,6 +122,7 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
 
     // ********** run-time **********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         if(getPostLoadMethod() != null) {
             runtimeDescriptor.setAmendmentMethodName(getPostLoadMethod().getName());
@@ -130,10 +135,12 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
 
     // ********** MWAbstractDescriptorPolicy implementation **********
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
 
+    @Override
     public boolean isActive() {
         return true;
     }
@@ -141,6 +148,7 @@ public final class MWDescriptorAfterLoadingPolicy extends MWAbstractDescriptorPo
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkAfterLoadClass(problems);

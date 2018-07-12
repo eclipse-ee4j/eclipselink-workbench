@@ -60,6 +60,7 @@ public final class MWBatchReadItem extends MWAttributeItem {
 
     // ****************** MWQueryItem implementation ************
 
+    @Override
     public void removeSelfFromParent() {
         ((MWRelationalReadAllQuery) getParentQuery()).removeBatchReadItem(this);
     }
@@ -67,6 +68,7 @@ public final class MWBatchReadItem extends MWAttributeItem {
 
     // ****************** Problem Handling************
 
+    @Override
     public Problem queryableNullProblem() {
         return buildProblem(
                 ProblemConstants.QUERYABLE_NULL_FOR_BATCH_READ_ITEM,
@@ -74,10 +76,12 @@ public final class MWBatchReadItem extends MWAttributeItem {
                 new Integer(((MWRelationalReadAllQuery) getParentQuery()).indexOfBatchReadItem(this) + 1));
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         return buildProblem(ProblemConstants.QUERYABLE_NOT_VALID_FOR_READ_ALL_QUERY_BATCH_READ_ITEM, queryable.displayString(), getParentQuery().signature());
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return queryable.isValidForBatchReadAttribute();
     }
@@ -85,6 +89,7 @@ public final class MWBatchReadItem extends MWAttributeItem {
 
     // ****************** runtime conversion ************
 
+    @Override
     protected void adjustRuntimeQuery(ObjectLevelReadQuery readQuery) {
         ((ReadAllQuery) readQuery).addBatchReadAttribute(getQueryableArgument().runtimeExpression(readQuery.getExpressionBuilder()));
     }

@@ -62,6 +62,7 @@ public interface CellRendererAdapter {
      */
     CellRendererAdapter DEFAULT_CELL_RENDERER_ADAPTER =
         new AbstractCellRendererAdapter() {
+            @Override
             public String buildText(Object object) {
                 return String.valueOf(object);
             }
@@ -73,9 +74,11 @@ public interface CellRendererAdapter {
      */
     CellRendererAdapter DISPLAYABLE_CELL_RENDERER_ADAPTER =
         new AbstractCellRendererAdapter() {
+            @Override
             public Icon buildIcon(Object object) {
                 return ((Displayable) object).icon();
             }
+            @Override
             public String buildText(Object object) {
                 return ((Displayable) object).displayString();
             }
@@ -87,6 +90,7 @@ public interface CellRendererAdapter {
      */
     CellRendererAdapter NODE_CELL_RENDERER_ADAPTER =
         new AbstractCellRendererAdapter(){
+            @Override
             public String buildText(Object object) {
                 return (object == null) ? null : ((Node) object).displayString();
             }

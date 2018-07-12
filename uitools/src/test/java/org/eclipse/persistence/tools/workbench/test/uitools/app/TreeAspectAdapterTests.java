@@ -54,6 +54,7 @@ public class TreeAspectAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.subject1 = new TestSubject();
@@ -103,6 +104,7 @@ public class TreeAspectAdapterTests extends TestCase {
     private TreeAspectAdapter buildAspectAdapter(ValueModel subjectHolder) {
         return new TreeAspectAdapter(subjectHolder, TestSubject.NAMES_TREE) {
             // this is not a typical aspect adapter - the value is determined by the aspect name
+            @Override
             protected Iterator getValueFromSubject() {
                 if (this.treeName == TestSubject.NAMES_TREE) {
                     return ((TestSubject) this.subject).namePaths();
@@ -112,6 +114,7 @@ public class TreeAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.treeName);
                 }
             }
+            @Override
             public void addNode(Object[] parentPath, Object node) {
                 TestNode parent = (TestNode) parentPath[parentPath.length - 1];
                 if (this.treeName == TestSubject.NAMES_TREE) {
@@ -122,6 +125,7 @@ public class TreeAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.treeName);
                 }
             }
+            @Override
             public void removeNode(Object[] path) {
                 TestNode node = (TestNode) path[path.length - 1];
                 if (this.treeName == TestSubject.NAMES_TREE) {
@@ -137,12 +141,15 @@ public class TreeAspectAdapterTests extends TestCase {
 
     private TreeChangeListener buildValueChangeListener1() {
         return new TreeChangeListener() {
+            @Override
             public void nodeAdded(TreeChangeEvent e) {
                 TreeAspectAdapterTests.this.value1Changed(e);
             }
+            @Override
             public void nodeRemoved(TreeChangeEvent e) {
                 TreeAspectAdapterTests.this.value1Changed(e);
             }
+            @Override
             public void treeChanged(TreeChangeEvent e) {
                 TreeAspectAdapterTests.this.value1Changed(e);
             }
@@ -153,6 +160,7 @@ public class TreeAspectAdapterTests extends TestCase {
         this.event1 = e;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -291,6 +299,7 @@ public class TreeAspectAdapterTests extends TestCase {
         }
         public Iterator nameNodes() {
             return new TreeIterator(this.rootNameNode) {
+                @Override
                 public Iterator children(Object next) {
                     return ((TestNode) next).children();
                 }
@@ -298,6 +307,7 @@ public class TreeAspectAdapterTests extends TestCase {
         }
         public Iterator namePaths() {
             return new TransformationIterator(this.nameNodes()) {
+                @Override
                 protected Object transform(Object next) {
                     return ((TestNode) next).path();
                 }
@@ -335,6 +345,7 @@ public class TreeAspectAdapterTests extends TestCase {
         }
         public Iterator descriptionNodes() {
             return new TreeIterator(this.rootDescriptionNode) {
+                @Override
                 public Iterator children(Object next) {
                     return ((TestNode) next).children();
                 }
@@ -342,6 +353,7 @@ public class TreeAspectAdapterTests extends TestCase {
         }
         public Iterator descriptionPaths() {
             return new TransformationIterator(this.descriptionNodes()) {
+                @Override
                 protected Object transform(Object next) {
                     return ((TestNode) next).path();
                 }
@@ -401,11 +413,13 @@ public class TreeAspectAdapterTests extends TestCase {
         }
         private Iterator buildAntiPath() {
             return new ChainIterator(this) {
+                @Override
                 protected Object nextLink(Object currentLink) {
                     return ((TestNode) currentLink).getParent();
                 }
             };
         }
+        @Override
         public String toString() {
             return "TestNode(" + this.text + ")";
         }

@@ -54,6 +54,7 @@ public class NamedConnectionPoolCreationDialog extends AbstractValidatingDialog 
             this.poolNames = CollectionTools.collection( poolNames);
     }
 
+    @Override
     protected void initialize() {
             super.initialize();
             getOKAction().setEnabled( false);
@@ -63,6 +64,7 @@ public class NamedConnectionPoolCreationDialog extends AbstractValidatingDialog 
         return new DocumentAdapter(stringHolder, new RegexpDocument(RegexpDocument.RE_SQL_RELATED));
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
         setTitle( resourceRepository().getString( "NAMED_CONNECTION_POOL_CREATION_DIALOG_TITLE"));
@@ -103,14 +105,16 @@ public class NamedConnectionPoolCreationDialog extends AbstractValidatingDialog 
         panel.add(nameTextField, constraints);
         nameLabel.setLabelFor(nameTextField);
 
-        nameTextField.getDocument().addDocumentListener(
-           new DocumentListener() {
+        nameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
                public void insertUpdate(DocumentEvent e) {
                    updateOKAction();
                }
+            @Override
                public void removeUpdate(DocumentEvent e) {
                    updateOKAction();
                }
+            @Override
                public void changedUpdate(DocumentEvent e) {
                }
            }
@@ -141,10 +145,12 @@ public class NamedConnectionPoolCreationDialog extends AbstractValidatingDialog 
 
 //       ********** opening **********
 
+    @Override
     protected String helpTopicId() {
         return "dialog.namedConnectionPoolCreation";
     }
 
+    @Override
     protected void prepareToShow() {
 
         super.prepareToShow();
@@ -152,6 +158,7 @@ public class NamedConnectionPoolCreationDialog extends AbstractValidatingDialog 
         nameTextField.selectAll();
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return nameTextField;
     }

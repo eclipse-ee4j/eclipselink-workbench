@@ -26,7 +26,6 @@ import java.util.Vector;
 import java.util.prefs.Preferences;
 
 import org.eclipse.persistence.tools.workbench.mappingsio.FileNotFoundListener;
-import org.eclipse.persistence.tools.workbench.mappingsio.LegacyProjectReadCallback;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProjectSubFileComponentContainer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
@@ -76,6 +75,7 @@ class Project60Reader {
         return this.readProject();
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.file);
     }

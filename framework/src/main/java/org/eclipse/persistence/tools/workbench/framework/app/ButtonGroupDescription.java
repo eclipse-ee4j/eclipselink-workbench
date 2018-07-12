@@ -45,11 +45,13 @@ public class ButtonGroupDescription implements ComponentGroupDescription
         buttons = new ArrayList();
     }
 
+    @Override
     public void add(ComponentDescription menuItem)
     {
         buttons.add(menuItem);
     }
 
+    @Override
     public void remove(ComponentDescription menuItem)
     {
         buttons.remove(menuItem);
@@ -59,10 +61,12 @@ public class ButtonGroupDescription implements ComponentGroupDescription
      * Returns an ordered list of <code>Components</code> describing this
      * group.
      */
+    @Override
     public ListIterator components()
     {
         return new TransformationListIterator(buttons.listIterator())
         {
+            @Override
             protected Object transform(Object next)
             {
                 return ((ComponentDescription)next).component();
@@ -70,6 +74,7 @@ public class ButtonGroupDescription implements ComponentGroupDescription
         };
     }
 
+    @Override
     public boolean hasComponents()
     {
         return buttons.size() > 0;
@@ -80,6 +85,7 @@ public class ButtonGroupDescription implements ComponentGroupDescription
      * <code>FrameworkAction</code>s with this group.  These actions represent
      * all child actions.
      */
+    @Override
     public Iterator actions()
     {
         ArrayList actionIterators = new ArrayList();
@@ -95,6 +101,7 @@ public class ButtonGroupDescription implements ComponentGroupDescription
      * Per the <code>ActionContainer</code> interface, this method defines how this
      * group updates itself based upon the given Collection of FrameworkActions.
      */
+    @Override
     public void updateOn(Collection frameworkActions)
     {
         for (Iterator buttonDescIter = new ArrayList(buttons).iterator(); buttonDescIter.hasNext();)

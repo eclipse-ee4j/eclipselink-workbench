@@ -85,6 +85,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         DatabaseSessionConfig session = new DatabaseSessionConfig();
@@ -156,6 +157,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize() {
 
         super.initialize();
@@ -165,6 +167,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
     * Initializes this new model inst. var. and aggregates.
     */
+    @Override
    protected void initialize( Object newConfig) {
        super.initialize( newConfig);
 
@@ -176,6 +179,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Initializes this adapter from the specified config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 
@@ -187,6 +191,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
         this.login = ( LoginAdapter)this.adapt( databaseSession().getLoginConfig());
     }
 
+    @Override
     protected void postInitializationFromModel() {
         super.postInitializationFromModel();
 
@@ -232,6 +237,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
      * its children config model for saving.
      * If Login is clean, set this config model loginConfig to null to prevent being saved.
      */
+    @Override
     protected void preSaving() {
         super.preSaving();
 
@@ -245,6 +251,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
      * Post Saving: Re-intilizes this instance config model and
      * its children config model after saving.
      */
+    @Override
     protected void postSaving() {
         super.postSaving();
 
@@ -283,6 +290,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Returns this login adapter.
      */
+    @Override
     public LoginAdapter getLogin() {
 
         return this.login;
@@ -297,26 +305,31 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Convenience method to get the datasource platform.
      */
+    @Override
     public String getDataSourceName() {
 
         return this.getLogin().getPlatformName();
     }
 
+    @Override
     public boolean platformIsRdbms() {
 
         return this.login.platformIsRdbms();
     }
 
+    @Override
     public boolean platformIsEis() {
 
         return this.login.platformIsEis();
     }
 
+    @Override
     public boolean platformIsXml() {
 
         return this.login.platformIsXml();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 
@@ -346,6 +359,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
         this.setManaged( broker != null);
     }
 
+    @Override
     protected void setManaged( boolean managed) {
         super.setManaged( managed);
 
@@ -355,6 +369,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
         this.updateExternalConnectionPooling();
     }
 
+    @Override
     void externalTransactionControllerClassChanged() {
 
         if( this.hasJTA() && getServerPlatform().isCustom()) {
@@ -379,6 +394,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     public Iterator additionalProjectNames() {
 
         return new TransformationIterator( additionalProjects()) {
+            @Override
             protected Object transform( Object next) {
                 return (( ProjectAdapter) next).getName();
             }
@@ -551,6 +567,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Returns usesExternalConnectionPooling.
      */
+    @Override
     public boolean usesExternalConnectionPooling() {
 
         return this.getLogin().usesExternalConnectionPooling();
@@ -558,6 +575,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Sets usesExternalConnectionPooling and the config model.
      */
+    @Override
     public void setExternalConnectionPooling( boolean value) {
 
         boolean old = this.getLogin().usesExternalConnectionPooling();
@@ -569,6 +587,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 
@@ -578,6 +597,7 @@ public class DatabaseSessionAdapter extends SessionAdapter implements LoginHandl
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo(branchProblems);

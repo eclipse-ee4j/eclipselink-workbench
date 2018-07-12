@@ -39,11 +39,13 @@ public abstract class MWTransactionalProjectDefaultsPolicy extends MWProjectDefa
         super(parent);
     }
 
+    @Override
     protected MWCachingPolicy buildCachingPolicy()
     {
         return new MWTransactionalProjectCachingPolicy(this);
     }
 
+    @Override
     protected void initializePolicyDescriptors()
     {
         super.initializePolicyDescriptors();
@@ -53,6 +55,7 @@ public abstract class MWTransactionalProjectDefaultsPolicy extends MWProjectDefa
 
     private class EventsPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (!descriptor.getEventsPolicy().isActive()) {
                 descriptor.addEventsPolicy();
@@ -62,6 +65,7 @@ public abstract class MWTransactionalProjectDefaultsPolicy extends MWProjectDefa
 
     private class ReturningPolicyDescriptor implements PolicyDescriptor
     {
+        @Override
         public void applyPolicyToDescriptor(MWMappingDescriptor descriptor) {
             if (descriptor.supportsReturningPolicy()) {
                 ((MWTransactionalDescriptor) descriptor).addReturningPolicy();

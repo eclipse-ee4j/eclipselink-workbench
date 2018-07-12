@@ -33,6 +33,7 @@ final class MapAsDirectToXmlTypeAction extends ChangeMappingTypeAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.directToXmlType");
@@ -41,11 +42,13 @@ final class MapAsDirectToXmlTypeAction extends ChangeMappingTypeAction {
         this.initializeToolTipText("MAP_AS_DIRECT_TO_XML_TYPE_ACTION.toolTipText");
     }
 
+    @Override
     protected void engageValueEnabled(AbstractApplicationNode node) {
         super.engageValueEnabled(node);
         ((MappingNode) node).database().addPropertyChangeListener(MWDatabase.DATABASE_PLATFORM_PROPERTY, getEnabledStateListener());
     }
 
+    @Override
     protected void disengageValueEnabled(AbstractApplicationNode node) {
         super.disengageValueEnabled(node);
         ((MappingNode) node).database().removePropertyChangeListener(MWDatabase.DATABASE_PLATFORM_PROPERTY, getEnabledStateListener());
@@ -54,18 +57,22 @@ final class MapAsDirectToXmlTypeAction extends ChangeMappingTypeAction {
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWDirectToXmlTypeMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWRelationalClassDescriptor) descriptor).addDirectToXmlTypeMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWDirectToXmlTypeMapping.class;
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return super.shouldBeEnabled(selectedNode) &&
                 ((MappingNode) selectedNode).database().getDatabasePlatform().containsDatabaseTypeNamed("XMLTYPE");

@@ -47,6 +47,7 @@ public class ReadOnlyListValueModel
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.value.size();
     }
@@ -57,6 +58,7 @@ public class ReadOnlyListValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.value.listIterator();
     }

@@ -99,9 +99,11 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
 
     protected PropertyChangeListener buildValueListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 SpinnerModelAdapter.this.valueChanged(e);
             }
+            @Override
             public String toString() {
                 return "value listener";
             }
@@ -111,16 +113,19 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
     /**
      * expand access a bit for inner class
      */
+    @Override
     protected void fireStateChanged() {
         super.fireStateChanged();
     }
 
     protected ChangeListener buildDelegateListener() {
         return new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 // forward the event, with this as the source
                 SpinnerModelAdapter.this.fireStateChanged();
             }
+            @Override
             public String toString() {
                 return "delegate listener";
             }
@@ -133,6 +138,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
     /**
      * @see javax.swing.SpinnerModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.delegate.getValue();
     }
@@ -142,6 +148,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
      * The resulting event will be ignored: @see synchronizeDelegate(Object).
      * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(Object value) {
         this.delegate.setValue(value);
         this.valueHolder.setValue(value);
@@ -150,6 +157,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
     /**
      * @see javax.swing.SpinnerModel#getNextValue()
      */
+    @Override
     public Object getNextValue() {
         return this.delegate.getNextValue();
     }
@@ -157,6 +165,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
     /**
      * @see javax.swing.SpinnerModel#getPreviousValue()
      */
+    @Override
     public Object getPreviousValue() {
         return this.delegate.getPreviousValue();
     }
@@ -165,6 +174,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
      * Extend to start listening to the underlying value if necessary.
      * @see javax.swing.SpinnerModel#addChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void addChangeListener(ChangeListener listener) {
         if (this.listenerList.getListenerCount(ChangeListener.class) == 0) {
             this.delegate.addChangeListener(this.delegateListener);
@@ -177,6 +187,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
      * Extend to stop listening to the underlying value if appropriate.
      * @see javax.swing.SpinnerModel#removeChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void removeChangeListener(ChangeListener listener) {
         super.removeChangeListener(listener);
         if (this.listenerList.getListenerCount(ChangeListener.class) == 0) {
@@ -219,6 +230,7 @@ public class SpinnerModelAdapter extends AbstractSpinnerModel {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.valueHolder);
     }

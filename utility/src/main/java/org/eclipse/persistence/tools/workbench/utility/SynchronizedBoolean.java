@@ -304,6 +304,7 @@ public class SynchronizedBoolean
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             synchronized (this.mutex) {
@@ -317,6 +318,7 @@ public class SynchronizedBoolean
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (o instanceof SynchronizedBoolean) {
             return this.getValue() == ((SynchronizedBoolean) o).getValue();
@@ -327,6 +329,7 @@ public class SynchronizedBoolean
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.getValue() ? 1 : 0;
     }
@@ -334,6 +337,7 @@ public class SynchronizedBoolean
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return String.valueOf(this.getValue());
     }

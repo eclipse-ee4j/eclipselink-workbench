@@ -137,6 +137,7 @@ final class LiteralArgumentPanel extends ArgumentPanel
 
     private CollectionValueModel buildTypesCollectionHolder() {
         return new CollectionAspectAdapter(getArgumentHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWLiteralArgument) this.subject).buildBasicTypes().iterator();
             }
@@ -145,9 +146,11 @@ final class LiteralArgumentPanel extends ArgumentPanel
 
     private PropertyValueModel buildTypeHolder() {
         return new PropertyAspectAdapter(getArgumentHolder(), MWLiteralArgument.TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWLiteralArgument) this.subject).getLiteralType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                ((MWLiteralArgument) this.subject).setType((MWTypeDeclaration) value);
             }
@@ -159,6 +162,7 @@ final class LiteralArgumentPanel extends ArgumentPanel
         final PropertyValueModel literalHolder = buildLiteralHolder();
         textField.setDocument(new DocumentAdapter(literalHolder));
         typeHolder.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 MWTypeDeclaration type = (MWTypeDeclaration) evt.getNewValue();
                 if (type != null) {
@@ -186,10 +190,12 @@ final class LiteralArgumentPanel extends ArgumentPanel
 
     private PropertyValueModel buildLiteralHolder() {
         return new PropertyAspectAdapter(getArgumentHolder(), MWLiteralArgument.VALUE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWLiteralArgument) this.subject).getValue();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWLiteralArgument) this.subject).setValue((String)value);
             }
@@ -197,8 +203,10 @@ final class LiteralArgumentPanel extends ArgumentPanel
     }
 
 
+    @Override
     protected PropertyValueModel buildQueryArgumentHolder(PropertyValueModel argumentHolder) {
         return new FilteringPropertyValueModel(argumentHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWLiteralArgument;
             }

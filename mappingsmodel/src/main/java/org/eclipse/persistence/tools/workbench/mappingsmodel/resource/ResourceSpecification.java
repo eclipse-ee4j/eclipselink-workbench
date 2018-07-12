@@ -102,6 +102,7 @@ public abstract class ResourceSpecification
     /** Returns a URL based on the specification */
     protected abstract URL resourceUrl() throws ResourceException;
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.location);
     }

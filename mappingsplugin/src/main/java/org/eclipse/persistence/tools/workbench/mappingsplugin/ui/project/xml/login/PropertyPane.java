@@ -143,6 +143,7 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 PropertyEditor editor;
@@ -171,6 +172,7 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 PropertyEditor editor;
@@ -210,6 +212,7 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         selectionModel.addListSelectionListener(new ListSelectionListener()
         {
+            @Override
             public void valueChanged(ListSelectionEvent e)
             {
                 if (!e.getValueIsAdjusting())
@@ -229,12 +232,14 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         return new CollectionAspectAdapter(buildLoginSpecHolder(), MWEisLoginSpec.PROPERTY_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;
                 return loginSpec.getProperties().iterator();
             }
 
+            @Override
             protected int sizeFromSubject()
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;
@@ -277,6 +282,7 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 Object[] selectedValues = model.getSelectedValues();
@@ -300,6 +306,7 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         selectionModel.addListSelectionListener(new ListSelectionListener()
         {
+            @Override
             public void valueChanged(ListSelectionEvent e)
             {
                 if (!e.getValueIsAdjusting())
@@ -352,6 +359,7 @@ public class PropertyPane extends AbstractSubjectPanel
      *
      * @return The container with all its widgets
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -449,6 +457,7 @@ public class PropertyPane extends AbstractSubjectPanel
     * @param enabled <code>true<code> if this component and its children should
     * be enabled, <code>false<code> otherwise
     */
+    @Override
     public void setEnabled(boolean enabled)
     {
         super.setEnabled(enabled);
@@ -477,6 +486,7 @@ public class PropertyPane extends AbstractSubjectPanel
      */
     private class PropertyChangeHandler implements PropertyChangeListener
     {
+        @Override
         public void propertyChange(PropertyChangeEvent e)
         {
             if (table.isEnabled())
@@ -513,6 +523,7 @@ public class PropertyPane extends AbstractSubjectPanel
         {
             return new PropertyAspectAdapter(MWProperty.KEY_PROPERTY, property)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     return property.getKey();
@@ -530,6 +541,7 @@ public class PropertyPane extends AbstractSubjectPanel
         {
             return new PropertyAspectAdapter(MWProperty.VALUE_PROPERTY, property)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     return property.getValue();
@@ -543,6 +555,7 @@ public class PropertyPane extends AbstractSubjectPanel
          * @param subject
          * @return
          */
+        @Override
         public PropertyValueModel[] cellModels(Object subject)
         {
             MWProperty property = (MWProperty) subject;
@@ -561,6 +574,7 @@ public class PropertyPane extends AbstractSubjectPanel
          * @param index
          * @return
          */
+        @Override
         public Class getColumnClass(int index)
         {
             switch (index)
@@ -579,6 +593,7 @@ public class PropertyPane extends AbstractSubjectPanel
          *
          * @return
          */
+        @Override
         public int getColumnCount()
         {
             return COLUMN_COUNT;
@@ -590,6 +605,7 @@ public class PropertyPane extends AbstractSubjectPanel
          * @param index
          * @return
          */
+        @Override
         public String getColumnName(int index)
         {
             return null;
@@ -601,6 +617,7 @@ public class PropertyPane extends AbstractSubjectPanel
          * @param index
          * @return
          */
+        @Override
         public boolean isColumnEditable(int index)
         {
             return false;
@@ -693,6 +710,7 @@ public class PropertyPane extends AbstractSubjectPanel
          *
          * @return {@link PropertyEditorView}
          */
+        @Override
         protected Component buildMainPanel()
         {
             PropertyEditorView view = new PropertyEditorView(new SimplePropertyValueModel(virtualProperty),
@@ -720,6 +738,7 @@ public class PropertyPane extends AbstractSubjectPanel
         {
             return new PropertyChangeListener()
             {
+                @Override
                 public void propertyChange(PropertyChangeEvent e)
                 {
                     validate(e.getPropertyName());
@@ -732,6 +751,7 @@ public class PropertyPane extends AbstractSubjectPanel
          *
          * @return session.login.properties.propertyEditor
          */
+        @Override
         protected String helpTopicId()
         {
             return "session.login.properties.propertyEditor";
@@ -742,6 +762,7 @@ public class PropertyPane extends AbstractSubjectPanel
          *
          * @return The first focusable component of this dialog
          */
+        @Override
         protected Component initialFocusComponent()
         {
             return initialFocusComponent;
@@ -750,6 +771,7 @@ public class PropertyPane extends AbstractSubjectPanel
         /**
          * Makes sure the OK button is disabled.
          */
+        @Override
         protected void prepareToShow()
         {
             super.prepareToShow();
@@ -870,12 +892,14 @@ public class PropertyPane extends AbstractSubjectPanel
         {
             return new SimplePropertyValueModel()
             {
+                @Override
                 public Object getValue()
                 {
                     VirtualProperty property = (VirtualProperty) subject();
                     return property.key;
                 }
 
+                @Override
                 public void setValue(Object value)
                 {
                     VirtualProperty property = (VirtualProperty) subject();
@@ -907,12 +931,14 @@ public class PropertyPane extends AbstractSubjectPanel
         {
             return new SimplePropertyValueModel()
             {
+                @Override
                 public Object getValue()
                 {
                     VirtualProperty property = (VirtualProperty) subject();
                     return property.value;
                 }
 
+                @Override
                 public void setValue(Object value)
                 {
                     VirtualProperty property = (VirtualProperty) subject();
@@ -936,6 +962,7 @@ public class PropertyPane extends AbstractSubjectPanel
         /**
          * Initializes the layout of this view.
          */
+        @Override
         protected void initializeLayout()
         {
             GridBagConstraints constraints = new GridBagConstraints();
@@ -987,6 +1014,7 @@ public class PropertyPane extends AbstractSubjectPanel
      */
     private class SelectionTableCellRenderer extends SimpleTableCellRenderer
     {
+        @Override
         public Component getTableCellRendererComponent(JTable table,
                                                                       Object value,
                                                                       boolean selected,
@@ -1084,6 +1112,7 @@ public class PropertyPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder())
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWEisProject) subject).getEisLoginSpec();

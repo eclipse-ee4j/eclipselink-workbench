@@ -31,6 +31,7 @@ final class DeleteDatabasePlatformAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("DELETE_DATABASE_PLATFORM");
         // no accelerator
@@ -38,6 +39,7 @@ final class DeleteDatabasePlatformAction extends AbstractFrameworkAction {
         this.initializeToolTipText("DELETE_DATABASE_PLATFORM.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         int response = JOptionPane.showConfirmDialog(
                         this.currentWindow(),
@@ -50,6 +52,7 @@ final class DeleteDatabasePlatformAction extends AbstractFrameworkAction {
         }
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         DatabasePlatform platform = ((DatabasePlatformNode) selectedNode).getDatabasePlatform();
         platform.getRepository().removePlatform(platform);

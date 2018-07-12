@@ -74,6 +74,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
         super( subjectHolder, contextHolder);
     }
 
+    @Override
     protected void initializeLayout()
     {
         this.sortedFieldsAdapter = this.buildSortedInsertFieldReturnOnlyFlagsAdapter();
@@ -143,6 +144,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
 
     protected TableCellRenderer buildFieldColumnCellRenderer() {
         return new SimpleTableCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return value == null ? null : ((MWDataField) value).fieldName();
             }
@@ -158,6 +160,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged( ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ReturningInsertFieldsPanel.this.rowSelectionChanged();
@@ -191,9 +194,11 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
 
     private CollectionValueModel buildInsertFieldReturnOnlyFlagsAdapter() {
         return new CollectionAspectAdapter( getSubjectHolder(), MWReturningPolicy.INSERT_FIELD_RETURN_ONLY_FLAGS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return (( MWReturningPolicy) this.subject).insertFieldReturnOnlyFlags();
             }
+            @Override
             protected int sizeFromSubject() {
                 return (( MWReturningPolicy) this.subject).insertFieldReturnOnlyFlagsSize();
             }
@@ -219,11 +224,13 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
 
     private Action buildAddAction() {
         final Action action = new AbstractFrameworkAction( this.getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText( "ADD_BUTTON");
                 initializeMnemonic( "ADD_BUTTON");
             }
 
+            @Override
             public void actionPerformed( ActionEvent event) {
                 ReturningInsertFieldsPanel.this.addField();
             }
@@ -231,6 +238,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
         action.setEnabled( true);
 
         this.getSubjectHolder().addPropertyChangeListener(PropertyValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange( PropertyChangeEvent evt) {
                 action.setEnabled( returningPolicy() != null);
             }
@@ -248,11 +256,13 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
 
     private Action buildRemoveAction() {
         removeAction = new AbstractFrameworkAction( this.getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText( "REMOVE_BUTTON");
                 initializeMnemonic( "REMOVE_BUTTON");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ReturningInsertFieldsPanel.this.removeField();
             }
@@ -295,14 +305,17 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString( COLUMN_NAME_KEYS[ index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case INSERT_FIELD_COLUMN:
@@ -314,6 +327,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
             }
         }
 
+        @Override
         public boolean isColumnEditable( int index) {
             switch (index) {
                 case INSERT_FIELD_COLUMN:
@@ -325,6 +339,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
             }
         }
 
+        @Override
         public PropertyValueModel[] cellModels( Object subject) {
             MWReturningPolicyInsertFieldReturnOnlyFlag insert = ( MWReturningPolicyInsertFieldReturnOnlyFlag)subject;
             PropertyValueModel[] result = new PropertyValueModel[ COLUMN_COUNT];
@@ -338,6 +353,7 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
         private PropertyValueModel buildInsertFieldAdapter( MWReturningPolicyInsertFieldReturnOnlyFlag field) {
             // the field does not change
             PropertyValueModel adapter = new PropertyAspectAdapter( EMPTY_STRING_ARRAY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return (( MWReturningPolicyInsertFieldReturnOnlyFlag) this.subject).getField();
                 }
@@ -347,9 +363,11 @@ public abstract class ReturningInsertFieldsPanel extends AbstractSubjectPanel {
 
         private PropertyValueModel buildReturnOnlyAdapter( MWReturningPolicyInsertFieldReturnOnlyFlag field) {
             return new PropertyAspectAdapter( MWReturningPolicyInsertFieldReturnOnlyFlag.RETURN_ONLY_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf((( MWReturningPolicyInsertFieldReturnOnlyFlag)subject).isReturnOnly());
                 }
+                @Override
                 protected void setValueOnSubject( Object value) {
                     (( MWReturningPolicyInsertFieldReturnOnlyFlag)subject).setReturnOnly((( Boolean)value).booleanValue());
                 }

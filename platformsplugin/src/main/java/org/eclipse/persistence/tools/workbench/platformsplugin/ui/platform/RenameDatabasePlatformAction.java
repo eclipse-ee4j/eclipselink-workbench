@@ -36,6 +36,7 @@ final class RenameDatabasePlatformAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("RENAME_DATABASE_PLATFORM");
         // no accelerator
@@ -43,6 +44,7 @@ final class RenameDatabasePlatformAction extends AbstractFrameworkAction {
         this.initializeToolTipText("RENAME_DATABASE_PLATFORM.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         // save the selection state, so we can restore it when we are done
         TreePath[] paths = this.navigatorSelectionModel().getSelectionPaths();
@@ -79,6 +81,7 @@ final class RenameDatabasePlatformAction extends AbstractFrameworkAction {
 
     private Iterator existingPlatformNames(DatabasePlatformRepository repository) {
         return new TransformationIterator(repository.platforms()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabasePlatform) next).getName();
             }

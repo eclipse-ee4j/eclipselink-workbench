@@ -55,6 +55,7 @@ public class SimpleCollectionValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.bagHolder = new SimpleCollectionValueModel(this.buildBag());
@@ -94,6 +95,7 @@ public class SimpleCollectionValueModelTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -356,14 +358,17 @@ public class SimpleCollectionValueModelTests extends TestCase {
 
     private CollectionChangeListener buildBagListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 SimpleCollectionValueModelTests.this.bagEventType = ADD;
                 SimpleCollectionValueModelTests.this.bagEvent = e;
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 SimpleCollectionValueModelTests.this.bagEventType = REMOVE;
                 SimpleCollectionValueModelTests.this.bagEvent = e;
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 SimpleCollectionValueModelTests.this.bagEventType = CHANGE;
                 SimpleCollectionValueModelTests.this.bagEvent = e;
@@ -373,14 +378,17 @@ public class SimpleCollectionValueModelTests extends TestCase {
 
     private CollectionChangeListener buildSetListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 SimpleCollectionValueModelTests.this.setEventType = ADD;
                 SimpleCollectionValueModelTests.this.setEvent = e;
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 SimpleCollectionValueModelTests.this.setEventType = REMOVE;
                 SimpleCollectionValueModelTests.this.setEvent = e;
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 SimpleCollectionValueModelTests.this.setEventType = CHANGE;
                 SimpleCollectionValueModelTests.this.setEvent = e;

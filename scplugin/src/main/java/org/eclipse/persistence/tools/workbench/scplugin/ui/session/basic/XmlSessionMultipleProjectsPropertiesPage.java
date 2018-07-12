@@ -62,6 +62,7 @@ public final class XmlSessionMultipleProjectsPropertiesPage extends ScrollablePr
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

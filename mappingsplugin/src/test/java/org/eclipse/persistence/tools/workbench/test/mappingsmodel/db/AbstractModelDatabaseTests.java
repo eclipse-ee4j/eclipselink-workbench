@@ -69,6 +69,7 @@ abstract class AbstractModelDatabaseTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
 
@@ -170,6 +171,7 @@ abstract class AbstractModelDatabaseTests extends TestCase {
         this.reference_ADDR_STATE.addColumnPair(this.field_STATE_ID2_FK, this.field_STATE_ID2);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

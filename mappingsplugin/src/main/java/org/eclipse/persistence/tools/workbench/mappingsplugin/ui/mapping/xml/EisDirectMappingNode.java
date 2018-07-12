@@ -32,6 +32,7 @@ public final class EisDirectMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_XML_DIRECT_MAPPING_NODE";
     }
@@ -39,6 +40,7 @@ public final class EisDirectMappingNode
 
     // **************** MappingNode contract **********************************
 
+    @Override
     protected String buildIconKey() {
         return "mapping.xmlDirect";
     }
@@ -46,6 +48,7 @@ public final class EisDirectMappingNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
 //        return getDescriptorNode().mappingHelpTopicPrefix() + ".direct";
         return getDescriptorNode().mappingHelpTopicPrefix() + "Direct"; // For 10.1.3
@@ -54,6 +57,7 @@ public final class EisDirectMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return EisDirectMappingPropertiesPage.class;
     }

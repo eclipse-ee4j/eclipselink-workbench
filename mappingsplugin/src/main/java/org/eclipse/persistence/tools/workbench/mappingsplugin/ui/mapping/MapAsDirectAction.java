@@ -29,14 +29,17 @@ public abstract class MapAsDirectAction extends ChangeMappingTypeAction {
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWDirectMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return descriptor.addDirectMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWDirectMapping.class;
     }

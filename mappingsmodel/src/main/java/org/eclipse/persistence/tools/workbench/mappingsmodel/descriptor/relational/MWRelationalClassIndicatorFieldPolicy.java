@@ -20,11 +20,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.ColumnStringHolder;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAbstractClassIndicatorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorFieldPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorValue;
@@ -37,7 +35,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.AggregateFieldDescription;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.AggregateRuntimeFieldNameGenerator;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWVariableOneToOneMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.iterators.NullIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
@@ -46,9 +43,7 @@ import org.eclipse.persistence.tools.workbench.utility.string.PartialStringMatch
 import org.eclipse.persistence.tools.workbench.utility.string.SimplePartialStringMatcher;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringMatcher.StringHolderScore;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.mappings.VariableOneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -88,6 +83,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.columnHandle = new MWColumnHandle(this, this.buildColumnScrubber());
@@ -96,6 +92,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
 
     //    ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.columnHandle);
@@ -103,9 +100,11 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
 
     private NodeReferenceScrubber buildColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalClassIndicatorFieldPolicy.this.setColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalClassIndicatorFieldPolicy.buildColumnScrubber()";
             }
@@ -115,6 +114,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
 
     //    ********** Accessors **********
 
+    @Override
     public MWDataField getField() {
         return this.getColumn();
     }
@@ -133,6 +133,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
         this.firePropertyChanged(FIELD_PROPERTY, old, column);
     }
 
+    @Override
     protected boolean fieldSpecified() {
         return ((MWRelationalDescriptor) this.getContainingDescriptor()).isAggregateDescriptor() || getField() != null;
     }
@@ -140,12 +141,15 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
 
     //    ********** Aggregate Support **********
 
+    @Override
     public String fieldNameForRuntime() {
         return "CLASS_INDICATOR_FIELD";
     }
 
+    @Override
     public AggregateFieldDescription fullFieldDescription() {
         return new AggregateFieldDescription() {
+            @Override
             public String getMessageKey() {
                 if (getParent() instanceof MWDescriptorInheritancePolicy) {
                     return "AGGREGATE_FIELD_DESCRIPTION_FOR_CLASS_INDICATOR_FIELD_FOR_INHERITANCE";
@@ -153,24 +157,29 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
                 return "AGGREGATE_FIELD_DESCRIPTION_FOR_CLASS_INDICATOR_FIELD";
             }
 
+            @Override
             public Object[] getMessageArguments() {
                 return new Object[] {};
             }
         };
     }
 
+    @Override
     public void parentDescriptorMorphedToAggregate() {
         setField(null);
     }
 
+    @Override
     public boolean fieldIsWritten() {
         return true;
     }
 
+    @Override
     public MWDescriptor owningDescriptor() {
         return this.getContainingDescriptor();
     }
 
+    @Override
     public void addToAggregateFieldNameGenerators(Collection generators) {
         generators.add(this);
     }
@@ -178,6 +187,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
 
     // ************* Automap Support *************
 
+    @Override
     public void automap() {
         super.automap();
         this.automapColumn();
@@ -231,6 +241,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
 
     // ********* Problems ***************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         addClassIndicatorFieldNotSpecifiedProblemTo(newProblems);
@@ -244,6 +255,7 @@ public final class MWRelationalClassIndicatorFieldPolicy extends MWClassIndicato
     //    ********** Runtime Conversion **********
 
     //runtime conversion for when this is used in MWRelationalInheritancePolicy
+    @Override
     public void adjustRuntimeInheritancePolicy(InheritancePolicy runtimeInheritancePolicy) {
         super.adjustRuntimeInheritancePolicy(runtimeInheritancePolicy);
         if (getColumn() != null) {

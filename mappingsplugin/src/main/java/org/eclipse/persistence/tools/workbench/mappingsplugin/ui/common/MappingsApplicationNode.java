@@ -49,6 +49,7 @@ public abstract class MappingsApplicationNode
      * The default implementation caches properties pages in the
      * MW plug-in.
      */
+    @Override
     public Component propertiesPage(WorkbenchContext context) {
         AbstractPropertiesPage propertiesPage = (AbstractPropertiesPage) this.getMappingsPlugin().buildPropertiesPage(this.propertiesPageClass());
         propertiesPage.setNode(this, this.buildLocalWorkbenchContext(context));
@@ -69,6 +70,7 @@ public abstract class MappingsApplicationNode
      * The default implementation caches properties pages in the
      * MW plug-in.
      */
+    @Override
     public void releasePropertiesPage(Component propertiesPage) {
         this.releasePropertiesPage((AbstractPropertiesPage) propertiesPage);
     }

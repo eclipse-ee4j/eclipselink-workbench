@@ -56,6 +56,7 @@ class XmlSchemaRepositoryPanel
         super(context);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel page = new JPanel(new BorderLayout());
         page.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,6 +85,7 @@ class XmlSchemaRepositoryPanel
 
     private ListValueModel buildDisplayableSchemasValueModel() {
         return new TransformationListValueModelAdapter(this.buildSchemasValueModel()) {
+             @Override
              protected Object transformItem(Object item) {
                 return new XmlSchemaDisplayableAdapter((MWXmlSchema) item, resourceRepository());
             }
@@ -92,9 +94,11 @@ class XmlSchemaRepositoryPanel
 
     private CollectionValueModel buildSchemasValueModel() {
         return new CollectionAspectAdapter(this.getSelectionHolder(), MWXmlSchemaRepository.SCHEMAS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWXmlSchemaRepository) subject).schemas();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWXmlSchemaRepository) subject).schemasSize();
             }

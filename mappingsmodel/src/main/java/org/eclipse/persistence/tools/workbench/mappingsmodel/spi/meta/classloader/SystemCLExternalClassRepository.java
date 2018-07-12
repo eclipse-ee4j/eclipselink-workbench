@@ -54,6 +54,7 @@ final class SystemCLExternalClassRepository
     /**
      * @see AbstractCLExternalClassRepository#buildClassDescriptions()
      */
+    @Override
     Map buildClassDescriptions() {
         Map classDescriptions = new HashMap(10000);    // this should be big enough for now (jdk1.4)...
         // first add all the primitives, since they do not show up on the "system" classpath
@@ -66,6 +67,7 @@ final class SystemCLExternalClassRepository
     /**
      * @see AbstractCLExternalClassRepository#buildClassLoader()
      */
+    @Override
     ClassLoader buildClassLoader() {
         return this.getClass().getClassLoader();
     }

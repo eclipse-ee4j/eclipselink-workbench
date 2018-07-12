@@ -32,6 +32,7 @@ public class DescriptorCreationFailureContainer
     private Collection failureEvents = new Vector();
 
 
+    @Override
     public void descriptorCreationFailure(DescriptorCreationFailureEvent e) {
         this.failureEvents.add(e);
 
@@ -44,6 +45,7 @@ public class DescriptorCreationFailureContainer
     /** return the names of the classes that failed to have descriptors created */
     public Iterator failureClassNames() {
         return new TransformationIterator(failureEvents()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DescriptorCreationFailureEvent) next).getClassName();
             }

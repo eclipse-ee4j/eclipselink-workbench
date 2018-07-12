@@ -41,6 +41,7 @@ final class DirectToFieldMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildGeneralPanel() {
         return new DirectToFieldMappingPanel(getNodeHolder(), getWorkbenchContextHolder());
     }

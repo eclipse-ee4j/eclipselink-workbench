@@ -134,6 +134,7 @@ public class TreeModelAdapterUITest {
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 TreeModelAdapterUITest.this.treeSelectionChanged(e);
             }
@@ -159,6 +160,7 @@ public class TreeModelAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -179,6 +181,7 @@ public class TreeModelAdapterUITest {
 
     private JTree buildTree() {
         this.tree = new JTree(this.treeModel) {
+            @Override
             public String convertValueToText(Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
                 return ((Displayable) value).displayString();
             }
@@ -267,6 +270,7 @@ public class TreeModelAdapterUITest {
 
     private Action buildAddAction() {
         Action action = new AbstractAction("add") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeModelAdapterUITest.this.addNode();
             }
@@ -300,6 +304,7 @@ public class TreeModelAdapterUITest {
 
     private Action buildRemoveAction() {
         Action action = new AbstractAction("remove") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeModelAdapterUITest.this.removeNode();
             }
@@ -346,6 +351,7 @@ public class TreeModelAdapterUITest {
 
     private Action buildRenameAction() {
         Action action = new AbstractAction("rename") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeModelAdapterUITest.this.renameNode();
             }
@@ -380,6 +386,7 @@ public class TreeModelAdapterUITest {
 
     private Action buildClearChildrenAction() {
         Action action = new AbstractAction("clear children") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeModelAdapterUITest.this.clearChildren();
             }
@@ -405,6 +412,7 @@ public class TreeModelAdapterUITest {
 
     private Action buildResetAction() {
         Action action = new AbstractAction("reset") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeModelAdapterUITest.this.reset();
             }

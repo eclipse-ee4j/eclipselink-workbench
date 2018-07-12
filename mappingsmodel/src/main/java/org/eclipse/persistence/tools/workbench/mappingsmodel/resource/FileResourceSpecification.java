@@ -54,10 +54,12 @@ public final class FileResourceSpecification
 
     // **************** ResourceSpecification contract ************************
 
+    @Override
     public String getSourceKey() {
         return KEY;
     }
 
+    @Override
     protected URL resourceUrl()
         throws ResourceException
     {
@@ -95,6 +97,7 @@ public final class FileResourceSpecification
     /**
      * convert to platform-independent representation
      */
+    @Override
     protected String getLocationForTopLink2() {
         return this.location.replace('\\', '/');
     }
@@ -102,6 +105,7 @@ public final class FileResourceSpecification
     /**
      * convert to platform-specific representation
      */
+    @Override
     protected void setLocationForTopLink2(String fileName) {
         this.location = new File(fileName).getPath();
     }

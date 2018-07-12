@@ -45,6 +45,7 @@ final class WorkbenchCloseAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.close");
@@ -63,6 +64,7 @@ final class WorkbenchCloseAction
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 synchronized (WorkbenchCloseAction.this) {
                     WorkbenchCloseAction.this.update();
@@ -73,6 +75,7 @@ final class WorkbenchCloseAction
 
     private WindowListener buildWorkbenchWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 WorkbenchCloseAction.this.workbenchWindowClosed();
             }
@@ -87,6 +90,7 @@ final class WorkbenchCloseAction
         this.setEnabled(this.selectedProjectNodes().length > 0);
     }
 
+    @Override
     protected void execute() {
         this.nodeManager.close(this.selectedProjectNodes(), this.getWorkbenchContext());
     }

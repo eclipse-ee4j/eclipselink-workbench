@@ -37,6 +37,7 @@ final class HelpTopicIDWindowAction extends AbstractFrameworkAction {
     /**
      * initialize stuff
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("HELP_TOPIC_ID_WINDOW");
@@ -46,6 +47,7 @@ final class HelpTopicIDWindowAction extends AbstractFrameworkAction {
     /**
      * ignore the selected nodes
      */
+    @Override
     protected void execute() {
         // no need for localization - this should only occur in development
         JOptionPane.showMessageDialog(this.currentWindow(), "Invalid Help Manager: ");

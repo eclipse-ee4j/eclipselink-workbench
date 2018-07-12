@@ -59,18 +59,22 @@ public interface MnemonicRepository {
      */
     MnemonicRepository NULL_INSTANCE =
         new MnemonicRepository() {
+            @Override
             public boolean hasMnemonic(String key) {
                 return key == null;
             }
+            @Override
             public int getMnemonic(String key) {
                 return this.getMnemonicIndex(key);
             }
+            @Override
             public int getMnemonicIndex(String key) {
                 if (key == null) {
                     return -1;
                 }
                 throw new MissingMnemonicException("Missing mnemonic: " + key, key);
             }
+            @Override
             public String toString() {
                 return "NullMnemonicRepository";
             }

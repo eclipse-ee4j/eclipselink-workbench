@@ -42,6 +42,7 @@ final class PreferencesEditorView
     /**
      * @see AbstractEditorView#buildLabel()
      */
+    @Override
     JLabel buildLabel() {
         return this.label;
     }
@@ -50,6 +51,7 @@ final class PreferencesEditorView
      * if we have a new properties page, we probably have a new label
      * @see AbstractEditorView#installNewPropertiesPage()
      */
+    @Override
     void installNewPropertiesPage() {
         this.label.setText(((PreferencesNode) this.node).displayString());
         super.installNewPropertiesPage();

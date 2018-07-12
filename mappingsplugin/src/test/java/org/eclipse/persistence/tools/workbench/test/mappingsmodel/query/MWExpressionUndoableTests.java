@@ -57,6 +57,7 @@ public class MWExpressionUndoableTests extends TestCase
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.employeeProject = new EmployeeProject().getProject();
@@ -137,6 +138,7 @@ public class MWExpressionUndoableTests extends TestCase
         return mainExpression;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

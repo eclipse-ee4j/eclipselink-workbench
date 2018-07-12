@@ -32,6 +32,7 @@ public class DeleteSessionAction extends AbstractEnablableFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();
@@ -41,6 +42,7 @@ public class DeleteSessionAction extends AbstractEnablableFrameworkAction {
         this.initializeIcon( "DELETE");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         SessionAdapter session = ( SessionAdapter)selectedNode.getValue();
@@ -89,10 +91,12 @@ public class DeleteSessionAction extends AbstractEnablableFrameworkAction {
         return (confirmation == JOptionPane.OK_OPTION);
     }
 
+    @Override
     public void execute() {
         super.execute();
     }
 
+    @Override
     protected void updateEnabledState() {
 
         ApplicationNode[] nodes = selectedNodes();
@@ -123,6 +127,7 @@ public class DeleteSessionAction extends AbstractEnablableFrameworkAction {
         }
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         throw new UnsupportedOperationException();
     }

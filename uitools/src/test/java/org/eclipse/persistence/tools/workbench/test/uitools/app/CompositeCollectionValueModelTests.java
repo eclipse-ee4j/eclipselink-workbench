@@ -49,12 +49,14 @@ public class CompositeCollectionValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.neighborhood = new Neighborhood("Hanna-Barbera");
         this.neighborhoodHolder = new SimplePropertyValueModel(this.neighborhood);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -202,6 +204,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
 
     private CollectionValueModel buildFamiliesAspectAdapter(ValueModel communeHolder) {
         return new CollectionAspectAdapter(communeHolder, Neighborhood.FAMILIES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((Neighborhood) this.subject).families();
             }
@@ -210,6 +213,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
 
     CollectionValueModel buildMembersAdapter(Family family) {
         return new CollectionAspectAdapter(Family.MEMBERS_COLLECTION, family) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((Family) this.subject).members();
             }
@@ -219,6 +223,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
     private CompositeCollectionValueModel buildAllMembersComposite(ValueModel communeHolder) {
         // override #transform(Object)
         return new CompositeCollectionValueModel(this.buildFamiliesAspectAdapter(communeHolder)) {
+            @Override
             protected CollectionValueModel transform(Object value) {
                 return CompositeCollectionValueModelTests.this.buildMembersAdapter((Family) value);
             }
@@ -237,9 +242,11 @@ public class CompositeCollectionValueModelTests extends TestCase {
 
     private Transformer buildTransformer() {
         return new Transformer() {
+            @Override
             public Object transform(Object value) {
                 return CompositeCollectionValueModelTests.this.buildMembersAdapter((Family) value);
             }
+            @Override
             public String toString() {
                 return "Local Transformer";
             }
@@ -307,6 +314,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
 
         private Iterator membersIterators() {
             return new TransformationIterator(this.families()) {
+                @Override
                 protected Object transform(Object next) {
                     return ((Family) next).members();
                 }
@@ -317,6 +325,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
             return this.familyNamed(familyName).memberNamed(memberName);
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.name);
         }
@@ -372,6 +381,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
             throw new IllegalArgumentException(memberName);
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.name);
         }
@@ -401,6 +411,7 @@ public class CompositeCollectionValueModelTests extends TestCase {
             this.firePropertyChanged(NAME_PROPERTY, old, name);
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.name);
         }

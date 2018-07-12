@@ -41,6 +41,7 @@ public final class NullTransformer implements Transformer
     /*
      * (non-Javadoc)
      */
+    @Override
     public Object transform(Object object)
     {
         return object;

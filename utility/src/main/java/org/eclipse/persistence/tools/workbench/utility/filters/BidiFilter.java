@@ -33,13 +33,16 @@ public interface BidiFilter extends Filter {
     BidiFilter NULL_INSTANCE =
         new BidiFilter() {
             // nothing is filtered - everything is accepted
+            @Override
             public boolean accept(Object o) {
                 return true;
             }
             // nothing is "reverse-filtered" - everything is accepted
+            @Override
             public boolean reverseAccept(Object o) {
                 return true;
             }
+            @Override
             public String toString() {
                 return "NullBidiFilter";
             }

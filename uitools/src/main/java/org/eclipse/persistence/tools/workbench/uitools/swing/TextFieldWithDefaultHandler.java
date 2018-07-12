@@ -166,6 +166,7 @@ public final class TextFieldWithDefaultHandler
     {
         return new FocusListener()
         {
+            @Override
             public void focusGained(FocusEvent e)
             {
                 if (!e.isTemporary())
@@ -174,6 +175,7 @@ public final class TextFieldWithDefaultHandler
                 }
             }
 
+            @Override
             public void focusLost(FocusEvent e)
             {
                 if (!e.isTemporary())
@@ -188,6 +190,7 @@ public final class TextFieldWithDefaultHandler
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 updateTextFieldForegroundColor((String) e.getNewValue());
@@ -197,7 +200,8 @@ public final class TextFieldWithDefaultHandler
 
     private PropertyChangeListener buildSubjectPropertyChangeListener()
     {
-        return new PropertyChangeListener() { public void propertyChange(PropertyChangeEvent e)
+        return new PropertyChangeListener() {@Override
+ public void propertyChange(PropertyChangeEvent e)
         {
             if (locked)
                 return;

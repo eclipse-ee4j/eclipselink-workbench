@@ -19,8 +19,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ListIterator;
 
 import javax.swing.BorderFactory;
@@ -32,10 +30,7 @@ import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContex
 import org.eclipse.persistence.tools.workbench.framework.ui.dialog.NewNameDialog;
 import org.eclipse.persistence.tools.workbench.framework.uitools.AddRemoveListPanel;
 import org.eclipse.persistence.tools.workbench.framework.uitools.AddRemovePanel.Adapter;
-import org.eclipse.persistence.tools.workbench.platformsmodel.DatabasePlatform;
-import org.eclipse.persistence.tools.workbench.platformsmodel.DatabasePlatformRepository;
 import org.eclipse.persistence.tools.workbench.scplugin.model.SequenceType;
-import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DefaultSequenceAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.NativeSequenceAdapter;
@@ -62,8 +57,6 @@ import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.swing.ObjectListSelectionModel;
 import org.eclipse.persistence.tools.workbench.uitools.cell.SimpleListCellRenderer;
 import org.eclipse.persistence.tools.workbench.utility.Transformer;
-import org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel;
-import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 // Mapping Workbench
@@ -119,6 +112,7 @@ public class SequencingPropertiesPage extends AbstractLoginPropertiesPage
      *
      * @return The fully initialized pane
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -181,6 +175,7 @@ public class SequencingPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new Transformer()
         {
+            @Override
             public Component transform(Object sequence)
             {
                 if (sequence == null)
@@ -319,6 +314,7 @@ public class SequencingPropertiesPage extends AbstractLoginPropertiesPage
     private ListCellRenderer buildSequenceListRenderer() {
         return new SimpleListCellRenderer() {
 
+            @Override
             protected String buildText(javax.swing.JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 
                 SequenceAdapter sequence = (SequenceAdapter)value;
@@ -494,26 +490,31 @@ public class SequencingPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new AddRemoveListPanel.OptionAdapter()
         {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel)
             {
                 addSequence(listSelectionModel);
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel)
             {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public String optionalButtonKey()
             {
                 return "SEQUENCING_PANE_EDIT_BUTTON";
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel)
             {
                 editSequence(listSelectionModel);
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel)
             {
                 for (Object sequence : listSelectionModel.getSelectedValues())

@@ -103,6 +103,7 @@ public class UIToolsIconResourceFileNameMap extends AbstractIconResourceFileName
         {"folder", "basic/file/Folder.gif"},
     };
 
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

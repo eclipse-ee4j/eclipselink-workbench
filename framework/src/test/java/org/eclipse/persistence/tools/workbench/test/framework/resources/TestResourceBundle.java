@@ -27,6 +27,7 @@ public final class TestResourceBundle extends java.util.ListResourceBundle {
         {"FORMATTED_MSG_4",    "{3}-argument message: {0, number} + {1, number} = {2, number}."},
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

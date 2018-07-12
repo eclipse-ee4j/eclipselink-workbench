@@ -77,6 +77,7 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
 
 
     /** Initialize persistent state*/
+    @Override
     protected void initialize(Node parentNode) {
         super.initialize(parentNode);
 
@@ -85,6 +86,7 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
 
     // ****************** Accessors ************
 
+    @Override
     public boolean isAscending() {
         return this.ascending;
     }
@@ -93,6 +95,7 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
         return !isAscending();
     }
 
+    @Override
     public void setAscending(boolean ascending) {
         boolean old = this.ascending;
         this.ascending = ascending;
@@ -103,12 +106,14 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
         return this.itemName;
     }
 
+    @Override
     public void removeSelfFromParent() {
         ((MWReportQuery) getParentQuery()).removeOrderingItem(this);
     }
 
     // ****************** Problems ************
 
+    @Override
     public Problem queryableNullProblem() {
         return buildProblem(
                 ProblemConstants.QUERYABLE_NULL_FOR_ORDERING_ITEM,
@@ -116,10 +121,12 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
                 new Integer(((MWReportQuery) getParentQuery()).indexOfOrderingItem(this) + 1));
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return true;
     }
@@ -127,6 +134,7 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
 
     // ****************** Runtime Conversion ************
 
+    @Override
     protected void adjustRuntimeQuery(ObjectLevelReadQuery readQuery) {
         ReportQuery reportQuery = (ReportQuery) readQuery;
         Expression expression = getQueryableArgument().runtimeExpression(reportQuery.getExpressionBuilder());
@@ -188,6 +196,7 @@ public final class MWReportOrderingItem extends MWAttributeItem implements Order
         return null;
     }
 
+    @Override
     public String displayString() {
         String displayString;
         if (this.itemName == null) {

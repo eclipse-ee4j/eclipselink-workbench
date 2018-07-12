@@ -43,6 +43,7 @@ public class DefaultProblem
     /**
      * @see Problem#getSource()
      */
+    @Override
     public Node getSource() {
         return this.source;
     }
@@ -50,6 +51,7 @@ public class DefaultProblem
     /**
      * @see Problem#getMessageKey()
      */
+    @Override
     public String getMessageKey() {
         return this.messageKey;
     }
@@ -57,6 +59,7 @@ public class DefaultProblem
     /**
      * @see Problem#getMessageArguments()
      */
+    @Override
     public Object[] getMessageArguments() {
         return this.messageArguments;
     }
@@ -72,6 +75,7 @@ public class DefaultProblem
      * Also, problems are not saved to disk....
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if ( ! (o instanceof Problem)) {
             return false;
@@ -86,6 +90,7 @@ public class DefaultProblem
      * @see #equals(Object)
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.source.hashCode() ^ this.messageKey.hashCode();
     }
@@ -93,6 +98,7 @@ public class DefaultProblem
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.messageKey);
     }

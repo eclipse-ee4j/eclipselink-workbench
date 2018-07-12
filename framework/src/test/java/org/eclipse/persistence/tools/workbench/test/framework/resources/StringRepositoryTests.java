@@ -40,12 +40,14 @@ public class StringRepositoryTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.simpleRepos = new ResourceBundleStringRepository(TestResourceBundle.class);
         this.defaultRepos = new DefaultStringRepository(TestResourceBundle.class);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -124,6 +126,7 @@ public class StringRepositoryTests extends TestCase {
 public static class DuplicateKeyResourceBundle extends ListResourceBundle {
     static final String DUPLICATE_KEY = "CANCEL";
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

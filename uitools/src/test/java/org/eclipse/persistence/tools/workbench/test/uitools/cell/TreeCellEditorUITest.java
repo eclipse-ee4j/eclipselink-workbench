@@ -185,6 +185,7 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildCrowdNodeAdapter() {
         return new TransformationPropertyValueModel(this.crowdHolder) {
+            @Override
             protected Object transform(Object value) {
                 return new CrowdNode((Crowd) value);
             }
@@ -201,6 +202,7 @@ public class TreeCellEditorUITest {
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 TreeCellEditorUITest.this.treeSelectionChanged(e);
             }
@@ -227,6 +229,7 @@ public class TreeCellEditorUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -304,6 +307,7 @@ public class TreeCellEditorUITest {
 
     private Action buildAddAction() {
         Action action = new AbstractAction("add") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeCellEditorUITest.this.addPerson();
             }
@@ -328,6 +332,7 @@ public class TreeCellEditorUITest {
 
     private Action buildRemoveAction() {
         this.removeAction = new AbstractAction("remove") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeCellEditorUITest.this.removePerson();
             }
@@ -352,6 +357,7 @@ public class TreeCellEditorUITest {
 
     private Action buildRenameAction() {
         this.renameAction = new AbstractAction("rename") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeCellEditorUITest.this.renamePerson();
             }
@@ -380,6 +386,7 @@ public class TreeCellEditorUITest {
 
     private Action buildAddEyeColorAction() {
         Action action = new AbstractAction("add eye color") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeCellEditorUITest.this.addEyeColor();
             }
@@ -420,6 +427,7 @@ public class TreeCellEditorUITest {
 
     private Action buildPrintAction() {
         Action action = new AbstractAction("print") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeCellEditorUITest.this.printCrowd();
             }
@@ -444,6 +452,7 @@ public class TreeCellEditorUITest {
 
     private Action buildResetAction() {
         Action action = new AbstractAction("reset") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 TreeCellEditorUITest.this.reset();
             }
@@ -494,9 +503,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildNameAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setName((String) value);
             }
@@ -516,9 +527,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildBirthDateAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.BIRTH_DATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getBirthDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setBirthDate((Date) value);
             }
@@ -538,9 +551,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildGoneWestDateAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.GONE_WEST_DATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getGoneWestDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setGoneWestDate((Date) value);
             }
@@ -560,9 +575,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildEyeColorAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.EYE_COLOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getEyeColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEyeColor((String) value);
             }
@@ -585,9 +602,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildEvilAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.EVIL_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((Person) this.subject).isEvil());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEvil(((Boolean) value).booleanValue());
             }
@@ -607,9 +626,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildRankAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.RANK_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getRank());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setRank(((Integer) value).intValue());
             }
@@ -629,9 +650,11 @@ public class TreeCellEditorUITest {
 
     private PropertyValueModel buildAdventureCountAdapter() {
         return new PropertyAspectAdapter(this.selectedPersonHolder, Person.ADVENTURE_COUNT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getAdventureCount());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setAdventureCount(((Integer) value).intValue());
             }
@@ -724,18 +747,22 @@ class CrowdNode extends AbstractTreeNodeValueModel implements LocalNode {
         this.crowd = crowd;
         this.childrenModel = this.buildChildrenModel(crowd);
     }
+    @Override
     protected void initialize() {
         super.initialize();
         this.crowdListener = this.buildCrowdListener();
     }
     private CollectionChangeListener buildCrowdListener() {
         return new CollectionChangeListener() {
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CrowdNode.this.crowdChanged();
             }
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CrowdNode.this.crowdChanged();
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CrowdNode.this.crowdChanged();
             }
@@ -756,6 +783,7 @@ class CrowdNode extends AbstractTreeNodeValueModel implements LocalNode {
     // wrap the persons in the list in person nodes
     protected ListValueModel buildPersonNodeAdapter(Crowd c) {
         return new TransformationListValueModelAdapter(this.buildPeopleAdapter(c)) {
+            @Override
             protected Object transformItem(Object item) {
                 return CrowdNode.this.buildPersonNode((Person) item);
             }
@@ -767,9 +795,11 @@ class CrowdNode extends AbstractTreeNodeValueModel implements LocalNode {
     // the list of children can change
     protected CollectionValueModel buildPeopleAdapter(Crowd c) {
         return new CollectionAspectAdapter(Crowd.PEOPLE_COLLECTION, c) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((Crowd) this.subject).people();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((Crowd) this.subject).peopleSize();
             }
@@ -778,12 +808,15 @@ class CrowdNode extends AbstractTreeNodeValueModel implements LocalNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     public Person getPerson() {
         return null;
     }
+    @Override
     public Object getCellValue() {
         return this.crowd;
     }
+    @Override
     public TreeCellRenderer getRenderer() {
         TreeCellRenderer renderer = TreeCellEditorUITest.this.getRenderer(this.getClass());
         if (renderer == null) {
@@ -794,37 +827,45 @@ class CrowdNode extends AbstractTreeNodeValueModel implements LocalNode {
     }
     private TreeCellRenderer buildRenderer() {
         return new SimpleTreeCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return "Crowd of " + ((Crowd) value).peopleSize() + " person(s)";
             }
         };
     }
+    @Override
     public TreeCellEditor getEditor() {
         return NullTreeCellEditor.instance();
     }
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.crowd;
     }
+    @Override
     public void setValue(Object value) {
         Object old = this.crowd;
         this.crowd = (Crowd) value;
         this.firePropertyChanged(VALUE, old, value);
     }
+    @Override
     public TreeNodeValueModel getParent() {
         return null;
     }
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         this.crowd.addCollectionChangeListener(Crowd.PEOPLE_COLLECTION, this.crowdListener);
     }
+    @Override
     protected void disengageValue() {
         this.crowd.removeCollectionChangeListener(Crowd.PEOPLE_COLLECTION, this.crowdListener);
     }
@@ -843,6 +884,7 @@ class CrowdNode extends AbstractTreeNodeValueModel implements LocalNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "Crowd(" + this.crowd.peopleSize() + " people)";
     }
@@ -864,12 +906,14 @@ class PersonNode extends AbstractTreeNodeValueModel implements LocalNode, Displa
         this.person = person;
         this.childrenModel = this.buildChildrenModel();
     }
+    @Override
     protected void initialize() {
         super.initialize();
         this.personListener = this.buildPersonListener();
     }
     private PropertyChangeListener buildPersonListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PersonNode.this.personChanged(e);
             }
@@ -889,12 +933,15 @@ class PersonNode extends AbstractTreeNodeValueModel implements LocalNode, Displa
 
     // ********** LocalNode implementation **********
 
+    @Override
     public Person getPerson() {
         return this.person;
     }
+    @Override
     public Object getCellValue() {
         return this.person;
     }
+    @Override
     public TreeCellRenderer getRenderer() {
         TreeCellRenderer renderer = TreeCellEditorUITest.this.getRenderer(this.getClass());
         if (renderer == null) {
@@ -905,47 +952,57 @@ class PersonNode extends AbstractTreeNodeValueModel implements LocalNode, Displa
     }
     private TreeCellRenderer buildRenderer() {
         return new SimpleTreeCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((Person) value).getName();
             }
         };
     }
+    @Override
     public TreeCellEditor getEditor() {
         return NullTreeCellEditor.instance();
     }
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.person;
     }
+    @Override
     public void setValue(Object value) {
         Object old = this.person;
         this.person = (Person) value;
         this.firePropertyChanged(VALUE, old, value);
     }
+    @Override
     public TreeNodeValueModel getParent() {
         return this.crowdNode;
     }
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         this.person.addPropertyChangeListener(Person.NAME_PROPERTY, this.personListener);
     }
+    @Override
     protected void disengageValue() {
         this.person.removePropertyChangeListener(Person.NAME_PROPERTY, this.personListener);
     }
 
     // ********** Displayable implementation **********
 
+    @Override
     public String displayString() {
         return this.person.getName();
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -962,10 +1019,12 @@ class PersonNode extends AbstractTreeNodeValueModel implements LocalNode, Displa
     // ********** standard methods **********
 
     // use the standard Displayable comparator
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
 
+    @Override
     public String toString() {
         return "PersonNode(" + this.person + ")";
     }
@@ -984,12 +1043,14 @@ abstract class PersonAttributeNode extends AbstractTreeNodeValueModel implements
         super();
         this.initialize(personNode);
     }
+    @Override
     protected void initialize() {
         super.initialize();
         this.attributeListener = this.buildAttributeListener();
     }
     protected PropertyChangeListener buildAttributeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PersonAttributeNode.this.attributeChanged(e);
             }
@@ -1004,12 +1065,15 @@ abstract class PersonAttributeNode extends AbstractTreeNodeValueModel implements
 
     // ********** LocalNode implementation **********
 
+    @Override
     public Person getPerson() {
         return this.personNode.getPerson();
     }
+    @Override
     public Object getCellValue() {
         return this.getValue();
     }
+    @Override
     public TreeCellRenderer getRenderer() {
         TreeCellRenderer renderer = TreeCellEditorUITest.this.getRenderer(this.getClass());
         if (renderer == null) {
@@ -1019,6 +1083,7 @@ abstract class PersonAttributeNode extends AbstractTreeNodeValueModel implements
         return renderer;
     }
     protected abstract TreeCellRenderer buildRenderer();
+    @Override
     public TreeCellEditor getEditor() {
         TreeCellEditor editor = TreeCellEditorUITest.this.getEditor(this.getClass());
         if (editor == null) {
@@ -1034,24 +1099,30 @@ abstract class PersonAttributeNode extends AbstractTreeNodeValueModel implements
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.attributeAdapter.getValue();
     }
+    @Override
     public void setValue(Object value) {
         this.attributeAdapter.setValue(value);
     }
+    @Override
     public TreeNodeValueModel getParent() {
         return this.personNode;
     }
+    @Override
     public ListValueModel getChildrenModel() {
         return NullListValueModel.instance();
     }
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         this.attributeAdapter.addPropertyChangeListener(ValueModel.VALUE, this.attributeListener);
     }
+    @Override
     protected void disengageValue() {
         this.attributeAdapter.removePropertyChangeListener(ValueModel.VALUE, this.attributeListener);
     }
@@ -1073,11 +1144,14 @@ class BirthDateNode extends PersonAttributeNode {
     public BirthDateNode(PersonNode personNode) {
         super(personNode);
     }
+    @Override
     protected PropertyValueModel buildAttributeAdapter() {
         return new PropertyAspectAdapter(Person.BIRTH_DATE_PROPERTY, this.getPerson()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getBirthDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 try {
                     Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String) value);
@@ -1092,9 +1166,11 @@ class BirthDateNode extends PersonAttributeNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     protected TreeCellRenderer buildRenderer() {
         return new TextFieldTreeCellRenderer("Birth:");
     }
+    @Override
     public TreeCellEditor buildEditor() {
         // build a new renderer - do not re-use the original
         return new TextFieldTreeCellEditor((TextFieldTreeCellRenderer) this.buildRenderer());
@@ -1102,6 +1178,7 @@ class BirthDateNode extends PersonAttributeNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "BirthDateNode(" + this.getValue() + ")";
     }
@@ -1116,11 +1193,14 @@ class GoneWestDateNode extends PersonAttributeNode {
     public GoneWestDateNode(PersonNode personNode) {
         super(personNode);
     }
+    @Override
     protected PropertyValueModel buildAttributeAdapter() {
         return new PropertyAspectAdapter(Person.GONE_WEST_DATE_PROPERTY, this.getPerson()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getGoneWestDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setGoneWestDate((Date) value);
             }
@@ -1129,12 +1209,14 @@ class GoneWestDateNode extends PersonAttributeNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     protected TreeCellRenderer buildRenderer() {
         return new SpinnerTreeCellRenderer("Gone West:", this.buildRendererModel());
     }
     protected SpinnerModel buildRendererModel() {
         return new DateSpinnerModelAdapter(new SimplePropertyValueModel());
     }
+    @Override
     public TreeCellEditor buildEditor() {
         // build a new renderer - do not re-use the original
         return new SpinnerTreeCellEditor((SpinnerTreeCellRenderer) this.buildRenderer());
@@ -1142,6 +1224,7 @@ class GoneWestDateNode extends PersonAttributeNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "GoneWestDateNode(" + this.getValue() + ")";
     }
@@ -1156,11 +1239,14 @@ class EyeColorNode extends PersonAttributeNode {
     public EyeColorNode(PersonNode personNode) {
         super(personNode);
     }
+    @Override
     protected PropertyValueModel buildAttributeAdapter() {
         return new PropertyAspectAdapter(Person.EYE_COLOR_PROPERTY, this.getPerson()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getEyeColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEyeColor((String) value);
             }
@@ -1169,12 +1255,14 @@ class EyeColorNode extends PersonAttributeNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     protected TreeCellRenderer buildRenderer() {
         return new ComboBoxTreeCellRenderer(this.buildComboBoxModel(), "Eyes:");
     }
     private ComboBoxModel buildComboBoxModel() {
         return new ComboBoxModelAdapter(TreeCellEditorUITest.this.eyeColorListHolder, new SimplePropertyValueModel());
     }
+    @Override
     public TreeCellEditor buildEditor() {
         // build a new renderer - do not re-use the original
         return new ComboBoxTreeCellEditor((ComboBoxTreeCellRenderer) this.buildRenderer());
@@ -1182,6 +1270,7 @@ class EyeColorNode extends PersonAttributeNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "EyeColorNode(" + this.getValue() + ")";
     }
@@ -1196,11 +1285,14 @@ class EvilNode extends PersonAttributeNode {
     public EvilNode(PersonNode personNode) {
         super(personNode);
     }
+    @Override
     protected PropertyValueModel buildAttributeAdapter() {
         return new PropertyAspectAdapter(Person.EVIL_PROPERTY, this.getPerson()) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((Person) this.subject).isEvil());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEvil(((Boolean) value).booleanValue());
             }
@@ -1209,9 +1301,11 @@ class EvilNode extends PersonAttributeNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     protected TreeCellRenderer buildRenderer() {
         return new CheckBoxTreeCellRenderer("Evil");
     }
+    @Override
     public TreeCellEditor buildEditor() {
         // build a new renderer - do not re-use the original
         return new CheckBoxTreeCellEditor((CheckBoxTreeCellRenderer) this.buildRenderer());
@@ -1219,6 +1313,7 @@ class EvilNode extends PersonAttributeNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "EvilNode(" + this.getValue() + ")";
     }
@@ -1233,11 +1328,14 @@ class RankNode extends PersonAttributeNode {
     public RankNode(PersonNode personNode) {
         super(personNode);
     }
+    @Override
     protected PropertyValueModel buildAttributeAdapter() {
         return new PropertyAspectAdapter(Person.RANK_PROPERTY, this.getPerson()) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getRank());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 try {
                     int rank = Integer.parseInt((String) value);
@@ -1252,9 +1350,11 @@ class RankNode extends PersonAttributeNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     protected TreeCellRenderer buildRenderer() {
         return new TextFieldTreeCellRenderer("Rank:");
     }
+    @Override
     public TreeCellEditor buildEditor() {
         // build a new renderer - do not re-use the original
         return new TextFieldTreeCellEditor((TextFieldTreeCellRenderer) this.buildRenderer());
@@ -1262,6 +1362,7 @@ class RankNode extends PersonAttributeNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "RankNode(" + this.getValue() + ")";
     }
@@ -1276,11 +1377,14 @@ class AdventureCountNode extends PersonAttributeNode {
     public AdventureCountNode(PersonNode personNode) {
         super(personNode);
     }
+    @Override
     protected PropertyValueModel buildAttributeAdapter() {
         return new PropertyAspectAdapter(Person.ADVENTURE_COUNT_PROPERTY, this.getPerson()) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getAdventureCount());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setAdventureCount(((Integer) value).intValue());
             }
@@ -1289,9 +1393,11 @@ class AdventureCountNode extends PersonAttributeNode {
 
     // ********** LocalNode implementation **********
 
+    @Override
     protected TreeCellRenderer buildRenderer() {
         return new SpinnerTreeCellRenderer("Adventures:");
     }
+    @Override
     public TreeCellEditor buildEditor() {
         // build a new renderer - do not re-use the original
         return new SpinnerTreeCellEditor((SpinnerTreeCellRenderer) this.buildRenderer());
@@ -1299,6 +1405,7 @@ class AdventureCountNode extends PersonAttributeNode {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return "AdventureCountNode(" + this.getValue() + ")";
     }

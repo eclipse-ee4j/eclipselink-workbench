@@ -91,17 +91,20 @@ public final class ExplicitElementDeclaration
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.identityConstraints = new Hashtable();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.minOccurs = 1;
         this.maxOccurs = 1;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 
@@ -123,26 +126,32 @@ public final class ExplicitElementDeclaration
 
     // **************** MWElementDeclaration contract *************************
 
+    @Override
     public MWSchemaTypeDefinition getType() {
         return this.type;
     }
 
+    @Override
     public MWElementDeclaration getSubstitutionGroup() {
         return this.substitutionGroup;
     }
 
+    @Override
     public boolean isAbstract() {
         return this.abstractFlag;
     }
 
+    @Override
     public String getDefaultValue() {
         return this.defaultValue;
     }
 
+    @Override
     public String getFixedValue() {
         return this.fixedValue;
     }
 
+    @Override
     public boolean isNillable() {
         return this.nillable;
     }
@@ -150,18 +159,22 @@ public final class ExplicitElementDeclaration
 
     // **************** MWParticle contract ***********************************
 
+    @Override
     public int getMinOccurs() {
         return this.minOccurs;
     }
 
+    @Override
     public int getMaxOccurs() {
         return this.maxOccurs;
     }
 
+    @Override
     public boolean isDescriptorContextComponent() {
         return ! this.type.isReference();
     }
 
+    @Override
     public boolean isEquivalentTo(XSParticleDecl xsParticle) {
         if (xsParticle.getTerm() instanceof XSElementDecl) {
             XSElementDecl elementNode = (XSElementDecl) xsParticle.getTerm();
@@ -175,6 +188,7 @@ public final class ExplicitElementDeclaration
 
     // **************** MWXpathableSchemaComponent contract *******************
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return this.type.baseBuiltInTypes();
     }
@@ -182,22 +196,27 @@ public final class ExplicitElementDeclaration
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return true;
     }
 
+    @Override
     public String contextTypeQname() {
         return this.type.contextTypeQname();
     }
 
+    @Override
     public boolean containsText() {
         return this.type.containsText();
     }
 
+    @Override
     public boolean containsWildcard() {
         return this.type.containsWildcard();
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return this.type.compareSchemaOrder(element1, element2);
     }
@@ -205,10 +224,12 @@ public final class ExplicitElementDeclaration
 
     // **************** MWNamedSchemaComponent contract ***********************
 
+    @Override
     public String componentTypeName() {
         return "element";
     }
 
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {
         this.type.addDirectlyOwnedComponentsTo(directlyOwnedComponents);
     }
@@ -216,10 +237,12 @@ public final class ExplicitElementDeclaration
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public Iterator structuralComponents() {
         return this.type.structuralComponents();
     }
 
+    @Override
     public Iterator descriptorContextComponents() {
         if (! this.type.isReference()) {
             return this.type.descriptorContextComponents();
@@ -229,6 +252,7 @@ public final class ExplicitElementDeclaration
         }
     }
 
+    @Override
     public Iterator xpathComponents() {
         Iterator typeXpathComponents = this.type.xpathComponents();
 
@@ -240,10 +264,12 @@ public final class ExplicitElementDeclaration
         }
     }
 
+    @Override
     public MWNamedSchemaComponent nestedNamedComponent(QName qName) {
         return this.type.nestedNamedComponent(qName);
     }
 
+    @Override
     public MWAttributeDeclaration nestedAttribute(String namespaceUrl, String attributeName) {
         if (this.nilAttribute != null
             && namespaceUrl.equals(this.nilAttribute.getNamespaceUrl())
@@ -256,10 +282,12 @@ public final class ExplicitElementDeclaration
         }
     }
 
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         return this.type.nestedElement(namespaceUrl, elementName);
     }
 
+    @Override
     public int totalElementCount() {
         return 1;
     }
@@ -267,6 +295,7 @@ public final class ExplicitElementDeclaration
 
     // **************** SchemaModel contract  *********************************
 
+    @Override
     protected void reloadInternal(XSObject xsObject) {
 
         XSElementDecl elemenDecl = null;
@@ -375,6 +404,7 @@ public final class ExplicitElementDeclaration
         }
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
 

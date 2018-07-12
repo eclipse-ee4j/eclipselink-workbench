@@ -38,6 +38,7 @@ public interface Bag extends java.util.Collection {
      * equals method works properly across different implementations of the
      * bag interface.
      */
+    @Override
     boolean equals(Object o);
 
     /**
@@ -49,6 +50,7 @@ public interface Bag extends java.util.Collection {
      * <code>b1</code> and <code>b2</code>, as required by the general
      * contract of the <code>Object.hashCode</code> method.
      */
+    @Override
     int hashCode();
 
 }

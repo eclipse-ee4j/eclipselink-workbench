@@ -84,6 +84,7 @@ public final class MWLoginSpecHandle extends MWHandle {
         this.loginSpec = loginSpec;
     }
 
+    @Override
     protected Node node() {
         return getLoginSpec();
     }
@@ -93,6 +94,7 @@ public final class MWLoginSpecHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (this.loginSpecName != null) {
@@ -108,10 +110,12 @@ public final class MWLoginSpecHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER login spec should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.loginSpec.compareTo(((MWLoginSpecHandle) o).loginSpec);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.loginSpec == null) {
             sb.append("null");

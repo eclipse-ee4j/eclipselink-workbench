@@ -61,6 +61,7 @@ public abstract class AbstractParticle
 
     // **************** Initialization ****************************************
 
+    @Override
     protected /* private-protected */ void initialize(Node parent) {
         super.initialize(parent);
         this.minOccurs = 1;
@@ -70,22 +71,27 @@ public abstract class AbstractParticle
 
     // **************** MWParticle contract ***********************************
 
+    @Override
     public int getMinOccurs() {
         return this.minOccurs;
     }
 
+    @Override
     public int getMaxOccurs() {
         return this.maxOccurs;
     }
 
+    @Override
     public boolean isDescriptorContextComponent() {
         return false;
     }
 
     /** No-op */
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {}
 
     /** Default implementation */
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return 0;
     }
@@ -93,6 +99,7 @@ public abstract class AbstractParticle
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject schemaObject) {
         super.reloadInternal(schemaObject);
 

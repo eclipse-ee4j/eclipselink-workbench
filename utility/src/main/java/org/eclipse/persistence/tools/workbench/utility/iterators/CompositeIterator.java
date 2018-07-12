@@ -87,6 +87,7 @@ public class CompositeIterator implements Iterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         try {
             this.loadCurrentIterator();
@@ -100,6 +101,7 @@ public class CompositeIterator implements Iterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         this.loadCurrentIterator();
         Object result = this.currentIterator.next();
@@ -115,6 +117,7 @@ public class CompositeIterator implements Iterator {
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         if (this.lastIteratorToReturnNext == null) {
             // CompositeIterator#next() has never been called
@@ -139,6 +142,7 @@ public class CompositeIterator implements Iterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.iterators + ')';
     }

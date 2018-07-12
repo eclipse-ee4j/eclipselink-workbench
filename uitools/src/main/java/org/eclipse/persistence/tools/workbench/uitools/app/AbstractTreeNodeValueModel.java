@@ -65,6 +65,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         // this value model is allowed to fire state change events...
 //        return new ValueModelChangeSupport(this);
@@ -74,6 +75,7 @@ public abstract class AbstractTreeNodeValueModel
 
     // ********** extend AbstractModel implementation **********
 
+    @Override
     public void addStateChangeListener(StateChangeListener listener) {
         if (this.hasNoStateChangeListeners()) {
             this.engageValue();
@@ -89,6 +91,7 @@ public abstract class AbstractTreeNodeValueModel
      */
     protected abstract void engageValue();
 
+    @Override
     public void removeStateChangeListener(StateChangeListener listener) {
         super.removeStateChangeListener(listener);
         if (this.hasNoStateChangeListeners()) {
@@ -108,6 +111,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         throw new UnsupportedOperationException();
     }
@@ -118,6 +122,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see TreeNodeValueModel#path()
      */
+    @Override
     public TreeNodeValueModel[] path() {
         List path = CollectionTools.reverseList(this.backPath());
         return (TreeNodeValueModel[]) path.toArray(new TreeNodeValueModel[path.size()]);
@@ -130,6 +135,7 @@ public abstract class AbstractTreeNodeValueModel
      */
     protected Iterator backPath() {
         return new ChainIterator(this) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return ((TreeNodeValueModel) currentLink).getParent();
             }
@@ -139,6 +145,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see TreeNodeValueModel#getChild(int)
      */
+    @Override
     public TreeNodeValueModel getChild(int index) {
         return (TreeNodeValueModel) this.getChildrenModel().getItem(index);
     }
@@ -146,6 +153,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see TreeNodeValueModel#childrenSize()
      */
+    @Override
     public int childrenSize() {
         return this.getChildrenModel().size();
     }
@@ -153,6 +161,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see TreeNodeValueModel#indexOfChild(Object)
      */
+    @Override
     public int indexOfChild(TreeNodeValueModel child) {
         ListValueModel children = this.getChildrenModel();
         int size = children.size();
@@ -167,6 +176,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see TreeNodeValueModel#isLeaf()
      */
+    @Override
     public boolean isLeaf() {
         return this.getChildrenModel().size() == 0;
     }
@@ -185,6 +195,7 @@ public abstract class AbstractTreeNodeValueModel
      * results in a possible change in the node sort order.  -bjv
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (o == null) {
             return false;
@@ -199,6 +210,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.getValue().hashCode();
     }
@@ -206,6 +218,7 @@ public abstract class AbstractTreeNodeValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getValue());
     }

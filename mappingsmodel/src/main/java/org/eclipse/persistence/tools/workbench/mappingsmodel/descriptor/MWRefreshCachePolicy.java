@@ -72,6 +72,7 @@ public final class MWRefreshCachePolicy
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.alwaysRefreshCache = false;

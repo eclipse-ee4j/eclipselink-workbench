@@ -97,6 +97,7 @@ public class FilteringPropertyValueModel extends PropertyValueModelWrapper {
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.filterValue(this.valueHolder.getValue());
     }
@@ -107,6 +108,7 @@ public class FilteringPropertyValueModel extends PropertyValueModelWrapper {
     /**
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         if (this.reverseAccept(value)) {
             this.valueHolder.setValue(value);
@@ -119,6 +121,7 @@ public class FilteringPropertyValueModel extends PropertyValueModelWrapper {
     /**
      * @see PropertyValueModelWrapper#valueChanged(PropertyChangeEvent)
      */
+    @Override
     protected void valueChanged(PropertyChangeEvent e) {
         // filter the values before propagating the change event
         Object oldValue = this.filterValue(e.getOldValue());

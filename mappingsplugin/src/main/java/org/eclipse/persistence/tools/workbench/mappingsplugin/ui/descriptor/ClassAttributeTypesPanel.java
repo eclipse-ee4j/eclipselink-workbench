@@ -90,9 +90,11 @@ final class ClassAttributeTypesPanel
     private PropertyValueModel buildAttributeTypeAdapter() {
         PropertyValueModel adapter =
             new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                     return ((MWClassAttribute) this.subject).getType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                     ((MWClassAttribute) this.subject).setType((MWClass) value);
             }
@@ -105,10 +107,12 @@ final class ClassAttributeTypesPanel
     private PropertyValueModel buildAttributeTypeDimensionalityAdapter() {
         PropertyValueModel adapter =
             new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.DIMENSIONALITY_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return new Integer(((MWClassAttribute) this.subject).getDimensionality());
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWClassAttribute) this.subject).setDimensionality(((Integer) value).intValue());
                 }
@@ -120,6 +124,7 @@ final class ClassAttributeTypesPanel
 
     private PropertyChangeListener buildAttributeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ClassAttributeTypesPanel.this.updateAllTypeComponents();
             }
@@ -129,10 +134,12 @@ final class ClassAttributeTypesPanel
     private PropertyValueModel buildAttributeValueTypeHolder() {
         PropertyValueModel attributeTypeValueHolder =
             new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.VALUE_TYPE_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWClassAttribute) this.subject).getValueType();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWClassAttribute) this.subject).setValueType((MWClass) value);
                 }
@@ -143,6 +150,7 @@ final class ClassAttributeTypesPanel
 
     private PropertyChangeListener buildAttributeValueTypeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ClassAttributeTypesPanel.this.updateAllTypeComponents();
             }
@@ -151,9 +159,11 @@ final class ClassAttributeTypesPanel
 
     private PropertyValueModel buildAttributeKeyTypeHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.KEY_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getKeyType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setKeyType((MWClass) value);
             }
@@ -162,10 +172,12 @@ final class ClassAttributeTypesPanel
 
     private PropertyValueModel buildAttributeItemTypeHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.ITEM_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getItemType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                     ((MWClassAttribute) this.subject).setItemType((MWClass) value);
             }
@@ -174,6 +186,7 @@ final class ClassAttributeTypesPanel
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ClassAttributeTypesPanel.this.getAttribute().getRepository();
     }
@@ -392,6 +405,7 @@ final class ClassAttributeTypesPanel
 
     private ValueModel buildAttributeTypeBooleanHolder() {
         return new TransformationPropertyValueModel(this.attributeTypeHolder) {
+            @Override
             protected Object transform(Object value) {
                 return value == null ? Boolean.FALSE : Boolean.TRUE;
             }

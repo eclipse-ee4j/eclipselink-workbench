@@ -56,6 +56,7 @@ public class WebSphere_6_1_PlatformAdapter extends ServerPlatformAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new WebSphere_6_1_PlatformConfig();
     }

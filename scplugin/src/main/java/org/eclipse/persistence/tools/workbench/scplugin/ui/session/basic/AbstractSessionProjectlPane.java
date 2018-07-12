@@ -132,12 +132,14 @@ abstract class AbstractSessionProjectlPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseSessionAdapter.USE_ADDITIONAL_PROJECTS_COLLECTION)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
                 return Boolean.valueOf(session.usesAdditionalProjects());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
@@ -151,6 +153,7 @@ abstract class AbstractSessionProjectlPane extends AbstractSubjectPanel
      *
      * @return The container with all its widgets
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();

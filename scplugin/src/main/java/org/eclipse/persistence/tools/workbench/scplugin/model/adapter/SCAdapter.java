@@ -106,6 +106,7 @@ public abstract class SCAdapter extends SCModel {
      *
      * @return The repository for classpath entries and classes
      */
+    @Override
     public ClassRepository getClassRepository()
     {
         return ((SCAdapter) getParent()).getClassRepository();
@@ -206,6 +207,7 @@ public abstract class SCAdapter extends SCModel {
     /**
      * Mark the object and its parent as dirty branches
      */
+    @Override
     public void markBranchDirty() {
         super.markBranchDirty();
 
@@ -263,6 +265,7 @@ public abstract class SCAdapter extends SCModel {
 
         Iterator iterator = new TransformationIterator( adapters.iterator()) {
 
+                  @Override
                   protected Object transform( Object next) {
                      return (( SCAdapter)next).getModel();
                   }
@@ -405,6 +408,7 @@ public abstract class SCAdapter extends SCModel {
     /**
      * Initializes this new instance.
      */
+    @Override
     protected void initialize() {
         super.initialize();
 

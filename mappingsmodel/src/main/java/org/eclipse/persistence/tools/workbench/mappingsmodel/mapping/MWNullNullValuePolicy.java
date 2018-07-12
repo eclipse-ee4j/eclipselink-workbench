@@ -30,30 +30,37 @@ public final class MWNullNullValuePolicy
         super(parent);
     }
 
+    @Override
     public boolean usesNullValue() {
         return false;
     }
 
+    @Override
     public String getNullValue() {
         return null;
     }
 
+    @Override
     public void setNullValue(String newValue) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public MWTypeDeclaration getNullValueType() {
         return null;
     }
 
+    @Override
     public void setNullValueType(MWTypeDeclaration newNullType) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void adjustRuntimeMapping(AbstractDirectMapping mapping) {
         // nothing to adjust
     }
 
+    @Override
     public MWNullValuePolicy getValueForTopLink() {
         return null;
     }

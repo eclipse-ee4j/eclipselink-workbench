@@ -68,6 +68,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
 
 
     /** Initialize persistent state*/
+    @Override
     protected void initialize(Node parentNode) {
         super.initialize(parentNode);
 
@@ -77,6 +78,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
 
     // ****************** Accessors ************
 
+    @Override
     public boolean isAscending() {
         return this.ascending;
     }
@@ -85,6 +87,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
         return !isAscending();
     }
 
+    @Override
     public void setAscending(boolean ascending) {
         boolean old = this.ascending;
         this.ascending = ascending;
@@ -94,6 +97,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
 
     // ****************** MWQueryItem implementation ************
 
+    @Override
     public void removeSelfFromParent() {
         ((MWRelationalReadAllQuery) getParentQuery()).removeOrderingItem(this);
     }
@@ -101,6 +105,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
 
     // ****************** Problems ************
 
+    @Override
     public Problem queryableNullProblem() {
         return buildProblem(
                 ProblemConstants.QUERYABLE_NULL_FOR_ORDERING_ITEM,
@@ -108,6 +113,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
                 new Integer(((MWRelationalReadAllQuery) getParentQuery()).indexOfOrderingItem(this) + 1));
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         return buildProblem(
                         ProblemConstants.QUERYABLE_NOT_VALID_FOR_READ_ALL_QUERY_ORDERING_ITEM,
@@ -115,6 +121,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
                         getParentQuery().signature());
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return queryable.isValidForReadAllQueryOrderable();
     }
@@ -122,6 +129,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
 
     // ****************** Runtime Conversion ************
 
+    @Override
     protected void adjustRuntimeQuery(ObjectLevelReadQuery readQuery) {
         Expression expression = getQueryableArgument().runtimeExpression(readQuery.getExpressionBuilder());
 
@@ -135,6 +143,7 @@ public final class MWOrderingItem extends MWAttributeItem implements Ordering {
     }
 
 
+    @Override
     public String displayString() {
         String displayString = super.displayString() + " (";
         if (isAscending()) {

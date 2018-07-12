@@ -42,6 +42,7 @@ public class JavaSourceGenerator
     /**
      * @see Generator.Adapter#export(org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject, java.io.File)
      */
+    @Override
     public void export(MWProject project, File outputFile) {
         project.setProjectSourceDirectoryName(outputFile.getParent());
         project.setProjectSourceClassName(FileTools.stripExtension(outputFile.getName()));

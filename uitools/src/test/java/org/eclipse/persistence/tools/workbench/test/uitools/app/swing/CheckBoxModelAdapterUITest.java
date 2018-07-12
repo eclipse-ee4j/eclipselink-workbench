@@ -77,9 +77,11 @@ public class CheckBoxModelAdapterUITest {
 
     private PropertyValueModel buildFlag1Holder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.FLAG1_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((TestModel) this.subject).isFlag1());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setFlag1(((Boolean) value).booleanValue());
             }
@@ -88,9 +90,11 @@ public class CheckBoxModelAdapterUITest {
 
     private PropertyValueModel buildFlag2Holder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.FLAG2_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((TestModel) this.subject).isFlag2());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setFlag2(((Boolean) value).booleanValue());
             }
@@ -99,9 +103,11 @@ public class CheckBoxModelAdapterUITest {
 
     private PropertyValueModel buildNotFlag2Holder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.NOT_FLAG2_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((TestModel) this.subject).isNotFlag2());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setNotFlag2(((Boolean) value).booleanValue());
             }
@@ -123,6 +129,7 @@ public class CheckBoxModelAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -175,6 +182,7 @@ public class CheckBoxModelAdapterUITest {
 
     private ItemListener buildUnattachedItemListener() {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 System.out.println("unattached state changed: " + e);
             }
@@ -196,6 +204,7 @@ public class CheckBoxModelAdapterUITest {
 
     private Action buildFlipFlag1Action() {
         Action action = new AbstractAction("flip flag 1") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 CheckBoxModelAdapterUITest.this.flipFlag1();
             }
@@ -214,6 +223,7 @@ public class CheckBoxModelAdapterUITest {
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 CheckBoxModelAdapterUITest.this.clearModel();
             }
@@ -232,6 +242,7 @@ public class CheckBoxModelAdapterUITest {
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 CheckBoxModelAdapterUITest.this.restoreModel();
             }
@@ -250,6 +261,7 @@ public class CheckBoxModelAdapterUITest {
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction("print model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 CheckBoxModelAdapterUITest.this.printModel();
             }
@@ -305,6 +317,7 @@ public class CheckBoxModelAdapterUITest {
         public void setNotFlag2(boolean notFlag2) {
             this.setFlag2( ! notFlag2);
         }
+        @Override
         public String toString() {
             return "TestModel(" + this.isFlag1() + " - " + this.isFlag2() + ")";
         }

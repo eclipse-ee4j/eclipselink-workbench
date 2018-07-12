@@ -50,7 +50,6 @@ import org.eclipse.persistence.tools.workbench.uitools.cell.AdaptableListCellRen
 import org.eclipse.persistence.tools.workbench.uitools.chooser.NodeSelector;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.NameTools;
-import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 
 
 
@@ -67,6 +66,7 @@ final class ClassAttributesPropertiesPage
         super(descriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.mwClassHolder = buildMWClassHolder();
@@ -75,12 +75,14 @@ final class ClassAttributesPropertiesPage
 
     private PropertyValueModel buildMWClassHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptor) this.subject).getMWClass();
             }
         };
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         //
@@ -133,6 +135,7 @@ final class ClassAttributesPropertiesPage
 
     private NodeSelector buildAttributeSelector() {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 ProjectNode projectNode = (ProjectNode) navigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectMappingNodeFor((MWClassAttribute) item, navigatorSelectionModel());
@@ -153,6 +156,7 @@ final class ClassAttributesPropertiesPage
 
     private ListSelectionListener buildListSelectionListener(final AddRemoveListPanel attributesListPanel) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -169,22 +173,27 @@ final class ClassAttributesPropertiesPage
 
     private AddRemoveListPanel.OptionAdapter buildAddRemoveListPanelAdapter() {
         return new AddRemoveListPanel.OptionAdapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 addNewAttribute(listSelectionModel);
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 removeSelectedAttributes(listSelectionModel);
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 renameSelectedAttribute(listSelectionModel);
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public String optionalButtonKey() {
                 return "RENAME_BUTTON";
             }
@@ -198,8 +207,8 @@ final class ClassAttributesPropertiesPage
         newNameDialogBuilder.setTitle(resourceRepository().getString("addNewAttribute.title"));
         newNameDialogBuilder.setTextFieldDescription(resourceRepository().getString("enterTheNameOfTheNewAttribute.message"));
         newNameDialogBuilder.setHelpTopicId("dialog.newAttribute");
-        newNameDialogBuilder.setDocumentFactory(
-                new DocumentFactory() {
+        newNameDialogBuilder.setDocumentFactory(new DocumentFactory() {
+            @Override
                     public Document buildDocument() {
                         return new RegexpDocument(RegexpDocument.RE_FIELD);
                     }
@@ -216,9 +225,11 @@ final class ClassAttributesPropertiesPage
 
     private CollectionValueModel buildAttributesHolder() {
         return new CollectionAspectAdapter(this.mwClassHolder, MWClass.ATTRIBUTES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWClass) this.subject).attributes();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWClass) this.subject).attributesSize();
             }
@@ -252,8 +263,8 @@ final class ClassAttributesPropertiesPage
         builder.setTextFieldDescription(resourceRepository().getString("renameAttribute.message"));
         builder.setTitle(resourceRepository().getString("renameAttribute.title"));
         builder.setHelpTopicId("dialog.attributeRename");
-        builder.setDocumentFactory(
-                new DocumentFactory() {
+        builder.setDocumentFactory(new DocumentFactory() {
+            @Override
                     public Document buildDocument() {
                         return new RegexpDocument(RegexpDocument.RE_FIELD);
                     }

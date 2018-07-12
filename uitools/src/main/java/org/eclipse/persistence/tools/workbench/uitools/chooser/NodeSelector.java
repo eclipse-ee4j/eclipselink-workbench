@@ -30,6 +30,7 @@ public interface NodeSelector
      */
     class DefaultNodeSelector implements NodeSelector {
 
+        @Override
         public void selectNodeFor(Object item) {
             //default is to do nothing
         }

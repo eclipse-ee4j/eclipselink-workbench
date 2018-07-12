@@ -91,6 +91,7 @@ public abstract class LogAdapter extends SCAdapter {
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -99,6 +100,7 @@ public abstract class LogAdapter extends SCAdapter {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 

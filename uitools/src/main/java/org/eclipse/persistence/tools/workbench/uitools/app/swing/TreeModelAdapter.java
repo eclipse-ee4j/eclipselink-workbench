@@ -131,6 +131,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.rootListener = this.buildRootListener();
@@ -143,9 +144,11 @@ public class TreeModelAdapter extends AbstractTreeModel {
 
     private PropertyChangeListener buildRootListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 TreeModelAdapter.this.rootChanged();
             }
+            @Override
             public String toString() {
                 return "root listener";
             }
@@ -154,9 +157,11 @@ public class TreeModelAdapter extends AbstractTreeModel {
 
     private PropertyChangeListener buildNodeValueListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 TreeModelAdapter.this.nodeChanged((TreeNodeValueModel) e.getSource());
             }
+            @Override
             public String toString() {
                 return "node value listener";
             }
@@ -165,9 +170,11 @@ public class TreeModelAdapter extends AbstractTreeModel {
 
     private StateChangeListener buildNodeStateListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 TreeModelAdapter.this.nodeChanged((TreeNodeValueModel) e.getSource());
             }
+            @Override
             public String toString() {
                 return "node state listener";
             }
@@ -176,18 +183,23 @@ public class TreeModelAdapter extends AbstractTreeModel {
 
     private ListChangeListener buildChildrenListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 new EventChangePolicy(e).addChildren();
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 new EventChangePolicy(e).removeChildren();
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 new EventChangePolicy(e).replaceChildren();
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 new EventChangePolicy(e).rebuildChildren();
             }
+            @Override
             public String toString() {
                 return "children listener";
             }
@@ -200,6 +212,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
     /**
      * @see javax.swing.tree.TreeModel#getRoot()
      */
+    @Override
     public Object getRoot() {
         return this.root;
     }
@@ -207,6 +220,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
     /**
      * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
      */
+    @Override
     public Object getChild(Object parent, int index) {
         return ((TreeNodeValueModel) parent).getChild(index);
     }
@@ -214,6 +228,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
     /**
      * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
      */
+    @Override
     public int getChildCount(Object parent) {
         return ((TreeNodeValueModel) parent).childrenSize();
     }
@@ -221,6 +236,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
     /**
      * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
      */
+    @Override
     public boolean isLeaf(Object node) {
         return ((TreeNodeValueModel) node).isLeaf();
     }
@@ -228,6 +244,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
     /**
      * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath, java.lang.Object)
      */
+    @Override
     public void valueForPathChanged(TreePath path, Object newValue) {
         ((TreeNodeValueModel) path.getLastPathComponent()).setValue(newValue);
     }
@@ -235,6 +252,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
     /**
      * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object, java.lang.Object)
      */
+    @Override
     public int getIndexOfChild(Object parent, Object child) {
         return ((TreeNodeValueModel) parent).indexOfChild((TreeNodeValueModel) child);
     }
@@ -243,6 +261,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
      * Extend to start listening to the underlying model if necessary.
      * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void addTreeModelListener(TreeModelListener l) {
         if (this.hasNoTreeModelListeners()) {
             this.engageModel();
@@ -254,6 +273,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
      * Extend to stop listening to the underlying model if appropriate.
      * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {
         super.removeTreeModelListener(l);
         if (this.hasNoTreeModelListeners()) {
@@ -450,6 +470,7 @@ public class TreeModelAdapter extends AbstractTreeModel {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.root);
     }
@@ -565,6 +586,7 @@ private class EventChangePolicy extends ChangePolicy {
     /**
      * Map the ListChangeEvent's source to the corresponding parent.
      */
+    @Override
     TreeNodeValueModel parent() {
         return (TreeNodeValueModel) TreeModelAdapter.this.parents.get(this.event.getSource());
     }
@@ -572,6 +594,7 @@ private class EventChangePolicy extends ChangePolicy {
     /**
      * The ListChangeEvent's item index is the children start index.
      */
+    @Override
     int childrenStartIndex() {
         return this.event.getIndex();
     }
@@ -579,6 +602,7 @@ private class EventChangePolicy extends ChangePolicy {
     /**
      * The ListChangeEvent's size is the children size.
      */
+    @Override
     int childrenSize() {
         return this.event.size();
     }
@@ -586,6 +610,7 @@ private class EventChangePolicy extends ChangePolicy {
     /**
      * The ListChangeEvent's items are the children.
      */
+    @Override
     Iterator children() {
         return this.event.items();
     }
@@ -639,6 +664,7 @@ private class NodeChangePolicy extends ChangePolicy {
     /**
      * The node itself is the parent.
      */
+    @Override
     TreeNodeValueModel parent() {
         return this.node;
     }
@@ -647,6 +673,7 @@ private class NodeChangePolicy extends ChangePolicy {
      * Since we will always be dealing with all of the node's
      * children, the children start index is always zero.
      */
+    @Override
     int childrenStartIndex() {
         return 0;
     }
@@ -656,6 +683,7 @@ private class NodeChangePolicy extends ChangePolicy {
      * children, the children size is always equal to the size
      * of the children model.
      */
+    @Override
     int childrenSize() {
         return this.node.getChildrenModel().size();
     }
@@ -665,6 +693,7 @@ private class NodeChangePolicy extends ChangePolicy {
      * children, the children are all the objects held by
      * the children model.
      */
+    @Override
     Iterator children() {
         return (Iterator) this.node.getChildrenModel().getValue();
     }

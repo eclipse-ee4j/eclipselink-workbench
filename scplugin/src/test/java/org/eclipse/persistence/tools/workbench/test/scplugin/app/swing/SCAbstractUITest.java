@@ -106,6 +106,7 @@ public abstract class SCAbstractUITest {
     protected WindowListener buildWindowListener() {
 
         return new WindowAdapter() {
+            @Override
             public void windowClosing( WindowEvent e) {
                 e.getWindow().setVisible( false);
                 System.exit( 0);
@@ -139,6 +140,7 @@ public abstract class SCAbstractUITest {
 
     private Action buildResetPropertyAction() {
         Action action = new AbstractAction( "reset property") {
+            @Override
             public void actionPerformed (ActionEvent event) {
                 SCAbstractUITest.this.resetProperty();
             }
@@ -155,6 +157,7 @@ public abstract class SCAbstractUITest {
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SCAbstractUITest.this.clearModel();
             }
@@ -179,6 +182,7 @@ public abstract class SCAbstractUITest {
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SCAbstractUITest.this.restoreModel();
             }
@@ -200,6 +204,7 @@ public abstract class SCAbstractUITest {
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction( "print model") {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 SCAbstractUITest.this.printModel();
             }

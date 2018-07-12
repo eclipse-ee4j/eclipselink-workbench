@@ -66,6 +66,7 @@ public class PropertiesPageContainer extends ScrollablePropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         container = new JPanel(new BorderLayout());

@@ -150,6 +150,7 @@ final class AnyObjectMappingPropertiesPage
 
     private ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAnyObjectMapping) this.subject).getXmlField();
             }

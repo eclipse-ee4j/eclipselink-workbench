@@ -44,22 +44,27 @@ public final class NullServerPlatformAdapter extends ServerPlatformAdapter
         super( null);
     }
 
+    @Override
     protected Object buildModel() {
 
         return null;
     }
 
+    @Override
     protected void initializeDefaults() {
     }
 
+    @Override
     protected void checkParent( Node parent) {
     }
 
+    @Override
     public String getServerClassName() {
 
         return NoServerPlatform.class.getName();
     }
 
+    @Override
     public boolean isNull() {
 
         return true;
@@ -67,6 +72,7 @@ public final class NullServerPlatformAdapter extends ServerPlatformAdapter
     /**
      * Returns this config model property.
      */
+    @Override
     public boolean getEnableJTA() {
 
         return false;
@@ -74,6 +80,7 @@ public final class NullServerPlatformAdapter extends ServerPlatformAdapter
     /**
      * Sets this config model property.
      */
+    @Override
     public void setEnableJTA( boolean value) {
 
         throw new IllegalStateException();
@@ -81,6 +88,7 @@ public final class NullServerPlatformAdapter extends ServerPlatformAdapter
     /**
      * Returns this config model property.
      */
+    @Override
     public boolean getEnableRuntimeServices() {
 
         return false;
@@ -88,6 +96,7 @@ public final class NullServerPlatformAdapter extends ServerPlatformAdapter
     /**
      * Sets this config model property.
      */
+    @Override
     public void setEnableRuntimeServices( boolean value) {
 
         throw new IllegalStateException();

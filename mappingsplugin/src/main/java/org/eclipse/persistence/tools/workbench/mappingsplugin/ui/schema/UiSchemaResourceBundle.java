@@ -134,6 +134,7 @@ public final class UiSchemaResourceBundle
         {"XML_SCHEMA_DEFINITION_DESCRIPTION", "XML Schema Definitions"},
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

@@ -246,6 +246,7 @@ public final class IPAddress
      *
      * @return The short description of this class and its values
      */
+    @Override
     public final String toString()
     {
         StringBuffer sb = new StringBuffer();

@@ -30,6 +30,7 @@ class RenameTableAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("rename");
@@ -37,6 +38,7 @@ class RenameTableAction extends AbstractFrameworkAction {
         this.initializeToolTipText("RENAME");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         this.promptToRenameTable((MWTable) selectedNode.getValue());
         // re-select because the node will removed, sorted, and re-added

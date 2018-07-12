@@ -30,9 +30,11 @@ public interface Filter {
     Filter NULL_INSTANCE =
         new Filter() {
             // nothing is filtered - everything is accepted
+            @Override
             public boolean accept(Object next) {
                 return true;
             }
+            @Override
             public String toString() {
                 return "NullFilter";
             }

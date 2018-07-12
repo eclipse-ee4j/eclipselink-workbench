@@ -28,12 +28,14 @@ final class GenerateTablesFromAllDescriptorsAction extends AbstractGenerateTable
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeTextAndMnemonic("ALL_DESCRIPTORS_LABEL_MENU_ITEM");
     //    initializeIcon("table.remove");
     }
 
+    @Override
     protected void execute() {
         generateTablesFromDescriptors(CollectionTools.collection(allDescriptors()));
     }

@@ -71,6 +71,7 @@ public class DefaultMnemonicRepository implements MnemonicRepository {
     /**
      * @see MnemonicRepository#hasMnemonic(String)
      */
+    @Override
     public boolean hasMnemonic(String key) {
         return (key == null) || CollectionTools.contains(this.resourceBundle.getKeys(), key);
     }
@@ -78,6 +79,7 @@ public class DefaultMnemonicRepository implements MnemonicRepository {
     /**
      * @see MnemonicRepository#getMnemonic(String)
      */
+    @Override
     public int getMnemonic(String key) {
         if  (key == null) {
             return -1;
@@ -96,6 +98,7 @@ public class DefaultMnemonicRepository implements MnemonicRepository {
     /**
      * @see MnemonicRepository#getMnemonicIndex(String)
      */
+    @Override
     public int getMnemonicIndex(String key) {
         return this.getString(key).indexOf(DefaultStringRepository.MNEMONIC_CHAR);
     }
@@ -123,6 +126,7 @@ public class DefaultMnemonicRepository implements MnemonicRepository {
         }
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.resourceBundle.getClass().getName());
     }

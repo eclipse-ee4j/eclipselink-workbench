@@ -38,6 +38,7 @@ public class ReverseComparatorTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.naturalReverseComparator = new ReverseComparator();
@@ -47,6 +48,7 @@ public class ReverseComparatorTests extends TestCase {
 
     private Comparator buildCustomComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 String s1 = (String) o1;
                 String s2 = (String) o2;
@@ -87,6 +89,7 @@ public class ReverseComparatorTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

@@ -60,6 +60,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("synchronize");
@@ -67,11 +68,13 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
         this.initializeToolTipText("REFRESH");
     }
 
+    @Override
     protected void engageValueEnabled(AbstractApplicationNode node) {
         super.engageValueEnabled(node);
         ((TableNode) node).getTable().getDatabase().addPropertyChangeListener(MWDatabase.CONNECTED_PROPERTY, this.getEnabledStateListener());
     }
 
+    @Override
     protected void disengageValueEnabled(AbstractApplicationNode node) {
         super.disengageValueEnabled(node);
         ((TableNode) node).getTable().getDatabase().removePropertyChangeListener(MWDatabase.CONNECTED_PROPERTY, this.getEnabledStateListener());
@@ -86,6 +89,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
         return selectedTables;
     }
 
+    @Override
     protected void execute() {
         Collection selectedTables = this.selectedTables();
         // grab the database from the first selected table
@@ -119,6 +123,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
         }
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return ((MWTable) ((TableNode) selectedNode).getValue()).getDatabase().isConnected();
     }
@@ -135,6 +140,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
             this.missingTables = new TreeSet(missingTables);
         }
 
+        @Override
         protected Component buildMainPanel() {
             JPanel mainPanel = new JPanel(new GridBagLayout());
             GridBagConstraints contraints = new GridBagConstraints();
@@ -180,6 +186,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
             return mainPanel;
         }
 
+        @Override
         protected String helpTopicId() {
             return "dialog.tablesNotFound";
         }
@@ -200,6 +207,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
 
         private static final Comparator EXTERNAL_TABLE_DESCRIPTION_COMPARATOR =
             new Comparator() {
+                @Override
                 public int compare(Object o1, Object o2) {
                     return Collator.getInstance().compare(((ExternalTableDescription) o1).getQualifiedName(), ((ExternalTableDescription) o2).getQualifiedName());
                 }
@@ -219,6 +227,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
             return (ExternalTableDescription) this.tableList.getSelectedValue();
         }
 
+        @Override
         protected Component buildMainPanel() {
             JPanel mainPanel = new JPanel(new GridBagLayout());
             GridBagConstraints contraints = new GridBagConstraints();
@@ -259,6 +268,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
 
         private ListCellRenderer buildExternalTableDescriptionCellRenderer() {
             return new SimpleListCellRenderer() {
+                @Override
                 protected String buildText(Object value) {
                     return ((ExternalTableDescription) value).getQualifiedName();
                 }
@@ -271,6 +281,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
 
         private ListSelectionListener buildExternalTableDescriptionListSelectionListener() {
             return new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         DuplicateTablesDialog.this.externalTableDescriptionSelectionChanged();
@@ -279,6 +290,7 @@ class RefreshTableAction extends AbstractEnablableFrameworkAction {
             };
         }
 
+        @Override
         protected String helpTopicId() {
             return "dialog.duplicateTables";
         }

@@ -80,6 +80,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see StringRepository#hasString(String)
      */
+    @Override
     public boolean hasString(String key) {
         return this.stringRepository.hasString(key);
     }
@@ -87,6 +88,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see StringRepository#getString(String)
      */
+    @Override
     public String getString(String key) {
         return this.stringRepository.getString(key);
     }
@@ -94,6 +96,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see StringRepository#getString(String, Object)
      */
+    @Override
     public String getString(String key, Object argument) {
         return this.stringRepository.getString(key, argument);
     }
@@ -101,6 +104,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see StringRepository#getString(String, Object, Object)
      */
+    @Override
     public String getString(String key, Object argument1, Object argument2) {
         return this.stringRepository.getString(key, argument1, argument2);
     }
@@ -108,6 +112,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see StringRepository#getString(String, Object, Object, Object)
      */
+    @Override
     public String getString(String key, Object argument1, Object argument2, Object argument3) {
         return this.stringRepository.getString(key, argument1, argument2, argument3);
     }
@@ -115,6 +120,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see StringRepository#getString(String, Object[])
      */
+    @Override
     public String getString(String key, Object[] arguments) {
         return this.stringRepository.getString(key, arguments);
     }
@@ -122,6 +128,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see MnemonicRepository#hasMnemonic(String)
      */
+    @Override
     public boolean hasMnemonic(String key) {
         return this.mnemonicRepository.hasMnemonic(key);
     }
@@ -129,6 +136,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see MnemonicRepository#getMnemonic(String)
      */
+    @Override
     public int getMnemonic(String key) {
         return this.mnemonicRepository.getMnemonic(key);
     }
@@ -136,6 +144,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see MnemonicRepository#getMnemonicIndex(String)
      */
+    @Override
     public int getMnemonicIndex(String key) {
         return this.mnemonicRepository.getMnemonicIndex(key);
     }
@@ -143,6 +152,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see AcceleratorRepository#hasAccelerator(String)
      */
+    @Override
     public boolean hasAccelerator(String key) {
         return this.acceleratorRepository.hasAccelerator(key);
     }
@@ -150,6 +160,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see AcceleratorRepository#getAccelerator(String)
      */
+    @Override
     public KeyStroke getAccelerator(String key) {
         return this.acceleratorRepository.getAccelerator(key);
     }
@@ -157,6 +168,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see IconRepository#hasIcon(String)
      */
+    @Override
     public boolean hasIcon(String key) {
         return this.iconRepository.hasIcon(key);
     }
@@ -164,6 +176,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see IconRepository#getIcon(String)
      */
+    @Override
     public Icon getIcon(String key) {
         return this.iconRepository.getIcon(key);
     }
@@ -174,6 +187,7 @@ public class DefaultResourceRepository implements ResourceRepository {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this);
     }

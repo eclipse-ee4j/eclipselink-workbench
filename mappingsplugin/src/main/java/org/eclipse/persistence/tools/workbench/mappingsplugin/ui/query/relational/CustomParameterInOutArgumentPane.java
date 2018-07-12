@@ -299,6 +299,7 @@ public final class CustomParameterInOutArgumentPane extends AbstractSubjectPanel
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWModel) CustomParameterInOutArgumentPane.this.subject()).getRepository();
             }

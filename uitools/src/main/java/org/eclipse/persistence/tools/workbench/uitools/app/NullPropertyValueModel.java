@@ -50,6 +50,7 @@ public final class NullPropertyValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return null;
     }
@@ -60,6 +61,7 @@ public final class NullPropertyValueModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "NullPropertyValueModel";
     }

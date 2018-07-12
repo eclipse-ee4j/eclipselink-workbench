@@ -28,6 +28,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     /**
      * @see ApplicationContext#buildRedirectedPreferencesContext(String)
      */
+    @Override
     public ApplicationContext buildRedirectedPreferencesContext(String path) {
         return new RedirectedPreferencesApplicationContext(this, path);
     }
@@ -35,6 +36,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(Class, resources.IconResourceFileNameMap)
      */
+    @Override
     public ApplicationContext buildExpandedResourceRepositoryContext(Class resourceBundleClass, IconResourceFileNameMap iconResourceFileNameMap) {
         return new ExpandedResourceRepositoryApplicationContext(this, resourceBundleClass, iconResourceFileNameMap);
     }
@@ -42,6 +44,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(resources.IconResourceFileNameMap)
      */
+    @Override
     public ApplicationContext buildExpandedResourceRepositoryContext(IconResourceFileNameMap iconResourceFileNameMap) {
         return this.buildExpandedResourceRepositoryContext(null, iconResourceFileNameMap);
     }
@@ -49,6 +52,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(Class)
      */
+    @Override
     public ApplicationContext buildExpandedResourceRepositoryContext(Class resourceBundleClass) {
         return this.buildExpandedResourceRepositoryContext(resourceBundleClass, null);
     }

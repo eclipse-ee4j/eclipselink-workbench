@@ -165,6 +165,7 @@ public final class DatabasePlatformRepository
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.platforms = new Vector();
@@ -222,6 +223,7 @@ public final class DatabasePlatformRepository
 
     public Iterator platforms() {
         return new CloneIterator(this.platforms) {
+            @Override
             protected void remove(Object current) {
                 DatabasePlatformRepository.this.removePlatform((DatabasePlatform) current);
             }
@@ -304,6 +306,7 @@ public final class DatabasePlatformRepository
     /**
      * as the root node, we must implement this method
      */
+    @Override
     public ChangeNotifier getChangeNotifier() {
         return this.changeNotifier;
     }
@@ -311,6 +314,7 @@ public final class DatabasePlatformRepository
     /**
      * allow clients to install another change notifier
      */
+    @Override
     public void setChangeNotifier(ChangeNotifier changeNotifier) {
         this.changeNotifier = changeNotifier;
     }
@@ -319,6 +323,7 @@ public final class DatabasePlatformRepository
     /**
      * as the root node, we must implement this method
      */
+    @Override
     public Validator getValidator() {
         return this.validator;
     }
@@ -326,6 +331,7 @@ public final class DatabasePlatformRepository
     /**
      * allow clients to install an active validator
      */
+    @Override
     public void setValidator(Validator validator) {
         this.validator = validator;
     }
@@ -363,6 +369,7 @@ public final class DatabasePlatformRepository
 
     private Iterator platformNames() {
         return new TransformationIterator(this.platforms()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabasePlatform) next).getName();
             }
@@ -371,6 +378,7 @@ public final class DatabasePlatformRepository
 
     private Iterator platformShortFileNames() {
         return new TransformationIterator(this.platforms()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabasePlatform) next).getShortFileName();
             }
@@ -379,6 +387,7 @@ public final class DatabasePlatformRepository
 
     private Iterator lowerCasePlatformShortFileNames() {
         return new TransformationIterator(this.platformShortFileNames()) {
+            @Override
             protected Object transform(Object next) {
                 return ((String) next).toLowerCase();
             }
@@ -388,17 +397,20 @@ public final class DatabasePlatformRepository
 
     // ********** behavior **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.platforms) { children.addAll(this.platforms); }
         children.add(this.jdbcTypeRepository);
     }
 
+    @Override
     protected void addTransientAspectNamesTo(Set transientAspectNames) {
         super.addTransientAspectNamesTo(transientAspectNames);
         transientAspectNames.add(PLATFORMS_COLLECTION);
     }
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         if (this.platforms.isEmpty()) {
             currentProblems.add(this.buildProblem("001"));
@@ -686,10 +698,12 @@ public final class DatabasePlatformRepository
 
     // ********** printing and displaying **********
 
+    @Override
     public String displayString() {
         return this.name;
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         for (Iterator stream = this.platforms(); stream.hasNext(); ) {
             DatabasePlatform platform = (DatabasePlatform) stream.next();

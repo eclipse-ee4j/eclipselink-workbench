@@ -32,21 +32,27 @@ public interface ClassFileTestInterface extends java.util.Collection, java.lang.
     }
 
     class NullClassFileTestInterface extends java.util.AbstractCollection implements ClassFileTestInterface {
+        @Override
         public int compareTo(Object o) {
             return 0;
         }
+        @Override
         public void foo() {
             // do nothing
         }
+        @Override
         public String baz(String[][] names) {
             return null;
         }
+        @Override
         public Iterator iterator() {
             return null;
         }
+        @Override
         public int bar(int[][] indexPairs) {
             return 0;
         }
+        @Override
         public int size() {
             return 0;
         }

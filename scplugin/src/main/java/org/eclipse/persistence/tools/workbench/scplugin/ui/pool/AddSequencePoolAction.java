@@ -30,6 +30,7 @@ public class AddSequencePoolAction extends AbstractEnablableFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "ADD_SEQUENCE_CONNECTION_POOL");
@@ -39,6 +40,7 @@ public class AddSequencePoolAction extends AbstractEnablableFrameworkAction {
         this.initializeToolTipText( "ADD_SEQUENCE_CONNECTION_POOL.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         ServerSessionAdapter session = ( ServerSessionAdapter)selectedNode.getValue();
@@ -52,12 +54,14 @@ public class AddSequencePoolAction extends AbstractEnablableFrameworkAction {
     }
 
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         ServerSessionAdapter session = (ServerSessionAdapter) selectedNode.getValue();
 
         return !session.hasSequencePool();
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {ServerSessionAdapter.SEQUENCE_CONNECTION_POOL_PROPERTY};
     }

@@ -76,7 +76,8 @@ final class SCPreferencesPage extends AbstractPanel
         );
 
         // Add a fake listener so that all the other listeners can be engaged
-        valueModel.addPropertyChangeListener(PropertyValueModel.VALUE, new PropertyChangeListener() { public void propertyChange(PropertyChangeEvent e) {} });
+        valueModel.addPropertyChangeListener(PropertyValueModel.VALUE, new PropertyChangeListener() {@Override
+ public void propertyChange(PropertyChangeEvent e) {} });
 
         return valueModel;
     }
@@ -84,6 +85,7 @@ final class SCPreferencesPage extends AbstractPanel
     private PropertyValueModel buildClasspathHolderImp()
     {
         return new PreferencePropertyValueModel(preferences(), SCPlugin.DEFAULT_CLASSPATH_PREFERENCE) {
+            @Override
             protected Object getValueFromSubject() {
                 String classpath = (String)super.getValueFromSubject();
                 if ("".equals(classpath)) {
@@ -153,6 +155,7 @@ final class SCPreferencesPage extends AbstractPanel
             this.preferenceHolder = preferenceHolder;
         }
 
+        @Override
         public void addItem(int index, Object item)
         {
             SCClassRepository classpath = (SCClassRepository) subject;
@@ -160,18 +163,21 @@ final class SCPreferencesPage extends AbstractPanel
             this.preferenceHolder.setValue(classpath.entries());
         }
 
+        @Override
         public Object getItem(int index)
         {
             SCClassRepository classpath = (SCClassRepository) subject;
             return classpath.getClasspathEntry(index);
         }
 
+        @Override
         protected ListIterator getValueFromSubject()
         {
             SCClassRepository classpath = (SCClassRepository) subject;
             return classpath.classpathEntries();
         }
 
+        @Override
         public Object removeItem(int index)
         {
             SCClassRepository classpath = (SCClassRepository) subject;
@@ -180,6 +186,7 @@ final class SCPreferencesPage extends AbstractPanel
             return entry;
         }
 
+        @Override
         public Object replaceItem(int index, Object item)
         {
             SCClassRepository classpath = (SCClassRepository) subject;
@@ -200,6 +207,7 @@ final class SCPreferencesPage extends AbstractPanel
             super(new String[0]);
         }
 
+        @Override
         public Validator getValidator()
         {
             return NULL_VALIDATOR;
@@ -208,6 +216,7 @@ final class SCPreferencesPage extends AbstractPanel
         //Not sure if this should even descend from SCClassRepository since that is a regular
         //model object and making this descend from it tries to tie it into the change notification system.
         //But overriding this method at least stops the exceptions this caused before noted in bug 4649391.
+        @Override
         public ChangeNotifier getChangeNotifier() {
             return DefaultChangeNotifier.instance();
         }

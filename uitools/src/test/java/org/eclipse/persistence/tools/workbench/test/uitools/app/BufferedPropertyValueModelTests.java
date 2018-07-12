@@ -55,6 +55,7 @@ public class BufferedPropertyValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
 
@@ -75,9 +76,11 @@ public class BufferedPropertyValueModelTests extends TestCase {
 
     private PropertyValueModel buildIDAdapter(ValueModel eHolder) {
         return new PropertyAspectAdapter(eHolder, Employee.ID_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Employee) this.subject).getID());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Employee) this.subject).setID(((Integer) value).intValue());
             }
@@ -86,9 +89,11 @@ public class BufferedPropertyValueModelTests extends TestCase {
 
     private PropertyValueModel buildNameAdapter(ValueModel eHolder) {
         return new PropertyAspectAdapter(eHolder, Employee.NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Employee) this.subject).getName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Employee) this.subject).setName((String) value);
             }
@@ -97,15 +102,18 @@ public class BufferedPropertyValueModelTests extends TestCase {
 
     private PropertyValueModel buildHireDateAdapter(ValueModel eHolder) {
         return new PropertyAspectAdapter(eHolder, Employee.HIRE_DATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Employee) this.subject).getHireDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Employee) this.subject).setHireDate((Date) value);
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -336,6 +344,7 @@ public class BufferedPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildBufferedListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 BufferedPropertyValueModelTests.this.bufferedEvent = e;
             }
@@ -344,6 +353,7 @@ public class BufferedPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildAdapterListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 BufferedPropertyValueModelTests.this.adapterEvent = e;
             }
@@ -352,6 +362,7 @@ public class BufferedPropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildEmployeeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 BufferedPropertyValueModelTests.this.employeeEvent = e;
             }
@@ -406,6 +417,7 @@ public class BufferedPropertyValueModelTests extends TestCase {
             this.hireDate = hireDate;
             this.firePropertyChanged(HIRE_DATE_PROPERTY, old, hireDate);
         }
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.name);
         }

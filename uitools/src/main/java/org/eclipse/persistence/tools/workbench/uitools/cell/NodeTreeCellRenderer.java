@@ -37,6 +37,7 @@ public class NodeTreeCellRenderer implements TreeCellRenderer {
      * Delegate rendering to the node's renderer.
      * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
      */
+    @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         RenderingNode node = (RenderingNode) value;
         return node.getRenderer().getTreeCellRendererComponent(tree, node.getCellValue(), sel, expanded, leaf, row, hasFocus);

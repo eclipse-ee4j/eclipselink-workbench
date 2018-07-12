@@ -62,6 +62,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#initializeActions()
      */
+    @Override
     protected void initializeActions() {
         super.initializeActions();
         this.importAction = buildImportAction();
@@ -71,6 +72,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildMainPanel()
      */
+    @Override
     protected Component buildMainPanel() {
         return this.view.getComponent();
     }
@@ -78,6 +80,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildCustomActions()
      */
+    @Override
     protected Iterator buildCustomActions() {
         Collection customActions = new ArrayList();
         customActions.add(this.importAction);
@@ -88,6 +91,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#helpTopicId()
      */
+    @Override
     protected String helpTopicId() {
         return "preferences";
     }
@@ -96,6 +100,7 @@ final class PreferencesDialog extends AbstractDialog {
      * override to explicitly control size
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#prepareToShow()
      */
+    @Override
     protected void prepareToShow() {
         this.setSize(600, 400);
         this.setLocationRelativeTo(this.getParent());
@@ -109,6 +114,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#initialFocusComponent()
      */
+    @Override
     protected Component initialFocusComponent() {
         return this.view.initialFocusComponent();
     }
@@ -116,6 +122,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#okConfirmed()
      */
+    @Override
     protected void okConfirmed() {
         this.view.triggerAccept();
         super.okConfirmed();
@@ -124,6 +131,7 @@ final class PreferencesDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#cancelPressed()
      */
+    @Override
     protected void cancelPressed() {
         this.view.triggerReset();
         super.cancelPressed();
@@ -134,6 +142,7 @@ final class PreferencesDialog extends AbstractDialog {
 
     protected Action buildImportAction() {
         return new AbstractAction(this.buildImportText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 PreferencesDialog.this.importPressed();
             }
@@ -146,6 +155,7 @@ final class PreferencesDialog extends AbstractDialog {
 
     protected void importPressed() {
         JFileChooser chooser = new JFileChooser() {
+            @Override
             public void approveSelection() {
                 File file = getSelectedFile();
                 if (!file.exists()) {
@@ -172,6 +182,7 @@ final class PreferencesDialog extends AbstractDialog {
 
     protected Action buildExportAction() {
         return new AbstractAction(this.buildExportText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 PreferencesDialog.this.exportPressed();
             }

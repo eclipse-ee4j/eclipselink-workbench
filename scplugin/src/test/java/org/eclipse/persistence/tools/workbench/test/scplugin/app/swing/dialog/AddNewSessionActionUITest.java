@@ -29,6 +29,7 @@ public class AddNewSessionActionUITest extends AddNewSessionAction  {
         super( context);
     }
 
+    @Override
     public void execute() {
         ApplicationNode selectedNode;
 
@@ -37,6 +38,7 @@ public class AddNewSessionActionUITest extends AddNewSessionAction  {
         this.execute( selectedNode);
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         TopLinkSessionsAdapter sessions = (TopLinkSessionsAdapter) selectedNode.getValue();

@@ -43,6 +43,7 @@ final class EisCompositeDescriptorTabbedPropertiesPage extends MappingDescriptor
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         super.initializeTabs();
         addTab(new EisCompositeDescriptorInfoPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "DESCRIPTOR_INFO_TAB");
@@ -50,16 +51,19 @@ final class EisCompositeDescriptorTabbedPropertiesPage extends MappingDescriptor
         addTab(buildEventsPolicyValueModel(), EventsPolicyPropertiesPage.EDITOR_WEIGHT, buildEventsPolicyPropertiesPage(), "XML_DESCRIPTOR_EVENTS_TAB");
     }
 
+    @Override
     protected Component buildInheritancePolicyPropertiesPage() {
         return new EisInheritancePolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected ComponentBuilder buildInheritancePolicyPageBuilder()
     {
         return new ComponentBuilder()
         {
             private XmlInheritancePolicyPropertiesPage inheritancePolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (inheritancePolicyPage == null)

@@ -33,10 +33,12 @@ public class Oracle10gR2Tests extends Oracle10gTests {
     /**
      * the Oracle 10.2.0.3.0 server in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb3.ca.oracle.com";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "10.2.0.3.0";
     }

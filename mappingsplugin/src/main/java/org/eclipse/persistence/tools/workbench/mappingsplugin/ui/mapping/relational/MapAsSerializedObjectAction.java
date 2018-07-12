@@ -26,6 +26,7 @@ final class MapAsSerializedObjectAction extends MapAsRelationalDirectMapping {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.serialized");
@@ -34,12 +35,14 @@ final class MapAsSerializedObjectAction extends MapAsRelationalDirectMapping {
         this.initializeToolTipText("MAP_AS_SERIALIZED_OBJECT_ACTION.toolTipText");
     }
 
+    @Override
     protected MappingNode morphNode(MappingNode selectedNode) {
         MappingNode mappingNode = super.morphNode(selectedNode);
         ((MWDirectMapping) mappingNode.getMapping()).setSerializedObjectConverter();
         return mappingNode;
     }
 
+    @Override
     protected String converterType() {
         return MWConverter.SERIALIZED_OBJECT_CONVERTER;
     }

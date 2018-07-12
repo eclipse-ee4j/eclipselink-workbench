@@ -420,6 +420,7 @@ public final class UiQueryBundle extends java.util.ListResourceBundle
         {"QUICK_VIEW_ORDERING_ATTRIBUTES_LABEL_ACCESSIBLE",   "Shows the list of ordering attributes for the selected query"},
     };
 
+    @Override
     public Object[][] getContents()
     {
         return contents;

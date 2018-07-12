@@ -55,6 +55,7 @@ final class QueryableEditDialog
         this.argument = argument;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialogEditQueryable";
     }
@@ -64,6 +65,7 @@ final class QueryableEditDialog
     */
     private TreeSelectionListener buildTreeSelectionHandler() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 updateOKButton();
             }
@@ -74,6 +76,7 @@ final class QueryableEditDialog
         return argument.getParentQuery().getOwningDescriptor();
     }
 
+    @Override
     protected Component buildMainPanel() {
         getOKAction().setEnabled(false);
 
@@ -90,6 +93,7 @@ final class QueryableEditDialog
         queryKeyTree.setSelectedQueryableArgumentElement(argument.getQueryableArgumentElement());
 
         SwingComponentFactory.addDoubleClickMouseListener(queryKeyTree, new DoubleClickMouseListener() {
+            @Override
             public void mouseDoubleClicked(MouseEvent e) {
                 TreePath path = queryKeyTree.getPathForLocation(e.getX(), e.getY());
 
@@ -115,12 +119,14 @@ final class QueryableEditDialog
 
     private Filter buildQueryableFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ((MWQueryable) o).isTraversableForQueryExpression();
             }
         };
     }
 
+    @Override
     protected boolean preConfirm() {
         TreePath selectionPath = this.queryKeyTree.getSelectionPath();
 
@@ -148,6 +154,7 @@ final class QueryableEditDialog
         return super.preConfirm();
     }
 
+    @Override
     protected void cancelPressed() {
         ((DefaultMutableTreeNode) queryKeyTree.getModel().getRoot()).removeAllChildren();
         super.cancelPressed();

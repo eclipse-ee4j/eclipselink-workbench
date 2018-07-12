@@ -64,6 +64,7 @@ public final class NullValuePolicyPanel
         super(mappingHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.nullValuePolicyHolder = this.buildNullValuePolicyHolder();
@@ -71,6 +72,7 @@ public final class NullValuePolicyPanel
 
     protected PropertyValueModel buildNullValuePolicyHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWDirectMapping.USES_NULL_VALUE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDirectMapping) subject).getNullValuePolicy();
             }
@@ -79,6 +81,7 @@ public final class NullValuePolicyPanel
 
     private PropertyChangeListener buildUsesNullValueListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(usesNullValue());
             }
@@ -89,6 +92,7 @@ public final class NullValuePolicyPanel
         return subject() == null ? false : ((MWDirectMapping) subject()).usesNullValue();
     }
 
+    @Override
     protected void initializeLayout() {
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -158,9 +162,11 @@ public final class NullValuePolicyPanel
 
     private PropertyValueModel buildUseNullValueHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWDirectMapping.USES_NULL_VALUE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWDirectMapping) subject).usesNullValue());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDirectMapping) subject).setUseNullValue(((Boolean) value).booleanValue());
             }
@@ -195,6 +201,7 @@ public final class NullValuePolicyPanel
 
     private CollectionValueModel buildNullValueTypeCollectionHolder() {
         return new CollectionAspectAdapter(getSubjectHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWDirectMapping) subject).buildBasicTypes().iterator();
             }
@@ -203,10 +210,12 @@ public final class NullValuePolicyPanel
 
     private PropertyValueModel buildNullValueTypeHolder() {
         return new PropertyAspectAdapter(this.nullValuePolicyHolder, MWNullValuePolicy.NULL_VALUE_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWNullValuePolicy) subject).getNullValueType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWNullValuePolicy) subject).setNullValueType((MWTypeDeclaration) value);
             }
@@ -215,6 +224,7 @@ public final class NullValuePolicyPanel
 
     private StringConverter buildNullValueTypeStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return ((MWTypeDeclaration) o).typeName();
             }
@@ -238,10 +248,12 @@ public final class NullValuePolicyPanel
 
     private PropertyValueModel buildNullValueHolder() {
         return new PropertyAspectAdapter(this.nullValuePolicyHolder, MWNullValuePolicy.NULL_VALUE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWNullValuePolicy) subject).getNullValue();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWNullValuePolicy) subject).setNullValue((String) value);
             }

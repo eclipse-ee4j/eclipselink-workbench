@@ -25,10 +25,12 @@ public final class MWNullClassIndicatorPolicy
         super(parent);
     }
 
+    @Override
     public MWAbstractClassIndicatorPolicy getValueForTopLink() {
         return null;
     }
 
+    @Override
     public String getType() {
         return MWClassIndicatorPolicy.NULL_TYPE;
     }

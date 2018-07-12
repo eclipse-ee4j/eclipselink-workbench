@@ -65,32 +65,39 @@ abstract class AbstractLoginPaneTest extends SCAbstractPanelTest
         testFocusTransferByMnemonic("CONNECTION_USER_NAME_FIELD", COMPONENT_TEXT_FIELD);
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder(ApplicationNode projectNode)
     {
         return this.nodeHolder;
     }
 
+    @Override
     protected SCAdapter buildSelection()
     {
         return this.selection;
     }
 
+    @Override
     protected void clearModel()
     {
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected void restoreModel()
     {
     }
 
+    @Override
     protected void tearDown() throws Exception
     {
         super.tearDown();

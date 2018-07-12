@@ -38,6 +38,7 @@ final class EisVersionLockingPanel
         super(lockingPolicyHolder, contextHolder);
     }
 
+    @Override
     protected JPanel buildVersionLockingFieldChooser() {
         GridBagConstraints constraints = new GridBagConstraints();
         Pane lockingPanel = new Pane(new GridBagLayout());
@@ -76,6 +77,7 @@ final class EisVersionLockingPanel
 
     private PropertyValueModel buildLockingFieldSelectionHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisDescriptorLockingPolicy) this.subject).getVersionLockField();
             }

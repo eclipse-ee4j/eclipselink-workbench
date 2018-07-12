@@ -61,6 +61,7 @@ final class DescriptorPackagePropertiesPage
         super(context);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         nodeHolder.addPropertyChangeListener(ValueModel.VALUE, this.buildNodeListener());
@@ -69,6 +70,7 @@ final class DescriptorPackagePropertiesPage
 
     private PropertyChangeListener buildNodeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 DescriptorPackagePropertiesPage.this.nodeChanged();
             }
@@ -79,6 +81,7 @@ final class DescriptorPackagePropertiesPage
         return new ListModelAdapter(this.buildDescriptorLVM());
     }
 
+    @Override
     protected Component buildPage() {
         JPanel page = new JPanel(new BorderLayout());
         page.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -96,9 +99,11 @@ final class DescriptorPackagePropertiesPage
         return new AdaptableListCellRenderer(
                 new DescriptorCellRendererAdapter(this.resourceRepository()) {
                     // no need for the package name
+                    @Override
                     protected String buildNonNullValueText(Object value) {
                         return ((MWDescriptor) value).displayString();
                     }
+                    @Override
                     public String toString() {
                         return "descriptor cell renderer";
                     }
@@ -115,6 +120,7 @@ final class DescriptorPackagePropertiesPage
 
     private ListValueModel buildDescriptorLVM() {
         return new TransformationListValueModelAdapter(this.buildDescriptorNodeLVM()) {
+            @Override
             protected Object transformItem(Object item) {
                 return ((DescriptorNode) item).getDescriptor();
             }

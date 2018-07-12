@@ -190,6 +190,7 @@ public class TokenWriter
      *
      * @param  c  character
      */
+    @Override
     public void write(int c) {
         synchronized (this.lock) {
             if (this.charRequiresEscape(c))
@@ -235,6 +236,7 @@ public class TokenWriter
      * @param  offset   Offset from which to start writing characters
      * @param  length   Number of characters to write
      */
+    @Override
     public void write(char[] cbuffer, int offset, int length) {
         synchronized (this.lock) {
             this.checkIndices(cbuffer, offset, length);
@@ -309,6 +311,7 @@ public class TokenWriter
      *
      * @return String representation of the current buffer value
      */
+    @Override
     public String toString() {
         return this.buffer.toString();
     }
@@ -325,6 +328,7 @@ public class TokenWriter
     /**
      * Flush the stream.
      */
+    @Override
     public void flush() {
         // do nothing...
     }
@@ -334,6 +338,7 @@ public class TokenWriter
      * This method does not release the buffer, since its
      * contents might still be required.
      */
+    @Override
     public void close() {
         // do nothing...
     }

@@ -31,26 +31,32 @@ public abstract class QueryQuickViewItem implements QuickViewItem {
         this.queryItem = queryItem;
     }
 
+    @Override
     public String accessibleName() {
         return null; // TODO: Might need it
     }
 
+    @Override
     public String displayString() {
         return this.queryItem.displayString();
     }
 
+    @Override
     public Object getValue() {
         return this.queryItem;
     }
 
+    @Override
     public Icon icon() {
         return null; // TODO
     }
 
+    @Override
     public boolean isRemovable() {
         return true;
     }
 
+    @Override
     public void remove() {
         this.queryItem.removeSelfFromParent();
     }

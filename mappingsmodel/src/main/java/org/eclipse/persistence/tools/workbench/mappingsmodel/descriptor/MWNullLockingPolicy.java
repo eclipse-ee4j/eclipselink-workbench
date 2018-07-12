@@ -27,27 +27,33 @@ final public class MWNullLockingPolicy extends MWModel implements MWLockingPolic
         super(parent);
     }
 
+    @Override
     public String getLockingType() {
         return "";
     }
 
+    @Override
     public void setLockingType(String newLockingType) {
         throw new UnsupportedOperationException();
 
     }
 
+    @Override
     public MWDataField getVersionLockField() {
         return null;
     }
 
+    @Override
     public void setVersionLockField(MWDataField newLockField) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean shouldStoreVersionInCache() {
         return false;
     }
 
+    @Override
     public void setStoreInCache(boolean newStoreInCache) {
         throw new UnsupportedOperationException();
     }
@@ -55,15 +61,18 @@ final public class MWNullLockingPolicy extends MWModel implements MWLockingPolic
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         // Do nothing.  Null policy.
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         // Do nothing.  Null policy.
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         // Do nothing.  Null policy.
     }

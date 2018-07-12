@@ -104,6 +104,7 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
         return "descriptor.copying";
     }
 
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -147,6 +148,7 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
         return copyPolicyPanel;
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder)
     {
         super.initialize(nodeHolder);
@@ -157,6 +159,7 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(),
                 MWMappingDescriptor.COPY_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWDescriptorPolicy policy = ((MWMappingDescriptor) this.subject).getCopyPolicy();
@@ -191,11 +194,13 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
         {
             this.policyTypeHolder = new PropertyAspectAdapter(this.copyPolicyHolder,
                     MWDescriptorCopyPolicy.COPY_POLICY_TYPE_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     return ((MWDescriptorCopyPolicy) this.subject).getPolicyType();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     ((MWDescriptorCopyPolicy) this.subject).setPolicyType((String) value);
@@ -208,6 +213,7 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
     private PropertyValueModel buildClassHolder()
     {
         return new PropertyAspectAdapter(this.copyPolicyHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorCopyPolicy) this.subject).getOwningDescriptor().getMWClass();
             }
@@ -218,10 +224,12 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.copyPolicyHolder,
                 MWDescriptorCopyPolicy.COPY_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject(){
                 return ((MWDescriptorCopyPolicy) this.subject).getMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value){
                 ((MWDescriptorCopyPolicy) this.subject).setMethod((MWMethod) value);
             }
@@ -242,6 +250,7 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
     private CachingComboBoxModel buildCloneMethodComboBoxModel()
     {
         return new IndirectComboBoxModel(buildCloneMethodSelectionHolder(), buildClassHolder()) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return CopyPolicyPropertiesPage.this.orderedCloneMethodChoices((MWClass) subject);
             }
@@ -257,6 +266,7 @@ final class CopyPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(useCloneMethodHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
 

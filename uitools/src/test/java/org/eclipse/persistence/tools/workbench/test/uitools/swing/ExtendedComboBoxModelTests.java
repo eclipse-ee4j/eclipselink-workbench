@@ -51,6 +51,7 @@ public class ExtendedComboBoxModelTests
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.comboBoxModel = this.buildComboBoxModel();
@@ -130,14 +131,17 @@ public class ExtendedComboBoxModelTests
 
     private ListDataListener buildListener() {
         return new ListDataListener() {
+            @Override
             public void intervalAdded(ListDataEvent e) {
                 ExtendedComboBoxModelTests.this.eventType = ADD;
                 ExtendedComboBoxModelTests.this.event = e;
             }
+            @Override
             public void intervalRemoved(ListDataEvent e) {
                 ExtendedComboBoxModelTests.this.eventType = REMOVE;
                 ExtendedComboBoxModelTests.this.event = e;
             }
+            @Override
             public void contentsChanged(ListDataEvent e) {
                 ExtendedComboBoxModelTests.this.eventType = CHANGE;
                 ExtendedComboBoxModelTests.this.event = e;
@@ -161,6 +165,7 @@ public class ExtendedComboBoxModelTests
         }
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

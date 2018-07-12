@@ -28,6 +28,7 @@ public abstract class RelationalProjectRunnerTests extends ProjectRunnerTests {
     /**
      * Post building MW project.
      */
+    @Override
     protected void postBuildProject( MWProject project) {
 
         this.configureDeploymentLogin( project);

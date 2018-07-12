@@ -45,6 +45,7 @@ final class OXDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedProp
         super(context);
     }
 
+    @Override
     protected void initializeTabs()
     {
         super.initializeTabs();
@@ -54,16 +55,19 @@ final class OXDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedProp
                 buildEventsPolicyPropertiesPage(), "XML_DESCRIPTOR_EVENTS_TAB");
     }
 
+    @Override
     protected Component buildInheritancePolicyPropertiesPage() {
         return new OXInheritancePolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected ComponentBuilder buildInheritancePolicyPageBuilder()
     {
         return new ComponentBuilder()
         {
             private XmlInheritancePolicyPropertiesPage inheritancePolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (inheritancePolicyPage == null)

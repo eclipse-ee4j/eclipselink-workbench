@@ -112,6 +112,7 @@ public final class MWEisLoginSpec extends MWModel {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.connectionSpecClassHandle = new MWClassHandle(this, this.buildConnectionSpecClassScrubber());
@@ -252,10 +253,12 @@ public final class MWEisLoginSpec extends MWModel {
 
     // ********** displaying and printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }
 
+    @Override
     public String displayString() {
         return this.name;
     }
@@ -263,6 +266,7 @@ public final class MWEisLoginSpec extends MWModel {
 
     // ********** Containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.connectionSpecClassHandle);
@@ -270,9 +274,11 @@ public final class MWEisLoginSpec extends MWModel {
 
     private NodeReferenceScrubber buildConnectionSpecClassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWEisLoginSpec.this.setConnectionSpecClass(null);
             }
+            @Override
             public String toString() {
                 return "MWEisLoginSpec.buildConnectionSpecClassScrubber()";
             }

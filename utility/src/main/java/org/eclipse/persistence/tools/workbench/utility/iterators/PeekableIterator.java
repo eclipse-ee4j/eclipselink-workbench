@@ -53,6 +53,7 @@ public class PeekableIterator implements Iterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.next != END;
     }
@@ -60,6 +61,7 @@ public class PeekableIterator implements Iterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.next == END) {
             throw new NoSuchElementException();
@@ -86,6 +88,7 @@ public class PeekableIterator implements Iterator {
      * method.
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -105,6 +108,7 @@ public class PeekableIterator implements Iterator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nestedIterator + ')';
     }

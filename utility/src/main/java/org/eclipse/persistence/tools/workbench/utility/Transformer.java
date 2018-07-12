@@ -30,9 +30,11 @@ public interface Transformer {
     Transformer NULL_INSTANCE =
         new Transformer() {
             // simply return the object, unchanged
+            @Override
             public Object transform(Object o) {
                 return o;
             }
+            @Override
             public String toString() {
                 return "NullTransformer";
             }

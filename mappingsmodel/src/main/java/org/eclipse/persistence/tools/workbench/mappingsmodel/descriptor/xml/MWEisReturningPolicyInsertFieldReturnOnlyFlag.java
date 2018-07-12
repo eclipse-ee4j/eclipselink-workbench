@@ -46,11 +46,13 @@ public final class MWEisReturningPolicyInsertFieldReturnOnlyFlag
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.field = new MWXmlField(this);
     }
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.field);
@@ -59,6 +61,7 @@ public final class MWEisReturningPolicyInsertFieldReturnOnlyFlag
 
     // ********** MWReturningPolicyInsertFieldReturnOnlyFlag implementation **********
 
+    @Override
     public MWDataField getField() {
         return this.field;
     }
@@ -73,24 +76,29 @@ public final class MWEisReturningPolicyInsertFieldReturnOnlyFlag
 
     // ********** MWXpathContext implementation **********
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.eisDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     private MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -100,6 +108,7 @@ public final class MWEisReturningPolicyInsertFieldReturnOnlyFlag
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         // TODO ????

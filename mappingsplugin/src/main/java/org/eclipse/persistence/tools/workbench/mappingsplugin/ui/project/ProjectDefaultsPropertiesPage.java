@@ -62,6 +62,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
 
     private Comparator buildAdvancedPolicyComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return Collator.getInstance().compare(((UIAdvancedPolicyHolder) o1).displayString(), ((UIAdvancedPolicyHolder) o2).displayString());
             }
@@ -100,6 +101,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
     {
         return new AbstractCellRendererAdapter()
         {
+            @Override
             public String buildText(Object value)
             {
                 return ((UIAdvancedPolicyHolder) value).displayString();
@@ -218,6 +220,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
         return new JPanel();
     }
 
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -252,10 +255,12 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
         return panel;
     }
 
+    @Override
     protected PropertyValueModel buildSelectionHolder()
     {
         return new TransformationPropertyValueModel(super.buildSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -290,6 +295,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationIterator(policyIdIter)
         {
+            @Override
             protected Object transform(Object next)
             {
                 return getPolicyHolderFor((String)next);
@@ -313,6 +319,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
             this.selectionModel = selectionModel;
         }
 
+        @Override
         public void valueChanged(ListSelectionEvent e)
         {
             if (e.getValueIsAdjusting())
@@ -342,6 +349,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
      */
     private class ProjectValueChangeListener implements PropertyChangeListener
     {
+        @Override
         public void propertyChange(PropertyChangeEvent evt)
         {
             if (selection() != null)
@@ -399,6 +407,7 @@ class ProjectDefaultsPropertiesPage extends ScrollablePropertiesPage
             }
         }
 
+        @Override
         public String toString()
         {
             return StringTools.buildToStringFor(this);

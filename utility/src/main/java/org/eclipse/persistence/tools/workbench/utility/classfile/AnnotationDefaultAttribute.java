@@ -31,21 +31,25 @@ public class AnnotationDefaultAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         int length = this.getLength();
         this.info = new byte[length];
         stream.read(this.info);
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         this.writeHexStringOn(this.info, writer);
         writer.println();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
+    @Override
     void toString(StringBuffer sb) {
         this.appendHexStringTo(this.info, sb);
     }

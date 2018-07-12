@@ -274,6 +274,7 @@ public class UiProjectBundle extends ListResourceBundle {
         {"CACHING_POLICY_EXISTENCE_CHECKING_ASSUME_NON_EXISTENCE", "Assume Non-Existence"},
     };
 
+    @Override
     public Object[][] getContents() {
         return contents;
     }

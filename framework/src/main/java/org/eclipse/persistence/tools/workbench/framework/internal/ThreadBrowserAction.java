@@ -33,6 +33,7 @@ final class ThreadBrowserAction
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.action.AbstractFrameworkAction#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("THREAD_BROWSER");
@@ -41,6 +42,7 @@ final class ThreadBrowserAction
     /**
      * ignore the selected nodes
      */
+    @Override
     protected void execute() {
         new ThreadBrowser().open();
     }

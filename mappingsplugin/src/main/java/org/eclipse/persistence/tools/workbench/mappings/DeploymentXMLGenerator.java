@@ -41,6 +41,7 @@ public class DeploymentXMLGenerator
     /**
      * @see Generator.Adapter#export(org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject, java.io.File)
      */
+    @Override
     public void export(MWProject project, File outputFile) {
         project.setDeploymentXMLFileName(outputFile.getPath());
         project.exportDeploymentXML();

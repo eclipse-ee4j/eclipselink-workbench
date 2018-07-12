@@ -36,6 +36,7 @@ final class RenameDatabaseTypeAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("RENAME_DATABASE_TYPE");
         // no accelerator
@@ -43,6 +44,7 @@ final class RenameDatabaseTypeAction extends AbstractFrameworkAction {
         this.initializeToolTipText("RENAME_DATABASE_TYPE.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         // save the selection state, so we can restore it when we are done
         TreePath[] paths = this.navigatorSelectionModel().getSelectionPaths();
@@ -79,6 +81,7 @@ final class RenameDatabaseTypeAction extends AbstractFrameworkAction {
 
     private Iterator existingTypeNames(DatabasePlatform platform) {
         return new TransformationIterator(platform.databaseTypes()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabaseType) next).getName();
             }

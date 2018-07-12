@@ -53,6 +53,7 @@ public class UnaryTableSequenceAdapter extends SequenceAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new UnaryTableSequenceConfig();
     }

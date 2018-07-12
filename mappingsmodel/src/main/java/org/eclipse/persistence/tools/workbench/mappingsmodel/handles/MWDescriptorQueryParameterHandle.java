@@ -20,8 +20,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryParameter;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 /**
@@ -88,6 +86,7 @@ public final class MWDescriptorQueryParameterHandle extends MWHandle {
         this.queryParameter = queryParameter;
     }
 
+    @Override
     protected Node node() {
         return getQueryParameter();
     }
@@ -97,6 +96,7 @@ public final class MWDescriptorQueryParameterHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (this.classDescriptorName != null && this.querySignature != null && this.queryParameterName != null) {
@@ -123,10 +123,12 @@ public final class MWDescriptorQueryParameterHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER query parameter should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.queryParameter.compareTo(((MWDescriptorQueryParameterHandle) o).queryParameter);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.queryParameter == null) {
             sb.append("null");

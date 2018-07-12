@@ -40,20 +40,24 @@ public class ConstantValueAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.constantValueIndex = stream.readU2();
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         this.constantValue().displayStringOn(writer);
         writer.println();
     }
 
+    @Override
     public void printFieldInitializationClauseOn(PrintWriter writer) {
         writer.print(" = ");
         this.constantValue().printFieldInitializationClauseOn(writer);
     }
 
+    @Override
     public Object fieldConstantValue() {
         return this.constantValue().value();
     }
@@ -82,6 +86,7 @@ public class ConstantValueAttribute extends Attribute {
         return (StringConstant) this.constantValue();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -90,6 +95,7 @@ public class ConstantValueAttribute extends Attribute {
         return this.constantValueIndex;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         this.constantValue().toString(sb);
     }

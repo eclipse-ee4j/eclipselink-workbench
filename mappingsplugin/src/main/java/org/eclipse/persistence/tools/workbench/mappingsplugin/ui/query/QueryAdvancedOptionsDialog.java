@@ -81,11 +81,13 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
         this.query = query;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         setTitle(resourceRepository().getString("ADVANCED_QUERY_OPTIONS_DIALOG.title"));
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.advancedQueryOptions";
     }
@@ -156,6 +158,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
 
     private ListCellRenderer buildTopLinkModelOptionsCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return resourceRepository().getString(((TopLinkOption) value).resourceKey());
             }
@@ -164,6 +167,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
 
     private ActionListener buildLockingAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 setLocking();
             }
@@ -272,6 +276,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
     //yeah, this isn't pretty. The model needs to be changed, take a look at the comment in MWQuery
     protected PropertyValueModel buildQueryTimeoutBooleanHolder(PropertyValueModel queryTimeoutHolder) {
         return new TransformationPropertyValueModel(queryTimeoutHolder) {
+            @Override
             protected Object transform(Object value) {
                 if (value == null)  {
                     return null;
@@ -280,6 +285,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
                 return Boolean.valueOf(((Integer) value).intValue() > 0);
             }
 
+            @Override
             protected Object reverseTransform(Object value) {
                 if (Boolean.TRUE.equals(value)) {
                     return ((Integer) this.valueHolder.getValue()).intValue() > 0 ? this.valueHolder.getValue() : new Integer(1);
@@ -292,6 +298,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
     }
     protected ComponentEnabler buildQueryTimeoutSpinnerEnabler(PropertyValueModel queryTimeoutHolder, Component[] components) {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(queryTimeoutHolder) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(((Integer) value).intValue() > 0);
             }
@@ -322,6 +329,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
 
     private ActionListener buildMaximumRowsAction(final JCheckBox checkBox) {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 setMaximumRows(checkBox);
             }
@@ -382,6 +390,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
 
     private ActionListener buildFirstResultAction(final JCheckBox checkBox) {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 setFirstResult(checkBox);
             }
@@ -461,6 +470,7 @@ public abstract class QueryAdvancedOptionsDialog extends AbstractDialog {
 
     private ActionListener buildMaintainCacheAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 setMaintainCache();
             }

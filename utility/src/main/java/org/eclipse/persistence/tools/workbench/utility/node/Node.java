@@ -362,12 +362,15 @@ public interface Node extends Comparable {
             this.source = source;
             this.target = target;
         }
+        @Override
         public Node getSource() {
             return this.source;
         }
+        @Override
         public Node getTarget() {
             return this.target;
         }
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.source + " => " + this.target);
         }
@@ -385,6 +388,7 @@ public interface Node extends Comparable {
      */
     Comparator DEFAULT_COMPARATOR =
         new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 // disallow duplicates based on object identity
                 if (o1 == o2) {
@@ -408,6 +412,7 @@ public interface Node extends Comparable {
                 // (unless the objects are always passed into this method in the same order).
                 return -1;        // if all else fails, indicate that o1 < o2
             }
+            @Override
             public String toString() {
                 return "Node.DEFAULT_COMPARATOR";
             }
@@ -419,6 +424,7 @@ public interface Node extends Comparable {
      */
     Validator NULL_VALIDATOR =
         new PluggableValidator(PluggableValidator.Delegate.NULL_DELEGATE) {
+            @Override
             public String toString() {
                 return "Node.NULL_VALIDATOR";
             }

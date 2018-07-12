@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWAbstractQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadAllQuery;
@@ -29,8 +27,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadObjectQ
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneListIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.queries.DatabaseQuery;
@@ -82,12 +78,14 @@ public final class MWRelationalReadAllQuery
         super(parent, name);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.batchReadItems = new Vector();
         this.orderingItems = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.batchReadItems) { children.addAll(this.batchReadItems); }
@@ -98,6 +96,7 @@ public final class MWRelationalReadAllQuery
     // ******************* Morphing *******************
 
 
+    @Override
     public MWReportQuery asReportQuery() {
         getQueryManager().removeQuery(this);
         MWReportQuery newQuery = ((MWRelationalQueryManager) getQueryManager()).addReportQuery(getName());
@@ -105,6 +104,7 @@ public final class MWRelationalReadAllQuery
         return newQuery;
     }
 
+    @Override
     public MWReadObjectQuery asReadObjectQuery() {
         getQueryManager().removeQuery(this);
         MWReadObjectQuery newQuery = getQueryManager().addReadObjectQuery(getName());
@@ -112,16 +112,19 @@ public final class MWRelationalReadAllQuery
         return newQuery;
     }
 
+    @Override
     public MWReadAllQuery asReadAllQuery() {
         return this;
     }
 
+    @Override
     public String queryType() {
         return READ_ALL_QUERY;
     }
 
     // ********** orderingItems **********
 
+    @Override
     public Ordering addOrderingItem(MWQueryable queryable) {
         if (orderingAttributesAllowed()) {
             MWOrderingItem orderingItem = new MWOrderingItem(this, queryable);
@@ -131,6 +134,7 @@ public final class MWRelationalReadAllQuery
         throw new IllegalStateException("Ordering Items are not allowed if the QueryFormat is EJBQL or SQL");
     }
 
+    @Override
     public Ordering addOrderingItem(Iterator queryables) {
         if (orderingAttributesAllowed()) {
             MWOrderingItem orderingItem = new MWOrderingItem(this, queryables);
@@ -140,6 +144,7 @@ public final class MWRelationalReadAllQuery
         throw new IllegalStateException("Ordering Items are not allowed if the QueryFormat is EJBQL or SQL");
     }
 
+    @Override
     public Ordering addOrderingItem(Iterator queryables, Iterator allowsNull) {
         if (orderingAttributesAllowed()) {
             MWOrderingItem orderingItem = new MWOrderingItem(this, queryables, allowsNull);
@@ -149,6 +154,7 @@ public final class MWRelationalReadAllQuery
         throw new IllegalStateException("Ordering Items are not allowed if the QueryFormat is EJBQL or SQL");
     }
 
+    @Override
     public Ordering addOrderingItem(int index, Iterator queryables, Iterator allowsNull) {
         if (orderingAttributesAllowed()) {
             MWOrderingItem orderingItem = new MWOrderingItem(this, queryables, allowsNull);
@@ -170,10 +176,12 @@ public final class MWRelationalReadAllQuery
         addItemToList(index, orderingItem, this.orderingItems, ORDERING_ITEMS_LIST);
     }
 
+    @Override
     public void removeOrderingItem(Ordering orderingItem) {
         removeOrderingItem(this.orderingItems.indexOf(orderingItem));
     }
 
+    @Override
     public void removeOrderingItem(int index) {
         removeItemFromList(index, this.orderingItems, ORDERING_ITEMS_LIST);
     }
@@ -184,24 +192,29 @@ public final class MWRelationalReadAllQuery
         }
     }
 
+    @Override
     public ListIterator orderingItems() {
         return new CloneListIterator(this.orderingItems);
     }
 
+    @Override
     public int orderingItemsSize() {
         return this.orderingItems.size();
     }
 
+    @Override
     public int indexOfOrderingItem(Ordering orderingItem) {
         return this.orderingItems.indexOf(orderingItem);
     }
 
+    @Override
     public void moveOrderingItemUp(Ordering item) {
         int index = indexOfOrderingItem(item);
         removeOrderingItem(index);
         addOrderingItem(index - 1, item);
     }
 
+    @Override
     public void moveOrderingItemDown(Ordering item) {
         int index = indexOfOrderingItem(item);
         removeOrderingItem(index);
@@ -300,10 +313,12 @@ public final class MWRelationalReadAllQuery
 
     //*********** MWRelationalQuery implementation  ***************
 
+    @Override
     public void formatSetToEjbql() {
         removeOrderingItems(orderingItems());
     }
 
+    @Override
     public void formatSetToSql() {
         removeOrderingItems(orderingItems());
         removeBatchReadItems(batchReadItems());
@@ -311,6 +326,7 @@ public final class MWRelationalReadAllQuery
 
     // **************** Runtime conversion ****************
 
+    @Override
     public DatabaseQuery runtimeQuery() {
         ReadAllQuery query = (ReadAllQuery) super.runtimeQuery();
         for (Iterator i = batchReadItems(); i.hasNext();) {
@@ -323,6 +339,7 @@ public final class MWRelationalReadAllQuery
         return query;
     }
 
+    @Override
     protected ObjectLevelReadQuery buildRuntimeQuery() {
         return new ReadAllQuery();
     }

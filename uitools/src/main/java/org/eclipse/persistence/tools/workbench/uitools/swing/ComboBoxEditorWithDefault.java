@@ -96,6 +96,7 @@ public final class ComboBoxEditorWithDefault implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void addActionListener(ActionListener actionListener)
     {
         // No need to add the listener since the value is pushed to the model
@@ -105,6 +106,7 @@ public final class ComboBoxEditorWithDefault implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public Component getEditorComponent()
     {
         return defaultComboBoxEditor.getEditorComponent();
@@ -113,6 +115,7 @@ public final class ComboBoxEditorWithDefault implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public Object getItem()
     {
         return getTextField().getText();
@@ -156,6 +159,7 @@ public final class ComboBoxEditorWithDefault implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void removeActionListener(ActionListener actionListener)
     {
         // No need to remove the listener since it never was added
@@ -164,6 +168,7 @@ public final class ComboBoxEditorWithDefault implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void selectAll()
     {
         defaultComboBoxEditor.selectAll();
@@ -172,6 +177,7 @@ public final class ComboBoxEditorWithDefault implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void setItem(Object value)
     {
         JTextField textField = getTextField();

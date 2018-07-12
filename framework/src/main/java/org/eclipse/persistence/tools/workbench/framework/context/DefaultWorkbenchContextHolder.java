@@ -52,6 +52,7 @@ public class DefaultWorkbenchContextHolder
     /**
      * @see WorkbenchContextHolder#getWorkbenchContext()
      */
+    @Override
     public WorkbenchContext getWorkbenchContext() {
         return this.workbenchContext;
     }

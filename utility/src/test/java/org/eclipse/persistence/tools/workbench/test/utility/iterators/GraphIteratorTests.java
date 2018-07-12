@@ -40,6 +40,7 @@ public class GraphIteratorTests extends TestCase
         super(name);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -121,6 +122,7 @@ public class GraphIteratorTests extends TestCase
 
     private GraphIterator.MisterRogers buildMisterRogers() {
         return new GraphIterator.MisterRogers() {
+            @Override
             public Iterator neighbors(Object next) {
                 return ((GraphNode) next).neighbors();
             }
@@ -132,6 +134,7 @@ public class GraphIteratorTests extends TestCase
      */
     private Iterator buildGraphIterator2() {
         return new GraphIterator(this.buildGraph()) {
+            @Override
             public Iterator neighbors(Object next) {
                 return ((GraphNode) next).neighbors();
             }
@@ -187,6 +190,7 @@ public class GraphIteratorTests extends TestCase
             return this.neighbors.size();
         }
 
+        @Override
         public String toString() {
             return "GraphNode(" + this.name + ")";
         }

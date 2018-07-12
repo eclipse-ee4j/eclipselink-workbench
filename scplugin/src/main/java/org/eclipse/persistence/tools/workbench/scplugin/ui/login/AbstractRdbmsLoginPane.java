@@ -155,6 +155,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseLoginAdapter.USE_DRIVER_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -210,6 +211,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new Transformer()
         {
+            @Override
             public Object transform(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject();
@@ -247,12 +249,14 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseLoginAdapter.DATA_SOURCE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
                 return adapter.getDataSourceName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
@@ -360,12 +364,14 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseLoginAdapter.DRIVER_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
                 return adapter.getDriverClassName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
@@ -450,6 +456,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
         (
             new CollectionAspectAdapter(buildDriverClassHolder())
             {
+                @Override
                 protected Iterator getValueFromSubject()
                 {
                     return DatabaseLoginAdapter.driverURLs((String) subject);
@@ -480,12 +487,14 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseLoginAdapter.CONNECTION_URL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return login.getConnectionURL();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -498,6 +507,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new AdaptableListCellRenderer(new AbstractCellRendererAdapter()
         {
+            @Override
             public String buildText(Object value)
             {
                 LookupType lookupType = (LookupType) value;
@@ -543,6 +553,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     {
         return new Comparator()
         {
+            @Override
             public int compare(Object object1, Object object2)
             {
                 LookupType lookupType1 = (LookupType) object1;
@@ -569,12 +580,14 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
                 return null; // Never go here
             }
 
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
                 return findLookupType(lookupChoices, adapter.getLookupType());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LookupType lookupType = (LookupType) value;
@@ -616,6 +629,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -727,6 +741,7 @@ abstract class AbstractRdbmsLoginPane extends AbstractLoginPane
     * @param enabled <code>true<code> if this component and its children should
     * be enabled, <code>false<code> otherwise
      */
+    @Override
     protected void updateEnableStateOfChildren(boolean enabled)
     {
         super.updateEnableStateOfChildren(enabled);

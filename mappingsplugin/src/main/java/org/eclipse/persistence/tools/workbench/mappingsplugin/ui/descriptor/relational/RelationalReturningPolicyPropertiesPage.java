@@ -18,7 +18,6 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.rel
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.ReturningPolicyPropertiesPage;
-import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.relational.RelationalReturningInsertFieldsPanel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 
 
@@ -36,10 +35,12 @@ final class RelationalReturningPolicyPropertiesPage extends ReturningPolicyPrope
     }
 
 
+    @Override
     protected AbstractPanel insertFieldsPanel(PropertyValueModel returningPolicyHolder) {
         return new RelationalReturningInsertFieldsPanel(returningPolicyHolder, getWorkbenchContextHolder());
     }
 
+    @Override
     protected AbstractPanel updateFieldsPanel(PropertyValueModel returningPolicyHolder) {
         return new RelationalReturningUpdateFieldsPanel(returningPolicyHolder, getWorkbenchContextHolder());
     }

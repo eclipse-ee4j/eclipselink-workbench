@@ -46,6 +46,7 @@ public class SingleElementIterator implements Iterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.element != END;
     }
@@ -53,6 +54,7 @@ public class SingleElementIterator implements Iterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.element == END) {
             throw new NoSuchElementException();
@@ -65,6 +67,7 @@ public class SingleElementIterator implements Iterator {
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -72,6 +75,7 @@ public class SingleElementIterator implements Iterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.element + ')';
     }

@@ -92,10 +92,12 @@ public abstract class ExplicitSchemaTypeDefinition
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return true;
     }
 
+    @Override
     public String contextTypeQname() {
         if (this.getName() == null) {
             return (this.getBaseType() == null) ? null : this.getBaseType().qName();

@@ -29,18 +29,21 @@ final class GenerateTablesFromSelectedDescriptorsAction extends AbstractGenerate
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeTextAndMnemonic("SELECTED_DESCRIPTORS_MENU_ITEM");
     //    initializeIcon("table.remove");
     }
 
+    @Override
     protected void execute() {
         generateTablesFromDescriptors(CollectionTools.collection(selectedDescriptors()));
     }
 
     private Iterator selectedDescriptors() {
         return new TransformationIterator(CollectionTools.iterator(selectedNodes())) {
+            @Override
             protected Object transform(Object next) {
                 return ((DescriptorNode) next).getDescriptor();
             }

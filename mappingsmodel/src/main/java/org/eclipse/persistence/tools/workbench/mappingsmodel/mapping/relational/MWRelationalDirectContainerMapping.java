@@ -100,6 +100,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** Initialization *****************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.directValueColumnHandle = new MWColumnHandle(this, this.buildDirectValueColumnScrubber());
@@ -108,6 +109,7 @@ public abstract class MWRelationalDirectContainerMapping
         this.joinFetchOption = (JoinFetchOption) MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions().topLinkOptionForMWModelOption(JOIN_FETCH_NONE);
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
 
@@ -122,6 +124,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** Containment Hierarchy *****************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.directValueColumnHandle);
@@ -131,9 +134,11 @@ public abstract class MWRelationalDirectContainerMapping
 
     private NodeReferenceScrubber buildDirectValueColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalDirectContainerMapping.this.setDirectValueColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalDirectContainerMapping.buildDirectValueColumnScrubber()";
             }
@@ -142,9 +147,11 @@ public abstract class MWRelationalDirectContainerMapping
 
     private NodeReferenceScrubber buildReferenceScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalDirectContainerMapping.this.setReference(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalDirectContainerMapping.buildReferenceScrubber()";
             }
@@ -153,9 +160,11 @@ public abstract class MWRelationalDirectContainerMapping
 
     private NodeReferenceScrubber buildTargetTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalDirectContainerMapping.this.setTargetTable(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalDirectContainerMapping.buildTargetTableScrubber()";
             }
@@ -165,6 +174,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** Morphing ***************
 
+    @Override
     public void initializeFromMWRelationalDirectContainerMapping(MWRelationalDirectContainerMapping oldMapping) {
         super.initializeFromMWRelationalDirectContainerMapping(oldMapping);
         this.setTargetTable(oldMapping.getTargetTable());
@@ -175,12 +185,14 @@ public abstract class MWRelationalDirectContainerMapping
     }
 
 
+    @Override
     public void initializeFromMWAbstractTableReferenceMapping(MWAbstractTableReferenceMapping oldMapping) {
         super.initializeFromMWAbstractTableReferenceMapping(oldMapping);
         this.setReference(oldMapping.getReference());
         this.setUsesBatchReading(oldMapping.usesBatchReading());
     }
 
+    @Override
     protected void initializeFromMWIndirectableMapping(MWIndirectableMapping oldMapping) {
         super.initializeFromMWIndirectableMapping(oldMapping);
 
@@ -192,6 +204,7 @@ public abstract class MWRelationalDirectContainerMapping
         }
     }
 
+    @Override
     protected void initializeFromMWIndirectableContainerMapping(MWIndirectableContainerMapping oldMapping) {
         super.initializeFromMWIndirectableContainerMapping(oldMapping);
 
@@ -203,6 +216,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** MWDirectMapping implementation ****************
 
+    @Override
     protected MWTypeConversionConverter buildTypeConversionConverter() {
         return new MWRelationalTypeConversionConverter(this);
     }
@@ -266,6 +280,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** JoinFetch *********************************************
 
+    @Override
     public JoinFetchOption getJoinFetchOption() {
         if (this.joinFetchOption == null) {
             this.joinFetchOption = (JoinFetchOption)MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions().topLinkOptionForMWModelOption(JOIN_FETCH_NONE);
@@ -273,22 +288,26 @@ public abstract class MWRelationalDirectContainerMapping
         return this.joinFetchOption;
     }
 
+    @Override
     public void setJoinFetchOption(JoinFetchOption newJoinFetchOption) {
         JoinFetchOption old = this.joinFetchOption;
         this.joinFetchOption = newJoinFetchOption;
         firePropertyChanged(JOIN_FETCH_PROPERTY, old, this.joinFetchOption);
     }
 
+    @Override
     public void setJoinFetchOption(String joinFetchOptions) {
         setJoinFetchOption((JoinFetchOption) MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions().topLinkOptionForMWModelOption(joinFetchOptions));
     }
 
     // **************** Reference *********************************************
 
+    @Override
     public MWReference getReference() {
         return this.referenceHandle.getReference();
     }
 
+    @Override
     public void setReference(MWReference newValue) {
         MWReference oldValue = getReference();
         this.referenceHandle.setReference(newValue);
@@ -299,26 +318,32 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** Indirection type **************************************
 
+    @Override
     public boolean usesNoIndirection() {
         return this.indirectionType == NO_INDIRECTION;
     }
 
+    @Override
     public boolean usesValueHolderIndirection() {
         return this.indirectionType == VALUE_HOLDER_INDIRECTION;
     }
 
+    @Override
     public boolean usesTransparentIndirection() {
         return this.indirectionType == TRANSPARENT_INDIRECTION;
     }
 
+    @Override
     public void setUseNoIndirection() {
         setIndirectionType(NO_INDIRECTION);
     }
 
+    @Override
     public void setUseValueHolderIndirection() {
         setIndirectionType(VALUE_HOLDER_INDIRECTION);
     }
 
+    @Override
     public void setUseTransparentIndirection() {
         setIndirectionType(TRANSPARENT_INDIRECTION);
     }
@@ -332,10 +357,12 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** Batch reading ****************
 
+    @Override
     public boolean usesBatchReading() {
         return this.batchReading;
     }
 
+    @Override
     public void setUsesBatchReading(boolean newValue) {
         boolean oldValue = this.batchReading;
         this.batchReading = newValue;
@@ -348,10 +375,12 @@ public abstract class MWRelationalDirectContainerMapping
     /**
      * direct collection mapping can never have sub queryable elements(children)
      */
+    @Override
     public boolean allowsChildren() {
         return false;
     }
 
+    @Override
     public boolean allowsOuterJoin() {
         return allowsChildren();
     }
@@ -360,39 +389,48 @@ public abstract class MWRelationalDirectContainerMapping
      * A directCollectionMapping will always be a leaf.  You cannot joined
      * anything to a directCollectionMapping
      */
+    @Override
     public boolean isLeaf(Filter queryableFilter) {
         return true;
     }
 
+    @Override
     public boolean usesAnyOf() {
         return true;
     }
 
+    @Override
     public boolean isValidForReadAllQueryOrderable() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForBatchReadAttribute() {
         return true;
     }
 
+    @Override
     public boolean isValidForBatchReadAttribute() {
         return true;
     }
 
 
+    @Override
     public boolean isTraversableForJoinedAttribute() {
         return true;
     }
 
+    @Override
     public boolean isValidForJoinedAttribute() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForQueryExpression() {
         return true;
     }
 
+    @Override
     public boolean isValidForQueryExpression() {
         return true;
     }
@@ -400,6 +438,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // **************** MWTableReferenceMapping implementation *************************************
 
+    @Override
     public boolean referenceIsCandidate(MWReference reference) {
         if (getTargetTable() != null) {
             if (reference.getSourceTable() == getTargetTable()) {
@@ -415,6 +454,7 @@ public abstract class MWRelationalDirectContainerMapping
         return false;
     }
 
+    @Override
     public Iterator candidateReferences() {
         return this.buildCandidateReferences().iterator();
     }
@@ -453,10 +493,12 @@ public abstract class MWRelationalDirectContainerMapping
 
     // ********** MWMapping implementation **********
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new DirectCollectionMapping();
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         //no written database fields in the owning table to add
     }
@@ -467,6 +509,7 @@ public abstract class MWRelationalDirectContainerMapping
     /**
      * Attempts to perform an automapping of this mapping.
      */
+    @Override
     public void automap() {
         super.automap();
         this.automapIndirection();
@@ -545,6 +588,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // *************  Aggregate support ************
 
+    @Override
     protected Collection buildAggregateFieldNameGenerators() {
         Collection generators = super.buildAggregateFieldNameGenerators();
         if (getReference() != null) {
@@ -570,27 +614,33 @@ public abstract class MWRelationalDirectContainerMapping
             this.columnPair = columnPair;
         }
 
+        @Override
         public boolean fieldIsWritten() {
             return false;
         }
 
+        @Override
         public String fieldNameForRuntime() {
             return this.columnPair.getTargetColumn().getName() + "_IN_REFERENCE_" + this.mapping.getReference().getName();
         }
 
+        @Override
         public AggregateFieldDescription fullFieldDescription() {
             final MWColumn column = this.columnPair.getTargetColumn();
             return new AggregateFieldDescription() {
+                @Override
                 public String getMessageKey() {
                     return "AGGREGATE_FIELD_DESCRIPTION_FOR_REFERENCE";
                 }
 
+                @Override
                 public Object[] getMessageArguments() {
                     return new Object[] {column.getName(), ColumnPairAggregateRuntimeFieldNameGenerator.this.mapping.getReference().getName()};
                 }
             };
         }
 
+        @Override
         public MWDescriptor owningDescriptor() {
             throw new UnsupportedOperationException();
         }
@@ -601,6 +651,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     //************** Problem Handling **********
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkDirectValueColumn(newProblems);
@@ -657,6 +708,7 @@ public abstract class MWRelationalDirectContainerMapping
 
     // ************* Runtime Conversion *************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         DirectCollectionMapping directCollectionMapping = (DirectCollectionMapping) super.runtimeMapping();
         if (getDirectValueColumn() != null) {
@@ -834,6 +886,7 @@ public abstract class MWRelationalDirectContainerMapping
         this.referenceHandle = ((handle == null) ? new MWReferenceHandle(this, scrubber) : handle.setScrubber(scrubber));
     }
 
+    @Override
     public TopLinkOptionSet joinFetchOptions() {
         if (joinFetchOptions == null) {
             joinFetchOptions = MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions();

@@ -23,7 +23,6 @@ import java.util.Vector;
 import javax.xml.namespace.QName;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAbstractTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAdvancedPropertyAdditionException;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorInheritancePolicy;
@@ -36,7 +35,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWNamedSche
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMappingFactory;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWNullTransformer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWAbstractAnyMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWAnyAttributeMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWAnyCollectionMapping;
@@ -98,12 +96,14 @@ public final class MWOXDescriptor
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.rootDescriptor = false;
         this.defaultRootElementTypeHandle = new MWNamedSchemaComponentHandle(this, this.buildDefaultRootElementTypeScrubber());
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (getTransactionalPolicy() instanceof MWNullTransactionalPolicy) {
@@ -111,21 +111,25 @@ public final class MWOXDescriptor
         }
     }
 
+    @Override
     public void applyAdvancedPolicyDefaults(MWProjectDefaultsPolicy defaultsPolicy) {
         defaultsPolicy.applyAdvancedPolicyDefaults(this);
     }
 
     private NodeReferenceScrubber buildDefaultRootElementTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWOXDescriptor.this.setDefaultRootElementType(null);
             }
+            @Override
             public String toString() {
                 return "MWOXDescriptor.buildDefaultRootElementTypeScrubber()";
             }
         };
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.defaultRootElementTypeHandle);
@@ -137,6 +141,7 @@ public final class MWOXDescriptor
         return (MWOXProject) this.getProject();
     }
 
+    @Override
     public MWMappingFactory mappingFactory() {
         return MWOXMappingFactory.instance();
     }
@@ -144,6 +149,7 @@ public final class MWOXDescriptor
     // **************** Root descriptor ***************************************
 
 
+    @Override
     public boolean isRootDescriptor() {
         return this.rootDescriptor;
     }
@@ -212,6 +218,7 @@ public final class MWOXDescriptor
 
     // **************** Inheritance policy ************************************
 
+    @Override
     protected MWDescriptorInheritancePolicy buildInheritancePolicy() {
         return new MWOXDescriptorInheritancePolicy(this);
     }
@@ -271,6 +278,7 @@ public final class MWOXDescriptor
     //***************** Morphing support **************************************
 
     //currently there is no descriptor morhping for MWOXDescriptors
+    @Override
     public void initializeOn(MWDescriptor newDescriptor) {
         throw new UnsupportedOperationException();
     }
@@ -278,6 +286,7 @@ public final class MWOXDescriptor
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -287,6 +296,7 @@ public final class MWOXDescriptor
     }
 
     /** overridden from MWXmlDescriptor */
+    @Override
     protected boolean schemaContextIsRequired() {
         // any type descriptors do not require a schema context
         return ! this.isAnyTypeDescriptor();
@@ -325,12 +335,14 @@ public final class MWOXDescriptor
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected ClassDescriptor buildBasicRuntimeDescriptor() {
         XMLDescriptor runtimeDescriptor = new XMLDescriptor();
         runtimeDescriptor.setJavaClassName(getMWClass().getName());
         return runtimeDescriptor;
     }
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         XMLDescriptor runtimeDescriptor = (XMLDescriptor) super.buildRuntimeDescriptor();
 
@@ -340,6 +352,7 @@ public final class MWOXDescriptor
         return runtimeDescriptor;
     }
 
+    @Override
     protected void adjustRuntimeDescriptorRootProperties(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptorRootProperties(runtimeDescriptor);
 
@@ -354,22 +367,27 @@ public final class MWOXDescriptor
 
     }
 
+    @Override
     public AbstractDirectMapping buildDefaultRuntimeDirectMapping() {
         return new XMLDirectMapping();
     }
 
+    @Override
     public AbstractCompositeDirectCollectionMapping buildDefaultRuntimeDirectCollectionMapping() {
         return new XMLCompositeDirectCollectionMapping();
     }
 
+    @Override
     public AbstractCompositeObjectMapping buildDefaultRuntimeCompositeObjectMapping() {
         return new XMLCompositeObjectMapping();
     }
 
+    @Override
     public AbstractCompositeCollectionMapping buildDefaultRuntimeCompositeCollectionMapping() {
         return new XMLCompositeCollectionMapping();
     }
 
+    @Override
     public AbstractTransformationMapping buildDefaultRuntimeTransformationMapping() {
         return new XMLTransformationMapping();
     }
@@ -415,14 +433,17 @@ public final class MWOXDescriptor
 
     // **************** Primary key policy ************************************
 
+    @Override
     public MWXmlPrimaryKeyPolicy primaryKeyPolicy() {
         return ((MWOXTransactionalPolicy) this.getTransactionalPolicy()).getPrimaryKeyPolicy();
     }
 
     // - returns an iterator on the attributes mapped by all mappings obtained by
     //   getPrimaryKeyMappings()
+    @Override
     public Iterator primaryKeyAttributes() {
         return new TransformationIterator(this.primaryKeyMappings()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWMapping) next).getInstanceVariable();
             }
@@ -432,6 +453,7 @@ public final class MWOXDescriptor
 
     // - returns an iterator on all mappings in this descriptor that map to primary key fields,
     //   plus all mappings in this descriptor's superdescriptors that do the same
+    @Override
     public Iterator primaryKeyMappings() {
         Collection pkMappings = new Vector();
 
@@ -467,14 +489,17 @@ public final class MWOXDescriptor
 
     //**************************** Returning Policy ***************************************************
 
+    @Override
     public MWDescriptorPolicy getReturningPolicy() {
         throw new UnsupportedOperationException("Returning Policy not supported on OX descriptor");
     }
 
+    @Override
     public void addReturningPolicy() throws MWAdvancedPropertyAdditionException {
         throw new UnsupportedOperationException("Returning Policy not supported on OX descriptor");
     }
 
+    @Override
     public void removeReturningPolicy() {
         throw new UnsupportedOperationException("Returning Policy not supported on OX descriptor");
     }

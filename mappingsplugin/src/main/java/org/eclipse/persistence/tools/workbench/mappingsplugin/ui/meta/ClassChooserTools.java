@@ -173,9 +173,11 @@ public class ClassChooserTools {
      */
     public static Filter buildDeclarableFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ClassTools.classNamedIsDeclarable((String) o);
             }
+            @Override
             public String toString() {
                 return "declarable filter";
             }
@@ -188,9 +190,11 @@ public class ClassChooserTools {
      */
     public static Filter buildReferenceFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ClassTools.classNamedIsReference((String) o);
             }
+            @Override
             public String toString() {
                 return "reference filter";
             }
@@ -202,9 +206,11 @@ public class ClassChooserTools {
      */
     public static Filter buildNonVoidFilter() {
         return new Filter() {
+            @Override
             public boolean accept(Object o) {
                 return ! o.equals("void");
             }
+            @Override
             public String toString() {
                 return "non-void filter";
             }
@@ -230,6 +236,7 @@ public class ClassChooserTools {
          * ClassDescription, so it does not need to be converted.
          * @see org.eclipse.persistence.tools.workbench.utility.Transformer#transform(Object)
          */
+        @Override
         public Object transform(Object o) {
             return o;
         }
@@ -239,6 +246,7 @@ public class ClassChooserTools {
          * convert it to the appropriate MWClass.
          * @see org.eclipse.persistence.tools.workbench.utility.BidiTransformer#reverseTransform(Object)
          */
+        @Override
         public Object reverseTransform(Object o) {
             return (o == null) ? null : this.classRepositoryHolder.getClassRepository().typeNamed(((ClassDescription) o).getName());
         }

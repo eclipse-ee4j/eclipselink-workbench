@@ -59,11 +59,8 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.TreeIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.indirection.IndirectContainer;
 import org.eclipse.persistence.indirection.ValueHolderInterface;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.mappings.transformers.AttributeTransformer;
 import org.eclipse.persistence.mappings.transformers.FieldTransformer;
 import org.eclipse.persistence.oxm.XMLDescriptor;
@@ -169,6 +166,7 @@ public final class MWClass extends MWModel
     /**
      * initialize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.modifier = new MWModifier(this);
@@ -183,6 +181,7 @@ public final class MWClass extends MWModel
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.declaringTypeHandle = new MWClassHandle(this, this.defaultDeclaringType(), this.buildDeclaringTypeScrubber());
@@ -266,6 +265,7 @@ public final class MWClass extends MWModel
      * listening to the type and triggers change events while synchronizing
      * with the type for the first time)
      */
+    @Override
     public ChangeNotifier getChangeNotifier() {
         return this.coreTypeRefreshInProgress ?
             NullChangeNotifier.instance()
@@ -277,6 +277,7 @@ public final class MWClass extends MWModel
     // ********** accessors **********
 
     // ***** name
+    @Override
     public String getName() {
         return this.name;
     }
@@ -338,6 +339,7 @@ public final class MWClass extends MWModel
 
 
     // ***** modifier
+    @Override
     public MWModifier getModifier() {
         return this.modifier;
     }
@@ -461,9 +463,11 @@ public final class MWClass extends MWModel
     // ***** interfaces
     private Iterator interfaceHandles() {
         return new CloneIterator(this.interfaceHandles) {
+            @Override
             protected void remove(Object current) {
                 MWClass.this.removeInterfaceHandle((MWClassHandle) current);
             }
+            @Override
             public String toString() {
                 return "MWClass.interfaceHandles()";
             }
@@ -477,9 +481,11 @@ public final class MWClass extends MWModel
 
     public Iterator interfaces() {
         return new TransformationIterator(this.interfaceHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWClassHandle) next).getType();
             }
+            @Override
             public String toString() {
                 return "MWClass.interfaces()";
             }
@@ -538,9 +544,11 @@ public final class MWClass extends MWModel
     public Iterator attributes() {
         this.checkForPartiallyPopulatedCoreType();
         return new CloneIterator(this.attributes) {
+            @Override
             protected void remove(Object current) {
                 MWClass.this.removeAttribute((MWClassAttribute) current);
             }
+            @Override
             public String toString() {
                 return "MWClass.attributes()";
             }
@@ -602,9 +610,11 @@ public final class MWClass extends MWModel
     // ***** ejb20Attributes
     public Iterator ejb20Attributes() {
         return new CloneIterator(this.ejb20Attributes) {
+            @Override
             protected void remove(Object current) {
                 MWClass.this.removeEjb20Attribute((MWClassAttribute) current);
             }
+            @Override
             public String toString() {
                 return "MWClass.ejb20Attributes()";
             }
@@ -675,9 +685,11 @@ public final class MWClass extends MWModel
     public Iterator methods() {
         this.checkForPartiallyPopulatedCoreType();
         return new CloneIterator(this.methods) {
+            @Override
             protected void remove(Object current) {
                 MWClass.this.removeMethod((MWMethod) current);
             }
+            @Override
             public String toString() {
                 return "MWClass.methods()";
             }
@@ -732,9 +744,11 @@ public final class MWClass extends MWModel
     private Iterator typeHandles() {
         this.checkForPartiallyPopulatedCoreType();
         return new CloneIterator(this.typeHandles) {
+            @Override
             protected void remove(Object current) {
                 MWClass.this.removeTypeHandle((MWClassHandle) current);
             }
+            @Override
             public String toString() {
                 return "MWClass.typeHandles()";
             }
@@ -751,9 +765,11 @@ public final class MWClass extends MWModel
 
     public Iterator types() {
         return new TransformationIterator(this.typeHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWClassHandle) next).getType();
             }
+            @Override
             public String toString() {
                 return "MWClass.types()";
             }
@@ -812,50 +828,62 @@ public final class MWClass extends MWModel
 
     // ********** Modifiable implementation **********
 
+    @Override
     public boolean supportsAbstract() {
         return true;
     }
 
+    @Override
     public boolean canBeSetAbstract() {
         return ! this.getModifier().isFinal();
     }
 
+    @Override
     public boolean canBeSetFinal() {
         return ! this.isAbstract();
     }
 
+    @Override
     public boolean supportsInterface() {
         return true;
     }
 
+    @Override
     public boolean canBeSetInterface() {
         return true;
     }
 
+    @Override
     public boolean supportsNative() {
         return false;
     }
 
+    @Override
     public boolean canBeSetNative() {
         return false;
     }
 
+    @Override
     public boolean canBeSetPackage() {
         return true;
     }
 
+    @Override
     public boolean canBeSetPrivate() {
         return this.isMemberType();
     }
 
+    @Override
     public boolean canBeSetProtected() {
         return this.isMemberType();
     }
 
+    @Override
     public boolean canBeSetPublic() {
         return true;
     }
 
+    @Override
     public boolean canBeSetStatic() {
         return this.isMemberType();
     }
@@ -868,34 +896,42 @@ public final class MWClass extends MWModel
             || ((this.getDeclaringType() != null) && this.getDeclaringType().isStrict());
     }
 
+    @Override
     public boolean supportsStrict() {
         return true;
     }
 
+    @Override
     public boolean canBeSetStrict() {
         return true;
     }
 
+    @Override
     public boolean supportsSynchronized() {
         return false;
     }
 
+    @Override
     public boolean canBeSetSynchronized() {
         return false;
     }
 
+    @Override
     public boolean supportsTransient() {
         return false;
     }
 
+    @Override
     public boolean canBeSetTransient() {
         return false;
     }
 
+    @Override
     public boolean supportsVolatile() {
         return false;
     }
 
+    @Override
     public boolean canBeSetVolatile() {
         return false;
     }
@@ -913,6 +949,7 @@ public final class MWClass extends MWModel
      */
     private static final int METHOD_ALLOWED_MODIFIERS_FLAGS = Modifier.ABSTRACT | Modifier.FINAL | Modifier.STRICT;
 
+    @Override
     public void modifierChanged(int oldCode, int newCode) {
         this.firePropertyChanged(MODIFIER_CODE_PROPERTY, oldCode, newCode);
         if (MWModifier.anyFlagsAreDifferent(ALLOWED_MODIFIERS_FLAGS, oldCode, newCode)) {
@@ -933,6 +970,7 @@ public final class MWClass extends MWModel
         }
     }
 
+    @Override
     public void accessLevelChanged(String oldValue, String newValue) {
         this.firePropertyChanged(MODIFIER_ACCESS_LEVEL_PROPERTY, oldValue, newValue);
     }
@@ -953,6 +991,7 @@ public final class MWClass extends MWModel
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ClassDescription#getAdditionalInfo()
      */
+    @Override
     public String getAdditionalInfo() {
         return this.getProject().getName();
     }
@@ -1002,9 +1041,11 @@ public final class MWClass extends MWModel
      */
     public Iterator declaringTypeLineage() {
         return new ChainIterator(this) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return ((MWClass) currentLink).getDeclaringType();
             }
+            @Override
             public String toString() {
                 return "MWClass.declaringTypeLineage()";
             }
@@ -1105,6 +1146,7 @@ public final class MWClass extends MWModel
             ExpandedInterfacesTreeIterator(Iterator roots) {
                 super(roots);
             }
+            @Override
             protected Iterator children(Object next) {
                 return ((MWClass) next).interfaces();
             }
@@ -1123,9 +1165,11 @@ public final class MWClass extends MWModel
     public Iterator allInterfaces() {
         return new CompositeIterator(
             new TransformationIterator(this.lineage()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWClass) next).expandedInterfaces();
                 }
+            @Override
                 public String toString() {
                     return "MWClass.allInterfaces()";
                 }
@@ -1153,9 +1197,11 @@ public final class MWClass extends MWModel
     public Iterator allAttributes() {
         return new CompositeIterator(
             new TransformationIterator(this.lineage()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWClass) next).attributes();
                 }
+            @Override
                 public String toString() {
                     return "MWClass.allAttributes()";
                 }
@@ -1183,9 +1229,11 @@ public final class MWClass extends MWModel
 
     private Iterator attributeNames(Iterator attrs) {
         return new TransformationIterator(attrs) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWClassAttribute) next).getName();
             }
+            @Override
             public String toString() {
                 return "MWClass.attributeNames(Iterator)";
             }
@@ -1254,9 +1302,11 @@ public final class MWClass extends MWModel
 
     private Iterator instanceVariables(Iterator attrs) {
         return new FilteringIterator(attrs) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWClassAttribute) next).isInstanceVariable();
             }
+            @Override
             public String toString() {
                 return "MWClass.instanceVariables(Iterator)";
             }
@@ -1273,6 +1323,7 @@ public final class MWClass extends MWModel
 
     private Iterator visibleAttributes(Iterator attrs) {
         return new FilteringIterator(attrs) {
+            @Override
             protected boolean accept(Object next) {
                 MWClassAttribute attribute = (MWClassAttribute) next;
                 if (attribute.getDeclaringType() == MWClass.this) {
@@ -1286,6 +1337,7 @@ public final class MWClass extends MWModel
                 }
                 return MWClass.this.packageName().equals(attribute.getDeclaringType().packageName());
             }
+            @Override
             public String toString() {
                 return "MWClass.visibleAttributes(Iterator)";
             }
@@ -1298,9 +1350,11 @@ public final class MWClass extends MWModel
     public Iterator allEjb20Attributes() {
         return new CompositeIterator(
             new TransformationIterator(this.lineage()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWClass) next).ejb20Attributes();
                 }
+            @Override
                 public String toString() {
                     return "MWClass.allEjb20Attributes()";
                 }
@@ -1376,9 +1430,11 @@ public final class MWClass extends MWModel
     public Iterator allMethods() {
         return new CompositeIterator(
             new TransformationIterator(this.lineage()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWClass) next).methods();
                 }
+            @Override
                 public String toString() {
                     return "MWClass.allMethods()";
                 }
@@ -1388,9 +1444,11 @@ public final class MWClass extends MWModel
 
     public Iterator constructors() {
         return new FilteringIterator(this.methods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isConstructor();
             }
+            @Override
             public String toString() {
                 return "MWClass.constructors()";
             }
@@ -1415,9 +1473,11 @@ public final class MWClass extends MWModel
 
     private Iterator nonConstructors(Iterator methodStream) {
         return new FilteringIterator(methodStream) {
+            @Override
             protected boolean accept(Object next) {
                 return ! ((MWMethod) next).isConstructor();
             }
+            @Override
             public String toString() {
                 return "MWClass.nonConstructors(Iterator)";
             }
@@ -1437,9 +1497,11 @@ public final class MWClass extends MWModel
 
     private Iterator instanceMethods(Iterator methodStream) {
         return new FilteringIterator(methodStream) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isInstanceMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.instanceMethods(Iterator)";
             }
@@ -1459,9 +1521,11 @@ public final class MWClass extends MWModel
 
     private Iterator staticMethods(Iterator methodStream) {
         return new FilteringIterator(methodStream) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isStatic();
             }
+            @Override
             public String toString() {
                 return "MWClass.staticMethods(Iterator)";
             }
@@ -1473,9 +1537,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateTopLinkGetMethods() {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateTopLinkGetMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateTopLinkGetMethods()";
             }
@@ -1487,9 +1553,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateTopLinkSetMethods() {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateTopLinkSetMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateTopLinkSetMethods()";
             }
@@ -1501,9 +1569,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateMapContainerPolicyKeyMethods() {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateMapContainerPolicyKeyMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateMapContainerPolicyKeyMethods()";
             }
@@ -1515,9 +1585,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateClassExtractionMethods() {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateClassExtractionMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateClassExtractionMethods()";
             }
@@ -1529,9 +1601,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateCloneMethods() {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateCloneMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateCloneMethods()";
             }
@@ -1543,9 +1617,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateDescriptorEventMethods() {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateDescriptorEventMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateDescriptorEventMethods()";
             }
@@ -1560,9 +1636,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateFactoryMethods() {
         return new FilteringIterator(this.methods()) {        // NOT #allMethods()
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateFactoryMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateFactoryMethods()";
             }
@@ -1577,9 +1655,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateInstantiationMethods() {
         return new FilteringIterator(this.methods()) {        // NOT #allMethods()
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateInstantiationMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateInstantiationMethods()";
             }
@@ -1591,9 +1671,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateFactoryInstantiationMethodsFor(final MWClass type) {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateFactoryInstantiationMethodFor(type);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateFactoryInstantiationMethodsFor(MWClass)";
             }
@@ -1608,9 +1690,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateDescriptorAfterLoadMethods() {
         return new FilteringIterator(this.methods()) {        // NOT #allMethods()
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateDescriptorAfterLoadMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateDescriptorAfterLoadMethods()";
             }
@@ -1622,9 +1706,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateAttributeTransformerMethods() {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateAttributeTransformerMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateAttributeTransformerMethods()";
             }
@@ -1636,9 +1722,11 @@ public final class MWClass extends MWModel
      */
     public Iterator candidateFieldTransformerMethods() {
         return new FilteringIterator(this.allMethods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateFieldTransformerMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateFieldTransformerMethods()";
             }
@@ -1647,9 +1735,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateGetMethodsFor(final MWClassAttribute attribute) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateGetMethodFor(attribute);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateGetMethodsFor(MWClassAttribute)";
             }
@@ -1658,9 +1748,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateSetMethodsFor(final MWClassAttribute attribute) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateSetMethodFor(attribute);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateSetMethodsFor(MWClassAttribute)";
             }
@@ -1669,9 +1761,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateGetMethodsFor(final MWClass type) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateGetMethodFor(type);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateGetMethodsFor(MWClass)";
             }
@@ -1680,9 +1774,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateSetMethodsFor(final MWClass type) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateSetMethodFor(type);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateSetMethodsFor(MWClass)";
             }
@@ -1691,9 +1787,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateAddMethodsFor(final MWClass itemType) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateAddMethodFor(itemType);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateAddMethodsFor(MWClass)";
             }
@@ -1702,9 +1800,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateAddMethodsFor(final MWClass keyType, final MWClass itemType) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateAddMethodFor(keyType, itemType);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateAddMethodsFor(MWClass, MWClass)";
             }
@@ -1713,9 +1813,11 @@ public final class MWClass extends MWModel
 
     Iterator candidateRemoveMethodsFor(final MWClass itemOrKeyType) {
         return new FilteringIterator(this.methods()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWMethod) next).isCandidateRemoveMethodFor(itemOrKeyType);
             }
+            @Override
             public String toString() {
                 return "MWClass.candidateRemoveMethodsFor(MWClass)";
             }
@@ -1727,9 +1829,11 @@ public final class MWClass extends MWModel
      */
     private Iterator ejb20GetMethods() {
         return new FilteringIterator(this.methods()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMethod) next).isEjb20GetMethod();
             }
+            @Override
             public String toString() {
                 return "MWClass.ejb20GetMethods()";
             }
@@ -2062,9 +2166,11 @@ public final class MWClass extends MWModel
      */
     public Iterator lineage() {
         return new ChainIterator(this) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return ((MWClass) currentLink).getSuperclass();
             }
+            @Override
             public String toString() {
                 return "MWClass.lineage()";
             }
@@ -2078,6 +2184,7 @@ public final class MWClass extends MWModel
      */
     public Iterator lineageIncludingInterfaces() {
         return new TreeIterator(this) {
+            @Override
             protected Iterator children(Object next) {
                 MWClass type = (MWClass) next;
                 MWClass superType = type.getSuperclass();
@@ -2087,6 +2194,7 @@ public final class MWClass extends MWModel
                 :
                     new CompositeIterator(superType, type.interfaces());
             }
+            @Override
             public String toString() {
                 return "MWClass.lineageIncludingInterfaces()";
             }
@@ -2100,9 +2208,11 @@ public final class MWClass extends MWModel
      */
     public Iterator lineageTo(final MWClass superclass) {
         return new ChainIterator(this) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return (currentLink == superclass) ? null : ((MWClass) currentLink).getSuperclass();
             }
+            @Override
             public String toString() {
                 return "MWClass.lineageTo(MWClass)";
             }
@@ -2260,6 +2370,7 @@ public final class MWClass extends MWModel
     /**
      * containment hierarchy
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.modifier);
@@ -2279,9 +2390,11 @@ public final class MWClass extends MWModel
 
     private NodeReferenceScrubber buildDeclaringTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClass.this.setDeclaringType(null);
             }
+            @Override
             public String toString() {
                 return "MWClass.buildDeclaringTypeScrubber()";
             }
@@ -2290,9 +2403,11 @@ public final class MWClass extends MWModel
 
     private NodeReferenceScrubber buildSuperclassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClass.this.setSuperclass(null);
             }
+            @Override
             public String toString() {
                 return "MWClass.buildSuperclassScrubber()";
             }
@@ -2308,9 +2423,11 @@ public final class MWClass extends MWModel
 
     private NodeReferenceScrubber buildInterfaceScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClass.this.removeInterfaceHandle((MWClassHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWClass.buildInterfaceScrubber()";
             }
@@ -2326,9 +2443,11 @@ public final class MWClass extends MWModel
 
     private NodeReferenceScrubber buildTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWClass.this.removeTypeHandle((MWClassHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWClass.buildTypeScrubber()";
             }
@@ -2339,6 +2458,7 @@ public final class MWClass extends MWModel
      * Notify the repository that the type has changed.
      * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#aspectChanged(java.lang.String)
      */
+    @Override
     protected void aspectChanged(String aspectName) {
         super.aspectChanged(aspectName);
         this.getRepository().typeChanged(this);
@@ -2354,6 +2474,7 @@ public final class MWClass extends MWModel
      * don't want the "core" type's parent (the class repository) marked dirty
      * because "core" types are never written out to XML files.
      */
+    @Override
     protected void markParentBranchDirty() {
         if (this.isCoreType()) {
             // do nothing - the repository isn't really dirty yet
@@ -2694,6 +2815,7 @@ public final class MWClass extends MWModel
 
     // ********** problem handling **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         // @see #addDescriptorProblemsTo(List)
@@ -2734,6 +2856,7 @@ public final class MWClass extends MWModel
 
     // ********** displaying and printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(getName());
     }
@@ -2741,6 +2864,7 @@ public final class MWClass extends MWModel
     /**
      * e.g. "Object"
      */
+    @Override
     public String displayString() {
         return this.shortName();
     }
@@ -3070,6 +3194,7 @@ public final class MWClass extends MWModel
     /**
      * the primitive flag is derived from the class's name
      */
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         this.primitive = this.defaultPrimitiveFlag();
@@ -3225,9 +3350,11 @@ public final class MWClass extends MWModel
 
     private static Iterator primitiveClasses(Iterator pairs) {
         return new TransformationIterator(pairs) {
+            @Override
             protected Object transform(Object next) {
                 return ((PrimitiveWrapperPair) next).getPrimitiveClass();
             }
+            @Override
             public String toString() {
                 return "MWClass.primitiveClasses(Iterator)";
             }
@@ -3236,9 +3363,11 @@ public final class MWClass extends MWModel
 
     private static Iterator primitiveClassNames(Iterator pairs) {
         return new TransformationIterator(pairs) {
+            @Override
             protected Object transform(Object next) {
                 return ((PrimitiveWrapperPair) next).primitiveClassName();
             }
+            @Override
             public String toString() {
                 return "MWClass.primitiveClassNames(Iterator)";
             }
@@ -3247,9 +3376,11 @@ public final class MWClass extends MWModel
 
     private static Iterator wrapperClasses(Iterator pairs) {
         return new TransformationIterator(pairs) {
+            @Override
             protected Object transform(Object next) {
                 return ((PrimitiveWrapperPair) next).getWrapperClass();
             }
+            @Override
             public String toString() {
                 return "MWClass.wrapperClasses(Iterator)";
             }

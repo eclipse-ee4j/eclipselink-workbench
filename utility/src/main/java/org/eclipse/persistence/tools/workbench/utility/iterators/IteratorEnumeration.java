@@ -39,6 +39,7 @@ public class IteratorEnumeration implements Enumeration {
     /**
      * @see java.util.Enumeration#hasMoreElements()
      */
+    @Override
     public boolean hasMoreElements() {
         return this.iterator.hasNext();
     }
@@ -46,6 +47,7 @@ public class IteratorEnumeration implements Enumeration {
     /**
      * @see java.util.Enumeration#nextElement()
      */
+    @Override
     public Object nextElement() {
         return this.iterator.next();
     }
@@ -53,6 +55,7 @@ public class IteratorEnumeration implements Enumeration {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.iterator + ')';
     }

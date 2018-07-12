@@ -54,34 +54,42 @@ public class ObjectType extends FieldType {
 
     // ********** public API **********
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
+    @Override
     public int arrayDepth() {
         return 0;
     }
 
+    @Override
     public String elementTypeName() {
         return this.typeName;
     }
 
+    @Override
     public String javaName() {
         return this.typeName;
     }
 
+    @Override
     public Class javaClass() throws ClassNotFoundException {
         return Class.forName(this.typeName);
     }
 
+    @Override
     public void appendDeclarationTo(StringBuffer sb) {
         sb.append(this.typeName);
     }
 
+    @Override
     public void printDeclarationOn(PrintWriter writer) {
         writer.print(this.typeName);
     }
 
+    @Override
     public String internalName() {
         StringBuffer sb = new StringBuffer();
         this.appendInternalNameTo(sb);
@@ -91,12 +99,14 @@ public class ObjectType extends FieldType {
 
     // ********** internal API **********
 
+    @Override
     void appendArrayJavaNameTo(StringBuffer sb) {
         sb.append('L');
         sb.append(this.typeName);
         sb.append(';');
     }
 
+    @Override
     void appendArrayInternalNameTo(StringBuffer sb) {
         this.appendInternalNameTo(sb);
     }

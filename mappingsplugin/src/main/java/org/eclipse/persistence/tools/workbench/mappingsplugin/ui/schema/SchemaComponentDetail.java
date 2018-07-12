@@ -46,6 +46,7 @@ abstract class SchemaComponentDetail
 
     private StateChangeListener buildStateChangeListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 SchemaComponentDetail.this.valueChanged();
             }

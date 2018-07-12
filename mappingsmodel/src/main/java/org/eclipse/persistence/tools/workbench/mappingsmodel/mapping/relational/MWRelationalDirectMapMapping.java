@@ -63,6 +63,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
         super(parent, attribute, name);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.directKeyColumnHandle = new MWColumnHandle(this, this.buildDirectKeyColumnScrubber());
@@ -73,6 +74,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     // ************** Containment Hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.directKeyColumnHandle);
@@ -82,9 +84,11 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     private NodeReferenceScrubber buildDirectKeyColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalDirectMapMapping.this.setDirectKeyColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalDirectMapMapping.buildDirectKeyColumnScrubber()";
             }
@@ -95,10 +99,12 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     // **************** Morphing **************
 
+    @Override
     public MWDirectMapMapping asMWDirectMapMapping() {
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWRelationalDirectMapMapping(this);
     }
@@ -106,6 +112,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     // **************** MWQueryable interface ***********************
 
+    @Override
     public String iconKey() {
         return "mapping.directMap";
     }
@@ -124,6 +131,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
         firePropertyChanged(DIRECT_KEY_COLUMN_PROPERTY, old, directKeyColumn);
     }
 
+    @Override
     protected void setDirectFieldsNull() {
         super.setDirectFieldsNull();
         setDirectKeyColumn(null);
@@ -131,28 +139,33 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     // **************** Direct Key Converter ******************
 
+    @Override
     public MWConverter getDirectKeyConverter() {
         return this.directKeyConverter;
     }
 
+    @Override
     public MWNullConverter setNullDirectKeyConverter() {
         MWNullConverter nullConverter = new MWNullConverter(this);
         this.setDirectKeyConverter(nullConverter);
         return nullConverter;
     }
 
+    @Override
     public MWObjectTypeConverter setObjectTypeDirectKeyConverter() {
         MWObjectTypeConverter objectTypeConverter = new MWObjectTypeConverter(this);
         this.setDirectKeyConverter(objectTypeConverter);
         return objectTypeConverter;
     }
 
+    @Override
     public MWSerializedObjectConverter setSerializedObjectDirectKeyConverter() {
         MWSerializedObjectConverter serializedObjectConverter = new MWSerializedObjectConverter(this);
         this.setDirectKeyConverter(serializedObjectConverter);
         return serializedObjectConverter;
     }
 
+    @Override
     public MWTypeConversionConverter setTypeConversionDirectKeyConverter() {
         MWTypeConversionConverter typeConversionConverter = new MWXmlTypeConversionConverter(this);
         this.setDirectKeyConverter(typeConversionConverter);
@@ -174,6 +187,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
     }
 
 
+    @Override
     protected MWClass conatinerPolicyClass() {
         return getContainerPolicy().getDefaultingContainerClass().getContainerClass();
     }
@@ -181,6 +195,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     // **************** MWRelationalDirectContainerMapping implementation **************
 
+    @Override
     protected int automapNonPrimaryKeyColumnsSize() {
         return 2;    // key and value columns
     }
@@ -188,6 +203,7 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     //************** Problem Handling **********
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkDirectKeyColumn(newProblems);
@@ -206,10 +222,12 @@ public final class MWRelationalDirectMapMapping extends MWRelationalDirectContai
 
     // **************** Runtime Conversion ******************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new DirectMapMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         DirectMapMapping runtimeMapping = (DirectMapMapping) super.runtimeMapping();
 

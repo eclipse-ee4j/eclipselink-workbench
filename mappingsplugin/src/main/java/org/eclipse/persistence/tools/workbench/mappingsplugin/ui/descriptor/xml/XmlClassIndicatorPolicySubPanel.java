@@ -64,6 +64,7 @@ public class XmlClassIndicatorPolicySubPanel
 
     protected void initialize(PropertyValueModel descriptorHolder) {
         PropertyValueModel schemaContextHolder = new PropertyAspectAdapter(descriptorHolder, MWXmlDescriptor.SCHEMA_CONTEXT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlDescriptor) this.subject).getSchemaContext();
             }
@@ -73,6 +74,7 @@ public class XmlClassIndicatorPolicySubPanel
 
     private PropertyChangeListener buildSchemaContextPropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //this looks funny, but forces the regeneration of the indicator type values only when use xsi type
                 //is selected so that user defined values do not get blown away.
@@ -89,6 +91,7 @@ public class XmlClassIndicatorPolicySubPanel
 
     private ValueModel buildClassIndicatorFieldSelectionHolder() {
         return new PropertyAspectAdapter(getClassIndicatorFieldPolicyHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlClassIndicatorFieldPolicy) this.subject).getField();
             }
@@ -256,6 +259,7 @@ public class XmlClassIndicatorPolicySubPanel
         return useClassIndicatorFieldPanel;
     }
 
+    @Override
     protected void initializeLayout(Collection isRootListeners) {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -309,6 +313,7 @@ public class XmlClassIndicatorPolicySubPanel
 
     private PropertyChangeListener buildUseXSITypeDictionaryListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() == Boolean.FALSE);
             }
@@ -317,9 +322,11 @@ public class XmlClassIndicatorPolicySubPanel
 
     protected void initializeUseXSITypeAsIndicatorHolder() {
         this.useXSITypeModel = new PropertyAspectAdapter(getClassIndicatorFieldPolicyHolder(), MWXmlClassIndicatorFieldPolicy.USE_XSITYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlClassIndicatorFieldPolicy) this.subject).isUseXSIType());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlClassIndicatorFieldPolicy) this.subject).setUseXSIType(((Boolean)value).booleanValue());
             }
@@ -333,6 +340,7 @@ public class XmlClassIndicatorPolicySubPanel
     private void addSpecifyFieldListener(final SpecifyFieldListener listener) {
         getUseXSITypeModel().addPropertyChangeListener(
             new PropertyChangeListener() {
+                @Override
                 public void propertyChange(PropertyChangeEvent evt) {
                     boolean enabled = evt.getNewValue() == Boolean.FALSE;
                     listener.updateSpecifyFieldStatus(enabled);
@@ -341,11 +349,13 @@ public class XmlClassIndicatorPolicySubPanel
         );
     }
 
+    @Override
     public void updateSpecifyFieldStatus(boolean newValue) {
         this.isSpecifyField = newValue;
         updateEnablementStatus();
     }
 
+    @Override
     public void updateEnablementStatus() {
         super.updateEnablementStatus();
         this.useXSITypeRadioButton.setEnabled(this.isRoot() && this.isIndicatorType());

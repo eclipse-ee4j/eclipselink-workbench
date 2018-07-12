@@ -19,8 +19,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relation
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryable;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 
@@ -87,6 +85,7 @@ public final class MWQueryableHandle extends MWHandle {
         this.queryable = queryable;
     }
 
+    @Override
     protected Node node() {
         return getQueryable();
     }
@@ -96,6 +95,7 @@ public final class MWQueryableHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (this.mappingDescriptorName != null && this.queryableName != null) {
@@ -117,10 +117,12 @@ public final class MWQueryableHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER queryable should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.queryable.compareTo(((MWQueryableHandle) o).queryable);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append((this.queryable == null) ? "null" : this.queryable.getName());
     }

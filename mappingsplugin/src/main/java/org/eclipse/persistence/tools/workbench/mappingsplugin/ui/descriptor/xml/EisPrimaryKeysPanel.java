@@ -49,6 +49,7 @@ final class EisPrimaryKeysPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initializeLayout() {
         this.setBorder(BorderFactory.createCompoundBorder(
             buildTitledBorder("PRIMARY_KEYS_PANEL.TITLE"),
@@ -85,10 +86,12 @@ final class EisPrimaryKeysPanel
 
     private AddRemoveListPanel.Adapter buildPrimaryKeysAddRemoveAdapter() {
         return new AddRemoveListPanel.Adapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 listSelectionModel.setSelectedValues(EisPrimaryKeysPanel.this.addPrimaryKeys());
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 EisPrimaryKeysPanel.this.removePrimaryKeys(listSelectionModel.getSelectedValues());
             }
@@ -119,10 +122,12 @@ final class EisPrimaryKeysPanel
     private ListValueModel buildPrimaryKeysHolder() {
         return new CollectionListValueModelAdapter(
             new CollectionAspectAdapter(this.buildPrimaryKeyPolicyHolder(), MWXmlPrimaryKeyPolicy.PRIMARY_KEYS_COLLECTION) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return ((MWXmlPrimaryKeyPolicy) this.subject).primaryKeys();
                 }
 
+                @Override
                 protected int sizeFromSubject() {
                     return ((MWXmlPrimaryKeyPolicy) this.subject).primaryKeysSize();
                 }
@@ -132,6 +137,7 @@ final class EisPrimaryKeysPanel
 
     private ValueModel buildPrimaryKeyPolicyHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlDescriptor) this.subject).primaryKeyPolicy();
             }
@@ -140,6 +146,7 @@ final class EisPrimaryKeysPanel
 
     private ListCellRenderer buildPrimaryKeysListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((MWXmlField) value).getXpath();
             }

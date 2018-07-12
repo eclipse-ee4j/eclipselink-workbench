@@ -27,7 +27,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribu
 
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLAnyCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCollectionReferenceMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 
@@ -74,6 +73,7 @@ public final class MWXmlCollectionReferenceMapping extends MWAbstractXmlReferenc
 
     // **************** Morphing **********************************************
 
+    @Override
     public MWXmlCollectionReferenceMapping asMWXmlCollectionReferenceMapping() {
         return this;
     }
@@ -128,6 +128,7 @@ public final class MWXmlCollectionReferenceMapping extends MWAbstractXmlReferenc
         this.containerPolicy = containerPolicy;
     }
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -138,6 +139,7 @@ public final class MWXmlCollectionReferenceMapping extends MWAbstractXmlReferenc
         firePropertyChanged(CONTAINER_POLICY_PROPERTY, oldValue, containerPolicy);
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -147,6 +149,7 @@ public final class MWXmlCollectionReferenceMapping extends MWAbstractXmlReferenc
         return containerPolicy;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -156,6 +159,7 @@ public final class MWXmlCollectionReferenceMapping extends MWAbstractXmlReferenc
         return containerPolicy;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -165,6 +169,7 @@ public final class MWXmlCollectionReferenceMapping extends MWAbstractXmlReferenc
         return containerPolicy;
     }
 
+    @Override
     public boolean usesTransparentIndirection() {
          return false;
     }

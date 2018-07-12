@@ -35,11 +35,9 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.descriptors.DescriptorEvent;
 
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.queries.ReadAllQuery;
 
 
 public abstract class MWModel
@@ -74,6 +72,7 @@ public abstract class MWModel
      * Every object except the MWProject will have a parent.
      */
     // TODO this can be renamed to getParent() when we move to jdk 1.5
+    @Override
     public final MWNode getMWParent() {
         return (MWNode) getParent();
     }
@@ -82,6 +81,7 @@ public abstract class MWModel
      * Do NOT override this method.
      * Every model object should be able to return the project.
      */
+    @Override
     public final MWProject getProject() {
         if (this.getParent() == null) {
             try {
@@ -111,6 +111,7 @@ public abstract class MWModel
      * Do NOT override this method.
      * Every model object should be able to return the class repository.
      */
+    @Override
     public final MWClassRepository getRepository() {
         return this.getProject().getClassRepository();
     }
@@ -131,6 +132,7 @@ public abstract class MWModel
      * since that would probably drop any changes entered manually
      * by the user since the last refresh.
      */
+    @Override
     public final MWClass typeNamed(String typeName) {
         return this.getRepository().typeNamedInternal(typeName);
     }
@@ -151,6 +153,7 @@ public abstract class MWModel
      * since that would probably drop any changes entered manually
      * by the user since the last refresh.
      */
+    @Override
     public final MWClass typeFor(Class javaClass) {
         return this.typeNamed(javaClass.getName());
     }
@@ -331,6 +334,7 @@ public abstract class MWModel
     /**
      * This is called when a mapping is morphed
      */
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).mappingReplaced(oldMapping, newMapping);
@@ -342,6 +346,7 @@ public abstract class MWModel
     /**
      * This called when a descriptor is morphed.
      */
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).descriptorReplaced(oldDescriptor, newDescriptor);
@@ -356,6 +361,7 @@ public abstract class MWModel
      * This is called when a descriptor is unmapped in lieu of
      * calling #nodeRemoved(Node) for all the mappings
      */
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             MWNode child = (MWNode) stream.next();
@@ -375,6 +381,7 @@ public abstract class MWModel
      * handles. This happens BEFORE the call to #postProjectBuild() below.
      * @see MWProject#postProjectBuild()
      */
+    @Override
     public final void resolveClassHandles() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).resolveClassHandles();
@@ -389,6 +396,7 @@ public abstract class MWModel
      * #postProjectBuild() below.
      * @see MWProject#postProjectBuild()
      */
+    @Override
     public final void resolveMetadataHandles() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).resolveMetadataHandles();
@@ -403,6 +411,7 @@ public abstract class MWModel
      * #postProjectBuild() below.
      * @see MWProject#postProjectBuild()
      */
+    @Override
     public final void resolveColumnHandles() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).resolveColumnHandles();
@@ -417,6 +426,7 @@ public abstract class MWModel
      * #postProjectBuild() below.
      * @see MWProject#postProjectBuild()
      */
+    @Override
     public final void resolveReferenceHandles() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).resolveReferenceHandles();
@@ -431,6 +441,7 @@ public abstract class MWModel
      * #postProjectBuild() below.
      * @see MWProject#postProjectBuild()
      */
+    @Override
     public final void resolveDescriptorHandles() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).resolveDescriptorHandles();
@@ -444,6 +455,7 @@ public abstract class MWModel
      * This happens BEFORE the call to #postProjectBuild() below.
      * @see MWProject#postProjectBuild()
      */
+    @Override
     public final void resolveMethodHandles() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).resolveMethodHandles();
@@ -456,6 +468,7 @@ public abstract class MWModel
      * descriptor handles have been resolved.
      * Now we can cascade through the model, tying everything together.
      */
+    @Override
     public void postProjectBuild() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             ((MWNode) stream.next()).postProjectBuild();
@@ -470,6 +483,7 @@ public abstract class MWModel
     /**
      * Return something useful for the UI.
      */
+    @Override
     public String displayString() {
         // the default is to use the developer-friendly string...
         return this.toString();
@@ -538,6 +552,7 @@ public abstract class MWModel
      */
     private Comparator buildBasicTypesComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 MWTypeDeclaration c1 = (MWTypeDeclaration) o1;
                 MWTypeDeclaration c2 = (MWTypeDeclaration) o2;

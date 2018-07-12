@@ -94,6 +94,7 @@ abstract class AttributeItemDialog extends AbstractDialog {
         return this.queryableTree;
     }
 
+    @Override
     protected void initializeContentPane() {
         super.initializeContentPane();
         if (this.attributeItem != null) {
@@ -105,6 +106,7 @@ abstract class AttributeItemDialog extends AbstractDialog {
         }
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -130,6 +132,7 @@ abstract class AttributeItemDialog extends AbstractDialog {
 
 
         SwingComponentFactory.addDoubleClickMouseListener(queryableTree, new DoubleClickMouseListener() {
+            @Override
             public void mouseDoubleClicked(MouseEvent e) {
                 TreePath path = queryableTree.getPathForLocation(e.getX(), e.getY());
 
@@ -158,6 +161,7 @@ abstract class AttributeItemDialog extends AbstractDialog {
     */
     private TreeSelectionListener buildTreeSelectionHandler() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 treeSelectionChanged(e);
             }
@@ -179,11 +183,13 @@ abstract class AttributeItemDialog extends AbstractDialog {
         }
     }
 
+    @Override
     protected void cancelPressed() {
         ((DefaultMutableTreeNode) this.queryableTree.getModel().getRoot()).removeAllChildren();
         super.cancelPressed();
     }
 
+    @Override
     protected boolean preConfirm() {
         TreePath selectionPath = this.queryableTree.getSelectionPath();
 

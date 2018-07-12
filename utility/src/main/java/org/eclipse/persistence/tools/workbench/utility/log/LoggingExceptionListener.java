@@ -78,6 +78,7 @@ public class LoggingExceptionListener
      * Logger#doLog(LogRecord) like all the other Logger#log(...) methods.
      * @see ExceptionListener#exceptionThrown(Thread, Throwable)
      */
+    @Override
     public void exceptionThrown(Thread thread, Throwable exception) {
         LogRecord logRecord = new LogRecord(this.level, this.message);
         logRecord.setParameters(new Object[] { (thread == null) ? "null" : thread.getName() });
@@ -93,6 +94,7 @@ public class LoggingExceptionListener
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

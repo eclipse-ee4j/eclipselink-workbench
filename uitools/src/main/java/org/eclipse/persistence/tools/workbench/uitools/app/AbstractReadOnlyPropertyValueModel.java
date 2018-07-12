@@ -53,6 +53,7 @@ public abstract class AbstractReadOnlyPropertyValueModel
     /**
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         throw new UnsupportedOperationException();
     }
@@ -63,6 +64,7 @@ public abstract class AbstractReadOnlyPropertyValueModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getValue());
     }

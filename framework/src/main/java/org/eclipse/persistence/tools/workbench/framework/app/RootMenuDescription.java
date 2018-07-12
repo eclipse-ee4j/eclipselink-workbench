@@ -52,6 +52,7 @@ public class RootMenuDescription implements GroupContainerDescription
      * a group of menu items.  Default implemented parameter would be
      * <code>MenuGroupDescription</code>.
      */
+    @Override
     public void add(ComponentGroupDescription menuGroup)
     {
         buttonGroups.add(menuGroup);
@@ -62,12 +63,14 @@ public class RootMenuDescription implements GroupContainerDescription
      * a group of menu items.  Default implemented parameter would be
      * <code>MenuGroupDescription</code>.
      */
+    @Override
     public void remove(ComponentGroupDescription menuGroup)
     {
         buttonGroups.remove(menuGroup);
     }
 
 
+    @Override
     public boolean hasComponents()
     {
         return buttonGroups.size() > 0;
@@ -76,6 +79,7 @@ public class RootMenuDescription implements GroupContainerDescription
     /**
      * Returns the root <code>JMenu</code>.
      */
+    @Override
     public Component component()
     {
         JMenu menu = new JMenu();
@@ -89,6 +93,7 @@ public class RootMenuDescription implements GroupContainerDescription
     /**
      * All actions expressed as menu items in this menu.
      */
+    @Override
     public Iterator actions()
     {
         ArrayList actionIterators = new ArrayList();
@@ -104,6 +109,7 @@ public class RootMenuDescription implements GroupContainerDescription
      * Updates this menu and all of its children based upon the Collection
      * of <code>FrameworkActions</code>.
      */
+    @Override
     public void updateOn(Collection frameworkActions)
     {
         for (Iterator groups = buttonGroups.iterator(); groups.hasNext();)
@@ -119,6 +125,7 @@ public class RootMenuDescription implements GroupContainerDescription
      * Merges this menu based upon the <code>FrameworkActions</code> expressed
      * in the given <code>ActionContainer</code>.
      */
+    @Override
     public void mergeWith(ActionContainer menuDescription)
     {
         updateOn(CollectionTools.collection(menuDescription.actions()));
@@ -139,6 +146,7 @@ public class RootMenuDescription implements GroupContainerDescription
     /**
      * Returns all of the menu items contained in this menu in an ordered List.
      */
+    @Override
     public ListIterator components()
     {
         ArrayList listOfItems = new ArrayList();

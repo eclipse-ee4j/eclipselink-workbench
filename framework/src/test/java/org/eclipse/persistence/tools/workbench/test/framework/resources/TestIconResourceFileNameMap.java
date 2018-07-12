@@ -22,6 +22,7 @@ public class TestIconResourceFileNameMap extends AbstractIconResourceFileNameMap
         {"copy", "basic/edit/Copy.gif"},
     };
 
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

@@ -58,12 +58,14 @@ final class MethodPropertiesPanel extends AbstractPanel {
 
     private PropertyValueModel buildReturnTypeHolder() {
         PropertyValueModel adapter = new PropertyAspectAdapter(this.methodHolder, MWMethod.RETURN_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWMethod) subject).isConstructor()) {
                     return null;
                 }
                 return ((MWMethod) subject).getReturnType();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWMethod) subject).setReturnType((MWClass) value);
             }
@@ -200,6 +202,7 @@ final class MethodPropertiesPanel extends AbstractPanel {
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return MethodPropertiesPanel.this.getMethod().getRepository();
             }
@@ -224,12 +227,14 @@ final class MethodPropertiesPanel extends AbstractPanel {
 
     private PropertyValueModel buildDimensionalityHolder() {
         return new PropertyAspectAdapter(this.methodHolder, MWMethod.RETURN_TYPE_DIMENSIONALITY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWMethod) subject).isConstructor()) {
                     return new Integer(0);
                 }
                 return new Integer(((MWMethod) subject).getReturnTypeDimensionality());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWMethod) subject).setReturnTypeDimensionality(((Integer) value).intValue());
             }
@@ -239,6 +244,7 @@ final class MethodPropertiesPanel extends AbstractPanel {
 
     private PropertyChangeListener buildMethodListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(getMethod() != null && !getMethod().isConstructor());
             }
@@ -247,6 +253,7 @@ final class MethodPropertiesPanel extends AbstractPanel {
 
     private PropertyChangeListener buildReturnTypeListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() == null ? false : !((MWClass) evt.getNewValue()).isVoid());
             }

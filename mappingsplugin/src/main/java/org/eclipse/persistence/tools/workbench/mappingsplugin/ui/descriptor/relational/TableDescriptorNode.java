@@ -32,10 +32,12 @@ public final class TableDescriptorNode extends RelationalClassDescriptorNode {
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public String helpTopicID() {
         return "descriptor.class";
     }
 
+    @Override
     public String buildIconKey() {
         return    "descriptor.class";
     }
@@ -46,18 +48,21 @@ public final class TableDescriptorNode extends RelationalClassDescriptorNode {
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_TABLE_DESCRIPTOR_NODE";
     }
 
     // ********** DescriptorNode overrides *************
 
+    @Override
     public boolean supportsInterfaceAliasPolicy() {
         return true;
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return TableDescriptorTabbedPropertiesPage.class;
     }
@@ -65,14 +70,17 @@ public final class TableDescriptorNode extends RelationalClassDescriptorNode {
 
     // ********** MWRelationalClassDescriptorNode overrides **********
 
+    @Override
     public boolean isTableDescriptor() {
         return true;
     }
 
+    @Override
     public boolean supportsTransactionalDescriptorProperties() {
         return true;
     }
 
+    @Override
     public void selectQueryKey(MWQueryKey queryKey, WorkbenchContext context) {
         ((TableDescriptorTabbedPropertiesPage) context.getPropertiesPage()).selectQueryKey(queryKey);
 }

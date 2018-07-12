@@ -43,6 +43,7 @@ public class ExternalClassDescriptionClassDescriptionRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository#refreshClassDescriptions()
      */
+    @Override
     public void refreshClassDescriptions() {
         this.repository.refreshExternalClassDescriptions();
     }
@@ -50,6 +51,7 @@ public class ExternalClassDescriptionClassDescriptionRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository#classDescriptions()
      */
+    @Override
     public Iterator classDescriptions() {
         return this.filteredExternalClassDescriptions(this.repository.externalClassDescriptions());
     }
@@ -60,6 +62,7 @@ public class ExternalClassDescriptionClassDescriptionRepository
      */
     protected Iterator filteredExternalClassDescriptions(Iterator externalClassDescriptions) {
         return new FilteringIterator(externalClassDescriptions) {
+            @Override
             protected boolean accept(Object o) {
                 return ExternalClassDescriptionClassDescriptionRepository.this.accept(((ExternalClassDescription) o).getName());
             }

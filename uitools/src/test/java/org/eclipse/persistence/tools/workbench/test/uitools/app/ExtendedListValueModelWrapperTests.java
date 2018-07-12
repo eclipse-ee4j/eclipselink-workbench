@@ -54,6 +54,7 @@ public class ExtendedListValueModelWrapperTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.listHolder = new SimpleListValueModel(this.buildList());
@@ -96,6 +97,7 @@ public class ExtendedListValueModelWrapperTests extends TestCase {
         return new ExtendedListValueModelWrapper(this.buildPrefix(), lvm, this.buildSuffix());
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -431,18 +433,22 @@ public class ExtendedListValueModelWrapperTests extends TestCase {
 
     private ListChangeListener buildListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ExtendedListValueModelWrapperTests.this.eventType = ADD;
                 ExtendedListValueModelWrapperTests.this.event = e;
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ExtendedListValueModelWrapperTests.this.eventType = REMOVE;
                 ExtendedListValueModelWrapperTests.this.event = e;
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ExtendedListValueModelWrapperTests.this.eventType = REPLACE;
                 ExtendedListValueModelWrapperTests.this.event = e;
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ExtendedListValueModelWrapperTests.this.eventType = CHANGE;
                 ExtendedListValueModelWrapperTests.this.event = e;

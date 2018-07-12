@@ -56,6 +56,7 @@ final class RelationalDescriptorComponentFactory extends TransactionalDescriptor
 
     private static StringConverter buildColumnStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWColumn) o).qualifiedName();
             }
@@ -77,6 +78,7 @@ final class RelationalDescriptorComponentFactory extends TransactionalDescriptor
 
     private static Iterator findEligibleColumns(Iterator tableFields, final Collection fieldsToExclude) {
         return new FilteringIterator(tableFields) {
+            @Override
             protected boolean accept(Object next) {
                 return ! fieldsToExclude.contains(next);
             }

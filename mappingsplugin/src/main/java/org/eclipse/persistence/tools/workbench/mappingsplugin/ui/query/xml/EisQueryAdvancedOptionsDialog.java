@@ -45,10 +45,12 @@ final class EisQueryAdvancedOptionsDialog extends QueryAdvancedOptionsDialog {
         super(query, context);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.eisQueryAdvancedOptions";
     }
 
+    @Override
     protected Component buildMainPanel() {
 
         JPanel panel = new JPanel(new GridBagLayout());

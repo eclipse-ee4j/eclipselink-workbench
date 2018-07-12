@@ -35,6 +35,7 @@ public class OrderedContainerDiff extends CompositeDiff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         if (this.different()) {
             pw.print("The ");

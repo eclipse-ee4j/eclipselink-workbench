@@ -52,6 +52,7 @@ public class PreferencePropertyValueModelTests extends PreferencesTestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.testNode.put(KEY_NAME, STRING_VALUE);
@@ -63,12 +64,14 @@ public class PreferencePropertyValueModelTests extends PreferencesTestCase {
         this.event = null;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }
 
     private PropertyChangeListener buildValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 if (PreferencePropertyValueModelTests.this.event != null) {
                     throw new IllegalStateException("unexpected this.event: " + e);
@@ -277,9 +280,11 @@ public class PreferencePropertyValueModelTests extends PreferencesTestCase {
 
     private NodeChangeListener buildParentNodeChangeListener() {
         return new NodeChangeListener() {
+            @Override
             public void childAdded(NodeChangeEvent e) {
                 throw new IllegalStateException("unexpected this.event: " + e);
             }
+            @Override
             public void childRemoved(NodeChangeEvent e) {
                 if (e.getChild() == PreferencePropertyValueModelTests.this.testNode) {
                     PreferencePropertyValueModelTests.this.preferenceAdapter.removePropertyChangeListener(ValueModel.VALUE, PreferencePropertyValueModelTests.this.listener);
@@ -341,6 +346,7 @@ public class PreferencePropertyValueModelTests extends PreferencesTestCase {
 
     private PreferenceChangeListener buildPreferenceChangeListener() {
         return new PreferenceChangeListener() {
+            @Override
             public void preferenceChange(PreferenceChangeEvent evt) {
                 PreferencePropertyValueModelTests.this.preferenceEvent = evt;
             }
@@ -382,6 +388,7 @@ private class AlwaysUpdatePreferencePropertyValueModel extends PreferencePropert
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.adapters.PreferencePropertyValueModel#shouldSetPreference(java.lang.Object, java.lang.Object)
      */
+    @Override
     protected boolean shouldSetPreference(Object oldValue, Object newValue) {
         return true;
     }

@@ -78,6 +78,7 @@ public final class XmlSchemaNode
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.propertiesPages = new HashMap();
@@ -89,6 +90,7 @@ public final class XmlSchemaNode
      */
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 XmlSchemaNode.this.disposePropertiesPage(e.getWindow());
             }
@@ -109,6 +111,7 @@ public final class XmlSchemaNode
 
     // **************** Properties pages **************************************
 
+    @Override
     public Component propertiesPage(WorkbenchContext context) {
         Window window = context.getCurrentWindow();
         Component propertiesPage = (Component) this.propertiesPages.get(window);
@@ -128,6 +131,7 @@ public final class XmlSchemaNode
      * This is a no-op, because properties pages for this node are stored locally,
      * and so they do not need to be released.
      */
+    @Override
     protected void releasePropertiesPage(AbstractPropertiesPage propertiesPage) {
         // do nothing
     }
@@ -152,18 +156,22 @@ public final class XmlSchemaNode
 
     // **************** AbstractApplicationNode contract **********************
 
+    @Override
     protected String buildDisplayString() {
         return this.getSchema().getName();
     }
 
+    @Override
     protected String buildIconKey() {
         return "file.xml";
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return SCHEMA_DISPLAY_STRING_PROPERTY_NAMES;
     }
 
+    @Override
     public String helpTopicID() {
         return "xmlSchema";
     }
@@ -178,6 +186,7 @@ public final class XmlSchemaNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         WorkbenchContext localContext = buildLocalWorkbenchContext(workbenchContext);
 
@@ -193,6 +202,7 @@ public final class XmlSchemaNode
         return menuDesc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         GroupContainerDescription desc = new ToolBarDescription();
         ToolBarButtonGroupDescription buttonGroup = new ToolBarButtonGroupDescription();
@@ -205,10 +215,12 @@ public final class XmlSchemaNode
 
     // **************** Removable implementation **********************
 
+    @Override
     public String getName() {
         return getSchema().getName();
     }
 
+    @Override
     public void remove() {
         this.getSchema().schemaRepository().removeSchema(this.getSchema());
     }
@@ -223,6 +235,7 @@ public final class XmlSchemaNode
             super(context);
         }
 
+        @Override
         protected void initialize() {
             this.initializeTextAndMnemonic("REIMPORT_SCHEMA_ACTION");
             //this.setAccelerator(getResourceRepository().getAccelerator("???"));
@@ -231,9 +244,11 @@ public final class XmlSchemaNode
             this.setEnabled(true);
         }
 
+        @Override
         protected void execute() {
             Iterator nodesIterator = CollectionTools.iterator(this.selectedNodes());
             Iterator schemasIterator = new TransformationIterator(nodesIterator) {
+                @Override
                 protected Object transform(Object next) {
                     return ((XmlSchemaNode) next).getSchema();
                 }
@@ -250,6 +265,7 @@ public final class XmlSchemaNode
             super(context);
         }
 
+        @Override
         protected void initialize() {
             this.setIcon(EMPTY_ICON);
             this.initializeTextAndMnemonic("SCHEMA_PROPERTIES_ACTION");
@@ -258,6 +274,7 @@ public final class XmlSchemaNode
             this.setEnabled(true);
         }
 
+        @Override
         protected void execute(ApplicationNode selectedNode) {
             new EditSchemaDialog(this.getWorkbenchContext(), ((XmlSchemaNode) selectedNode).getSchema()).promptToEditSchema();
             this.navigatorSelectionModel().setSelectedNode(selectedNode);

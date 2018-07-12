@@ -64,6 +64,7 @@ public final class MWGroupingItem extends MWAttributeItem {
 
     // ****************** MWQueryItem implementation ************
 
+    @Override
     public void removeSelfFromParent() {
         ((MWReportQuery) getParentQuery()).removeGroupingItem(this);
     }
@@ -72,6 +73,7 @@ public final class MWGroupingItem extends MWAttributeItem {
 
     // ****************** Problem Handling************
 
+    @Override
     public Problem queryableNullProblem() {
         return buildProblem(
                 ProblemConstants.QUERYABLE_NULL_FOR_GROUPING_ITEM,
@@ -79,10 +81,12 @@ public final class MWGroupingItem extends MWAttributeItem {
                 new Integer(((MWReportQuery) getParentQuery()).indexOfGroupingItem(this) + 1));
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         throw new IllegalStateException("Any type of MWQueryable is valid for a grouping item");
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return true;
     }
@@ -90,6 +94,7 @@ public final class MWGroupingItem extends MWAttributeItem {
 
     // ****************** Runtime Conversion ************
 
+    @Override
     protected void adjustRuntimeQuery(ObjectLevelReadQuery readQuery) {
         Expression expression = getQueryableArgument().runtimeExpression(readQuery.getExpressionBuilder());
         ((ReportQuery) readQuery).addGrouping(expression);

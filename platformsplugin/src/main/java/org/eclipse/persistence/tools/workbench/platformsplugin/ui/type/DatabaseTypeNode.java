@@ -48,14 +48,17 @@ public final class DatabaseTypeNode
 
     // ********** PlatformsApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DatabaseTypePropertiesPage.class;
     }
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
         return new DatabaseTypePropertiesPage(context);
     }
 
+    @Override
     public String helpTopicID() {
         return "database.type";
     }
@@ -63,10 +66,12 @@ public final class DatabaseTypeNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return DATABASE_TYPE_DISPLAY_STRING_PROPERTY_NAMES;
     }
 
+    @Override
     protected String buildIconKey() {
         return "DATABASE_TYPE";
     }
@@ -74,6 +79,7 @@ public final class DatabaseTypeNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
 
@@ -91,6 +97,7 @@ public final class DatabaseTypeNode
         return menu;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
 

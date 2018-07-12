@@ -52,6 +52,7 @@ public abstract class ValueAspectPropertyValueModelAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.value = null;
@@ -63,6 +64,7 @@ public abstract class ValueAspectPropertyValueModelAdapter
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.value;
     }
@@ -73,6 +75,7 @@ public abstract class ValueAspectPropertyValueModelAdapter
     /**
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         this.valueHolder.setValue(value);
     }
@@ -83,6 +86,7 @@ public abstract class ValueAspectPropertyValueModelAdapter
     /**
      * @see PropertyValueModelWrapper#valueChanged(java.beans.PropertyChangeEvent)
      */
+    @Override
     protected void valueChanged(PropertyChangeEvent e) {
         this.disengageValue();
         this.engageValue();
@@ -95,6 +99,7 @@ public abstract class ValueAspectPropertyValueModelAdapter
     /**
      * Start listening to the value holder and the value.
      */
+    @Override
     protected void engageValueHolder() {
         super.engageValueHolder();
         this.engageValue();
@@ -116,6 +121,7 @@ public abstract class ValueAspectPropertyValueModelAdapter
     /**
      * Stop listening to the value holder and the value.
      */
+    @Override
     protected void disengageValueHolder() {
         this.disengageValue();
         super.disengageValueHolder();

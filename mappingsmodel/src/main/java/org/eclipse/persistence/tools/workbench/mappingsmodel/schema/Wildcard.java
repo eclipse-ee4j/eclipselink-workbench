@@ -46,6 +46,7 @@ public final class Wildcard
 
     // **************** MWParticle contract ***********************************
 
+    @Override
     public boolean isEquivalentTo(XSParticleDecl xsParticle) {
         return xsParticle.getTerm() instanceof XSWildcard;
     }

@@ -52,6 +52,7 @@ public class ToggleToolBarButtonDescription
      */
     private static class ToggleToolBarButtonCreator implements ButtonCreator {
 
+        @Override
         public AbstractButton createButton(FrameworkAction action) {
             AbstractButton button = new ToggleToolBarButton();
             // the client property hack must be set before the action is set

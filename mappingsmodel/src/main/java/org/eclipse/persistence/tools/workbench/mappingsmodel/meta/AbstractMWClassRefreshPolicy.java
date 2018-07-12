@@ -28,6 +28,7 @@ public abstract class AbstractMWClassRefreshPolicy
         super();
     }
 
+    @Override
     public void refreshAttributes(MWClass mwClass, ExternalField[] externalFields)
     {
         // after we have looped through the Java fields,

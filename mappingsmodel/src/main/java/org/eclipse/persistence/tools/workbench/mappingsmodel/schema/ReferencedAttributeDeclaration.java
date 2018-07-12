@@ -40,10 +40,12 @@ public final class ReferencedAttributeDeclaration
 
     // **************** SchemaComponentReference contract *********************
 
+    @Override
     protected MWNamedSchemaComponent getReferencedComponent() {
         return this.attribute;
     }
 
+    @Override
     protected void resolveReference(String attributeNamespace, String attributeName) {
         this.attribute = (ExplicitAttributeDeclaration) this.getSchema().attribute(attributeNamespace, attributeName);
     }
@@ -51,18 +53,22 @@ public final class ReferencedAttributeDeclaration
 
     // **************** MWAttributeDeclaration contract ***********************
 
+    @Override
     public MWSimpleTypeDefinition getType() {
         return this.attribute.getType();
     }
 
+    @Override
     public String getDefaultValue() {
         return this.attribute.getDefaultValue();
     }
 
+    @Override
     public String getFixedValue() {
         return this.attribute.getFixedValue();
     }
 
+    @Override
     public String getUse() {
         return this.attribute.getUse();
     }
@@ -70,10 +76,12 @@ public final class ReferencedAttributeDeclaration
 
     // **************** MWXpathableSchemaComponent contract *******************
 
+    @Override
     public int getMaxOccurs() {
         return this.attribute.getMaxOccurs();
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return this.attribute.baseBuiltInTypes();
     }
@@ -81,24 +89,29 @@ public final class ReferencedAttributeDeclaration
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return true;
     }
 
+    @Override
     public String contextTypeQname() {
         return this.attribute.contextTypeQname();
     }
 
+    @Override
     public boolean containsText() {
         // should always be false, but consistently asking the attribute seems a good thing
         return this.attribute.containsText();
     }
 
+    @Override
     public boolean containsWildcard() {
         // should always be false, but consistently asking the attribute seems a good thing
         return this.attribute.containsWildcard();
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return this.attribute.compareSchemaOrder(element1, element2);
     }

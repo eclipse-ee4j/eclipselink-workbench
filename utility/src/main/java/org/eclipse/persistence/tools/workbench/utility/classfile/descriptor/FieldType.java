@@ -120,6 +120,7 @@ public abstract class FieldType {
      */
     public abstract String internalName();
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer(200);
         sb.append(ClassTools.shortClassNameForObject(this));

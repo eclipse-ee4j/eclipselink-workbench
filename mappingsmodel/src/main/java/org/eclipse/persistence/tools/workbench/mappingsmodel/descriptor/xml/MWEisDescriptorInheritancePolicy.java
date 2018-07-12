@@ -37,10 +37,12 @@ public final class MWEisDescriptorInheritancePolicy
 
     // **************** Problem handling **************************************
 
+    @Override
     protected String descendantDescriptorTypeMismatchProblemString() {
         return ProblemConstants.DESCRIPTOR_EIS_INHERITANCE_DESCRIPTOR_TYPES_DONT_MATCH;
     }
 
+    @Override
     protected boolean checkDescendantsForDescriptorTypeMismatch() {
         for (Iterator stream = this.descendentDescriptors(); stream.hasNext(); ) {
             MWEisDescriptor currentDescriptor = (MWEisDescriptor) stream.next();

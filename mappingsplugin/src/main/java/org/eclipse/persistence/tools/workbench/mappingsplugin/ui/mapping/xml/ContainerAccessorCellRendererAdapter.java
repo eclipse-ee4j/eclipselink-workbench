@@ -36,6 +36,7 @@ public final class ContainerAccessorCellRendererAdapter extends
 
     // **************** CellRendererAdapter contract **************************
 
+    @Override
     public Icon buildIcon(Object value) {
         MWContainerAccessor accessor = (MWContainerAccessor) value;
         String text = this.buildText(accessor);
@@ -51,10 +52,12 @@ public final class ContainerAccessorCellRendererAdapter extends
         throw new IllegalArgumentException("unknown transformer: " + accessor);
     }
 
+    @Override
     public String buildText(Object value) {
         return ((MWContainerAccessor) value).accessorDisplayString();
     }
 
+    @Override
     public String buildToolTipText(Object value) {
         MWContainerAccessor accessor = (MWContainerAccessor) value;
         String text = this.buildText(accessor);

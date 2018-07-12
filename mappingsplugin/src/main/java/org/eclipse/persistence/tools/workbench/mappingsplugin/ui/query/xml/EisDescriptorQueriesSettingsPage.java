@@ -35,11 +35,13 @@ extends ScrollablePropertiesPage
         super(eisDescriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
     }
 
 
+    @Override
     protected Component buildPage() {
         setName(resourceRepository().getString("SETTINGS_PANEL_NAME"));
 

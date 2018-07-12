@@ -17,7 +17,6 @@ import java.util.List;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.queries.DatabaseQuery;
-import org.eclipse.persistence.queries.ObjectLevelReadQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWProcedure;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 

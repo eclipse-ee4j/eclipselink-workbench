@@ -41,8 +41,10 @@ public final class ParametersQuickViewSection extends AbstractQuickViewSection {
         this.queriesPropertiesPage = page;
     }
 
+    @Override
     public ListValueModel buildItemsHolder() {
         return new TransformationListValueModelAdapter(buildListValueModel()) {
+            @Override
             protected Object transformItem(Object item) {
                 return ParametersQuickViewSection.this.queriesPropertiesPage.buildQueryParameterQuickViewItem((MWQueryItem) item);
             }
@@ -58,16 +60,19 @@ public final class ParametersQuickViewSection extends AbstractQuickViewSection {
 
     private ListValueModel buildParameterListHolder() {
         return new ListAspectAdapter(this.queryHolder, MWAbstractQuery.PARAMETERS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWAbstractQuery) this.subject).parameters();
             }
 
+            @Override
             protected int sizeFromSubject() {
                 return ((MWAbstractQuery) this.subject).parametersSize();
             }
         };
     }
 
+    @Override
     public void select() {
         this.queriesPropertiesPage.selectGeneralPanel();
     }

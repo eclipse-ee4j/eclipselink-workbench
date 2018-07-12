@@ -92,6 +92,7 @@ final class DiffTestTools {
 
     static Iterator differentLeafDiffs(Diff diff) {
         return new FilteringIterator(leafDiffs(diff)) {
+            @Override
             protected boolean accept(Object next) {
                 return ((Diff) next).different();
             }
@@ -194,6 +195,7 @@ final class DiffTestTools {
 
     static Iterator differentLeafReflectiveFieldDiffs(Diff diff) {
         return new FilteringIterator(leafReflectiveFieldDiffs(diff)) {
+            @Override
             protected boolean accept(Object next) {
                 return ((Diff) next).different();
             }

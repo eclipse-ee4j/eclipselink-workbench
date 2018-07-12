@@ -46,6 +46,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.wrappedCollectionHolder = new SimpleCollectionValueModel();
@@ -53,6 +54,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
         this.event = null;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -68,6 +70,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
 
     public void testGetValue() {
         this.adapter.addPropertyChangeListener(ValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {/* OK */}
         });
         assertFalse(this.booleanValue());
@@ -98,6 +101,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
 
     public void testSetValue() {
         this.adapter.addPropertyChangeListener(ValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {/* OK */}
         });
         assertFalse(this.booleanValue());
@@ -114,6 +118,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
 
     public void testEventFiring() {
         this.adapter.addPropertyChangeListener(ValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 CollectionPropertyValueModelAdapterTests.this.event = e;
             }
@@ -148,6 +153,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
 
     public void testStaleValue() {
         PropertyChangeListener listener = new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {/* OK */}
         };
         this.adapter.addPropertyChangeListener(ValueModel.VALUE, listener);
@@ -169,6 +175,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
         assertFalse(((AbstractModel) this.wrappedCollectionHolder).hasAnyCollectionChangeListeners(ValueModel.VALUE));
 
         PropertyChangeListener listener = new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {/* OK */}
         };
         this.adapter.addPropertyChangeListener(ValueModel.VALUE, listener);
@@ -207,10 +214,12 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
         /**
          * always return a Boolean
          */
+        @Override
         public Object getValue() {
             Object result = super.getValue();
             return (result == null) ? Boolean.FALSE : result;
         }
+        @Override
         public void setValue(Object value) {
             if (this.booleanValue()) {
                 if ( ! this.booleanValueOf(value)) {
@@ -224,6 +233,7 @@ public class CollectionPropertyValueModelAdapterTests extends TestCase {
                 }
             }
         }
+        @Override
         protected Object buildValue() {
             return Boolean.valueOf(CollectionTools.contains((Iterator) this.collectionHolder.getValue(), this.item));
         }

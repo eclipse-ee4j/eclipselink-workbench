@@ -57,6 +57,7 @@ public class LoginPropertiesPropertiesPage extends AbstractLoginPropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         PropertyPane propertyPane = new PropertyPane(getSelectionHolder(), getWorkbenchContextHolder());

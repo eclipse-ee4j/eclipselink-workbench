@@ -265,10 +265,12 @@ final class StoredProcedurePropertiesPane extends AbstractSubjectPanel
     private AddRemoveListPanel.Adapter buildAddRemoveListPanelAdapter() {
         return new AddRemoveListPanel.Adapter() {
 
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 promptToAddAgument(listSelectionModel);
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 removeSelectedArguments(listSelectionModel);
             }
@@ -277,6 +279,7 @@ final class StoredProcedurePropertiesPane extends AbstractSubjectPanel
 
     protected ListSelectionListener buildArgumentListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ObjectListSelectionModel listSelectionModel = (ObjectListSelectionModel) e.getSource();
@@ -294,6 +297,7 @@ final class StoredProcedurePropertiesPane extends AbstractSubjectPanel
 
     private ListCellRenderer buildArgumentsListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if ("".equals(((MWAbstractProcedureArgument)value).getArgumentName())) {
                     return resourceRepository().getString("UNNAMED_ARGUMENT");
@@ -504,6 +508,7 @@ final class StoredProcedurePropertiesPane extends AbstractSubjectPanel
                 return unnamedInOutValuePane;
             }
 
+            @Override
             public JComponent transform(Object argument) {
                 if (argument == null) {
                     return emptyPane();

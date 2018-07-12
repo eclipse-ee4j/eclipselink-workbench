@@ -32,6 +32,7 @@ final class RelationalReturningInsertFieldsPanel extends ReturningInsertFieldsPa
         super( subjectHolder, contextHolder);
     }
 
+    @Override
     protected void addField() {
         Iterator selectedFields = this.returningPolicy().insertFields();
 

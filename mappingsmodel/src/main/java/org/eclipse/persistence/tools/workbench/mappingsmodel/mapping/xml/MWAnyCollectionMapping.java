@@ -64,6 +64,7 @@ public final class MWAnyCollectionMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
 
@@ -89,15 +90,18 @@ public final class MWAnyCollectionMapping
 
     private NodeReferenceScrubber buildElementTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAnyCollectionMapping.this.setElementType(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractCompositeMapping.buildElementTypeScrubber()";
             }
         };
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.containerPolicy);
@@ -106,10 +110,12 @@ public final class MWAnyCollectionMapping
 
     // **************** Element type ******************************************
 
+    @Override
     public MWComplexTypeDefinition getElementType() {
         return (MWComplexTypeDefinition) this.elementTypeHandle.getComponent();
     }
 
+    @Override
     public void setElementType(MWComplexTypeDefinition newElementType) {
         MWComplexTypeDefinition oldElementType = this.getElementType();
         this.elementTypeHandle.setComponent(newElementType);
@@ -118,6 +124,7 @@ public final class MWAnyCollectionMapping
 
     // **************** Container policy **************************************
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -127,6 +134,7 @@ public final class MWAnyCollectionMapping
         firePropertyChanged(CONTAINER_POLICY_PROPERTY, oldValue, containerPolicy);
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -136,6 +144,7 @@ public final class MWAnyCollectionMapping
         return cp;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -145,6 +154,7 @@ public final class MWAnyCollectionMapping
         return cp;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -154,6 +164,7 @@ public final class MWAnyCollectionMapping
         return cp;
     }
 
+    @Override
     public boolean usesTransparentIndirection() {
         return false;
     }
@@ -161,6 +172,7 @@ public final class MWAnyCollectionMapping
 
     // **************** MWXpathContext implementation *************************
 
+    @Override
     protected boolean mayUseCollectionData() {
         return true;
     }
@@ -172,10 +184,12 @@ public final class MWAnyCollectionMapping
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWAnyCollectionMapping(this);
     }
 
+    @Override
     public void initializeFromMWCompositeCollectionMapping(MWCompositeCollectionMapping oldMapping) {
         super.initializeFromMWCompositeCollectionMapping(oldMapping);
         if (oldMapping.getContainerPolicy().getDefaultingContainerClass().usesDefaultContainerClass()) {
@@ -187,10 +201,12 @@ public final class MWAnyCollectionMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new XMLAnyCollectionMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         XMLAnyCollectionMapping runtimeMapping = (XMLAnyCollectionMapping) super.runtimeMapping();
         runtimeMapping.setField(this.getXmlField().runtimeField());

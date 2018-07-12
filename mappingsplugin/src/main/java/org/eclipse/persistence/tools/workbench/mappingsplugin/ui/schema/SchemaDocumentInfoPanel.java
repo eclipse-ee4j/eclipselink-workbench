@@ -51,6 +51,7 @@ final class SchemaDocumentInfoPanel
         super(schemaNodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -169,6 +170,7 @@ final class SchemaDocumentInfoPanel
 
     private PropertyValueModel buildSchemaSourceLabelAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), MWXmlSchema.SCHEMA_SOURCE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 ResourceSpecification schemaSource = ((MWXmlSchema) this.subject).getSchemaSource();
                 if (schemaSource == null) {
@@ -202,10 +204,12 @@ final class SchemaDocumentInfoPanel
 
     private PropertyValueModel buildDefaultNamespaceHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), MWXmlSchema.SHOULD_USE_DEFAULT_NAMESPACE) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlSchema) this.subject).shouldUseDefaultNamespace());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlSchema) this.subject).setShouldUseDefaultNamespace(((Boolean) value).booleanValue());
             }
@@ -215,6 +219,7 @@ final class SchemaDocumentInfoPanel
     private ItemListener buildDefaultNamspaceUrlEnabler(final JTextField defaultNamespaceUrl)
     {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 defaultNamespaceUrl.setEnabled(e.getStateChange() == ItemEvent.SELECTED);
             }
@@ -227,9 +232,11 @@ final class SchemaDocumentInfoPanel
 
     private PropertyValueModel buildDefaultNamespaceUrlHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), MWXmlSchema.DEFAULT_NAMESPACE_URL) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlSchema) this.subject).getDefaultNamespaceUrl();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlSchema) this.subject).setDefaultNamespaceUrl((String) value);
             }

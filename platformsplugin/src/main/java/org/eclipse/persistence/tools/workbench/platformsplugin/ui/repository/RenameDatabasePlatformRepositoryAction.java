@@ -32,6 +32,7 @@ final class RenameDatabasePlatformRepositoryAction extends AbstractFrameworkActi
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("RENAME_DATABASE_PLATFORM_REPOSITORY");
         this.initializeIcon("RENAME_DATABASE_PLATFORM_REPOSITORY");
@@ -39,6 +40,7 @@ final class RenameDatabasePlatformRepositoryAction extends AbstractFrameworkActi
         this.initializeToolTipText("RENAME_DATABASE_PLATFORM_REPOSITORY.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         // save the selection state, so we can restore it when we are done
         TreePath[] paths = this.navigatorSelectionModel().getSelectionPaths();

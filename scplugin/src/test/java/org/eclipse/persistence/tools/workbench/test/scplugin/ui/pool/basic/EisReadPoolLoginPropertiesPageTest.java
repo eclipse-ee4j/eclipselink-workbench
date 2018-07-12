@@ -81,6 +81,7 @@ public class EisReadPoolLoginPropertiesPageTest extends AbstractReadPoolPanelTes
         runTestCase(new EisLoginPaneTest(this, getNodeHolder(), (EISLoginAdapter) pool.getLogin()));
     }
 
+    @Override
     protected PropertyValueModel buildNodeHolder(ApplicationNode projectNode)
     {
         ServerSessionAdapter session = (ServerSessionAdapter) getTopLinkSessions().sessionNamed("SC-EisServerSessionTest");
@@ -89,17 +90,20 @@ public class EisReadPoolLoginPropertiesPageTest extends AbstractReadPoolPanelTes
         return new SimplePropertyValueModel(poolNode);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(EisReadPoolLoginPropertiesPage.class, getNodeHolder());
     }
 
+    @Override
     protected SCAdapter buildSelection()
     {
         ServerSessionAdapter session = (ServerSessionAdapter) getTopLinkSessions().sessionNamed("SC-EisServerSessionTest");
         return session.getReadConnectionPool();
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Eis Read Connection Pool - Login Tab Test";

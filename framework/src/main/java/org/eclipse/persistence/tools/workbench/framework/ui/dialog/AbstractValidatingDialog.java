@@ -97,6 +97,7 @@ public abstract class AbstractValidatingDialog
 
     // ********** initialization **********
 
+    @Override
     protected void initializeContentPane() {
         this.container.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -192,6 +193,7 @@ public abstract class AbstractValidatingDialog
      * opened, its size will not be taken into account.
      * Blame GridBagLayout....
      */
+    @Override
     protected void windowOpened() {
         super.windowOpened();
 
@@ -337,6 +339,7 @@ public abstract class AbstractValidatingDialog
          * @return An <code>AccessibleContentPane</code> that serves as the
          * <code>AccessibleContext</code> of this <code>ContentPane</code>
          */
+        @Override
         public AccessibleContext getAccessibleContext() {
             if (this.accessibleContext == null) {
                 this.accessibleContext = new AccessibleStatusBarPane();
@@ -359,6 +362,7 @@ public abstract class AbstractValidatingDialog
          */
         private class AccessibleLabel extends JLabel {
 
+            @Override
             public void setText(String text) {
                 String oldText = getText();
                 super.setText(text);
@@ -375,6 +379,7 @@ public abstract class AbstractValidatingDialog
          */
         private class StatusBar extends JPanel {
 
+            @Override
             public AccessibleContext getAccessibleContext() {
                 if (this.accessibleContext == null) {
                     this.accessibleContext = new AccessibleStatusBar();
@@ -383,6 +388,7 @@ public abstract class AbstractValidatingDialog
             }
 
             protected class AccessibleStatusBar extends AccessibleJPanel {
+                @Override
                 public AccessibleRole getAccessibleRole() {
                     return AccessibleRole.STATUS_BAR;
                 }

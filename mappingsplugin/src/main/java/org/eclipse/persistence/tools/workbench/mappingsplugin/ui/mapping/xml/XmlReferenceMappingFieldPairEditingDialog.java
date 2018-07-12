@@ -20,7 +20,6 @@ import java.beans.PropertyChangeListener;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractValidatingDialog;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWEisReferenceMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFieldPair;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlReferenceMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlField;
@@ -106,6 +105,7 @@ final class XmlReferenceMappingFieldPairEditingDialog
 
     private PropertyChangeListener buildValidatingListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 XmlReferenceMappingFieldPairEditingDialog.this.updateMessage();
                 XmlReferenceMappingFieldPairEditingDialog.this.updateOKAction();
@@ -195,6 +195,7 @@ final class XmlReferenceMappingFieldPairEditingDialog
 
         // **************** Source Xml field **********************************
 
+        @Override
         public ValueModel sourceXmlFieldHolder() {
             if (this.sourceXmlFieldHolder == null) {
                 this.sourceXmlFieldHolder = this.buildSourceXmlFieldHolder();
@@ -214,6 +215,7 @@ final class XmlReferenceMappingFieldPairEditingDialog
 
         // **************** Source Xpath **************************************
 
+        @Override
         public PropertyValueModel sourceXpathHolder() {
             if (this.sourceXpathHolder == null) {
                 this.sourceXpathHolder = this.buildSourceXpathHolder();
@@ -251,6 +253,7 @@ final class XmlReferenceMappingFieldPairEditingDialog
 
         // **************** Target Xml field **********************************
 
+        @Override
         public ValueModel targetXmlFieldHolder() {
             if (this.targetXmlFieldHolder == null) {
                 this.targetXmlFieldHolder = this.buildTargetXmlFieldHolder();
@@ -270,6 +273,7 @@ final class XmlReferenceMappingFieldPairEditingDialog
 
         // **************** Target Xpath **************************************
 
+        @Override
         public PropertyValueModel targetXpathHolder() {
             if (this.targetXpathHolder == null) {
                 this.targetXpathHolder = this.buildTargetXpathHolder();

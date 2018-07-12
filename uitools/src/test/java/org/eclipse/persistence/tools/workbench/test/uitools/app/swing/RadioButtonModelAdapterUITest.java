@@ -72,9 +72,11 @@ public class RadioButtonModelAdapterUITest {
 
     private PropertyValueModel buildColorHolder(ValueModel subjectHolder) {
         return new PropertyAspectAdapter(subjectHolder, TestModel.COLOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) this.subject).getColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setColor((String) value);
             }
@@ -97,6 +99,7 @@ public class RadioButtonModelAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -155,6 +158,7 @@ public class RadioButtonModelAdapterUITest {
 
     private Action buildResetColorAction() {
         Action action = new AbstractAction("reset color") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 RadioButtonModelAdapterUITest.this.resetColor();
             }
@@ -173,6 +177,7 @@ public class RadioButtonModelAdapterUITest {
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 RadioButtonModelAdapterUITest.this.clearModel();
             }
@@ -191,6 +196,7 @@ public class RadioButtonModelAdapterUITest {
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 RadioButtonModelAdapterUITest.this.restoreModel();
             }
@@ -209,6 +215,7 @@ public class RadioButtonModelAdapterUITest {
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction("print model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 RadioButtonModelAdapterUITest.this.printModel();
             }
@@ -252,6 +259,7 @@ private static class TestModel extends AbstractModel {
         this.color = color;
         this.firePropertyChanged(COLOR_PROPERTY, old, color);
     }
+    @Override
     public String toString() {
         return "TestModel(" + this.color + ")";
     }

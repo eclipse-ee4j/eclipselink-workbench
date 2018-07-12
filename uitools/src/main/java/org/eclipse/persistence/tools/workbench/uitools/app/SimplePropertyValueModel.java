@@ -48,6 +48,7 @@ public class SimplePropertyValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
@@ -56,6 +57,7 @@ public class SimplePropertyValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.value;
     }
@@ -63,12 +65,14 @@ public class SimplePropertyValueModel
     /**
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         Object old = this.value;
         this.value = value;
         this.firePropertyChanged(VALUE, old, value);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.value);
     }

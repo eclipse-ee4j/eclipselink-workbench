@@ -61,6 +61,7 @@ public interface PartialStringComparatorEngine {
          */
         Comparator DEFAULT_COMPARATOR =
             new Comparator() {
+                @Override
                 public int compare(Object o1, Object o2) {
                     double score1 = ((StringHolderPair) o1).getScore();
                     double score2 = ((StringHolderPair) o2).getScore();
@@ -85,22 +86,27 @@ public interface PartialStringComparatorEngine {
             this.score = score;
         }
 
+        @Override
         public StringHolder getStringHolder1() {
             return this.stringHolder1;
         }
 
+        @Override
         public StringHolder getStringHolder2() {
             return this.stringHolder2;
         }
 
+        @Override
         public double getScore() {
             return this.score;
         }
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
 
+        @Override
         public String toString() {
             StringBuffer sb = new StringBuffer(100);
             StringTools.buildSimpleToStringOn(this, sb);

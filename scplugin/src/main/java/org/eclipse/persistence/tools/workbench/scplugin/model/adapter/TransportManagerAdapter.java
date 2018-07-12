@@ -61,6 +61,7 @@ public abstract class TransportManagerAdapter extends SCAdapter {
         return new JNDINamingServiceAdapter( this);
     }
 
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 

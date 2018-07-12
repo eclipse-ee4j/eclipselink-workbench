@@ -37,6 +37,7 @@ abstract class XmlInheritancePolicyPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -90,6 +91,7 @@ abstract class XmlInheritancePolicyPropertiesPage
         return classIndicatorPolicyPanel;
     }
 
+    @Override
     protected String helpTopicIdPrefix() {
         return "descriptor.xml";
     }

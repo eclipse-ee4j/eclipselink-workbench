@@ -79,9 +79,11 @@ public class IndirectComboBoxModelUITests
 
     private PropertyValueModel buildColorHolder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.COLOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) this.subject).getColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setColor((String) value);
             }
@@ -94,6 +96,7 @@ public class IndirectComboBoxModelUITests
 
     private CachingComboBoxModel buildIndirectComboBoxModel(PropertyValueModel selectionHolder, PropertyValueModel pvm) {
         return new IndirectComboBoxModel(selectionHolder, pvm) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return ((TestModel) subject).validColors().listIterator();
             }
@@ -112,6 +115,7 @@ public class IndirectComboBoxModelUITests
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -143,6 +147,7 @@ public class IndirectComboBoxModelUITests
 
     protected ListCellRenderer buildComboBoxRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return super.buildText(value);
             }
@@ -175,6 +180,7 @@ public class IndirectComboBoxModelUITests
 
     private Action buildResetColorAction() {
         Action action = new AbstractAction("reset color") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 IndirectComboBoxModelUITests.this.resetColor();
             }
@@ -194,6 +200,7 @@ public class IndirectComboBoxModelUITests
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 IndirectComboBoxModelUITests.this.clearModel();
             }
@@ -213,6 +220,7 @@ public class IndirectComboBoxModelUITests
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 IndirectComboBoxModelUITests.this.restoreModel();
             }
@@ -232,6 +240,7 @@ public class IndirectComboBoxModelUITests
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction("print model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 IndirectComboBoxModelUITests.this.printModel();
             }
@@ -251,6 +260,7 @@ public class IndirectComboBoxModelUITests
 
     private Action buildAddTwentyAction() {
         Action action = new AbstractAction("add 20") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 IndirectComboBoxModelUITests.this.addTwenty();
             }
@@ -270,6 +280,7 @@ public class IndirectComboBoxModelUITests
 
     private Action buildRemoveTwentyAction() {
         Action action = new AbstractAction("remove 20") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 IndirectComboBoxModelUITests.this.removeTwenty();
             }
@@ -351,6 +362,7 @@ public class IndirectComboBoxModelUITests
                 }
             }
         }
+        @Override
         public String toString() {
             return "TestModel(" + this.color + ")";
         }
@@ -368,6 +380,7 @@ public class IndirectComboBoxModelUITests
         public LocalListChooser2(CachingComboBoxModel model) {
             super(model);
         }
+        @Override
         protected ListBrowser buildBrowser() {
             return new FilteringListBrowser();
         }

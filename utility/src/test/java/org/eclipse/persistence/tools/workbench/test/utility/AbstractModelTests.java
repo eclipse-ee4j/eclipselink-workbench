@@ -85,11 +85,13 @@ public class AbstractModelTests
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.testModel = new TestModel();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -1000,54 +1002,66 @@ public class AbstractModelTests
 
 // ********** listener implementations **********
 
+    @Override
     public void stateChanged(StateChangeEvent e) {
         this.stateChangedCalled = true;
         this.stateChangeEvent = e;
     }
 
+    @Override
     public void propertyChange(PropertyChangeEvent e) {
         this.propertyChangeCalled = true;
         this.propertyChangeEvent = e;
     }
 
+    @Override
     public void itemsAdded(CollectionChangeEvent e) {
         this.itemsAddedCollectionCalled = true;
         this.collectionChangeEvent = e;
     }
+    @Override
     public void itemsRemoved(CollectionChangeEvent e) {
         this.itemsRemovedCollectionCalled = true;
         this.collectionChangeEvent = e;
     }
+    @Override
     public void collectionChanged(CollectionChangeEvent e) {
         this.collectionChangedCalled = true;
         this.collectionChangeEvent = e;
     }
 
+    @Override
     public void itemsAdded(ListChangeEvent e) {
         this.itemsAddedListCalled = true;
         this.listChangeEvent = e;
     }
+    @Override
     public void itemsRemoved(ListChangeEvent e) {
         this.itemsRemovedListCalled = true;
         this.listChangeEvent = e;
     }
+    @Override
     public void itemsReplaced(ListChangeEvent e) {
         this.itemsReplacedListCalled = true;
         this.listChangeEvent = e;
     }
+    @Override
     public void listChanged(ListChangeEvent e) {
         this.listChangedCalled = true;
         this.listChangeEvent = e;
     }
 
+    @Override
     public void nodeAdded(TreeChangeEvent e) {
         this.nodeAddedCalled = true;
         this.treeChangeEvent = e;
     }
+    @Override
     public void nodeRemoved(TreeChangeEvent e) {
         this.nodeRemovedCalled = true;
         this.treeChangeEvent = e;
     }
+    @Override
     public void treeChanged(TreeChangeEvent e) {
         this.treeChangedCalled = true;
         this.treeChangeEvent = e;
@@ -1127,6 +1141,7 @@ public class AbstractModelTests
             assertFalse(this.attributeValueHasChanged(null, null));
         }
 
+        @Override
         public Object clone() {
             try {
                 return super.clone();
@@ -1135,6 +1150,7 @@ public class AbstractModelTests
             }
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(TEST_TO_STRING);
         }
@@ -1160,6 +1176,7 @@ public class AbstractModelTests
     public void testIndirectRemoveStateListener() {
         this.verifyIndirectRemoveListener(
             new NotifyCommand() {
+                @Override
                 public void notifyListeners(LocalA localA) {
                     localA.notifyStateListeners();
                 }
@@ -1170,6 +1187,7 @@ public class AbstractModelTests
     public void testIndirectRemovePropertyListener() {
         this.verifyIndirectRemoveListener(
             new NotifyCommand() {
+                @Override
                 public void notifyListeners(LocalA localA) {
                     localA.notifyPropertyListeners();
                 }
@@ -1180,6 +1198,7 @@ public class AbstractModelTests
     public void testIndirectRemoveCollectionListener() {
         this.verifyIndirectRemoveListener(
             new NotifyCommand() {
+                @Override
                 public void notifyListeners(LocalA localA) {
                     localA.notifyCollectionListeners();
                 }
@@ -1190,6 +1209,7 @@ public class AbstractModelTests
     public void testIndirectRemoveListListener() {
         this.verifyIndirectRemoveListener(
             new NotifyCommand() {
+                @Override
                 public void notifyListeners(LocalA localA) {
                     localA.notifyListListeners();
                 }
@@ -1200,6 +1220,7 @@ public class AbstractModelTests
     public void testIndirectRemoveTreeListener() {
         this.verifyIndirectRemoveListener(
             new NotifyCommand() {
+                @Override
                 public void notifyListeners(LocalA localA) {
                     localA.notifyTreeListeners();
                 }
@@ -1278,31 +1299,43 @@ public class AbstractModelTests
             localA.addTreeChangeListener(this);
         }
 
+        @Override
         public void stateChanged(StateChangeEvent e) {
             this.fireStateChanged();
         }
 
+        @Override
         public void propertyChange(PropertyChangeEvent evt) {
             this.firePropertyChanged("bar", 1, 2);
         }
 
+        @Override
         public void collectionChanged(CollectionChangeEvent e) {
             this.fireCollectionChanged("bar");
         }
+        @Override
         public void itemsAdded(CollectionChangeEvent e) {/*ignore*/}
+        @Override
         public void itemsRemoved(CollectionChangeEvent e) {/*ignore*/}
 
+        @Override
         public void listChanged(ListChangeEvent e) {
             this.fireListChanged("bar");
         }
+        @Override
         public void itemsAdded(ListChangeEvent e) {/*ignore*/}
+        @Override
         public void itemsRemoved(ListChangeEvent e) {/*ignore*/}
+        @Override
         public void itemsReplaced(ListChangeEvent e) {/*ignore*/}
 
+        @Override
         public void treeChanged(TreeChangeEvent e) {
             this.fireTreeStructureChanged("bar");
         }
+        @Override
         public void nodeAdded(TreeChangeEvent e) {/*ignore*/}
+        @Override
         public void nodeRemoved(TreeChangeEvent e) {/*ignore*/}
 
     }
@@ -1345,6 +1378,7 @@ public class AbstractModelTests
             return this.listeningToLocalA;
         }
 
+        @Override
         public void stateChanged(StateChangeEvent e) {
             Object source = e.getSource();
             if (source == this.localA) {
@@ -1359,6 +1393,7 @@ public class AbstractModelTests
             }
         }
 
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             Object source = e.getSource();
             if (source == this.localA) {
@@ -1373,6 +1408,7 @@ public class AbstractModelTests
             }
         }
 
+        @Override
         public void collectionChanged(CollectionChangeEvent e) {
             Object source = e.getSource();
             if (source == this.localA) {
@@ -1386,9 +1422,12 @@ public class AbstractModelTests
                 throw new IllegalStateException("bogus event source: " + source);
             }
         }
+        @Override
         public void itemsAdded(CollectionChangeEvent e) {/*ignore*/}
+        @Override
         public void itemsRemoved(CollectionChangeEvent e) {/*ignore*/}
 
+        @Override
         public void listChanged(ListChangeEvent e) {
             Object source = e.getSource();
             if (source == this.localA) {
@@ -1402,10 +1441,14 @@ public class AbstractModelTests
                 throw new IllegalStateException("bogus event source: " + source);
             }
         }
+        @Override
         public void itemsAdded(ListChangeEvent e) {/*ignore*/}
+        @Override
         public void itemsRemoved(ListChangeEvent e) {/*ignore*/}
+        @Override
         public void itemsReplaced(ListChangeEvent e) {/*ignore*/}
 
+        @Override
         public void treeChanged(TreeChangeEvent e) {
             Object source = e.getSource();
             if (source == this.localA) {
@@ -1419,7 +1462,9 @@ public class AbstractModelTests
                 throw new IllegalStateException("bogus event source: " + source);
             }
         }
+        @Override
         public void nodeAdded(TreeChangeEvent e) {/*ignore*/}
+        @Override
         public void nodeRemoved(TreeChangeEvent e) {/*ignore*/}
 
     }

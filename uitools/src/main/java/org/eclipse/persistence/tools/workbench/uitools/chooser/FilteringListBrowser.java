@@ -48,6 +48,7 @@ public class FilteringListBrowser
      * Prompt the user using a JOptionPane with a filtering
      * list panel.
      */
+    @Override
     public void browse(ListChooser chooser) {
         this.initializeCellRenderer(chooser);
 
@@ -137,6 +138,7 @@ public class FilteringListBrowser
          * and it looks a bit clumsy.
          * @see org.eclipse.persistence.tools.workbench.uitools.FilteringListPanel#prototypeCellValue()
          */
+        @Override
         protected String prototypeCellValue() {
             return null;
         }

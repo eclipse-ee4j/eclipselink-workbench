@@ -37,11 +37,13 @@ public final class DefaultMWClassRefreshPolicy
         super();
     }
 
+    @Override
     protected void resolveMissingAttributes(MWClass mwClass, Collection missingAttributes)
     {
         mwClass.removeAttributes(missingAttributes);
     }
 
+    @Override
     public void finalizeRefresh(MWClass mwClass)
     {
         mwClass.clearEjb20Attributes();

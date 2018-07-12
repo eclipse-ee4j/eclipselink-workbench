@@ -61,6 +61,7 @@ public class ItemPropertyListValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.foo = new Junk("this.foo");
@@ -75,6 +76,7 @@ public class ItemPropertyListValueModelAdapterTests extends TestCase {
         this.harry = new Junk("this.harry");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -155,6 +157,7 @@ public class ItemPropertyListValueModelAdapterTests extends TestCase {
     private Comparator buildCustomComparator() {
         // sort with reverse order
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((Comparable) o2).compareTo(o1);
             }
@@ -318,12 +321,15 @@ private class Junk extends AbstractModel implements Displayable {
     public Junk(String name) {
         this.name = name;
     }
+    @Override
     public String displayString() {
         return this.name;
     }
+    @Override
     public Icon icon() {
         return null;
     }
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -332,6 +338,7 @@ private class Junk extends AbstractModel implements Displayable {
         this.name = name;
         this.firePropertyChanged(DISPLAY_STRING_PROPERTY, old, name);
     }
+    @Override
     public String toString() {
         return "Junk(" + this.name + ")";
     }

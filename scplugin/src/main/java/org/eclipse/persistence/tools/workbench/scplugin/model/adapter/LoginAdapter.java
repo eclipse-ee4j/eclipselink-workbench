@@ -85,6 +85,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
      * to the specified collection.
      * @see #children()
      */
+    @Override
     protected void addChildrenTo( List children) {
         super.addChildrenTo( children);
 
@@ -362,6 +363,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
         this.firePropertyChanged( EXTERNAL_TRANSACTION_CONTROLLER_PROPERTY, old, value);
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         String platform = this.getPlatformClass();
@@ -373,6 +375,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Returns true when this config element has not been setup.
      */
+    @Override
     protected boolean isACleanConfig() {
         boolean cleanConfig = super.isACleanConfig();
 
@@ -387,6 +390,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 
@@ -415,6 +419,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -425,6 +430,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -484,6 +490,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Returns an iterator on this collection of properties.
      */
+    @Override
     public Iterator properties() {
 
         return this.getProperties().iterator();
@@ -491,6 +498,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Returns an iterator on this collection of properties.
      */
+    @Override
     public int propertySize() {
 
         return this.getProperties().size();
@@ -515,6 +523,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Adds the given properties and fire notification.
      */
+    @Override
     public PropertyAdapter addProperty( String name, String value) {
 
         PropertyAdapter property = buildPropertyAdapter(name, value);
@@ -549,6 +558,7 @@ public abstract class LoginAdapter extends SCAdapter implements Property {
     /**
      * Removes the given properties and fire notification.
      */
+    @Override
     public void removeProperty( PropertyAdapter property) {
 
         this.getPropertyConfigs().remove(property.propertyConfig());

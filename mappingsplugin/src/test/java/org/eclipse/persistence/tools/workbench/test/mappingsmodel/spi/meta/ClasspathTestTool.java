@@ -165,6 +165,7 @@ public class ClasspathTestTool {
 
     public static SourceExtender buildNullSourceExtender() {
         return new SourceExtender() {
+            @Override
             public void extendSourceOn(IndentingPrintWriter pw, int version) {
                 // do nothing
             }

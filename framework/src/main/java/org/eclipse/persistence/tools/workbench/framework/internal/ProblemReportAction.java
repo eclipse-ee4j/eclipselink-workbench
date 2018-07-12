@@ -37,6 +37,7 @@ final class ProblemReportAction
         this.appProblemContainerHolder = appProblemContainerHolder;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("PROBLEM_REPORT");
@@ -44,6 +45,7 @@ final class ProblemReportAction
         this.initializeAccelerator("PROBLEM_REPORT.ACCELERATOR");
     }
 
+    @Override
     protected void execute() {
         StringWriter sw = new StringWriter(10000);        // start big
         IndentingPrintWriter ipw = new IndentingPrintWriter(sw, "   ");

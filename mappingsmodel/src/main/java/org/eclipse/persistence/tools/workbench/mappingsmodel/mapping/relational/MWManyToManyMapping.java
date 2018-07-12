@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumnPair;
@@ -41,10 +40,8 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational.
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.ManyToManyMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 
@@ -68,6 +65,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
         super(descriptor, attribute, name);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.targetReferenceHandle = new MWReferenceHandle(this, this.buildTargetReferenceScrubber());
@@ -104,6 +102,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
         firePropertyChanged(TARGET_REFERENCE_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public boolean isManyToManyMapping(){
         return true;
     }
@@ -114,11 +113,13 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
     /**
      * IMPORTANT:  See MWRMapping class comment.
      */
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWManyToManyMapping(this);
     }
 
 
+    @Override
     public MWManyToManyMapping asMWManyToManyMapping() {
         return this;
     }
@@ -126,6 +127,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     // ************ containment hierarchy **************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.targetReferenceHandle);
@@ -134,9 +136,11 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     private NodeReferenceScrubber buildTargetReferenceScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWManyToManyMapping.this.setTargetReference(null);
             }
+            @Override
             public String toString() {
                 return "MWManyToManyMapping.buildTargetReferenceScrubber()";
             }
@@ -145,9 +149,11 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     private NodeReferenceScrubber buildRelationTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWManyToManyMapping.this.setRelationTable(null);
             }
+            @Override
             public String toString() {
                 return "MWManyToManyMapping.buildRelationTableScrubber()";
             }
@@ -157,6 +163,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     // ************ MWMapping implementation **************
 
+    @Override
     public String iconKey() {
         return "mapping.manyToMany";
     }
@@ -164,6 +171,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     // ************* Automap Support ****************
 
+    @Override
     public void automap() {
         super.automap();
         this.automapRelationTable();
@@ -171,6 +179,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
         this.automapTargetReference();
     }
 
+    @Override
     protected void automapTableReference() {
         // override to do nothing - in a many-to-many mapping the 'table
         // reference' field holds the the 'source reference', and the source
@@ -226,6 +235,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
     /**
      * return the relation table's source and target references
      */
+    @Override
     protected Set buildCandidateReferences() {
         Set references = new HashSet();
         references.addAll(this.buildCandidateRelationTableSourceReferences());
@@ -376,6 +386,7 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     //************** Problem Handling ***************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -421,10 +432,12 @@ public final class MWManyToManyMapping extends MWCollectionMapping {
 
     // ************ runtime conversion **************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new ManyToManyMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         ManyToManyMapping manyToManyMapping = (ManyToManyMapping) super.runtimeMapping();
 

@@ -58,6 +58,7 @@ public class TransformationListValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.listHolder = new SimpleListValueModel(this.buildList());
@@ -114,12 +115,14 @@ public class TransformationListValueModelAdapterTests extends TestCase {
 
     ListValueModel buildTransformedListHolder(ListValueModel lvm) {
         return new TransformationListValueModelAdapter(lvm) {
+            @Override
             protected Object transformItem(Object item) {
                 return (item == null) ? null : ((String) item).toUpperCase();
             }
         };
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -250,18 +253,22 @@ public class TransformationListValueModelAdapterTests extends TestCase {
 
     private ListChangeListener buildListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 TransformationListValueModelAdapterTests.this.eventType = ADD;
                 TransformationListValueModelAdapterTests.this.event = e;
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 TransformationListValueModelAdapterTests.this.eventType = REMOVE;
                 TransformationListValueModelAdapterTests.this.event = e;
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 TransformationListValueModelAdapterTests.this.eventType = REPLACE;
                 TransformationListValueModelAdapterTests.this.event = e;
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 TransformationListValueModelAdapterTests.this.eventType = CHANGE;
                 TransformationListValueModelAdapterTests.this.event = e;
@@ -319,11 +326,13 @@ public static class TransformerTests extends TransformationListValueModelAdapter
     public TransformerTests(String name) {
         super(name);
     }
+    @Override
     ListValueModel buildTransformedListHolder(ListValueModel lvm) {
         return new TransformationListValueModelAdapter(lvm, this.buildTransformer());
     }
     private Transformer buildTransformer() {
         return new Transformer() {
+            @Override
             public Object transform(Object o) {
                 return (o == null) ? null : ((String) o).toUpperCase();
             }

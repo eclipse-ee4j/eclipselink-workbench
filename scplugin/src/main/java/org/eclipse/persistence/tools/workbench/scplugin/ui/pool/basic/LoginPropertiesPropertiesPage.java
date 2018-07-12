@@ -79,6 +79,7 @@ public class LoginPropertiesPropertiesPage extends ScrollablePropertiesPage
     {
         return new TransformationPropertyValueModel(getSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(value != NullLoginAdapter.instance());
@@ -91,6 +92,7 @@ public class LoginPropertiesPropertiesPage extends ScrollablePropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         JComponent subPane = new PropertyPane(getSelectionHolder(), getWorkbenchContextHolder());
@@ -121,11 +123,13 @@ public class LoginPropertiesPropertiesPage extends ScrollablePropertiesPage
      * @return The <code>PropertyValueModel</code> containing the {@link EisLoginAdapter}
      * to be edited by this page
      */
+    @Override
     protected PropertyValueModel buildSelectionHolder()
     {
         return new PropertyAspectAdapter(super.buildSelectionHolder(),
                                                     ConnectionPoolAdapter.LOGIN_CONFIG_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ConnectionPoolAdapter session = (ConnectionPoolAdapter) subject;

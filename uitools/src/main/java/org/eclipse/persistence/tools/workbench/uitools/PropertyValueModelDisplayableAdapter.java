@@ -68,6 +68,7 @@ public class PropertyValueModelDisplayableAdapter
         this.adapter = adapter;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.valueChangeListener = this.buildValueChangeListener();
@@ -75,9 +76,11 @@ public class PropertyValueModelDisplayableAdapter
 
     protected PropertyChangeListener buildValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyValueModelDisplayableAdapter.this.valueChanged(e);
             }
+            @Override
             public String toString() {
                 return "value change listener";
             }
@@ -91,6 +94,7 @@ public class PropertyValueModelDisplayableAdapter
      * Extend to start listening to the nested model if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addPropertyChangeListener(java.beans.PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
         if (this.hasNoRelevantListeners()) {
             this.valueHolder.addPropertyChangeListener(ValueModel.VALUE, this.valueChangeListener);
@@ -102,6 +106,7 @@ public class PropertyValueModelDisplayableAdapter
      * Extend to start listening to the nested model if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#addPropertyChangeListener(String, java.beans.PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         if (this.propertyIsRelevant(propertyName) && this.hasNoRelevantListeners()) {
             this.valueHolder.addPropertyChangeListener(ValueModel.VALUE, this.valueChangeListener);
@@ -113,6 +118,7 @@ public class PropertyValueModelDisplayableAdapter
      * Extend to stop listening to the nested model if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removePropertyChangeListener(java.beans.PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
         super.removePropertyChangeListener(listener);
         if (this.hasNoRelevantListeners()) {
@@ -124,6 +130,7 @@ public class PropertyValueModelDisplayableAdapter
      * Extend to stop listening to the nested model if necessary.
      * @see org.eclipse.persistence.tools.workbench.utility.Model#removePropertyChangeListener(String, java.beans.PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         super.removePropertyChangeListener(propertyName, listener);
         if (this.propertyIsRelevant(propertyName) && this.hasNoRelevantListeners()) {
@@ -154,6 +161,7 @@ public class PropertyValueModelDisplayableAdapter
     /**
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -164,6 +172,7 @@ public class PropertyValueModelDisplayableAdapter
     /**
      * @see Displayable#displayString()
      */
+    @Override
     public String displayString() {
         return this.displayString(this.valueHolder.getValue());
     }
@@ -171,6 +180,7 @@ public class PropertyValueModelDisplayableAdapter
     /**
      * @see Displayable#icon()
      */
+    @Override
     public Icon icon() {
         return this.icon(this.valueHolder.getValue());
     }

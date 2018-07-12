@@ -37,12 +37,9 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWAggregateMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.MWManyToManyMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassRepository;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProjectDefaultsPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.SPIManager;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.SimpleSPIManager;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.classfile.CFExternalClassRepositoryFactory;
 import org.eclipse.persistence.tools.workbench.platformsmodel.DatabasePlatform;
 import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.Classpath;
@@ -51,14 +48,9 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.FilteringIterat
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringComparatorEngine.StringHolderPair;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
 import org.eclipse.persistence.sessions.DatabaseLogin;
 import org.eclipse.persistence.sessions.DatasourceLogin;
 import org.eclipse.persistence.tools.schemaframework.TableCreator;
@@ -160,6 +152,7 @@ public final class MWRelationalProject
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.sequencingPolicy = new MWSequencingPolicy(this);
@@ -169,12 +162,14 @@ public final class MWRelationalProject
         this.generateDeprecatedDirectMappings = false;
     }
 
+    @Override
     protected MWProjectDefaultsPolicy buildDefaultsPolicy() {
         return new MWRelationalProjectDefaultsPolicy(this);
     }
 
     //*********** misc *************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.tableRepository);
@@ -182,6 +177,7 @@ public final class MWRelationalProject
         children.add(this.tableGenerationPolicy);
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         for (Iterator descriptors = this.descriptors(); descriptors.hasNext(); ) {
             ((MWRelationalDescriptor) descriptors.next()).notifyExpressionsToRecalculateQueryables();
@@ -192,6 +188,7 @@ public final class MWRelationalProject
     //*********** accessors *************
 
     /** This is used by the I/O manager. */
+    @Override
     public MWModel getMetaDataRepository() {
         return this.getTableRepository();
     }
@@ -235,6 +232,7 @@ public final class MWRelationalProject
 
     // ********** descriptors and mappings **********
 
+    @Override
     protected MWDescriptor createDescriptorForType(MWClass type) throws InterfaceDescriptorCreationException {
         if (type.isInterface()) {
             return new MWInterfaceDescriptor(this, type, type.fullName());
@@ -251,6 +249,7 @@ public final class MWRelationalProject
 
     public Iterator descriptorsThatImplement(final MWRelationalDescriptor descriptor) {
         return new FilteringIterator(this.tableDescriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWDescriptor) next).getMWClass().allInterfacesContains(descriptor.getMWClass());
             }
@@ -259,6 +258,7 @@ public final class MWRelationalProject
 
     public Iterator tableDescriptors() {
         return new FilteringIterator(this.descriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWRelationalDescriptor) next).isTableDescriptor();
             }
@@ -267,6 +267,7 @@ public final class MWRelationalProject
 
     public Iterator aggregateDescriptors() {
         return new FilteringIterator(this.descriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWRelationalDescriptor) next).isAggregateDescriptor();
             }
@@ -275,6 +276,7 @@ public final class MWRelationalProject
 
     public Iterator interfaceDescriptors() {
         return new FilteringIterator(this.descriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWRelationalDescriptor) next).isInterfaceDescriptor();
             }
@@ -283,14 +285,17 @@ public final class MWRelationalProject
 
     public Iterator allWriteableManyToManyMappings() {
         return new FilteringIterator(this.allWriteableMappings()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWMapping) next) instanceof MWManyToManyMapping;
             }
         };
     }
 
+    @Override
     public Iterator interfaceDescriptorsThatImplement(final MWMappingDescriptor descriptor) {
         return new FilteringIterator(this.interfaceDescriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWInterfaceDescriptor) next).hasImplementor(descriptor);
             }
@@ -303,6 +308,7 @@ public final class MWRelationalProject
     /**
      * the project must have some tables before anything can be automapped
      */
+    @Override
     public boolean canAutomapDescriptors() {
         return this.getDatabase().tablesSize() > 0;
     }
@@ -311,6 +317,7 @@ public final class MWRelationalProject
      * match classes with tables using partial string matching on their short
      * names, with any prevailing prefixes and/or suffixes stripped off
      */
+    @Override
     protected void matchClassesAndMetaData(Collection automapDescriptors) {
         super.matchClassesAndMetaData(automapDescriptors);
         DescriptorStringHolder[] descriptorHolders = this.buildMetaDataDescriptorStringHolders(automapDescriptors);
@@ -391,11 +398,13 @@ public final class MWRelationalProject
 
     // ********** aggregate path to field **********
 
+    @Override
     public void recalculateAggregatePathsToColumn(MWMappingDescriptor descriptor) {
         this.recalculateAggregatePathsToColumn(descriptor, null);
     }
 
     //current mapping is used so that we can stay out of an infinite loop if the aggregates are set up with circular references
+    @Override
     public void recalculateAggregatePathsToColumn(MWMappingDescriptor descriptor, MWAggregateMapping currentMapping) {
         for (Iterator stream = this.aggregateMappingsWithReferenceDescriptor(descriptor); stream.hasNext(); ) {
             MWAggregateMapping mapping = (MWAggregateMapping) stream.next();
@@ -408,6 +417,7 @@ public final class MWRelationalProject
 
     private Iterator aggregateMappingsWithReferenceDescriptor(final MWMappingDescriptor descriptor) {
         return new FilteringIterator(this.allAggregateMappings()) {
+            @Override
             protected boolean accept(Object next) {
                 return (((MWAggregateMapping) next).getReferenceDescriptor() == descriptor);
             }
@@ -416,6 +426,7 @@ public final class MWRelationalProject
 
     private Iterator allAggregateMappings() {
         return new FilteringIterator(this.allMappings()) {
+            @Override
             protected boolean accept(Object next) {
                 return (next instanceof MWAggregateMapping);
             }
@@ -435,6 +446,7 @@ public final class MWRelationalProject
         firePropertyChanged(GENERATE_DEPRECATED_DIRECT_MAPPINGS_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     protected DatasourceLogin buildRuntimeLogin() {
         DatabaseLogin login = this.getDatabase().buildDeploymentRuntimeDatabaseLogin();
         this.getSequencingPolicy().adjustRuntimeLogin(login);

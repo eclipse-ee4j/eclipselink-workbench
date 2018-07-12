@@ -128,6 +128,7 @@ final class EisQueryOptionsPanel extends AbstractPanel
 
     private ActionListener buildAdvancedOptionsAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 showAdvancedOptionsDialog();
             }
@@ -161,6 +162,7 @@ final class EisQueryOptionsPanel extends AbstractPanel
 
     private PropertyChangeListener buildQueryListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(getQuery() != null);
             }

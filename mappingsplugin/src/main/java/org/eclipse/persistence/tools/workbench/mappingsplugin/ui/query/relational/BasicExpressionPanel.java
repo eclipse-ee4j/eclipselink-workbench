@@ -99,6 +99,7 @@ final class BasicExpressionPanel extends AbstractPanel
 
     private PropertyValueModel buildFirstArgumentHolder() {
         return new PropertyAspectAdapter(this.basicExpressionHolder, MWBasicExpression.FIRST_ARUGMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWBasicExpression) this.subject).getFirstArgument();
             }
@@ -107,6 +108,7 @@ final class BasicExpressionPanel extends AbstractPanel
 
     private PropertyValueModel buildSecondArgumentHolder() {
         return new PropertyAspectAdapter(this.basicExpressionHolder, MWBasicExpression.SECOND_ARGUMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWBasicExpression) this.subject).getSecondArgument();
             }
@@ -115,6 +117,7 @@ final class BasicExpressionPanel extends AbstractPanel
 
     private PropertyValueModel buildBasicExpressionHolder(PropertyValueModel selectedExpressionHolder) {
         return new FilteringPropertyValueModel(selectedExpressionHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWBasicExpression;
             }
@@ -123,6 +126,7 @@ final class BasicExpressionPanel extends AbstractPanel
 
     private ValueModel buildBasicExpressionEnablerModel() {
         return new PropertyAspectAdapter(this.basicExpressionHolder) {
+            @Override
             protected Object buildValue() {
                 if (basicExpressionHolder.getValue() == null) {
                     return Boolean.FALSE;
@@ -256,6 +260,7 @@ final class BasicExpressionPanel extends AbstractPanel
 
     private CollectionValueModel buildOperatorTypeCollectionHolder() {
         return new AbstractReadOnlyCollectionValueModel() {
+            @Override
             public Object getValue() {
                 return allowableOperatorTypes();
             }
@@ -265,6 +270,7 @@ final class BasicExpressionPanel extends AbstractPanel
     private PropertyValueModel buildOperatorAdapter() {
         return new PropertyAspectAdapter(this.basicExpressionHolder, MWBasicExpression.OPERATOR_TYPE_PROPERTY) {
 
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWBasicExpression) this.subject).getOperatorType() == MWBasicExpression.EQUAL)
                     return EQUAL;
@@ -294,6 +300,7 @@ final class BasicExpressionPanel extends AbstractPanel
                 throw new IllegalArgumentException();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
 
                 if (value == EQUAL)

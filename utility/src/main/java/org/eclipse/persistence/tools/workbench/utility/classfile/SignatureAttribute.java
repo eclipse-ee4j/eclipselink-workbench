@@ -42,14 +42,17 @@ public class SignatureAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.signatureIndex = stream.readU2();
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         writer.println(this.signature());
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -62,6 +65,7 @@ public class SignatureAttribute extends Attribute {
         return this.signatureIndex;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.signature());
     }

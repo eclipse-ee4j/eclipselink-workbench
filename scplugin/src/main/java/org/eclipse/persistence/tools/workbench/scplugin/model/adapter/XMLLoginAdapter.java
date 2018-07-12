@@ -94,6 +94,7 @@ public final class XMLLoginAdapter extends LoginAdapter {
         /**
          * Factory method for building this model.
          */
+        @Override
         protected Object buildModel() {
 
             return new XMLLoginConfig();
@@ -110,6 +111,7 @@ public final class XMLLoginAdapter extends LoginAdapter {
         /**
          * Returns the datasource platform class from user's preference.
          */
+        @Override
         protected String getDefaultPlatformClassName() {
 
             return DEFAULT_PLATFORM_CLASS_NAME;
@@ -138,6 +140,7 @@ public final class XMLLoginAdapter extends LoginAdapter {
             return values;
         }
 
+        @Override
         boolean platformIsXml() {
 
             return true;

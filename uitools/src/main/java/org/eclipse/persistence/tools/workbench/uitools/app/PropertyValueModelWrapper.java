@@ -55,6 +55,7 @@ public abstract class PropertyValueModelWrapper
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.valueChangeListener = this.buildValueChangeListener();
@@ -63,15 +64,18 @@ public abstract class PropertyValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
 
     protected PropertyChangeListener buildValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyValueModelWrapper.this.valueChanged(e);
             }
+            @Override
             public String toString() {
                 return "value change listener";
             }
@@ -85,6 +89,7 @@ public abstract class PropertyValueModelWrapper
      * Extend to start listening to the nested model if necessary.
      * @see Model#addPropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
         if (this.hasNoPropertyChangeListeners(VALUE)) {
             this.engageValueHolder();
@@ -96,6 +101,7 @@ public abstract class PropertyValueModelWrapper
      * Extend to start listening to the nested model if necessary.
      * @see Model#addPropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         if (propertyName == VALUE && this.hasNoPropertyChangeListeners(VALUE)) {
             this.engageValueHolder();
@@ -107,6 +113,7 @@ public abstract class PropertyValueModelWrapper
      * Extend to stop listening to the nested model if necessary.
      * @see Model#removePropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
         super.removePropertyChangeListener(listener);
         if (this.hasNoPropertyChangeListeners(VALUE)) {
@@ -118,6 +125,7 @@ public abstract class PropertyValueModelWrapper
      * Extend to stop listening to the nested model if necessary.
      * @see Model#removePropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         super.removePropertyChangeListener(propertyName, listener);
         if (propertyName == VALUE && this.hasNoPropertyChangeListeners(VALUE)) {
@@ -145,6 +153,7 @@ public abstract class PropertyValueModelWrapper
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.valueHolder);
     }

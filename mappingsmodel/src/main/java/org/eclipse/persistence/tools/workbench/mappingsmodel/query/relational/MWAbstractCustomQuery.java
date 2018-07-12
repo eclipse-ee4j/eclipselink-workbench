@@ -74,28 +74,34 @@ public abstract class MWAbstractCustomQuery extends MWModel    implements MWRela
         return descriptor;
     }
 
+    @Override
     public void formatSetToEjbql() {
         // Nothing needs to be done here
     }
 
+    @Override
     public void formatSetToSql() {
         // Nothing needs to be done here
     }
 
     // ******************* Accessors *******************
 
+    @Override
     public MWRelationalSpecificQueryOptions getRelationalOptions() {
         return this.relationalOptions;
     }
 
+    @Override
     public String getQueryFormatType() {
         return this.relationalOptions.getQueryFormatType();
     }
 
+    @Override
     public void setQueryFormatType(String type) {
         this.relationalOptions.setQueryFormatType(type);
     }
 
+    @Override
     public MWQueryFormat getQueryFormat() {
         return this.relationalOptions.getQueryFormat();
     }
@@ -105,31 +111,38 @@ public abstract class MWAbstractCustomQuery extends MWModel    implements MWRela
         ((MWSQLQueryFormat)relationalOptions.getQueryFormat()).setQueryString(sql);
     }
 
+    @Override
     public TriStateBoolean isCacheStatement() {
         return this.relationalOptions.isCacheStatement();
     }
 
+    @Override
     public void setCacheStatement(TriStateBoolean cacheStatement) {
         this.relationalOptions.setCacheStatement(cacheStatement);
     }
 
 
+    @Override
     public TriStateBoolean isBindAllParameters() {
         return this.relationalOptions.isBindAllParameters();
     }
 
+    @Override
     public void setBindAllParameters(TriStateBoolean bindAllParameters) {
         this.relationalOptions.setBindAllParameters(bindAllParameters);
     }
 
+    @Override
     public boolean isPrepare() {
         return this.relationalOptions.isPrepare();
     }
 
+    @Override
     public void setPrepare(boolean bindAllParameters) {
         this.relationalOptions.setPrepare(bindAllParameters);
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         this.relationalOptions.notifyExpressionsToRecalculateQueryables();
     }

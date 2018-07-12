@@ -45,6 +45,7 @@ public class InheritanceReflectiveDiffTests extends MultiClassReflectiveDiffTest
         super(name);
     }
 
+    @Override
     protected Differentiator buildDifferentiator() {
         DiffEngine diffEngine = new DiffEngine();
 
@@ -79,10 +80,12 @@ public class InheritanceReflectiveDiffTests extends MultiClassReflectiveDiffTest
         return diffEngine;
     }
 
+    @Override
     protected Employee buildEmployee(int id, String name) {
         return new InheritanceEmployee(id, name);
     }
 
+    @Override
     protected ReflectiveDifferentiator employeeDifferentiator() {
         return (ReflectiveDifferentiator) ((DiffEngine) this.differentiator).getUserDifferentiator(SimpleEmployee.class);
     }

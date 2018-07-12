@@ -49,12 +49,14 @@ public class SCRemoteCommandManagerUITest extends SCAbstractUITest
     {
         return new PropertyAspectAdapter(this.subjectHolder, RemoteCommandManagerAdapter.CHANNEL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter manager = (RemoteCommandManagerAdapter) subject;
                 return manager.getChannel();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RemoteCommandManagerAdapter manager = (RemoteCommandManagerAdapter) subject;
@@ -63,6 +65,7 @@ public class SCRemoteCommandManagerUITest extends SCAbstractUITest
         };
     }
 
+    @Override
     protected Component buildPropertyTestingPanel()
     {
         JCheckBox checkBox = new JCheckBox("Cache Synchronization");
@@ -79,6 +82,7 @@ public class SCRemoteCommandManagerUITest extends SCAbstractUITest
         return panel;
     }
 
+    @Override
     protected void clearModel()
     {
         this.subjectHolder.setValue(null);
@@ -90,20 +94,24 @@ public class SCRemoteCommandManagerUITest extends SCAbstractUITest
         openWindow();
     }
 
+    @Override
     protected void printModel()
     {
         System.out.println(subject());
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected void restoreModel()
     {
         this.subjectHolder.setValue(subject());
     }
 
+    @Override
     protected void setUp()
     {
         super.setUp();
@@ -129,6 +137,7 @@ public class SCRemoteCommandManagerUITest extends SCAbstractUITest
         return this.subjectHolder;
     }
 
+    @Override
     protected String windowTitle()
     {
         return "RemoteCommandManager";

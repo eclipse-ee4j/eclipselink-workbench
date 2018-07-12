@@ -23,13 +23,11 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
-import org.eclipse.persistence.tools.workbench.framework.uitools.SwingTools;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWTableDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWCustomReadAllQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWCustomReadObjectQuery;
@@ -51,6 +49,7 @@ public final class RelationalCustomSqlPropertiesPage
         super(relationalDescriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.queryManagerHolder = buildQueryManagerHolder();
@@ -58,6 +57,7 @@ public final class RelationalCustomSqlPropertiesPage
 
     private PropertyValueModel buildQueryManagerHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) subject).getQueryManager();
             }
@@ -68,6 +68,7 @@ public final class RelationalCustomSqlPropertiesPage
         return "descriptor.queryManager.customSQL";
     }
 
+    @Override
     protected Component buildPage() {
         setName("Queries");
         JPanel panel = new JPanel(new GridBagLayout());

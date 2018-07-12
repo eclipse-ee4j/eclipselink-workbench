@@ -36,10 +36,12 @@ public final class MWNullContainerAccessor extends MWContainerAccessor {
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void adjustRuntimeMapping(AbstractCompositeObjectMapping mapping) {
         //no-op
     }
 
+    @Override
     public void adjustRuntimeMapping(AbstractCompositeCollectionMapping mapping) {
         //no-op
     }

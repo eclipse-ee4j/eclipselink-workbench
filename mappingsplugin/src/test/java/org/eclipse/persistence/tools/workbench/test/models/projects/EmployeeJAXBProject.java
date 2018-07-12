@@ -14,7 +14,6 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.test.models.projects;
 
-import java.util.ArrayList;
 
 import org.eclipse.persistence.tools.workbench.test.mappingsmodel.MappingsModelTestTools;
 import org.eclipse.persistence.tools.workbench.test.models.jaxb.employee.NormalHoursTransformer;
@@ -26,7 +25,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWAnyAt
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWCompositeCollectionMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWCompositeObjectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlCollectionReferenceMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlDirectCollectionMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlDirectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFragmentCollectionMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFragmentMapping;

@@ -15,10 +15,8 @@
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 
@@ -48,12 +46,14 @@ public abstract class MWStringQueryFormat extends MWQueryFormat
         this.queryString = queryString;
     }
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
         this.queryString = "";
     }
 
+    @Override
     public String getQueryString()
     {
         return this.queryString;
@@ -71,6 +71,7 @@ public abstract class MWStringQueryFormat extends MWQueryFormat
         firePropertyChanged(QUERY_STRING_PROPERTY, oldQueryString, newQueryString);
     }
 
+    @Override
     public void toString(StringBuffer sb)
     {
         super.toString(sb);

@@ -51,10 +51,12 @@ public class NativeSequenceAdapter extends SequenceAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new NativeSequenceConfig();
     }
 
+    @Override
     public boolean isNative() {
 
         return true;

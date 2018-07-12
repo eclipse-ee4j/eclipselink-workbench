@@ -43,6 +43,7 @@ public class ValueListPropertyValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.junk = new Junk("foo");
@@ -50,6 +51,7 @@ public class ValueListPropertyValueModelAdapterTests extends TestCase {
         this.junkHolder2 = new ValueListPropertyValueModelAdapter(this.junkHolder, Junk.STUFF_LIST);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -110,6 +112,7 @@ public class ValueListPropertyValueModelAdapterTests extends TestCase {
             this.oldValue = oldValue;
             this.newValue = newValue;
         }
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             this.eventReceived = true;
             assertEquals(this.source, e.getSource());
@@ -143,6 +146,7 @@ public class ValueListPropertyValueModelAdapterTests extends TestCase {
             this.replaceItemInList(oldStuffItem, newStuffItem, this.stuff, STUFF_LIST);
         }
 
+        @Override
         public String toString() {
             return "Junk(" + this.stuff + ")";
         }

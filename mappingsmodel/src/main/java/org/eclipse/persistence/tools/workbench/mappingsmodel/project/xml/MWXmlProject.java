@@ -69,11 +69,13 @@ public abstract class MWXmlProject
     // **************** Initialization ****************************************
 
     /** initialize persistent state */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.schemaRepository = new MWXmlSchemaRepository(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.schemaRepository);
@@ -87,6 +89,7 @@ public abstract class MWXmlProject
     }
 
     /** This is used by the I/O manager. */
+    @Override
     public MWModel getMetaDataRepository() {
         return this.getSchemaRepository();
     }
@@ -98,6 +101,7 @@ public abstract class MWXmlProject
 
     // ********** automap **********
 
+    @Override
     public boolean canAutomapDescriptors() {
         return false;
     }
@@ -106,6 +110,7 @@ public abstract class MWXmlProject
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         for (Iterator stream = this.mappingDescriptors(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).resolveXpaths();
@@ -113,6 +118,7 @@ public abstract class MWXmlProject
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         for (Iterator stream = this.mappingDescriptors(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).schemaChanged(change);
@@ -122,6 +128,7 @@ public abstract class MWXmlProject
 
     // **************** TopLink methods ***************************************
 
+    @Override
     protected void resolveInternalReferences() {
         for (Iterator stream = this.schemaRepository.schemas(); stream.hasNext(); ) {
             ((MWXmlSchema) stream.next()).resolveReferences();

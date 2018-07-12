@@ -14,13 +14,10 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsplugin;
 
-import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -29,7 +26,6 @@ import javax.swing.JOptionPane;
 import org.eclipse.persistence.tools.workbench.framework.action.AbstractFrameworkAction;
 import org.eclipse.persistence.tools.workbench.framework.app.ApplicationNode;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWError;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.DescriptorCreationFailureContainer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.ExternalClassLoadFailureContainer;
@@ -53,6 +49,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("REFRESH_CLASSES_ACTION");
         this.initializeAccelerator("REFRESH_CLASSES_ACTION.accelerator");
@@ -60,6 +57,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
         this.initializeIcon("synchronize");
     }
 
+    @Override
     protected void execute() {
         this.navigatorSelectionModel().pushExpansionState();
         this.refreshDescriptors(this.selectedProjectNodes(), this.selectedNodes());
@@ -124,6 +122,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
             "PROJECT_EJB_UPDATE_STATUS_DIALOG_MESSAGE",
             "project.export.ejb-jar.xml")
         {
+            @Override
             protected CellRendererAdapter buildNodeRenderer(Object value)
             {
                 if (value instanceof MWProject)
@@ -169,6 +168,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
                     "project.export.ejb-jar.xml");
         }
 
+        @Override
         protected Action buildCancelAction()
         {
             AbstractAction action = (AbstractAction) super.buildCancelAction();
@@ -177,6 +177,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
             return action;
         }
 
+        @Override
         protected CellRendererAdapter buildNodeRenderer(Object value)
         {
             if (value instanceof MWProject)
@@ -185,6 +186,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
             return super.buildNodeRenderer(value);
         }
 
+        @Override
         protected Action buildOKAction()
         {
             AbstractAction action = (AbstractAction) super.buildOKAction();
@@ -193,6 +195,7 @@ public final class RefreshClassesAction extends AbstractFrameworkAction {
             return action;
         }
 
+        @Override
         protected boolean cancelButtonIsVisible()
         {
             return true;

@@ -43,6 +43,7 @@ final class OpenAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.open");
@@ -55,6 +56,7 @@ final class OpenAction
      * prompt the user for a file, then ask the node manager to open it;
      * the node manager will figure out whether the file is already open
      */
+    @Override
     protected void execute() {
         File file = this.promptUserForFile();
         if (file != null) {

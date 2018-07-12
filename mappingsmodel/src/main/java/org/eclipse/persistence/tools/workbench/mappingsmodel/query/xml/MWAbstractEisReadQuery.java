@@ -61,6 +61,7 @@ public abstract class MWAbstractEisReadQuery extends MWAbstractReadQuery {
         super(parent, name);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.eisInteraction = new MWEisInteraction(this);
@@ -69,6 +70,7 @@ public abstract class MWAbstractEisReadQuery extends MWAbstractReadQuery {
 
     // ************* Morphing ************
 
+    @Override
     public Iterator queryTypes() {
         List list = new ArrayList();
         list.add(READ_ALL_QUERY);
@@ -76,17 +78,20 @@ public abstract class MWAbstractEisReadQuery extends MWAbstractReadQuery {
         return list.iterator();
     }
 
+    @Override
     public MWReportQuery asReportQuery() {
         throw new UnsupportedOperationException();
     }
 
     //TODO not sure this will work, need property change notification
+    @Override
     public void initializeFrom(MWReadQuery query) {
         super.initializeFrom(query);
         this.eisInteraction = ((MWAbstractEisReadQuery) query).getEisInteraction();
         this.eisInteraction.setParent(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.eisInteraction);
@@ -102,6 +107,7 @@ public abstract class MWAbstractEisReadQuery extends MWAbstractReadQuery {
 
     // **************** Runtime Conversion ****************
 
+    @Override
     public DatabaseQuery runtimeQuery() {
         ObjectLevelReadQuery runtimeQuery = (ObjectLevelReadQuery) super.runtimeQuery();
         this.eisInteraction.adjustRuntimeDescriptor(runtimeQuery);

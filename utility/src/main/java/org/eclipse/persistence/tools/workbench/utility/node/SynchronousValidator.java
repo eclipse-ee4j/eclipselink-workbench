@@ -40,6 +40,7 @@ public class SynchronousValidator
     /**
      * @see PluggableValidator.Delegate#validate()
      */
+    @Override
     public void validate() {
         this.node.validateBranch();
     }
@@ -47,6 +48,7 @@ public class SynchronousValidator
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.node);
     }

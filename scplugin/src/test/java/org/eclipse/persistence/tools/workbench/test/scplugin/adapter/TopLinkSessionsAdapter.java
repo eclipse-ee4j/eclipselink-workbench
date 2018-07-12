@@ -55,6 +55,7 @@ public class TopLinkSessionsAdapter extends AbstractSessionsXmlTest {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new SessionConfigs();
     }
@@ -75,6 +76,7 @@ public class TopLinkSessionsAdapter extends AbstractSessionsXmlTest {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -109,6 +111,7 @@ public class TopLinkSessionsAdapter extends AbstractSessionsXmlTest {
         return ( SessionConfigs)this.getModel();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 

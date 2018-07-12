@@ -36,10 +36,12 @@ public final class MWOXDescriptorInheritancePolicy
 
     // **************** Problem handling **************************************
 
+    @Override
     protected String descendantDescriptorTypeMismatchProblemString() {
         throw new UnsupportedOperationException("Should not have this problem, currently only one type of OX descriptor");
     }
 
+    @Override
     protected boolean checkDescendantsForDescriptorTypeMismatch() {
         return false;
     }

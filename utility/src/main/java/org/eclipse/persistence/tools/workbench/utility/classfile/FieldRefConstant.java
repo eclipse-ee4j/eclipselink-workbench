@@ -36,10 +36,12 @@ public class FieldRefConstant extends MemberRefConstant {
         super(pool, tag, stream);
     }
 
+    @Override
     public String description() {
         return "field ref";
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         this.getFieldDescriptor().accept(visitor);

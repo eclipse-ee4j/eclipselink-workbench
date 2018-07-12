@@ -33,6 +33,7 @@ final class NewProjectAction extends AbstractFrameworkAction {
         this.plugin = plugin;
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("NEW_PROJECT_ACTION");
         this.initializeAccelerator("NEW_PROJECT_ACTION.accelerator");
@@ -40,6 +41,7 @@ final class NewProjectAction extends AbstractFrameworkAction {
         this.initializeToolTipText("NEW_PROJECT_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute() {
         ProjectCreationDialog dialog = new ProjectCreationDialog(this.getWorkbenchContext());
         dialog.show();

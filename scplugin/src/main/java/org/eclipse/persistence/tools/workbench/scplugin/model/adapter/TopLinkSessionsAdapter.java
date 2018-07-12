@@ -65,6 +65,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
      * to the specified collection.
      * @see #children()
      */
+    @Override
     protected void addChildrenTo( List children) {
         super.addChildrenTo( children);
 
@@ -74,12 +75,14 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new SessionConfigs();
     }
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -89,6 +92,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     /**
     * Initializes this new model inst. var. and aggregates.
     */
+    @Override
    protected void initialize( Object newConfig) {
        super.initialize( newConfig);
 
@@ -97,6 +101,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 
@@ -117,6 +122,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     /**
      * Post Initialization: allows validation, handle legacy model...
      */
+    @Override
     protected void postInitializationFromModel() {
 
         for( Iterator i = allSessions(); i.hasNext(); ) {
@@ -126,6 +132,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     /**
      * Pre Saving: Clean up all Sessions config model before writing.
      */
+    @Override
     protected void preSaving() {
 
         for( Iterator i = allSessions(); i.hasNext(); ) {
@@ -135,6 +142,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     /**
      * Post Saving: Re-initialize all Sessions config model after writing.
      */
+    @Override
     protected void postSaving() {
 
         for( Iterator i = allSessions(); i.hasNext(); ) {
@@ -182,6 +190,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     Collection getSessionsNames( Iterator sessions) {
 
         return CollectionTools.collection( new TransformationIterator( sessions) {
+            @Override
             protected Object transform( Object next) {
                 return (( SessionAdapter)next).getName();
             }
@@ -190,6 +199,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
 
     Iterator getNames( Iterator sessions) {
         return new TransformationIterator( sessions) {
+            @Override
             protected Object transform( Object next) {
                 return (( SessionAdapter)next).getName();
             }
@@ -242,6 +252,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     public Iterator sessionBrokers() {
 
         return new FilteringIterator( sessions()) {
+            @Override
             protected boolean accept( Object next) {
                 return (( SessionAdapter)next).isBroker();
             }
@@ -261,6 +272,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     Iterator managedSessions( final SessionBrokerAdapter broker) {
 
         return new FilteringIterator( managedSessions()) {
+            @Override
             protected boolean accept( Object next) {
                 return (( DatabaseSessionAdapter)next).getBroker() == broker;
             }
@@ -278,6 +290,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     public Iterator databaseSessions() {
 
         return new FilteringIterator( this.sessions()) {
+           @Override
            protected boolean accept( Object next) {
               return !(( SessionAdapter)next).isBroker();
            }
@@ -406,6 +419,7 @@ public final class TopLinkSessionsAdapter extends RootSCAdapter {
     }
 
     private static final String CR = System.getProperty("line.separator");
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 

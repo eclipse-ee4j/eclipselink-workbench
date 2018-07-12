@@ -66,11 +66,13 @@ public final class MWObjectTypeConverter
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.valuePairs = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 
@@ -173,14 +175,17 @@ public final class MWObjectTypeConverter
     // ************** MWConverter implementation ************
 
     /** Should ONLY be used in one place - the UI */
+    @Override
     public String accessibleNameKey() {
         return "ACCESSIBLE_SERIALIZED_MAPPING_NODE";
     }
 
+    @Override
     public String getType() {
         return OBJECT_TYPE_CONVERTER;
     }
 
+    @Override
     public String iconKey() {
         return "mapping.objectType";
     }
@@ -190,6 +195,7 @@ public final class MWObjectTypeConverter
 
     private Iterator dataValues() {
         return new TransformationIterator(this.valuePairs()) {
+            @Override
             protected Object transform(Object next) {
                 return ((ValuePair) next).dataValue;
             }
@@ -198,6 +204,7 @@ public final class MWObjectTypeConverter
 
     private Iterator attributeValues() {
         return new TransformationIterator(this.valuePairs()) {
+            @Override
             protected Object transform(Object next) {
                 return ((ValuePair) next).attributeValue;
             }
@@ -212,6 +219,7 @@ public final class MWObjectTypeConverter
     /**
      * This will always clear out the value pairs and rebuild them.
      */
+    @Override
     protected void rebuildValuePairs() {
         Iterator valuePairsCopy = valuePairs();
         this.clearValuePairs();
@@ -323,6 +331,7 @@ public final class MWObjectTypeConverter
 
     //************* Problem Handling ************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkValuePairs(currentProblems);
@@ -360,6 +369,7 @@ public final class MWObjectTypeConverter
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public Converter runtimeConverter(DatabaseMapping mapping) {
         ObjectTypeConverter converter = new ObjectTypeConverter(mapping);
 
@@ -399,6 +409,7 @@ public final class MWObjectTypeConverter
         return descriptor;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
 
@@ -511,6 +522,7 @@ public final class MWObjectTypeConverter
             return (MWObjectTypeConverter) this.getMWParent();
         }
 
+        @Override
         public int compareTo(Object o) {
             return Collator.getInstance().compare(this.dataValue.toString(), ((ValuePair) o).dataValue.toString());
         }
@@ -543,6 +555,7 @@ public final class MWObjectTypeConverter
             this.attributeValue = attributeValue;
         }
 
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.dataValue);
             sb.append(" => ");

@@ -62,6 +62,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         return new ConnectionPoolConfig();
@@ -80,6 +81,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo( List children) {
         super.addChildrenTo( children);
 
@@ -106,6 +108,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
     /**
      * Initializes this adapter.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -114,6 +117,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
     /**
      * Initializes this adapter from the specified config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -121,6 +125,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
         this.login = getLoginFromModel();
     }
 
+    @Override
     protected void postInitializationFromModel() {
         super.postInitializationFromModel();
 
@@ -141,6 +146,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
     /**
      * Returns this config model property.
      */
+    @Override
     public String getName() {
 
         return this.pool().getName();
@@ -156,11 +162,13 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
         this.firePropertyChanged( NAME_PROPERTY, old, name);
     }
 
+    @Override
     public String displayString() {
 
         return this.getName();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( this.getName());
@@ -230,6 +238,7 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
     /**
      * Returns this login adapter.
      */
+    @Override
     public LoginAdapter getLogin() {
 
         return this.login;
@@ -252,11 +261,13 @@ public class ConnectionPoolAdapter extends SCAdapter implements Nominative, Logi
         this.setLogin( NullLoginAdapter.instance());
     }
 
+    @Override
     public void setExternalConnectionPooling( boolean value) {
         // Don't do anything because this is a ConnectionPool
         return;
     }
 
+    @Override
     public boolean usesExternalConnectionPooling() {
 
         return false;

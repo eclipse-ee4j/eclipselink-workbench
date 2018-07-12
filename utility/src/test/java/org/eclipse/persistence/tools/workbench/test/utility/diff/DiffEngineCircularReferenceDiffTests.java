@@ -39,6 +39,7 @@ public class DiffEngineCircularReferenceDiffTests extends AbstractCircularRefere
         super(name);
     }
 
+    @Override
     Differentiator buildDifferentiator() {
         DiffEngine result = new DiffEngine();
         ReflectiveDifferentiator rd;
@@ -51,6 +52,7 @@ public class DiffEngineCircularReferenceDiffTests extends AbstractCircularRefere
         return result;
     }
 
+    @Override
     void verifyMismatch03(CompositeDiff cd) {
         ReflectiveDiff rd = (ReflectiveDiff) cd.getDiffs()[1];
         ReflectiveFieldDiff rfd = (ReflectiveFieldDiff) rd.getDiffs()[0];
@@ -65,6 +67,7 @@ public class DiffEngineCircularReferenceDiffTests extends AbstractCircularRefere
         assertEquals("parent2", ed.getObject2());
     }
 
+    @Override
     void verifyMismatch09(Diff diff) {
         List leafMismatches = DiffTestTools.differentLeafDiffList(diff);
         // one failure from TestNode reflective tester, one from TestBranchNode reflective tester
@@ -79,6 +82,7 @@ public class DiffEngineCircularReferenceDiffTests extends AbstractCircularRefere
         assertEquals(null, leafDiff.getObject2());
     }
 
+    @Override
     void verifyMismatch10(TestBranchNode node, Diff diff) {
         List leafMismatches = DiffTestTools.differentLeafDiffList(diff);
         // one failure from Object reflective tester, on from TestNode reflective tester, one from TestBranchNode reflective tester

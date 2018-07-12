@@ -27,6 +27,7 @@ public abstract class AbstractCellRendererAdapter
     /**
      * @see CellRendererAdapter#buildIcon(Object)
      */
+    @Override
     public Icon buildIcon(Object value) {
         return null;
     }
@@ -34,6 +35,7 @@ public abstract class AbstractCellRendererAdapter
     /**
      * @see CellRendererAdapter#buildText(Object)
      */
+    @Override
     public String buildText(Object value) {
         return null;
     }
@@ -41,6 +43,7 @@ public abstract class AbstractCellRendererAdapter
     /**
      * @see CellRendererAdapter#buildToolTipText(Object)
      */
+    @Override
     public String buildToolTipText(Object value) {
         return null;
     }
@@ -48,6 +51,7 @@ public abstract class AbstractCellRendererAdapter
     /**
      * @see CellRendererAdapter#buildAccessibleName(Object)
      */
+    @Override
     public String buildAccessibleName(Object value) {
         return null;
     }

@@ -32,6 +32,7 @@ public abstract class SCDatabaseLoginUITest extends SCAbstractUITest {
         super();
     }
 
+    @Override
     protected void setUp() {
 
         super.setUp();
@@ -51,14 +52,17 @@ public abstract class SCDatabaseLoginUITest extends SCAbstractUITest {
         return subjectHolder;
     }
 
+    @Override
     protected void clearModel() {
         subjectHolder.setValue( null);
     }
 
+    @Override
     protected void restoreModel() {
         subjectHolder.setValue( subject());
     }
 
+    @Override
     protected void printModel() {
         System.out.println( subject());
     }

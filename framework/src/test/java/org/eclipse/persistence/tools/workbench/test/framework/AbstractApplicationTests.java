@@ -41,6 +41,7 @@ public class AbstractApplicationTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.application = new TestApplication();
@@ -48,6 +49,7 @@ public class AbstractApplicationTests extends TestCase {
         this.executingFromClassDir = ! Classpath.fileNameIsArchive(classpathEntry);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -102,30 +104,37 @@ public class AbstractApplicationTests extends TestCase {
 
 private class TestApplication extends AbstractApplication {
 
+    @Override
     public String defaultSpecificationTitle() {
         return "EclipseLink Workbench";
     }
 
+    @Override
     public String defaultSpecificationVendor() {
         return "EclipseLink Project";
     }
 
+    @Override
     public String defaultReleaseDesignation() {
         return "1.1";
     }
 
+    @Override
     public String defaultLibraryDesignation() {
         return "Workbench";
     }
 
+    @Override
     public String defaultSpecificationVersion() {
         return "1.1.0";
     }
 
+    @Override
     public String defaultImplementationVersion() {
         return "1.1.0<dev>";
     }
 
+    @Override
     public boolean isFirstExecution() {
         return false;
     }
@@ -133,8 +142,10 @@ private class TestApplication extends AbstractApplication {
 }
 
 private class ProductionApplication extends TestApplication {
+    @Override
     protected ManifestInterrogator buildManifestInterrogator() {
         return new ManifestInterrogator(this.getClass(), this) {
+            @Override
             protected String buildJarFileName(Class resourceClass) {
                 try {
                     return FileTools.resourceFile("/jars/test.jar").getPath();

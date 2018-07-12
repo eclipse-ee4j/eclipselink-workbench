@@ -16,14 +16,11 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin;
 
 import java.awt.EventQueue;
 import java.awt.Frame;
-import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import javax.swing.Action;
 import javax.swing.JOptionPane;
@@ -34,7 +31,6 @@ import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContex
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
 import org.eclipse.persistence.tools.workbench.framework.ui.chooser.MultipleClassChooserDialog;
 import org.eclipse.persistence.tools.workbench.framework.ui.dialog.WaitDialog;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWError;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.DescriptorCreationFailureContainer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.ExternalClassLoadFailureContainer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassRepository;
@@ -66,6 +62,7 @@ public final class AddOrRefreshClassesAction
         super(context.buildExpandedResourceRepositoryContext(UiProjectBundle.class));
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("descriptor.refresh");
@@ -74,6 +71,7 @@ public final class AddOrRefreshClassesAction
         this.initializeAccelerator("ADD_OR_REFRESH_CLASSES_ACTION.accelerator");
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = this.selectedProjectNodes();
         for (int i = 0; i < projectNodes.length; i++) {
@@ -139,6 +137,7 @@ public final class AddOrRefreshClassesAction
             cp.addClassNamesTo(this.userClassNames);
         }
 
+        @Override
         protected boolean accept(String externalClassDescriptionName) {
             return super.accept(externalClassDescriptionName) &&
                     this.userClassNames.contains(externalClassDescriptionName);
@@ -160,6 +159,7 @@ public final class AddOrRefreshClassesAction
             this.selectedClassDescriptions = selectedClassDescriptions;
         }
 
+        @Override
         public void run() {
             WaitDialog waitDialog = this.buildWaitDialog();
             launchLater(waitDialog);
@@ -198,6 +198,7 @@ public final class AddOrRefreshClassesAction
         private boolean promptUserToUpdateProjectFromEjbJarXml() {
             class Prompt implements Runnable {
                 int option = 0;
+                @Override
                 public void run() {
                     this.option = JOptionPane.showConfirmDialog(
                             ClassImporter.this.workbenchContext().getCurrentWindow(),
@@ -234,6 +235,7 @@ public final class AddOrRefreshClassesAction
                 "PROJECT_EJB_UPDATE_STATUS_DIALOG_MESSAGE",
                 "project.export.ejb-jar.xml")
             {
+                @Override
                 protected CellRendererAdapter buildNodeRenderer(Object value) {
                     if (value instanceof MWProject) {
                         return new ProjectCellRendererAdapter(ClassImporter.this.resourceRepository());
@@ -267,6 +269,7 @@ public final class AddOrRefreshClassesAction
                     "project.export.ejb-jar.xml");
         }
 
+        @Override
         protected Action buildOKAction() {
             Action action = super.buildOKAction();
             action.putValue(Action.NAME, this.resourceRepository().getString("EJB_JAR_XML_VALIDATOR_STATUS_DIALOG_YES_BUTTON"));
@@ -274,6 +277,7 @@ public final class AddOrRefreshClassesAction
             return action;
         }
 
+        @Override
         protected Action buildCancelAction() {
             Action action = super.buildCancelAction();
             action.putValue(Action.NAME, this.resourceRepository().getString("EJB_JAR_XML_VALIDATOR_STATUS_DIALOG_NO_BUTTON"));
@@ -281,10 +285,12 @@ public final class AddOrRefreshClassesAction
             return action;
         }
 
+        @Override
         protected boolean cancelButtonIsVisible() {
             return true;
         }
 
+        @Override
         protected CellRendererAdapter buildNodeRenderer(Object value) {
             if (value instanceof MWProject) {
                 return new ProjectCellRendererAdapter(this.resourceRepository());

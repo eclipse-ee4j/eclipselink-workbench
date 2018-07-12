@@ -27,12 +27,14 @@ final class UnmapDescriptorAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeTextAndMnemonic("UNMAP_ACTION");
         initializeToolTipText("UNMAP_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         navigatorSelectionModel().pushExpansionState();
         ((MWMappingDescriptor) selectedNode.getValue()).unmap();

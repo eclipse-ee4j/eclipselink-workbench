@@ -26,7 +26,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryable;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.oxm.XMLDescriptor;
@@ -96,6 +95,7 @@ public final class MWQueryableArgumentElement extends MWModel {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.queryableHandle = new MWQueryableHandle(this, this.buildQueryableScrubber());
@@ -143,6 +143,7 @@ public final class MWQueryableArgumentElement extends MWModel {
 
     // ********** printing **********
 
+    @Override
     public String displayString() {
         StringBuffer displayString = new StringBuffer();
 
@@ -167,6 +168,7 @@ public final class MWQueryableArgumentElement extends MWModel {
         return displayString.toString();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (getJoinedQueryableElement() != null) {
             sb.append(getJoinedQueryableElement().displayString() + ".");
@@ -187,6 +189,7 @@ public final class MWQueryableArgumentElement extends MWModel {
 
     // ********** model synchronization support **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.queryableHandle);
@@ -197,15 +200,18 @@ public final class MWQueryableArgumentElement extends MWModel {
 
     private NodeReferenceScrubber buildQueryableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWQueryableArgumentElement.this.setQueryableToNull();
             }
+            @Override
             public String toString() {
                 return "MWQueryableArgumentElement.buildQueryableScrubber()";
             }
         };
     }
 
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         super.descriptorUnmapped(mappings);
         if (this.getQueryable() != null && mappings.contains(this.getQueryable())) {
@@ -213,6 +219,7 @@ public final class MWQueryableArgumentElement extends MWModel {
         }
     }
 
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         super.mappingReplaced(oldMapping, newMapping);
         if (this.getQueryable() == oldMapping) {

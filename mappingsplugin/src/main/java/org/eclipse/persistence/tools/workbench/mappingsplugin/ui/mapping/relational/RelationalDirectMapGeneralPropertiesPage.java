@@ -22,7 +22,6 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
@@ -41,6 +40,7 @@ final class RelationalDirectMapGeneralPropertiesPage extends ScrollablePropertie
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel container = new JPanel(new GridBagLayout());
         container.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));

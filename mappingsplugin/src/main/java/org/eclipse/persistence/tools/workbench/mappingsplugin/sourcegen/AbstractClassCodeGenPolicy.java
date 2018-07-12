@@ -44,6 +44,7 @@ abstract class AbstractClassCodeGenPolicy implements MWClassCodeGenPolicy
 
     protected abstract MWClass getMWClass();
 
+    @Override
     public String classComment(MWClass mwClass)
     {
         String CR = StringTools.CR;
@@ -57,25 +58,30 @@ abstract class AbstractClassCodeGenPolicy implements MWClassCodeGenPolicy
 
         return comment;
     }
+    @Override
     public String emptyMethodBodyComment() {
         return    stringRepository().getString("EMPTY_METHOD_BODY_COMMENT");
     }
 
+    @Override
     public String collectionImplementationClassNotDeterminedComment(MWClassAttribute attribute, MWClass concreteValueType) {
         return stringRepository().getString("CODE_GEN_COMMENT_FOR_COLLECTION_IMPLEMENTATION_CLASS_NOT_DETERMINED",
                                                                      new Object[] {attribute.getName(), concreteValueType.shortName()});
     }
 
+    @Override
     public String oneToOneMappingThatControlsWritingOfPrimaryKeyComment(MWOneToOneMapping mapping) {
         return stringRepository().getString("CODE_GEN_COMMENT_FOR_ONE_TO_ONE_MAPPING_THAT_CONTROLS_WRITING_OF_PRIMARY_KEY",
                                                                             new Object[] {mapping.getName(), StringTools.CR});
     }
 
 
+    @Override
     public String aggregateMappingDoesNotAllowNullImplementationClassNotDeterminedComment() {
         return stringRepository().getString("CODE_GEN_COMMENT_FOR_AGGREGATE_MAPPING_THAT_DOES_NOT_ALLOW_NULL_IMPLEMENTATION_CLASS_NOT_DETERMINED");
     }
 
+    @Override
     public String aggregateMappingDoesNotAllowNullComment(MWAggregateMapping mapping) {
         return stringRepository().getString("CODE_GEN_COMMENT_FOR_AGGREGATE_MAPPING_THAT_DOES_NOT_ALLOW_NULL",
                                                                         new Object[] {mapping.getName()});

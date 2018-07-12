@@ -17,13 +17,10 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relatio
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAbstractClassIndicatorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorFieldPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorPolicy;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorInheritancePolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
@@ -34,12 +31,9 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
-import org.eclipse.persistence.mappings.OneToOneMapping;
-import org.eclipse.persistence.mappings.TransformationMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.sessions.Record;
 
 public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorInheritancePolicy
     implements MWRelationalClassIndicatorFieldPolicy.Parent {
@@ -70,6 +64,7 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.readSubclassesOnQuery = true;
@@ -80,6 +75,7 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
 
     // *************** Containment Hierarchy *************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.readAllSubclassesViewHandle);
@@ -87,9 +83,11 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
 
     private NodeReferenceScrubber buildReadAllSubclassesViewScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalDescriptorInheritancePolicy.this.setReadAllSubclassesView(null);
             }
+            @Override
             public String toString() {
                 return "MWRelationalDescriptorInheritancePolicy.buildReadAllSubclassesViewScrubber()";
             }
@@ -99,6 +97,7 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
 
     // *************** Runtime conversion *************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptor(runtimeDescriptor);
         InheritancePolicy runtimeInheritancePolicy = (InheritancePolicy) runtimeDescriptor.getInheritancePolicy();
@@ -115,14 +114,17 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
 
     // *************** Accessors *************
 
+    @Override
     protected MWClassIndicatorFieldPolicy buildClassIndicatorFieldPolicy() {
         return new MWRelationalClassIndicatorFieldPolicy(this, getAllDescriptorsAvailableForIndicatorDictionary().iterator());
     }
 
+    @Override
     public MWTable getReadAllSubclassesView() {
         return this.readAllSubclassesViewHandle.getTable();
     }
 
+    @Override
     public void dispose() {
         super.dispose();
         ((MWRelationalProject)getProject()).notifyExpressionsToRecalculateQueryables();
@@ -149,6 +151,7 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
         return this.readSubclassesOnQuery;
     }
 
+    @Override
     protected void setClassIndicatorPolicy(MWClassIndicatorPolicy classIndicatorPolicy) {
         super.setClassIndicatorPolicy(classIndicatorPolicy);
         this.getProject().recalculateAggregatePathsToColumn(this.getOwningDescriptor());
@@ -166,6 +169,7 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
 
     // *************** Automap Support *************
 
+    @Override
     public void automap() {
         super.automap();
         this.getClassIndicatorPolicy().automap();
@@ -174,10 +178,12 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
 
     //*************** Problem Handling *************
 
+    @Override
     protected String descendantDescriptorTypeMismatchProblemString() {
         return ProblemConstants.DESCRIPTOR_TABLE_INHERITANCE_DESCRIPTOR_TYPES_DONT_MATCH;
     }
 
+    @Override
     protected boolean checkDescendantsForDescriptorTypeMismatch() {
         for (Iterator stream = this.descendentDescriptors(); stream.hasNext(); ) {
             MWRelationalDescriptor currentDescriptor = (MWRelationalDescriptor) stream.next();
@@ -190,6 +196,7 @@ public final class MWRelationalDescriptorInheritancePolicy extends MWDescriptorI
         return false;
     }
 
+    @Override
     public void addClassIndicatorFieldNotSpecifiedProblemTo(List newProblems) {
         ((MWClassIndicatorFieldPolicy) getClassIndicatorPolicy()).checkClassIndicatorField(newProblems);
     }

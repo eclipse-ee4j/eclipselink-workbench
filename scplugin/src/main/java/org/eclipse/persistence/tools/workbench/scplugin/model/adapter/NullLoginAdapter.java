@@ -41,6 +41,7 @@ public class NullLoginAdapter extends LoginAdapter {
         super();
     }
 
+    @Override
     protected Object buildModel() {
 
         return null;
@@ -48,6 +49,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns the datasource platform class from user's preference.
      */
+    @Override
     protected String getDefaultPlatformClassName() {
 
         return null;
@@ -55,12 +57,14 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns true when this uses the default Platform Class.
      */
+    @Override
     protected boolean platformClassIsDefault() {
         return true;
     }
     /**
      * Returns this config model property.
      */
+    @Override
     public String getEncryptionClass() {
 
         return "";
@@ -68,6 +72,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getPassword() {
 
         return "";
@@ -85,6 +90,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getPlatformClass() {
 
         return "";
@@ -92,6 +98,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getPlatformName() {
 
         return "";
@@ -99,6 +106,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getTableQualifier() {
 
         return "";
@@ -106,6 +114,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns this userName.
      */
+    @Override
     public String getUserName() {
 
         return "";
@@ -114,16 +123,19 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Sets this config model property.
      */
+    @Override
     public void setEncryptionClass( String value) {
     }
     /**
     * Sets usesExternalConnectionPooling and the config model.
     */
+    @Override
     public void setExternalConnectionPooling( boolean value) {
     }
     /**
      * Sets this config model property.
      */
+    @Override
     public void setPassword( String value) {
     }
 
@@ -138,26 +150,31 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Sets this config model property.
      */
+    @Override
     public void setPlatformClass( String value) {
     }
     /**
      * Sets this config model property.
      */
+    @Override
     public void setTableQualifier( String value) {
     }
     /**
      * Sets this userName and the config model.
      */
+    @Override
     public void setUserName( String name) {
     }
     /**
      * Sets this config model property.
      */
+    @Override
     public void setUsesExternalTransactionController( boolean value) {
     }
     /**
      * Returns usesExternalConnectionPooling.
      */
+    @Override
     public boolean usesExternalConnectionPooling() {
 
         return false;
@@ -165,6 +182,7 @@ public class NullLoginAdapter extends LoginAdapter {
     /**
      * Returns this config model property..
      */
+    @Override
     public boolean usesExternalTransactionController() {
 
         return false;

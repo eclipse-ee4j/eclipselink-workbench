@@ -67,6 +67,7 @@ public class RelationalClassIndicatorPolicySubPanel
     */
     private ValueModel buildTableHolder() {
         return new PropertyAspectAdapter(getDescriptorHolder(), MWTableDescriptor.PRIMARY_TABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalClassDescriptor) subject).getPrimaryTable();
             }
@@ -87,6 +88,7 @@ public class RelationalClassIndicatorPolicySubPanel
 
     private CollectionValueModel buildClassIndicatorFieldChooserValueModel(ValueModel tableHolder) {
         return new CollectionAspectAdapter(tableHolder, MWTable.COLUMNS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTable) subject).columns();
             }
@@ -95,10 +97,12 @@ public class RelationalClassIndicatorPolicySubPanel
 
     private PropertyValueModel buildClassIndicatorFieldChooserPropertyAdapter() {
         return new PropertyAspectAdapter(getClassIndicatorFieldPolicyHolder(), MWRelationalClassIndicatorFieldPolicy.FIELD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalClassIndicatorFieldPolicy) subject).getField();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalClassIndicatorFieldPolicy)subject).setField((MWColumn)value);
             }
@@ -150,6 +154,7 @@ public class RelationalClassIndicatorPolicySubPanel
 
     private ValueModel buildUseClassIndicatorFieldHolder() {
         return new PropertyAspectAdapter(getClassIndicatorPolicyHolder()) {
+            @Override
             protected Object buildValue() {
                 return subject == null ? Boolean.FALSE : Boolean.TRUE;
             }
@@ -247,6 +252,7 @@ public class RelationalClassIndicatorPolicySubPanel
         return useClassIndicatorFieldPanel;
     }
 
+    @Override
     protected void initializeLayout(Collection isRootListerners) {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -279,6 +285,7 @@ public class RelationalClassIndicatorPolicySubPanel
         addIndicatorFieldListener(this);
     }
 
+    @Override
     public void updateEnablementStatus() {
         super.updateEnablementStatus();
         classIndicatorFieldComboBox.setEnabled(this.isRoot() && this.isIndicatorType() && !this.isAggregate());

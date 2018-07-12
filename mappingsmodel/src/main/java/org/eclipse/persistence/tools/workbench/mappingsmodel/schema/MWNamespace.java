@@ -247,6 +247,7 @@ public final class MWNamespace
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.namespacePrefix = "";
@@ -257,6 +258,7 @@ public final class MWNamespace
         this.modelGroupDefinitions = new Hashtable();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.attributeDeclarations) { children.addAll(this.attributeDeclarations.values()); }
@@ -736,12 +738,14 @@ public final class MWNamespace
 
     // **************** Display ***********************************************
 
+    @Override
     public void toString(StringBuffer sb) {
         super.toString(sb);
         String url = (this.getNamespaceUrl().equals("")) ? "(absent)" : this.getNamespaceUrl();
         sb.append("namespace: " + url);
     }
 
+    @Override
     public int compareTo(Object o) {
         if(this == o)
             return 0;
@@ -827,6 +831,7 @@ public final class MWNamespace
             super();
         }
 
+        @Override
         public int compare(Object obj1, Object obj2) {
             return this.compare((MWNamespace) obj1, (MWNamespace) obj2);
         }

@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.scplugin.ui.session.login;
 
 //JDK
 import java.awt.BorderLayout;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 import javax.swing.BorderFactory;
@@ -29,8 +28,6 @@ import org.eclipse.persistence.tools.workbench.framework.uitools.AddRemoveListPa
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.SessionAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.ui.tools.ClassChooserTools;
-import org.eclipse.persistence.tools.workbench.uitools.app.CollectionAspectAdapter;
-import org.eclipse.persistence.tools.workbench.uitools.app.CollectionValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ListAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.ListValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
@@ -109,6 +106,7 @@ final class StructConvertersPane extends AbstractSubjectPanel
     {
         return new ListAspectAdapter(getSubjectHolder(), DatabaseLoginAdapter.STRUCT_CONVERTER_COLLECTION_PROPERTY)
         {
+            @Override
             protected ListIterator getValueFromSubject()
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) this.subject;
@@ -131,6 +129,7 @@ final class StructConvertersPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         AddRemoveListPanel structConverterListPanel = buildStructConverterListPane();
@@ -151,6 +150,7 @@ final class StructConvertersPane extends AbstractSubjectPanel
      */
     private class AddRemoveListAdapter implements AddRemoveListPanel.Adapter
     {
+        @Override
         public void addNewItem(ObjectListSelectionModel listSelectionModel)
         {
             DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject();
@@ -172,6 +172,7 @@ final class StructConvertersPane extends AbstractSubjectPanel
             }
         }
 
+        @Override
         public void removeSelectedItems(ObjectListSelectionModel listSelectionModel)
         {
             DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject();
@@ -198,6 +199,7 @@ final class StructConvertersPane extends AbstractSubjectPanel
                     AddRemoveListPanel.RIGHT);
         }
 
+        @Override
         protected String addButtonKey()
         {
             return "OPTIONS_STRUCT_CONVERTERS_ADD_BUTTON";
@@ -212,6 +214,7 @@ final class StructConvertersPane extends AbstractSubjectPanel
             buttonPanel.add(removeButton);
         }
 
+        @Override
         protected String removeButtonKey()
         {
             return "OPTIONS_STRUCT_CONVERTERS_REMOVE_BUTTON";

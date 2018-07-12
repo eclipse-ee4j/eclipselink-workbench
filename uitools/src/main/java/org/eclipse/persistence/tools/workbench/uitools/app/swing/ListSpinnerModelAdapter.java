@@ -117,9 +117,11 @@ public class ListSpinnerModelAdapter extends SpinnerListModel {
 
     private PropertyChangeListener buildValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ListSpinnerModelAdapter.this.synchronize(e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "value listener";
             }
@@ -137,6 +139,7 @@ public class ListSpinnerModelAdapter extends SpinnerListModel {
      * @see javax.swing.JSpinner.DefaultEditor(javax.swing.JSpinner)
      * @see javax.swing.SpinnerModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.getChangeListeners().length == 0) {
             // sorry about this "lateral" call to super  ~bjv
@@ -150,6 +153,7 @@ public class ListSpinnerModelAdapter extends SpinnerListModel {
      * The resulting event will be ignored: @see synchronize(Object).
      * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(Object value) {
         super.setValue(value);
         this.valueHolder.setValue(value);
@@ -159,6 +163,7 @@ public class ListSpinnerModelAdapter extends SpinnerListModel {
      * Extend to start listening to the underlying value if necessary.
      * @see javax.swing.SpinnerModel#addChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void addChangeListener(ChangeListener listener) {
         if (this.getChangeListeners().length == 0) {
             this.valueHolder.addPropertyChangeListener(ValueModel.VALUE, this.valueChangeListener);
@@ -171,6 +176,7 @@ public class ListSpinnerModelAdapter extends SpinnerListModel {
      * Extend to stop listening to the underlying value if appropriate.
      * @see javax.swing.SpinnerModel#removeChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void removeChangeListener(ChangeListener listener) {
         super.removeChangeListener(listener);
         if (this.getChangeListeners().length == 0) {
@@ -210,6 +216,7 @@ public class ListSpinnerModelAdapter extends SpinnerListModel {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.valueHolder);
     }

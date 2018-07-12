@@ -40,6 +40,7 @@ public class ObjectListSelectionModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.listModel = this.buildListModel();
@@ -58,6 +59,7 @@ public class ObjectListSelectionModelTests extends TestCase {
         return new ObjectListSelectionModel(lm);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -205,6 +207,7 @@ public class ObjectListSelectionModelTests extends TestCase {
 
     private ListSelectionListener buildListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 // do nothing for now...
             }

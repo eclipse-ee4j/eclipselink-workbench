@@ -71,6 +71,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.parentDescriptorHandle = new MWDescriptorHandle(this, this.buildParentDescriptorScrubber());
@@ -88,6 +89,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // **************** containment hierarchy ***************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.classIndicatorPolicy);
@@ -96,21 +98,25 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     private NodeReferenceScrubber buildParentDescriptorScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorInheritancePolicy.this.setParentDescriptor(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorInheritancePolicy.buildParentDescriptorScrubber()";
             }
         };
     }
 
+    @Override
     public void descriptorInheritanceChanged() {
         for (Iterator stream = this.childDescriptors(); stream.hasNext(); ) {
             ((MWDescriptor) stream.next()).inheritanceChanged();
         }
     }
 
+    @Override
     public void parentDescriptorMorphedToAggregate() {
         getClassIndicatorPolicy().parentDescriptorMorphedToAggregate();
     }
@@ -119,6 +125,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // **************** Parent descriptor *************************************
 
+    @Override
     public MWDescriptor getParentDescriptor() {
         return this.parentDescriptorHandle.getDescriptor();
     }
@@ -145,11 +152,13 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         }
     }
 
+    @Override
     public Iterator candidateParentDescriptors() {
         final Set descendentDescriptors = CollectionTools.set(this.descendentDescriptors());
         final MWDescriptor thisDescriptor = this.getOwningDescriptor();
 
         return new FilteringIterator(this.getProject().descriptors()) {
+            @Override
             protected boolean accept(Object o) {
                 MWDescriptor descriptor = (MWDescriptor) o;
                 return descriptor.canHaveInheritance()
@@ -162,6 +171,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // **************** Is root ***********************************************
 
+    @Override
     public boolean isRoot() {
         return this.isRoot;
     }
@@ -189,6 +199,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         }
     }
 
+    @Override
     public MWClassIndicatorPolicy getClassIndicatorPolicy() {
         return this.classIndicatorPolicy;
     }
@@ -223,8 +234,10 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         return result;
     }
 
+    @Override
     public Iterator descendentDescriptors() {
         return new TreeIterator(this.childDescriptors()) {
+            @Override
             protected Iterator children(Object next) {
                 return ((MWDescriptor) next).getInheritancePolicy().childDescriptors();
             }
@@ -235,8 +248,10 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         return this.descendentDescriptors().hasNext();
     }
 
+    @Override
     public Iterator childDescriptors() {
         return new FilteringIterator(this.getProject().mappingDescriptors()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWDescriptor) o).getInheritancePolicy().getParentDescriptor()
                     == MWDescriptorInheritancePolicy.this.getOwningDescriptor();
@@ -250,15 +265,18 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     /** Return a full inheritance lineage, starting with this policy's descriptor
      * and continuing up until there is a descriptor with no parent descriptor */
+    @Override
     public Iterator descriptorLineage() {
         // using a chain iterator to traverse up the inheritance tree
         return new ChainIterator(this.getOwningDescriptor()) {
+            @Override
             protected Object nextLink(Object currentLink) {
                 return ((MWDescriptor) currentLink).getInheritancePolicy().getParentDescriptor();
             }
         };
     }
 
+    @Override
     public MWDescriptor getRootDescriptor() {
         MWDescriptor rootDescriptor = null;
 
@@ -268,6 +286,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         return rootDescriptor;
     }
 
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         super.descriptorReplaced(oldDescriptor, newDescriptor);
         if (this.getParentDescriptor() == oldDescriptor) {
@@ -279,6 +298,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         return null;
     }
 
+    @Override
     public void buildClassIndicatorValues() {
         getClassIndicatorPolicy().rebuildClassIndicatorValues(getAllDescriptorsAvailableForIndicatorDictionary());
     }
@@ -286,6 +306,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // **************** MWClassIndicatorPolicy.Parent implementation **********
 
+    @Override
     public MWMappingDescriptor getContainingDescriptor() {
         return this.getOwningDescriptor();
     }
@@ -293,6 +314,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     //*************** Problem Handling *************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         if (this.isRoot()) {
@@ -380,6 +402,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // *************** Automap Support *************
 
+    @Override
     public void automap() {
         // Nothing to do
     }
@@ -387,6 +410,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // **************** Runtime Conversion ***************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         InheritancePolicy runtimeInheritancePolicy = (InheritancePolicy)runtimeDescriptor.getInheritancePolicy();
         if (this.getParentDescriptor() != null) {
@@ -401,6 +425,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
 
     // **************** display methods ***************
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.getParentDescriptor() != null) {
             sb.append("Parent = " + getParentDescriptor().getMWClass().shortName() + " ");
@@ -409,10 +434,12 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         }
     }
 
+    @Override
     public boolean isActive() {
         return true;
     }
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
@@ -468,6 +495,7 @@ public abstract class MWDescriptorInheritancePolicy extends MWAbstractDescriptor
         this.classIndicatorPolicy = (classIndicatorPolicy == null) ? new MWNullClassIndicatorPolicy(this) : classIndicatorPolicy;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (isRoot()) {

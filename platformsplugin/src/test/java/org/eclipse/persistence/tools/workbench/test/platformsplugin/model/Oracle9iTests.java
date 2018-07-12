@@ -38,18 +38,22 @@ public class Oracle9iTests extends Oracle8iTests {
     /**
      * the Oracle 9.2.0.8.0 server in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb1.ca.oracle.com";
     }
 
+    @Override
     protected String platformName() {
         return "Oracle9i";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "9.2.0.8.0";
     }
 
+    @Override
     protected void addIgnorableTypeNamesTo(Collection adtNames) {
         super.addIgnorableTypeNamesTo(adtNames);
         // ignore custom time stuff...
@@ -60,6 +64,7 @@ public class Oracle9iTests extends Oracle8iTests {
         adtNames.add("INTERVAL DAY(3) TO SECOND(2)");
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    TIMESTAMP_COL                TIMESTAMP,"); sb.append(CR);
         sb.append("    TIMESTAMP_2_COL            TIMESTAMP(2),"); sb.append(CR);
@@ -75,14 +80,17 @@ public class Oracle9iTests extends Oracle8iTests {
         super.appendColumnsToTableDDL(sb);
     }
 
+    @Override
     protected int unicodeSizeFor(int size) {
         return 2 * size;
     }
 
+    @Override
     protected int varraySize() {
         return 2617;
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // TIMESTAMP
         this.verifyColumnAttribute(metaDataMap, "TIMESTAMP_COL", "TABLE_CAT", null);

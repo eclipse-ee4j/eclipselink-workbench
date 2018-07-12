@@ -94,6 +94,7 @@ public abstract class CollectionAspectAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.collectionChangeListener = this.buildCollectionChangeListener();
@@ -105,15 +106,19 @@ public abstract class CollectionAspectAdapter
     protected CollectionChangeListener buildCollectionChangeListener() {
         // transform the subject's collection change events into VALUE collection change events
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 CollectionAspectAdapter.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 CollectionAspectAdapter.this.itemsRemoved(e);
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 CollectionAspectAdapter.this.collectionChanged(e);
             }
+            @Override
             public String toString() {
                 return "collection change listener: " + CollectionAspectAdapter.this.collectionName;
             }
@@ -128,6 +133,7 @@ public abstract class CollectionAspectAdapter
      * This should be an *iterator* on the collection.
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.subject == null) {
             return NullIterator.instance();
@@ -152,6 +158,7 @@ public abstract class CollectionAspectAdapter
      * Add the specified item to the subject's collection aspect.
      * @see CollectionValueModel#addItem(Object)
      */
+    @Override
     public void addItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -160,6 +167,7 @@ public abstract class CollectionAspectAdapter
      * Add the specified items to the subject's collection aspect.
      * @see CollectionValueModel#addItems(Collection)
      */
+    @Override
     public void addItems(Collection items) {
         for (Iterator stream = items.iterator(); stream.hasNext(); ) {
             this.addItem(stream.next());
@@ -170,6 +178,7 @@ public abstract class CollectionAspectAdapter
      * Remove the specified item from the subject's collection aspect.
      * @see CollectionValueModel#removeItem(Object)
      */
+    @Override
     public void removeItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -178,6 +187,7 @@ public abstract class CollectionAspectAdapter
      * Remove the specified items from the subject's collection aspect.
      * @see CollectionValueModel#removeItems(Collection)
      */
+    @Override
     public void removeItems(Collection items) {
         for (Iterator stream = items.iterator(); stream.hasNext(); ) {
             this.removeItem(stream.next());
@@ -188,6 +198,7 @@ public abstract class CollectionAspectAdapter
      * Return the size of the collection value.
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return this.subject == null ? 0 : this.sizeFromSubject();
     }
@@ -207,6 +218,7 @@ public abstract class CollectionAspectAdapter
     /**
      * @see AspectAdapter#hasListeners()
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyCollectionChangeListeners(VALUE);
     }
@@ -214,6 +226,7 @@ public abstract class CollectionAspectAdapter
     /**
      * @see AspectAdapter#fireAspectChange(Object, Object)
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.fireCollectionChanged(VALUE);
     }
@@ -221,6 +234,7 @@ public abstract class CollectionAspectAdapter
     /**
      * @see AspectAdapter#disengageNonNullSubject()
      */
+    @Override
     protected void engageNonNullSubject() {
         if (this.collectionName != null) {
             ((Model) this.subject).addCollectionChangeListener(this.collectionName, this.collectionChangeListener);
@@ -230,6 +244,7 @@ public abstract class CollectionAspectAdapter
     /**
      * @see AspectAdapter#engageNonNullSubject()
      */
+    @Override
     protected void disengageNonNullSubject() {
         if (this.collectionName != null) {
             ((Model) this.subject).removeCollectionChangeListener(this.collectionName, this.collectionChangeListener);
@@ -239,6 +254,7 @@ public abstract class CollectionAspectAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.collectionName);
     }

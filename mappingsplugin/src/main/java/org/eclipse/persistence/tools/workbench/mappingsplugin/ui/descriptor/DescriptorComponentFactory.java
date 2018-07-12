@@ -37,6 +37,7 @@ public class DescriptorComponentFactory extends SwingComponentFactory {
     /** We want to display the signature, but we want filtering based only on the method name */
     public static StringConverter buildMethodStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? "" : ((MWMethod) o).getName();
             }
@@ -45,6 +46,7 @@ public class DescriptorComponentFactory extends SwingComponentFactory {
 
     public static NodeSelector buildMethodNodeSelector(final WorkbenchContextHolder contextHolder) {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 ProjectNode projectNode = (ProjectNode) contextHolder.getWorkbenchContext().getNavigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectMethod((MWMethod) item, contextHolder.getWorkbenchContext());

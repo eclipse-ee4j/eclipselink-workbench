@@ -97,6 +97,7 @@ public class SimpleDisplayableTests extends TestCase {
 
     private PropertyChangeListener buildListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 SimpleDisplayableTests.this.isNotified = true;
             }
@@ -105,6 +106,7 @@ public class SimpleDisplayableTests extends TestCase {
 
     private SimpleDisplayable buildCustomDisplayableWrapper(String string) {
         return new SimpleDisplayable(string) {
+            @Override
             public Icon icon() {
                 return new EmptyIcon(((String) this.object).length());
             }

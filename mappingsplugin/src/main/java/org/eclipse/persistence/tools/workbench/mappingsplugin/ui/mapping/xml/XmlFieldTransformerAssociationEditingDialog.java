@@ -76,15 +76,18 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(FieldTransformerAssociationEditor associationEditor) {
         super.initialize(associationEditor);
         this.associationEditor().xpathHolder().addPropertyChangeListener(ValueModel.VALUE, this.validatingListener);
     }
 
+    @Override
     protected Component buildMainPanel() {
         return new XmlFieldTransformerAssociationEditingPanel(this.associationEditor(), this.getWorkbenchContext());
     }
 
+    @Override
     protected void updateMessage() {
         super.updateMessage();
 
@@ -100,6 +103,7 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
     // **************** Behavior **********************************************
 
+    @Override
     protected void prepareToShow() {
         pack();
         setSize(Math.max(600, getWidth()), getHeight());
@@ -150,6 +154,7 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
         // **************** Xml field *****************************************
 
+        @Override
         public ValueModel xmlFieldHolder() {
             if (this.xmlFieldHolder == null) {
                 this.xmlFieldHolder = this.buildXmlFieldHolder();
@@ -160,6 +165,7 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
         private PropertyValueModel buildXmlFieldHolder() {
             return new PropertyAspectAdapter(MWXmlFieldTransformerAssociation.FIELD_PROPERTY, this.association()) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWXmlFieldTransformerAssociation) this.subject).getXmlField();
                 }
@@ -173,6 +179,7 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
         // **************** Xpath *********************************************
 
+        @Override
         public PropertyValueModel xpathHolder() {
             if (this.xpathHolder == null) {
                 this.xpathHolder = this.buildXpathHolder();
@@ -187,10 +194,12 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
         private PropertyValueModel buildInternalXpathHolder() {
             return new PropertyAspectAdapter(this.xmlFieldHolder(), MWXmlField.XPATH_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWXmlField) this.subject).getXpath();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWXmlField) this.subject).setXpath((String) value);
                 }
@@ -208,6 +217,7 @@ public final class XmlFieldTransformerAssociationEditingDialog
 
         // **************** Editing *******************************************
 
+        @Override
         public void commit() {
             super.commit();
             this.xpathTrigger.accept();

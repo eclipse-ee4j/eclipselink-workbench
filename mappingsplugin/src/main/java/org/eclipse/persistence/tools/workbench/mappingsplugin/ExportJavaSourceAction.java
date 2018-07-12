@@ -28,6 +28,7 @@ public final class ExportJavaSourceAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeText("EXPORT_PROJECT_JAVA_SOURCE_ACTION");
@@ -39,6 +40,7 @@ public final class ExportJavaSourceAction extends AbstractFrameworkAction {
         updateEnabledState();
     }
 
+    @Override
     protected void execute() {
         ProjectSourceGenerationCoordinator coordinator = new ProjectSourceGenerationCoordinator(getWorkbenchContext());
         ApplicationNode[] projectNodes = selectedProjectNodes();

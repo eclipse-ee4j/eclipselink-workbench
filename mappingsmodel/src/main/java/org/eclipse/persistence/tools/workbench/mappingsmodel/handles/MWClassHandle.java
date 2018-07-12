@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.handles;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
-import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
@@ -79,6 +78,7 @@ public final class MWClassHandle extends MWHandle {
         this.type = type;
     }
 
+    @Override
     protected Node node() {
         return getType();
     }
@@ -91,6 +91,7 @@ public final class MWClassHandle extends MWHandle {
     /**
      * Class handles are resolved here - BEFORE all the other handles
      */
+    @Override
     public void resolveClassHandles() {
         super.resolveClassHandles();
         if (this.typeName != null) {
@@ -106,10 +107,12 @@ public final class MWClassHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER type should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.type.compareTo(((MWClassHandle) o).type);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.type == null) {
             sb.append("null");

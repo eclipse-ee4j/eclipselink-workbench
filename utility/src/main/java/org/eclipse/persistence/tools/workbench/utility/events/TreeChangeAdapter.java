@@ -29,6 +29,7 @@ public class TreeChangeAdapter implements TreeChangeListener {
     /**
      * @see TreeChangeListener#treeNodeAdded(TreeChangeEvent)
      */
+    @Override
     public void nodeAdded(TreeChangeEvent e) {
         // do nothing
     }
@@ -36,6 +37,7 @@ public class TreeChangeAdapter implements TreeChangeListener {
     /**
      * @see TreeChangeListener#itemRemoved(TreeChangeEvent)
      */
+    @Override
     public void nodeRemoved(TreeChangeEvent e) {
         // do nothing
     }
@@ -43,6 +45,7 @@ public class TreeChangeAdapter implements TreeChangeListener {
     /**
      * @see TreeChangeListener#treeChanged(TreeChangeEvent)
      */
+    @Override
     public void treeChanged(TreeChangeEvent e) {
         // do nothing
     }

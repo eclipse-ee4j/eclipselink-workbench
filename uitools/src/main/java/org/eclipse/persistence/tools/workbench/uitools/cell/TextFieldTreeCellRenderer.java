@@ -66,6 +66,7 @@ public class TextFieldTreeCellRenderer extends LabeledTreeCellRenderer {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.tools.LabeledTreeCellRenderer#buildComponent()
      */
+    @Override
     protected JComponent buildComponent() {
         JTextField textField = new JTextField();
         textField.setMargin(new Insets(0, 2, 0, 2));
@@ -85,6 +86,7 @@ public class TextFieldTreeCellRenderer extends LabeledTreeCellRenderer {
     /**
      * Set the text field's value.
      */
+    @Override
     protected void setValue(Object value) {
         this.getTextField().setText(value.toString());
     }

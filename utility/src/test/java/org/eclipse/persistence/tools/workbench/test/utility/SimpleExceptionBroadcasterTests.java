@@ -37,6 +37,7 @@ public class SimpleExceptionBroadcasterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.broadcaster = new SimpleExceptionBroadcaster();
@@ -49,6 +50,7 @@ public class SimpleExceptionBroadcasterTests extends TestCase {
         }
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -165,9 +167,11 @@ public class SimpleExceptionBroadcasterTests extends TestCase {
             super();
             this.number = number;
         }
+        @Override
         public void exceptionThrown(Thread thread, Throwable exception) {
             SimpleExceptionBroadcasterTests.this.localListenerNotified(this.number);
         }
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, new Integer(this.number));
         }

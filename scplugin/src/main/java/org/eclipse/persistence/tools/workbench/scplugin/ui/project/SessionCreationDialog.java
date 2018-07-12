@@ -96,11 +96,13 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
             this.sessionNames = sessionNames;
     }
 
+    @Override
     protected void initialize() {
             super.initialize();
             getOKAction().setEnabled( false);
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
         setTitle(resourceRepository().getString( "SESSION_CREATION_DIALOG_TITLE"));
@@ -232,6 +234,7 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
     private ActionListener buildServerPlatformAction() {
 
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 boolean checked = ((JCheckBox) e.getSource()).isSelected();
                 String serverClassName;
@@ -266,6 +269,7 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
         subPane.setEnabled(false);
 
         this.useServerPlatformCheckBox.addItemListener(new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 JCheckBox checkBox = (JCheckBox) e.getSource();
                 subPane.setEnabled(checkBox.isSelected());
@@ -339,6 +343,7 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
 
     private ListCellRenderer buildServerPlatformRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (value == null)
                     return "";
@@ -387,12 +392,15 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
 
         this.nameTextField.getDocument().addDocumentListener(
            new DocumentListener() {
+               @Override
                public void insertUpdate(DocumentEvent e) {
                    updateOKAction();
                }
+               @Override
                public void removeUpdate(DocumentEvent e) {
                    updateOKAction();
                }
+               @Override
                public void changedUpdate(DocumentEvent e) {
                    updateOKAction();
                }
@@ -504,6 +512,7 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
         buttonGroup.add(this.xmlRadioButton);
 
         this.xmlRadioButton.addChangeListener( new ChangeListener() {
+           @Override
            public void stateChanged( ChangeEvent e) {
                 SessionCreationDialog.this.databaseRadioButton.setSelected( true);
                 SessionCreationDialog.this.serverRadioButton.setEnabled( !SessionCreationDialog.this.xmlRadioButton.isSelected());
@@ -554,6 +563,7 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
         platformLabel.setLabelFor(databasePlatformComboBox);
 
         this.relationalRadioButton.addChangeListener(new ChangeListener() {
+           @Override
            public void stateChanged(ChangeEvent e) {
                databasePlatformComboBox.setEnabled(SessionCreationDialog.this.relationalRadioButton.isSelected());
                platformLabel.setEnabled(SessionCreationDialog.this.relationalRadioButton.isSelected());
@@ -608,6 +618,7 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
         adapterLabel.setLabelFor(adapterComboBox);
 
         this.eisRadioButton.addChangeListener(new ChangeListener() {
+           @Override
            public void stateChanged(ChangeEvent e) {
                adapterComboBox.setEnabled(SessionCreationDialog.this.eisRadioButton.isSelected());
                adapterLabel.setEnabled(SessionCreationDialog.this.eisRadioButton.isSelected());
@@ -696,14 +707,17 @@ public final class SessionCreationDialog extends AbstractValidatingDialog {
         return NameTools.uniqueNameFor(sessionName, this.sessionNames);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.sessionCreation";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.nameTextField;
     }
 
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         this.nameTextField.setText(buildUniqueSessionName());

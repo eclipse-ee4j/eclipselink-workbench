@@ -59,6 +59,7 @@ public class ItemStateListValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.foo = new Junk("this.foo");
@@ -73,6 +74,7 @@ public class ItemStateListValueModelAdapterTests extends TestCase {
         this.harry = new Junk("this.harry");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -144,6 +146,7 @@ public class ItemStateListValueModelAdapterTests extends TestCase {
     private Comparator buildCustomComparator() {
         // sort with reverse order
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((Comparable) o2).compareTo(o1);
             }
@@ -303,9 +306,11 @@ private class Junk extends AbstractModel implements Comparable {
         this.name = name;
         this.fireStateChanged();
     }
+    @Override
     public int compareTo(Object o) {
         return this.name.compareTo(((Junk) o).name);
     }
+    @Override
     public String toString() {
         return "Junk(" + this.name + ")";
     }

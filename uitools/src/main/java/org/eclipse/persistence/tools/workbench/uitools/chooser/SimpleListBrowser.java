@@ -35,6 +35,7 @@ public class SimpleListBrowser
     /**
      * Prompt the user using a JOptionPane.
      */
+    @Override
     public void browse(ListChooser chooser) {
         Object selection =
             JOptionPane.showInputDialog(

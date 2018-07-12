@@ -91,6 +91,7 @@ final class ExpressionTreePanel extends AbstractPanel
 
 
     protected class ExpressionTreeSelectionListener implements TreeSelectionListener {
+        @Override
         public void valueChanged(TreeSelectionEvent e) {
             if (expressionTreeSelectionModel.getSelectionPath() == null || expressionTreeSelectionModel.getSelectionCount() >1) {
                 selectedExpressionHolder.setValue(null);
@@ -163,6 +164,7 @@ final class ExpressionTreePanel extends AbstractPanel
     private ActionListener buildAddBasicExpresionAction()
      {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 addBasicExpresion();
             }
@@ -172,6 +174,7 @@ final class ExpressionTreePanel extends AbstractPanel
     private ActionListener buildAddNestedExpressionAction()
      {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 addNestedExpresion();
             }
@@ -181,6 +184,7 @@ final class ExpressionTreePanel extends AbstractPanel
     private ActionListener buildRemoveExpressionAction()
      {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 removeSelectedExpressions();
             }
@@ -247,6 +251,7 @@ final class ExpressionTreePanel extends AbstractPanel
 
     private PropertyValueModel buildSelectedCompoundExpressionHolder(PropertyValueModel selectedExpressionHolder) {
         return new FilteringPropertyValueModel(selectedExpressionHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWCompoundExpression;
             }
@@ -389,6 +394,7 @@ final class ExpressionTreePanel extends AbstractPanel
 
     private CollectionValueModel buildOperatorTypeCollectionHolder() {
         return new AbstractReadOnlyCollectionValueModel() {
+            @Override
             public Object getValue() {
                 return allowableOperatorTypes();
             }
@@ -398,6 +404,7 @@ final class ExpressionTreePanel extends AbstractPanel
     private PropertyValueModel buildOperatorAdapter() {
         return new PropertyAspectAdapter(selectedCompoundExpressionHolder, MWCompoundExpression.OPERATOR_TYPE_PROPERTY) {
 
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWCompoundExpression) subject).getOperatorType() == MWCompoundExpression.AND)
                     return AND;
@@ -409,6 +416,7 @@ final class ExpressionTreePanel extends AbstractPanel
                     return NOR;
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
 
                 if (value == AND)

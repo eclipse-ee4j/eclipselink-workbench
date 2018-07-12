@@ -824,6 +824,7 @@ public abstract class AbstractPanelTest extends TestCase
         this.window.pack();
         this.window.addWindowListener(new WindowAdapter()
         {
+            @Override
             public void windowClosing(WindowEvent event)
             {
                 try
@@ -1166,6 +1167,7 @@ public abstract class AbstractPanelTest extends TestCase
      * @throws Exception If any problem was encountered during the initialization
      * (preparation) of this test
      */
+    @Override
     protected void setUp() throws Exception
     {
         buildFocusGrabber();
@@ -1499,6 +1501,7 @@ public abstract class AbstractPanelTest extends TestCase
      *
      * @throws Exception
      */
+    @Override
     protected void tearDown() throws Exception
     {
         this.window.dispose();
@@ -1619,6 +1622,7 @@ public abstract class AbstractPanelTest extends TestCase
     {
         EventQueue.invokeAndWait(new Runnable()
         {
+            @Override
             public void run()
             {
                 if (!AbstractPanelTest.this.window.isVisible())

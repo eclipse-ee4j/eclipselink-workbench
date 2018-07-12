@@ -107,12 +107,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.DISCOVER_ANNOUNCEMENT_DELAY_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
                 return new Integer(adapter.getAnnouncementDelay());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
@@ -143,6 +145,7 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new TransformationPropertyValueModel(subjectHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -163,6 +166,7 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.JNDI_NAMING_SERVICE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter rmi = (RMITransportManagerAdapter) subject;
@@ -192,12 +196,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.DISCOVER_MULTICAST_GROUP_ADDRESS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
                 return adapter.getMulticastGroupAddress();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
@@ -216,12 +222,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.DISCOVER_MULTICAST_PORT_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
                 return new Integer(adapter.getMulticastPort());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
@@ -251,12 +259,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.DISCOVER_PACKET_TIME_TO_LIVE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
                 return new Integer(adapter.getPacketTimeToLive());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RMITransportManagerAdapter adapter = (RMITransportManagerAdapter) subject;
@@ -286,12 +296,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.NAMING_SERVICE_TYPE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter rmi = (RMITransportManagerAdapter) subject;
                 return rmi.getNamingServiceType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RMITransportManagerAdapter rmi = (RMITransportManagerAdapter) subject;
@@ -323,6 +335,7 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new TransformationPropertyValueModel(subjectHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -343,6 +356,7 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.RMI_REGISTRY_NAMING_SERVICE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter rmi = (RMITransportManagerAdapter) subject;
@@ -366,12 +380,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RMITransportManagerAdapter.SEND_MODE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RMITransportManagerAdapter transport = (RMITransportManagerAdapter) subject;
                 return Boolean.valueOf(transport.isSynchronous());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RMITransportManagerAdapter transport = (RMITransportManagerAdapter) subject;
@@ -383,6 +399,7 @@ final class RCMRMIPane extends AbstractTransportManagerPane
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -601,12 +618,14 @@ final class RCMRMIPane extends AbstractTransportManagerPane
         {
             return new PropertyAspectAdapter(getSubjectHolder(), RMIRegistryNamingServiceAdapter.URL_PROPERTY)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     RMIRegistryNamingServiceAdapter rmi = (RMIRegistryNamingServiceAdapter) subject;
                     return rmi.getURL();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     RMIRegistryNamingServiceAdapter rmi = (RMIRegistryNamingServiceAdapter) subject;
@@ -618,6 +637,7 @@ final class RCMRMIPane extends AbstractTransportManagerPane
         /**
          * Initialize the layout of this pane.
          */
+        @Override
         protected void initializeLayout()
         {
             GridBagConstraints constraints = new GridBagConstraints();

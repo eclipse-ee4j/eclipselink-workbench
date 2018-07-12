@@ -36,6 +36,7 @@ final class HelpPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildPropertiesPage()
      */
+    @Override
     protected Component buildPropertiesPage() {
         return new HelpPreferencesPage(this.getPreferencesContext());
     }
@@ -43,6 +44,7 @@ final class HelpPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildDisplayString()
      */
+    @Override
     protected String buildDisplayString() {
         return this.resourceRepository().getString("PREFERENCES.GENERAL.HELP");
     }
@@ -50,6 +52,7 @@ final class HelpPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.PreferencesNode#helpTopicId()
      */
+    @Override
     public String helpTopicId() {
         return "preferences.general.help";
     }

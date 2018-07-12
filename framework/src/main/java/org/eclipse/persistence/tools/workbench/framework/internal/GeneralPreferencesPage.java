@@ -237,6 +237,7 @@ final class GeneralPreferencesPage extends AbstractPanel {
 
     private Comparator buildLookAndFeelComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object object1, Object object2) {
                 UIManager.LookAndFeelInfo lafInfo1 = (UIManager.LookAndFeelInfo) object1;
                 UIManager.LookAndFeelInfo lafInfo2 = (UIManager.LookAndFeelInfo) object2;
@@ -248,10 +249,12 @@ final class GeneralPreferencesPage extends AbstractPanel {
     private PropertyValueModel buildBufferedLookAndFeelAdapter() {
         BufferedPropertyValueModel adapter = new BufferedPropertyValueModel(this.buildLookAndFeelAdapter(), this.getPreferencesContext().getBufferTrigger());
         return new TransformationPropertyValueModel(adapter) {
+            @Override
             protected Object reverseTransform(Object value) {
                 UIManager.LookAndFeelInfo info = (UIManager.LookAndFeelInfo) value;
                 return info.getClassName();
             }
+            @Override
             protected Object transform(Object value) {
                 String className = (String) value;
                 return GeneralPreferencesPage.this.getLookAndFeelInfo(className);
@@ -267,6 +270,7 @@ final class GeneralPreferencesPage extends AbstractPanel {
     private ListCellRenderer buildLookAndFeelListCellRenderer() {
         return new SimpleListCellRenderer() {
             private static final long serialVersionUID = 1L;
+            @Override
             protected String buildText(Object value) {
                 UIManager.LookAndFeelInfo info = (UIManager.LookAndFeelInfo) value;
                 // This null check is required when the user imports preferences from
@@ -311,10 +315,12 @@ final class GeneralPreferencesPage extends AbstractPanel {
 
     private BidiStringConverter buildRecentFilesSizeConverter() {
         return new BidiStringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? null : ((Integer) o).toString();
             }
 
+            @Override
             public Object convertToObject(String s) {
                 if (s == null) {
                     return new Integer(RecentFilesManager.DEFAULT_MAX_SIZE);
@@ -326,6 +332,7 @@ final class GeneralPreferencesPage extends AbstractPanel {
                 return i;
             }
 
+            @Override
             public String toString() {
                 return "RecentFilesManager-IntegerStringConverter";
             }

@@ -78,6 +78,7 @@ public class ThreadBrowser {
     private static final ThreadGroup[] EMPTY_GROUPS = new ThreadGroup[0];
     private static final Comparator THREAD_GROUP_COMPARATOR  =
         new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return Collator.getInstance().compare(((ThreadGroup) o1).getName(), ((ThreadGroup) o2).getName());
             }
@@ -86,6 +87,7 @@ public class ThreadBrowser {
     private static final Thread[] EMPTY_THREADS = new Thread[0];
     private static final Comparator THREAD_COMPARATOR  =
         new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return Collator.getInstance().compare(((Thread) o1).getName(), ((Thread) o2).getName());
             }
@@ -125,6 +127,7 @@ public class ThreadBrowser {
 
     private Runnable buildRefreshRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 ThreadBrowser.this.refresh();
             }
@@ -268,6 +271,7 @@ public class ThreadBrowser {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
                 ThreadBrowser.this.interruptAutoRefreshThread();
@@ -284,6 +288,7 @@ public class ThreadBrowser {
 
     private Action buildDumpSelectedGroupsAction() {
         Action action = new AbstractAction("dump") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ThreadBrowser.this.dumpSelectedGroups();
             }
@@ -304,6 +309,7 @@ public class ThreadBrowser {
 
     private Action buildRefreshAction() {
         Action action = new AbstractAction("refresh") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ThreadBrowser.this.refresh();
             }
@@ -339,6 +345,7 @@ public class ThreadBrowser {
 
     private PropertyChangeListener buildAutoRefreshListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ThreadBrowser.this.setAutoRefresh(((Boolean) evt.getNewValue()).booleanValue());
             }
@@ -364,6 +371,7 @@ public class ThreadBrowser {
 //
     private Iterator selectedThreadGroups() {
         return new FilteringIterator(this.selectedValues()) {
+            @Override
             protected boolean accept(Object next) {
                 return next instanceof ThreadGroup;
             }
@@ -372,6 +380,7 @@ public class ThreadBrowser {
 
     private Iterator selectedValues() {
         return new TransformationIterator(this.selectedPaths()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DefaultMutableTreeNode) ((TreePath) next).getLastPathComponent()).getUserObject();
             }
@@ -430,6 +439,7 @@ public class ThreadBrowser {
             super(treeModel);
         }
 
+        @Override
         public String convertValueToText(Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
             Object userObject = node.getUserObject();
@@ -480,6 +490,7 @@ public class ThreadBrowser {
             this.refreshRunnable = refreshRunnable;
         }
 
+        @Override
         public void run() {
             while (true) {
                 try {

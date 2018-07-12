@@ -61,11 +61,13 @@ public class TableModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.crowd = this.buildCrowd();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -98,6 +100,7 @@ public class TableModelAdapterTests extends TestCase {
         TableModelAdapter tableModelAdapter =  this.buildTableModelAdapter();
         this.event = null;
         tableModelAdapter.addTableModelListener(new TestTableModelListener() {
+            @Override
             public void tableChanged(TableModelEvent e) {
                 TableModelAdapterTests.this.event = e;
             }
@@ -201,9 +204,11 @@ public class TableModelAdapterTests extends TestCase {
 
     private CollectionValueModel buildPeopleAdapter() {
         return new CollectionAspectAdapter(Crowd.PEOPLE_COLLECTION, this.crowd) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((Crowd) this.subject).people();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((Crowd) this.subject).peopleSize();
             }
@@ -233,6 +238,7 @@ public class TableModelAdapterTests extends TestCase {
 
     private TableModelListener buildSingleEventListener() {
         return new TestTableModelListener() {
+            @Override
             public void tableChanged(TableModelEvent e) {
                 // we expect only a single event
                 if (TableModelAdapterTests.this.event == null) {
@@ -269,14 +275,17 @@ public static class PersonColumnAdapter implements ColumnAdapter {
     };
 
 
+    @Override
     public int getColumnCount() {
         return COLUMN_COUNT;
     }
 
+    @Override
     public String getColumnName(int index) {
         return COLUMN_NAMES[index];
     }
 
+    @Override
     public Class getColumnClass(int index) {
         switch (index) {
             case NAME_COLUMN:                    return Object.class;
@@ -290,10 +299,12 @@ public static class PersonColumnAdapter implements ColumnAdapter {
         }
     }
 
+    @Override
     public boolean isColumnEditable(int index) {
         return index != NAME_COLUMN;
     }
 
+    @Override
     public PropertyValueModel[] cellModels(Object subject) {
         Person person = (Person) subject;
         PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -311,9 +322,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildNameAdapter(Person person) {
         return new PropertyAspectAdapter(Person.NAME_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setName((String) value);
             }
@@ -322,9 +335,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildBirthDateAdapter(Person person) {
         return new PropertyAspectAdapter(Person.BIRTH_DATE_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getBirthDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setBirthDate((Date) value);
             }
@@ -333,9 +348,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildGoneWestDateAdapter(Person person) {
         return new PropertyAspectAdapter(Person.GONE_WEST_DATE_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getGoneWestDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setGoneWestDate((Date) value);
             }
@@ -344,9 +361,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildEyeColorAdapter(Person person) {
         return new PropertyAspectAdapter(Person.EYE_COLOR_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((Person) this.subject).getEyeColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEyeColor((String) value);
             }
@@ -355,9 +374,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildEvilAdapter(Person person) {
         return new PropertyAspectAdapter(Person.EVIL_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((Person) this.subject).isEvil());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setEvil(((Boolean) value).booleanValue());
             }
@@ -366,9 +387,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildRankAdapter(Person person) {
         return new PropertyAspectAdapter(Person.RANK_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getRank());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setRank(((Integer) value).intValue());
             }
@@ -377,9 +400,11 @@ public static class PersonColumnAdapter implements ColumnAdapter {
 
     private PropertyValueModel buildAdventureCountAdapter(Person person) {
         return new PropertyAspectAdapter(Person.ADVENTURE_COUNT_PROPERTY, person) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((Person) this.subject).getAdventureCount());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((Person) this.subject).setAdventureCount(((Integer) value).intValue());
             }
@@ -401,6 +426,7 @@ public static class Crowd extends AbstractModel {
 
     public Iterator people() {
         return new CloneIterator(this.people) {
+            @Override
             protected void remove(Object current) {
                 Crowd.this.removePerson((Person) current);
             }
@@ -444,6 +470,7 @@ public static class Crowd extends AbstractModel {
 
     public Iterator peopleNames() {
         return new TransformationIterator(this.people.iterator()) {
+            @Override
             protected Object transform(Object next) {
                 return ((Person) next).getName();
             }
@@ -460,6 +487,7 @@ public static class Crowd extends AbstractModel {
         return null;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, String.valueOf(this.people.size()) + " people");
     }
@@ -593,10 +621,12 @@ public static class Person extends AbstractModel implements Comparable {
         this.firePropertyChanged(ADVENTURE_COUNT_PROPERTY, old, adventureCount);
     }
 
+    @Override
     public int compareTo(Object o) {
         return this.name.compareToIgnoreCase(((Person) o).name);
     }
 
+    @Override
     public String toString() {
         return this.name +
                     "\tborn: " + DateFormat.getDateInstance().format(this.birthDate) +
@@ -612,6 +642,7 @@ public static class Person extends AbstractModel implements Comparable {
 
 
 private class TestTableModelListener implements TableModelListener {
+    @Override
     public void tableChanged(TableModelEvent e) {
         fail("unexpected event");
     }

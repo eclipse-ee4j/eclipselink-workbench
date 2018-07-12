@@ -36,6 +36,7 @@ public class DescriptorCellRendererAdapter extends NoneSelectedCellRendererAdapt
         super(repository);
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         MWDescriptor descriptor = (MWDescriptor) value;
 
@@ -68,10 +69,12 @@ public class DescriptorCellRendererAdapter extends NoneSelectedCellRendererAdapt
         }
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWDescriptor) value).displayStringWithPackage();
     }
 
+    @Override
     public String buildAccessibleName(Object value) {
         MWDescriptor descriptor = (MWDescriptor) value;
         StringBuffer sb = new StringBuffer();

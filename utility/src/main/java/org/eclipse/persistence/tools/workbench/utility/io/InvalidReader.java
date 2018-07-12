@@ -52,6 +52,7 @@ public final class InvalidReader
     /**
      * @see java.io.Reader#read(char[], int, int)
      */
+    @Override
     public int read(char[] cbuf, int off, int len) throws IOException {
         throw new UnsupportedOperationException();
     }
@@ -59,6 +60,7 @@ public final class InvalidReader
     /**
      * @see java.io.Reader#close()
      */
+    @Override
     public void close() throws IOException {
         // do nothing
     }
@@ -66,6 +68,7 @@ public final class InvalidReader
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

@@ -57,6 +57,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         // delegate to the nested iterator
         return this.nestedIterator.hasNext();
@@ -65,6 +66,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#next()
      */
+    @Override
     public Object next() {
         // transform the object returned by the nested iterator before returning it
         return this.transform(this.nestedIterator.next());
@@ -73,6 +75,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int nextIndex() {
         // delegate to the nested iterator
         return this.nestedIterator.nextIndex();
@@ -81,6 +84,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasPrevious()
      */
+    @Override
     public boolean hasPrevious() {
         // delegate to the nested iterator
         return this.nestedIterator.hasPrevious();
@@ -89,6 +93,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previous()
      */
+    @Override
     public Object previous() {
         // transform the object returned by the nested iterator before returning it
         return this.transform(this.nestedIterator.previous());
@@ -97,6 +102,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previousIndex()
      */
+    @Override
     public int previousIndex() {
         // delegate to the nested iterator
         return this.nestedIterator.previousIndex();
@@ -105,6 +111,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#add(Object)
      */
+    @Override
     public void add(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -112,6 +119,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#set(Object)
      */
+    @Override
     public void set(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -119,6 +127,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#remove()
      */
+    @Override
     public void remove() {
         // delegate to the nested iterator
         this.nestedIterator.remove();
@@ -134,6 +143,7 @@ public class TransformationListIterator implements ListIterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nestedIterator + ')';
     }

@@ -35,6 +35,7 @@ public final class ConverterPropertiesPage
         super(converterMappingNodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
 
@@ -57,6 +58,7 @@ public final class ConverterPropertiesPage
 
     private PropertyValueModel buildConverterHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWConverterMapping.CONVERTER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWConverterMapping) subject).getConverter();
             }
@@ -65,26 +67,32 @@ public final class ConverterPropertiesPage
 
     private ConverterPanel.ConverterSetter buildConverterSetter() {
         return new  ConverterPanel.ConverterSetter() {
+            @Override
             public String getType() {
                 return ((MWConverterMapping) selection()).getConverter().getType();
             }
 
+            @Override
             public void setNullConverter() {
                 ((MWConverterMapping) selection()).setNullConverter();
             }
 
+            @Override
             public void setObjectTypeConverter() {
                 ((MWConverterMapping) selection()).setObjectTypeConverter();
             }
 
+            @Override
             public void setSerializedObjectConverter() {
                 ((MWConverterMapping) selection()).setSerializedObjectConverter();
             }
 
+            @Override
             public void setTypeConversionConverter() {
                 ((MWConverterMapping) selection()).setTypeConversionConverter();
             }
 
+            @Override
             public String converterTypePropertyString() {
                 return MWConverterMapping.CONVERTER_PROPERTY;
             }

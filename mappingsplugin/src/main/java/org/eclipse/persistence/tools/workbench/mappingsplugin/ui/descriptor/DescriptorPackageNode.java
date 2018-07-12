@@ -99,6 +99,7 @@ public abstract class DescriptorPackageNode
         this.descriptorNodeBuilder = descriptorNodeBuilder;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.descriptorNodesHolder = new SimpleCollectionValueModel();
@@ -124,9 +125,11 @@ public abstract class DescriptorPackageNode
 
     protected PropertyChangeListener buildProjectNodeDirtyFlagListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 DescriptorPackageNode.this.projectNodeDirtyFlagChanged(e);
             }
+            @Override
             public String toString() {
                 return "project node dirty flag listener";
             }
@@ -136,6 +139,7 @@ public abstract class DescriptorPackageNode
 
     // ********** AbstractTreeNodeValueModel overrides **********
 
+    @Override
     public boolean equals(Object o) {
         if (o == null) {
             return false;
@@ -148,10 +152,12 @@ public abstract class DescriptorPackageNode
                     this.name.equals(other.name);
     }
 
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }
@@ -163,14 +169,17 @@ public abstract class DescriptorPackageNode
      * this node does not have a value; do not call this method
      * willy-nilly on a collection of heterogeneous nodes  ~bjv
      */
+    @Override
     public Object getValue() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     public String helpTopicID() {
         return "package";
     }
@@ -179,10 +188,12 @@ public abstract class DescriptorPackageNode
     /**
      * the name will temporarily be null during intialization
      */
+    @Override
     protected String buildDisplayString() {
         return (this.name == null) ? "" : (this.name.length() == 0) ? this.resourceRepository().getString("DEFAULT_PACKAGE") : this.name;
     }
 
+    @Override
     protected String buildIconKey() {
         return "package";
     }
@@ -191,6 +202,7 @@ public abstract class DescriptorPackageNode
      * delegate to the descriptor nodes; if none of the descriptor nodes is dirty,
      * check whether a descriptor node was removed earlier
      */
+    @Override
     protected boolean buildDirtyFlag() {
         for (Iterator stream = this.descriptors(); stream.hasNext(); ) {
             if (((MWDescriptor) stream.next()).isDirtyBranch()) {
@@ -203,6 +215,7 @@ public abstract class DescriptorPackageNode
     /**
      * delegate to the descriptors
      */
+    @Override
     protected boolean valueHasBranchProblems() {
         for (Iterator stream = this.descriptors(); stream.hasNext(); ) {
             if (((MWDescriptor) stream.next()).hasBranchProblems()) {
@@ -216,6 +229,7 @@ public abstract class DescriptorPackageNode
      * packages don't have "exclusive" application problems,
      * they only have "branch" application problems
      */
+    @Override
     protected void addExclusiveApplicationProblemsTo(List list) {
         // no problems
     }
@@ -223,6 +237,7 @@ public abstract class DescriptorPackageNode
     /**
      * delegate to the descriptor nodes
      */
+    @Override
     public boolean containsBranchApplicationProblemFor(Problem problem) {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             if (((DescriptorNode) stream.next()).containsBranchApplicationProblemFor(problem)) {
@@ -236,6 +251,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so engage the descriptor nodes
      */
+    @Override
     protected void engageValueDisplayString() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.engageDescriptorNodeDisplayString((DescriptorNode) stream.next());
@@ -250,6 +266,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so engage the descriptor nodes
      */
+    @Override
     protected void engageValueIcon() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.engageDescriptorNodeIcon((DescriptorNode) stream.next());
@@ -267,6 +284,7 @@ public abstract class DescriptorPackageNode
      * in certain situations, the project node being marked clean
      * can cause our dirty flag to be cleared also
      */
+    @Override
     protected void engageValueDirty() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.engageDescriptorNodeDirty((DescriptorNode) stream.next());
@@ -282,6 +300,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so engage the descriptor nodes
      */
+    @Override
     protected void engageValuePropertiesPageTitleIcon() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.engageDescriptorNodePropertiesPageTitleIcon((DescriptorNode) stream.next());
@@ -297,6 +316,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so engage the descriptor nodes
      */
+    @Override
     protected void engageValuePropertiesPageTitleText() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.engageDescriptorNodePropertiesPageTitleText((DescriptorNode) stream.next());
@@ -314,6 +334,7 @@ public abstract class DescriptorPackageNode
      * on the nodes, so it is possible that the package node could be informed
      * before the descriptor node. This would cause the problems to be out of synch.
      */
+    @Override
     protected void engageValueBranchProblems() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.engageDescriptorNodeBranchProblems((DescriptorNode) stream.next());
@@ -330,6 +351,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so disengage the descriptor nodes
      */
+    @Override
     protected void disengageValueDisplayString() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.disengageDescriptorNodeDisplayString((DescriptorNode) stream.next());
@@ -343,6 +365,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so disengage the descriptor nodes
      */
+    @Override
     protected void disengageValueIcon() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.disengageDescriptorNodeIcon((DescriptorNode) stream.next());
@@ -356,6 +379,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so disengage the descriptor nodes
      */
+    @Override
     protected void disengageValueDirty() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.disengageDescriptorNodeDirty((DescriptorNode) stream.next());
@@ -370,6 +394,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so disengage the descriptor nodes
      */
+    @Override
     protected void disengageValuePropertiesPageTitleIcon() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.disengageDescriptorNodePropertiesPageTitleIcon((DescriptorNode) stream.next());
@@ -383,6 +408,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so disengage the descriptor nodes
      */
+    @Override
     protected void disengageValuePropertiesPageTitleText() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.disengageDescriptorNodePropertiesPageTitleText((DescriptorNode) stream.next());
@@ -396,6 +422,7 @@ public abstract class DescriptorPackageNode
     /**
      * we don't have a value, so disengage the descriptor nodes
      */
+    @Override
     protected void disengageValueBranchProblems() {
         for (Iterator stream = this.descriptorNodes(); stream.hasNext(); ) {
             this.disengageDescriptorNodeBranchProblems((DescriptorNode) stream.next());
@@ -407,10 +434,12 @@ public abstract class DescriptorPackageNode
     }
 
 
+    @Override
     public void addValuePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         // do nothing, no model to listen to
     }
 
+    @Override
     public void removeValuePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         // do nothing, no model to unlisten :) to
     }
@@ -420,6 +449,7 @@ public abstract class DescriptorPackageNode
      * the text is not sufficient, if <code>null</code> is returned, then the
      * text is used as the accessible text.
      */
+    @Override
     public String accessibleName() {
         if ((this.name == null) || (this.name.length() == 0)) {
             return this.resourceRepository().getString("DEFAULT_PACKAGE");
@@ -430,24 +460,29 @@ public abstract class DescriptorPackageNode
 
     // ********** MappingsApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DescriptorPackagePropertiesPage.class;
     }
 
+    @Override
     public String candidatePackageName() {
         return this.name;
     }
 
+    @Override
     public boolean isAutoMappable() {
         return true;
     }
 
+    @Override
     public void addDescriptorsTo(Collection descriptors) {
         CollectionTools.addAll(descriptors, this.descriptors());
     }
 
     public Iterator descriptors() {
         return new TransformationIterator(this.descriptorNodes()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DescriptorNode) next).getDescriptor();
             }
@@ -457,6 +492,7 @@ public abstract class DescriptorPackageNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         RootMenuDescription desc = new RootMenuDescription();
         this.addToMenuDescription(desc, buildLocalWorkbenchContext(workbenchContext));
@@ -492,6 +528,7 @@ public abstract class DescriptorPackageNode
         return exportJavaSourceGroup;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         return new ToolBarDescription();
     }
@@ -510,6 +547,7 @@ public abstract class DescriptorPackageNode
     /**
      * packages go first under the project
      */
+    @Override
     public int getProjectNodeChildPriority() {
         return 0;
     }
@@ -517,6 +555,7 @@ public abstract class DescriptorPackageNode
 
     // ********** AutomappableNode implementation **********
 
+    @Override
     public String getAutomapSuccessfulStringKey() {
         return "AUTOMAP_PACKAGE_SUCCESSFUL";
     }
@@ -524,6 +563,7 @@ public abstract class DescriptorPackageNode
 
     // ********** UnmappablePackageNode implementation **********
 
+    @Override
     public void unmapEntirePackage() {
         this.unmap();
     }
@@ -537,12 +577,14 @@ public abstract class DescriptorPackageNode
 
     // ********** RemovableNode implementation **********
 
+    @Override
     public void remove() {
         for (Iterator stream = CollectionTools.collection(this.descriptorNodes()).iterator(); stream.hasNext(); ) {
             ((DescriptorNode) stream.next()).remove();
         }
     }
 
+    @Override
     public String getName() {
         return this.name;
     }

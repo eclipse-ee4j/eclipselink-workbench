@@ -86,6 +86,7 @@ public class ComboBoxEditorAdapter implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void addActionListener(ActionListener listener)
     {
         delegate.addActionListener(listener);
@@ -94,6 +95,7 @@ public class ComboBoxEditorAdapter implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public Component getEditorComponent()
     {
         return delegate.getEditorComponent();
@@ -102,6 +104,7 @@ public class ComboBoxEditorAdapter implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public Object getItem()
     {
         String value = (String) delegate.getItem();
@@ -151,6 +154,7 @@ public class ComboBoxEditorAdapter implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void removeActionListener(ActionListener listener)
     {
         delegate.removeActionListener(listener);
@@ -159,6 +163,7 @@ public class ComboBoxEditorAdapter implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void selectAll()
     {
         delegate.selectAll();
@@ -167,6 +172,7 @@ public class ComboBoxEditorAdapter implements ComboBoxEditor
     /*
      * (non-Javadoc)
      */
+    @Override
     public void setItem(Object value)
     {
         // Convert the null-value to null

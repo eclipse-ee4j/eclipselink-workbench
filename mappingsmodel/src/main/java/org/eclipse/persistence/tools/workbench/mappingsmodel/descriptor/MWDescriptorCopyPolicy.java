@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
@@ -61,6 +60,7 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.methodHandle = new MWMethodHandle(this, this.buildMethodScrubber());
@@ -93,6 +93,7 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.methodHandle);
@@ -100,9 +101,11 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     private NodeReferenceScrubber buildMethodScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorCopyPolicy.this.setMethod(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorCopyPolicy.buildMethodScrubber()";
             }
@@ -112,10 +115,12 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** MWAbstractDescriptorPolicy implementation **********
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
 
+    @Override
     public boolean isActive() {
         return true;
     }
@@ -123,6 +128,7 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** runtime conversion **********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         if (this.policyType == MWDescriptorCopyPolicy.INSTANTIATION_POLICY) {
             runtimeDescriptor.useInstantiationCopyPolicy();
@@ -138,6 +144,7 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkCloneCopyPolicy(problems);
@@ -165,6 +172,7 @@ public final class MWDescriptorCopyPolicy extends MWAbstractDescriptorPolicy {
 
     // ********** printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getPolicyType());
         sb.append(", method=");

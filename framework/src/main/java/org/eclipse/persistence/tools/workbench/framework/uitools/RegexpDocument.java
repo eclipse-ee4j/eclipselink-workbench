@@ -381,6 +381,7 @@ public class RegexpDocument extends PlainDocument
      * @exception BadLocationException the given insert position is not a valid
      * position within the document
      */
+    @Override
     public void insertString(int startingOffset,
                                      String text,
                                      AttributeSet attributeSet) throws BadLocationException
@@ -431,6 +432,7 @@ public class RegexpDocument extends PlainDocument
      * valid part of the document. The location in the exception is the first bad
      * position encountered
      */
+    @Override
     public void remove(int startingOffset, int length) throws BadLocationException
     {
         if (regularExpression != null)

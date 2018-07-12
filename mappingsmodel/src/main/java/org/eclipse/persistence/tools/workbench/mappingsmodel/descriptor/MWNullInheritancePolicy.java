@@ -39,55 +39,68 @@ public final class MWNullInheritancePolicy
         super(parent);
     }
 
+    @Override
     public MWDescriptor getParentDescriptor() {
         return null;
     }
 
+    @Override
     public Iterator candidateParentDescriptors() {
         return NullIterator.instance();
     }
 
+    @Override
     public MWDescriptor getRootDescriptor() {
         return getOwningDescriptor();
     }
 
+    @Override
     public Iterator descriptorLineage() {
         // a lineage always includes the starting descriptor
         return new SingleElementIterator(this.getOwningDescriptor());
     }
 
+    @Override
     public Iterator childDescriptors() {
         return NullIterator.instance();
     }
 
+    @Override
     public Iterator descendentDescriptors() {
         return NullIterator.instance();
     }
 
+    @Override
     public boolean isRoot() {
         return false;
     }
 
+    @Override
     public MWClassIndicatorPolicy getClassIndicatorPolicy() {
         return new MWNullClassIndicatorPolicy(this);
     }
 
+    @Override
     public void buildClassIndicatorValues() {
         //do nothing
     }
 
+    @Override
     public void descriptorInheritanceChanged() {
         // no op
     }
 
+    @Override
     public void parentDescriptorMorphedToAggregate() {
         //do nothing, null policy
     }
 
+    @Override
     public void automap() {
         //do nothing, null policy
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         // Do Nothing.  Null Policy.
     }
@@ -96,11 +109,13 @@ public final class MWNullInheritancePolicy
     // **************** MWXmlInheritancePolicy implementation *****************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         // Do nothing.  Null policy.
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         // Do nothing.  Null policy.
     }
@@ -108,6 +123,7 @@ public final class MWNullInheritancePolicy
 
     // **************** MWClassIndicatorPolicy.Parent implementation **********
 
+    @Override
     public MWMappingDescriptor getContainingDescriptor() {
         return this.getOwningDescriptor();
     }

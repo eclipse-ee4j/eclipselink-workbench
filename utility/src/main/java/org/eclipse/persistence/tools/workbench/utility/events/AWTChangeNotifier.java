@@ -57,15 +57,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeNotifier#stateChanged(StateChangeListener, StateChangeEvent)
      */
+    @Override
     public void stateChanged(final StateChangeListener listener, final StateChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.stateChanged(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.stateChanged(event);
                     }
+                @Override
                     public String toString() {
                         return "stateChanged";
                     }
@@ -77,15 +79,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#propertyChange(java.beans.PropertyChangeListener, java.beans.PropertyChangeEvent)
      */
+    @Override
     public void propertyChange(final PropertyChangeListener listener, final PropertyChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.propertyChange(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.propertyChange(event);
                     }
+                @Override
                     public String toString() {
                         return "propertyChange";
                     }
@@ -97,15 +101,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#itemsAdded(CollectionChangeListener, CollectionChangeEvent)
      */
+    @Override
     public void itemsAdded(final CollectionChangeListener listener, final CollectionChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.itemsAdded(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.itemsAdded(event);
                     }
+                @Override
                     public String toString() {
                         return "itemsAdded (Collection)";
                     }
@@ -117,15 +123,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#itemsRemoved(CollectionChangeListener, CollectionChangeEvent)
      */
+    @Override
     public void itemsRemoved(final CollectionChangeListener listener, final CollectionChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.itemsRemoved(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.itemsRemoved(event);
                     }
+                @Override
                     public String toString() {
                         return "itemsRemoved (Collection)";
                     }
@@ -137,15 +145,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#collectionChanged(CollectionChangeListener, CollectionChangeEvent)
      */
+    @Override
     public void collectionChanged(final CollectionChangeListener listener, final CollectionChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.collectionChanged(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.collectionChanged(event);
                     }
+                @Override
                     public String toString() {
                         return "collectionChanged";
                     }
@@ -157,15 +167,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#itemsAdded(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void itemsAdded(final ListChangeListener listener, final ListChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.itemsAdded(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.itemsAdded(event);
                     }
+                @Override
                     public String toString() {
                         return "itemsAdded (List)";
                     }
@@ -177,15 +189,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#itemsRemoved(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void itemsRemoved(final ListChangeListener listener, final ListChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.itemsRemoved(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.itemsRemoved(event);
                     }
+                @Override
                     public String toString() {
                         return "itemsRemoved (List)";
                     }
@@ -197,15 +211,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#itemsReplaced(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void itemsReplaced(final ListChangeListener listener, final ListChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.itemsReplaced(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.itemsReplaced(event);
                     }
+                @Override
                     public String toString() {
                         return "itemsReplaced (List)";
                     }
@@ -217,15 +233,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#listChanged(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void listChanged(final ListChangeListener listener, final ListChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.listChanged(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.listChanged(event);
                     }
+                @Override
                     public String toString() {
                         return "listChanged";
                     }
@@ -237,15 +255,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#nodeAdded(TreeChangeListener, TreeChangeEvent)
      */
+    @Override
     public void nodeAdded(final TreeChangeListener listener, final TreeChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.nodeAdded(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.nodeAdded(event);
                     }
+                @Override
                     public String toString() {
                         return "nodeAdded";
                     }
@@ -257,15 +277,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#nodeRemoved(TreeChangeListener, TreeChangeEvent)
      */
+    @Override
     public void nodeRemoved(final TreeChangeListener listener, final TreeChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.nodeRemoved(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.nodeRemoved(event);
                     }
+                @Override
                     public String toString() {
                         return "nodeRemoved";
                     }
@@ -277,15 +299,17 @@ public final class AWTChangeNotifier
     /**
      * @see ChangeSupport.Notifier#treeChanged(TreeChangeListener, TreeChangeEvent)
      */
+    @Override
     public void treeChanged(final TreeChangeListener listener, final TreeChangeEvent event) {
         if (EventQueue.isDispatchThread()) {
             listener.treeChanged(event);
         } else {
-            this.invoke(
-                new Runnable() {
+            this.invoke(new Runnable() {
+                @Override
                     public void run() {
                         listener.treeChanged(event);
                     }
+                @Override
                     public String toString() {
                         return "treeChanged";
                     }

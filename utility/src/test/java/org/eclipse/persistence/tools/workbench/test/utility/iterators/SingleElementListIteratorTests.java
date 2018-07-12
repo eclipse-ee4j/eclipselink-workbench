@@ -112,6 +112,7 @@ public class SingleElementListIteratorTests extends SingleElementIteratorTests {
         assertTrue("UnsupportedOperationException not thrown", exCaught);
     }
 
+    @Override
     protected Iterator buildSingleElementIterator() {
         return new SingleElementListIterator(this.singleElement());
     }

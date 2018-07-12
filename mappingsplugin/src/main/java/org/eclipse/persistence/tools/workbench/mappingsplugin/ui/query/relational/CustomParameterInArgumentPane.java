@@ -45,6 +45,7 @@ public final class CustomParameterInArgumentPane extends AbstractSubjectPanel {
         initializeLayout();
     }
 
+    @Override
     protected void initializeLayout() {
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -277,6 +278,7 @@ public final class CustomParameterInArgumentPane extends AbstractSubjectPanel {
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWModel) CustomParameterInArgumentPane.this.subject()).getRepository();
             }

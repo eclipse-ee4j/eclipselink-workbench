@@ -30,6 +30,7 @@ final class MapAsManyToManyAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.manyToMany");
@@ -38,14 +39,17 @@ final class MapAsManyToManyAction
         this.initializeToolTipText("MAP_AS_MANY_TO_MANY_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWManyToManyMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWRelationalClassDescriptor) descriptor).addManyToManyMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWManyToManyMapping.class;
     }

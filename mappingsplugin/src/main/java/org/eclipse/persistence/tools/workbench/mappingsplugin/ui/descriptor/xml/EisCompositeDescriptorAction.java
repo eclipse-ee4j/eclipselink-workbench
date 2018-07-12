@@ -18,7 +18,6 @@ import org.eclipse.persistence.tools.workbench.framework.app.ApplicationNode;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.InterfaceDescriptorCreationException;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWEisDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.ChangeDescriptorTypeAction;
 
@@ -30,6 +29,7 @@ final class EisCompositeDescriptorAction extends ChangeDescriptorTypeAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeTextAndMnemonic("EIS_COMPOSITE_DESCRIPTOR_ACTION");
@@ -37,6 +37,7 @@ final class EisCompositeDescriptorAction extends ChangeDescriptorTypeAction {
         initializeToolTipText("EIS_COMPOSITE_DESCRIPTOR_ACTION.toolTipText");
     }
 
+    @Override
     protected MWDescriptor morphDescriptor(MWDescriptor descriptor) {
         try {
             return  ((MWEisDescriptor) descriptor).asCompositeEisDescriptor();
@@ -45,6 +46,7 @@ final class EisCompositeDescriptorAction extends ChangeDescriptorTypeAction {
         }
     }
 
+    @Override
     protected boolean shouldBeSelected(ApplicationNode selectedNode) {
         return ((EisDescriptorNode) selectedNode).isCompositeDescriptor();
     }

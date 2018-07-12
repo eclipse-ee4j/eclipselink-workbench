@@ -145,6 +145,7 @@ public class SchemaContextAndXpathChooserTest
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -219,6 +220,7 @@ public class SchemaContextAndXpathChooserTest
 
     private SchemaRepositoryValue buildSchemaRepositoryValue() {
         return new SchemaRepositoryValue() {
+            @Override
             public Iterator schemas() {
                 return SchemaContextAndXpathChooserTest.this.schemaRepository.schemas();
             }
@@ -259,6 +261,7 @@ public class SchemaContextAndXpathChooserTest
 
     private Action buildLoadSchemaAction() {
         return new AbstractAction("Load Schema") {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 SchemaContextAndXpathChooserTest.this.loadSchema();
                 this.setEnabled(false);
@@ -281,6 +284,7 @@ public class SchemaContextAndXpathChooserTest
 
     private Action buildChangePrefixesAction() {
         return new AbstractAction("Change Prefixes") {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 SchemaContextAndXpathChooserTest.this.changePrefixes();
             }
@@ -300,6 +304,7 @@ public class SchemaContextAndXpathChooserTest
 
     private Iterator namespaceIterators() {
         return new TransformationIterator(this.schemaRepository.schemas()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWXmlSchema) next).declaredNamespaces();
             }
@@ -333,10 +338,12 @@ public class SchemaContextAndXpathChooserTest
             super();
         }
 
+        @Override
         public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
             return (MWSchemaContextComponent) SchemaContextAndXpathChooserTest.this.schemaContextComponentHolder.getValue();
         }
 
+        @Override
         public MWXpathSpec xpathSpec(MWXmlField xmlField) {
             return new LocalXpathSpec();
         }
@@ -345,14 +352,17 @@ public class SchemaContextAndXpathChooserTest
     private class LocalXpathSpec
         implements MWXpathSpec
     {
+        @Override
         public boolean mayUseCollectionData() {
             return ((Boolean) SchemaContextAndXpathChooserTest.this.multiElementSelectableHolder.getValue()).booleanValue();
         }
 
+        @Override
         public boolean mayUseComplexData() {
             return ((Boolean) SchemaContextAndXpathChooserTest.this.complexFieldSelectableHolder.getValue()).booleanValue();
         }
 
+        @Override
         public boolean mayUseSimpleData() {
             return ((Boolean) SchemaContextAndXpathChooserTest.this.directFieldSelectableHolder.getValue()).booleanValue();
         }

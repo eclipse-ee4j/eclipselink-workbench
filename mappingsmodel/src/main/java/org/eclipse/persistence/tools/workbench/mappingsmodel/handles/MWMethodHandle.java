@@ -17,14 +17,9 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.handles;
 import java.util.StringTokenizer;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethod;
 import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
-import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
-
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 /**
@@ -84,6 +79,7 @@ public final class MWMethodHandle extends MWHandle {
         this.method = method;
     }
 
+    @Override
     protected Node node() {
         return getMethod();
     }
@@ -93,6 +89,7 @@ public final class MWMethodHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void resolveMethodHandles() {
         super.resolveMethodHandles();
         if (this.methodDeclaringTypeName != null && this.methodSignature != null) {
@@ -136,10 +133,12 @@ public final class MWMethodHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER method should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.method.compareTo(((MWMethodHandle) o).method);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.method == null) {
             sb.append("null");

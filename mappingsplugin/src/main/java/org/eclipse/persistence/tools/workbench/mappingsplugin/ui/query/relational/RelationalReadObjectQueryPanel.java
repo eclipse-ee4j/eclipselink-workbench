@@ -93,6 +93,7 @@ final class RelationalReadObjectQueryPanel
 
     protected QuickViewPanel.QuickViewItem buildJoinedAttributeQuickViewItem(MWJoinedItem queryItem) {
         return new QueryQuickViewItem(queryItem) {
+            @Override
             public void select() {
                 RelationalReadObjectQueryPanel.this.queryPropertiesPane.setSelectedComponent(RelationalReadObjectQueryPanel.this.joinedAttributesPanel);
                 RelationalReadObjectQueryPanel.this.joinedAttributesPanel.select((MWQueryItem) getValue());

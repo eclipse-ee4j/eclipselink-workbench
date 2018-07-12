@@ -40,6 +40,7 @@ public abstract class ScrollablePropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initializeLayout() {
         JScrollPane scrollPane = new JScrollPane(this.buildPage());
         scrollPane.setBorder(BorderFactory.createEmptyBorder());

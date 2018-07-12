@@ -51,6 +51,7 @@ public final class InvalidInputStream
     /**
      * @see java.io.InputStream#read()
      */
+    @Override
     public int read() {
         throw new UnsupportedOperationException();
     }
@@ -58,6 +59,7 @@ public final class InvalidInputStream
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

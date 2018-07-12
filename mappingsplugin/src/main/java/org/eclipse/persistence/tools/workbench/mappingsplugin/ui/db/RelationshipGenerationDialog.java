@@ -25,7 +25,6 @@ import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.TreeSet;
 import java.util.Vector;
-import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -38,7 +37,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicArrowButton;
 import org.eclipse.persistence.tools.workbench.framework.action.AbstractFrameworkAction;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog;
@@ -83,6 +81,7 @@ final class RelationshipGenerationDialog extends AbstractDialog
 
     private ListCellRenderer getListCellRenderer() {
         return new DefaultListCellRenderer() {
+            @Override
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 MWRelationshipHolder holder = (MWRelationshipHolder) value;
@@ -99,25 +98,30 @@ final class RelationshipGenerationDialog extends AbstractDialog
         return new Vector(selectedListData);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.relationshipGenerator";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return availableList;
     }
 
+    @Override
     protected void initialize(WorkbenchContext context) {
         super.initialize(context);
 
         setTitle(resourceRepository().getString("chooseRelationshipsToGenerate.title"));
     }
 
+    @Override
     protected void prepareToShow() {
         this.setSize(800, 400);
         this.setLocationRelativeTo(this.getParent());
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -201,6 +205,7 @@ final class RelationshipGenerationDialog extends AbstractDialog
 
         // setup double clicking in the selected list to remove items
         SwingComponentFactory.addDoubleClickMouseListener(selectedList, new DoubleClickMouseListener() {
+            @Override
             public void mouseDoubleClicked(MouseEvent e) {
                 deselectItems();
             }
@@ -293,6 +298,7 @@ final class RelationshipGenerationDialog extends AbstractDialog
 
     private ListSelectionListener buildSelectionListListener(final JButton leftArrowButton) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -306,6 +312,7 @@ final class RelationshipGenerationDialog extends AbstractDialog
         };
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
         if (actionCommand == ID_ONE_TO_ONE)
@@ -318,6 +325,7 @@ final class RelationshipGenerationDialog extends AbstractDialog
 
     private AbstractFrameworkAction buildAction() {
         return new AbstractFrameworkAction(getWorkbenchContext()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 RelationshipGenerationDialog.this.actionPerformed(e);
             }
@@ -373,6 +381,7 @@ final class RelationshipGenerationDialog extends AbstractDialog
         selectedListData = new TreeSet(data);
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent lse) {
         if (lse.getValueIsAdjusting())
             return;

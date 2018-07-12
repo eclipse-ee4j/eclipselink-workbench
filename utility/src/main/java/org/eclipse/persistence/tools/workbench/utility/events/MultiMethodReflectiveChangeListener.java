@@ -64,14 +64,17 @@ class MultiMethodReflectiveChangeListener
         }
     }
 
+    @Override
     public void itemsAdded(CollectionChangeEvent e) {
         this.invoke(this.addMethod, e);
     }
 
+    @Override
     public void itemsRemoved(CollectionChangeEvent e) {
         this.invoke(this.removeMethod, e);
     }
 
+    @Override
     public void collectionChanged(CollectionChangeEvent e) {
         this.invoke(this.changeMethod, e);
     }
@@ -87,18 +90,22 @@ class MultiMethodReflectiveChangeListener
         }
     }
 
+    @Override
     public void itemsAdded(ListChangeEvent e) {
         this.invoke(this.addMethod, e);
     }
 
+    @Override
     public void itemsRemoved(ListChangeEvent e) {
         this.invoke(this.removeMethod, e);
     }
 
+    @Override
     public void itemsReplaced(ListChangeEvent e) {
         this.invoke(this.replaceMethod, e);
     }
 
+    @Override
     public void listChanged(ListChangeEvent e) {
         this.invoke(this.changeMethod, e);
     }
@@ -114,14 +121,17 @@ class MultiMethodReflectiveChangeListener
         }
     }
 
+    @Override
     public void nodeAdded(TreeChangeEvent e) {
         this.invoke(this.addMethod, e);
     }
 
+    @Override
     public void nodeRemoved(TreeChangeEvent e) {
         this.invoke(this.removeMethod, e);
     }
 
+    @Override
     public void treeChanged(TreeChangeEvent e) {
         this.invoke(this.changeMethod, e);
     }

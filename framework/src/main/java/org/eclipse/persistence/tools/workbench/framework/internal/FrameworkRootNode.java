@@ -65,9 +65,11 @@ final class FrameworkRootNode
     // the list of project nodes is held by the framework node manager and can change
     private CollectionValueModel buildProjectNodesAdapter() {
         return new CollectionAspectAdapter(FrameworkNodeManager.PROJECT_NODES_COLLECTION, (FrameworkNodeManager) this.getValue()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((FrameworkNodeManager) this.subject).projectNodes();
             }
+            @Override
             public int size() {
                 return ((FrameworkNodeManager) this.subject).projectNodesSize();
             }
@@ -77,14 +79,17 @@ final class FrameworkRootNode
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.frameworkNodeManager;
     }
 
+    @Override
     public TreeNodeValueModel getParent() {
         return null;
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
@@ -93,10 +98,12 @@ final class FrameworkRootNode
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         // do nothing - the framework node manager never changes
     }
 
+    @Override
     protected void disengageValue() {
         // do nothing - the framework node manager never changes
     }
@@ -104,10 +111,12 @@ final class FrameworkRootNode
 
     // ********** Displayable implementation **********
 
+    @Override
     public String displayString() {
         return null;
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -118,6 +127,7 @@ final class FrameworkRootNode
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AccessibleNode#accessibleName()
      */
+    @Override
     public String accessibleName() {
         return "RootNode";
     }
@@ -125,6 +135,7 @@ final class FrameworkRootNode
 
     // ********** Comparable implementation **********
 
+    @Override
     public int compareTo(Object o) {
         return 0;    // should never happen...
     }

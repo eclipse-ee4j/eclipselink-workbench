@@ -39,6 +39,7 @@ final class EditorView
      * The label is fixed for this view.
      * @see AbstractEditorView#buildLabel()
      */
+    @Override
     JLabel buildLabel() {
         JLabel label = new JLabel(this.resourceRepository().getString("EDITOR_LABEL"));
         label.setDisplayedMnemonic(this.resourceRepository().getMnemonic("EDITOR_LABEL"));

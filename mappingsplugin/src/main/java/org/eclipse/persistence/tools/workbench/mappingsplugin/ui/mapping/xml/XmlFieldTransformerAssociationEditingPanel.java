@@ -41,6 +41,7 @@ public final class XmlFieldTransformerAssociationEditingPanel
     // **************** Initialization ****************************************
 
     /** Not really a "field" - we create an xpath chooser panel here */
+    @Override
     protected JPanel buildFieldChooserPanel() {
         Insets offset = BorderFactory.createTitledBorder("m").getBorderInsets(this);
         JPanel panel = new JPanel(new BorderLayout());

@@ -38,6 +38,7 @@ public abstract class MWXmlDescriptorInheritancePolicy
 
     // **************** Class indicator field policy **************************
 
+    @Override
     protected MWClassIndicatorFieldPolicy buildClassIndicatorFieldPolicy() {
         return new MWXmlClassIndicatorFieldPolicy(this, getAllDescriptorsAvailableForIndicatorDictionary().iterator());
     }
@@ -46,11 +47,13 @@ public abstract class MWXmlDescriptorInheritancePolicy
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         ((MWXmlNode) this.getClassIndicatorPolicy()).resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         ((MWXmlNode) this.getClassIndicatorPolicy()).schemaChanged(change);
     }

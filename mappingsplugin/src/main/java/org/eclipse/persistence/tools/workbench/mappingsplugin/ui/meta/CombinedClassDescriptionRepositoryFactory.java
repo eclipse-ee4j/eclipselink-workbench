@@ -50,6 +50,7 @@ public class CombinedClassDescriptionRepositoryFactory
         this.repositoryWillReturnDuplicateClassNames = repositoryWillReturnDuplicateClassNames;
     }
 
+    @Override
     public ClassDescriptionRepository createClassDescriptionRepository() {
         CombinedClassDescriptionRepository repository = new CombinedClassDescriptionRepository(this.classRepositoryHolder.getClassRepository(), this.classNameFilter);
         repository.setReturnsDuplicateClassNames(this.repositoryWillReturnDuplicateClassNames);

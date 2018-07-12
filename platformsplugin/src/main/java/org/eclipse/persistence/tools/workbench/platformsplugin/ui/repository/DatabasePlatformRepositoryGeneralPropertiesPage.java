@@ -53,6 +53,7 @@ final class DatabasePlatformRepositoryGeneralPropertiesPage extends ScrollablePr
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -171,10 +172,12 @@ final class DatabasePlatformRepositoryGeneralPropertiesPage extends ScrollablePr
 
     private PropertyValueModel buildFileNameAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatformRepository.FILE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 File file = ((DatabasePlatformRepository) this.subject).getFile();
                 return (file == null) ? null : file.getAbsolutePath();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatformRepository) this.subject).setFile(new File((String) value));
             }
@@ -192,6 +195,7 @@ final class DatabasePlatformRepositoryGeneralPropertiesPage extends ScrollablePr
 
     private ListCellRenderer buildPlatformRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 // need null check for combo-box
                 return (value == null) ? "" : ((DatabasePlatform) value).getName();
@@ -205,9 +209,11 @@ final class DatabasePlatformRepositoryGeneralPropertiesPage extends ScrollablePr
 
     private CollectionValueModel buildAllPlatformsAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((DatabasePlatformRepository) this.subject).platforms();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabasePlatformRepository) this.subject).platformsSize();
             }
@@ -216,9 +222,11 @@ final class DatabasePlatformRepositoryGeneralPropertiesPage extends ScrollablePr
 
     private PropertyValueModel buildDefaultPlatformAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatformRepository.DEFAULT_PLATFORM_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabasePlatformRepository) this.subject).getDefaultPlatform();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatformRepository) this.subject).setDefaultPlatform((DatabasePlatform) value);
             }
@@ -240,9 +248,11 @@ final class DatabasePlatformRepositoryGeneralPropertiesPage extends ScrollablePr
 
     private PropertyValueModel buildCommentAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), AbstractNodeModel.COMMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabasePlatformRepository) this.subject).getComment();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatformRepository) this.subject).setComment((String) value);
             }

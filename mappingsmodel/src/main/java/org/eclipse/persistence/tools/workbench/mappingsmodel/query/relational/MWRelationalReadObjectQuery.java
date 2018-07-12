@@ -14,13 +14,11 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWAbstractQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadAllQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadObjectQuery;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.queries.ObjectLevelReadQuery;
 import org.eclipse.persistence.queries.ReadObjectQuery;
@@ -52,11 +50,13 @@ public final class MWRelationalReadObjectQuery
 
     // ******************* Morphing *******************
 
+    @Override
     public String queryType() {
         return READ_OBJECT_QUERY;
     }
 
 
+    @Override
     public MWReadAllQuery asReadAllQuery() {
         getQueryManager().removeQuery(this);
         MWReadAllQuery newQuery = getQueryManager().addReadAllQuery(getName());
@@ -64,10 +64,12 @@ public final class MWRelationalReadObjectQuery
         return newQuery;
     }
 
+    @Override
     public MWReadObjectQuery asReadObjectQuery() {
         return this;
     }
 
+    @Override
     public MWReportQuery asReportQuery() {
         getQueryManager().removeQuery(this);
         MWReportQuery newQuery = ((MWRelationalQueryManager) getQueryManager()).addReportQuery(getName());
@@ -79,16 +81,19 @@ public final class MWRelationalReadObjectQuery
         return createMethodReturnType;
     }
 
+    @Override
     public void formatSetToEjbql() {
         //do nothing
     }
 
+    @Override
     public void formatSetToSql() {
         //do nothing
     }
 
     // **************** Runtime conversion ****************
 
+    @Override
     protected ObjectLevelReadQuery buildRuntimeQuery() {
         return new ReadObjectQuery();
     }

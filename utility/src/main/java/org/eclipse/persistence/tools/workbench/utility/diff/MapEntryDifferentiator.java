@@ -46,6 +46,7 @@ public class MapEntryDifferentiator implements Differentiator {
     /**
      * @see Differentiator#diff(Object, Object)
      */
+    @Override
     public Diff diff(Object object1, Object object2) {
         return this.diff(object1, object2, DifferentiatorAdapter.NORMAL);
     }
@@ -53,6 +54,7 @@ public class MapEntryDifferentiator implements Differentiator {
     /**
      * @see Differentiator#keyDiff(Object, Object)
      */
+    @Override
     public Diff keyDiff(Object object1, Object object2) {
         return this.diff(object1, object2, DifferentiatorAdapter.KEY);
     }
@@ -73,6 +75,7 @@ public class MapEntryDifferentiator implements Differentiator {
      * map entries should only belong to a single map
      * @see Differentiator#comparesValueObjects()
      */
+    @Override
     public boolean comparesValueObjects() {
         return false;
     }
@@ -94,6 +97,7 @@ public class MapEntryDifferentiator implements Differentiator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.valueDifferentiator);
     }

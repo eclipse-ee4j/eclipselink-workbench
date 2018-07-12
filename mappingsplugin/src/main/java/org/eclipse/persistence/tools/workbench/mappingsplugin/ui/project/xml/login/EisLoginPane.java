@@ -75,12 +75,14 @@ class EisLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(buildLoginSpecHolder(), MWEisLoginSpec.CONNECTION_FACTORY_URL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;
                 return loginSpec.getConnectionFactoryURL();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;
@@ -115,12 +117,14 @@ class EisLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(buildLoginSpecHolder(), MWEisLoginSpec.CONNECTION_SPEC_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;
                 return loginSpec.getConnectionSpecClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;
@@ -132,6 +136,7 @@ class EisLoginPane extends AbstractLoginPane
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -253,6 +258,7 @@ class EisLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(getSubjectHolder())
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWEisProject) subject).getEisLoginSpec();
@@ -264,11 +270,13 @@ class EisLoginPane extends AbstractLoginPane
     {
         return new PropertyAspectAdapter(buildLoginSpecHolder(), MWEisLoginSpec.J2C_ADAPTER_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWEisLoginSpec) subject).getJ2CAdapterName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisLoginSpec loginSpec = (MWEisLoginSpec) subject;

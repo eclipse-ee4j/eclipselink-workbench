@@ -24,11 +24,13 @@ public final class MWEjbCreateMethodCodeGenPolicy
         super(method, classCodeGenPolicy);
     }
 
+    @Override
     void insertArguments(NonreflectiveMethodDefinition methodDef)
     {
         super.insertArguments(methodDef);
     }
 
+    @Override
     void insertMethodBody(NonreflectiveMethodDefinition methodDef)
     {
         super.insertMethodBody(methodDef);

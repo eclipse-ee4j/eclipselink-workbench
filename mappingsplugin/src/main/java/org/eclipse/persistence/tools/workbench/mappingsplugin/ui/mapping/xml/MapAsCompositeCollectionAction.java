@@ -29,6 +29,7 @@ final class MapAsCompositeCollectionAction extends ChangeMappingTypeAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.compositeCollection");
@@ -40,14 +41,17 @@ final class MapAsCompositeCollectionAction extends ChangeMappingTypeAction
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWCompositeCollectionMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWXmlDescriptor) descriptor).addCompositeCollectionMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWCompositeCollectionMapping.class;
     }

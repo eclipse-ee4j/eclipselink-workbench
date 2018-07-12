@@ -32,6 +32,7 @@ public abstract class AbstractAssociation
     /**
      * @see Association#equals(Object)
      */
+    @Override
     public synchronized boolean equals(Object o) {
         if ( ! (o instanceof Association)) {
             return false;
@@ -46,6 +47,7 @@ public abstract class AbstractAssociation
     /**
      * @see Association#hashCode()
      */
+    @Override
     public synchronized int hashCode() {
         return (this.getKey() == null ? 0 : this.getKey().hashCode())
             ^ (this.getValue() == null ? 0 : this.getValue().hashCode());
@@ -54,6 +56,7 @@ public abstract class AbstractAssociation
     /**
      * @see Object#toString()
      */
+    @Override
     public synchronized String toString() {
         return this.getKey() + " => " + this.getValue();
     }

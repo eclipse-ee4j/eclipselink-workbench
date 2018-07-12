@@ -51,10 +51,12 @@ public class ConnectionPolicyAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new ConnectionPolicyConfig();
     }
 
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 

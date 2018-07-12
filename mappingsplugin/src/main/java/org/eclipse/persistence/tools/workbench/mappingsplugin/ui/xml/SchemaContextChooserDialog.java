@@ -124,6 +124,7 @@ final class SchemaContextChooserDialog
 
     //***************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -151,12 +152,14 @@ final class SchemaContextChooserDialog
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent tse) {
                 SchemaContextChooserDialog.this.schemaContextTreeSelectionChanged();
             }
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -259,6 +262,7 @@ final class SchemaContextChooserDialog
 
     private PropertyValueModel buildSelectedSchemaContextStringHolder() {
         return new TransformationPropertyValueModel(this.selectedSchemaComponentHolder) {
+            @Override
             protected Object transform(Object value) {
                 return SchemaContextComponentDisplayer.displayString(
                     SchemaContextChooserDialog.this.resourceRepository(),
@@ -290,11 +294,13 @@ final class SchemaContextChooserDialog
 
     // **************** AbstractDialog contract *******************************
 
+    @Override
     protected void okConfirmed() {
         this.schemaComponentHolder.setValue(this.selectedSchemaComponentHolder.getValue());
         super.okConfirmed();
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.schemaContextChooser";
     }
@@ -302,6 +308,7 @@ final class SchemaContextChooserDialog
 
     // **************** Behavior **********************************************
 
+    @Override
     public void show() {
         if (! this.schemaRepositoryValue.schemas().hasNext()) {
             this.showErrorDialog();
@@ -356,6 +363,7 @@ final class SchemaContextChooserDialog
 
         protected ListValueModel buildSchemaNodesAdapter() {
             return new TransformationListValueModelAdapter(this.buildSchemasAdapter()) {
+                @Override
                 protected Object transformItem(Object item) {
                     return SchemaRepositoryNode.this.buildSchemaNode((MWXmlSchema) item);
                 }
@@ -373,6 +381,7 @@ final class SchemaContextChooserDialog
 
         // **************** ValueModel contract ***********************************
 
+        @Override
         public Object getValue() {
             return this.schemaRepository;
         }
@@ -380,10 +389,12 @@ final class SchemaContextChooserDialog
 
         // **************** TreeNodeValueModel contract ***************************
 
+        @Override
         public TreeNodeValueModel getParent() {
             return null;
         }
 
+        @Override
         public ListValueModel getChildrenModel() {
             return this.childrenModel;
         }
@@ -391,13 +402,16 @@ final class SchemaContextChooserDialog
 
         // ********** AbstractTreeNodeValueModel implementation **********
 
+        @Override
         protected void engageValue() {}
 
+        @Override
         protected void disengageValue() {}
 
 
         // **************** Comparable contract ***********************************
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
@@ -405,10 +419,12 @@ final class SchemaContextChooserDialog
 
         // **************** Displayable contract **********************************
 
+        @Override
         public String displayString() {
             return null;
         }
 
+        @Override
         public Icon icon() {
             return null;
         }
@@ -453,6 +469,7 @@ final class SchemaContextChooserDialog
 
         private ListValueModel buildContextComponentNodesAdapter() {
             return new TransformationListValueModelAdapter(this.buildContextComponentsAdapter()) {
+                @Override
                 protected Object transformItem(Object item) {
                     return SchemaNode.this.buildContextComponentNode((MWNamedSchemaComponent) item);
                 }
@@ -470,6 +487,7 @@ final class SchemaContextChooserDialog
 
         // **************** ValueModel contract ***********************************
 
+        @Override
         public Object getValue() {
             return this.schema;
         }
@@ -477,10 +495,12 @@ final class SchemaContextChooserDialog
 
         // **************** TreeNodeValueModel contract ***************************
 
+        @Override
         public TreeNodeValueModel getParent() {
             return this.parent;
         }
 
+        @Override
         public ListValueModel getChildrenModel() {
             return this.childrenModel;
         }
@@ -488,13 +508,16 @@ final class SchemaContextChooserDialog
 
         // ********** AbstractTreeNodeValueModel implementation **********
 
+        @Override
         protected void engageValue() {}
 
+        @Override
         protected void disengageValue() {}
 
 
         // **************** Comparable contract ***********************************
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
@@ -502,10 +525,12 @@ final class SchemaContextChooserDialog
 
         // **************** Displayable contract **********************************
 
+        @Override
         public String displayString() {
             return "schema::" + this.schema.getName();
         }
 
+        @Override
         public Icon icon() {
             return null;
         }
@@ -546,6 +571,7 @@ final class SchemaContextChooserDialog
 
         protected ListValueModel buildChildrenModel() {
             return new TransformationListValueModelAdapter(this.buildContextComponentsAdapter()) {
+                @Override
                 protected Object transformItem(Object item) {
                     return SchemaContextComponentNode.this.buildContextComponentNode((MWNamedSchemaComponent) item);
                 }
@@ -563,6 +589,7 @@ final class SchemaContextChooserDialog
 
         // **************** ValueModel contract ***********************************
 
+        @Override
         public Object getValue() {
             return this.component;
         }
@@ -570,10 +597,12 @@ final class SchemaContextChooserDialog
 
         // **************** TreeNodeValueModel contract ***************************
 
+        @Override
         public TreeNodeValueModel getParent() {
             return this.parent;
         }
 
+        @Override
         public ListValueModel getChildrenModel() {
             return this.childrenModel;
         }
@@ -581,13 +610,16 @@ final class SchemaContextChooserDialog
 
         // ********** AbstractTreeNodeValueModel implementation **********
 
+        @Override
         protected void engageValue() {}
 
+        @Override
         protected void disengageValue() {}
 
 
         // **************** Comparable contract ***********************************
 
+        @Override
         public int compareTo(Object o) {
             return SchemaContextComponentNodeComparator.compare(this, o);
         }
@@ -595,10 +627,12 @@ final class SchemaContextChooserDialog
 
         // **************** Displayable contract **********************************
 
+        @Override
         public String displayString() {
             return this.component.componentTypeName() + "::" + this.component.qName();
         }
 
+        @Override
         public Icon icon() {
             return null;
         }

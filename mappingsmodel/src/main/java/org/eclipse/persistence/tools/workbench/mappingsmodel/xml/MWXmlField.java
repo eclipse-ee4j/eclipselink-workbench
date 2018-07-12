@@ -103,11 +103,13 @@ public final class MWXmlField
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.xpathSteps = new Vector();
     }
 
+    @Override
     protected void addTransientAspectNamesTo(Set transientAspectNames) {
         super.addTransientAspectNamesTo(transientAspectNames);
         transientAspectNames.add(RESOLVED_PROPERTY);
@@ -426,11 +428,13 @@ public final class MWXmlField
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         this.resolve();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         if (change.getChangeType() == SchemaChange.SCHEMA_STRUCTURE_CHANGED) {
             this.resolve();
@@ -443,6 +447,7 @@ public final class MWXmlField
 
     // **************** MWDataField handling **************************************
 
+    @Override
     public String fieldName() {
         return this.xpath;
     }
@@ -450,6 +455,7 @@ public final class MWXmlField
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkXpath(currentProblems);
@@ -477,6 +483,7 @@ public final class MWXmlField
         return this.xpath;
     }
 
+    @Override
     public DatabaseField runtimeField() {
         if (! this.isSpecified()) {
             return null;
@@ -747,11 +754,13 @@ public final class MWXmlField
 
     // **************** printing/displaying ***************************************
 
+    @Override
     public void toString(StringBuffer sb) {
         super.toString(sb);
         sb.append("\"" + this.xpath + "\"");
     }
 
+    @Override
     public String displayString() {
         return this.xpath;
     }
@@ -770,6 +779,7 @@ public final class MWXmlField
         return descriptor;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
 

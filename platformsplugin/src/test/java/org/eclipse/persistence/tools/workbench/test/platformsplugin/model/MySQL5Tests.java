@@ -34,18 +34,22 @@ public class MySQL5Tests extends MySQL4Tests {
     /**
      * the MySQL 5.0 Server in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb4.ca.oracle.com";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "5.0.15";
     }
 
+    @Override
     protected String tableName() {
         return super.tableName().toLowerCase();    // ???
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // BIT
         this.verifyColumnAttribute(metaDataMap, "BIT_COL", "TABLE_CAT", "");

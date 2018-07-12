@@ -65,6 +65,7 @@ public final class ServerSessionAdapter extends DatabaseSessionAdapter {
      * to the specified collection.
      * @see #children()
      */
+    @Override
     protected void addChildrenTo( List children) {
 
         super.addChildrenTo(children);
@@ -75,6 +76,7 @@ public final class ServerSessionAdapter extends DatabaseSessionAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         ServerSessionConfig session = new ServerSessionConfig();
@@ -124,6 +126,7 @@ public final class ServerSessionAdapter extends DatabaseSessionAdapter {
     /**
      * Sets usesExternalConnectionPooling and the config model.
      */
+    @Override
     public void setExternalConnectionPooling( boolean value) {
 
         super.setExternalConnectionPooling( value);
@@ -151,6 +154,7 @@ public final class ServerSessionAdapter extends DatabaseSessionAdapter {
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -159,6 +163,7 @@ public final class ServerSessionAdapter extends DatabaseSessionAdapter {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 

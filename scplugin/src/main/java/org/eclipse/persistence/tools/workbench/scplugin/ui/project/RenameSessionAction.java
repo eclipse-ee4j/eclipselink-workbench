@@ -29,6 +29,7 @@ public class RenameSessionAction extends AbstractFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeText( "RENAME_SESSION");
         this.initializeMnemonic( "RENAME_SESSION");
@@ -37,6 +38,7 @@ public class RenameSessionAction extends AbstractFrameworkAction {
         this.initializeToolTipText( "RENAME_SESSION.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         SessionAdapter session = ( SessionAdapter)selectedNode.getValue();

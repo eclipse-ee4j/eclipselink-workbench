@@ -63,20 +63,24 @@ public final class MWRelationalTransactionalPolicy
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.primaryKeyPolicy = new MWRelationalPrimaryKeyPolicy(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.primaryKeyPolicy);
     }
 
+    @Override
     protected MWQueryManager buildQueryManager() {
         return new MWRelationalQueryManager(this);
     }
 
+    @Override
     protected MWLockingPolicy buildLockingPolicy() {
         return new MWTableDescriptorLockingPolicy(this);
     }
@@ -88,6 +92,7 @@ public final class MWRelationalTransactionalPolicy
 
     // *************** Runtime Conversion ********************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptor(runtimeDescriptor);
         this.primaryKeyPolicy.adjustRuntimeDescriptor(runtimeDescriptor);

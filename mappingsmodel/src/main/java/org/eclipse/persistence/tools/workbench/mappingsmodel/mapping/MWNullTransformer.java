@@ -39,16 +39,20 @@ public final class MWNullTransformer
 
     // **************** Aggregate Support *************************************
 
+    @Override
     public String fieldNameForRuntime() {
         return "NULL_TRANSFORMER";
     }
 
+    @Override
     public AggregateFieldDescription fullFieldDescription() {
         return new AggregateFieldDescription() {
+            @Override
             public String getMessageKey() {
                 return "AGGREGATE_FIELD_DESCRIPTION_FOR_NULL_TRANSFORMER";
             }
 
+            @Override
             public Object[] getMessageArguments() {
                 return new Object[0];
             }
@@ -56,6 +60,7 @@ public final class MWNullTransformer
     }
 
     /** @see AggregateRuntimeFieldNameGenerator#fieldIsWritten() */
+    @Override
     public boolean fieldIsWritten() {
         return true;
     }
@@ -63,6 +68,7 @@ public final class MWNullTransformer
 
     // **************** UI support *********************************************
 
+    @Override
     public String transformerDisplayString() {
         return null;
     }
@@ -70,10 +76,12 @@ public final class MWNullTransformer
 
     // **************** Problems *********************************************
 
+    @Override
     public void addAttributeTransformerProblemsForMapping(List newProblems, MWTransformationMapping mapping) {
         newProblems.add(this.buildProblem(ProblemConstants.MAPPING_ATTRIBUTE_TRANSFORMER_NOT_SPECIFIED));
     }
 
+    @Override
     public void addFieldTransformerProblemsForAssociation(List newProblems, MWFieldTransformerAssociation association) {
         newProblems.add(this.buildProblem(ProblemConstants.MAPPING_FIELD_TRANSFORMER_NOT_SPECIFIED, association.fieldName()));
     }
@@ -81,10 +89,12 @@ public final class MWNullTransformer
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void setRuntimeAttributeTransformer(AbstractTransformationMapping mapping) {
         // NOP
     }
 
+    @Override
     public void addRuntimeFieldTransformer(AbstractTransformationMapping mapping, DatabaseField runtimeField) {
         // NOP
     }
@@ -92,6 +102,7 @@ public final class MWNullTransformer
 
     // **************** TopLink methods ************************************
 
+    @Override
     public MWTransformer valueForTopLink() {
         return null;
     }

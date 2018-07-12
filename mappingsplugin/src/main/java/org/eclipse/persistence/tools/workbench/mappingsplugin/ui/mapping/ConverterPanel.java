@@ -55,10 +55,12 @@ public final class ConverterPanel
 
     private PropertyValueModel buildConverterTypeHolder(PropertyValueModel converterHolder, final ConverterSetter converterSetter) {
         return new PropertyAspectAdapter(converterHolder, converterSetter.converterTypePropertyString()) {
+            @Override
             protected Object getValueFromSubject() {
                 return converterSetter.getType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 String converterType = (String) value;
                 if (converterType.equals(MWConverter.NO_CONVERTER)) {
@@ -210,6 +212,7 @@ public final class ConverterPanel
 
     private PropertyValueModel buildTypeConversionConverterHolder() {
         return new FilteringPropertyValueModel(this.converterHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return (value instanceof MWTypeConversionConverter);
             }
@@ -222,6 +225,7 @@ public final class ConverterPanel
 
     private ValueModel buildIsTypeConversionConverterHolder() {
         return new PropertyAspectAdapter(this.converterHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Boolean(this.subject instanceof MWTypeConversionConverter);
             }
@@ -250,6 +254,7 @@ public final class ConverterPanel
 
     private PropertyValueModel buildObjectTypeConverterHolder() {
         return new FilteringPropertyValueModel(this.converterHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return (value instanceof MWObjectTypeConverter);
             }
@@ -262,6 +267,7 @@ public final class ConverterPanel
 
     private ValueModel buildIsObjectTypeConverterHolder() {
         return new PropertyAspectAdapter(this.converterHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Boolean(this.subject instanceof MWObjectTypeConverter);
             }

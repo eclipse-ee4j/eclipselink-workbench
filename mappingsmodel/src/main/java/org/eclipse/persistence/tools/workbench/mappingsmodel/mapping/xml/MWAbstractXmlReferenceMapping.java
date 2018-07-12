@@ -20,17 +20,11 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWOXDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWDescriptorHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWAbstractReferenceMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWReferenceMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWSchemaContextComponent;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlField;
@@ -38,16 +32,10 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlNode;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXpathContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXpathSpec;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.SchemaChange;
-import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneListIterator;
-import org.eclipse.persistence.tools.workbench.utility.node.Node;
-
-import org.eclipse.persistence.mappings.AggregateMapping;
 import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.ForeignReferenceMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
-import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLObjectReferenceMapping;
 
 public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceMapping implements MWXpathContext, MWXmlReferenceMapping {
@@ -98,6 +86,7 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         for (Iterator stream = this.xmlFieldPairs(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).resolveXpaths();
@@ -105,6 +94,7 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         for (Iterator stream = this.xmlFieldPairs(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).schemaChanged(change);
@@ -129,10 +119,12 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         MWXmlFieldPair firstFieldPair = xmlFieldPairAt(0);
         if (firstFieldPair != null && firstFieldPair.getSourceXmlField() != null && firstFieldPair.getSourceXmlField().isResolved()) {
@@ -158,24 +150,29 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -184,6 +181,7 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
 
     // **************** MWReferenceMapping contract ***************************
 
+    @Override
     public boolean descriptorIsValidReferenceDescriptor(MWDescriptor descriptor) {
         return true;
     }
@@ -196,6 +194,7 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
         return ProblemConstants.MAPPING_REFERENCE_DESCRIPTOR_NOT_ROOT;
     }
 
+    @Override
     public MWXmlDescriptor referenceDescriptor() {
         return (MWXmlDescriptor)getReferenceDescriptor();
     }
@@ -208,14 +207,17 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
 
     // **************** Xml field pairs ***************************************
 
+    @Override
     public int xmlFieldPairsSize() {
         return this.xmlFieldPairs.size();
     }
 
+    @Override
     public ListIterator<MWXmlFieldPair> xmlFieldPairs() {
         return new CloneListIterator(this.xmlFieldPairs);
     }
 
+    @Override
     public MWXmlFieldPair xmlFieldPairAt(int index) {
         if (index < this.xmlFieldPairsSize()) {
             return this.xmlFieldPairs.get(index);
@@ -223,29 +225,35 @@ public abstract class MWAbstractXmlReferenceMapping extends MWAbstractReferenceM
         return null;
     }
 
+    @Override
     public MWXmlFieldPair addFieldPair(String sourceXpath, String targetXpath) {
         MWXmlFieldPair xmlFieldPair = new MWXmlFieldPair(this, sourceXpath, targetXpath);
         this.addFieldPair(xmlFieldPair);
         return xmlFieldPair;
     }
 
+    @Override
     public void addFieldPair(MWXmlFieldPair xmlFieldPair) {
         this.addItemToList(this.xmlFieldPairsSize(), xmlFieldPair, this.xmlFieldPairs, XML_FIELD_PAIRS_LIST);
     }
 
     /** Builds an empty field pair, but does not add it */
+    @Override
     public MWXmlFieldPair buildEmptyFieldPair() {
         return new MWXmlFieldPair(this);
     }
 
+    @Override
     public void removeXmlFieldPair(MWXmlFieldPair xmlFieldPair) {
         this.removeNodeFromList(this.xmlFieldPairs.indexOf(xmlFieldPair), this.xmlFieldPairs, XML_FIELD_PAIRS_LIST);
     }
 
+    @Override
     public void clearXmlFieldPairs() {
         this.clearList(this.xmlFieldPairs, XML_FIELD_PAIRS_LIST);
     }
 
+    @Override
     public boolean sourceFieldMayUseCollectionXpath() {
         return false;
     }

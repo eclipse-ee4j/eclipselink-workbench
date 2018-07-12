@@ -37,6 +37,7 @@ public class MappingsValidateTask extends MappingsTask implements ProjectValidat
         super();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -44,6 +45,7 @@ public class MappingsValidateTask extends MappingsTask implements ProjectValidat
         this.reportformat = TXT;
     }
 
+    @Override
     public void execute() throws BuildException {
         super.execute();
 
@@ -58,6 +60,7 @@ public class MappingsValidateTask extends MappingsTask implements ProjectValidat
      * Executes the MappingsRunner.
      * Returns 0 if the there is no problem in the project.
      */
+    @Override
     public int execute( String projectFile, String reportfile, String reportformat, Vector ignoreErrorCodes) {
 
         Object[] args = { projectFile, reportfile, reportformat, ignoreErrorCodes};
@@ -65,6 +68,7 @@ public class MappingsValidateTask extends MappingsTask implements ProjectValidat
        return this.execute( args);
     }
 
+    @Override
     protected String getProjectRunnerClassName() {
 
         return "org.eclipse.persistence.tools.workbench.ant.ProjectValidator";
@@ -95,6 +99,7 @@ public class MappingsValidateTask extends MappingsTask implements ProjectValidat
          * get the values
          * @return an array of the allowed values for this attribute.
          */
+        @Override
         public String[] getValues() {
             return new String[] { TXT, HTML};
         }

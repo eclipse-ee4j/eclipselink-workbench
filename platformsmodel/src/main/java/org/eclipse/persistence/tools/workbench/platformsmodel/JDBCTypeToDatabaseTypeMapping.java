@@ -108,6 +108,7 @@ public final class JDBCTypeToDatabaseTypeMapping
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#addProblemsTo(java.util.Set)
      */
+    @Override
     protected void addProblemsTo(List currentProblems) {
         if (this.databaseType == null) {
             currentProblems.add(this.buildProblem("002", this.getJDBCType().getName()));
@@ -131,6 +132,7 @@ public final class JDBCTypeToDatabaseTypeMapping
      * sort by JDBC type, there should be no duplicates
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         JDBCTypeToDatabaseTypeMapping other = (JDBCTypeToDatabaseTypeMapping) o;
         return this.jdbcType.compareTo(other.jdbcType);
@@ -174,6 +176,7 @@ public final class JDBCTypeToDatabaseTypeMapping
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
      */
+    @Override
     public String displayString() {
         StringBuffer sb = new StringBuffer();
         this.displayStringOn(sb);
@@ -183,6 +186,7 @@ public final class JDBCTypeToDatabaseTypeMapping
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         this.displayStringOn(sb);
     }

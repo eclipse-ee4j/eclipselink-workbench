@@ -53,6 +53,7 @@ public final class CFExternalClassRepositoryFactory
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepositoryFactory#buildExternalClassRepository(java.io.File[])
      */
+    @Override
     public ExternalClassRepository buildClassRepository(File[] classpath) {
         return new CFExternalClassRepository(classpath);
     }

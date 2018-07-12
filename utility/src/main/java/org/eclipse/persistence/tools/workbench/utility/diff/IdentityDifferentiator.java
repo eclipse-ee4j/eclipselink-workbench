@@ -46,6 +46,7 @@ public class IdentityDifferentiator implements Differentiator {
     /**
      * @see Differentiator#diff(Object, Object)
      */
+    @Override
     public Diff diff(Object object1, Object object2) {
         if (object1 == object2) {
             return new NullDiff(object1, object2, this);
@@ -60,6 +61,7 @@ public class IdentityDifferentiator implements Differentiator {
     /**
      * @see Differentiator#keyDiff(Object, Object)
      */
+    @Override
     public Diff keyDiff(Object object1, Object object2) {
         return this.diff(object1, object2);
     }
@@ -67,6 +69,7 @@ public class IdentityDifferentiator implements Differentiator {
     /**
      * @see Differentiator#comparesValueObjects()
      */
+    @Override
     public boolean comparesValueObjects() {
         return false;
     }
@@ -74,6 +77,7 @@ public class IdentityDifferentiator implements Differentiator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "IdentityDifferentiator";
     }

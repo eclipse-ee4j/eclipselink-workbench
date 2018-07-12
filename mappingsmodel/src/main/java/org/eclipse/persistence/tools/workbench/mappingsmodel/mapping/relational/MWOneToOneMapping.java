@@ -45,17 +45,12 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationI
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.internal.indirection.ProxyIndirectionPolicy;
 import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
-import org.eclipse.persistence.sessions.Record;
 
 
 public final class MWOneToOneMapping
@@ -86,11 +81,13 @@ public final class MWOneToOneMapping
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.targetForeignKeyHandles = new Vector();
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
         if (!getInstanceVariable().isValueHolder() && getInstanceVariable().getType().isInterface()) {
@@ -104,6 +101,7 @@ public final class MWOneToOneMapping
 
     // **************** Containment Hierarchy ***************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.targetForeignKeyHandles) { children.addAll(this.targetForeignKeyHandles); }
@@ -118,9 +116,11 @@ public final class MWOneToOneMapping
 
     private NodeReferenceScrubber buildTargetForeignKeyScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWOneToOneMapping.this.removeTargetForeignKeyHandle((MWColumnPairHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWOneToOneMapping.buildTargetForeignKeyScrubber()";
             }
@@ -138,6 +138,7 @@ public final class MWOneToOneMapping
 
     private Iterator targetForeignKeyHandles() {
         return new CloneIterator(this.targetForeignKeyHandles) {
+            @Override
             protected void remove(Object current) {
                 MWOneToOneMapping.this.removeTargetForeignKeyHandle((MWColumnPairHandle) current);
             }
@@ -151,6 +152,7 @@ public final class MWOneToOneMapping
 
     public Iterator targetForeignKeys() {
         return new TransformationIterator(this.targetForeignKeyHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumnPairHandle) next).getColumnPair();
             }
@@ -183,6 +185,7 @@ public final class MWOneToOneMapping
         }
     }
 
+    @Override
     public void setReference(MWReference reference) {
         if (this.getReference() != reference) {
             this.clearTargetForeignKeys();
@@ -192,10 +195,12 @@ public final class MWOneToOneMapping
 
     // *********** MWProxyIndirectionMapping implementation ***********
 
+    @Override
     public boolean usesProxyIndirection() {
         return getIndirectionType() == PROXY_INDIRECTION;
     }
 
+    @Override
     public void setUseProxyIndirection() {
         setIndirectionType(PROXY_INDIRECTION);
     }
@@ -207,6 +212,7 @@ public final class MWOneToOneMapping
         return CollectionTools.contains(this.targetForeignKeys(), targetForeignKey);
     }
 
+    @Override
     protected boolean fieldIsWritten(MWColumnPair columnPair) {
         return ! this.containsTargetForeignKey(columnPair);
     }
@@ -218,6 +224,7 @@ public final class MWOneToOneMapping
      * one-to-one mappings can be either "source foreign key"
      * or "target foreign key"
      */
+    @Override
     protected Set buildCandidateReferences() {
         Set references = new HashSet();
         references.addAll(this.buildCandidateSourceReferences());
@@ -229,16 +236,19 @@ public final class MWOneToOneMapping
      * Returns true if this mapping behaves like a 1-1, where the source table (e.g. EMPLOYEE) has
      * a foreign key to the target table (e.g., ADDRESS);
      **/
+    @Override
     public boolean sourceReferenceFieldsAreFromSourceDescriptorTables() {
         return true;
     }
 
+    @Override
     public boolean isOneToOneMapping(){
         return true;
     }
 
     // **************** Mapping Morphing support ******************
 
+    @Override
     public MWOneToOneMapping asMWOneToOneMapping() {
         return this;
     }
@@ -246,6 +256,7 @@ public final class MWOneToOneMapping
     /**
      * IMPORTANT:  See MWMapping class comment.
      */
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWOneToOneMapping(this);
     }
@@ -268,6 +279,7 @@ public final class MWOneToOneMapping
 //        getIndirectionPolicy().setUsesIndirection(!oldMapping.usesTransparentIndirection());
 //    }
 
+    @Override
     public void initializeFromMWDirectMapping(MWDirectMapping oldMapping) {
         super.initializeFromMWDirectMapping(oldMapping);
         // set up default indirection policy
@@ -282,6 +294,7 @@ public final class MWOneToOneMapping
 //        this.setUsesIndirection(oldMapping.usesIndirection());
 //    }
 
+    @Override
     public void initializeFromMWVariableOneToOneMapping(MWVariableOneToOneMapping oldMapping) {
         super.initializeFromMWVariableOneToOneMapping(oldMapping);
         if (oldMapping.usesValueHolderIndirection()) {
@@ -299,6 +312,7 @@ public final class MWOneToOneMapping
      * Used for code gen.
      * See MWRMapping.initialValue()
      */
+    @Override
     public String initialValue(MWClassCodeGenPolicy classCodeGenPolicy) {
         String initialValue = super.initialValue(classCodeGenPolicy);
 
@@ -332,6 +346,7 @@ public final class MWOneToOneMapping
 
     // **************** Aggregate Support **************
 
+    @Override
     protected Collection buildAggregateFieldNameGenerators() {
         Collection generators = super.buildAggregateFieldNameGenerators();
         if (getReference() != null) {
@@ -346,14 +361,17 @@ public final class MWOneToOneMapping
 
     // *************** MWQueryable implementation ************************
 
+    @Override
     public boolean usesAnyOf() {
         return false;
     }
 
+    @Override
     public boolean isTraversableForReadAllQueryOrderable() {
         return true;
     }
 
+    @Override
     public String iconKey() {
         return "mapping.oneToOne";
     }
@@ -361,6 +379,7 @@ public final class MWOneToOneMapping
 
     // *************** Problem Handling ************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.addUsesIndirectionWhileMaintainsBiDirectionalRelationship(newProblems);
@@ -372,6 +391,7 @@ public final class MWOneToOneMapping
         }
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         if (isReadOnly()) {
             return;
@@ -389,10 +409,12 @@ public final class MWOneToOneMapping
 
     // **************** Runtime Conversion *****************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new OneToOneMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         OneToOneMapping runtimeMapping = (OneToOneMapping) super.runtimeMapping();
 

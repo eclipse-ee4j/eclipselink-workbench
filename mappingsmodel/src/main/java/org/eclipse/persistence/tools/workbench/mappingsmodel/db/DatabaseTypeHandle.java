@@ -62,6 +62,7 @@ final class DatabaseTypeHandle
         this.databaseType = databaseType;
     }
 
+    @Override
     protected Node node() {
         return getDatabaseType();
     }
@@ -70,6 +71,7 @@ final class DatabaseTypeHandle
         return this.getDatabase().getDatabasePlatform();
     }
 
+    @Override
     public void postProjectBuild() {
         if (this.databaseTypeName == null) {
             // bug 3856524 - databaseType can be null in legacy projects
@@ -92,10 +94,12 @@ final class DatabaseTypeHandle
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER attribute should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.databaseType.compareTo(((DatabaseTypeHandle) o).databaseType);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.databaseType == null) {
             sb.append("null");

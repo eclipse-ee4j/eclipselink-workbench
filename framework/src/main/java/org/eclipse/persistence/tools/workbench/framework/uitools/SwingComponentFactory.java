@@ -27,7 +27,6 @@ import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -428,6 +427,7 @@ public class SwingComponentFactory
      */
     public static void attachTableEditorCanceler(final JTable table, ValueModel subjectHolder) {
         subjectHolder.addPropertyChangeListener(ValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 if (table.isEditing())
                     table.getCellEditor().cancelCellEditing();
@@ -443,6 +443,7 @@ public class SwingComponentFactory
      */
     public static void attachDateSpinnerCommiter(final JSpinner spinner, ValueModel subjectHolder) {
         subjectHolder.addPropertyChangeListener(ValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 try {
                     spinner.commitEdit();
@@ -969,6 +970,7 @@ public class SwingComponentFactory
             this.defaultDelegate = defaultDelegate;
         }
 
+        @Override
         public Component getListCellRendererComponent(JList list,
                                                       Object value,
                                                       int index,

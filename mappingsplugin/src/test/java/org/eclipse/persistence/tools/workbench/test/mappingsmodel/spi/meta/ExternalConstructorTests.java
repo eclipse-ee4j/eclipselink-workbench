@@ -35,6 +35,7 @@ public abstract class ExternalConstructorTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.repository = this.buildRepository();
@@ -42,6 +43,7 @@ public abstract class ExternalConstructorTests extends TestCase {
 
     protected abstract ExternalClassRepository buildRepository();
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

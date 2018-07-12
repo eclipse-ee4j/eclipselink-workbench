@@ -59,6 +59,7 @@ public class EisLoginTabbedPropertiesPage extends AbstractPropertiesPage
         return "LOGIN_SEQUENCING_TAB_TITLE";
     }
 
+    @Override
     protected void initializeLayout()
     {
         JTabbedPane tabbedPane = new JTabbedPane();

@@ -103,6 +103,7 @@ public final class ValueInArgumentPane extends AbstractSubjectPanel {
 
     private Action buildEditAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ArgumentValueDialog dialog = new ArgumentValueDialog(getWorkbenchContext(), getSubjectHolder());
 
@@ -263,12 +264,15 @@ public final class ValueInArgumentPane extends AbstractSubjectPanel {
         }
 
         private class CVDocumentListener implements DocumentListener {
+            @Override
             public void changedUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void insertUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void removeUpdate(DocumentEvent de) {
                 updateOKButton();
             }

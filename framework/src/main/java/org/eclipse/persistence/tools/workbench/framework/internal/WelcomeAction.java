@@ -26,11 +26,13 @@ final class WelcomeAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.setIcon(EMPTY_ICON);
         this.initializeTextAndMnemonic("HELP_WELCOME");
     }
 
+    @Override
     protected void execute() {
         this.helpManager().showTopic("welcome");
     }

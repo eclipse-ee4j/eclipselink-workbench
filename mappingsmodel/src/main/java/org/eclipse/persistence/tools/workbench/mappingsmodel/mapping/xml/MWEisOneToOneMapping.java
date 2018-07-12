@@ -58,11 +58,13 @@ public final class MWEisOneToOneMapping
     // **************** Initialization ****************************************
 
     /** initialize persistent state */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.useDescriptorReadObjectInteraction = true;
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
         if (!getInstanceVariable().isValueHolder() && getInstanceVariable().getType().isInterface()) {
@@ -74,6 +76,7 @@ public final class MWEisOneToOneMapping
      * 1:1 mappings don't have a selection interaction when they
      * use the descriptor read object interaction
      */
+    @Override
     protected boolean requiresSelectionInteraction() {
         return false;
     }
@@ -112,6 +115,7 @@ public final class MWEisOneToOneMapping
      * Return true if a source field may use a collection xpath
      * @see MWEisReferenceMapping#sourceFieldMayUseCollectionXpath()
      */
+    @Override
     public boolean sourceFieldMayUseCollectionXpath() {
         return false;
     }
@@ -119,16 +123,19 @@ public final class MWEisOneToOneMapping
 
     // *********** MWProxyIndirectionMapping implementation ***********
 
+    @Override
     public boolean usesProxyIndirection() {
         return getIndirectionType() == PROXY_INDIRECTION;
     }
 
+    @Override
     public void setUseProxyIndirection() {
         setIndirectionType(PROXY_INDIRECTION);
     }
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWEisOneToOneMapping(this);
     }
@@ -136,6 +143,7 @@ public final class MWEisOneToOneMapping
 
     // ************** Problem handling ****************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -204,10 +212,12 @@ public final class MWEisOneToOneMapping
 
     // **************** Runtime Conversion ***************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new EISOneToOneMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         EISOneToOneMapping mapping = (EISOneToOneMapping) super.runtimeMapping();
 

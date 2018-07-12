@@ -37,6 +37,7 @@ public class RenamePackageAction extends AbstractFrameworkAction {
         super(workbenchContext);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -44,6 +45,7 @@ public class RenamePackageAction extends AbstractFrameworkAction {
         this.initializeToolTipText("RENAME_PACKAGE_ACTION.tooltip");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         String packageName = this.promptForPackageName(selectedNode);
         if (packageName == null) {
@@ -90,6 +92,7 @@ public class RenamePackageAction extends AbstractFrameworkAction {
         }
 
         // check each package name component for a reserved word
+        @Override
         protected boolean nameIsIllegal(String name) {
             String[] segments = name.split("\\.");
             for (int i = 0; i < segments.length; i++) {
@@ -104,13 +107,16 @@ public class RenamePackageAction extends AbstractFrameworkAction {
             LocalBuilder() {
                 super();
             }
+            @Override
             protected DocumentFactory buildDefaultDocumentFactory() {
                 return new NewNameDialog.DocumentFactory() {
+                    @Override
                     public Document buildDocument() {
                         return RegexpDocument.buildDocument(RegexpDocument.RE_PACKAGE);
                     }
                 };
             }
+            @Override
             protected NewNameDialog buildDialog(WorkbenchContext context, Builder clone) {
                 return new LocalNewNameDialog(context, clone);
             }

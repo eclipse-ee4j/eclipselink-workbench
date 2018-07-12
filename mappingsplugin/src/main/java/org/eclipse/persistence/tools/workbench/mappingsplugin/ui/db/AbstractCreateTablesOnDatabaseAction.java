@@ -40,6 +40,7 @@ abstract class AbstractCreateTablesOnDatabaseAction extends AbstractTableGenerat
      */
     protected abstract Collection buildTables();
 
+    @Override
     protected void execute() {
         if ( ! this.confirmTableCreation()) {
             return;
@@ -94,10 +95,12 @@ abstract class AbstractCreateTablesOnDatabaseAction extends AbstractTableGenerat
         return option == JOptionPane.YES_OPTION;
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return this.database().isConnected();
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {MWDatabase.CONNECTED_PROPERTY};
     }

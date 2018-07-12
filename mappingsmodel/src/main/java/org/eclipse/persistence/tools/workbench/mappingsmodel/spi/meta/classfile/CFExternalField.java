@@ -40,6 +40,7 @@ final class CFExternalField
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalField#getType()
      */
+    @Override
     public ExternalClassDescription getType() {
         return this.classDescriptionNamed(this.getField().javaTypeName());
     }

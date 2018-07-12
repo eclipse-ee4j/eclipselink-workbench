@@ -28,6 +28,7 @@ public class ClassCellRendererAdapter
         super(repository);
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWClass) value).displayStringWithPackage();
     }
@@ -36,6 +37,7 @@ public class ClassCellRendererAdapter
         return true;
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         MWClass mwClass = (MWClass) value;
 

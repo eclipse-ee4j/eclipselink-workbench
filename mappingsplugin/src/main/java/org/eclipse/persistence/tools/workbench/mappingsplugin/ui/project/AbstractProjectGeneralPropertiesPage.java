@@ -49,6 +49,7 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
         super(projectNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel selectionNodeHolder) {
         super.initialize(selectionNodeHolder);
         this.projectSaveDirectoryHolder = this.buildProjectSaveDirectoryHolder();
@@ -124,6 +125,7 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
 
     private ClasspathPanel.DefaultClasspathDirectoryHolder buildDefaultClasspathDirectoryHolder() {
         return new ClasspathPanel.DefaultClasspathDirectoryHolder() {
+            @Override
             public File getDefaultClasspathDirectory() {
                 String dirName = AbstractProjectGeneralPropertiesPage.this.mostRecentClasspathDirectoryPreference();
                 if (dirName != null) {
@@ -136,6 +138,7 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
                 return FileTools.userHomeDirectory();
             }
 
+            @Override
             public void setDefaultClasspathDirectory(File defaultClasspathDirectory) {
                 AbstractProjectGeneralPropertiesPage.this.setMostRecentClasspathDirectoryPreference(defaultClasspathDirectory.getPath());
             }
@@ -144,6 +147,7 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
 
     private PropertyValueModel buildProjectSaveDirectoryHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), MWProject.SAVE_DIRECTORY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWProject) this.subject).getSaveDirectory();
             }
@@ -153,6 +157,7 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
     private Document buildSaveLocationDocumentAdapter() {
         return new DocumentAdapter(
             new PropertyAspectAdapter(this.projectSaveDirectoryHolder) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((File) this.subject).getAbsolutePath();
                 }
@@ -162,6 +167,7 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
 
     private PropertyValueModel buildRepositoryHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWProject) this.subject).getRepository();
             }
@@ -170,18 +176,23 @@ public abstract class AbstractProjectGeneralPropertiesPage extends ScrollablePro
 
     private ListValueModel buildClasspathHolder() {
         return new ListAspectAdapter(this.buildRepositoryHolder(), MWClassRepository.CLASSPATH_ENTRIES_LIST) {
+            @Override
             public void addItem(int index, Object item) {
                 ((MWClassRepository) this.subject).addClasspathEntry(index, (String) item);
             }
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWClassRepository) this.subject).classpathEntries();
             }
+            @Override
             public Object removeItem(int index) {
                 return ((MWClassRepository) this.subject).removeClasspathEntry(index);
             }
+            @Override
             public Object replaceItem(int index, Object item) {
                 return ((MWClassRepository) this.subject).replaceClasspathEntry(index, (String) item);
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWClassRepository) this.subject).classpathEntriesSize();
             }

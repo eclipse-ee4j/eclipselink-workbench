@@ -130,10 +130,12 @@ public abstract class AbstractFrameworkAction extends AbstractAction implements 
         this.setToolTipText(this.resourceRepository().getString(key));
     }
 
+    @Override
     public void setUp() {
         // no listeners to add, see subclasses
     }
 
+    @Override
     public void tearDown() {
         // no listeners to remove, see subclasses
     }
@@ -144,6 +146,7 @@ public abstract class AbstractFrameworkAction extends AbstractAction implements 
     /**
      * By default we invoke the #execute() method.
      */
+    @Override
     public void actionPerformed(ActionEvent e) {
         this.currentWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         this.execute();
@@ -176,23 +179,28 @@ public abstract class AbstractFrameworkAction extends AbstractAction implements 
 
     // ********** FrameworkAction implementation **********
 
+    @Override
     public String getText() {
         return (String) this.getValue(NAME);
     }
 
+    @Override
     public int getMnemonic() {
         Integer mnemonic = (Integer) this.getValue(MNEMONIC_KEY);
         return (mnemonic == null) ? - 1 : mnemonic.intValue();
     }
 
+    @Override
     public KeyStroke getAccelerator() {
         return (KeyStroke) this.getValue(ACCELERATOR_KEY);
     }
 
+    @Override
     public Icon getIcon() {
         return (Icon) this.getValue(SMALL_ICON);
     }
 
+    @Override
     public String getToolTipText() {
         return (String) this.getValue(SHORT_DESCRIPTION);
     }
@@ -271,6 +279,7 @@ public abstract class AbstractFrameworkAction extends AbstractAction implements 
      * Default classification for a FrameworkAction is simply the
      * class name.
      */
+    @Override
     public String getClassification() {
         return this.getClass().getName();
     }
@@ -280,6 +289,7 @@ public abstract class AbstractFrameworkAction extends AbstractAction implements 
      */
     public static Runnable buildDialogLauncher(final Dialog d) {
         return new Runnable() {
+            @Override
             public void run() {
                 d.show();
             }

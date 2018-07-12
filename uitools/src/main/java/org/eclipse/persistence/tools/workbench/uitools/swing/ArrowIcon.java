@@ -110,6 +110,7 @@ public class ArrowIcon
 
     // ********** accessors **********
 
+    @Override
     public int getIconWidth() {
         return this.width;
     }
@@ -121,6 +122,7 @@ public class ArrowIcon
         }
     }
 
+    @Override
     public int getIconHeight() {
         return this.height;
     }
@@ -189,6 +191,7 @@ public class ArrowIcon
         this.opaque = opaque;
     }
 
+    @Override
     public AccessibleContext getAccessibleContext() {
         if (this.accessibleContext == null) {
             this.accessibleContext = new AccessibleArrowIcon();
@@ -219,6 +222,7 @@ public class ArrowIcon
 
     // ********** Icon implementation **********
 
+    @Override
     public void paintIcon(Component component, Graphics g, int x, int y) {
         // save the original graphics settings
         Color oldColor = g.getColor();
@@ -393,46 +397,57 @@ public class ArrowIcon
         implements AccessibleIcon, Serializable
     {
 
+        @Override
         public AccessibleRole getAccessibleRole() {
             return AccessibleRole.ICON;
         }
 
+        @Override
         public AccessibleStateSet getAccessibleStateSet() {
             return null;
         }
 
+        @Override
         public Accessible getAccessibleParent() {
             return null;
         }
 
+        @Override
         public int getAccessibleIndexInParent() {
             return -1;
         }
 
+        @Override
         public int getAccessibleChildrenCount() {
             return 0;
         }
 
+        @Override
         public Accessible getAccessibleChild(int index) {
             return null;
         }
 
+        @Override
         public Locale getLocale() throws IllegalComponentStateException {
             return null;
         }
 
+        @Override
         public String getAccessibleIconDescription() {
             return ArrowIcon.this.getDescription();
         }
 
+        @Override
         public void setAccessibleIconDescription(String description) {
             ArrowIcon.this.setDescription(description);
         }
 
+        @Override
         public int getAccessibleIconHeight() {
             return ArrowIcon.this.getIconHeight();
         }
 
+        @Override
         public int getAccessibleIconWidth() {
             return ArrowIcon.this.getIconWidth();
         }

@@ -32,6 +32,7 @@ final class OrderingPropertiesPage extends ScrollablePropertiesPage
     }
 
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 

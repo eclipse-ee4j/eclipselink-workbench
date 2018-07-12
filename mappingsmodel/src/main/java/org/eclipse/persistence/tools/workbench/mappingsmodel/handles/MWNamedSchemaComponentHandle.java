@@ -79,6 +79,7 @@ public final class MWNamedSchemaComponentHandle
         this.component = component;
     }
 
+    @Override
     protected Node node() {
         return getComponent();
     }
@@ -88,6 +89,7 @@ public final class MWNamedSchemaComponentHandle
         return this;
     }
 
+    @Override
     public void resolveMetadataHandles() {
         super.resolveMetadataHandles();
 
@@ -122,10 +124,12 @@ public final class MWNamedSchemaComponentHandle
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER field should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.component.compareTo(((MWNamedSchemaComponentHandle) o).component);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.component.getName());
     }

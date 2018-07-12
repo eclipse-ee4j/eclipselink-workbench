@@ -91,9 +91,11 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
 
     protected PropertyChangeListener buildBooleanChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ToggleButtonModelAdapter.this.booleanChanged(e);
             }
+            @Override
             public String toString() {
                 return "boolean listener";
             }
@@ -107,6 +109,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to update the underlying model if necessary.
      * @see javax.swing.ButtonModel#setSelected(boolean)
      */
+    @Override
     public void setSelected(boolean b) {
         if (this.isSelected() != b) {    // stop the recursion!
             super.setSelected(b);//put the super call first, otherwise the following gets called twice
@@ -118,6 +121,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to start listening to the underlying model if necessary.
      * @see javax.swing.ButtonModel#addActionListener(java.awt.event.ActionListener)
      */
+    @Override
     public void addActionListener(ActionListener l) {
         if (this.hasNoListeners()) {
             this.engageModel();
@@ -129,6 +133,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to stop listening to the underlying model if appropriate.
      * @see javax.swing.ButtonModel#removeActionListener(java.awt.event.ActionListener)
      */
+    @Override
     public void removeActionListener(ActionListener l) {
         super.removeActionListener(l);
         if (this.hasNoListeners()) {
@@ -140,6 +145,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to start listening to the underlying model if necessary.
      * @see java.awt.ItemSelectable#addItemListener(java.awt.event.ItemListener)
      */
+    @Override
     public void addItemListener(ItemListener l) {
         if (this.hasNoListeners()) {
             this.engageModel();
@@ -151,6 +157,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to stop listening to the underlying model if appropriate.
      * @see java.awt.ItemSelectable#removeItemListener(java.awt.event.ItemListener)
      */
+    @Override
     public void removeItemListener(ItemListener l) {
         super.removeItemListener(l);
         if (this.hasNoListeners()) {
@@ -162,6 +169,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to start listening to the underlying model if necessary.
      * @see javax.swing.ButtonModel#addChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void addChangeListener(ChangeListener l) {
         if (this.hasNoListeners()) {
             this.engageModel();
@@ -173,6 +181,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
      * Extend to stop listening to the underlying model if appropriate.
      * @see javax.swing.ButtonModel#removeChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void removeChangeListener(ChangeListener l) {
         super.removeChangeListener(l);
         if (this.hasNoListeners()) {
@@ -228,6 +237,7 @@ public class ToggleButtonModelAdapter extends ToggleButtonModel {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.booleanHolder);
     }

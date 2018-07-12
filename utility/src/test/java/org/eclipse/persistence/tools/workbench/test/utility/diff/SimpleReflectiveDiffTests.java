@@ -34,16 +34,19 @@ public class SimpleReflectiveDiffTests extends AbstractReflectiveDiffTests {
         super(name);
     }
 
+    @Override
     protected Differentiator buildDifferentiator() {
         ReflectiveDifferentiator result = new ReflectiveDifferentiator(SimpleEmployee.class);
         result.addKeyFieldNamed("id");
         return result;
     }
 
+    @Override
     protected Employee buildEmployee(int id, String name) {
         return new SimpleEmployee(id, name);
     }
 
+    @Override
     protected ReflectiveDifferentiator employeeDifferentiator() {
         return (ReflectiveDifferentiator) this.differentiator;
     }

@@ -55,6 +55,7 @@ public class Pane extends AccessibleTitledPanel
     * @param enabled <code>true<code> if this component and its children should
     * be enabled, <code>false<code> otherwise
     */
+    @Override
     public final void setEnabled(boolean enabled)
     {
         if (isEnabled() == enabled)

@@ -30,6 +30,7 @@ public final class OneToManyMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_ONE_TO_MANY_MAPPING_NODE";
     }
@@ -37,16 +38,19 @@ public final class OneToManyMappingNode extends MappingNode {
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".oneToMany";
     }
 
+    @Override
     protected String buildIconKey() {
         return ((MWOneToManyMapping) getMapping()).iconKey();
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return OneToManyMappingTabbedPropertiesPage.class;
     }

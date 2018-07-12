@@ -29,6 +29,7 @@ public final class MapAsDirectMapAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.directMap");
@@ -39,14 +40,17 @@ public final class MapAsDirectMapAction
 
     // ************ ChangeMappingTypeAction implementation ***********
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return (MWMapping) mapping.asMWDirectMapMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return (MWMapping) descriptor.addDirectMapMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWDirectMapMapping.class;
     }

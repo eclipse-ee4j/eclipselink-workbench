@@ -28,6 +28,7 @@ public final class OracleHelpAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -35,6 +36,7 @@ public final class OracleHelpAction extends AbstractFrameworkAction {
         this.initializeToolTipText("HELP.tooltip");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         this.helpManager().showTopic(selectedNode.helpTopicID());
     }

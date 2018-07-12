@@ -59,11 +59,13 @@ public final class ExplicitAttributeDeclaration
 
     // **************** Initialization ****************************************
 
+    @Override
     protected /* private-protected */ void initialize(Node parent) {
         super.initialize(parent);
         this.type = new ReferencedSimpleTypeDefinition(this, "anySimpleType", XMLConstants.W3C_XML_SCHEMA_NS_URI);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.type);
@@ -72,18 +74,22 @@ public final class ExplicitAttributeDeclaration
 
     // **************** MWAttributeDeclaration contract ***********************
 
+    @Override
     public MWSimpleTypeDefinition getType() {
         return this.type;
     }
 
+    @Override
     public String getDefaultValue() {
         return this.defaultValue;
     }
 
+    @Override
     public String getFixedValue() {
         return this.fixedValue;
     }
 
+    @Override
     public String getUse() {
         return this.use;
     }
@@ -91,10 +97,12 @@ public final class ExplicitAttributeDeclaration
 
     // **************** MWXpathableSchemaComponent contract *******************
 
+    @Override
     public int getMaxOccurs() {
         return 1;
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return this.type.baseBuiltInTypes();
     }
@@ -102,22 +110,27 @@ public final class ExplicitAttributeDeclaration
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return true;
     }
 
+    @Override
     public String contextTypeQname() {
         return this.type.contextTypeQname();
     }
 
+    @Override
     public boolean containsText() {
         return false;
     }
 
+    @Override
     public boolean containsWildcard() {
         return false;
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         // no elements in an attribute
         return 0;
@@ -126,6 +139,7 @@ public final class ExplicitAttributeDeclaration
 
     // **************** MWNamedSchemaComponent contract ***********************
 
+    @Override
     public String componentTypeName() {
         return "attribute";
     }
@@ -134,6 +148,7 @@ public final class ExplicitAttributeDeclaration
     // **************** MWSchemaComponent contract ****************************
 
     /** Attribute declarations have no subcomponents. */
+    @Override
     public Iterator structuralComponents() {
         return NullIterator.instance();
     }
@@ -141,6 +156,7 @@ public final class ExplicitAttributeDeclaration
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject xsAttrUse) {
         XSAttributeUseImpl attributeUseImpl = null;
         XSAttributeDecl attributeDecl = null;
@@ -184,6 +200,7 @@ public final class ExplicitAttributeDeclaration
         }
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
         this.type.resolveReferences();

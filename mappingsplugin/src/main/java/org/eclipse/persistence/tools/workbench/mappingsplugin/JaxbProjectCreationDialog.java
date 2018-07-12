@@ -63,6 +63,7 @@ public final class JaxbProjectCreationDialog
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -125,6 +126,7 @@ public final class JaxbProjectCreationDialog
      */
     private PropertyChangeListener buildInterfacePackageNameListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 String oldInterfacePackageName = (String) evt.getOldValue();
                 String newInterfacePackageName = (String) evt.getNewValue();
@@ -139,16 +141,19 @@ public final class JaxbProjectCreationDialog
 
     private PropertyChangeListener buildGeneralSettingChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 JaxbProjectCreationDialog.this.updateOKAction();
             }
         };
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.newJaxbProjectDialog";
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -308,10 +313,12 @@ public final class JaxbProjectCreationDialog
 
     private FileFilter buildXsdFileFilter() {
         return new FileFilter() {
+            @Override
             public boolean accept(File f) {
                 return (f.isDirectory() || this.validSchemaExtension(f));
             }
 
+            @Override
             public String getDescription() {
                 return resourceRepository().getString("XSD_FILE_FILTER");
             }
@@ -348,10 +355,12 @@ public final class JaxbProjectCreationDialog
 
     private FileFilter buildXmlFileFilter() {
         return new FileFilter() {
+            @Override
             public boolean accept(File f) {
                 return (f.isDirectory() || this.validXmlExtension(f));
             }
 
+            @Override
             public String getDescription() {
                 return resourceRepository().getString("XML_FILE_FILTER");
             }
@@ -364,6 +373,7 @@ public final class JaxbProjectCreationDialog
 
     protected ActionListener buildFileBrowseAction(final PropertyValueModel fileValue, final FileFilter fileFilter) {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent  e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileFilter(fileFilter);
@@ -697,6 +707,7 @@ public final class JaxbProjectCreationDialog
 
     private ActionListener  buildDirectoryBrowseAction(final PropertyValueModel fileValue) {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent  e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -725,6 +736,7 @@ public final class JaxbProjectCreationDialog
         this.getOKAction().setEnabled(enabled);
     }
 
+    @Override
     protected boolean preConfirm() {
         // *** validate input schema file ***
         //

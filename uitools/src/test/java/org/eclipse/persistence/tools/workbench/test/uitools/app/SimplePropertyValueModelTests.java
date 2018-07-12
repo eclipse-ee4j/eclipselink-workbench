@@ -39,11 +39,13 @@ public class SimplePropertyValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.objectHolder = new SimplePropertyValueModel("foo");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -88,6 +90,7 @@ public class SimplePropertyValueModelTests extends TestCase {
 
     private PropertyChangeListener buildListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 SimplePropertyValueModelTests.this.event = e;
             }

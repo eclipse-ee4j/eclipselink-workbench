@@ -63,6 +63,7 @@ public final class GlobalAWTExceptionHandler
      * First, restore the cursor; then broadcast the exception.
      * @see AWTExceptionHandler.GlobalHandler#handle(Throwable)
      */
+    @Override
     public synchronized void handle(Throwable t) {
         this.restoreDefaultCursor();
         this.broadcaster.broadcast(Thread.currentThread(), t);
@@ -87,6 +88,7 @@ public final class GlobalAWTExceptionHandler
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

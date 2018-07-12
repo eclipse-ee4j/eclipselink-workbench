@@ -58,6 +58,7 @@ public class ExceptionDialog extends AbstractDialog {
      * The main panel merely consists of a label or two.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildMainPanel()
      */
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridLayout(0, 1));
 
@@ -76,6 +77,7 @@ public class ExceptionDialog extends AbstractDialog {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#helpTopicId()
      */
+    @Override
     protected String helpTopicId() {
         return "dialog.unexpectedError";
     }
@@ -84,6 +86,7 @@ public class ExceptionDialog extends AbstractDialog {
      * Allow the user to see the stack trace.
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildCustomActions()
      */
+    @Override
     protected Iterator buildCustomActions() {
         Action stackTraceAction = this.buildStackTraceAction();
         return new SingleElementIterator(stackTraceAction);
@@ -91,6 +94,7 @@ public class ExceptionDialog extends AbstractDialog {
 
     private Action buildStackTraceAction() {
         return new AbstractAction(this.buildStackTraceText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ExceptionDialog.this.displayStackTrace();
             }

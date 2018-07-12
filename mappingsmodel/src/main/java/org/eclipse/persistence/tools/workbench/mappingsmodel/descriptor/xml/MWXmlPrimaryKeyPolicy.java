@@ -21,7 +21,6 @@ import java.util.Vector;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAbstractTransactionalPolicy;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.schema.MWSchemaContextComponent;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlField;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlNode;
@@ -63,11 +62,13 @@ public final class MWXmlPrimaryKeyPolicy
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.primaryKeys = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.primaryKeys) { children.addAll(this.primaryKeys); }
@@ -92,6 +93,7 @@ public final class MWXmlPrimaryKeyPolicy
     /** Return an iterator of the string xpaths used as primary keys */
     public Iterator primaryKeyXpaths() {
         return new TransformationIterator(this.primaryKeys()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWXmlField) next).getXpath();
             }
@@ -120,6 +122,7 @@ public final class MWXmlPrimaryKeyPolicy
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
@@ -128,20 +131,24 @@ public final class MWXmlPrimaryKeyPolicy
         return (MWXmlDescriptor)getParent().getParent();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -151,6 +158,7 @@ public final class MWXmlPrimaryKeyPolicy
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         for (Iterator stream = this.primaryKeys(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).resolveXpaths();
@@ -158,6 +166,7 @@ public final class MWXmlPrimaryKeyPolicy
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         for (Iterator stream = this.primaryKeys(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).schemaChanged(change);
@@ -197,6 +206,7 @@ public final class MWXmlPrimaryKeyPolicy
 
     private Iterator specifiedPrimaryKeys() {
         return new FilteringIterator(this.primaryKeys()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWXmlField) o).isSpecified();
             }

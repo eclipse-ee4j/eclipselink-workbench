@@ -71,6 +71,7 @@ public class AssociationTextFieldTreeCellRenderer extends TextFieldTreeCellRende
 
     // ********** API used by the cell editor **********
 
+    @Override
     protected Object getValue() {
         return this.association;
     }
@@ -85,6 +86,7 @@ public class AssociationTextFieldTreeCellRenderer extends TextFieldTreeCellRende
     /**
      * The label is determined by the association's key.
      */
+    @Override
     protected void setValue(Object value) {
         this.association = (Association) value;
         this.setLabelText(this.buildLabelText(value));

@@ -53,6 +53,7 @@ abstract class AbstractAutomapVerifier extends TestCase
     }
 
     protected class AggregateMappingInfo implements MappingInfo {
+        @Override
         public void verifyMapping(MWMapping mapping) {
             // Make sure the Mapping is a AggregateMapping
             assertTrue(mapping.getParentDescriptor().getName() + "." + mapping.getName() + "is not a aggregate mapping",
@@ -74,6 +75,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             this.directValueColumnName = directValueColumnName;
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             this.verifyDirectCollectionMapping(mapping);
         }
@@ -145,6 +147,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             }
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             verifyDirectMapping(mapping);
         }
@@ -246,6 +249,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             }
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             super.verifyMapping(mapping);
             verifyManyToManyMapping(mapping);
@@ -260,6 +264,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             this.mappingInfoTable = mappingInfoTable;
         }
 
+        @Override
         public void verifyDescriptor(MWDescriptor descriptor) {
             verifyMappingDescription(descriptor);
         }
@@ -286,12 +291,14 @@ abstract class AbstractAutomapVerifier extends TestCase
     }
 
     protected final class ProhibitedMappingInfo implements MappingInfo {
+        @Override
         public void verifyMapping(MWMapping mapping) {
             fail("This mapping should not have been mapped: " + mapping.getParentDescriptor().getName() + "." + mapping.getName());
         }
     }
 
     protected final class NullMappingInfo implements MappingInfo {
+        @Override
         public void verifyMapping(MWMapping mapping) {
             // Let this test pass
         }
@@ -302,6 +309,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             super(referenceDescriptorName, referenceName);
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             super.verifyMapping(mapping);
             verifyOneToManyMapping(mapping);
@@ -357,6 +365,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             super(referenceDescriptorName, referenceName);
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             super.verifyMapping(mapping);
             verifyOneToOneMapping(mapping);
@@ -377,6 +386,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             this.referenceDescriptorName = referenceDescriptorName;
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             verifyReferenceMapping(mapping);
         }
@@ -415,6 +425,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             this.primaryTableNames = primaryTableNames;
         }
 
+        @Override
         public void verifyDescriptor(MWDescriptor descriptor) {
             super.verifyDescriptor(descriptor);
             verifyTableDescriptor(descriptor);
@@ -465,6 +476,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             this.referenceName = referenceName;
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             super.verifyMapping(mapping);
             verifyTableReferenceMapping(mapping);
@@ -537,6 +549,7 @@ abstract class AbstractAutomapVerifier extends TestCase
             this.classIndicatorFieldName = classIndicatorFieldName;
         }
 
+        @Override
         public void verifyMapping(MWMapping mapping) {
             super.verifyMapping(mapping);
             verifyVariableOneToOneMapping(mapping);

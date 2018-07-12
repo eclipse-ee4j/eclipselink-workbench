@@ -59,6 +59,7 @@ public abstract class SequenceAdapter extends SCAdapter implements Nominative {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         return new SequenceConfig();
@@ -66,6 +67,7 @@ public abstract class SequenceAdapter extends SCAdapter implements Nominative {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getName() {
 
         return this.sequence().getName();
@@ -95,11 +97,13 @@ public abstract class SequenceAdapter extends SCAdapter implements Nominative {
         firePropertyChanged(PREALLOCATION_SIZE_PROPERTY, old, size);
     }
 
+    @Override
     public String displayString() {
 
         return this.getName();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( this.getName());

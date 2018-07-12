@@ -30,6 +30,7 @@ public final class AggregateMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_AGGREGATE_MAPPING_NODE";
     }
@@ -38,16 +39,19 @@ public final class AggregateMappingNode extends MappingNode {
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".aggregate";
     }
 
+    @Override
     protected String buildIconKey() {
         return "mapping.aggregate";
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return AggregateMappingTabbedPropertiesPage.class;
     }

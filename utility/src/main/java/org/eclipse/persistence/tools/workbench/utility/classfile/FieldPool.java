@@ -113,6 +113,7 @@ public class FieldPool implements Member.Pool {
         }
     }
 
+    @Override
     public ClassFile getClassFile() {
         return this.classFile;
     }
@@ -129,6 +130,7 @@ public class FieldPool implements Member.Pool {
         return this.fields;
     }
 
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.count + " field(s))";
     }

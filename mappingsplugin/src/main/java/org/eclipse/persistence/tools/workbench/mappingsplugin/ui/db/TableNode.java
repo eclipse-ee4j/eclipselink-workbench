@@ -45,6 +45,7 @@ public final class TableNode extends MappingsApplicationNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public String helpTopicID() {
         return "table";
     }
@@ -52,6 +53,7 @@ public final class TableNode extends MappingsApplicationNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return TableTabbedPropertiesPage.class;
     }
@@ -59,14 +61,17 @@ public final class TableNode extends MappingsApplicationNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     public String buildIconKey() {
         return "table";
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return TABLE_DISPLAY_STRING_PROPERTY_NAMES;
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         WorkbenchContext localContext = this.buildLocalWorkbenchContext(workbenchContext);
 
@@ -91,6 +96,7 @@ public final class TableNode extends MappingsApplicationNode
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         WorkbenchContext localContext = this.buildLocalWorkbenchContext(workbenchContext);
 
@@ -149,10 +155,12 @@ public final class TableNode extends MappingsApplicationNode
 
     // ********** Removable iplementation **********
 
+    @Override
     public String getName() {
         return getTable().getName();
     }
 
+    @Override
     public void remove() {
         getTable().getDatabase().removeTable(getTable());
     }

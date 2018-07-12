@@ -36,6 +36,7 @@ public class XMLToolsReadTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.testDocument = this.buildTestDocument();
@@ -81,6 +82,7 @@ public class XMLToolsReadTests extends TestCase {
         return sb.toString();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

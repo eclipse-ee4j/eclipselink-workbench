@@ -51,10 +51,12 @@ final class EmptySelectionPseudoNode
 
     // ********** AbstractTreeNodeValueModel overrides **********
 
+    @Override
     public boolean equals(Object o) {
         return this == o;
     }
 
+    @Override
     public int hashCode() {
         return System.identityHashCode(this);
     }
@@ -67,6 +69,7 @@ final class EmptySelectionPseudoNode
      * willy-nilly on a collection of heterogeneous nodes - narrow
      * down the collection to the relevant nodes  ~bjv
      */
+    @Override
     public Object getValue() {
         throw new UnsupportedOperationException();
     }
@@ -75,13 +78,16 @@ final class EmptySelectionPseudoNode
      * the problems view will want to listen to our list of problems,
      * but we don't have any
      */
+    @Override
     protected void engageValueBranchProblems() {
         // do nothing since we don't have a value
     }
+    @Override
     protected void disengageValueBranchProblems() {
         // do nothing since we don't have a value
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append("[empty]");
     }
@@ -89,10 +95,12 @@ final class EmptySelectionPseudoNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         throw new UnsupportedOperationException();
     }
@@ -100,10 +108,12 @@ final class EmptySelectionPseudoNode
 
     // ********** EditorNode implementation **********
 
+    @Override
     public Component propertiesPage(WorkbenchContext workbenchContext) {
         return this.emptyPropertiesPage;
     }
 
+    @Override
     public void releasePropertiesPage(Component propertiesPage) {
         // do nothing
     }

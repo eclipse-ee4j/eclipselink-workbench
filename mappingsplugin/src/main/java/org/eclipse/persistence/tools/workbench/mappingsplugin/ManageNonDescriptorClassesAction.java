@@ -27,6 +27,7 @@ public final class ManageNonDescriptorClassesAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -34,6 +35,7 @@ public final class ManageNonDescriptorClassesAction
         this.initializeToolTipText("MANAGE_NON_DESCRIPTOR_CLASSES.toolTipText");
     }
 
+    @Override
     protected void execute() {
         // The assumption is that there is only one project node upon which to execute
         MWProject project = (MWProject) this.selectedNodes()[0].getProjectRoot().getValue();
@@ -42,6 +44,7 @@ public final class ManageNonDescriptorClassesAction
         dialog.show();
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return this.navigatorSelectionModel().getSelectedProjectNodes().length == 1;
     }

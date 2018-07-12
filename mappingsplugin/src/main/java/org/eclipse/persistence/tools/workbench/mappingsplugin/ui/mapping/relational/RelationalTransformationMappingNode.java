@@ -31,6 +31,7 @@ public final class RelationalTransformationMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_TRANSFORMATION_MAPPING_NODE";
     }
@@ -38,11 +39,13 @@ public final class RelationalTransformationMappingNode
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
 //        return this.getDescriptorNode().mappingHelpTopicPrefix() + ".transformation";
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".transformation.relational"; // For 10.1.3
     }
 
+    @Override
     protected String buildIconKey() {
         return getMapping().iconKey();
     }
@@ -50,6 +53,7 @@ public final class RelationalTransformationMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return RelationalTransformationMappingPropertiesPage.class;
     }

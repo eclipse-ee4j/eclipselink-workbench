@@ -91,7 +91,8 @@ public Employee()
  * For bi-directional relationships, it is important to maintain both sides of the relationship when changing it.
  */
 
-public void addManagedEmployee(EmployeeInterface employee)
+    @Override
+    public void addManagedEmployee(EmployeeInterface employee)
 {
       getManagedEmployees().addElement(employee);
       employee.setManager(this);
@@ -100,16 +101,19 @@ public void addManagedEmployee(EmployeeInterface employee)
  * For bi-directional relationships, it is important to maintain both sides of the relationship when changing it.
  */
 
-public void addPhoneNumber(PhoneNumber phoneNumber)
+    @Override
+    public void addPhoneNumber(PhoneNumber phoneNumber)
 {
     getPhoneNumbers().addElement(phoneNumber);
     phoneNumber.setOwner(this);
 }
-public void addProject(ProjectInterface project)
+    @Override
+    public void addProject(ProjectInterface project)
 {
       getProjects().addElement(project);
 }
-public void addResponsibility(String responsibility)
+    @Override
+    public void addResponsibility(String responsibility)
 {
       getResponsibilitiesList().addElement(responsibility);
 }
@@ -133,7 +137,8 @@ public Time[] buildNormalHours(Record row, Session session)
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public Address getAddress()
+    @Override
+    public Address getAddress()
 {
     return (Address) address.getValue();
 }
@@ -141,15 +146,18 @@ public Address getAddress()
  *    Return the last element of the Transformation mapped normalHours.
  */
 
-public Time getEndTime()
+    @Override
+    public Time getEndTime()
 {
     return getNormalHours()[1];
 }
-public String getFirstName()
+    @Override
+    public String getFirstName()
 {
     return firstName;
 }
-public String getGender()
+    @Override
+    public String getGender()
 {
     return gender;
 }
@@ -157,11 +165,13 @@ public String getGender()
  * Return the persistent identifier of the receiver.
  */
 
-public BigDecimal getId()
+    @Override
+    public BigDecimal getId()
 {
     return id;
 }
-public String getLastName() {
+    @Override
+    public String getLastName() {
     return lastName;
 }
 /**
@@ -169,7 +179,8 @@ public String getLastName() {
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public Vector getManagedEmployees()
+    @Override
+    public Vector getManagedEmployees()
 {
     return (Vector) managedEmployees.getValue();
 }
@@ -178,15 +189,18 @@ public Vector getManagedEmployees()
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public EmployeeInterface getManager()
+    @Override
+    public EmployeeInterface getManager()
 {
     return (EmployeeInterface) manager.getValue();
 }
-public Time[] getNormalHours()
+    @Override
+    public Time[] getNormalHours()
 {
     return normalHours;
 }
-public EmploymentPeriod getPeriod()
+    @Override
+    public EmploymentPeriod getPeriod()
 {
     return period;
 }
@@ -195,7 +209,8 @@ public EmploymentPeriod getPeriod()
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public Vector getPhoneNumbers()
+    @Override
+    public Vector getPhoneNumbers()
 {
     return (Vector) phoneNumbers.getValue();
 }
@@ -204,7 +219,8 @@ public Vector getPhoneNumbers()
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public Vector getProjects()
+    @Override
+    public Vector getProjects()
 {
     return (Vector) projects.getValue();
 }
@@ -213,11 +229,13 @@ public Vector getProjects()
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public Vector getResponsibilitiesList()
+    @Override
+    public Vector getResponsibilitiesList()
 {
     return (Vector) responsibilitiesList.getValue();
 }
-public int getSalary()
+    @Override
+    public int getSalary()
 {
     return salary;
 }
@@ -225,7 +243,8 @@ public int getSalary()
  *    Return the first element of the Transformation mapped normalHours.
  */
 
-public java.sql.Time getStartTime()
+    @Override
+    public java.sql.Time getStartTime()
 {
     return getNormalHours()[0];
 }
@@ -233,7 +252,8 @@ public java.sql.Time getStartTime()
  * For bi-directional relationships, it is important to maintain both sides of the relationship when changing it.
  */
 
-public void removeManagedEmployee(EmployeeInterface employee)
+    @Override
+    public void removeManagedEmployee(EmployeeInterface employee)
 {
       getManagedEmployees().removeElement(employee);
     employee.setManager(null);
@@ -245,15 +265,18 @@ public void removeManagedEmployee(EmployeeInterface employee)
  * Only in independent relationships should you null out the back reference.
  */
 
-public void removePhoneNumber(PhoneNumber phoneNumber)
+    @Override
+    public void removePhoneNumber(PhoneNumber phoneNumber)
 {
     getPhoneNumbers().removeElement(phoneNumber);
 }
-public void removeProject(ProjectInterface project)
+    @Override
+    public void removeProject(ProjectInterface project)
 {
       getProjects().removeElement(project);
 }
-public void removeResponsibility(String responsibility)
+    @Override
+    public void removeResponsibility(String responsibility)
 {
       getResponsibilitiesList().removeElement(responsibility);
 }
@@ -262,7 +285,8 @@ public void removeResponsibility(String responsibility)
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public void setAddress(Address address)
+    @Override
+    public void setAddress(Address address)
 {
     this.address.setValue(address);
 }
@@ -270,19 +294,23 @@ public void setAddress(Address address)
  *    Set the last element of the Transformation mapped normalHours.
  */
 
-public void setEndTime(Time endTime)
+    @Override
+    public void setEndTime(Time endTime)
 {
     getNormalHours()[1] = endTime;
 }
-public void setFemale()
+    @Override
+    public void setFemale()
 {
     setGender("Female");
 }
-public void setFirstName(String firstName)
+    @Override
+    public void setFirstName(String firstName)
 {
     this.firstName = firstName;
 }
-public void setGender(String gender)
+    @Override
+    public void setGender(String gender)
 {
     this.gender = gender;
 }
@@ -297,11 +325,13 @@ public void setId(BigDecimal id)
 {
     this.id = id;
 }
-public void setLastName(String lastName)
+    @Override
+    public void setLastName(String lastName)
 {
     this.lastName = lastName;
 }
-public void setMale()
+    @Override
+    public void setMale()
 {
     setGender("Male");
 }
@@ -310,7 +340,8 @@ public void setMale()
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public void setManagedEmployees(Vector managedEmployees)
+    @Override
+    public void setManagedEmployees(Vector managedEmployees)
 {
     this.managedEmployees.setValue(managedEmployees);
 }
@@ -320,15 +351,18 @@ public void setManagedEmployees(Vector managedEmployees)
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public void setManager(EmployeeInterface manager)
+    @Override
+    public void setManager(EmployeeInterface manager)
 {
     this.manager.setValue(manager);
 }
-public void setNormalHours(Time[] normalHours)
+    @Override
+    public void setNormalHours(Time[] normalHours)
 {
     this.normalHours = normalHours;
 }
-public void setPeriod(EmploymentPeriod period)
+    @Override
+    public void setPeriod(EmploymentPeriod period)
 {
     this.period = period;
 }
@@ -337,7 +371,8 @@ public void setPeriod(EmploymentPeriod period)
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public void setPhoneNumbers(Vector phoneNumbers)
+    @Override
+    public void setPhoneNumbers(Vector phoneNumbers)
 {
     this.phoneNumbers.setValue(phoneNumbers);
 }
@@ -346,7 +381,8 @@ public void setPhoneNumbers(Vector phoneNumbers)
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public void setProjects(Vector projects)
+    @Override
+    public void setProjects(Vector projects)
 {
     this.projects.setValue(projects);
 }
@@ -355,11 +391,13 @@ public void setProjects(Vector projects)
  * The get/set methods must however be changed to wrap/unwrap the value holder.
  */
 
-public void setResponsibilitiesList(Vector responsibilitiesList)
+    @Override
+    public void setResponsibilitiesList(Vector responsibilitiesList)
 {
     this.responsibilitiesList.setValue(responsibilitiesList);
 }
-public void setSalary(int salary)
+    @Override
+    public void setSalary(int salary)
 {
     this.salary = salary;
 }
@@ -367,7 +405,8 @@ public void setSalary(int salary)
  *    Set the first element of the Transformation mapped normalHours.
  */
 
-public void setStartTime(Time startTime)
+    @Override
+    public void setStartTime(Time startTime)
 {
     getNormalHours()[0] = startTime;
 }

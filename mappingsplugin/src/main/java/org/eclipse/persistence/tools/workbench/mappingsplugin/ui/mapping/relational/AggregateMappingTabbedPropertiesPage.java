@@ -41,6 +41,7 @@ final class AggregateMappingTabbedPropertiesPage extends TabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(new AggregateMappingPanel(getNodeHolder(), getWorkbenchContextHolder()), "AGGREGATE_MAPPING_GENERAL_TAB");
         addTab(buildInAggregateDescriptorValueModel(), DEFAULT_WEIGHT, buildFieldsPageBuilder(),"AGGREGATE_MAPPING_FIELDS_TAB");
@@ -52,6 +53,7 @@ final class AggregateMappingTabbedPropertiesPage extends TabbedPropertiesPage {
         return new ComponentBuilder() {
             private AggregateMappingColumnsPanel aggregateMappingFieldsPanel;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder) {
                 if (aggregateMappingFieldsPanel == null) {
                     aggregateMappingFieldsPanel = new AggregateMappingColumnsPanel(nodeHolder, getWorkbenchContextHolder());
@@ -63,6 +65,7 @@ final class AggregateMappingTabbedPropertiesPage extends TabbedPropertiesPage {
 
     private PropertyValueModel buildInAggregateDescriptorValueModel() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object buildValue() {
                 if (subject == null) {
                     return Boolean.FALSE;
@@ -70,6 +73,7 @@ final class AggregateMappingTabbedPropertiesPage extends TabbedPropertiesPage {
                 return this.getValueFromSubject();
             }
 
+            @Override
             protected Object getValueFromSubject() {
                 if (((MWAggregateMapping) subject).parentDescriptorIsAggregate()) {
                     return Boolean.FALSE;

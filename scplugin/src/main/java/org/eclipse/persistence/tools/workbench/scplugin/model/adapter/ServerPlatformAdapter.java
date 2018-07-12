@@ -63,6 +63,7 @@ public abstract class ServerPlatformAdapter extends SCAdapter {
     /**
      * Initializes default values.
      */
+    @Override
     protected void initializeDefaults() {
 
         super.initializeDefaults();

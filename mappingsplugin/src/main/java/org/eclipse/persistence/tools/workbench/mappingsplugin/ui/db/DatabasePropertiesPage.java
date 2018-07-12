@@ -64,7 +64,6 @@ import org.eclipse.persistence.tools.workbench.uitools.app.swing.ListModelAdapte
 import org.eclipse.persistence.tools.workbench.uitools.app.swing.ObjectListSelectionModel;
 import org.eclipse.persistence.tools.workbench.uitools.cell.SimpleListCellRenderer;
 import org.eclipse.persistence.tools.workbench.utility.NameTools;
-import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
 
@@ -92,6 +91,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
         return "database";
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -103,6 +103,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
         JButton changePlatformButton = this.buildButton("CHANGE_DATABASE_PLATFORM_BUTTON_TEXT");
         changePlatformButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DatabasePropertiesPage.this.promptToChangePlatform();
             }
@@ -294,6 +295,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private PropertyValueModel buildPlatformNameHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWDatabase.DATABASE_PLATFORM_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDatabase) this.subject).getDatabasePlatform().getName();
             }
@@ -383,9 +385,11 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private CollectionValueModel buildLoginSpecsAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder(), MWDatabase.LOGIN_SPECS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWDatabase) this.subject).loginSpecs();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWDatabase) this.subject).loginSpecsSize();
             }
@@ -394,6 +398,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private ListCellRenderer buildLoginSpecCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 // need null check for combo-box
                 return (value == null) ? "" : ((MWLoginSpec) value).getName();
@@ -409,6 +414,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private ListSelectionListener buildLoginSpecListSelectionListener(final ObjectListSelectionModel loginSpecListSelectionModel, final PropertyValueModel loginSpecHolder) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -420,6 +426,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private ListSelectionListener buildLoginSpecListSelectionListener(final JButton button) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -433,6 +440,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private ActionListener buildAddButtonActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DatabasePropertiesPage.this.addLoginSpec();
             }
@@ -468,6 +476,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private ActionListener buildRemoveButtonActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DatabasePropertiesPage.this.removeLoginSpec();
             }
@@ -492,6 +501,7 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private ActionListener buildRenameButtonActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 DatabasePropertiesPage.this.renameLoginSpec();
             }
@@ -533,9 +543,11 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private CollectionValueModel buildAllLoginsAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder(), MWDatabase.LOGIN_SPECS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWDatabase) this.subject).loginSpecs();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWDatabase) this.subject).loginSpecsSize();
             }
@@ -544,9 +556,11 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private PropertyValueModel buildDevelopmentLoginAdapter() {
         PropertyValueModel adapter = new PropertyAspectAdapter(this.getSelectionHolder(), MWDatabase.DEVELOPMENT_LOGIN_SPEC_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDatabase) this.subject).getDevelopmentLoginSpec();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDatabase) this.subject).setDevelopmentLoginSpec((MWLoginSpec) value);
             }
@@ -567,9 +581,11 @@ public class DatabasePropertiesPage extends TitledPropertiesPage {
 
     private PropertyValueModel buildDeploymentLoginAdapter() {
         PropertyValueModel adapter = new PropertyAspectAdapter(this.getSelectionHolder(), MWDatabase.DEPLOYMENT_LOGIN_SPEC_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDatabase) this.subject).getDeploymentLoginSpec();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDatabase) this.subject).setDeploymentLoginSpec((MWLoginSpec) value);
             }

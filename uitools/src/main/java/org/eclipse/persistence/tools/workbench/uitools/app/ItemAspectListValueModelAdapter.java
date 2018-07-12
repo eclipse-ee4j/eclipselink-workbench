@@ -74,6 +74,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.counters = new IdentityHashMap();
@@ -85,6 +86,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return this.listHolder.getValue();
     }
@@ -95,6 +97,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#addItem(int, Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         this.listHolder.addItem(index, item);
     }
@@ -102,6 +105,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#addItems(int, java.util.List)
      */
+    @Override
     public void addItems(int index, List items) {
         this.listHolder.addItems(index, items);
     }
@@ -109,6 +113,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         return this.listHolder.removeItem(index);
     }
@@ -116,6 +121,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         return this.listHolder.removeItems(index, length);
     }
@@ -123,6 +129,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#replaceItem(int, Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         return this.listHolder.replaceItem(index, item);
     }
@@ -130,6 +137,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#replaceItems(int, java.util.List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         return this.listHolder.replaceItems(index, items);
     }
@@ -137,6 +145,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         return this.listHolder.getItem(index);
     }
@@ -144,6 +153,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.listHolder.size();
     }
@@ -154,6 +164,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * Start listening to the list holder and the items in the list.
      */
+    @Override
     protected void engageModel() {
         super.engageModel();
         this.engageAllItems();
@@ -188,6 +199,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
     /**
      * Stop listening to the list holder and the items in the list.
      */
+    @Override
     protected void disengageModel() {
         this.disengageAllItems();
         super.disengageModel();
@@ -228,6 +240,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
      * Items were added to the wrapped list holder.
      * Forward the event and begin listening to the added items.
      */
+    @Override
     protected void itemsAdded(ListChangeEvent e) {
         // re-fire event with the wrapper as the source
         this.fireItemsAdded(e.cloneWithSource(this, VALUE));
@@ -238,6 +251,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
      * Items were removed from the wrapped list holder.
      * Stop listening to the removed items and forward the event.
      */
+    @Override
     protected void itemsRemoved(ListChangeEvent e) {
         this.disengageItems(e.items());
         // re-fire event with the wrapper as the source
@@ -249,6 +263,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
      * Stop listening to the removed items, forward the event,
      * and begin listening to the added items.
      */
+    @Override
     protected void itemsReplaced(ListChangeEvent e) {
         this.disengageItems(e.replacedItems());
         // re-fire event with the wrapper as the source
@@ -260,6 +275,7 @@ public abstract class ItemAspectListValueModelAdapter extends ListValueModelWrap
      * The wrapped list holder has changed in some dramatic fashion.
      * Reconfigure our listeners and forward the event.
      */
+    @Override
     protected void listChanged(ListChangeEvent e) {
         // we should only need to disengage each item once...
         // make a copy to prevent a ConcurrentModificationException

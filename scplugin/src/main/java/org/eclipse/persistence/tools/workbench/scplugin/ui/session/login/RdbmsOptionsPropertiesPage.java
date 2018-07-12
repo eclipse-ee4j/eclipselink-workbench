@@ -19,7 +19,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Collection;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
@@ -38,7 +37,6 @@ import org.eclipse.persistence.tools.workbench.framework.uitools.SwingComponentF
 import org.eclipse.persistence.tools.workbench.framework.uitools.SwingTools;
 import org.eclipse.persistence.tools.workbench.framework.uitools.TriStateBooleanCellRendererAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseLoginAdapter;
-import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
 import org.eclipse.persistence.tools.workbench.uitools.app.CollectionValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
@@ -210,14 +208,17 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     private CellRendererAdapter buildBatchWritingLabelDecorator()
     {
         return new TriStateBooleanCellRendererAdapter(resourceRepository()) {
+            @Override
             protected String undefinedResourceKey() {
                 return "LOGIN_BATCH_WRITING_NONE_CHOICE";
             }
 
+            @Override
             protected String trueResourceKey() {
                 return "LOGIN_BATCH_WRITING_JDBC_CHOICE";
             }
 
+            @Override
             protected String falseResourceKey() {
                 return "LOGIN_BATCH_WRITING_BUFFERED_CHOICE";
             }
@@ -240,6 +241,7 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
 
         return new PropertyAspectAdapter(getSelectionHolder(), propertyNames)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -251,6 +253,7 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
                 return TriStateBoolean.valueOf(login.usesJdbcBatchWriting());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -395,12 +398,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.BYTE_ARRAY_BINDING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.usesByteArrayBinding());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -431,12 +436,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.CACHE_ALL_STATEMENTS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.cachesAllStatements());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -503,12 +510,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.FORCE_FIELD_NAMES_TO_UPPER_CASE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.forcesFieldNamesToUppercase());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -707,12 +716,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.NATIVE_SQL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.usesNativeSQL());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -743,12 +754,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.OPTIMIZE_DATA_CONVERSION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.optimizesDataConversion());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -762,6 +775,7 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -864,12 +878,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.BIND_ALL_PARAMETERS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.bindsAllParameters());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -899,12 +915,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.STREAMS_FOR_BINDING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.usesStreamsForBinding());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -935,12 +953,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.STRING_BINDING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.usesStringBinding());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -959,12 +979,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.MAX_BATCH_WRITING_SIZE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
                 return new Integer(adapter.getMaxBatchWritingSize());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
@@ -1006,12 +1028,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.TABLE_QUALIFIER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
                 return adapter.getTableQualifier();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter adapter = (DatabaseLoginAdapter) subject;
@@ -1042,12 +1066,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.TRIM_STRINGS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.trimsStrings());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -1078,12 +1104,14 @@ public class RdbmsOptionsPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.USE_PROPERTIES_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.usesProperties());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;

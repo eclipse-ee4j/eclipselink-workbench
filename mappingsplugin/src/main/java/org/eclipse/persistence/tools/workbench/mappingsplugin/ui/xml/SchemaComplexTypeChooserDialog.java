@@ -112,6 +112,7 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
     //***************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -135,6 +136,7 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
     private PropertyChangeListener buildSelectedComplexTypeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 SchemaComplexTypeChooserDialog.this.getOKAction().setEnabled(evt.getNewValue() != null);
             }
@@ -150,12 +152,14 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent tse) {
                 SchemaComplexTypeChooserDialog.this.treeSelectionChanged();
             }
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -219,11 +223,13 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
     // **************** AbstractDialog contract *******************************
 
+    @Override
     protected void okConfirmed() {
         this.complexTypeHolder.setValue(this.selectedComplexTypeHolder.getValue());
         super.okConfirmed();
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.schemaComplexTypeChooser";
     }
@@ -231,6 +237,7 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
     // **************** Behavior **********************************************
 
+    @Override
     public void show() {
         if (this.schema == null) {
             this.showErrorDialog();
@@ -285,6 +292,7 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         private ListValueModel buildComplexTypeNodesAdapter() {
             return new TransformationListValueModelAdapter(this.buildComplexTypesAdapter()) {
+                @Override
                 protected Object transformItem(Object item) {
                     return SchemaNode.this.buildComplexTypeNode((MWComplexTypeDefinition) item);
                 }
@@ -302,6 +310,7 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // **************** ValueModel contract ***********************************
 
+        @Override
         public Object getValue() {
             return this.schema;
         }
@@ -309,10 +318,12 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // **************** TreeNodeValueModel contract ***************************
 
+        @Override
         public TreeNodeValueModel getParent() {
             return null;
         }
 
+        @Override
         public ListValueModel getChildrenModel() {
             return this.childrenModel;
         }
@@ -320,13 +331,16 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // ********** AbstractTreeNodeValueModel implementation **********
 
+        @Override
         protected void engageValue() {}
 
+        @Override
         protected void disengageValue() {}
 
 
         // **************** Comparable contract ***********************************
 
+        @Override
         public int compareTo(Object o) {
             return DEFAULT_COMPARATOR.compare(this, o);
         }
@@ -334,10 +348,12 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // **************** Displayable contract **********************************
 
+        @Override
         public String displayString() {
             return null;
         }
 
+        @Override
         public Icon icon() {
             return null;
         }
@@ -375,6 +391,7 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // **************** ValueModel contract ***********************************
 
+        @Override
         public Object getValue() {
             return this.typeDefinition;
         }
@@ -382,10 +399,12 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // **************** TreeNodeValueModel contract ***************************
 
+        @Override
         public TreeNodeValueModel getParent() {
             return this.parent;
         }
 
+        @Override
         public ListValueModel getChildrenModel() {
             return NullListValueModel.instance();
         }
@@ -393,13 +412,16 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // ********** AbstractTreeNodeValueModel implementation **********
 
+        @Override
         protected void engageValue() {}
 
+        @Override
         protected void disengageValue() {}
 
 
         // **************** Comparable contract ***********************************
 
+        @Override
         public int compareTo(Object o) {
             return ComplexTypeNodeComparator.compare(this, o);
         }
@@ -407,10 +429,12 @@ final class SchemaComplexTypeChooserDialog extends AbstractDialog
 
         // **************** Displayable contract **********************************
 
+        @Override
         public String displayString() {
             return this.typeDefinition.qName();
         }
 
+        @Override
         public Icon icon() {
             return null;
         }

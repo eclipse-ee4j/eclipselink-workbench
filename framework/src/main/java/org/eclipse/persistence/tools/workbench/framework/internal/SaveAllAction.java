@@ -54,6 +54,7 @@ final class SaveAllAction
         this.initialize(nodeManager);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.saveAll");
@@ -78,9 +79,11 @@ final class SaveAllAction
 
     private CollectionValueModel buildProjectNodesAdapter() {
         return new CollectionAspectAdapter(FrameworkNodeManager.PROJECT_NODES_COLLECTION, this.nodeManager) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((FrameworkNodeManager) this.subject).projectNodes();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((FrameworkNodeManager) this.subject).projectNodesSize();
             }
@@ -89,15 +92,19 @@ final class SaveAllAction
 
     private ListChangeListener buildProjectNodesListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 SaveAllAction.this.updateEnabledState();
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 SaveAllAction.this.updateEnabledState();
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 SaveAllAction.this.updateEnabledState();
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 SaveAllAction.this.updateEnabledState();
             }
@@ -106,6 +113,7 @@ final class SaveAllAction
 
     private WindowListener buildWorkbenchWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 SaveAllAction.this.workbenchWindowClosed();
             }
@@ -128,6 +136,7 @@ final class SaveAllAction
         this.setEnabled(false);
     }
 
+    @Override
     protected void execute() {
         this.nodeManager.saveAll(getWorkbenchContext());
     }

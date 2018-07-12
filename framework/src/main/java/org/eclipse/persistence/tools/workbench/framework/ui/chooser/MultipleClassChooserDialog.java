@@ -36,10 +36,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
-import javax.swing.SwingConstants;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
@@ -152,24 +150,29 @@ public class MultipleClassChooserDialog extends AbstractDialog {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setSize(800, 400);
     }
 
+    @Override
     protected void prepareToShow() {
         this.setLocationRelativeTo(this.getParent());
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.mutipleClassChooser";
     }
 
     private Action buildRefreshAction() {
         return new AbstractFrameworkAction(getWorkbenchContext()) {
+            @Override
             protected void initialize() {
                 this.initializeText("refresh");
             }
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MultipleClassChooserDialog.this.refresh();
             }
@@ -207,6 +210,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
 
     private TreeSelectionModel buildAvailableTreeSelectionModel() {
         return this.buildTreeSelectionModel(new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 MultipleClassChooserDialog.this.availableTreeSelectionChanged(e);
             }
@@ -215,6 +219,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
 
     private TreeSelectionModel buildSelectedTreeSelectionModel() {
         return this.buildTreeSelectionModel(new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 MultipleClassChooserDialog.this.selectedTreeSelectionChanged(e);
             }
@@ -223,6 +228,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
 
     private Action buildSelectAction() {
         Action action = new AbstractFrameworkAction(getWorkbenchContext()) {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 MultipleClassChooserDialog.this.selectClassNodes();
             }
@@ -237,6 +243,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
 
     private Action buildDeselectAction() {
         Action action = new AbstractFrameworkAction(getWorkbenchContext()) {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 MultipleClassChooserDialog.this.deselectClassNodes();
             }
@@ -380,6 +387,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
      */
     private MouseListener buildDoubleClickSelect() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     // check whether anything is actually selected;
@@ -403,6 +411,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
      */
     private MouseListener buildDoubleClickDeselect() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     // check whether anything is actually selected;
@@ -417,6 +426,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
 
     // ********** layout **********
 
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
 
@@ -569,6 +579,7 @@ public class MultipleClassChooserDialog extends AbstractDialog {
         return mainPanel;
     }
 
+    @Override
     protected Iterator buildCustomActions() {
         return new SingleElementIterator(this.buildRefreshAction());
     }

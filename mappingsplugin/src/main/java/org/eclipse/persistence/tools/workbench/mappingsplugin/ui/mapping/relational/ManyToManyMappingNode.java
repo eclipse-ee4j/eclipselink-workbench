@@ -30,6 +30,7 @@ public final class ManyToManyMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_MANY_TO_MANY_MAPPING_NODE";
     }
@@ -37,10 +38,12 @@ public final class ManyToManyMappingNode extends MappingNode {
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".manyToMany";
     }
 
+    @Override
     protected String buildIconKey() {
         return ((MWManyToManyMapping) getMapping()).iconKey();
     }
@@ -48,6 +51,7 @@ public final class ManyToManyMappingNode extends MappingNode {
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return ManyToManyMappingTabbedPropertiesPage.class;
     }

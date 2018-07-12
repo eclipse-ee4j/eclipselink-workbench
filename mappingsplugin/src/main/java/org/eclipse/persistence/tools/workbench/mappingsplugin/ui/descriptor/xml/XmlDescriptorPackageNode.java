@@ -29,6 +29,7 @@ public final class XmlDescriptorPackageNode extends DescriptorPackageNode {
         super(name, parent, descriptorNodeBuilder);
     }
 
+    @Override
     protected void addToMenuDescription(GroupContainerDescription menuDescription, WorkbenchContext context) {
 
         menuDescription.add(buildClassActionGroup(context));

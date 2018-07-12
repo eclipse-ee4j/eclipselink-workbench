@@ -59,12 +59,15 @@ private static class Foo extends AbstractModel implements Displayable {
     public Foo(String name) {
         this.name = name;
     }
+    @Override
     public String displayString() {
         return this.name;
     }
+    @Override
     public Icon icon() {
         return null;
     }
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }

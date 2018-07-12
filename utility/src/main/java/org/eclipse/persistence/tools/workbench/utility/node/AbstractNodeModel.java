@@ -136,6 +136,7 @@ public abstract class AbstractNodeModel
      * Initialize a newly-created instance.
      * @see #initialize(Node)
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.comment = "";
@@ -167,15 +168,19 @@ public abstract class AbstractNodeModel
      * when one of the node's aspects has changed.
      * @see #aspectChanged(String)
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ChangeSupport(this) {
             private static final long serialVersionUID = 1L;
+            @Override
             protected ChangeNotifier notifier() {
                 return AbstractNodeModel.this.getChangeNotifier();
             }
+            @Override
             protected ChangeSupport buildChildChangeSupport() {
                 return AbstractNodeModel.this.buildChildChangeSupport();
             }
+            @Override
             protected void sourceChanged(String aspectName) {
                 super.sourceChanged(aspectName);
                 AbstractNodeModel.this.aspectChanged(aspectName);
@@ -190,9 +195,11 @@ public abstract class AbstractNodeModel
     protected ChangeSupport buildChildChangeSupport() {
         return new ChangeSupport(this) {
             private static final long serialVersionUID = 1L;
+            @Override
             protected ChangeNotifier notifier() {
                 return AbstractNodeModel.this.getChangeNotifier();
             }
+            @Override
             protected ChangeSupport buildChildChangeSupport() {
                 // return AbstractNodeModel.this.buildChildChangeSupport();
                 throw new UnsupportedOperationException();
@@ -208,6 +215,7 @@ public abstract class AbstractNodeModel
      * they are the same object.
      * Do NOT override this method - we rely on object identity extensively.
      */
+    @Override
     public final boolean equals(Object o) {
         return this == o;
     }
@@ -217,6 +225,7 @@ public abstract class AbstractNodeModel
      * they are the same object.
      * Do NOT override this method - we rely on object identity extensively.
      */
+    @Override
     public final int hashCode() {
         return super.hashCode();
     }
@@ -230,6 +239,7 @@ public abstract class AbstractNodeModel
      * Most objects must have a parent.
      * @see Node#getParent()
      */
+    @Override
     public final Node getParent() {
         return this.parent;
     }
@@ -239,6 +249,7 @@ public abstract class AbstractNodeModel
      * Most objects must have a parent.
      * @see Node#setParent(Node)
      */
+    @Override
     public final void setParent(Node parentNode) {
         this.checkParent(parentNode);
         this.parent = parentNode;
@@ -263,6 +274,7 @@ public abstract class AbstractNodeModel
      * @see #addChildrenTo(java.util.List)
      * @see Node#children()
      */
+    @Override
     public final Iterator children() {
         List children = new ArrayList();
         this.addChildrenTo(children);
@@ -286,6 +298,7 @@ public abstract class AbstractNodeModel
      * through the tree.
      * @see Node#setChildBackpointers()
      */
+    @Override
     public final void setChildBackpointers() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             Node child = (Node) stream.next();        // pull out the child to ease debugging
@@ -297,6 +310,7 @@ public abstract class AbstractNodeModel
     /**
      * @see Node#isDescendantOf(Node)
      */
+    @Override
     public final boolean isDescendantOf(Node node) {
         return (this == node) || this.parentIsDescendantOf(node);
     }
@@ -320,6 +334,7 @@ public abstract class AbstractNodeModel
     /**
      * @see Node#addBranchReferencesTo(java.util.Collection)
      */
+    @Override
     public final void addBranchReferencesTo(Collection branchReferences) {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             Node child = (Node) stream.next();        // pull out the child to ease debugging
@@ -343,6 +358,7 @@ public abstract class AbstractNodeModel
      * INTRA-NODE API?
      * @see Node#addAllNodesTo(java.util.Collection)
      */
+    @Override
     public final void addAllNodesTo(Collection nodes) {
         nodes.add(this);
         for (Iterator stream = this.children(); stream.hasNext(); ) {
@@ -358,6 +374,7 @@ public abstract class AbstractNodeModel
      * INTRA-NODE API
      * @see Node#nodeRemoved(Node)
      */
+    @Override
     public void nodeRemoved(Node node) {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             Node child = (Node) stream.next();        // pull out the child to ease debugging
@@ -381,6 +398,7 @@ public abstract class AbstractNodeModel
      * typically, only handles will implement this method
      * @see Node#nodeRenamed(Node)
      */
+    @Override
     public void nodeRenamed(Node node) {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             Node child = (Node) stream.next();        // pull out the child to ease debugging
@@ -419,6 +437,7 @@ public abstract class AbstractNodeModel
      * Typically only the root node directly holds a notifier.
      * @see Node#getChangeNotifier()
      */
+    @Override
     public ChangeNotifier getChangeNotifier() {
         if (this.parent == null) {
             throw new IllegalStateException("This node should not be firing change events during its construction.");
@@ -432,6 +451,7 @@ public abstract class AbstractNodeModel
      * Typically only the root node directly holds a notifier.
      * @see Node#setChangeNotifier(ChangeNotifier)
      */
+    @Override
     public void setChangeNotifier(ChangeNotifier changeNotifier) {
         if (this.parent == null) {
             throw new IllegalStateException("This root node should implement #setChangeNotifier(ChangeNotifier).");
@@ -462,6 +482,7 @@ public abstract class AbstractNodeModel
      * Typically only the root node directly holds a validator.
      * @see Node#getValidator()
      */
+    @Override
     public Node.Validator getValidator() {
         if (this.parent == null) {
             throw new IllegalStateException("This node should not be firing change events during its construction.");
@@ -475,6 +496,7 @@ public abstract class AbstractNodeModel
      * Typically only the root node directly holds a validator.
      * @see Node#setValidator(Node.Validator)
      */
+    @Override
     public void setValidator(Node.Validator validator) {
         if (this.parent == null) {
             throw new IllegalStateException("This root node should implement #setValidator(Node.Validator).");
@@ -500,6 +522,7 @@ public abstract class AbstractNodeModel
      * its descendants were last read or saved.
      * @see Node#isDirtyBranch()
      */
+    @Override
     public final boolean isDirtyBranch() {
         return this.dirtyBranch;
     }
@@ -548,6 +571,7 @@ public abstract class AbstractNodeModel
      * if necessary.
      * @see Node#markBranchDirty()
      */
+    @Override
     public void markBranchDirty() {
         // short-circuit any unnecessary propagation
         if (this.dirtyBranch) {
@@ -573,6 +597,7 @@ public abstract class AbstractNodeModel
      * will be written out.
      * @see Node#markEntireBranchDirty()
      */
+    @Override
     public final void markEntireBranchDirty() {
         this.markDirty();
         for (Iterator stream = this.children(); stream.hasNext(); ) {
@@ -606,6 +631,7 @@ public abstract class AbstractNodeModel
      * client use.
      * @see Node#cascadeMarkEntireBranchClean()
      */
+    @Override
     public final void cascadeMarkEntireBranchClean() {
         for (Iterator stream = this.children(); stream.hasNext(); ) {
             Node child = (Node) stream.next();        // pull out the child to ease debugging
@@ -621,6 +647,7 @@ public abstract class AbstractNodeModel
      * its entire branch is now clean, as well as its parent's branch.
      * @see Node#markBranchCleanIfPossible()
      */
+    @Override
     public final void markBranchCleanIfPossible() {
         // short-circuit any unnecessary propagation
         if (this.dirty) {
@@ -690,6 +717,7 @@ public abstract class AbstractNodeModel
      */
     public final Iterator allDirtyNodes() {
         return new FilteringIterator(this.allNodes()) {
+            @Override
             protected boolean accept(Object o) {
                 return (o instanceof AbstractNodeModel) && ((AbstractNodeModel) o).isDirty();
             }
@@ -731,6 +759,7 @@ public abstract class AbstractNodeModel
      * node's descendants' problems.
      * @see Node#branchProblems()
      */
+    @Override
     public final ListIterator branchProblems() {
         return new CloneListIterator(this.branchProblems);    // removes are not allowed
     }
@@ -740,6 +769,7 @@ public abstract class AbstractNodeModel
      * node's descendants' problems.
      * @see Node#branchProblemsSize()
      */
+    @Override
     public final int branchProblemsSize() {
         return this.branchProblems.size();
     }
@@ -748,6 +778,7 @@ public abstract class AbstractNodeModel
      * Return whether the node or any of its descendants have problems.
      * @see Node#hasBranchProblems()
      */
+    @Override
     public final boolean hasBranchProblems() {
         return ! this.branchProblems.isEmpty();
     }
@@ -755,6 +786,7 @@ public abstract class AbstractNodeModel
     /**
      * @see Node#containsBranchProblem(Problem)
      */
+    @Override
     public final boolean containsBranchProblem(Problem problem) {
         return this.branchProblems.contains(problem);
     }
@@ -786,6 +818,7 @@ public abstract class AbstractNodeModel
      * notify the node's parent.
      * @see Node#validateBranch()
      */
+    @Override
     public void validateBranch() {
         if (this.validateBranchInternal()) {
             // if our "branch" problems have changed, then
@@ -809,6 +842,7 @@ public abstract class AbstractNodeModel
      * client use.
      * @see Node#validateBranchInternal()
      */
+    @Override
     public boolean validateBranchInternal() {
         // rebuild "branch" problems in children first
         for (Iterator stream = this.children(); stream.hasNext(); ) {
@@ -884,6 +918,7 @@ public abstract class AbstractNodeModel
      * specified collection.
      * @see Node#addBranchProblemsTo(java.util.List)
      */
+    @Override
     public final void addBranchProblemsTo(List list) {
         list.addAll(this.branchProblems);
     }
@@ -895,6 +930,7 @@ public abstract class AbstractNodeModel
      * must be rebuilt.
      * @see Node#rebuildBranchProblems()
      */
+    @Override
     public final void rebuildBranchProblems() {
         if ( ! this.checkBranchProblems()) {
             throw new IllegalStateException("we should not get here unless our \"branch\" problems have changed");
@@ -909,6 +945,7 @@ public abstract class AbstractNodeModel
      * notify the node's parent.
      * @see Node#clearAllBranchProblems()
      */
+    @Override
     public final void clearAllBranchProblems() {
         if (this.clearAllBranchProblemsInternal()) {
             // if our "branch" problems have changed, then
@@ -926,6 +963,7 @@ public abstract class AbstractNodeModel
      * client use.
      * @see Node#clearAllBranchProblemsInternal()
      */
+    @Override
     public final boolean clearAllBranchProblemsInternal() {
         if (this.branchProblems.isEmpty()) {
             return false;
@@ -995,6 +1033,7 @@ public abstract class AbstractNodeModel
      * Compare display strings.
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -1008,6 +1047,7 @@ public abstract class AbstractNodeModel
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer sb)
      * @see #displayString()
      */
+    @Override
     public final String toString() {
         return super.toString();
     }

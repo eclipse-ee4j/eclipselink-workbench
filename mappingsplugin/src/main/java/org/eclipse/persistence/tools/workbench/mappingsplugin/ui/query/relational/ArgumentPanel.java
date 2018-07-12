@@ -46,6 +46,7 @@ abstract class ArgumentPanel
 
     private PropertyValueModel buildQueryHolder() {
         return new PropertyAspectAdapter(this.argumentHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWArgument) this.subject).getParentQuery();
             }

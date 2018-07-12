@@ -22,7 +22,6 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
@@ -42,6 +41,7 @@ final class OneToManyGeneralPropertiesPage extends ScrollablePropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
         Insets offset = BorderFactory.createTitledBorder("m").getBorderInsets(this);

@@ -139,6 +139,7 @@ public class FilteringIteratorTests extends TestCase {
 
     private Iterator buildInnerFilteredIterator(Iterator nestedIterator) {
         return new FilteringIterator(nestedIterator) {
+            @Override
             protected boolean accept(Object next) {
                 return ((String) next).startsWith(PREFIX);
             }
@@ -152,6 +153,7 @@ public class FilteringIteratorTests extends TestCase {
     // this inner iterator will call the "outer" object
     private Iterator buildInnerFilteredIterator2(Iterator nestedIterator) {
         return new FilteringIterator(nestedIterator) {
+            @Override
             protected boolean accept(Object next) {
                 return ((String) next).startsWith(FilteringIteratorTests.this.getPrefix());
             }
@@ -186,6 +188,7 @@ public class FilteringIteratorTests extends TestCase {
 
     private Filter buildAcceptFilter(String prefix) {
         return new SimpleFilter(prefix) {
+            @Override
             public boolean accept(Object next) {
                 return ((String) next).startsWith((String) this.criterion);
             }
@@ -198,6 +201,7 @@ public class FilteringIteratorTests extends TestCase {
 
     private Filter buildRejectFilter(String prefix) {
         return new SimpleFilter(prefix) {
+            @Override
             public boolean reject(Object next) {
                 return ((String) next).startsWith((String) this.criterion);
             }
@@ -210,9 +214,11 @@ public class FilteringIteratorTests extends TestCase {
 
     private Filter buildBothFilter(String prefix) {
         return new SimpleFilter(prefix) {
+            @Override
             public boolean reject(Object next) {
                 return ((String) next).startsWith((String) this.criterion);
             }
+            @Override
             public boolean accept(Object next) {
                 return ((String) next).startsWith((String) this.criterion);
             }

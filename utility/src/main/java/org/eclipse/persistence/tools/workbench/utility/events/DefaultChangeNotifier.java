@@ -51,6 +51,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#stateChanged(StateChangeListener, StateChangeEvent)
      */
+    @Override
     public void stateChanged(StateChangeListener listener, StateChangeEvent event) {
         listener.stateChanged(event);
     }
@@ -58,6 +59,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#propertyChange(java.beans.PropertyChangeListener, java.beans.PropertyChangeEvent)
      */
+    @Override
     public void propertyChange(PropertyChangeListener listener, PropertyChangeEvent event) {
         listener.propertyChange(event);
     }
@@ -65,6 +67,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#itemsAdded(CollectionChangeListener, CollectionChangeEvent)
      */
+    @Override
     public void itemsAdded(CollectionChangeListener listener, CollectionChangeEvent event) {
         listener.itemsAdded(event);
     }
@@ -72,6 +75,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#itemsRemoved(CollectionChangeListener, CollectionChangeEvent)
      */
+    @Override
     public void itemsRemoved(CollectionChangeListener listener, CollectionChangeEvent event) {
         listener.itemsRemoved(event);
     }
@@ -79,6 +83,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#collectionChanged(CollectionChangeListener, CollectionChangeEvent)
      */
+    @Override
     public void collectionChanged(CollectionChangeListener listener, CollectionChangeEvent event) {
         listener.collectionChanged(event);
     }
@@ -86,6 +91,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#itemsAdded(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void itemsAdded(ListChangeListener listener, ListChangeEvent event) {
         listener.itemsAdded(event);
     }
@@ -93,6 +99,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#itemsRemoved(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void itemsRemoved(ListChangeListener listener, ListChangeEvent event) {
         listener.itemsRemoved(event);
     }
@@ -100,6 +107,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#itemsReplaced(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void itemsReplaced(ListChangeListener listener, ListChangeEvent event) {
         listener.itemsReplaced(event);
     }
@@ -107,6 +115,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#listChanged(ListChangeListener, ListChangeEvent)
      */
+    @Override
     public void listChanged(ListChangeListener listener, ListChangeEvent event) {
         listener.listChanged(event);
     }
@@ -114,6 +123,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#nodeAdded(TreeChangeListener, TreeChangeEvent)
      */
+    @Override
     public void nodeAdded(TreeChangeListener listener, TreeChangeEvent event) {
         listener.nodeAdded(event);
     }
@@ -121,6 +131,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#nodeRemoved(TreeChangeListener, TreeChangeEvent)
      */
+    @Override
     public void nodeRemoved(TreeChangeListener listener, TreeChangeEvent event) {
         listener.nodeRemoved(event);
     }
@@ -128,6 +139,7 @@ public final class DefaultChangeNotifier
     /**
      * @see ChangeNotifier#treeChanged(TreeChangeListener, TreeChangeEvent)
      */
+    @Override
     public void treeChanged(TreeChangeListener listener, TreeChangeEvent event) {
         listener.treeChanged(event);
     }

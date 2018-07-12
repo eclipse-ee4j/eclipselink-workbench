@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWClassHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
@@ -25,7 +24,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 
@@ -56,6 +54,7 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.interfaceAliasHandle = new MWClassHandle(this, this.buildInterfaceAliasScrubber());
@@ -64,6 +63,7 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.interfaceAliasHandle);
@@ -71,9 +71,11 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     private NodeReferenceScrubber buildInterfaceAliasScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWDescriptorInterfaceAliasPolicy.this.setInterfaceAlias(null);
             }
+            @Override
             public String toString() {
                 return "MWDescriptorInterfaceAliasPolicy.buildInterfaceAliasScrubber()";
             }
@@ -101,6 +103,7 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     // ********** run-time **********
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         MWClass interfaceAlias = getInterfaceAlias();
         if (interfaceAlias != null) {
@@ -111,10 +114,12 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     // ********** MWAbstractDescriptorPolicy implementation **********
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
 
+    @Override
     public boolean isActive() {
         return true;
     }
@@ -122,6 +127,7 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkInterfaceAlias(problems);
@@ -136,6 +142,7 @@ public final class MWDescriptorInterfaceAliasPolicy extends MWAbstractDescriptor
 
     // ********** misc **********
 
+    @Override
     public void toString(StringBuffer sb) {
         this.getInterfaceAlias().toString(sb);
     }

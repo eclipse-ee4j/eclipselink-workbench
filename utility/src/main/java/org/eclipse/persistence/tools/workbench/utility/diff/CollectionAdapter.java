@@ -47,6 +47,7 @@ public class CollectionAdapter
     /**
      * @see ContainerDifferentiator.Adapter#diffIsFatal(Object, Object)
      */
+    @Override
     public boolean diffIsFatal(Object object1, Object object2) {
         if ( ! (object1 instanceof Collection)) {
             return true;
@@ -60,6 +61,7 @@ public class CollectionAdapter
     /**
      * @see ContainerDifferentiator.Adapter#containerClass()
      */
+    @Override
     public Class containerClass() {
         return Collection.class;
     }
@@ -67,6 +69,7 @@ public class CollectionAdapter
     /**
      * @see ContainerDifferentiator.Adapter#size(Object)
      */
+    @Override
     public int size(Object container) {
         return ((Collection) container).size();
     }
@@ -74,6 +77,7 @@ public class CollectionAdapter
     /**
      * @see ContainerDifferentiator.Adapter#iterator(Object)
      */
+    @Override
     public Iterator iterator(Object container) {
         return ((Collection) container).iterator();
     }
@@ -81,6 +85,7 @@ public class CollectionAdapter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "CollectionAdapter";
     }

@@ -109,10 +109,12 @@ public class AddRemoveTablePanel extends AddRemovePanel {
 
     }
 
+    @Override
     public JComponent getComponent() {
         return this.table;
     }
 
+    @Override
     protected void moveItemsDown() {
         if (this.table.isEditing()) {
             this.table.getCellEditor().stopCellEditing();
@@ -120,6 +122,7 @@ public class AddRemoveTablePanel extends AddRemovePanel {
         super.moveItemsDown();
     }
 
+    @Override
     protected void moveItemsUp() {
         if (this.table.isEditing()) {
             this.table.getCellEditor().stopCellEditing();
@@ -127,6 +130,7 @@ public class AddRemoveTablePanel extends AddRemovePanel {
         super.moveItemsUp();
     }
 
+    @Override
     protected void addNewItem() {
         if (this.table.isEditing()) {
             this.table.getCellEditor().stopCellEditing();
@@ -134,6 +138,7 @@ public class AddRemoveTablePanel extends AddRemovePanel {
         super.addNewItem();
     }
 
+    @Override
     protected void removeSelectedItems() {
         if (this.table.isEditing()) {
             this.table.getCellEditor().stopCellEditing();

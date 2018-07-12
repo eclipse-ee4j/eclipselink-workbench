@@ -30,6 +30,7 @@ public class ReflectiveDiff extends CompositeDiff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         if (this.different()) {
             pw.print("Reflective comparison (");

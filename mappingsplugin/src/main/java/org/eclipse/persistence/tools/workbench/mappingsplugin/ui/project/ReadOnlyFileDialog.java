@@ -47,15 +47,18 @@ final class ReadOnlyFileDialog extends AbstractDialog {
         this.files = (Vector) CollectionTools.sort(new Vector(files));
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.readOnly";
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setTitle(this.resourceRepository().getString("versionControlAssistance.title"));
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -103,19 +106,23 @@ final class ReadOnlyFileDialog extends AbstractDialog {
         return panel;
     }
 
+    @Override
     protected String buildOKText() {
         return this.resourceRepository().getString("save");
     }
 
+    @Override
     protected Iterator buildCustomActions() {
         return new SingleElementIterator(this.buildSaveAsAction());
     }
 
     private Action buildSaveAsAction() {
         return new AbstractFrameworkAction(this.getWorkbenchContext()) {
+            @Override
             protected void initialize() {
                 this.initializeTextAndMnemonic("saveAs");
             }
+            @Override
             protected void execute() {
                 ReadOnlyFileDialog.this.saveAsPressed();
             }

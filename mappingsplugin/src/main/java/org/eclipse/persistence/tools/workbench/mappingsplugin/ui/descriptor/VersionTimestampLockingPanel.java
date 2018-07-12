@@ -40,12 +40,14 @@ public class VersionTimestampLockingPanel extends AbstractSubjectPanel {
         super(lockingPolicyHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.optimisticVersionLockingPolicyRetrieveTimeModel = buildOptimisticVersionLockingPolicyRetrieveTimeValueHolder();
         this.optimisticVersionLockingPolicyTypeModel = buildOptimisticVersionLockingPolicyTypeValueHolder();
     }
 
+    @Override
     protected void initializeLayout() {
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -89,10 +91,12 @@ public class VersionTimestampLockingPanel extends AbstractSubjectPanel {
     private PropertyValueModel buildOptimisticVersionLockingPolicyRetrieveTimeValueHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(),
                 MWDescriptorLockingPolicy.RETRIEVE_TIME_FROM_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorLockingPolicy) subject).getRetrieveTimeFrom();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) subject).setRetrieveTimeFrom((String) value);
             }
@@ -102,10 +106,12 @@ public class VersionTimestampLockingPanel extends AbstractSubjectPanel {
     private PropertyValueModel buildOptimisticVersionLockingPolicyTypeValueHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(),
                 MWDescriptorLockingPolicy.OPTIMISTIC_VERSION_LOCKING_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorLockingPolicy) subject).getOptimisticVersionLockingType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorLockingPolicy) subject).setOptimisticVersionLockingType((String) value);
             }
@@ -138,6 +144,7 @@ public class VersionTimestampLockingPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildVersionTimestampLockingPanelEnabler(Component[] components) {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(this.optimisticVersionLockingPolicyTypeModel) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value == MWDescriptorLockingPolicy.OPTIMISTIC_VERSION_TIMESTAMP);
             }

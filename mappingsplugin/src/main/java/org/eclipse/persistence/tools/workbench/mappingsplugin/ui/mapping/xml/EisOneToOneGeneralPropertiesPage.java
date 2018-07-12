@@ -41,6 +41,7 @@ final class EisOneToOneGeneralPropertiesPage extends ScrollablePropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
         JPanel container = new JPanel(new GridBagLayout());
         container.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -221,6 +222,7 @@ final class EisOneToOneGeneralPropertiesPage extends ScrollablePropertiesPage
             );
         }
 
+        @Override
         protected void initializeLayout() {
             GridBagConstraints constraints = new GridBagConstraints();
 

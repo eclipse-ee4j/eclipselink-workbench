@@ -44,10 +44,12 @@ public class XMLLoginTabbedPropertiesPage extends TabbedPropertiesPage {
         return "LOGIN_SEQUENCING_TAB_TITLE";
     }
 
+    @Override
     protected Component buildTitlePanel() {
         return new JComponent() { };
     }
 
+    @Override
     protected JTabbedPane buildTabbedPane()
     {
         JTabbedPane tabbedPane = super.buildTabbedPane();
@@ -55,6 +57,7 @@ public class XMLLoginTabbedPropertiesPage extends TabbedPropertiesPage {
         return tabbedPane;
     }
 
+    @Override
     protected void initializeTabs() {
         addTab( buildOptionsPropertiesPage(), buildOptionsPropertiesPageTitle());
     }

@@ -64,6 +64,7 @@ public final class SessionBrokerSessionsPropertiesPage extends ScrollablePropert
      *
      * @return The fully initialized container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

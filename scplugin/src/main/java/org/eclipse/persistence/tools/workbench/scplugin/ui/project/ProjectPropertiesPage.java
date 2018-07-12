@@ -121,6 +121,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 ProjectNode node = (ProjectNode) getNode();
@@ -139,6 +140,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
     {
         return new TransformationPropertyValueModel(getSelectionHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 SCAdapter adapter = (SCAdapter) value;
@@ -167,6 +169,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
     {
         return new ClasspathPanel.DefaultClasspathDirectoryHolder()
         {
+            @Override
             public File getDefaultClasspathDirectory()
             {
                 File projectSaveLocation = getProject().getSaveDirectory();
@@ -186,6 +189,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
                 return FileTools.userHomeDirectory();
             }
 
+            @Override
             public void setDefaultClasspathDirectory(File defaultClasspathDirectory)
             {
                 File projectSaveLocation = getProject().getSaveDirectory();
@@ -230,6 +234,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
     {
         TransformationPropertyValueModel transformation = new TransformationPropertyValueModel(buildLocationHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 File file = (File) value;
@@ -259,6 +264,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), TopLinkSessionsAdapter.SAVE_PATH_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 TopLinkSessionsAdapter adapter = (TopLinkSessionsAdapter) subject;
@@ -272,6 +278,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
      *
      * @return The fully initialized pane
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -382,6 +389,7 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
     {
         return new SimplePropertyValueModel(getSelectionHolder())
         {
+            @Override
             public Object getValue()
             {
                 ValueModel projectHolder = (ValueModel) super.getValue();
@@ -407,30 +415,35 @@ public final class ProjectPropertiesPage extends TitledPropertiesPage
             super(buildClasspathHolder(), ClassRepository.CLASSPATH_ENTRIES_LIST);
         }
 
+        @Override
         public void addItem(int index, Object item)
         {
             ClassRepository classpath = (ClassRepository) subject;
             classpath.addClasspathEntry(index, (String) item);
         }
 
+        @Override
         public Object getItem(int index)
         {
             ClassRepository classpath = (ClassRepository) subject;
             return classpath.getClasspathEntry(index);
         }
 
+        @Override
         protected ListIterator getValueFromSubject()
         {
             ClassRepository classpath = (ClassRepository) subject;
             return classpath.classpathEntries();
         }
 
+        @Override
         public Object removeItem(int index)
         {
             ClassRepository classpath = (ClassRepository) subject;
             return classpath.removeClasspathEntry(index);
         }
 
+        @Override
         public Object replaceItem(int index, Object item)
         {
             ClassRepository classpath = (ClassRepository) subject;

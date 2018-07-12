@@ -52,6 +52,7 @@ public class ApplicationContextWrapper extends AbstractApplicationContext {
     /**
      * @see ApplicationContext#getApplication()
      */
+    @Override
     public Application getApplication() {
         return this.delegate.getApplication();
     }
@@ -59,6 +60,7 @@ public class ApplicationContextWrapper extends AbstractApplicationContext {
     /**
      * @see ApplicationContext#getPreferences()
      */
+    @Override
     public Preferences getPreferences() {
         return this.delegate.getPreferences();
     }
@@ -66,6 +68,7 @@ public class ApplicationContextWrapper extends AbstractApplicationContext {
     /**
      * @see ApplicationContext#getResourceRepository()
      */
+    @Override
     public ResourceRepository getResourceRepository() {
         return this.delegate.getResourceRepository();
     }
@@ -73,6 +76,7 @@ public class ApplicationContextWrapper extends AbstractApplicationContext {
     /**
      * @see ApplicationContext#getNodeManager()
      */
+    @Override
     public NodeManager getNodeManager() {
         return this.delegate.getNodeManager();
     }
@@ -80,6 +84,7 @@ public class ApplicationContextWrapper extends AbstractApplicationContext {
     /**
      * @see ApplicationContext#getHelpManager()
      */
+    @Override
     public HelpManager getHelpManager() {
         return this.delegate.getHelpManager();
     }

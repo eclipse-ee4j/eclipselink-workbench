@@ -18,15 +18,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWTransformationMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWTransformer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
@@ -37,11 +34,9 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.CompositeIterat
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Problem;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.TransformationMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
 
 public final class MWRelationalTransformationMapping
     extends MWTransformationMapping
@@ -59,6 +54,7 @@ public final class MWRelationalTransformationMapping
 
     // *********** MWQueryable implementation ***********
 
+    @Override
     public String iconKey() {
         return "mapping.transformation";
     }
@@ -104,6 +100,7 @@ public final class MWRelationalTransformationMapping
 
     private Iterator columns() {
         return new TransformationIterator(this.fieldTransformerAssociations()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWRelationalFieldTransformerAssociation) next).getColumn();
             }
@@ -113,6 +110,7 @@ public final class MWRelationalTransformationMapping
     public Iterator candidateColumns() {
         return new CompositeIterator(
             new TransformationIterator(getParentRelationalDescriptor().associatedTables()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWTable) next).columns();
                 }
@@ -122,6 +120,7 @@ public final class MWRelationalTransformationMapping
 
     // **************** Problems **********************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
 
@@ -160,6 +159,7 @@ public final class MWRelationalTransformationMapping
 
     // ************* aggregate support *************
 
+    @Override
     protected Collection buildAggregateFieldNameGenerators() {
         Collection aggregateFieldNameGenerators = super.buildAggregateFieldNameGenerators();
         for (Iterator i = fieldTransformerAssociations(); i.hasNext(); ) {
@@ -170,6 +170,7 @@ public final class MWRelationalTransformationMapping
         return aggregateFieldNameGenerators;
     }
 
+    @Override
     public void parentDescriptorMorphedToAggregate() {
         super.parentDescriptorMorphedToAggregate();
         Iterator i = fieldTransformerAssociations();
@@ -178,6 +179,7 @@ public final class MWRelationalTransformationMapping
         }
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         if (this.isReadOnly()) {
             return;
@@ -205,6 +207,7 @@ public final class MWRelationalTransformationMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new TransformationMapping();
     }

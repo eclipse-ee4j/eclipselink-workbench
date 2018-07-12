@@ -54,7 +54,6 @@ import org.eclipse.persistence.tools.workbench.framework.ui.chooser.DefaultListC
 import org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.uitools.SwingComponentFactory;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAbstractClassIndicatorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorFieldPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWClassIndicatorValue;
@@ -120,6 +119,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     protected PropertyValueModel buildClassIndicatorFieldPolicyHolder(PropertyValueModel classIndicatorPolicyHolder) {
         return new FilteringPropertyValueModel(classIndicatorPolicyHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return  value instanceof MWClassIndicatorFieldPolicy;
             }
@@ -128,6 +128,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     protected ValueModel buildUseClassIndicatorDictionaryBooleanHolder() {
         return new PropertyAspectAdapter(this.classIndicatorFieldPolicyHolder, MWClassIndicatorFieldPolicy.CLASS_NAME_IS_INDICATOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(!((MWClassIndicatorFieldPolicy) this.subject).classNameIsIndicator());
             }
@@ -165,6 +166,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     private CollectionValueModel buildIndicatorTypeChooserValueModel() {
         return new CollectionAspectAdapter(this.classIndicatorFieldPolicyHolder) {
+            @Override
             protected Iterator getValueFromSubject() {
                 MWAbstractClassIndicatorPolicy policy = (MWAbstractClassIndicatorPolicy) this.subject;
                 return policy.buildBasicTypes().iterator();
@@ -174,10 +176,12 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     private PropertyValueModel buildIndicatorTypeChooserPropertyAdapter() {
         return new PropertyAspectAdapter(this.classIndicatorFieldPolicyHolder, MWClassIndicatorFieldPolicy.INDICATOR_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassIndicatorFieldPolicy) this.subject).getIndicatorType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassIndicatorFieldPolicy) this.subject).setIndicatorType((MWTypeDeclaration) value);
             }
@@ -208,14 +212,17 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case INCLUDE_COLUMN:            return Boolean.class;
@@ -226,10 +233,12 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index == INCLUDE_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWClassIndicatorValue indicatorValue = (MWClassIndicatorValue)subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -246,9 +255,11 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
         private PropertyValueModel buildIncludeAdapter(MWClassIndicatorValue indicatorValue) {
             return new PropertyAspectAdapter(MWClassIndicatorValue.INCLUDE_PROPERTY, indicatorValue) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf(((MWClassIndicatorValue) this.subject).isInclude());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWClassIndicatorValue) this.subject).setInclude(((Boolean)value).booleanValue());
                 }
@@ -257,6 +268,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
         private PropertyValueModel buildClassAdapter(MWClassIndicatorValue indicatorValue) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWClassIndicatorValue.DESCRIPTOR_PROPERTY, indicatorValue) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWClassIndicatorValue) this.subject).getDescriptorValue();
                 }
@@ -266,6 +278,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
         private PropertyValueModel buildValueAdapter(MWClassIndicatorValue indicatorValue) {
             return new PropertyAspectAdapter(MWClassIndicatorValue.INDICATOR_VALUE_PROPERTY, indicatorValue) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWClassIndicatorValue) this.subject).getIndicatorValueAsString();
                 }
@@ -295,10 +308,12 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
                 return object.toString();
         }
 
+        @Override
         protected String helpTopicId() {
             return "descriptor.inheritance.indicator.editDialog";
         }
 
+        @Override
         protected Component buildMainPanel() {
             JPanel panel = new JPanel(new GridBagLayout());
 
@@ -379,6 +394,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
             return panel;
         }
 
+        @Override
         public boolean preConfirm() {
             String indicatorValueText = this.indicatorValueTextField.getText();
             Object indicatorValue = null;
@@ -469,12 +485,15 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
         }
 
         private class CVDocumentListener implements DocumentListener {
+            @Override
             public void changedUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void insertUpdate(DocumentEvent de) {
                 updateOKButton();
             }
+            @Override
             public void removeUpdate(DocumentEvent de) {
                 updateOKButton();
             }
@@ -538,6 +557,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     private CollectionValueModel buildClassIndicatorValuesHolder() {
         return new CollectionAspectAdapter(this.classIndicatorFieldPolicyHolder, MWClassIndicatorFieldPolicy.CLASS_INDICATOR_VALUES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWClassIndicatorFieldPolicy) this.subject).classIndicatorValues();
             }
@@ -546,6 +566,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     private Action buildEditAction() {
         return new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 editIndicator();
             }
@@ -569,6 +590,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     private ListSelectionListener buildRowSelectionListener(final ListSelectionModel selectionModel) {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     editButton.getModel().setEnabled( editButtonShouldBeEnabled() && ! (selectionModel.isSelectionEmpty()
@@ -580,6 +602,7 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
 
     private PropertyChangeListener buildIncludePropertyChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 updateEditButton();
             }
@@ -602,16 +625,19 @@ public abstract class ClassIndicatorDictionarySubPanel extends AbstractPanel imp
         return this.editButton;
     }
 
+    @Override
     public void updateRootStatus(boolean newValue) {
         this.isRoot = newValue;
         updateEnablementStatus();
     }
 
+    @Override
     public void updateIndicatorFieldStatus(boolean newValue) {
         this.isIndicatorField = newValue;
         updateEnablementStatus();
     }
 
+    @Override
     public void updateIndicatorDictionaryStatus(boolean newValue) {
         this.isIndicatorDictionary = newValue;
         updateEnablementStatus();

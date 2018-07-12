@@ -41,10 +41,12 @@ public interface DisplayableAdapter {
     DisplayableAdapter DEFAULT_INSTANCE =
         new DisplayableAdapter() {
 
+            @Override
             public String displayString(Object object) {
                 return String.valueOf(object);
             }
 
+            @Override
             public Icon icon(Object object) {
                 return null;
             }

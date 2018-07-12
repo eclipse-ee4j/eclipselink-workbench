@@ -49,6 +49,7 @@ public class DiffableDifferentiator implements Differentiator {
     /**
      * @see Differentiator#diff(Object, Object)
      */
+    @Override
     public Diff diff(Object object1, Object object2) {
         return this.diff(object1, object2, DiffableAdapter.NORMAL);
     }
@@ -56,6 +57,7 @@ public class DiffableDifferentiator implements Differentiator {
     /**
      * @see Differentiator#keyDiff(Object, Object)
      */
+    @Override
     public Diff keyDiff(Object object1, Object object2) {
         return this.diff(object1, object2, DiffableAdapter.KEY);
     }
@@ -77,6 +79,7 @@ public class DiffableDifferentiator implements Differentiator {
     /**
      * @see Differentiator#comparesValueObjects()
      */
+    @Override
     public boolean comparesValueObjects() {
         return false;
     }
@@ -84,6 +87,7 @@ public class DiffableDifferentiator implements Differentiator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "DiffableDifferentiator";
     }

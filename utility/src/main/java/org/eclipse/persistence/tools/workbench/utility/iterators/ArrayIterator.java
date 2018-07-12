@@ -59,6 +59,7 @@ public class ArrayIterator
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.nextIndex < this.maxIndex;
     }
@@ -66,6 +67,7 @@ public class ArrayIterator
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.hasNext()) {
             return this.array[this.nextIndex++];
@@ -76,6 +78,7 @@ public class ArrayIterator
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -83,6 +86,7 @@ public class ArrayIterator
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + CollectionTools.list(this.array) + ')';
     }

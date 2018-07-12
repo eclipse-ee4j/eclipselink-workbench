@@ -142,6 +142,7 @@ public final class MWXmlSchema extends MWModel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeBuiltInNamespaces();
@@ -153,6 +154,7 @@ public final class MWXmlSchema extends MWModel
         this.builtInNamespaces.add(MWNamespace.xsiNamespace(this));
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.targetNamespaceUrl = "";
@@ -165,6 +167,7 @@ public final class MWXmlSchema extends MWModel
         this.name = schemaName;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.schemaSource);
@@ -175,6 +178,7 @@ public final class MWXmlSchema extends MWModel
 
     // **************** Nominative implementation ***************************
 
+    @Override
     public String getName() {
         return this.name;
     }
@@ -277,6 +281,7 @@ public final class MWXmlSchema extends MWModel
 
     public Iterator importedNamespaces() {
         return new FilteringIterator(this.declaredNamespaces()) {
+            @Override
             protected boolean accept(Object next) {
                 return ! ((MWNamespace) next).isTargetNamespace();
             }
@@ -308,6 +313,7 @@ public final class MWXmlSchema extends MWModel
         return (MWXmlSchemaRepository) this.getParent();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }
@@ -426,6 +432,7 @@ public final class MWXmlSchema extends MWModel
 
     private Iterator complexTypeIterators() {
         return new TransformationIterator(this.declaredNamespaces()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWNamespace) next).complexTypes();
             }
@@ -449,6 +456,7 @@ public final class MWXmlSchema extends MWModel
 
     private Iterator simpleTypeIterators() {
         return new TransformationIterator(this.declaredNamespaces()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWNamespace) next).simpleTypes();
             }
@@ -493,6 +501,7 @@ public final class MWXmlSchema extends MWModel
 
     private Iterator structuralComponentIterators() {
         return new TransformationIterator(this.declaredNamespaces()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWNamespace) next).structuralComponents();
             }
@@ -505,6 +514,7 @@ public final class MWXmlSchema extends MWModel
 
     private Iterator contextComponentIterators() {
         return new TransformationIterator(this.declaredNamespaces()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWNamespace) next).contextComponents();
             }
@@ -517,6 +527,7 @@ public final class MWXmlSchema extends MWModel
 
     private Iterator rootElementIterators() {
         return new TransformationIterator(this.declaredNamespaces()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWNamespace) next).elements();
             }
@@ -660,6 +671,7 @@ public final class MWXmlSchema extends MWModel
 
     // **************** Problems **********************************************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkRequiredNamespacePrefix(currentProblems);

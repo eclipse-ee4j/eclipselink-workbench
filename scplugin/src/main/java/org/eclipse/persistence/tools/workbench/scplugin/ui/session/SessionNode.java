@@ -43,6 +43,7 @@ public abstract class SessionNode extends SCApplicationNode {
 
     // **************** factory methods ****************************************
 
+    @Override
     protected List buildDisplayStringPropertyNamesList() {
 
         List displayStrings = super.buildDisplayStringPropertyNamesList();
@@ -50,11 +51,13 @@ public abstract class SessionNode extends SCApplicationNode {
         return displayStrings;
     }
 
+    @Override
     protected FrameworkAction buildRenameNodeAction(WorkbenchContext workbenchContext) {
 
         return new RenameSessionAction(workbenchContext);
     }
 
+    @Override
     protected FrameworkAction buildDeleteNodeAction(WorkbenchContext workbenchContext) {
 
         return new DeleteSessionAction(workbenchContext);

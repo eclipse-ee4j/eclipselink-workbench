@@ -56,6 +56,7 @@ public class OXProjectExporterTests extends XmlProjectRunnerTests {
         assertEquals( status, 0);
     }
 
+    @Override
     protected MWProject buildProject() throws Exception {
 
         return new EmployeeOXProject().getProject();

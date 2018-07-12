@@ -175,6 +175,7 @@ public class GridLayout implements LayoutManager2,
      * @param component The component to be added
      * @param constraints Where/how the component is added to the layout
      */
+    @Override
     public void addLayoutComponent(Component component, Object constraints)
     {
         if (constraints == null) {
@@ -196,6 +197,7 @@ public class GridLayout implements LayoutManager2,
      * @param name the name of the component
      * @param component the component to be added
      */
+    @Override
     public void addLayoutComponent(String name, Component component)
     {
     }
@@ -248,6 +250,7 @@ public class GridLayout implements LayoutManager2,
      *
      * @return 0.5f
      */
+    @Override
     public float getLayoutAlignmentX(Container target)
     {
         return 0.5f;
@@ -259,6 +262,7 @@ public class GridLayout implements LayoutManager2,
      *
      * @return 0.5f
      */
+    @Override
     public float getLayoutAlignmentY(Container target)
     {
         return 0.5f;
@@ -465,6 +469,7 @@ public class GridLayout implements LayoutManager2,
      *
      * @param target The container to invalidate
      */
+    @Override
     public void invalidateLayout(Container target)
     {
     }
@@ -484,6 +489,7 @@ public class GridLayout implements LayoutManager2,
      *
      * @param parent The container in which to do the layout
      */
+    @Override
     public void layoutContainer(Container parent)
     {
         if (parent == null)
@@ -726,6 +732,7 @@ public class GridLayout implements LayoutManager2,
      *
      * @return <code>(Integer.MAX_VALUE, Integer.MAX_VALUE)</code>
      */
+    @Override
     public Dimension maximumLayoutSize(Container target)
     {
         return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -738,6 +745,7 @@ public class GridLayout implements LayoutManager2,
      * @param parent The container used to calculate the minimum size
      * @return The minimum layout size needed by the given container
      */
+    @Override
     public Dimension minimumLayoutSize(Container parent)
     {
         return getLayoutSize(parent, true);
@@ -750,6 +758,7 @@ public class GridLayout implements LayoutManager2,
      * @param parent The container used to calculate the preferred size
      * @return The preferred layout size needed by the given container
      */
+    @Override
     public Dimension preferredLayoutSize(Container parent)
     {
         return getLayoutSize(parent, false);
@@ -760,6 +769,7 @@ public class GridLayout implements LayoutManager2,
      *
      * @param component the component to be removed
      */
+    @Override
     public void removeLayoutComponent(Component component)
     {
         constraintsTable.remove(component);

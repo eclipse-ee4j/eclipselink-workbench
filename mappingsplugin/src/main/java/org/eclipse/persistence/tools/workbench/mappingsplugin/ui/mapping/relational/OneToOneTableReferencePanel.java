@@ -50,6 +50,7 @@ final class OneToOneTableReferencePanel
     /**
      * add a column for the "target foreign key" flag
      */
+    @Override
     protected ColumnPairsPanel buildColumnPairsPanel() {
         return new ExpandedColumnPairsPanel(this.getSubjectHolder(), this.getWorkbenchContextHolder(), this.buildTableReferenceHolder());
     }
@@ -58,6 +59,7 @@ final class OneToOneTableReferencePanel
      * the reference source can be on either side;
      * default to a "source" foreign key
      */
+    @Override
     protected MWTable defaultNewReferenceSourceTable() {
         Iterator candidateTables = this.mapping().getParentRelationalDescriptor().candidateTables();
         return candidateTables.hasNext() ? (MWTable) candidateTables.next() : null;
@@ -67,6 +69,7 @@ final class OneToOneTableReferencePanel
      * the reference target can be on either side
      * default to a "source" foreign key
      */
+    @Override
     protected MWTable defaultNewReferenceTargetTable() {
         MWRelationalDescriptor descriptor = (MWRelationalDescriptor) this.mapping().getReferenceDescriptor();
         if (descriptor == null) {
@@ -91,6 +94,7 @@ final class OneToOneTableReferencePanel
             this.mappingHolder = mappingHolder;
         }
 
+        @Override
         protected ColumnAdapter buildColumnAdapter() {
             return new ExpandedColumnPairsColumnAdapter(this, this.resourceRepository());
         }
@@ -124,6 +128,7 @@ final class OneToOneTableReferencePanel
 
         // ********** ColumnAdapter implementation **********
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWColumnPair columnPair = (MWColumnPair) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -135,6 +140,7 @@ final class OneToOneTableReferencePanel
             return result;
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case TARGET_FOREIGN_KEY_COLUMN:
@@ -145,14 +151,17 @@ final class OneToOneTableReferencePanel
             }
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return true;
         }
@@ -161,9 +170,11 @@ final class OneToOneTableReferencePanel
 
         private PropertyValueModel buildSourceColumnAdapter(MWColumnPair columnPair) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWColumnPair.SOURCE_COLUMN_PROPERTY, columnPair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumnPair) this.subject).getSourceColumn();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumnPair) this.subject).setSourceColumn((MWColumn) value);
                 }
@@ -173,9 +184,11 @@ final class OneToOneTableReferencePanel
 
         private PropertyValueModel buildTargetColumnAdapter(MWColumnPair columnPair) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWColumnPair.TARGET_COLUMN_PROPERTY, columnPair) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumnPair) this.subject).getTargetColumn();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumnPair) this.subject).setTargetColumn((MWColumn) value);
                 }
@@ -193,6 +206,7 @@ final class OneToOneTableReferencePanel
 
         private CollectionValueModel buildTargetForeignKeysAdapter() {
             return new CollectionAspectAdapter(this.mappingHolder(), MWOneToOneMapping.TARGET_FOREIGN_KEYS_COLLECTION) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return ((MWOneToOneMapping) this.subject).targetForeignKeys();
                 }
@@ -216,6 +230,7 @@ final class OneToOneTableReferencePanel
         /**
          * always return a Boolean
          */
+        @Override
         public Object getValue() {
             Object result = super.getValue();
             return (result == null) ? Boolean.FALSE : result;
@@ -223,6 +238,7 @@ final class OneToOneTableReferencePanel
 
         // ********** PropertyValueModel implementation **********
 
+        @Override
         public void setValue(Object value) {
             if (this.booleanValue()) {
                 if ( ! this.booleanValueOf(value)) {
@@ -239,6 +255,7 @@ final class OneToOneTableReferencePanel
 
         // ********** CollectionPropertyValueModelAdapter implementation **********
 
+        @Override
         protected Object buildValue() {
             return Boolean.valueOf(this.columnPairIsTargetForeignKey());
         }

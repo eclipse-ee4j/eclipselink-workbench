@@ -24,6 +24,7 @@ public abstract class XmlProjectRunnerTests extends ProjectRunnerTests {
     /**
      * Post building MW project.
      */
+    @Override
     protected void postBuildProject( MWProject project) {
         // do nothing
     }

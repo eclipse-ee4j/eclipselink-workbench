@@ -31,6 +31,7 @@ final class DatabasePlatformTabbedPropertiesPage extends TabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         this.addTab(this.buildGeneralPropertiesPage(), this.buildGeneralPropertiesPageTitle());
         this.addTab(this.buildJDBCPropertiesPage(), this.buildJDBCPropertiesPageTitle());

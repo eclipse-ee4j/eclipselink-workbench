@@ -93,6 +93,7 @@ final class URLCLExternalClassRepository
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassRepository#getExternalClassDescription(String)
      */
+    @Override
     public ExternalClassDescription getClassDescription(String className) {
         // postponing suffering even more; some queries only need classes that are on the system classpath;
         // if the project classpath is large, buildClassDescriptions() in the superclass can hang...
@@ -106,6 +107,7 @@ final class URLCLExternalClassRepository
     /**
      * @see AbstractCLExternalClassRepository#buildClassDescriptions()
      */
+    @Override
     Map buildClassDescriptions() {
         Map classDescriptions = new HashMap(20000);    // let's start large
         // first add the "system" classes
@@ -118,6 +120,7 @@ final class URLCLExternalClassRepository
     /**
      * @see AbstractCLExternalClassRepository#buildClassLoader()
      */
+    @Override
     ClassLoader buildClassLoader() {
         return new URLClassLoader(this.canonicalProjectClasspath.urls());
     }

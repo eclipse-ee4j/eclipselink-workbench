@@ -43,6 +43,7 @@ final class ManyToManyTableReferencePropertiesPage extends ScrollablePropertiesP
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -153,6 +154,7 @@ final class ManyToManyTableReferencePropertiesPage extends ScrollablePropertiesP
 
     private StringConverter buildTableStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTable) o).getName();
             }
@@ -163,12 +165,14 @@ final class ManyToManyTableReferencePropertiesPage extends ScrollablePropertiesP
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWManyToManyMapping.RELATION_TABLE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWManyToManyMapping mapping = (MWManyToManyMapping) subject;
                 return mapping.getRelationTable();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWManyToManyMapping mapping = (MWManyToManyMapping) subject;

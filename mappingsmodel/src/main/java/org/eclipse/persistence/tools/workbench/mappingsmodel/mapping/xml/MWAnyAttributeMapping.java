@@ -18,10 +18,8 @@ import java.util.List;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWAttributeHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWClassHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWMethodHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
@@ -32,7 +30,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.Problem;
 
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.XMLField;
 import org.eclipse.persistence.oxm.mappings.XMLAnyAttributeMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 
@@ -152,6 +149,7 @@ public final class MWAnyAttributeMapping extends MWAbstractAnyMapping {
 
     private NodeReferenceScrubber buildClassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAnyAttributeMapping.this.setMapClass(null);
             }

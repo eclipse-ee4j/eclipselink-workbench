@@ -42,6 +42,7 @@ public class DeleteBrokerAction extends DeleteSessionAction
         super(context);
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode)
     {
         SessionBrokerAdapter broker = (SessionBrokerAdapter) selectedNode.getValue();

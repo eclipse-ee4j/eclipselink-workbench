@@ -50,6 +50,7 @@ public final class RMIIIOPTransportManagerAdapter extends RMITransportManagerAda
         /**
          * Factory method for building this model.
          */
+    @Override
         protected Object buildModel() {
             return new RMIIIOPTransportManagerConfig();
         }

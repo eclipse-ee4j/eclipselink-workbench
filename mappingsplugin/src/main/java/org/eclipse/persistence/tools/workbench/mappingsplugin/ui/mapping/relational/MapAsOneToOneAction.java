@@ -30,6 +30,7 @@ final class MapAsOneToOneAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.oneToOne");
@@ -38,14 +39,17 @@ final class MapAsOneToOneAction
         this.initializeToolTipText("MAP_AS_ONE_TO_ONE_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWOneToOneMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWRelationalClassDescriptor) descriptor).addOneToOneMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWOneToOneMapping.class;
     }

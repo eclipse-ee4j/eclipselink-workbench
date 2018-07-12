@@ -125,6 +125,7 @@ public class SpinnerWithDefaultHandler
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 spinnerModel().setDefaultValue((Number) e.getNewValue());
@@ -136,11 +137,13 @@ public class SpinnerWithDefaultHandler
     {
         return new FocusListener()
         {
+            @Override
             public void focusGained(FocusEvent e)
             {
                 updateTextFieldOnFocusGained();
             }
 
+            @Override
             public void focusLost(FocusEvent e)
             {
                 if (!e.isTemporary())
@@ -170,6 +173,7 @@ public class SpinnerWithDefaultHandler
     {
         return new ChangeListener()
         {
+            @Override
             public void stateChanged(ChangeEvent e)
             {
                 updateTextFieldForegroundColor();
@@ -269,6 +273,7 @@ public class SpinnerWithDefaultHandler
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 subjectChanged(e.getNewValue() == null);

@@ -126,6 +126,7 @@ public class RdbmsSequencingPropertiesPageTest extends AbstractSessionPanelTest
         assertEquals("SEQUENCE", entry);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(SequencingPropertiesPage.class, getNodeHolder());
@@ -137,10 +138,12 @@ public class RdbmsSequencingPropertiesPageTest extends AbstractSessionPanelTest
         return (DatabaseLoginAdapter) session.getLogin();
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
@@ -150,6 +153,7 @@ public class RdbmsSequencingPropertiesPageTest extends AbstractSessionPanelTest
         getLogin().setDefaultTableSequenceTable();
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Testing Login Sequencing Page";

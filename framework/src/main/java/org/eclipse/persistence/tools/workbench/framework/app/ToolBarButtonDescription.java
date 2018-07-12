@@ -52,6 +52,7 @@ public class ToolBarButtonDescription extends ButtonDescription
      */
     private static class ToolBarButtonCreator implements ButtonCreator {
 
+        @Override
         public AbstractButton createButton(FrameworkAction action) {
             AbstractButton button = new JButton();
             // the client property hack must be set before the action is set

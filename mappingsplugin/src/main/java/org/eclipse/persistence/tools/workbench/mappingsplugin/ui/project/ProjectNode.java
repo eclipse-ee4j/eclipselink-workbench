@@ -176,6 +176,7 @@ public abstract class ProjectNode
         super(project, context.getNodeManager().getRootNode(), plugin, context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.descriptorNodeBuilder = this.buildDescriptorNodeBuilder();
@@ -191,15 +192,19 @@ public abstract class ProjectNode
 
     private CollectionChangeListener buildDescriptorsListener() {
         return new CollectionChangeListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 ProjectNode.this.addDescriptorNodesFor(e.items());
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 ProjectNode.this.removeDescriptorNodesFor(e.items());
             }
+            @Override
             public void collectionChanged(CollectionChangeEvent e) {
                 ProjectNode.this.rebuildDescriptorNodes();
             }
+            @Override
             public String toString() {
                 return "descriptors listener";
             }
@@ -208,6 +213,7 @@ public abstract class ProjectNode
 
     private PropertyChangeListener buildDescriptorNameListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 String oldPackageName = ClassTools.packageNameForClassNamed((String) e.getOldValue());
                 String newPackageName = ClassTools.packageNameForClassNamed((String) e.getNewValue());
@@ -215,6 +221,7 @@ public abstract class ProjectNode
                     ProjectNode.this.descriptorChangedPackage((MWDescriptor) e.getSource(), oldPackageName, newPackageName);
                 }
             }
+            @Override
             public String toString() {
                 return "descriptor name listener";
             }
@@ -223,6 +230,7 @@ public abstract class ProjectNode
 
     private ListValueModel buildChildrenModel() {
         return new SortedListValueModelAdapter(this.buildChildrenDisplayStringAdapter(), Child.COMPARATOR) {
+            @Override
             protected int indexToAddItems() {
                 //add new items before the metaDataRepositoryNode so it doesn't resort
                 //LDD of course if the item happens to be the metaDataRepository, this response throws an indexOutOfBoundsException
@@ -230,6 +238,7 @@ public abstract class ProjectNode
                 int index = super.indexToAddItems();
                 return (index > 0) ? --index : index;
             }
+            @Override
             public String toString() {
                 return "children model";
             }
@@ -254,6 +263,7 @@ public abstract class ProjectNode
         return new CompositeCollectionValueModel(container, Transformer.NULL_INSTANCE);
     }
 
+    @Override
     protected ApplicationContext expandContext(ApplicationContext context) {
         return super.expandContext(context).
             buildExpandedResourceRepositoryContext(UiProjectBundle.class).
@@ -269,6 +279,7 @@ public abstract class ProjectNode
     private Iterator descriptors() {
         return new CompositeIterator(
                 new TransformationIterator(this.descriptorPackageNodes()) {
+                    @Override
                     protected Object transform(Object next) {
                         return ((DescriptorPackageNode) next).descriptors();
                     }
@@ -276,10 +287,12 @@ public abstract class ProjectNode
         );
     }
 
+    @Override
     public void addDescriptorsTo(Collection descriptors) {
         CollectionTools.addAll(descriptors, this.descriptors());
     }
 
+    @Override
     public boolean isAutoMappable() {
         return true;
     }
@@ -287,6 +300,7 @@ public abstract class ProjectNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     protected void engageValue() {
         super.engageValue();
         this.getProject().addCollectionChangeListener(MWProject.DESCRIPTORS_COLLECTION, this.descriptorsListener);
@@ -300,6 +314,7 @@ public abstract class ProjectNode
      */
     protected abstract Child buildMetaDataRepositoryNode();
 
+    @Override
     protected void disengageValue() {
         this.metaDataRepositoryNodeHolder.setValue(null);
         this.removeDescriptorNodesFor(this.getProject().descriptors());
@@ -307,10 +322,12 @@ public abstract class ProjectNode
         super.disengageValue();
     }
 
+    @Override
     protected String[] iconPropertyNames() {
         return PROJECT_ICON_PROPERTY_NAMES;
     }
 
+    @Override
     protected IconBuilder buildIconBuilder() {
         IconBuilder ib = super.buildIconBuilder();
         return this.getApplicationContext().getApplication().isDevelopmentMode() ?
@@ -331,6 +348,7 @@ public abstract class ProjectNode
         );
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return PROJECT_DISPLAY_STRING_PROPERTY_NAMES;
     }
@@ -338,6 +356,7 @@ public abstract class ProjectNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         GroupContainerDescription desc = new RootMenuDescription();
         context = this.buildLocalWorkbenchContext(context);
@@ -378,14 +397,17 @@ public abstract class ProjectNode
 
     protected abstract GroupContainerDescription buildExportMenuDescription(WorkbenchContext context);
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     public String helpTopicID() {
         return "project";
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext) {
         return new ToolBarDescription();
     }
@@ -435,10 +457,12 @@ public abstract class ProjectNode
     }
 
 
+    @Override
     public File saveFile() {
         return this.getProject().saveFile();
     }
 
+    @Override
     public boolean save(File mostRecentSaveDirectory, WorkbenchContext workbenchContext) {
         boolean persistLastRefresh = preferences().getBoolean(MWClassRepository.PERSIST_LAST_REFRESH_PREFERENCE, MWClassRepository.PERSIST_LAST_REFRESH_PREFERENCE_DEFAULT);
         this.getProject().getClassRepository().setPersistLastRefresh(persistLastRefresh);
@@ -474,6 +498,7 @@ public abstract class ProjectNode
         return option == JOptionPane.YES_OPTION;
     }
 
+    @Override
     public boolean saveAs(File mostRecentSaveDirectory, WorkbenchContext workbenchContext) {
         File saveFile = this.saveFile();
         File directory = this.getProject().getSaveDirectory();
@@ -515,10 +540,12 @@ public abstract class ProjectNode
 
     private FileFilter buildSaveAsDialogFileFilter(final WorkbenchContext workbenchContext) {
         return new FileFilter () {
+            @Override
             public String getDescription() {
                 return workbenchContext.getApplicationContext().getResourceRepository().getString("SAVE_AS_DIALOG_MWP_FILE_FILTER");
             }
 
+            @Override
             public boolean accept(File file) {
                 return file.isDirectory() || MWProject.FILE_NAME_EXTENSION.equals(FileTools.extension(file));
             }
@@ -553,6 +580,7 @@ public abstract class ProjectNode
 
     // ********** AutomappableNode implementation **********
 
+    @Override
     public String getAutomapSuccessfulStringKey() {
         return "AUTOMAP_PROJECT_SUCCESSFUL";
     }
@@ -711,6 +739,7 @@ public abstract class ProjectNode
 
         Comparator COMPARATOR =
             new Comparator() {
+                @Override
                 public int compare(Object o1, Object o2) {
                     int priority1 = ((Child) o1).getProjectNodeChildPriority();
                     int priority2 = ((Child) o2).getProjectNodeChildPriority();
@@ -719,6 +748,7 @@ public abstract class ProjectNode
                     }
                     return priority1 - priority2;
                 }
+                @Override
                 public String toString() {
                     return "ProjectNode.Child.COMPARATOR";
                 }
@@ -738,6 +768,7 @@ public abstract class ProjectNode
          * Determines whether the selected file can be used as the new location to
          * persist the document.
          */
+        @Override
         public void approveSelection() {
             int result = canReplaceExistingFile();
 

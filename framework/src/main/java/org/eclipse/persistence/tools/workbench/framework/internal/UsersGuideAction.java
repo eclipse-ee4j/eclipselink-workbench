@@ -25,11 +25,13 @@ final class UsersGuideAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         initializeTextAndMnemonic("USERGUIDE");
 //        initializeIcon("search");
     }
 
+    @Override
     protected void execute() {
         helpManager().showTopic("eclipslink_userguide");
     }

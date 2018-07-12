@@ -103,6 +103,7 @@ final class PreferencesView {
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 PreferencesView.this.selectedNodeChanged(e.getNewLeadSelectionPath());
             }
@@ -225,12 +226,15 @@ final class PreferencesView {
         PreferencesEmptySelectionPseudoNode() {
             super(null);    // no context needed here
         }
+        @Override
         protected Component buildPropertiesPage() {
             return new JPanel();
         }
+        @Override
         protected String buildDisplayString() {
             return " ";    // put a space so the label preserves its size
         }
+        @Override
         public String helpTopicId() {
             return "preferences";
         }

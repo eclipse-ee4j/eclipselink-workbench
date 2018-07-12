@@ -70,6 +70,7 @@ public class FileHandlerCleanup implements Runnable {
      * ...then delete the file handler's lock file.
      * @see Runnable#run()
      */
+    @Override
     public void run() {
         this.fileHandler.close();
         new File(this.lockFileName).delete();
@@ -78,6 +79,7 @@ public class FileHandlerCleanup implements Runnable {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.lockFileName);
     }

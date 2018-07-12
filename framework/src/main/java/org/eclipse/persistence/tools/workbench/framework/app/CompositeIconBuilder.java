@@ -78,6 +78,7 @@ public class CompositeIconBuilder
      * icon builder and another icon.
      * @see IconBuilder#buildIcon()
      */
+    @Override
     public Icon buildIcon() {
         Icon icon1 = this.original.buildIcon();
         Icon icon2 = (this.combine) ? this.icon : this.getEmptyIcon();
@@ -117,6 +118,7 @@ public class CompositeIconBuilder
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -128,6 +130,7 @@ public class CompositeIconBuilder
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (o instanceof CompositeIconBuilder) {
             return this.equals((CompositeIconBuilder) o);
@@ -148,6 +151,7 @@ public class CompositeIconBuilder
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.original.hashCode() ^
             Boolean.valueOf(this.combine).hashCode() ^
@@ -161,6 +165,7 @@ public class CompositeIconBuilder
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.original);
     }

@@ -291,6 +291,7 @@ public abstract class Attribute {
 
     public abstract void accept(Visitor visitor);
 
+    @Override
     public final String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(ClassTools.shortClassNameForObject(this));

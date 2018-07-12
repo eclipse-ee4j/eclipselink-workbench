@@ -55,6 +55,7 @@ public final class ListCuratorTests
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.subject1 = new TestSubject(this.subject1Names());
@@ -87,6 +88,7 @@ public final class ListCuratorTests
 
     private ListCurator buildListCurator(ValueModel subjectHolder) {
         return new ListCurator(subjectHolder) {
+            @Override
             public Iterator getValueForRecord() {
                 return ((TestSubject) this.subject).strings();
             }
@@ -95,18 +97,22 @@ public final class ListCuratorTests
 
     private ListChangeListener buildListChangeListener1() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ListCuratorTests.this.value1Changed(e);
             }
 
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ListCuratorTests.this.value1Changed(e);
             }
 
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ListCuratorTests.this.value1Changed(e);
             }
 
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ListCuratorTests.this.value1Changed(e);
             }
@@ -117,6 +123,7 @@ public final class ListCuratorTests
         this.event1 = e;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

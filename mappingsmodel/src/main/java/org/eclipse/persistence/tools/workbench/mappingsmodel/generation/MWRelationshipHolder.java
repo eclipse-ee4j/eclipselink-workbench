@@ -45,6 +45,7 @@ public class MWRelationshipHolder
     public boolean canMapOneToOne() {
         return true;
     }
+    @Override
     public int compareTo(Object otherObject) {
         MWRelationshipHolder otherHolder = (MWRelationshipHolder) otherObject;
         if (getReference().getName().equals(otherHolder.getReference().getName()))

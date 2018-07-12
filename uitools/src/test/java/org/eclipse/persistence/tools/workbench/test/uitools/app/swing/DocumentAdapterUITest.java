@@ -73,9 +73,11 @@ public class DocumentAdapterUITest {
 
     private PropertyValueModel buildNameHolder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) this.subject).getName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setName((String) value);
             }
@@ -92,6 +94,7 @@ public class DocumentAdapterUITest {
 
     private AbstractDocument buildUpperCaseNameDocumentDelegate() {
         return new PlainDocument() {
+            @Override
             public void insertString(int offset, String string, AttributeSet a) throws BadLocationException {
                 if (string == null) {
                     return;
@@ -116,6 +119,7 @@ public class DocumentAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -167,6 +171,7 @@ public class DocumentAdapterUITest {
 
     private Action buildResetNameAction() {
         Action action = new AbstractAction("reset name") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DocumentAdapterUITest.this.resetName();
             }
@@ -185,6 +190,7 @@ public class DocumentAdapterUITest {
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DocumentAdapterUITest.this.clearModel();
             }
@@ -203,6 +209,7 @@ public class DocumentAdapterUITest {
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DocumentAdapterUITest.this.restoreModel();
             }
@@ -221,6 +228,7 @@ public class DocumentAdapterUITest {
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction("print model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DocumentAdapterUITest.this.printModel();
             }
@@ -249,6 +257,7 @@ public class DocumentAdapterUITest {
             this.name = name;
             this.firePropertyChanged(NAME_PROPERTY, old, name);
         }
+        @Override
         public String toString() {
             return "TestModel(" + this.getName() + ")";
         }

@@ -51,6 +51,7 @@ public class PropertyAspectAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.subject1 = new TestSubject("foo", "test subject 1");
@@ -66,6 +67,7 @@ public class PropertyAspectAdapterTests extends TestCase {
     private PropertyAspectAdapter buildAspectAdapter(ValueModel subjectHolder) {
         return new PropertyAspectAdapter(subjectHolder, TestSubject.NAME_PROPERTY) {
             // this is not a aspect adapter - the value is determined by the aspect name
+            @Override
             protected Object getValueFromSubject() {
                 if (this.propertyNames[0] == TestSubject.NAME_PROPERTY) {
                     return ((TestSubject) this.subject).getName();
@@ -75,6 +77,7 @@ public class PropertyAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.propertyNames[0]);
                 }
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 if (this.propertyNames[0] == TestSubject.NAME_PROPERTY) {
                     ((TestSubject) this.subject).setName((String) value);
@@ -89,6 +92,7 @@ public class PropertyAspectAdapterTests extends TestCase {
 
     private PropertyChangeListener buildValueChangeListener1() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyAspectAdapterTests.this.value1Changed(e);
             }
@@ -99,6 +103,7 @@ public class PropertyAspectAdapterTests extends TestCase {
         this.event1 = e;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -234,6 +239,7 @@ public class PropertyAspectAdapterTests extends TestCase {
 
     private PropertyValueModel buildMultipleAspectAdapter(ValueModel subjectHolder) {
         return new PropertyAspectAdapter(subjectHolder, TestSubject.NAME_PROPERTY, TestSubject.DESCRIPTION_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 TestSubject ts = (TestSubject) this.subject;
                 return ts.getName() + ":" + ts.getDescription();
@@ -243,6 +249,7 @@ public class PropertyAspectAdapterTests extends TestCase {
 
     private PropertyChangeListener buildMultipleValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyAspectAdapterTests.this.multipleValueChanged(e);
             }
@@ -283,6 +290,7 @@ public class PropertyAspectAdapterTests extends TestCase {
 
     private PropertyValueModel buildCustomAspectAdapter(ValueModel subjectHolder) {
         return new PropertyAspectAdapter(subjectHolder, TestSubject.NAME_PROPERTY) {
+            @Override
             protected Object buildValue() {
                 TestSubject ts = (TestSubject) this.subject;
                 return (ts == null) ? "<unnamed>" : ts.getName();
@@ -292,6 +300,7 @@ public class PropertyAspectAdapterTests extends TestCase {
 
     private PropertyChangeListener buildCustomValueChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 PropertyAspectAdapterTests.this.customValueChanged(e);
             }

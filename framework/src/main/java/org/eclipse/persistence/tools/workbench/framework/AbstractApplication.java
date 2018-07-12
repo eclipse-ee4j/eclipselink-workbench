@@ -65,6 +65,7 @@ public abstract class AbstractApplication
      * the Library Designation, as derived from the JAR file manifest.
      * @see Application#getFullProductName()
      */
+    @Override
     public String getFullProductName() {
         return this.manifestInterrogator.getFullProductName();
     }
@@ -73,6 +74,7 @@ public abstract class AbstractApplication
      * Return the Specification Title, as derived from the JAR file manifest.
      * @see Application#getProductName()
      */
+    @Override
     public String getProductName() {
         return this.manifestInterrogator.getProductName();
     }
@@ -81,6 +83,7 @@ public abstract class AbstractApplication
      * Return the Library Designation, as derived from the JAR file manifest.
      * @see Application#getShortProductName()
      */
+    @Override
     public String getShortProductName() {
         return this.manifestInterrogator.getShortProductName();
     }
@@ -89,6 +92,7 @@ public abstract class AbstractApplication
      * Return the Specification Version, as derived from the JAR file manifest.
      * @see org.eclipse.persistence.tools.workbench.framework.Application#getVersionNumber()
      */
+    @Override
     public String getVersionNumber() {
         return this.manifestInterrogator.getVersionNumber();
     }
@@ -97,6 +101,7 @@ public abstract class AbstractApplication
      * Concatenate the full product name and the version number.
      * @see Application#getFullProductNameAndVersionNumber()
      */
+    @Override
     public String getFullProductNameAndVersionNumber() {
         return this.getFullProductName() + " " + this.getVersionNumber();
     }
@@ -105,6 +110,7 @@ public abstract class AbstractApplication
      * Strip the build number off the end of the Implementation Version.
      * @see Application#getBuildNumber()
      */
+    @Override
     public String getBuildNumber() {
         return this.manifestInterrogator.getBuildNumber();
     }
@@ -112,6 +118,7 @@ public abstract class AbstractApplication
     /**
      * Return the Release Designation, as derived from the JAR file manifest.
      */
+    @Override
     public String getReleaseDesignation() {
         return this.manifestInterrogator.getReleaseDesignation();
     }
@@ -119,6 +126,7 @@ public abstract class AbstractApplication
     /**
      * @see Application#isDevelopmentMode()
      */
+    @Override
     public boolean isDevelopmentMode() {
         return this.manifestInterrogator.isDevelopmentMode();
     }

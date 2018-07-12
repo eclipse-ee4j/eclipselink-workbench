@@ -56,6 +56,7 @@ public class DescriptorStringHolder extends ObjectStringHolder {
     // ********** constants **********
 
     public static final StringConverter DEFAULT_STRING_CONVERTER = new StringConverter() {
+        @Override
         public String convertToString(Object o) {
             return ((MWDescriptor) o).shortName().toLowerCase();
         }

@@ -53,6 +53,7 @@ abstract class CLExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getDeclaringClass()
      */
+    @Override
     public ExternalClassDescription getDeclaringClass() {
         return this.classDescriptionFor(this.member.getDeclaringClass());
     }
@@ -60,6 +61,7 @@ abstract class CLExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getModifiers()
      */
+    @Override
     public int getModifiers() {
         return this.member.getModifiers();
     }
@@ -67,6 +69,7 @@ abstract class CLExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getName()
      */
+    @Override
     public String getName() {
         return this.member.getName();
     }
@@ -75,6 +78,7 @@ abstract class CLExternalMember
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#isSynthetic()
      * This is just a best guess at which members are synthetic.
      */
+    @Override
     public boolean isSynthetic() {
         return this.getName().startsWith("class$");
     }
@@ -82,6 +86,7 @@ abstract class CLExternalMember
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

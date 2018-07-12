@@ -42,6 +42,7 @@ public class ProjectXMLAdapter extends ProjectAdapter {
         super( parent, name);
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -53,10 +54,12 @@ public class ProjectXMLAdapter extends ProjectAdapter {
         return ( ProjectXMLConfig)this.getModel();
     }
 
+    @Override
     protected Object buildModel() {
             return new ProjectXMLConfig();
     }
 
+    @Override
     public boolean isXml() {
       return true;
     }

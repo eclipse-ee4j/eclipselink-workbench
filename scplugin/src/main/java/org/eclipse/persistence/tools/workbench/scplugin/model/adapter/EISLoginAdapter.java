@@ -50,6 +50,7 @@ public final class EISLoginAdapter extends LoginAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         return new EISLoginConfig();
@@ -57,6 +58,7 @@ public final class EISLoginAdapter extends LoginAdapter {
     /**
      * Factory method for building a child default SequencingAdapter.
      */
+    @Override
     protected SequencingAdapter buildSequencing() {
         SequencingAdapter sequencing = super.buildSequencing();
 
@@ -67,6 +69,7 @@ public final class EISLoginAdapter extends LoginAdapter {
     /**
      * Returns the datasource platform class from user's preference.
      */
+    @Override
     protected String getDefaultPlatformClassName() {
 
         String platformName = this.preferences().get( SCPlugin.EIS_PLATFORM_PREFERENCE, SCPlugin.EIS_PLATFORM_PREFERENCE_DEFAULT);
@@ -84,6 +87,7 @@ public final class EISLoginAdapter extends LoginAdapter {
     /**
      * Sets this config model datasource platform class.
      */
+    @Override
     public void setPlatformClass( String platformClassName) {
         super.setPlatformClass( platformClassName);
 
@@ -123,12 +127,14 @@ public final class EISLoginAdapter extends LoginAdapter {
         this.firePropertyChanged( CONNECTION_SPEC_CLASS_PROPERTY, old, name);
     }
 
+    @Override
     public void toString( StringBuffer sb) {
         super.toString( sb);
 
         sb.append( ", ").append( this.getConnectionSpecClassName());
     }
 
+    @Override
     boolean platformIsEis() {
 
         return true;

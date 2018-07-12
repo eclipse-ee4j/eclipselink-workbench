@@ -45,6 +45,7 @@ final class WorkbenchSaveAsAction extends AbstractFrameworkAction
         this.nodeManager = nodeManager;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("file.saveAs");
@@ -64,6 +65,7 @@ final class WorkbenchSaveAsAction extends AbstractFrameworkAction
 
     private WindowListener buildWorkbenchWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 WorkbenchSaveAsAction.this.workbenchWindowClosed();
             }
@@ -72,6 +74,7 @@ final class WorkbenchSaveAsAction extends AbstractFrameworkAction
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 synchronized (WorkbenchSaveAsAction.this) {
                     WorkbenchSaveAsAction.this.update();
@@ -81,6 +84,7 @@ final class WorkbenchSaveAsAction extends AbstractFrameworkAction
     }
 
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = this.selectedProjectNodes();
         for (int i = projectNodes.length; i-- > 0; ) {

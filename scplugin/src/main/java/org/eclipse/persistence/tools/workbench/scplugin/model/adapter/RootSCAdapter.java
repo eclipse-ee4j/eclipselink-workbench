@@ -83,6 +83,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
      * to the specified collection.
      * @see #children()
      */
+    @Override
     protected void addChildrenTo(List children) {
 
         super.addChildrenTo(children);
@@ -91,6 +92,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * Initializes session manager.
      */
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -139,6 +141,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     private ClassLoader buildLoader() {
 
         URLClassLoader loader = new URLClassLoader( buildEntries(), getClass().getClassLoader()) {
+            @Override
             public URL findResource( String name) {
                 try {
                     if( name.equals( getPath().getPath())) {
@@ -178,6 +181,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
         markEntireBranchClean();
     }
 
+    @Override
     public String displayString() {
         return this.name;
     }
@@ -194,6 +198,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * Returns the Preferences node used by the SC.
      */
+    @Override
     Preferences preferences() {
 
         return preferences;
@@ -205,6 +210,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
      *
      * @return The repository for classpath entries and classes
      */
+    @Override
     public ClassRepository getClassRepository() {
         return this.properties.getClassRepository();
     }
@@ -232,6 +238,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     }
 
     private static final String CR = System.getProperty("line.separator");
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( CR).append( "\t").append( this.displayString() + "( " + this.getConfigFileVersion()+ " )");
@@ -240,6 +247,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * Returns this config model property.
      */
+    @Override
     public String getName() {
 
         return this.name;
@@ -258,6 +266,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * as the root node, we must implement this method
      */
+    @Override
     public ChangeNotifier getChangeNotifier() {
         return this.changeNotifier;
     }
@@ -265,6 +274,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * allow clients to install another change notifier
      */
+    @Override
     public void setChangeNotifier(ChangeNotifier changeNotifier) {
         this.changeNotifier = changeNotifier;
     }
@@ -272,6 +282,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * as the root node, we must implement this method
      */
+    @Override
     public Validator getValidator() {
         return validator;
     }
@@ -279,6 +290,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
     /**
      * allow clients to install an active validator
      */
+    @Override
     public void setValidator(Validator validator) {
         this.validator = validator;
     }
@@ -287,6 +299,7 @@ abstract class RootSCAdapter extends SCAdapter implements Nominative {
      * Mark the object and all its descendants as clean.
      * N/A to Root objects.
      */
+    @Override
     protected void markEntireConfigurationClean() {
         return;
     }

@@ -48,6 +48,7 @@ public class PrefixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.addAll(this.buildPrefixStringHolders("zzz", 75));
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("xxx", stringHolders1);
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("yyy", stringHolders1);
@@ -77,6 +78,7 @@ public class PrefixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.addAll(this.buildPrefixStringHolders("zzzaaa", 35));
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("xxx", stringHolders1);
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("yyy", stringHolders1);
@@ -108,6 +110,7 @@ public class PrefixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.add(new SimpleStringHolder("zzz"));        // add a string that is ALL prefix!
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("xxx", stringHolders1);
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("yyy", stringHolders1);
@@ -139,6 +142,7 @@ public class PrefixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.add(new SimpleStringHolder("zzz"));        // add a string that is ALL prefix!
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertSomePrefixes("xxx", stringHolders1);
                 PrefixStrippingPartialStringComparatorEngineTests.this.assertNoPrefixes("yyy", stringHolders1);

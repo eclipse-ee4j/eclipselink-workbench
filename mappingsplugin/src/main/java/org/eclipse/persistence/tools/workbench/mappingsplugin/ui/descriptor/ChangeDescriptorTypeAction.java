@@ -33,10 +33,12 @@ public abstract class ChangeDescriptorTypeAction extends AbstractToggleFramework
         super(context);
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {MWDescriptor.ACTIVE_PROPERTY};
     }
 
+    @Override
     protected void execute() {
         Collection selectionPaths = new ArrayList();
         for (Iterator i = CollectionTools.iterator(selectedNodes()); i.hasNext(); ) {
@@ -59,6 +61,7 @@ public abstract class ChangeDescriptorTypeAction extends AbstractToggleFramework
 
     protected abstract MWDescriptor morphDescriptor(MWDescriptor descriptor);
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return ((DescriptorNode) selectedNode).isActive();
     }

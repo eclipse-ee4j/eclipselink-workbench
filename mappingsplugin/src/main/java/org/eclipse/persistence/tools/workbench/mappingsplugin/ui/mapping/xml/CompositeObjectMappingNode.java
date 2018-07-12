@@ -32,6 +32,7 @@ public final class CompositeObjectMappingNode
 
     // **************** MappingNode contract **********************************
 
+    @Override
     protected String buildIconKey() {
         return "mapping.compositeObject";
     }
@@ -39,6 +40,7 @@ public final class CompositeObjectMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_COMPOSITE_OBJECT_MAPPING_NODE";
     }
@@ -46,6 +48,7 @@ public final class CompositeObjectMappingNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
 //        return this.getDescriptorNode().mappingHelpTopicPrefix() + ".compositeObject";
         return this.getDescriptorNode().mappingHelpTopicPrefix() + "CompositeObject"; // For 10.1.3
@@ -54,6 +57,7 @@ public final class CompositeObjectMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         XmlDescriptorNode parentNode = (XmlDescriptorNode) getDescriptorNode();
         return parentNode.propertiesPageClassForCompositeObjectMapping();

@@ -31,14 +31,17 @@ public class Sybase12_0Tests extends PlatformTests {
         super(name);
     }
 
+    @Override
     protected String[] driverJARNames() {
         return new String[] {"jconn2.jar"};
     }
 
+    @Override
     protected String driverClassName() {
         return "com.sybase.jdbc2.jdbc.SybDriver";
     }
 
+    @Override
     protected String connectionURL() {
         return "jdbc:sybase:Tds:" + this.serverName() + ":5001/" + this.databaseName();
     }
@@ -50,6 +53,7 @@ public class Sybase12_0Tests extends PlatformTests {
         return "tlsvrdb7.ca.oracle.com";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "12.0";
     }
@@ -57,6 +61,7 @@ public class Sybase12_0Tests extends PlatformTests {
     /**
      * the Sybase server is not set up with individual accounts
      */
+    @Override
     protected String userName() {
         return "MWDEV1";
     }
@@ -65,6 +70,7 @@ public class Sybase12_0Tests extends PlatformTests {
         return this.userName();
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("BINARY_COL                BINARY NULL,"); sb.append(CR);
         sb.append("BINARY_100_COL            BINARY(100) NULL,"); sb.append(CR);
@@ -100,6 +106,7 @@ public class Sybase12_0Tests extends PlatformTests {
         sb.append("VARCHAR_20_COL            VARCHAR(20) NULL"); sb.append(CR);
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // BINARY
         this.verifyColumnAttribute(metaDataMap, "BINARY_COL", "TABLE_CAT", this.userName());
@@ -551,6 +558,7 @@ public class Sybase12_0Tests extends PlatformTests {
 
     }
 
+    @Override
     protected String platformName() {
         return "Sybase";
     }

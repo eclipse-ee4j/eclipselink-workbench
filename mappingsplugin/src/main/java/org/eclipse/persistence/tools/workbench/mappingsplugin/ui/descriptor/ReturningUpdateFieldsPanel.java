@@ -74,6 +74,7 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
      *
      * @return The container with all its widgets
      */
+    @Override
     protected void initializeLayout()
     {
         this.sortedFieldsAdapter = this.buildSortedUpdateFieldsHolder();
@@ -137,6 +138,7 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged( ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     ReturningUpdateFieldsPanel.this.rowSelectionChanged();
@@ -170,9 +172,11 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
 
     private CollectionValueModel buildUpdateFieldsAdapter() {
         return new CollectionAspectAdapter( getSubjectHolder(), MWReturningPolicy.UPDATE_FIELDS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return (( MWReturningPolicy)subject).updateFields();
             }
+            @Override
             protected int sizeFromSubject() {
                 return (( MWReturningPolicy)subject).updateFieldsSize();
             }
@@ -206,6 +210,7 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
 
     private Action buildAddAction() {
         final AbstractFrameworkAction action = new AbstractFrameworkAction( this.getApplicationContext()) {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 ReturningUpdateFieldsPanel.this.addField();
             }
@@ -215,6 +220,7 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
         action.setEnabled( true);
 
         this.getSubjectHolder().addPropertyChangeListener(PropertyValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange( PropertyChangeEvent evt) {
                 action.setEnabled( returningPolicy() != null);
 
@@ -234,6 +240,7 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
 
     private Action buildRemoveAction() {
         removeAction = new AbstractFrameworkAction( this.getApplicationContext()) {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ReturningUpdateFieldsPanel.this.removeField();
             }
@@ -274,14 +281,17 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString( COLUMN_NAME_KEYS[ index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case UPDATE_FIELD_COLUMN:
@@ -291,10 +301,12 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
             }
         }
 
+        @Override
         public boolean isColumnEditable( int index) {
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels( Object subject) {
             PropertyValueModel[] result = new PropertyValueModel[ COLUMN_COUNT];
 
@@ -305,6 +317,7 @@ public abstract class ReturningUpdateFieldsPanel extends AbstractSubjectPanel {
 
         private PropertyValueModel buildUpdateFieldAdapter( MWDataField field) {
             return new PropertyAspectAdapter( MWDataField.FIELD_NAME_PROPERTY, field) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWDataField) this.subject).fieldName();
                 }

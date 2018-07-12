@@ -99,6 +99,7 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new Comparator()
         {
+            @Override
             public int compare(Object object1, Object object2)
             {
                 String shortClassName1 = ((String) object1).replaceFirst( "Platform", "");
@@ -115,6 +116,7 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -245,12 +247,14 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
     {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(getSelectionHolder(), EISLoginAdapter.PLATFORM_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 EISLoginAdapter login = (EISLoginAdapter) subject;
                 return login.getPlatformClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 EISLoginAdapter adapter = (EISLoginAdapter) subject;
@@ -260,6 +264,7 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
 
         return new TransformationPropertyValueModel(adapter)
         {
+            @Override
             protected Object reverseTransform(Object value)
             {
                 if (value == null)
@@ -268,6 +273,7 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
                 return EisPlatformManager.instance().getRuntimePlatformClassNameForClass(( String)value);
             }
 
+            @Override
             protected Object transform(Object value)
             {
                 if (value == null)
@@ -288,6 +294,7 @@ public class EisConnectionPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new SimpleListCellRenderer()
         {
+            @Override
             protected String buildText(Object cellValue)
             {
                 if (((String) cellValue).equals("AQPlatform"))

@@ -23,20 +23,16 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 import org.eclipse.persistence.tools.workbench.framework.context.PreferencesContext;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.uitools.FileChooserPanel;
 import org.eclipse.persistence.tools.workbench.framework.uitools.SwingTools;
-import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
 import org.eclipse.persistence.tools.workbench.uitools.app.BufferedPropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
-import org.eclipse.persistence.tools.workbench.uitools.app.TransformationPropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.adapters.PreferencePropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.swing.CheckBoxModelAdapter;
-import org.eclipse.persistence.tools.workbench.uitools.app.swing.RadioButtonModelAdapter;
 import org.eclipse.persistence.tools.workbench.utility.string.BidiStringConverter;
 
 
@@ -115,6 +111,7 @@ final class HelpPreferencesPage extends AbstractPanel {
             JFileChooser.FILES_ONLY,
             true) {
 
+            @Override
             protected boolean labelVisible() {
                 return false;
             }
@@ -155,6 +152,7 @@ final class HelpPreferencesPage extends AbstractPanel {
             "PREFERENCES.GENERAL.HELP.LOCAL_BROWSER_CHOOSER_BUTTON",
             JFileChooser.FILES_ONLY)
         {
+            @Override
             protected boolean labelVisible() {
                 return false;
             }

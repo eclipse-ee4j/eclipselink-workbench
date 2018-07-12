@@ -225,6 +225,7 @@ public class AccessorEditingPanel extends AbstractPanel {
 
     private StringConverter buildMWMethodStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWMethod) o).shortSignatureWithReturnType();
             }
@@ -234,6 +235,7 @@ public class AccessorEditingPanel extends AbstractPanel {
     private ListCellRenderer buildMethodRenderer() {
         return new AdaptableListCellRenderer(
             new MethodCellRendererAdapter(this.resourceRepository()) {
+                @Override
                 protected Icon buildNonNullValueIcon(Object value) {
                     return null;
                 }
@@ -272,6 +274,7 @@ public class AccessorEditingPanel extends AbstractPanel {
 
     private PropertyChangeListener buildComponentEnablingListener(final Component component, final String enabledValue) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() == enabledValue);
             }
@@ -338,6 +341,7 @@ public class AccessorEditingPanel extends AbstractPanel {
 
     private StringConverter buildMWClassAttributeStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWClassAttribute) o).getName();
             }
@@ -347,6 +351,7 @@ public class AccessorEditingPanel extends AbstractPanel {
     private ListCellRenderer buildAttributeRenderer() {
         return new AdaptableListCellRenderer(
             new ClassAttributeCellRendererAdapter(this.resourceRepository()) {
+                @Override
                 protected Icon buildNonNullValueIcon(Object value) {
                     return null;
                 }

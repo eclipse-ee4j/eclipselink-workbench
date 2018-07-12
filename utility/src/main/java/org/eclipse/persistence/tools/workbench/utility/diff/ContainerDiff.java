@@ -39,6 +39,7 @@ public class ContainerDiff extends CompositeDiff {
     /**
      * @see Diff#different()
      */
+    @Override
     public boolean different() {
         if (this.removedElements.length != 0 ) {
             return true;
@@ -52,6 +53,7 @@ public class ContainerDiff extends CompositeDiff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         if (this.different()) {
             pw.print("The ");

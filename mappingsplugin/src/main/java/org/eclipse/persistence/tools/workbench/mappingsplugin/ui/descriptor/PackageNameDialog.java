@@ -68,10 +68,12 @@ public final class PackageNameDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected String helpTopicId() {
         return "dialog.createNewClass";
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -79,6 +81,7 @@ public final class PackageNameDialog
         //this.setPreferredSize(400, 150);
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -128,6 +131,7 @@ public final class PackageNameDialog
         ((JTextField) comboBox.getEditor().getEditorComponent()).setDocument(new RegexpDocument(RegexpDocument.RE_PACKAGE));
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.packageComboBox;
     }

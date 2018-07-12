@@ -33,6 +33,7 @@ public abstract class OracleTests extends PlatformTests {
     /**
      * extend to drop array and user-defined type
      */
+    @Override
     protected void dropDatabaseObjects() throws Exception {
         super.dropDatabaseObjects();
         Statement stmt;
@@ -53,6 +54,7 @@ public abstract class OracleTests extends PlatformTests {
     /**
      * extend to create user-defined type and array
      */
+    @Override
     protected void createDatabaseObjects() throws Exception {
         Statement stmt;
 
@@ -67,14 +69,17 @@ public abstract class OracleTests extends PlatformTests {
         super.createDatabaseObjects();
     }
 
+    @Override
     protected String[] driverJARNames() {
         return new String[] {"OracleThinJDBC_jdk14_10.2.0.1.0.jar"};
     }
 
+    @Override
     protected String driverClassName() {
         return "oracle.jdbc.OracleDriver";
     }
 
+    @Override
     protected String connectionURL() {
         return "jdbc:oracle:thin:@" + this.serverName() + ":1521:" + this.instanceName();
     }
@@ -99,6 +104,7 @@ public abstract class OracleTests extends PlatformTests {
         return 2615;
     }
 
+    @Override
     protected void addIgnorableTypeNamesTo(Collection adtNames) {
         super.addIgnorableTypeNamesTo(adtNames);
         adtNames.add(this.typeName());
@@ -132,6 +138,7 @@ public abstract class OracleTests extends PlatformTests {
         return this.typeName() + "_ARRAY";
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    VARCHAR2_20_COL            VARCHAR2(20),"); sb.append(CR);    // size is required
         sb.append("    NVARCHAR2_20_COL        NVARCHAR2(20),"); sb.append(CR);    // size is required
@@ -161,6 +168,7 @@ public abstract class OracleTests extends PlatformTests {
         sb.append("    " + this.arrayName() + "_COL " + this.arrayName()); sb.append(CR);            // ARRAY?
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // VARCHAR2(20)
         this.verifyColumnAttribute(metaDataMap, "VARCHAR2_20_COL", "TABLE_CAT", null);

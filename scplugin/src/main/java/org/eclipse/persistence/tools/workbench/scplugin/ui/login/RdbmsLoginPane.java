@@ -46,16 +46,19 @@ public final class RdbmsLoginPane extends AbstractRdbmsLoginPane
      *
      * @return {@link PropertyValueModel}
      */
+    @Override
     protected PropertyValueModel buildDatabaseDriverSelectionHolder()
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseLoginAdapter.USE_DRIVER_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf(login.databaseDriverIsDriverManager());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;

@@ -103,6 +103,7 @@ public abstract class AbstractSessionsXmlTest {
     private ClassLoader buildLoader() {
 
         URLClassLoader loader = new URLClassLoader(new URL[0], getClass().getClassLoader()) {
+            @Override
             public URL findResource(String name) {
                 try {
                     if (name.equals(getPath().getPath())) {
@@ -135,6 +136,7 @@ public abstract class AbstractSessionsXmlTest {
         this.save();
     }
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         StringTools.buildSimpleToStringOn(this, sb);

@@ -65,6 +65,7 @@ public class TransformationPropertyValueModel extends PropertyValueModelWrapper 
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // transform the object returned by the nested value model before returning it
         return this.transform(this.valueHolder.getValue());
@@ -76,6 +77,7 @@ public class TransformationPropertyValueModel extends PropertyValueModelWrapper 
     /**
      * @see PropertyValueModel#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(Object value) {
         // "reverse-transform" the object before passing it to the the nested value model
         this.valueHolder.setValue(this.reverseTransform(value));
@@ -87,6 +89,7 @@ public class TransformationPropertyValueModel extends PropertyValueModelWrapper 
     /**
      * @see PropertyValueModelWrapper#valueChanged(java.beans.PropertyChangeEvent)
      */
+    @Override
     protected void valueChanged(PropertyChangeEvent e) {
         // transform the values before propagating the change event
         Object oldValue = this.transform(e.getOldValue());

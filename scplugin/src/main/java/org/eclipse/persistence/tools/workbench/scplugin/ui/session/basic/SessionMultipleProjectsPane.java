@@ -67,6 +67,7 @@ final class SessionMultipleProjectsPane extends AbstractSessionMultipleProjectsP
      *
      * @param selectionModel
      */
+    @Override
     protected void addProject(ObjectListSelectionModel selectionModel)
     {
         DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject();
@@ -106,6 +107,7 @@ final class SessionMultipleProjectsPane extends AbstractSessionMultipleProjectsP
             this.databaseSession = databaseSession;
         }
 
+        @Override
         public void apply(boolean projectTypeXml, String projectName)
         {
             if (projectName == null)
@@ -132,11 +134,13 @@ final class SessionMultipleProjectsPane extends AbstractSessionMultipleProjectsP
             }
         }
 
+        @Override
         public String getProjectName()
         {
             return this.projectName;
         }
 
+        @Override
         public boolean isProjectXml()
         {
             return true;

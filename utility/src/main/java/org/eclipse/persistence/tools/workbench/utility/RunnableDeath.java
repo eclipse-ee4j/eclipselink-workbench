@@ -41,6 +41,7 @@ public final class RunnableDeath implements Runnable {
     /**
      * @see Runnable#run()
      */
+    @Override
     public void run() {
         long stop = System.currentTimeMillis() + this.wait;
         long remaining = this.wait;
@@ -58,6 +59,7 @@ public final class RunnableDeath implements Runnable {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, "wait=" + this.wait + "; exit status=" + this.exitStatus);
     }

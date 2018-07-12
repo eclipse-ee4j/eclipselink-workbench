@@ -44,7 +44,6 @@ import org.eclipse.persistence.tools.workbench.uitools.app.ListValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.SortedListValueModelAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.TransformationListValueModelAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.TreeNodeValueModel;
-import org.eclipse.persistence.tools.workbench.uitools.swing.EmptyIcon;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.iterators.NullIterator;
 
@@ -64,11 +63,13 @@ public class ServerSessionNode extends DatabaseSessionNode {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.childrenModel = this.buildChildrenModel();
     }
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -102,6 +103,7 @@ public class ServerSessionNode extends DatabaseSessionNode {
         return desc;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext workbenchContext)
     {
         WorkbenchContext wrappedContext = buildLocalWorkbenchContext(workbenchContext);
@@ -138,6 +140,7 @@ public class ServerSessionNode extends DatabaseSessionNode {
     protected ListValueModel buildChildrenNodeWrapper() {
 
         return new TransformationListValueModelAdapter( this.buildChildrenAspectAdapter()) {
+            @Override
             protected Object transformItem( Object item) {
                 return ServerSessionNode.this.buildChildNode(( ConnectionPoolAdapter) item);
             }
@@ -159,6 +162,7 @@ public class ServerSessionNode extends DatabaseSessionNode {
     protected CollectionValueModel buildChildrenAspectAdapter() {
 
         return new CollectionAspectAdapter( this, ServerSessionAdapter.POOLS_CONFIG_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 ServerSessionAdapter session = ( ServerSessionAdapter)subject;
                 if (session.platformIsXml()) {
@@ -173,6 +177,7 @@ public class ServerSessionNode extends DatabaseSessionNode {
                     collection.add( session.getSequenceConnectionPool());
                 return collection.iterator();
             }
+            @Override
             protected int sizeFromSubject() {
                 int readPool = (((( ServerSessionAdapter)subject).hasReadPool()) ? 1 : 0);
                 int writePool = (((( ServerSessionAdapter)subject).hasWritePool()) ? 1 : 0);
@@ -208,6 +213,7 @@ public class ServerSessionNode extends DatabaseSessionNode {
         return new AddReadPoolAction(workbenchContext);
     }
 
+    @Override
     protected List buildDisplayStringPropertyNamesList() {
 
         List displayStrings = super.buildDisplayStringPropertyNamesList();
@@ -215,10 +221,12 @@ public class ServerSessionNode extends DatabaseSessionNode {
         return displayStrings;
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     public String helpTopicID() {
         return "navigator.session.server";
     }

@@ -114,9 +114,11 @@ public abstract class IndirectComboBoxModel
 
     protected PropertyChangeListener buildSelectedItemListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 IndirectComboBoxModel.this.fireSelectedItemChanged();
             }
+            @Override
             public String toString() {
                 return "selected item listener";
             }
@@ -125,9 +127,11 @@ public abstract class IndirectComboBoxModel
 
     protected PropertyChangeListener buildListSubjectListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 IndirectComboBoxModel.this.fireContentsChanged();
             }
+            @Override
             public String toString() {
                 return "list subject listener";
             }
@@ -140,6 +144,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see javax.swing.ComboBoxModel#setSelectedItem(Object)
      */
+    @Override
     public void setSelectedItem(Object newSelectedItem) {
         this.selectedItemHolder.setValue(newSelectedItem);
     }
@@ -147,6 +152,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see javax.swing.ComboBoxModel#getSelectedItem()
      */
+    @Override
     public Object getSelectedItem() {
         return this.selectedItemHolder.getValue();
     }
@@ -157,6 +163,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see javax.swing.ListModel#getSize()
      */
+    @Override
     public int getSize() {
         int size = this.listSubjectHolder.getValue() == null ? 0 : listSizeFromSubject(this.listSubjectHolder.getValue());
         // if the size has changed, notify listeners
@@ -181,6 +188,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see javax.swing.ListModel#getElementAt(int)
      */
+    @Override
     public Object getElementAt(int index) {
         return CollectionTools.get(this.listValue(), index);
     }
@@ -189,6 +197,7 @@ public abstract class IndirectComboBoxModel
      * Extend to engage the underlying models.
      * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
      */
+    @Override
     public void addListDataListener(ListDataListener l) {
         if (this.hasNoListDataListeners()) {
             this.engageModel();
@@ -200,6 +209,7 @@ public abstract class IndirectComboBoxModel
      * Extend to dis-engage the underlying models.
      * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
      */
+    @Override
     public void removeListDataListener(ListDataListener l) {
         super.removeListDataListener(l);
         if (this.hasNoListDataListeners()) {
@@ -282,6 +292,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see CachingComboBoxModel#cacheList()
      */
+    @Override
     public void cacheList() {
         if (isCached()) {
             throw new IllegalArgumentException("List is already Cached, see isCached()");
@@ -292,6 +303,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see CachingComboBoxModel#uncacheList()
      */
+    @Override
     public void uncacheList() {
         if (isCached()) {
             this.cachedList = null;
@@ -305,6 +317,7 @@ public abstract class IndirectComboBoxModel
     /**
      * @see CachingComboBoxModel#isCached()
      */
+    @Override
     public boolean isCached() {
         return this.cachedList != null;
     }

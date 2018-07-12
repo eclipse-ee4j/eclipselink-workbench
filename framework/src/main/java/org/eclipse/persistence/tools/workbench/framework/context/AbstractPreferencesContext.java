@@ -36,6 +36,7 @@ public abstract class AbstractPreferencesContext
     /**
      * @see ApplicationContext#buildRedirectedPreferencesContext(String)
      */
+    @Override
     public ApplicationContext buildRedirectedPreferencesContext(String path) {
         return new RedirectedPreferencesContext(this, path);
     }
@@ -43,6 +44,7 @@ public abstract class AbstractPreferencesContext
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(Class, resources.IconResourceFileNameMap)
      */
+    @Override
     public ApplicationContext buildExpandedResourceRepositoryContext(Class resourceBundleClass, IconResourceFileNameMap iconResourceFileNameMap) {
         return new ExpandedResourceRepositoryPreferencesContext(this, resourceBundleClass, iconResourceFileNameMap);
     }
@@ -50,6 +52,7 @@ public abstract class AbstractPreferencesContext
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(resources.IconResourceFileNameMap)
      */
+    @Override
     public ApplicationContext buildExpandedResourceRepositoryContext(IconResourceFileNameMap iconResourceFileNameMap) {
         return this.buildExpandedResourceRepositoryContext(null, iconResourceFileNameMap);
     }
@@ -57,6 +60,7 @@ public abstract class AbstractPreferencesContext
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(Class)
      */
+    @Override
     public ApplicationContext buildExpandedResourceRepositoryContext(Class resourceBundleClass) {
         return this.buildExpandedResourceRepositoryContext(resourceBundleClass, null);
     }

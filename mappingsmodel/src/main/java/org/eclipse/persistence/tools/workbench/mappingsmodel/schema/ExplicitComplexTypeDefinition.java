@@ -84,17 +84,20 @@ public final class ExplicitComplexTypeDefinition
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.attributes = new Hashtable();
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.baseType = ReferencedSchemaTypeDefinition.urType(this);
         this.content = new EmptyContent(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.baseType);
@@ -156,18 +159,22 @@ public final class ExplicitComplexTypeDefinition
 
     // **************** MWComplexTypeDefinition contract **********************
 
+    @Override
     public String getDerivationMethod() {
         return this.derivationMethod;
     }
 
+    @Override
     public boolean isAbstract() {
         return this.abstractFlag;
     }
 
+    @Override
     public int totalElementCount() {
         return this.content.totalElementCount();
     }
 
+    @Override
     public int attributeCount() {
         return this.attributes.size();
     }
@@ -175,14 +182,17 @@ public final class ExplicitComplexTypeDefinition
 
     // **************** MWSchemaTypeDefinition contract ***********************
 
+    @Override
     public MWSchemaTypeDefinition getBaseType() {
         return this.baseType;
     }
 
+    @Override
     public boolean isComplex() {
         return true;
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         if (this.builtIn) {
             return NullIterator.instance();
@@ -195,14 +205,17 @@ public final class ExplicitComplexTypeDefinition
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean containsText() {
         return this.content.hasTextContent();
     }
 
+    @Override
     public boolean containsWildcard() {
         return this.content.containsWildcard();
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         if (element1.isDescendantOf(this.baseType)) {
             if (element2.isDescendantOf(this.baseType)) {
@@ -223,10 +236,12 @@ public final class ExplicitComplexTypeDefinition
 
     // **************** MWNamedSchemaComponent contract ***********************
 
+    @Override
     public String componentTypeName() {
         return "complexType";
     }
 
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {
         directlyOwnedComponents.addAll(this.attributes.values());
         this.content.addDirectlyOwnedComponentsTo(directlyOwnedComponents);
@@ -235,26 +250,32 @@ public final class ExplicitComplexTypeDefinition
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public Iterator structuralComponents() {
         return new CompositeIterator(this.content.structuralComponents(), this.attributes());
     }
 
+    @Override
     public Iterator descriptorContextComponents() {
         return this.content.descriptorContextComponents();
     }
 
+    @Override
     public Iterator xpathComponents() {
         return new CompositeIterator(this.attributes(), this.content.xpathComponents());
     }
 
+    @Override
     public MWAttributeDeclaration nestedAttribute(String namespaceUrl, String attributeName) {
         return this.attribute(namespaceUrl, attributeName);
     }
 
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         return this.content.nestedElement(namespaceUrl, elementName);
     }
 
+    @Override
     protected void reloadInternal(XSObject xsObject) {
         super.reloadInternal(xsObject);
 
@@ -336,6 +357,7 @@ public final class ExplicitComplexTypeDefinition
         return attribute;
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
 

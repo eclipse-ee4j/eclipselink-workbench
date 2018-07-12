@@ -42,6 +42,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.differentiator = this.buildDifferentiator();
@@ -49,6 +50,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
         this.testRootNode2 = this.buildTestRootNode();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -274,6 +276,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
             super();
             this.name = name;
         }
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.name);
         }
@@ -289,6 +292,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
         public String getComment() {
             return this.comment;
         }
+        @Override
         public Diff diff(Object o) {
             if ((o == null) || (this.getClass() != o.getClass())) {
                 return new SimpleDiff(this, o, "Unable to compare", DiffableDifferentiator.instance());
@@ -305,6 +309,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
                 diffs.add(new SimpleDiff(this.comment, other.comment, "Comments are different", DiffableDifferentiator.instance()));
             }
         }
+        @Override
         public Diff keyDiff(Object o) {
             if ((o == null) || (this.getClass() != o.getClass())) {
                 return new SimpleDiff(this, o, "Unable to compare", DiffableDifferentiator.instance());
@@ -345,6 +350,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
         public TestBranchNode getNode3() {
             return this.node3;
         }
+        @Override
         void addDiffsTo(TestNode other, Collection diffs) {
             super.addDiffsTo(other, diffs);
             TestRootNode otherRoot = (TestRootNode) other;
@@ -377,6 +383,7 @@ public abstract class AbstractCircularReferenceDiffTests extends TestCase {
         public TestBranchNode getSpouse() {
             return this.spouse;
         }
+        @Override
         void addDiffsTo(TestNode other, Collection diffs) {
             super.addDiffsTo(other, diffs);
             TestBranchNode otherBranch = (TestBranchNode) other;

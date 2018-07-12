@@ -93,12 +93,14 @@ final class RCMJMSPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JMSTopicTransportManagerAdapter.TOPIC_CONNECTION_FACTORY_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JMSTopicTransportManagerAdapter adapter = (JMSTopicTransportManagerAdapter) subject;
                 return adapter.getTopicConnectionFactoryName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JMSTopicTransportManagerAdapter adapter = (JMSTopicTransportManagerAdapter) subject;
@@ -128,12 +130,14 @@ final class RCMJMSPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JMSTopicTransportManagerAdapter.TOPIC_NAME_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JMSTopicTransportManagerAdapter adapter = (JMSTopicTransportManagerAdapter) subject;
                 return adapter.getTopicName();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JMSTopicTransportManagerAdapter adapter = (JMSTopicTransportManagerAdapter) subject;
@@ -163,12 +167,14 @@ final class RCMJMSPane extends AbstractTransportManagerPane
     {
         return new PropertyAspectAdapter(getSubjectHolder(), JMSTopicTransportManagerAdapter.TOPIC_HOST_URL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 JMSTopicTransportManagerAdapter adapter = (JMSTopicTransportManagerAdapter) subject;
                 return adapter.getTopicHostURL();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 JMSTopicTransportManagerAdapter adapter = (JMSTopicTransportManagerAdapter) subject;
@@ -180,6 +186,7 @@ final class RCMJMSPane extends AbstractTransportManagerPane
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -299,6 +306,7 @@ final class RCMJMSPane extends AbstractTransportManagerPane
          *
          * @return "JNDI_INITIAL_CONTEXT_FACTORY_NAME_FIELD_OPTIONAL"
          */
+        @Override
         protected String jndiInitialContextFactoryName()
         {
             return "JNDI_INITIAL_CONTEXT_FACTORY_NAME_FIELD_OPTIONAL";
@@ -310,6 +318,7 @@ final class RCMJMSPane extends AbstractTransportManagerPane
          *
          * @return "JNDI_PASSWORD_FIELD_OPTIONAL"
          */
+        @Override
         protected String jndiPasswordKey()
         {
             return "JNDI_PASSWORD_FIELD_OPTIONAL";
@@ -321,6 +330,7 @@ final class RCMJMSPane extends AbstractTransportManagerPane
          *
          * @return "JNDI_URL_FIELD_OPTIONAL"
          */
+        @Override
         protected String jndiUrlKey()
         {
             return "JNDI_URL_FIELD_OPTIONAL";
@@ -332,6 +342,7 @@ final class RCMJMSPane extends AbstractTransportManagerPane
          *
          * @return "JNDI_USER_NAME_FIELD_OPTIONAL"
          */
+        @Override
         protected String jndiUsernameKey()
         {
             return "JNDI_USER_NAME_FIELD_OPTIONAL";

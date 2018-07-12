@@ -36,6 +36,7 @@ public final class CreateNewClassAction extends AbstractEnablableFrameworkAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("CREATE_NEW_CLASS_ACTION");
         this.initializeAccelerator("CREATE_NEW_CLASS_ACTION.accelerator");
@@ -43,6 +44,7 @@ public final class CreateNewClassAction extends AbstractEnablableFrameworkAction
         this.initializeIcon("descriptor.new");
     }
 
+    @Override
     protected void execute() {
         this.promptToCreateNewClass(this.selectedNodes()[0]);
     }
@@ -86,6 +88,7 @@ public final class CreateNewClassAction extends AbstractEnablableFrameworkAction
 
     private Collection buildPackageNames(MWProject project) {
         Iterator packageNames = new FilteringIterator(project.packageNames()) {
+            @Override
             protected boolean accept(Object packageName) {
                 return ((String) packageName).length() > 0;
             }
@@ -97,10 +100,12 @@ public final class CreateNewClassAction extends AbstractEnablableFrameworkAction
         return ((MappingsApplicationNode) selectedNode).candidatePackageName();
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return false;
     }
 
+    @Override
     protected void updateEnabledState() {
         this.setEnabled(this.selectedNodes().length == 1);
     }

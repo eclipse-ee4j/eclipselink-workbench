@@ -39,6 +39,7 @@ final class EisOneToOneTabbedPropertiesPage extends TabbedPropertiesPage
         super(context);
     }
 
+    @Override
     protected void initializeTabs()
     {
         addTab(new EisOneToOneGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "GENERAL_TAB_TITLE");

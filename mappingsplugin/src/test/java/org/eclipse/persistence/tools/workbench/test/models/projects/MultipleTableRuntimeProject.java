@@ -14,7 +14,6 @@
 //     Oracle - initial API and implementation from Oracle TopLink
 package org.eclipse.persistence.tools.workbench.test.models.projects;
 
-import org.eclipse.persistence.tools.workbench.test.models.multipletable.*;
 
 import org.eclipse.persistence.sequencing.TableSequence;
 import org.eclipse.persistence.sessions.*;

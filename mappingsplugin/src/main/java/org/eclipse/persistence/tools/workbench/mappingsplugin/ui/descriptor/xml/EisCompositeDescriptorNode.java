@@ -30,22 +30,26 @@ public final class EisCompositeDescriptorNode extends EisDescriptorNode {
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public String helpTopicID() {
         return "descriptor.eis.composite";
     }
 
+    @Override
     public String buildIconKey() {
         return "descriptor.eis.composite";
     }
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_EIS_COMPOSITE_DESCRIPTOR_NODE";
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return EisCompositeDescriptorTabbedPropertiesPage.class;
     }
@@ -53,6 +57,7 @@ public final class EisCompositeDescriptorNode extends EisDescriptorNode {
 
     // ********** DescriptorNode overrides **********
 
+    @Override
     public boolean isCompositeDescriptor() {
         return true;
     }

@@ -548,6 +548,7 @@ public final class ComponentAligner
          *
          * @param listener The <code>PropertyChangeListener</code> to be added
          */
+        @Override
         public void addPropertyChangeListener(PropertyChangeListener listener)
         {
             componentAligner.addPropertyChangeListener(listener);
@@ -558,6 +559,7 @@ public final class ComponentAligner
          *
          * @return A non-<code>null</code> size
          */
+        @Override
         public Dimension getCachedSize()
         {
             return cachedSize;
@@ -568,6 +570,7 @@ public final class ComponentAligner
          *
          * @return The preferred size
          */
+        @Override
         public Dimension getPreferredSize()
         {
             return componentAligner.getPreferredSize();
@@ -578,6 +581,7 @@ public final class ComponentAligner
          *
          * @return A <code>ComponentAligner</code>
          */
+        @Override
         public Object getSource()
         {
             return componentAligner;
@@ -590,6 +594,7 @@ public final class ComponentAligner
          * @return <code>true<code> to prevent this <code>Wrapper</code> from
          * being invalidated; otherwise <code>false<code>
          */
+        @Override
         public boolean isLocked()
         {
             return componentAligner.locked;
@@ -602,6 +607,7 @@ public final class ComponentAligner
          *
          * @param listener The <code>PropertyChangeListener</code> to be removed
          */
+        @Override
         public void removePropertyChangeListener(PropertyChangeListener listener)
         {
             componentAligner.removePropertyChangeListener(listener);
@@ -612,6 +618,7 @@ public final class ComponentAligner
          *
          * @param preferredSize The new preferred size
          */
+        @Override
         public void setPreferredSize(Dimension preferredSize)
         {
             if (preferredSize == null)
@@ -662,6 +669,7 @@ public final class ComponentAligner
          *
          * @param listener The <code>PropertyChangeListener</code> to be added
          */
+        @Override
         public void addPropertyChangeListener(PropertyChangeListener listener)
         {
             component.addPropertyChangeListener(TEXT_PROPERTY, listener);
@@ -672,6 +680,7 @@ public final class ComponentAligner
          *
          * @return A non-<code>null</code> size
          */
+        @Override
         public Dimension getCachedSize()
         {
             return cachedSize;
@@ -682,6 +691,7 @@ public final class ComponentAligner
          *
          * @return The preferred size
          */
+        @Override
         public Dimension getPreferredSize()
         {
             return component.getPreferredSize();
@@ -692,6 +702,7 @@ public final class ComponentAligner
          *
          * @return A <code>JComponent</code>
          */
+        @Override
         public Object getSource()
         {
             return component;
@@ -703,6 +714,7 @@ public final class ComponentAligner
          *
          * @return <code>false<code> is always returned for a <code>JComponent</code>
          */
+        @Override
         public boolean isLocked()
         {
             return false;
@@ -716,6 +728,7 @@ public final class ComponentAligner
          * @param propertyName The name of the property that was listened on
          * @param listener The <code>PropertyChangeListener</code> to be removed
          */
+        @Override
         public void removePropertyChangeListener(PropertyChangeListener listener)
         {
             component.removePropertyChangeListener(TEXT_PROPERTY, listener);
@@ -726,6 +739,7 @@ public final class ComponentAligner
          *
          * @param preferredSize The new preferred size
          */
+        @Override
         public void setPreferredSize(Dimension preferredSize)
         {
             component.setPreferredSize(preferredSize);
@@ -738,6 +752,7 @@ public final class ComponentAligner
      */
     private class PropertyChangeHandler implements PropertyChangeListener
     {
+        @Override
         public void propertyChange(PropertyChangeEvent e)
         {
             invalidate(e.getSource());

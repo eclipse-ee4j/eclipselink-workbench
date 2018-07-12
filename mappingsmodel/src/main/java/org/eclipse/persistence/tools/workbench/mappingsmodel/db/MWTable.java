@@ -32,7 +32,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTabl
 import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalTableDescription;
 import org.eclipse.persistence.tools.workbench.platformsmodel.DatabasePlatform;
 import org.eclipse.persistence.tools.workbench.utility.NameTools;
-import org.eclipse.persistence.tools.workbench.utility.io.FileTools;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CompositeIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.FilteringIterator;
@@ -40,9 +39,6 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationI
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.tools.schemaframework.TableDefinition;
@@ -99,6 +95,7 @@ public final class MWTable
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.lastRefreshTimestamp = null;    // if the table is built by hand, this is left null
@@ -189,6 +186,7 @@ public final class MWTable
 
     public Iterator columns() {
         return new CloneIterator(this.columns) {
+            @Override
             protected void remove(Object current) {
                 MWTable.this.removeColumn((MWColumn) current);
             }
@@ -255,6 +253,7 @@ public final class MWTable
 
     public Iterator columnNames() {
         return new TransformationIterator(this.columns()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumn) next).getName();
             }
@@ -275,6 +274,7 @@ public final class MWTable
 
     public Iterator primaryKeyColumns() {
         return new FilteringIterator(this.columns()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWColumn) o).isPrimaryKey();
             }
@@ -283,6 +283,7 @@ public final class MWTable
 
     public Iterator primaryKeyColumnNames() {
         return new TransformationIterator(this.primaryKeyColumns()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumn) next).getName();
             }
@@ -291,6 +292,7 @@ public final class MWTable
 
     public Iterator nonPrimaryKeyColumns() {
         return new FilteringIterator(this.columns()) {
+            @Override
             protected boolean accept(Object o) {
                 return ! ((MWColumn) o).isPrimaryKey();
             }
@@ -311,6 +313,7 @@ public final class MWTable
 
     public Iterator references() {
         return new CloneIterator(this.references) {
+            @Override
             protected void remove(Object current) {
                 MWTable.this.removeReference((MWReference) current);
             }
@@ -386,6 +389,7 @@ public final class MWTable
 
     public Iterator referenceNames(){
         return new TransformationIterator(this.references()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWReference) next).getName();
             }
@@ -398,6 +402,7 @@ public final class MWTable
      */
     public Iterator databaseReferences() {
         return new FilteringIterator(this.references()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWReference) o).isOnDatabase();
             }
@@ -418,6 +423,7 @@ public final class MWTable
      */
     public Iterator referencesTo(final MWTable targetTable) {
         return new FilteringIterator(this.references()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWReference) o).getTargetTable() == targetTable;
             }
@@ -430,6 +436,7 @@ public final class MWTable
     /**
      * return the appropriately-qualified name
      */
+    @Override
     public String getName() {
         return this.qualifiedName();
     }
@@ -504,6 +511,7 @@ public final class MWTable
 
     // ********** miscellaneous behavior **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.columns) { children.addAll(this.columns); }
@@ -557,6 +565,7 @@ public final class MWTable
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
 
@@ -736,10 +745,12 @@ public final class MWTable
 
     // ********** printing and displaying **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.qualifiedName());
     }
 
+    @Override
     public String displayString() {
         return this.qualifiedName();
     }

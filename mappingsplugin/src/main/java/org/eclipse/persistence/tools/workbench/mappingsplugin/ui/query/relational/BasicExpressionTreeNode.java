@@ -50,11 +50,13 @@ final class BasicExpressionTreeNode extends ExpressionTreeNode implements Proper
         return (MWBasicExpression) getUserObject();
     }
 
+    @Override
     public void initializeChildren()
     {
         //BasicExpressions do not have children, so do nothing here
     }
 
+    @Override
     protected void engageListeners()
     {
          getBasicExpression().addPropertyChangeListener(this);
@@ -64,6 +66,7 @@ final class BasicExpressionTreeNode extends ExpressionTreeNode implements Proper
               getBasicExpression().getSecondArgument().addPropertyChangeListener(this);
      }
 
+    @Override
     protected void disengageListeners()
     {
         getBasicExpression().removePropertyChangeListener(this);
@@ -73,6 +76,7 @@ final class BasicExpressionTreeNode extends ExpressionTreeNode implements Proper
               getBasicExpression().getSecondArgument().removePropertyChangeListener(this);
      }
 
+    @Override
     public void propertyChange(PropertyChangeEvent evt)
     {
         String propertyName = evt.getPropertyName();

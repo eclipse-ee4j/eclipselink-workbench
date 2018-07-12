@@ -31,6 +31,7 @@ public class AddNewNamedPoolAction extends AbstractFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "ADD_NAMED_CONNECTION_POOL");
@@ -40,6 +41,7 @@ public class AddNewNamedPoolAction extends AbstractFrameworkAction {
         this.initializeToolTipText( "ADD_NAMED_CONNECTION_POOL.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         ServerSessionAdapter session = ( ServerSessionAdapter)selectedNode.getValue();
@@ -65,6 +67,7 @@ public class AddNewNamedPoolAction extends AbstractFrameworkAction {
         }
     }
 
+    @Override
     public void execute() {
         super.execute();
     }

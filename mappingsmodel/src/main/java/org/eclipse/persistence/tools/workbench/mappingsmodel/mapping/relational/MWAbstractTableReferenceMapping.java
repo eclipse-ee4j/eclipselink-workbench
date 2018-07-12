@@ -46,12 +46,9 @@ import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.filters.Filter;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.mappings.ForeignReferenceMapping;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -93,6 +90,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.referenceHandle = new MWReferenceHandle(this, this.buildReferenceScrubber());
@@ -103,6 +101,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // **************** Accessors ***************
 
+    @Override
     public JoinFetchOption getJoinFetchOption() {
         if (this.joinFetchOption == null) {
             this.joinFetchOption = (JoinFetchOption)MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions().topLinkOptionForMWModelOption(JOIN_FETCH_NONE);
@@ -110,20 +109,24 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         return this.joinFetchOption;
     }
 
+    @Override
     public void setJoinFetchOption(JoinFetchOption newJoinFetchOption) {
         JoinFetchOption old = this.joinFetchOption;
         this.joinFetchOption = newJoinFetchOption;
         firePropertyChanged(JOIN_FETCH_PROPERTY, old, this.joinFetchOption);
     }
 
+    @Override
     public void setJoinFetchOption(String joinFetchOptions) {
         setJoinFetchOption((JoinFetchOption) MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions().topLinkOptionForMWModelOption(joinFetchOptions));
     }
 
+    @Override
     public MWReference getReference() {
         return this.referenceHandle.getReference();
     }
 
+    @Override
     public void setReference(MWReference newValue) {
         MWReference oldValue = getReference();
         this.referenceHandle.setReference(newValue);
@@ -131,6 +134,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         this.getProject().recalculateAggregatePathsToColumn(this.getParentDescriptor());
     }
 
+    @Override
     public boolean maintainsBidirectionalRelationship() {
         return this.maintainsBidirectionalRelationship;
     }
@@ -145,6 +149,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         }
     }
 
+    @Override
     public MWMapping getRelationshipPartnerMapping() {
         return this.relationshipPartnerMappingHandle.getMapping();
     }
@@ -166,6 +171,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         firePropertyChanged(RELATIONSHIP_PARTNER_MAPPING_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor newReferenceDescriptor) {
         if (getReferenceDescriptor() != newReferenceDescriptor) {
             setRelationshipPartnerMapping(null);
@@ -173,15 +179,18 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         super.setReferenceDescriptor(newReferenceDescriptor);
     }
 
+    @Override
     public boolean descriptorIsValidReferenceDescriptor(MWDescriptor descriptor) {
         return ((MWRelationalDescriptor) descriptor).isTableDescriptor();
     }
 
 
+    @Override
     public boolean usesBatchReading() {
         return this.batchReading;
     }
 
+    @Override
     public void setUsesBatchReading(boolean newValue) {
         boolean oldValue = this.batchReading;
         this.batchReading = newValue;
@@ -202,6 +211,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // **************** Automap support ***************
 
+    @Override
     public void automap() {
         super.automap();
         this.automapTableReference();
@@ -307,10 +317,12 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // *************  MWTableReferenceMapping implementation ************
 
+    @Override
     public Iterator candidateReferences() {
         return this.buildCandidateReferences().iterator();
     }
 
+    @Override
     public boolean referenceIsCandidate(MWReference reference) {
         return this.buildCandidateReferences().contains(reference);
     }
@@ -318,18 +330,22 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // ************* MWQueryable implementation ************
 
+    @Override
     public boolean isTraversableForBatchReadAttribute() {
         return true;
     }
 
+    @Override
     public boolean isValidForBatchReadAttribute() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForJoinedAttribute() {
         return true;
     }
 
+    @Override
     public boolean isValidForJoinedAttribute() {
         return true;
     }
@@ -353,10 +369,12 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
             this.source = source;
         }
 
+        @Override
         public boolean fieldIsWritten() {
             return this.mapping.fieldIsWritten(this.columnPair);
         }
 
+        @Override
         public String fieldNameForRuntime() {
             MWColumn field;
             if (this.source) {
@@ -369,6 +387,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
             return field.getName() + "_IN_REFERENCE_" + this.mapping.getReference().getName();
         }
 
+        @Override
         public AggregateFieldDescription fullFieldDescription() {
             final MWColumn column;
             if (this.source) {
@@ -378,22 +397,26 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
                 column = this.columnPair.getTargetColumn();
             }
             return new AggregateFieldDescription() {
+                @Override
                 public String getMessageKey() {
                     return "AGGREGATE_FIELD_DESCRIPTION_FOR_REFERENCE";
                 }
 
+                @Override
                 public Object[] getMessageArguments() {
                     return new Object[] {column.getName(), ColumnPairAggregateRuntimeFieldNameGenerator.this.mapping.getReference().getName()};
                 }
             };
         }
 
+        @Override
         public MWDescriptor owningDescriptor() {
             throw new UnsupportedOperationException();
         }
 
     }
 
+    @Override
     public boolean isTableReferenceMapping(){
         return true;
     }
@@ -412,18 +435,22 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // ************ MWQueryable implementation ***********
 
+    @Override
     public boolean allowsChildren() {
         return true;
     }
 
+    @Override
     public boolean allowsOuterJoin() {
         return allowsChildren();
     }
 
+    @Override
     public boolean isLeaf(Filter queryableFilter) {
         return subQueryableElements(queryableFilter).size() == 0;
     }
 
+    @Override
     public List subQueryableElements(Filter queryableFilter) {
         List subQueryableElements = new ArrayList();
         if (getReferenceDescriptor() != null) {
@@ -433,18 +460,22 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         return subQueryableElements;
     }
 
+    @Override
     public MWQueryable subQueryableElementAt(int index, Filter queryableFilter) {
         return (MWQueryable) subQueryableElements(queryableFilter).get(index);
     }
 
+    @Override
     public boolean isTraversableForQueryExpression() {
         return true;
     }
 
+    @Override
     public boolean isValidForQueryExpression() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForReportQueryAttribute() {
         return true;
     }
@@ -454,6 +485,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
     /**
     * IMPORTANT:  See MWRMapping class comment.
     */
+    @Override
     public void initializeFromMWAbstractTableReferenceMapping(MWAbstractTableReferenceMapping oldMapping) {
         super.initializeFromMWAbstractTableReferenceMapping(oldMapping);
         this.setReference(oldMapping.getReference());
@@ -462,6 +494,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         this.setUsesBatchReading(oldMapping.usesBatchReading());
     }
 
+    @Override
     public void initializeFromMWRelationalDirectContainerMapping(MWRelationalDirectContainerMapping oldMapping) {
         super.initializeFromMWRelationalDirectContainerMapping(oldMapping);
         this.setReference(oldMapping.getReference());
@@ -469,6 +502,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
     }
 
 
+    @Override
     public boolean isValidRelationshipPartner() {
         return true;
     }
@@ -476,6 +510,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     //********* model synchronization support *********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.referenceHandle);
@@ -484,9 +519,11 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     private NodeReferenceScrubber buildRelationshipPartnerMappingScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAbstractTableReferenceMapping.this.setRelationshipPartnerMapping(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractTableReferenceMapping.buildRelationshipPartnerMappingScrubber()";
             }
@@ -495,15 +532,18 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     private NodeReferenceScrubber buildReferenceScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAbstractTableReferenceMapping.this.setReference(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractTableReferenceMapping.buildReferenceScrubber()";
             }
         };
     }
 
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         super.descriptorUnmapped(mappings);
         if (getRelationshipPartnerMapping() != null && mappings.contains(getRelationshipPartnerMapping())) {
@@ -511,6 +551,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         }
     }
 
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping) {
         super.mappingReplaced(oldMapping, newMapping);
         if (oldMapping == getRelationshipPartnerMapping()) {
@@ -530,6 +571,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // ************** Problem Handling **************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkReference(newProblems);
@@ -537,6 +579,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         this.addHasNonMutualRelationshipPartnerProblemTo(newProblems);
     }
 
+    @Override
     protected String referenceDescriptorInvalidProblemString() {
         return ProblemConstants.MAPPING_REFERENCE_DESCRIPTOR_NOT_RELATIONAL_DESCRIPTOR;
     }
@@ -576,6 +619,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
 
     // ************** Runtime Conversion**************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         ForeignReferenceMapping runtimeMapping = (ForeignReferenceMapping) super.runtimeMapping();
 
@@ -710,6 +754,7 @@ public abstract class MWAbstractTableReferenceMapping extends MWAbstractReferenc
         }
     }
 
+    @Override
     public TopLinkOptionSet joinFetchOptions() {
         if (joinFetchOptions == null) {
             joinFetchOptions = MWJoinFetchableMapping.JoinFetchOptionSet.joinFetchOptions();

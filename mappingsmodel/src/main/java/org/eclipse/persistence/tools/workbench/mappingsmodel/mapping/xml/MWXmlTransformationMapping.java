@@ -78,10 +78,12 @@ public final class MWXmlTransformationMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         for (Iterator stream = this.fieldTransformerAssociations(); stream.hasNext(); ) {
             MWXmlField xmlField = ((MWXmlFieldTransformerAssociation) stream.next()).getXmlField();
@@ -94,6 +96,7 @@ public final class MWXmlTransformationMapping
         return null;
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         if (this.isReadOnly()) {
             return;
@@ -120,6 +123,7 @@ public final class MWXmlTransformationMapping
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         for (Iterator stream = this.fieldTransformerAssociations(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).resolveXpaths();
@@ -127,6 +131,7 @@ public final class MWXmlTransformationMapping
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         for (Iterator stream = this.fieldTransformerAssociations(); stream.hasNext(); ) {
             ((MWXmlNode) stream.next()).schemaChanged(change);
@@ -136,6 +141,7 @@ public final class MWXmlTransformationMapping
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.addDuplicateXpathProblemsTo(newProblems);
@@ -159,6 +165,7 @@ public final class MWXmlTransformationMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return this.xmlDescriptor().buildDefaultRuntimeTransformationMapping();
     }

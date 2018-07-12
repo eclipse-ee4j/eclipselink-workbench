@@ -65,6 +65,7 @@ public class ClassChooserPanelUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.out.println("selected class: " +
@@ -87,6 +88,7 @@ public class ClassChooserPanelUITest {
 
     private ClassDescriptionRepositoryFactory buildClassDescriptionRepositoryFactory() {
         return new ClassDescriptionRepositoryFactory() {
+            @Override
             public ClassDescriptionRepository createClassDescriptionRepository() {
                 return ClassChooserPanelUITest.this.repository;
             }

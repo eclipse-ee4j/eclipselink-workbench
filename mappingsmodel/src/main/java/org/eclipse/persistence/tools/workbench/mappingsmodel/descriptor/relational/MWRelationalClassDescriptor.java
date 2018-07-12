@@ -25,7 +25,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWQueryKey;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
@@ -126,11 +125,13 @@ public abstract class MWRelationalClassDescriptor
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.userDefinedQueryKeys = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.userDefinedQueryKeys) { children.addAll(this.userDefinedQueryKeys); }
@@ -139,18 +140,22 @@ public abstract class MWRelationalClassDescriptor
 
     // ********** MWRelationalDescriptor implementation **********
 
+    @Override
     public boolean isTableDescriptor() {
         return false;
     }
 
+    @Override
     public boolean isAggregateDescriptor() {
         return false;
     }
 
+    @Override
     public boolean isInterfaceDescriptor() {
         return false;
     }
 
+    @Override
     public Iterator implementors() {
         return NullIterator.instance();
     }
@@ -161,6 +166,7 @@ public abstract class MWRelationalClassDescriptor
     public Iterator allAssociatedColumns() {
         return new CompositeIterator(
             new TransformationIterator(associatedTables()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWTable) next).columns();
                 }
@@ -180,9 +186,11 @@ public abstract class MWRelationalClassDescriptor
      * Return all tables associated with this descriptor and all descriptors
      * in its inheritance hierarchy
      */
+    @Override
     public Iterator associatedTablesIncludingInherited() {
         return new CompositeIterator(
             new TransformationIterator(this.inheritanceHierarchy()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWRelationalDescriptor) next).associatedTables();
                 }
@@ -190,10 +198,12 @@ public abstract class MWRelationalClassDescriptor
         );
     }
 
+    @Override
     public int associatedTablesIncludingInheritedSize() {
         return CollectionTools.size(this.associatedTablesIncludingInherited());
     }
 
+    @Override
     public Iterator candidateTables() {
         if (this.associatedTablesSize() == 0) {
             return this.getDatabase().tables();
@@ -201,10 +211,12 @@ public abstract class MWRelationalClassDescriptor
         return this.associatedTables();
     }
 
+    @Override
     public int candidateTablesSize() {
         return CollectionTools.size(this.candidateTables());
     }
 
+    @Override
     public Iterator candidateTablesIncludingInherited() {
         if (this.associatedTablesIncludingInheritedSize() == 0) {
             return this.getDatabase().tables();
@@ -212,6 +224,7 @@ public abstract class MWRelationalClassDescriptor
         return this.associatedTablesIncludingInherited();
     }
 
+    @Override
     public int candidateTablesIncludingInheritedSize() {
         return CollectionTools.size(this.candidateTablesIncludingInherited());
     }
@@ -219,12 +232,14 @@ public abstract class MWRelationalClassDescriptor
 
     //************** Morphing **************
 
+    @Override
     public MWAggregateDescriptor asMWAggregateDescriptor() {
         MWAggregateDescriptor newDescriptor = ((MWRelationalProject) this.getProject()).addAggregateDescriptorForType(this.getMWClass());
         this.initializeDescriptorAfterMorphing(newDescriptor);
         return newDescriptor;
     }
 
+    @Override
     public MWTableDescriptor asMWTableDescriptor() throws InterfaceDescriptorCreationException{
         MWTableDescriptor newDescriptor;
         try {
@@ -239,6 +254,7 @@ public abstract class MWRelationalClassDescriptor
     /**
      * This really should only happen as the result of a class refresh
      */
+    @Override
     public MWInterfaceDescriptor asMWInterfaceDescriptor() throws InterfaceDescriptorCreationException {
         MWInterfaceDescriptor newDescriptor = (MWInterfaceDescriptor) this.getProject().addDescriptorForType(getMWClass());
         this.initializeDescriptorAfterMorphing(newDescriptor);
@@ -246,11 +262,13 @@ public abstract class MWRelationalClassDescriptor
     }
 
 
+    @Override
     public void initializeFromMWAggregateDescriptor(MWAggregateDescriptor oldDescriptor) {
     //    super.initializeFromMWAggregateDescriptor(oldDescriptor);
         this.initializeFromMWRelationalClassDescriptor(oldDescriptor);
     }
 
+    @Override
     public void initializeFromMWRelationalClassDescriptor(MWRelationalClassDescriptor oldDescriptor) {
     //    super.initializeFromMWRelationalClassDescriptor(oldDescriptor);
         this.initializeFromMWMappingDescriptor(oldDescriptor);
@@ -260,16 +278,19 @@ public abstract class MWRelationalClassDescriptor
         }
     }
 
+    @Override
     public void initializeFromMWTableDescriptor(MWTableDescriptor oldDescriptor) {
     //    super.initializeFromMWTableDescriptor(oldDescriptor);
         this.initializeFromMWRelationalClassDescriptor(oldDescriptor);
     }
 
+    @Override
     public void initializeFromMWInterfaceDescriptor(MWInterfaceDescriptor oldDescriptor) {
     //    super.initializeFromMWInterfaceDescriptor(oldDescriptor);
        this.initializeFromMWDescriptor(oldDescriptor);
     }
 
+    @Override
     protected void refreshClass(MWClassRefreshPolicy refreshPolicy)
         throws ExternalClassNotFoundException, InterfaceDescriptorCreationException {
         super.refreshClass(refreshPolicy);
@@ -282,6 +303,7 @@ public abstract class MWRelationalClassDescriptor
 
     //************** Mapping Creation **************
 
+    @Override
     public MWMappingFactory mappingFactory() {
         return MWRelationalMappingFactory.instance();
     }
@@ -357,15 +379,19 @@ public abstract class MWRelationalClassDescriptor
         this.getProject().recalculateAggregatePathsToColumn(this);
     }
 
+    @Override
     public Iterator allQueryKeys() {
         return this.getAllQueryKeys().iterator();
     }
+    @Override
     public Iterator allQueryKeysIncludingInherited() {
         return this.getAllQueryKeysIncludingInherited().iterator();
     }
 
+    @Override
     public Iterator allQueryKeyNames() {
         return new TransformationIterator(allQueryKeys()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWQueryKey) next).getName();
             }
@@ -396,6 +422,7 @@ public abstract class MWRelationalClassDescriptor
         return queryKeys;
     }
 
+    @Override
     public Collection getAutoGeneratedQueryKeysIncludingInherited() {
         Collection autoQueryKeys = super.getAutoGeneratedQueryKeysIncludingInherited();
 
@@ -410,6 +437,7 @@ public abstract class MWRelationalClassDescriptor
         return autoQueryKeys;
     }
 
+    @Override
     public Collection getAllQueryKeysIncludingInherited() {
         Collection allQueryKeys = super.getAllQueryKeysIncludingInherited();
         allQueryKeys.addAll(getAllQueryKeys());
@@ -421,6 +449,7 @@ public abstract class MWRelationalClassDescriptor
         return allQueryKeys;
     }
 
+    @Override
     public MWQueryKey queryKeyNamed(String name) {
         for (Iterator stream = this.allQueryKeys(); stream.hasNext(); ) {
             MWQueryKey queryKey = (MWQueryKey) stream.next();
@@ -431,6 +460,7 @@ public abstract class MWRelationalClassDescriptor
         return null;
     }
 
+    @Override
     public MWQueryKey queryKeyNamedIncludingInherited(String name) {
         for (Iterator stream = this.allQueryKeysIncludingInherited(); stream.hasNext(); ) {
             MWQueryKey queryKey = (MWQueryKey) stream.next();
@@ -442,6 +472,7 @@ public abstract class MWRelationalClassDescriptor
     }
 
 
+    @Override
     public MWTable getPrimaryTable() {
         return null;
     }
@@ -458,6 +489,7 @@ public abstract class MWRelationalClassDescriptor
         return null;
     }
 
+    @Override
     public List getQueryables(Filter queryableFilter) {
         List queryables = new ArrayList();
         for (Iterator mappings = mappingsIncludingInherited(); mappings.hasNext();) {
@@ -478,6 +510,7 @@ public abstract class MWRelationalClassDescriptor
 
     // ********** Behavior **********
 
+    @Override
     protected MWDescriptorInheritancePolicy buildInheritancePolicy() {
         return new MWRelationalDescriptorInheritancePolicy(this);
     }
@@ -493,6 +526,7 @@ public abstract class MWRelationalClassDescriptor
     /**
      * throw property change for the query key collection since the umapping changes the auto generated ones.
      */
+    @Override
     public void unmap() {
         super.unmap();
         fireCollectionChanged(QUERY_KEYS_COLLECTION);
@@ -529,6 +563,7 @@ public abstract class MWRelationalClassDescriptor
         }
     }
 
+    @Override
     protected void automapInternal() {
         // automap the unmapped attributes *before* looping
         // through the mappings and automapping them
@@ -556,6 +591,7 @@ public abstract class MWRelationalClassDescriptor
 
     private Iterator mappedAttributes() {
         return new TransformationIterator(this.mappings()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWMapping) next).getInstanceVariable();
             }
@@ -714,6 +750,7 @@ public abstract class MWRelationalClassDescriptor
 
     // *************** aggregate mappings **************
 
+    @Override
     public Collection buildAggregateFieldNameGenerators() {
         Collection generators = new ArrayList();
         if (getInheritancePolicy().isRoot()) {
@@ -734,6 +771,7 @@ public abstract class MWRelationalClassDescriptor
 
     //************** runtime conversion **************/
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         ClassDescriptor runtimeDescriptor = super.buildRuntimeDescriptor();
 

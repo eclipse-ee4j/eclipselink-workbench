@@ -75,6 +75,7 @@ public final class JavaTypeDeclarationToJDBCTypeMapping
      * sort by Java type declaration, there should be no duplicates
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         JavaTypeDeclarationToJDBCTypeMapping other = (JavaTypeDeclarationToJDBCTypeMapping) o;
         return this.javaTypeDeclaration.compareTo(other.javaTypeDeclaration);
@@ -83,6 +84,7 @@ public final class JavaTypeDeclarationToJDBCTypeMapping
 
     // ********** i/o **********
 
+    @Override
     void write(Node node) {
         this.writeJavaTypeDeclaration(node);
         this.writeJDBCType(node);
@@ -95,6 +97,7 @@ public final class JavaTypeDeclarationToJDBCTypeMapping
     /**
      * @see AbstractJDBCTypeToJavaTypeDeclarationMapping#displayStringOn(StringBuffer)
      */
+    @Override
     public void displayStringOn(StringBuffer sb) {
         this.javaTypeDeclaration.displayStringOn(sb);
         sb.append(" => ");

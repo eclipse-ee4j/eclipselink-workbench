@@ -58,6 +58,7 @@ public final class MWSecondaryTableHolder extends MWModel {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node rent) {
         super.initialize(rent);
         this.primaryKeysHaveSameName = true;
@@ -108,6 +109,7 @@ public final class MWSecondaryTableHolder extends MWModel {
 
     // ********** model synchronization **********
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.tableHandle);
@@ -116,9 +118,11 @@ public final class MWSecondaryTableHolder extends MWModel {
 
     private NodeReferenceScrubber buildTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWSecondaryTableHolder.this.tableRemoved();
             }
+            @Override
             public String toString() {
                 return "MWSecondaryTableHolder.buildTableScrubber()";
             }
@@ -134,9 +138,11 @@ public final class MWSecondaryTableHolder extends MWModel {
 
     private NodeReferenceScrubber buildReferenceScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWSecondaryTableHolder.this.setReference(null);
             }
+            @Override
             public String toString() {
                 return "MWSecondaryTableHolder.buildReferenceScrubber()";
             }
@@ -146,6 +152,7 @@ public final class MWSecondaryTableHolder extends MWModel {
 
     // ********** printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         this.getTable().toString(sb);
     }

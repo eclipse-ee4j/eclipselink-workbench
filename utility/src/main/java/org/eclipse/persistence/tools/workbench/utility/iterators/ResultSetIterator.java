@@ -91,6 +91,7 @@ public class ResultSetIterator
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.next != END;
     }
@@ -98,6 +99,7 @@ public class ResultSetIterator
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.next == END) {
             throw new NoSuchElementException();
@@ -110,6 +112,7 @@ public class ResultSetIterator
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -136,6 +139,7 @@ public class ResultSetIterator
         Adapter DEFAULT_INSTANCE =
             new Adapter() {
                 // return the first object in the current row of the result set
+                @Override
                 public Object buildNext(ResultSet rs) throws SQLException {
                     // result set columns are indexed starting with 1
                     return rs.getObject(1);

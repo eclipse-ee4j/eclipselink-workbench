@@ -194,6 +194,7 @@ public class ListChangeEvent extends EventObject {
         return new ListChangeEvent(newSource, newListName, this.index + offset, this.items, this.replacedItems);
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.listName);
     }

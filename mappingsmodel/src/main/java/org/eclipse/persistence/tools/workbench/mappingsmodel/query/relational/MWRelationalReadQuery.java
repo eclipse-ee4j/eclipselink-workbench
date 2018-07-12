@@ -15,7 +15,6 @@
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWTypeNames;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadQuery;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWAbstractRelationalReadQuery.CacheUsageModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational.MWAbstractRelationalReadQuery.InMemoryQueryIndirectionPolicyModel;

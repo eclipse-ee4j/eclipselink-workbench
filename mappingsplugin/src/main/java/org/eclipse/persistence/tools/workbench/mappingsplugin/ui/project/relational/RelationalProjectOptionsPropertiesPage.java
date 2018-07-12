@@ -54,6 +54,7 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
     }
 
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -402,9 +403,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildProjectClassNameHolder(ValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder, MWProject.PROJECT_SOURCE_CLASS_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalProject) this.subject).getProjectSourceClassName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalProject) this.subject).setProjectSourceClassName((String) value);
             }
@@ -413,9 +416,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildProjectSourceRootDirectoryHolder(PropertyValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder, MWProject.PROJECT_SOURCE_DIRECTORY_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalProject) this.subject).getProjectSourceDirectoryName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalProject) this.subject).setProjectSourceDirectoryName((String) value);
             }
@@ -434,9 +439,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildTableCreatorClassNameHolder(ValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder, MWRelationalProject.TABLE_CREATOR_SOURCE_CLASS_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalProject) this.subject).getTableCreatorSourceClassName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalProject) this.subject).setTableCreatorSourceClassName((String) value);
             }
@@ -445,9 +452,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildTableCreatorRootDirectoryHolder(PropertyValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder, MWRelationalProject.TABLE_CREATOR_SOURCE_DIRECTORY_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalProject) this.subject).getTableCreatorSourceDirectoryName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalProject) this.subject).setTableCreatorSourceDirectoryName((String) value);
             }
@@ -463,9 +472,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildDefaultPkNameHolder(PropertyValueModel tableGenerationPolicyHolder) {
         return new PropertyAspectAdapter(tableGenerationPolicyHolder, MWTableGenerationPolicy.DEFAULT_PRIMARY_KEY_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableGenerationPolicy) this.subject).getDefaultPrimaryKeyName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableGenerationPolicy) this.subject).setDefaultPrimaryKeyName((String) value);
             }
@@ -480,9 +491,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildPrimaryKeySearchPatternHolder(PropertyValueModel tableGenerationPolicyHolder) {
         return new PropertyAspectAdapter(tableGenerationPolicyHolder, MWTableGenerationPolicy.PRIMARY_KEY_SEARCH_PATTERN_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableGenerationPolicy) this.subject).getPrimaryKeySearchPattern();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableGenerationPolicy) this.subject).setPrimaryKeySearchPattern((String) value);
             }
@@ -491,6 +504,7 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildTableGenerationHolder(final PropertyValueModel projectHolder) {
         return new PropertyAspectAdapter(projectHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalProject) this.subject).getTableGenerationPolicy();
             }
@@ -506,9 +520,11 @@ final class RelationalProjectOptionsPropertiesPage extends ProjectOptionsPropert
 
     private PropertyValueModel buildGenerateDeprecatedDirectMappingsAdapter() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWRelationalProject.GENERATE_DEPRECATED_DIRECT_MAPPINGS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWRelationalProject) this.subject).isGenerateDeprecatedDirectMappings());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalProject) this.subject).setGenerateDeprecatedDirectMappings(((Boolean) value).booleanValue());
             }

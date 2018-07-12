@@ -30,16 +30,19 @@ public final class VariableOneToOneMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_TRANSFORMATION_MAPPING_NODE";
     }
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return "mapping.variableOneToOne";
     }
 
+    @Override
     protected String buildIconKey() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".variableOneToOne";
     }
@@ -47,6 +50,7 @@ public final class VariableOneToOneMappingNode extends MappingNode {
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return VariableOneToOneMappingTabbedPropertiesPage.class;
     }

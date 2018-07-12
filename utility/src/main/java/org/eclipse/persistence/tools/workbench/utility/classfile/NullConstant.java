@@ -35,23 +35,28 @@ public class NullConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         // do nothing
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.println();
     }
 
+    @Override
     public String description() {
         return "null";
     }
 
+    @Override
     public Object value() {
         return null;
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

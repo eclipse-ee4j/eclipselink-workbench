@@ -39,11 +39,13 @@ final class XmlSessionTabbedPropertiesPage extends SessionTabbedPropertiesPage
         super(context);
     }
 
+    @Override
     protected AbstractPropertiesPage buildGeneralPropertiesPage()
     {
         return new XmlSessionProjectPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected ComponentBuilder buildMultipleProjectsPageBuilder()
     {
         return new XmlSessionMultipleProjectsPropertiesPageBuilder();
@@ -67,6 +69,7 @@ final class XmlSessionTabbedPropertiesPage extends SessionTabbedPropertiesPage
         return new XMLLoginTabbedPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected void initializeTabs()
     {
 
@@ -82,6 +85,7 @@ final class XmlSessionTabbedPropertiesPage extends SessionTabbedPropertiesPage
     {
         private XmlSessionMultipleProjectsPropertiesPage page;
 
+        @Override
         public Component buildComponent(PropertyValueModel nodeHolder)
         {
             if (this.page == null)

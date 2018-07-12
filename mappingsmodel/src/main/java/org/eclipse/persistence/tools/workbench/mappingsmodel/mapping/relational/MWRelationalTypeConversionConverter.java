@@ -56,6 +56,7 @@ public final class MWRelationalTypeConversionConverter extends MWTypeConversionC
 
     // **************** Methods ******************
 
+    @Override
     public Set getBasicTypes() {
         Set types = super.getBasicTypes();
         this.addNTypeDatabaseTypeDeclarationsTo(types);
@@ -72,6 +73,7 @@ public final class MWRelationalTypeConversionConverter extends MWTypeConversionC
 
     private Iterator nTypes() {
         return new TransformationIterator(new ArrayIterator(N_TYPE_CLASSES)) {
+            @Override
             protected Object transform(Object next) {
                 return MWRelationalTypeConversionConverter.this.typeFor((Class) next);
             }
@@ -92,6 +94,7 @@ public final class MWRelationalTypeConversionConverter extends MWTypeConversionC
 
     private Iterator oracleSpecificTypes() {
         return new TransformationIterator(new ArrayIterator(ORACLE_SPECIFIC_TYPE_NAMES)) {
+            @Override
             protected Object transform(Object next) {
                 return MWRelationalTypeConversionConverter.this.typeNamed((String) next);
             }
@@ -107,6 +110,7 @@ public final class MWRelationalTypeConversionConverter extends MWTypeConversionC
 
     // **************** Problem Handling *****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if (this.getDataType() != null) {

@@ -48,6 +48,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#putSpi(String, String)
      */
+    @Override
     protected void putSpi(String key, String value) {
         // ignore
     }
@@ -55,6 +56,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#getSpi(String)
      */
+    @Override
     protected String getSpi(String key) {
         return null;
     }
@@ -62,6 +64,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#removeSpi(String)
      */
+    @Override
     protected void removeSpi(String key) {
         // ignore
     }
@@ -69,6 +72,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#removeNodeSpi()
      */
+    @Override
     protected void removeNodeSpi() throws BackingStoreException {
         // ignore
     }
@@ -76,6 +80,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#keysSpi()
      */
+    @Override
     protected String[] keysSpi() throws BackingStoreException {
         return EMPTY_STRING_ARRAY;
     }
@@ -83,6 +88,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#childrenNamesSpi()
      */
+    @Override
     protected String[] childrenNamesSpi() throws BackingStoreException {
         return EMPTY_STRING_ARRAY;
     }
@@ -90,6 +96,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#childSpi(String)
      */
+    @Override
     protected AbstractPreferences childSpi(String name) {
         return this;
     }
@@ -97,6 +104,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#syncSpi()
      */
+    @Override
     protected void syncSpi() throws BackingStoreException {
         // ignore
     }
@@ -104,6 +112,7 @@ public class NullPreferences extends AbstractPreferences {
     /**
      * @see java.util.prefs.AbstractPreferences#flushSpi()
      */
+    @Override
     protected void flushSpi() throws BackingStoreException {
         // ignore
     }

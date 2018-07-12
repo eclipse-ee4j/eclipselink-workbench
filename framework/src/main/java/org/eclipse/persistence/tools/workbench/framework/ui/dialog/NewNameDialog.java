@@ -31,7 +31,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
-import javax.xml.bind.Validator;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
@@ -106,6 +105,7 @@ public class NewNameDialog extends AbstractValidatingDialog {
         this.subjectHolder = new SimplePropertyValueModel();
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -197,12 +197,15 @@ public class NewNameDialog extends AbstractValidatingDialog {
 
     protected DocumentListener buildDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 NewNameDialog.this.documentChanged();
             }
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 NewNameDialog.this.documentChanged();
             }
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 // this probably will never happen...
             }
@@ -212,10 +215,12 @@ public class NewNameDialog extends AbstractValidatingDialog {
 
     // ********** opening **********
 
+    @Override
     protected String helpTopicId() {
         return this.builder.getHelpTopicId();
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.textField;
     }
@@ -272,11 +277,13 @@ public class NewNameDialog extends AbstractValidatingDialog {
         this.clearErrorMessage();
     }
 
+    @Override
     protected void setErrorMessageKey(String key) {
         super.setErrorMessageKey(key);
         this.getOKAction().setEnabled(false);
     }
 
+    @Override
     protected void clearErrorMessage() {
         super.clearErrorMessage();
         this.getOKAction().setEnabled(true);
@@ -425,6 +432,7 @@ public class NewNameDialog extends AbstractValidatingDialog {
             return this.buildDialog(context, (Builder) this.clone());
         }
 
+        @Override
         protected Object clone() {
             Builder clone;
             try {
@@ -577,6 +585,7 @@ public class NewNameDialog extends AbstractValidatingDialog {
         }
         protected DocumentFactory buildDefaultDocumentFactory() {
             return new DocumentFactory() {
+                @Override
                 public Document buildDocument() {
                     return new PlainDocument();
                 }
@@ -645,6 +654,7 @@ public class NewNameDialog extends AbstractValidatingDialog {
             /*
              * (non-Javadoc)
              */
+        @Override
             public String displayString()
             {
                 return name;

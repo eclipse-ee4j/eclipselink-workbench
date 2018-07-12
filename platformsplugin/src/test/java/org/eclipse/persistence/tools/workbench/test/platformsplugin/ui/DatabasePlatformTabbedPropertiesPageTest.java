@@ -32,6 +32,7 @@ public class DatabasePlatformTabbedPropertiesPageTest extends AbstractProperties
         super();
     }
 
+    @Override
     protected ListValueModel nodesModel(DatabasePlatformRepositoryNode reposNode) {
         ListValueModel childrenModel = reposNode.getChildrenModel();
         // add a dummy listener so the models wake up
@@ -43,6 +44,7 @@ public class DatabasePlatformTabbedPropertiesPageTest extends AbstractProperties
         return (DatabasePlatform) this.currentValue();
     }
 
+    @Override
     protected void print() {
         DatabasePlatform currentPlatform = this.currentPlatform();
         if (currentPlatform == null) {

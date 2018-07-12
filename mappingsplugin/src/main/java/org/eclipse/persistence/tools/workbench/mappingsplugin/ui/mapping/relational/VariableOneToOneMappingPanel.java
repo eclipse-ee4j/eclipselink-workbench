@@ -44,6 +44,7 @@ final class VariableOneToOneMappingPanel extends ScrollablePropertiesPage {
         return "mapping.variableOneToOne";
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));

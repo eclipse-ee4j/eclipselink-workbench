@@ -31,10 +31,12 @@ public class DB2_8Tests extends DB2_7Tests {
         super(name);
     }
 
+    @Override
     protected String[] driverJARNames() {
         return new String[] {"db2java_8.1.zip", "db2jcc_8.1.jar"};
     }
 
+    @Override
     protected String userName() {
         return this.defautlUserName();
     }
@@ -42,18 +44,22 @@ public class DB2_8Tests extends DB2_7Tests {
     /**
      * the DB2 8.1 server in Ottawa
      */
+    @Override
     protected String serverName() {
         return "tlsvrdb2.ca.oracle.com";
     }
 
+    @Override
     protected String platformName() {
         return "IBM DB2";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "08.02.0003";
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    BLOB_COL            BLOB,"); sb.append(CR);
         sb.append("CLOB_COL            CLOB,"); sb.append(CR);
@@ -73,6 +79,7 @@ public class DB2_8Tests extends DB2_7Tests {
      * so we simply override this method and don't call
      * super.verifyTable(Map)
      */
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // BIGINT
         this.verifyColumnAttribute(metaDataMap, "BIGINT_COL", "TABLE_CAT", null);

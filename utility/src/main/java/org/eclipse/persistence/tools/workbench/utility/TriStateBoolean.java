@@ -180,6 +180,7 @@ public class TriStateBoolean
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -191,6 +192,7 @@ public class TriStateBoolean
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return (this.value == null) ? 0 : this.value.hashCode();
     }
@@ -198,6 +200,7 @@ public class TriStateBoolean
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -210,6 +213,7 @@ public class TriStateBoolean
      * Return "undefined", "true", or "false", as appropriate.
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return (this.value == null) ? "undefined" : this.value.toString();
     }

@@ -52,6 +52,7 @@ public class ToggleMenuItemDescription extends ButtonDescription
      */
     private static class CheckBoxMenuItemCreator implements ButtonCreator
     {
+        @Override
         public AbstractButton createButton(FrameworkAction action)
         {
             return new ToggleMenuItem((ToggleFrameworkAction) action);

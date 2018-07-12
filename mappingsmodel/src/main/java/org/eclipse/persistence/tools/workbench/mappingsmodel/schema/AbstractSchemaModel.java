@@ -66,6 +66,7 @@ public abstract class AbstractSchemaModel
      * Do NOT override this method.
      * Every schema object should be able to return its schema.
      */
+    @Override
     public final MWXmlSchema getSchema() {
         return this.getParentNamespace().getSchema();
     }
@@ -74,6 +75,7 @@ public abstract class AbstractSchemaModel
      * Do NOT override this method.
      * Every schema object should be able to return its parent namespace.
      */
+    @Override
     public final MWNamespace getParentNamespace() {
         if (this.getSchemaModelParent() == null) {
             try {
@@ -87,20 +89,24 @@ public abstract class AbstractSchemaModel
     }
 
     /** default implementation */
+    @Override
     public Iterator structuralComponents() {
         return NullIterator.instance();
     }
 
     /** default implementation */
+    @Override
     public Iterator descriptorContextComponents() {
         return NullIterator.instance();
     }
 
     /** default implementation */
+    @Override
     public Iterator xpathComponents() {
         return NullIterator.instance();
     }
 
+    @Override
     public MWNamedSchemaComponent parentNamedComponent() {
         MWSchemaModel parent = this.getSchemaModelParent();
 
@@ -131,6 +137,7 @@ public abstract class AbstractSchemaModel
     }
 
     /** default implementation */
+    @Override
     public MWNamedSchemaComponent nestedNamedComponent(QName qName) {
         if (qName.getComponentType() == QName.ATTRIBUTE_TYPE) {
             return this.nestedAttribute(qName.getNamespaceURI(), qName.getLocalName());
@@ -144,16 +151,19 @@ public abstract class AbstractSchemaModel
     }
 
     /** default implementation */
+    @Override
     public MWAttributeDeclaration nestedAttribute(String namespaceUrl, String attributeName) {
         return null;
     }
 
     /** default implementation */
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         return null;
     }
 
     /** default implementation */
+    @Override
     public int totalElementCount() {
         return 0;
     }
@@ -161,6 +171,7 @@ public abstract class AbstractSchemaModel
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     public final void reload(XSObject schemaObject) {
         if (this.reloadInProgress) {
             return;
@@ -177,6 +188,7 @@ public abstract class AbstractSchemaModel
         // no op
     }
 
+    @Override
     public void resolveReferences() {
         // subclasses must call super.resolveReferences()
         // no op

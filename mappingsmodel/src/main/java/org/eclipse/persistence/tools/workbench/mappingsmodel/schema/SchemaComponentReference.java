@@ -51,18 +51,22 @@ public abstract class SchemaComponentReference
 
     // **************** MWNamedSchemaComponent contract **********************
 
+    @Override
     public MWNamespace getTargetNamespace() {
         return this.getReferencedComponent().getParentNamespace();
     }
 
+    @Override
     public String componentTypeName() {
         return this.getReferencedComponent().componentTypeName();
     }
 
+    @Override
     public boolean directlyOwns(MWNamedSchemaComponent nestedComponent) {
         return this.getReferencedComponent().directlyOwns(nestedComponent);
     }
 
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {
         this.getReferencedComponent().addDirectlyOwnedComponentsTo(directlyOwnedComponents);
     }
@@ -70,6 +74,7 @@ public abstract class SchemaComponentReference
 
     // **************** MWSchemaComponent contract ****************************
 
+    @Override
     public boolean isReference() {
         return true;
     }
@@ -77,16 +82,19 @@ public abstract class SchemaComponentReference
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public Iterator xpathComponents() {
         return this.getReferencedComponent().xpathComponents();
     }
 
     /** Overridden from AbstractSchemaModel */
+    @Override
     public MWAttributeDeclaration nestedAttribute(String namespaceUrl, String attributeName) {
         return this.getReferencedComponent().nestedAttribute(namespaceUrl, attributeName);
     }
 
     /** Overridden from AbstractSchemaModel */
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         return this.getReferencedComponent().nestedElement(namespaceUrl, elementName);
     }
@@ -94,6 +102,7 @@ public abstract class SchemaComponentReference
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
         this.resolveReference(this.getNamespaceUrl(), this.getName());

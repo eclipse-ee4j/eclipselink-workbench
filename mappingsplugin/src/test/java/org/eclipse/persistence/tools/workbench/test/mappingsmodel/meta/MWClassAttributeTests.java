@@ -79,6 +79,7 @@ public class MWClassAttributeTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
@@ -115,6 +116,7 @@ public class MWClassAttributeTests extends TestCase {
         this.phoneNumbersAttribute.setItemType(this.phoneNumberType);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

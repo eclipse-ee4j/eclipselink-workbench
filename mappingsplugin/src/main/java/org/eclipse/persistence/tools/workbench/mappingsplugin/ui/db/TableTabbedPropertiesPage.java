@@ -37,6 +37,7 @@ public class TableTabbedPropertiesPage extends TabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         this.columnsPropertiesPage = new ColumnsPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
         this.referencesPropertiesPage = new ReferencesPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());

@@ -34,6 +34,7 @@ final class AddDatabasePlatformAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         this.initializeTextAndMnemonic("ADD_DATABASE_PLATFORM");
         // no accelerator
@@ -41,6 +42,7 @@ final class AddDatabasePlatformAction extends AbstractFrameworkAction {
         this.initializeToolTipText("ADD_DATABASE_PLATFORM.TOOL_TIP");
     }
 
+    @Override
     protected void execute() {
         NewNameDialog.Builder builder = this.buildNewNameDialogBuilder();
         ApplicationNode[] nodes = this.selectedNodes();
@@ -69,6 +71,7 @@ final class AddDatabasePlatformAction extends AbstractFrameworkAction {
 
     private Iterator existingTypeNames(DatabasePlatformRepository repository) {
         return new TransformationIterator(repository.platforms()) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabasePlatform) next).getName();
             }

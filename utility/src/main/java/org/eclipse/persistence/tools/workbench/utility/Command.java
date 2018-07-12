@@ -27,9 +27,11 @@ public interface Command {
 
     Command NULL_INSTANCE =
         new Command() {
+            @Override
             public void execute() {
                 // do nothing
             }
+            @Override
             public String toString() {
                 return "NullCommand";
             }

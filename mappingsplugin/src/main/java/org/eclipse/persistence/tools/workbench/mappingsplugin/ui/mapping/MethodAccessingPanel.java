@@ -60,11 +60,13 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
     public MethodAccessingPanel(PropertyValueModel mappingHolder, WorkbenchContextHolder contextHolder) {
         super(mappingHolder, contextHolder);
     }
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.methodAccessingHolder = buildMethodAccessingHolder();
     }
 
+    @Override
     protected void initializeLayout() {
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -135,9 +137,11 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildMethodAccessingHolder() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWMapping.USES_METHOD_ACCESSING_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWMapping) this.subject).usesMethodAccessing());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWMapping) this.subject).setUsesMethodAccessing(((Boolean) value).booleanValue());
             }
@@ -162,6 +166,7 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
     private CachingComboBoxModel buildGetMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildGetMethodHolder(), this.getSubjectHolder()) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return MethodAccessingPanel.this.orderedGetMethodChoices((MWMapping) subject);
                 }
@@ -172,10 +177,12 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
     private PropertyValueModel buildGetMethodHolder() {
         PropertyValueModel propertyValueModel =
             new PropertyAspectAdapter(getSubjectHolder(), MWMapping.GET_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWMapping) this.subject).getGetMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWMapping) this.subject).setGetMethod((MWMethod) value);
             }
@@ -219,6 +226,7 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
     private CachingComboBoxModel buildSetMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildSetMethodHolder(), this.getSubjectHolder()) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return MethodAccessingPanel.this.orderedSetMethodChoices((MWMapping) subject);
                 }
@@ -229,10 +237,12 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
     private PropertyValueModel buildSetMethodHolder() {
         PropertyValueModel propertyValueModel =
             new PropertyAspectAdapter(getSubjectHolder(), MWMapping.SET_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWMapping) this.subject).getSetMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWMapping) this.subject).setSetMethod((MWMethod) value);
             }
@@ -263,6 +273,7 @@ public final class MethodAccessingPanel extends AbstractSubjectPanel {
     /** We want to display the signature, but we want filtering based only on the method name */
     private StringConverter buildMethodStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? "" : ((MWMethod) o).getName();
             }

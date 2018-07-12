@@ -52,16 +52,19 @@ public class SessionBrokerAdapterTest extends AbstractAdapterTest
 
         sessionBroker.addCollectionChangeListener(SessionBrokerAdapter.SESSIONS_COLLECTION, new CollectionChangeListener()
         {
+            @Override
             public void collectionChanged(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.collectionChanged should not have been called");
             }
 
+            @Override
             public void itemsAdded(CollectionChangeEvent e)
             {
                 result.add(Boolean.TRUE);
             }
 
+            @Override
             public void itemsRemoved(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsRemoved should not have been called");
@@ -85,16 +88,19 @@ public class SessionBrokerAdapterTest extends AbstractAdapterTest
         sessionBroker.manage("SC-EmployeeTest");
         sessionBroker.addCollectionChangeListener(SessionBrokerAdapter.SESSIONS_COLLECTION, new CollectionChangeListener()
         {
+            @Override
             public void collectionChanged(CollectionChangeEvent e)
             {
                 result.add(Boolean.TRUE);
             }
 
+            @Override
             public void itemsAdded(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsAdded should not have been called");
             }
 
+            @Override
             public void itemsRemoved(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsRemoved should not have been called");
@@ -122,16 +128,19 @@ public class SessionBrokerAdapterTest extends AbstractAdapterTest
         sessionBroker.manage("SC-EmployeeTest2");
         sessionBroker.addCollectionChangeListener(SessionBrokerAdapter.SESSIONS_COLLECTION, new CollectionChangeListener()
         {
+            @Override
             public void collectionChanged(CollectionChangeEvent e)
             {
                 result.add(Boolean.TRUE);
             }
 
+            @Override
             public void itemsAdded(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsAdded should not have been called");
             }
 
+            @Override
             public void itemsRemoved(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsRemoved should not have been called");
@@ -160,6 +169,7 @@ public class SessionBrokerAdapterTest extends AbstractAdapterTest
 
         CollectionAspectAdapter adapter = new CollectionAspectAdapter(SessionBrokerAdapter.SESSIONS_COLLECTION, sessionBroker)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 return ((SessionBrokerAdapter) subject).sessions();
@@ -168,16 +178,19 @@ public class SessionBrokerAdapterTest extends AbstractAdapterTest
 
         adapter.addCollectionChangeListener(CollectionAspectAdapter.VALUE, new CollectionChangeListener()
         {
+            @Override
             public void collectionChanged(CollectionChangeEvent e)
             {
                 result.add(Boolean.TRUE);
             }
 
+            @Override
             public void itemsAdded(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsAdded should not have been called");
             }
 
+            @Override
             public void itemsRemoved(CollectionChangeEvent e)
             {
                 fail("CollectionChangeListener.itemsRemoved should not have been called");

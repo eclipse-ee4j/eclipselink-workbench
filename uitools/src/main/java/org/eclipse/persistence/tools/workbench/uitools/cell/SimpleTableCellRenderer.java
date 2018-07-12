@@ -45,6 +45,7 @@ public class SimpleTableCellRenderer
     /**
      * @see javax.swing.TableCellRenderer#getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
      */
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         // substitute null for the cell value so nothing is drawn initially...
         super.getTableCellRendererComponent(table, null, isSelected, hasFocus, row, column);

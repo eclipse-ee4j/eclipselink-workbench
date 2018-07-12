@@ -27,12 +27,14 @@ public interface DiffableAdapter {
 
 
     DiffableAdapter NORMAL = new DiffableAdapter() {
+        @Override
         public Diff diff(Diffable object1, Object object2) {
             return object1.diff(object2);
         }
     };
 
     DiffableAdapter KEY = new DiffableAdapter() {
+        @Override
         public Diff diff(Diffable object1, Object object2) {
             return object1.keyDiff(object2);
         }

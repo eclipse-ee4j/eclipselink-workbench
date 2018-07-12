@@ -51,6 +51,7 @@ public abstract class WorkbenchContextWrapper extends AbstractWorkbenchContext {
     /**
      * @see WorkbenchContext#getApplicationContext()
      */
+    @Override
     public ApplicationContext getApplicationContext() {
         return this.delegate.getApplicationContext();
     }
@@ -58,6 +59,7 @@ public abstract class WorkbenchContextWrapper extends AbstractWorkbenchContext {
     /**
      * @see WorkbenchContext#getCurrentWindow()
      */
+    @Override
     public Window getCurrentWindow() {
         return this.delegate.getCurrentWindow();
     }
@@ -65,6 +67,7 @@ public abstract class WorkbenchContextWrapper extends AbstractWorkbenchContext {
     /**
      * @see WorkbenchContext#getNavigatorSelectionModel()
      */
+    @Override
     public NavigatorSelectionModel getNavigatorSelectionModel() {
         return this.delegate.getNavigatorSelectionModel();
     }
@@ -72,6 +75,7 @@ public abstract class WorkbenchContextWrapper extends AbstractWorkbenchContext {
     /**
      * @see WorkbenchContext#getActionRepository()
      */
+    @Override
     public ActionRepository getActionRepository() {
         return this.delegate.getActionRepository();
     }
@@ -79,6 +83,7 @@ public abstract class WorkbenchContextWrapper extends AbstractWorkbenchContext {
     /**
      * @see WorkbenchContext#getPropertiesPage()
      */
+    @Override
     public Component getPropertiesPage() {
         return this.delegate.getPropertiesPage();
     }

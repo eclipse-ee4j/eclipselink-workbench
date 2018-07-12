@@ -35,18 +35,22 @@ public class AdaptableListCellRenderer
         this.adapter = adapter;
     }
 
+    @Override
     protected Icon buildIcon(Object value) {
         return this.adapter.buildIcon(value);
     }
 
+    @Override
     protected String buildText(Object value) {
         return this.adapter.buildText(value);
     }
 
+    @Override
     protected String buildToolTipText(Object value) {
         return this.adapter.buildToolTipText(value);
     }
 
+    @Override
     protected String buildAccessibleName(Object value) {
         return this.adapter.buildAccessibleName(value);
     }

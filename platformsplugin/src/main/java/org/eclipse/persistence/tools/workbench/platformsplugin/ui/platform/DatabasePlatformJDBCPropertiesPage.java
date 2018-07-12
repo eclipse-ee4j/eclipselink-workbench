@@ -69,6 +69,7 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel selectionNodeHolder) {
         super.initialize(selectionNodeHolder);
         this.databaseTypesHolder = this.buildSortedDatabaseTypesAdapter();
@@ -81,9 +82,11 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
 
     private CollectionValueModel buildDatabaseTypesAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder(), DatabasePlatform.DATABASE_TYPES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).databaseTypes();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabasePlatform) this.subject).databaseTypesSize();
             }
@@ -100,9 +103,11 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
 
     private CollectionValueModel buildMappingsAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder(), DatabasePlatform.JDBC_TYPE_TO_DATABASE_TYPE_MAPPINGS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).jdbcTypeToDatabaseTypeMappings();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabasePlatform) this.subject).jdbcTypeToDatabaseTypeMappingsSize();
             }
@@ -113,6 +118,7 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
         return new MappingColumnAdapter(this.getApplicationContext());
     }
 
+    @Override
     protected Component buildPage() {
         return new JScrollPane(this.buildTable());
     }
@@ -139,9 +145,11 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
 
     private TableCellRenderer buildJDBCTypeRenderer() {
         return new AdaptableTableCellRenderer(new AbstractCellRendererAdapter() {
+            @Override
             public String buildText(Object value) {
                 return ((JDBCType) value).displayString();
             }
+            @Override
             public Icon buildIcon(Object value) {
                 return EMPTY_ICON;
             }
@@ -158,9 +166,11 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
 
     private ListCellRenderer buildDatabaseTypeRenderer() {
         return new AdaptableListCellRenderer(new AbstractCellRendererAdapter() {
+            @Override
             public String buildText(Object value) {
                 return (value == null) ? null : ((DatabaseType) value).displayString();
             }
+            @Override
             public Icon buildIcon(Object value) {
                 return EMPTY_ICON;
             }
@@ -190,22 +200,27 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
             this.context = context;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.context.getResourceRepository().getString(COLUMN_NAMES[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             return Object.class;
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index != JDBC_TYPE_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             JDBCTypeToDatabaseTypeMapping mapping = (JDBCTypeToDatabaseTypeMapping) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -218,9 +233,11 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
 
         private PropertyValueModel buildJDBCTypeAdapter(JDBCTypeToDatabaseTypeMapping mapping) {
             PropertyValueModel adapter = new PropertyAspectAdapter(EMPTY_STRING_ARRAY, mapping) {        // the jdbc type cannot change
+                @Override
                 protected Object getValueFromSubject() {
                     return ((JDBCTypeToDatabaseTypeMapping) this.subject).getJDBCType();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     throw new UnsupportedOperationException();
                 }
@@ -230,9 +247,11 @@ final class DatabasePlatformJDBCPropertiesPage extends ScrollablePropertiesPage 
 
         private PropertyValueModel buildDatabaseTypeAdapter(JDBCTypeToDatabaseTypeMapping mapping) {
             PropertyValueModel adapter = new PropertyAspectAdapter(JDBCTypeToDatabaseTypeMapping.DATABASE_TYPE_PROPERTY, mapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((JDBCTypeToDatabaseTypeMapping) this.subject).getDatabaseType();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((JDBCTypeToDatabaseTypeMapping) this.subject).setDatabaseType((DatabaseType) value);
                 }

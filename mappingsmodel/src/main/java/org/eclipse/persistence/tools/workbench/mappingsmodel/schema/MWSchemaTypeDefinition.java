@@ -27,5 +27,6 @@ public interface MWSchemaTypeDefinition
      * Return the type definitions of the built in type that this type is based on
      * (Used for runtime conversion)
      */
+    @Override
     Iterator baseBuiltInTypes();
 }

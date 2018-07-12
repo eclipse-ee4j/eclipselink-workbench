@@ -37,6 +37,7 @@ public class DatabaseTypePropertiesPageTest extends AbstractPropertiesPageTest {
         super();
     }
 
+    @Override
     protected ListValueModel nodesModel(DatabasePlatformRepositoryNode reposNode) {
         ListValueModel childrenModel = this.defaultPlatformNode(this.platformNodesModel(reposNode), (DatabasePlatformRepository) reposNode.getValue()).getChildrenModel();
         // add a dummy listener so the models wake up
@@ -66,6 +67,7 @@ public class DatabaseTypePropertiesPageTest extends AbstractPropertiesPageTest {
         return (DatabaseType) this.currentValue();
     }
 
+    @Override
     protected void print() {
         DatabaseType currentType = this.currentType();
         if (currentType == null) {

@@ -164,6 +164,7 @@ public class Main {
             this.developmentMode = developmentMode;
         }
 
+        @Override
         public void run() {
             FrameworkApplication.launch(this.logger, this.preferences, this.projectFile, this.developmentMode);
         }

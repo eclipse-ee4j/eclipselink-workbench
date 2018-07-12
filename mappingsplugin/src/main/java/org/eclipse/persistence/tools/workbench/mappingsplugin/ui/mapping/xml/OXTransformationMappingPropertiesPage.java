@@ -42,6 +42,7 @@ public final class OXTransformationMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
 
         return new XmlTransformationMappingPropertiesPage(getNodeHolder(), getWorkbenchContextHolder(), "mapping.xmlTransformation");

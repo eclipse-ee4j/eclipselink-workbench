@@ -45,6 +45,7 @@ public abstract class SCModel extends AbstractNodeModel {
      */
     public abstract ClassRepository getClassRepository();
 
+    @Override
     public String displayString() {
         return ClassTools.shortClassNameForObject( this);
     }

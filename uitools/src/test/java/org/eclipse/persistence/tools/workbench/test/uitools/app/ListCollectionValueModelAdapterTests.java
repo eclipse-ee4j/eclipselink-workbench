@@ -53,6 +53,7 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.wrappedList = new ArrayList();
@@ -64,6 +65,7 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
         return CollectionTools.collection(this.wrappedList.iterator());
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -71,6 +73,7 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testGetValue() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 // override failure
             }
@@ -85,6 +88,7 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testStaleValue() {
         CollectionChangeListener listener = new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
         };
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, listener);
@@ -147,9 +151,11 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testListSynch() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 // override failure
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 // override failure
             }
@@ -172,9 +178,11 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testReplaceItem() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 // override failure
             }
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 // override failure
             }
@@ -185,11 +193,13 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
         Collection adapterCollection = CollectionTools.collection((Iterator) this.adapter.getValue());
         assertEquals(3, adapterCollection.size());
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {
                 assertEquals("foo", e.items().next());
                 assertFalse(CollectionTools.contains((Iterator) ListCollectionValueModelAdapterTests.this.adapter.getValue(), "joo"));
                 assertEquals(2, ListCollectionValueModelAdapterTests.this.adapter.size());
             }
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {
                 assertEquals("joo", e.items().next());
                 assertEquals(3, ListCollectionValueModelAdapterTests.this.adapter.size());
@@ -215,7 +225,9 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testListChangedToEmpty() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {/* OK */}
         });
         this.wrappedListHolder.addItem(0, "foo");
@@ -228,7 +240,9 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testCollectionChangedFromEmpty() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {/* OK */}
         });
         JList jList = new JList(new ListModelAdapter(this.adapter));
@@ -242,7 +256,9 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 
     public void testCollectionChangedFromEmptyToEmpty() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {/* OK */}
         });
         JList jList = new JList(new ListModelAdapter(this.adapter));
@@ -256,12 +272,15 @@ public class ListCollectionValueModelAdapterTests extends TestCase {
 // ********** inner class **********
 
 private class TestListener implements CollectionChangeListener {
+    @Override
     public void collectionChanged(CollectionChangeEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void itemsAdded(CollectionChangeEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void itemsRemoved(CollectionChangeEvent e) {
         fail("unexpected event");
     }

@@ -43,6 +43,7 @@ public abstract class AbstractExportRuntimeProjectJavaSourceTests extends TestCa
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.tempDir = FileTools.emptyTemporaryDirectory(ClassTools.shortClassNameForObject(this) + "." + this.getName());

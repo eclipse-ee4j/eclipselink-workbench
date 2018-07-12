@@ -108,15 +108,19 @@ public class ExtendedListModel
 
     protected ListDataListener buildListDataListener() {
         return new ListDataListener() {
+            @Override
             public void intervalAdded(ListDataEvent e) {
                 ExtendedListModel.this.intervalAdded(e);
             }
+            @Override
             public void intervalRemoved(ListDataEvent e) {
                 ExtendedListModel.this.intervalRemoved(e);
             }
+            @Override
             public void contentsChanged(ListDataEvent e) {
                 ExtendedListModel.this.contentsChanged(e);
             }
+            @Override
             public String toString() {
                 return "list data listener";
             }
@@ -147,10 +151,12 @@ public class ExtendedListModel
 
     // **************** ListModel implementation ******************************
 
+    @Override
     public int getSize() {
         return this.prefix.size() + this.listModel.getSize() + this.suffix.size();
     }
 
+    @Override
     public Object getElementAt(int index) {
         int prefixSize = this.prefix.size();
 

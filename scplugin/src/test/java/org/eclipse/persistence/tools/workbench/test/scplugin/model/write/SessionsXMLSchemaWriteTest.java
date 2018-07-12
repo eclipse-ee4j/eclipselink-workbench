@@ -122,6 +122,7 @@ public class SessionsXMLSchemaWriteTest extends TestCase {
         return new TestSuite( SessionsXMLSchemaWriteTest.class);
     }
 
+    @Override
     protected void setUp() throws Exception {
 
         this.path = getClass().getResource( "/SessionsXMLTestModel/XMLSchemaSessions.xml").getPath();
@@ -140,6 +141,7 @@ public class SessionsXMLSchemaWriteTest extends TestCase {
         this.topLinkSessions.removeSessionConfig( session);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

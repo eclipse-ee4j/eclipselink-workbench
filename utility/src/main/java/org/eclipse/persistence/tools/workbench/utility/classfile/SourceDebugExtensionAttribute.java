@@ -39,17 +39,20 @@ public class SourceDebugExtensionAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         int length = this.getLength();
         this.debugExtension = new byte[length];
         stream.read(this.debugExtension);
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         this.writeHexStringOn(this.debugExtension, writer);
         writer.println();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -58,6 +61,7 @@ public class SourceDebugExtensionAttribute extends Attribute {
         return this.debugExtension;
     }
 
+    @Override
     void toString(StringBuffer sb) {
         this.appendHexStringTo(this.debugExtension, sb);
     }

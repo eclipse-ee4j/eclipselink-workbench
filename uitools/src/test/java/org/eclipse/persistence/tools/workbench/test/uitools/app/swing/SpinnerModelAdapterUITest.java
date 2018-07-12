@@ -87,9 +87,11 @@ public class SpinnerModelAdapterUITest {
 
     private PropertyValueModel buildBirthDateHolder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.BIRTH_DATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) this.subject).getBirthDate();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setBirthDate((Date) value);
             }
@@ -102,9 +104,11 @@ public class SpinnerModelAdapterUITest {
 
     private PropertyValueModel buildAgeHolder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.AGE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((TestModel) this.subject).getAge());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setAge(((Number) value).intValue());
             }
@@ -117,9 +121,11 @@ public class SpinnerModelAdapterUITest {
 
     private PropertyValueModel buildEyeColorHolder(ValueModel vm) {
         return new PropertyAspectAdapter(vm, TestModel.EYE_COLOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) this.subject).getEyeColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setEyeColor((String) value);
             }
@@ -141,6 +147,7 @@ public class SpinnerModelAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -190,6 +197,7 @@ public class SpinnerModelAdapterUITest {
 
     private Action buildResetModelAction() {
         Action action = new AbstractAction("reset model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SpinnerModelAdapterUITest.this.resetModel();
             }
@@ -209,6 +217,7 @@ public class SpinnerModelAdapterUITest {
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SpinnerModelAdapterUITest.this.clearModel();
             }
@@ -227,6 +236,7 @@ public class SpinnerModelAdapterUITest {
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SpinnerModelAdapterUITest.this.restoreModel();
             }
@@ -245,6 +255,7 @@ public class SpinnerModelAdapterUITest {
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction("print model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SpinnerModelAdapterUITest.this.printModel();
             }
@@ -332,6 +343,7 @@ public class SpinnerModelAdapterUITest {
             this.eyeColor = eyeColor;
             this.firePropertyChanged(EYE_COLOR_PROPERTY, old, eyeColor);
         }
+        @Override
         public String toString() {
             return "TestModel(birth: " + this.getBirthDate() + " - eyes: " + this.eyeColor + ")";
         }

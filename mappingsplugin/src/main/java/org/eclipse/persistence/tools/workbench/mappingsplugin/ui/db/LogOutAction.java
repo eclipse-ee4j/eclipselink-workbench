@@ -31,6 +31,7 @@ final class LogOutAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeText("DATABASE_LOG_OUT");
@@ -39,14 +40,17 @@ final class LogOutAction
         initializeIcon("logout");
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return ((MWDatabase) ((DatabaseNode) selectedNode).getValue()).isConnected();
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {MWDatabase.CONNECTED_PROPERTY};
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         MWDatabase database = (MWDatabase) selectedNode.getValue();
         try {

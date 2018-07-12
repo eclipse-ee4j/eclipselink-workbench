@@ -74,6 +74,7 @@ public final class SCProblemsResourceBundle extends ListResourceBundle
      * @return The association of a key and a value that will be loaded into the
      * table when the resource bundle is loaded
      */
+    @Override
     protected Object[][] getContents()
     {
         return contents;

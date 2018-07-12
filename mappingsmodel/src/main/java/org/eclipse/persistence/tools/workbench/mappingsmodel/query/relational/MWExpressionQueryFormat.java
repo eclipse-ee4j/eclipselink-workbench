@@ -16,10 +16,8 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.query.relational;
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -48,6 +46,7 @@ public final class MWExpressionQueryFormat extends MWQueryFormat
         super(parent);
     }
 
+    @Override
     protected void addChildrenTo(List children)
     {
         super.addChildrenTo(children);
@@ -57,16 +56,19 @@ public final class MWExpressionQueryFormat extends MWQueryFormat
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node modelObject)
     {
         super.initialize(modelObject);
         expression = new MWCompoundExpression(this);
     }
 
+    @Override
     String getType() {
         return MWRelationalQuery.EXPRESSION_FORMAT;
     }
 
+    @Override
     public MWCompoundExpression getExpression()
     {
         return expression;
@@ -79,21 +81,26 @@ public final class MWExpressionQueryFormat extends MWQueryFormat
         firePropertyChanged(EXPRESSION_PROPERTY, oldExpression, getExpression());
     }
 
+    @Override
     public boolean orderingAttributesAllowed() {
         return true;
     }
 
+    @Override
     public boolean batchReadAttributesAllowed() {
         return true;
     }
 
+    @Override
     public boolean reportAttributesAllowed() {
         return true;
     }
 
+    @Override
     public boolean groupingAtributesAllowed() {
         return true;
     }
+    @Override
     public void toString(StringBuffer sb)
     {
         super.toString(sb);
@@ -120,10 +127,12 @@ public final class MWExpressionQueryFormat extends MWQueryFormat
     }
 
     //Conversion methods
+    @Override
     void convertToRuntime(DatabaseQuery runtimeQuery)
     {
         runtimeQuery.setSelectionCriteria(getExpression().buildRuntimeExpression(((ObjectLevelReadQuery)runtimeQuery).getExpressionBuilder()));
     }
+    @Override
     void convertFromRuntime(DatabaseQuery runtimeQuery)
     {
         Expression selectionCriteria = runtimeQuery.getSelectionCriteria();

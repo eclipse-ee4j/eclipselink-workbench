@@ -84,6 +84,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.parentDescriptorHolder = buildParentDescriptorHolder();
@@ -96,6 +97,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private PropertyValueModel buildParentDescriptorHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWVariableOneToOneMapping) subject).getParentDescriptor();
             }
@@ -108,6 +110,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private CollectionValueModel buildQueryKeyNamesHolder()  {
         return new CollectionAspectAdapter(buildReferenceDescriptorHolder()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWRelationalDescriptor) subject).allQueryKeyNames();
             }
@@ -116,6 +119,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private PropertyValueModel buildReferenceDescriptorHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWVariableOneToOneMapping.REFERENCE_DESCRIPTOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWVariableOneToOneMapping) subject).getReferenceDescriptor();
             }
@@ -125,9 +129,11 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private CollectionValueModel buildFieldQueryKeyAssociationsAdapter() {
         return new CollectionAspectAdapter(getSelectionHolder(), MWVariableOneToOneMapping.COLUMN_QUERY_KEY_PAIRS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWVariableOneToOneMapping) subject).columnQueryKeyPairs();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWVariableOneToOneMapping) subject).columnQueryKeyPairsSize();
             }
@@ -144,6 +150,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     VariableOneToOneQueryKeyAssociationsPanel.this.rowSelectionChanged();
@@ -159,6 +166,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
         this.removeAction.setEnabled(associationSelected);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel =  new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -278,11 +286,13 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private Action buildAddAction() {
         final Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("ADD_ASSOCIATION_BUTTON_TEXT");
                 initializeMnemonic("ADD_ASSOCIATION_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 VariableOneToOneQueryKeyAssociationsPanel.this.addFieldQueryKeyNameAssociation();
             }
@@ -320,10 +330,12 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
     private Action buildRemoveAction() {
         this.removeAction = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeTextAndMnemonic("REMOVE_ASSOCIATION_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 VariableOneToOneQueryKeyAssociationsPanel.this.removeFieldQueryKeyNameAssociation();
             }
@@ -392,14 +404,17 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
             return (MWVariableOneToOneMapping) this.selectionHolder.getValue();
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(this.COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case FIELD_COLUMN:    return Object.class;
@@ -408,6 +423,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             //TODO the column should actually be disabled, not just uneditable
 
@@ -419,6 +435,7 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
             return true;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWColumnQueryKeyPair association = (MWColumnQueryKeyPair) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -431,9 +448,11 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
         private PropertyValueModel buildFieldAdapter(MWColumnQueryKeyPair association) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWColumnQueryKeyPair.COLUMN_PROPERTY, association) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumnQueryKeyPair) subject).getColumn();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumnQueryKeyPair) subject).setColumn((MWColumn) value);
                 }
@@ -443,9 +462,11 @@ final class VariableOneToOneQueryKeyAssociationsPanel extends ScrollableProperti
 
         private PropertyValueModel buildTargetFieldAdapter(MWColumnQueryKeyPair association) {
             return new PropertyAspectAdapter(MWColumnQueryKeyPair.QUERY_KEY_NAME_PROPERTY, association) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumnQueryKeyPair) subject).getQueryKeyName();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumnQueryKeyPair) subject).setQueryKeyName((String) value);
                 }

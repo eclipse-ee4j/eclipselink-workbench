@@ -46,14 +46,17 @@ public class EmptyIcon
 
     // ********** Icon implementation **********
 
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         // don't paint anything for an empty icon
     }
 
+    @Override
     public int getIconWidth() {
         return this.width;
     }
 
+    @Override
     public int getIconHeight() {
         return this.height;
     }

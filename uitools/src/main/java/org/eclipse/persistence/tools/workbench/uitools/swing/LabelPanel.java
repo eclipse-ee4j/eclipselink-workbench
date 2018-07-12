@@ -74,9 +74,11 @@ public class LabelPanel
 
     protected PropertyChangeListener buildIconListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 LabelPanel.this.setIcon((Icon) e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "icon listener";
             }
@@ -85,9 +87,11 @@ public class LabelPanel
 
     protected PropertyChangeListener buildTextListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 LabelPanel.this.setText((String) e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "text listener";
             }

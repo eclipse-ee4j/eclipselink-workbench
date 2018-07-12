@@ -38,6 +38,7 @@ public class EnumerationIterator implements Iterator {
     /**
      * @see Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.enumeration.hasMoreElements();
     }
@@ -45,6 +46,7 @@ public class EnumerationIterator implements Iterator {
     /**
      * @see Iterator#next()
      */
+    @Override
     public Object next() {
         return this.enumeration.nextElement();
     }
@@ -52,6 +54,7 @@ public class EnumerationIterator implements Iterator {
     /**
      * @see Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -59,6 +62,7 @@ public class EnumerationIterator implements Iterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.enumeration + ')';
     }

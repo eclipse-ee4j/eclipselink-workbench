@@ -27,10 +27,12 @@ public abstract class MWAbstractDescriptorPolicy extends MWModel implements MWDe
         super(parent);
     }
 
+    @Override
     public MWMappingDescriptor getOwningDescriptor() {
         return (MWMappingDescriptor) this.getParent();
     }
 
+    @Override
     public void dispose()
     {
         // NO-OP here.  If an Advanced Policy requires
@@ -44,11 +46,13 @@ public abstract class MWAbstractDescriptorPolicy extends MWModel implements MWDe
     /**
      * Default implementation.  There is nothing to persist initially.
      */
+    @Override
     public MWDescriptorPolicy getPersistedPolicy()
     {
         return null;
     }
 
+    @Override
     public boolean isActive()
     {
         return false;

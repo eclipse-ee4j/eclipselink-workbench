@@ -81,6 +81,7 @@ public class ListModelAdapterUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -181,6 +182,7 @@ public class ListModelAdapterUITest {
 
     private Comparator buildCustomComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return ((Comparable) o2).compareTo(o1);
             }
@@ -189,6 +191,7 @@ public class ListModelAdapterUITest {
 
     private ListValueModel buildPrimitiveTaskListAdapter() {
         return new ListAspectAdapter(TaskList.TASKS_LIST, this.taskList()) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((TaskList) this.subject).tasks();
             }
@@ -197,6 +200,7 @@ public class ListModelAdapterUITest {
 
     private ListValueModel buildDisplayableTaskListAdapter() {
         return new ListAspectAdapter(TaskList.TASK_OBJECTS_LIST, this.taskList()) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((TaskList) this.subject).taskObjects();
             }
@@ -255,6 +259,7 @@ public class ListModelAdapterUITest {
 
     private Action buildAddAction() {
         Action action = new AbstractAction("add") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ListModelAdapterUITest.this.addTask();
             }
@@ -269,6 +274,7 @@ public class ListModelAdapterUITest {
 
     private Action buildRemoveAction() {
         Action action = new AbstractAction("remove") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ListModelAdapterUITest.this.removeTask();
             }
@@ -283,6 +289,7 @@ public class ListModelAdapterUITest {
 
     private Action buildClearAction() {
         Action action = new AbstractAction("clear") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ListModelAdapterUITest.this.clearTasks();
             }
@@ -336,12 +343,15 @@ private class TaskObject extends AbstractModel implements Displayable {
         this.name = name;
         this.creationTimeStamp = new Date();
     }
+    @Override
     public String displayString() {
         return this.name + ": " + this.creationTimeStamp.getTime();
     }
+    @Override
     public Icon icon() {
         return null;
     }
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -353,6 +363,7 @@ private class TaskObject extends AbstractModel implements Displayable {
         this.name = name;
         this.firePropertyChanged(DISPLAY_STRING_PROPERTY, old, name);
     }
+    @Override
     public String toString() {
         return "TaskObject(" + this.displayString() + ")";
     }

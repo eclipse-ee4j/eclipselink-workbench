@@ -53,6 +53,7 @@ public class DatabasePlatformTests extends TestCase {
         super(name);
     }
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.repository = TestDatabasePlatformRepositoryFactory.instance().createRepository();
@@ -60,6 +61,7 @@ public class DatabasePlatformTests extends TestCase {
         this.barPlatform = this.repository.platformNamed("Bar Platform");
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

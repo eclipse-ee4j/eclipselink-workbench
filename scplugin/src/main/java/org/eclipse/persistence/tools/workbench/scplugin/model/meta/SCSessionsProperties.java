@@ -277,6 +277,7 @@ public final class SCSessionsProperties extends AbstractModel
      *
      * @return The short description of this class and its values
      */
+    @Override
     public final String toString()
     {
         StringBuffer sb = new StringBuffer();
@@ -293,6 +294,7 @@ public final class SCSessionsProperties extends AbstractModel
      *
      * @param buffer The buffer used to add extra information
      */
+    @Override
     public void toString(StringBuffer buffer)
     {
         buffer.append("path=");

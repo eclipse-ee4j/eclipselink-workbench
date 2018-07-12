@@ -33,6 +33,7 @@ final class RelationalDirectContainerMappingTableReferencePropertiesPage extends
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 

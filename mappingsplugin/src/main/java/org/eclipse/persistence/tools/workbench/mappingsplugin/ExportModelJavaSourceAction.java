@@ -28,6 +28,7 @@ public class ExportModelJavaSourceAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("EXPORT_MODEL_JAVA_SOURCE_PROJECT");
@@ -36,6 +37,7 @@ public class ExportModelJavaSourceAction extends AbstractFrameworkAction {
         this.initializeIcon("GENERATE_JAVA");
     }
 
+    @Override
     protected void execute() {
         ApplicationNode[] projectNodes = this.selectedProjectNodes();
         for (int i = 0; i < projectNodes.length; i++) {

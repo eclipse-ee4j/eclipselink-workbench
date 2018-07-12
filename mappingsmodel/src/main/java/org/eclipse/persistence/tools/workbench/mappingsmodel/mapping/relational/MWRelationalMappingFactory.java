@@ -37,18 +37,22 @@ public final class MWRelationalMappingFactory implements MWMappingFactory {
         return INSTANCE;
     }
 
+    @Override
     public MWDirectMapping createDirectMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWDirectToFieldMapping(descriptor, attribute, name);
     }
 
+    @Override
     public MWDirectCollectionMapping createDirectCollectionMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWRelationalDirectCollectionMapping((MWRelationalClassDescriptor) descriptor, attribute, name);
     }
 
+    @Override
     public MWDirectMapMapping createDirectMapMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWRelationalDirectMapMapping((MWRelationalClassDescriptor) descriptor, attribute, name);
     }
 
+    @Override
     public MWTransformationMapping createTransformationMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute, String name) {
         return new MWRelationalTransformationMapping(descriptor, attribute, name);
     }

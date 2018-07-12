@@ -45,6 +45,7 @@ final class ClassAttributeModifiersPanel extends AbstractSubjectPanel {
         this.descriptorHolder = descriptorHolder;
     }
 
+    @Override
     protected void initializeLayout() {
         // labeled border
         this.setBorder(BorderFactory.createTitledBorder(this.resourceRepository().getString("MODIFIER_PANEL_TITLE")));
@@ -195,9 +196,11 @@ final class ClassAttributeModifiersPanel extends AbstractSubjectPanel {
 
     private Verifier buildVerifier() {
         return new Verifier() {
+            @Override
             public boolean verifyFinalChange(boolean newModifierIsFinal) {
                 return ClassAttributeModifiersPanel.this.verifyFinalOrStaticChange(newModifierIsFinal);
             }
+            @Override
             public boolean verifyStaticChange(boolean newModifierIsStatic) {
                 return ClassAttributeModifiersPanel.this.verifyFinalOrStaticChange(newModifierIsStatic);
             }

@@ -80,6 +80,7 @@ public class RadioButtonModelAdapter extends ToggleButtonModelAdapter {
      * by the user.
      * @see ToggleButtonModelAdapter#setSelected(boolean)
      */
+    @Override
     public void setSelected(boolean b) {
         // do not allow the user to de-select a radio button
         // radio buttons can
@@ -107,6 +108,7 @@ public class RadioButtonModelAdapter extends ToggleButtonModelAdapter {
         /**
          * always return the wrapped value
          */
+        @Override
         public boolean accept(Object value) {
             return true;
         }
@@ -115,6 +117,7 @@ public class RadioButtonModelAdapter extends ToggleButtonModelAdapter {
          * pass through the value to the wrapped property value model
          * *only* when it matches our button value
          */
+        @Override
         public boolean reverseAccept(Object value) {
             return value == this.buttonValue;
         }
@@ -139,6 +142,7 @@ public class RadioButtonModelAdapter extends ToggleButtonModelAdapter {
          * but if it is null simply pass it through because it will cause the
          * button model's default value to be used
          */
+        @Override
         public Object transform(Object value) {
             return (value == null) ? null : Boolean.valueOf(value == this.buttonValue);
         }
@@ -147,6 +151,7 @@ public class RadioButtonModelAdapter extends ToggleButtonModelAdapter {
          * if the new value is true, pass through the our button value;
          * otherwise pass through null
          */
+        @Override
         public Object reverseTransform(Object value) {
             return (((Boolean) value).booleanValue()) ? this.buttonValue : null;
         }

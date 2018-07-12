@@ -36,6 +36,7 @@ public final class PlatformsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
 //        this.insert(new HelpPreferencesNode(this.getPreferencesContext()), 0);
@@ -44,6 +45,7 @@ public final class PlatformsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildPropertiesPage()
      */
+    @Override
     protected Component buildPropertiesPage() {
         return new PlatformsPreferencesPage(this.getPreferencesContext());
     }
@@ -51,6 +53,7 @@ public final class PlatformsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.AbstractPreferencesNode#buildDisplayString()
      */
+    @Override
     protected String buildDisplayString() {
         return this.resourceRepository().getString("PREFERENCES.PLATFORMS");
     }
@@ -58,6 +61,7 @@ public final class PlatformsPreferencesNode extends AbstractPreferencesNode {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.app.PreferencesNode#helpTopicId()
      */
+    @Override
     public String helpTopicId() {
         return "preferences.platforms";
     }

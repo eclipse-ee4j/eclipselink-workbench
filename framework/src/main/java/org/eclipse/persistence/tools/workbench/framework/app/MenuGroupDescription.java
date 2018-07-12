@@ -38,6 +38,7 @@ public class MenuGroupDescription extends ButtonGroupDescription
      * Overridden from the parent class to handle sub-menu merging. If a sub menu
      * has been merged and there are no sub-components, the sub-menu be removed.
      */
+    @Override
     protected void postUpdateOnActions(ComponentDescription desc, Collection frameworkActions)
     {
         // check to see if it is a sub-menu

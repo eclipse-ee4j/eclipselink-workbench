@@ -38,6 +38,7 @@ public class ClassDependencyTestClass extends java.util.Vector implements Compar
         return staticString;
     }
 
+    @Override
     public int compareTo(Object o) {
         return this.hashCode() - o.hashCode();
     }

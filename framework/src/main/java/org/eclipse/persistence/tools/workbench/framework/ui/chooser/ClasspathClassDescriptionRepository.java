@@ -42,17 +42,20 @@ public class ClasspathClassDescriptionRepository implements ClassDescriptionRepo
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository#classDescriptions()
      */
+    @Override
     public Iterator classDescriptions() {
         return new CompositeIterator(this.entriesClassDescriptions());
     }
 
     protected Iterator entriesClassDescriptions() {
         return new TransformationIterator(this.classpathEntries()) {
+            @Override
             protected Object transform(Object next) {
                 return classDescriptionsFor((Classpath.Entry) next);
             }
             private Iterator classDescriptionsFor(final Classpath.Entry entry) {
                 return new TransformationIterator(entry.classNamesStream(ClasspathClassDescriptionRepository.this.classNameFilter())) {
+                    @Override
                     protected Object transform(Object next) {
                         return new ClasspathClassDescription((String) next, entry.fileName());
                     }
@@ -78,6 +81,7 @@ public class ClasspathClassDescriptionRepository implements ClassDescriptionRepo
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.chooser.ClassDescriptionRepository#refreshClassDescriptions()
      */
+    @Override
     public void refreshClassDescriptions() {
         // do nothing, since the class descriptions are recalculated every time
     }

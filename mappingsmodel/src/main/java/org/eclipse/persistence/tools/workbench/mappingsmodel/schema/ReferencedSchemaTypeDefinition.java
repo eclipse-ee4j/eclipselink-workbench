@@ -95,25 +95,30 @@ public abstract class ReferencedSchemaTypeDefinition
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return true;
     }
 
+    @Override
     public String contextTypeQname() {
         return (this.getReferencedType() == null) ?
             this.qName() : this.getReferencedType().contextTypeQname();
     }
 
+    @Override
     public boolean containsText() {
         return (this.getReferencedType() == null) ?
             false : this.getReferencedType().containsText();
     }
 
+    @Override
     public boolean containsWildcard() {
         return (this.getReferencedType() == null) ?
             false : this.getReferencedType().containsWildcard();
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return (this.getReferencedType() == null) ?
             0 : this.getReferencedType().compareSchemaOrder(element1, element2);

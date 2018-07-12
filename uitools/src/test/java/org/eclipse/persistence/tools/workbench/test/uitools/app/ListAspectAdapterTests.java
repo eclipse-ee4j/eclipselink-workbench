@@ -52,6 +52,7 @@ public class ListAspectAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.subject1 = new TestSubject();
@@ -103,6 +104,7 @@ public class ListAspectAdapterTests extends TestCase {
     private ListAspectAdapter buildAspectAdapter(ValueModel subjectHolder) {
         return new ListAspectAdapter(subjectHolder, TestSubject.NAMES_LIST) {
             // this is not a typical aspect adapter - the value is determined by the aspect name
+            @Override
             protected ListIterator getValueFromSubject() {
                 if (this.listName == TestSubject.NAMES_LIST) {
                     return ((TestSubject) this.subject).names();
@@ -112,6 +114,7 @@ public class ListAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.listName);
                 }
             }
+            @Override
             public void addItem(int index, Object item) {
                 if (this.listName == TestSubject.NAMES_LIST) {
                     ((TestSubject) this.subject).addName(index, (String) item);
@@ -121,6 +124,7 @@ public class ListAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.listName);
                 }
             }
+            @Override
             public Object removeItem(int index) {
                 if (this.listName == TestSubject.NAMES_LIST) {
                     return ((TestSubject) this.subject).removeName(index);
@@ -130,6 +134,7 @@ public class ListAspectAdapterTests extends TestCase {
                     throw new IllegalStateException("invalid aspect name: " + this.listName);
                 }
             }
+            @Override
             public Object replaceItem(int index, Object item) {
                 if (this.listName == TestSubject.NAMES_LIST) {
                     return ((TestSubject) this.subject).setName(index, (String) item);
@@ -144,15 +149,19 @@ public class ListAspectAdapterTests extends TestCase {
 
     private ListChangeListener buildValueChangeListener1() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ListAspectAdapterTests.this.value1Changed(e);
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ListAspectAdapterTests.this.value1Changed(e);
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ListAspectAdapterTests.this.value1Changed(e);
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ListAspectAdapterTests.this.value1Changed(e);
             }
@@ -163,6 +172,7 @@ public class ListAspectAdapterTests extends TestCase {
         this.event1 = e;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

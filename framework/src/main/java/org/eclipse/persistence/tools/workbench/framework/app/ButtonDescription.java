@@ -86,6 +86,7 @@ public class ButtonDescription implements ComponentDescription
         }
     }
 
+    @Override
     public Component component()
     {
         button = buttonCreator.createButton(getAction());
@@ -101,11 +102,13 @@ public class ButtonDescription implements ComponentDescription
         return action;
     }
 
+    @Override
     public Iterator actions()
     {
         return new SingleElementIterator(action);
     }
 
+    @Override
     public void updateOn(Collection frameworkActions)
     {
         // do nothing.  This is a leaf node.

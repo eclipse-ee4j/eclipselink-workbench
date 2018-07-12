@@ -81,6 +81,7 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
     /**
      * Extend to build the selection listener.
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.selectionListener = this.buildSelectionListener();
@@ -88,10 +89,12 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
 
     protected PropertyChangeListener buildSelectionListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 // notify listeners that the selection has changed
                 ComboBoxModelAdapter.this.fireSelectionChanged();
             }
+            @Override
             public String toString() {
                 return "selection listener";
             }
@@ -104,6 +107,7 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
     /**
      * @see javax.swing.ComboBoxModel#getSelectedItem()
      */
+    @Override
     public Object getSelectedItem() {
         return this.selectionHolder.getValue();
     }
@@ -111,6 +115,7 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
     /**
      * @see javax.swing.ComboBoxModel#setSelectedItem(Object)
      */
+    @Override
     public void setSelectedItem(Object selectedItem) {
         this.selectionHolder.setValue(selectedItem);
     }
@@ -121,6 +126,7 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
     /**
      * Extend to engage the selection holder.
      */
+    @Override
     protected void engageModel() {
         super.engageModel();
         this.selectionHolder.addPropertyChangeListener(ValueModel.VALUE, this.selectionListener);
@@ -129,6 +135,7 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
     /**
      * Extend to disengage the selection holder.
      */
+    @Override
     protected void disengageModel() {
         this.selectionHolder.removePropertyChangeListener(ValueModel.VALUE, this.selectionListener);
         super.disengageModel();
@@ -142,6 +149,7 @@ public class ComboBoxModelAdapter extends ListModelAdapter implements ComboBoxMo
         this.fireContentsChanged(this, -1, -1);
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.selectionHolder + ":" + this.listHolder);
     }

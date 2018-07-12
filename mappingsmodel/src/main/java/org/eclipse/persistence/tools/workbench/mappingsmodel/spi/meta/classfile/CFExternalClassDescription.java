@@ -76,6 +76,7 @@ final class CFExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#getArrayDepth()
      */
+    @Override
     public int getArrayDepth() {
         return ClassTools.arrayDepthForClassNamed(this.name);
     }
@@ -83,6 +84,7 @@ final class CFExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ClassDescription#getAdditionalInfo()
      */
+    @Override
     public String getAdditionalInfo() {
         return this.classpathEntry.getPath();
     }
@@ -90,6 +92,7 @@ final class CFExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#getElementTypeName()
      */
+    @Override
     public String getElementTypeName() {
         return ClassTools.elementTypeNameForClassNamed(this.name);
     }
@@ -97,6 +100,7 @@ final class CFExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#getExternalClass()
      */
+    @Override
     public synchronized ExternalClass getExternalClass() throws ExternalClassNotFoundException {
         if (this.externalClass == null) {
             this.externalClass = this.buildExternalClass();
@@ -107,6 +111,7 @@ final class CFExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ClassDescription#getName()
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -114,6 +119,7 @@ final class CFExternalClassDescription
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalClassDescription#isSynthetic()
      */
+    @Override
     public boolean isSynthetic() {
         return ClassTools.classNamedIsAnonymous(this.name);
     }
@@ -121,6 +127,7 @@ final class CFExternalClassDescription
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

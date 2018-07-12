@@ -52,6 +52,7 @@ abstract class CFExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getDeclaringClass()
      */
+    @Override
     public ExternalClassDescription getDeclaringClass() {
         return this.classDescriptionNamed(this.member.declaringClassName());
     }
@@ -59,6 +60,7 @@ abstract class CFExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getModifiers()
      */
+    @Override
     public int getModifiers() {
         return this.member.standardAccessFlags();
     }
@@ -66,6 +68,7 @@ abstract class CFExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#getName()
      */
+    @Override
     public String getName() {
         return this.member.name();
     }
@@ -73,6 +76,7 @@ abstract class CFExternalMember
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMember#isSynthetic()
      */
+    @Override
     public boolean isSynthetic() {
         return this.member.isSynthetic();
     }
@@ -80,6 +84,7 @@ abstract class CFExternalMember
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getName());
     }

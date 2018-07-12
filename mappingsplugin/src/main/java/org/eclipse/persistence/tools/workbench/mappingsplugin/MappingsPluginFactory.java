@@ -47,6 +47,7 @@ public final class MappingsPluginFactory implements PluginFactory {
 
     // ********** PluginFactory implementation **********
 
+    @Override
     public Plugin createPlugin(ApplicationContext context) {
         return new MappingsPlugin(context);
     }

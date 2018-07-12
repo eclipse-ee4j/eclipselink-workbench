@@ -132,10 +132,12 @@ public class ExtendedComboBoxModel
 
     // ********** ComboBoxModel implementation **********
 
+    @Override
     public void setSelectedItem(Object anItem) {
         this.comboBoxModel().setSelectedItem(anItem);
     }
 
+    @Override
     public Object getSelectedItem() {
         return this.comboBoxModel().getSelectedItem();
     }
@@ -146,6 +148,7 @@ public class ExtendedComboBoxModel
     /**
      * @see CachingComboBoxModel#cacheList()
      */
+    @Override
     public void cacheList() {
         this.cachingComboBoxModel().cacheList();
     }
@@ -153,6 +156,7 @@ public class ExtendedComboBoxModel
     /**
      * @see CachingComboBoxModel#uncacheList()
      */
+    @Override
     public void uncacheList() {
         this.cachingComboBoxModel().uncacheList();
     }
@@ -160,6 +164,7 @@ public class ExtendedComboBoxModel
     /**
      * @see CachingComboBoxModel#isCached()
      */
+    @Override
     public boolean isCached() {
         return this.cachingComboBoxModel().isCached();
     }

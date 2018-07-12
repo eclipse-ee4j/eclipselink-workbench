@@ -40,38 +40,46 @@ public class ArrayType extends FieldType {
 
     // ********** public API **********
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
+    @Override
     public int arrayDepth() {
         return this.componentType.arrayDepth() + 1;
     }
 
+    @Override
     public String elementTypeName() {
         return this.componentType.elementTypeName();
     }
 
+    @Override
     public String javaName() {
         StringBuffer sb = new StringBuffer();
         this.appendArrayJavaNameTo(sb);
         return sb.toString();
     }
 
+    @Override
     public Class javaClass() throws ClassNotFoundException {
         return Class.forName(this.javaName());
     }
 
+    @Override
     public void appendDeclarationTo(StringBuffer sb) {
         this.componentType.appendDeclarationTo(sb);
         sb.append("[]");
     }
 
+    @Override
     public void printDeclarationOn(PrintWriter writer) {
         this.componentType.printDeclarationOn(writer);
         writer.print("[]");
     }
 
+    @Override
     public String internalName() {
         StringBuffer sb = new StringBuffer();
         this.appendArrayInternalNameTo(sb);
@@ -81,11 +89,13 @@ public class ArrayType extends FieldType {
 
     // ********** internal API **********
 
+    @Override
     void appendArrayJavaNameTo(StringBuffer sb) {
         sb.append('[');
         this.componentType.appendArrayJavaNameTo(sb);
     }
 
+    @Override
     void appendArrayInternalNameTo(StringBuffer sb) {
         sb.append('[');
         this.componentType.appendArrayInternalNameTo(sb);

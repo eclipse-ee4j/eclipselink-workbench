@@ -109,6 +109,7 @@ public final class DatabaseType
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#initialize()
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.allowsSize = true;
@@ -274,6 +275,7 @@ public final class DatabaseType
 
     // ********** behavior **********
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         if (this.requiresSize() && (this.getInitialSize() == 0)) {
             currentProblems.add(this.buildProblem("003", this.getPlatform().getName(), this.getName()));
@@ -284,6 +286,7 @@ public final class DatabaseType
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractNodeModel#nodeRemoved(org.eclipse.persistence.tools.workbench.utility.Node)
      */
+    @Override
     public void nodeRemoved(org.eclipse.persistence.tools.workbench.utility.node.Node node) {
         super.nodeRemoved(node);
         if (this.jdbcType == node) {
@@ -382,6 +385,7 @@ public final class DatabaseType
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Node#displayString()
      */
+    @Override
     public String displayString() {
         return this.name;
     }
@@ -389,6 +393,7 @@ public final class DatabaseType
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.name);
     }

@@ -366,6 +366,7 @@ public class Pipe {
         /**
          * @see java.io.InputStream#available()
          */
+        @Override
         public int available() throws IOException {
             return Pipe.this.available();
         }
@@ -373,6 +374,7 @@ public class Pipe {
         /**
          * @see java.io.InputStream#read()
          */
+        @Override
         public int read() throws IOException {
             return Pipe.this.read();
         }
@@ -380,6 +382,7 @@ public class Pipe {
         /**
          * @see java.io.InputStream#read(byte[], int, int)
          */
+        @Override
         public int read(byte[] b, int off, int len) throws IOException {
             return Pipe.this.read(b, off, len);
         }
@@ -387,6 +390,7 @@ public class Pipe {
         /**
          * @see java.io.InputStream#close()
          */
+        @Override
         public void close() throws IOException {
             Pipe.this.closeInputStream();
         }
@@ -406,6 +410,7 @@ public class Pipe {
         /**
          * @see java.io.OutputStream#write(int)
          */
+        @Override
         public void write(int b) throws IOException {
             Pipe.this.write(b);
         }
@@ -413,6 +418,7 @@ public class Pipe {
         /**
          * @see java.io.OutputStream#write(byte[], int, int)
          */
+        @Override
         public void write(byte[] b, int off, int len) throws IOException {
             Pipe.this.write(b, off, len);
         }
@@ -420,6 +426,7 @@ public class Pipe {
         /**
          * @see java.io.OutputStream#close()
          */
+        @Override
         public void close() throws IOException {
             Pipe.this.closeOutputStream();
         }

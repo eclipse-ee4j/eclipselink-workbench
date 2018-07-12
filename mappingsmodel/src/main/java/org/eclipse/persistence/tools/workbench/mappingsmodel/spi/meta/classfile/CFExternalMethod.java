@@ -40,6 +40,7 @@ final class CFExternalMethod
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMethod#getExceptionTypes()
      */
+    @Override
     public ExternalClassDescription[] getExceptionTypes() {
         return this.buildClassDescriptionArray(this.getMethod().exceptionClassNames());
     }
@@ -47,6 +48,7 @@ final class CFExternalMethod
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMethod#getParameterTypes()
      */
+    @Override
     public ExternalClassDescription[] getParameterTypes() {
         return this.buildClassDescriptionArray(this.getMethod().javaParameterTypeNames());
     }
@@ -54,6 +56,7 @@ final class CFExternalMethod
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalMethod#getReturnType()
      */
+    @Override
     public ExternalClassDescription getReturnType() {
         return this.classDescriptionNamed(this.getMethod().javaReturnTypeName());
     }

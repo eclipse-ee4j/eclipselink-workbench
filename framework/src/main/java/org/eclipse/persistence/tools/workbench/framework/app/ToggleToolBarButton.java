@@ -44,6 +44,7 @@ public class ToggleToolBarButton
 
     private PropertyChangeListener buildActionListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 if (e.getPropertyName() == ToggleFrameworkAction.TOGGLE_STATE_PROPERTY) {
                     ToggleToolBarButton.this.setSelected(((Boolean) e.getNewValue()).booleanValue());
@@ -55,6 +56,7 @@ public class ToggleToolBarButton
     /**
      * @see javax.swing.AbstractButton#setAction(javax.swing.Action)
      */
+    @Override
     public void setAction(Action a) {
         ToggleFrameworkAction oldTFA = (ToggleFrameworkAction) this.getAction();
         ToggleFrameworkAction newTFA = (ToggleFrameworkAction) a;

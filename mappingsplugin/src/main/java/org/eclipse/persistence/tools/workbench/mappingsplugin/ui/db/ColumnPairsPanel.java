@@ -106,9 +106,11 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private CollectionValueModel buildColumnsAdapter(PropertyValueModel tableHolder)  {
         return new CollectionAspectAdapter(tableHolder, MWTable.COLUMNS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWTable) this.subject).columns();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWTable) this.subject).columnsSize();
             }
@@ -117,6 +119,7 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private PropertyValueModel buildSourceTableHolder() {
         return new PropertyAspectAdapter(this.referenceHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWReference) this.subject).getSourceTable();
             }
@@ -125,6 +128,7 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private PropertyValueModel buildTargetTableHolder() {
         return new PropertyAspectAdapter(this.referenceHolder, MWReference.TARGET_TABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWReference) this.subject).getTargetTable();
             }
@@ -133,9 +137,11 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private CollectionValueModel buildColumnPairsAdapter() {
         return new CollectionAspectAdapter(referenceHolder, MWReference.COLUMN_PAIRS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWReference) this.subject).columnPairs();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWReference) this.subject).columnPairsSize();
             }
@@ -165,6 +171,7 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ColumnPairsPanel.this.rowSelectionChanged();
@@ -244,6 +251,7 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private ListCellRenderer buildColumnListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 // need null check for combo-box
                 return (value == null) ? "" : ((MWColumn) value).getName();
@@ -302,11 +310,13 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private Action buildAddAction() {
         final Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("ADD_ASSOCIATION_BUTTON_TEXT");
                 initializeMnemonic("ADD_ASSOCIATION_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ColumnPairsPanel.this.addColumnPair();
             }
@@ -314,6 +324,7 @@ public class ColumnPairsPanel extends AbstractPanel {
         action.setEnabled(false);
 
         referenceHolder.addPropertyChangeListener(PropertyValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 action.setEnabled(selectedReference() != null);
 
@@ -350,11 +361,13 @@ public class ColumnPairsPanel extends AbstractPanel {
 
     private Action buildRemoveAction() {
         removeAction = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 initializeText("REMOVE_ASSOCIATION_BUTTON_TEXT");
                 initializeMnemonic("REMOVE_ASSOCIATION_BUTTON_TEXT");
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ColumnPairsPanel.this.removeColumnPair();
             }
@@ -418,14 +431,17 @@ public class ColumnPairsPanel extends AbstractPanel {
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case SOURCE_FIELD_COLUMN:    return Object.class;
@@ -434,10 +450,12 @@ public class ColumnPairsPanel extends AbstractPanel {
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return true;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWColumnPair association = (MWColumnPair) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -450,9 +468,11 @@ public class ColumnPairsPanel extends AbstractPanel {
 
         private PropertyValueModel buildSourceColumnAdapter(MWColumnPair association) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWColumnPair.SOURCE_COLUMN_PROPERTY, association) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumnPair) this.subject).getSourceColumn();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumnPair) this.subject).setSourceColumn((MWColumn) value);
                 }
@@ -462,9 +482,11 @@ public class ColumnPairsPanel extends AbstractPanel {
 
         private PropertyValueModel buildTargetColumnAdapter(MWColumnPair association) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWColumnPair.TARGET_COLUMN_PROPERTY, association) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWColumnPair) this.subject).getTargetColumn();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWColumnPair) this.subject).setTargetColumn((MWColumn) value);
                 }

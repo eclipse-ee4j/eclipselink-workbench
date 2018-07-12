@@ -78,10 +78,12 @@ final class TableCreatorSourceGenerationCoordinator
             //setMinimumWidth(250);
         }
 
+        @Override
         protected String helpTopicId() {
             return "dialog.tableCreatorClassName";
         }
 
+        @Override
         protected Component buildMainPanel() {
             JPanel panel = new JPanel(new GridBagLayout());
             GridBagConstraints constraints = new GridBagConstraints();
@@ -128,6 +130,7 @@ final class TableCreatorSourceGenerationCoordinator
             return adapter;
         }
 
+        @Override
         protected Component initialFocusComponent() {
             return this.tableCreatorClassNameTextField;
         }
@@ -138,12 +141,15 @@ final class TableCreatorSourceGenerationCoordinator
 
         private DocumentListener buildTableCreatorClassNameDocumentListener() {
             return new DocumentListener() {
+                @Override
                 public void insertUpdate(DocumentEvent de) {
                     tableCreatorClassNameChanged();
                 }
+                @Override
                 public void removeUpdate(DocumentEvent de) {
                     tableCreatorClassNameChanged();
                 }
+                @Override
                 public void changedUpdate(DocumentEvent de) {
                     tableCreatorClassNameChanged();
                 }

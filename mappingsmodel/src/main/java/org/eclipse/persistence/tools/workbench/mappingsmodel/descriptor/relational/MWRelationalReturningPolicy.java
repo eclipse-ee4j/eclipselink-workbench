@@ -57,6 +57,7 @@ public final class MWRelationalReturningPolicy
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.updateFieldHandles = new Vector();
@@ -76,6 +77,7 @@ public final class MWRelationalReturningPolicy
 
     private Iterator updateFieldHandles() {
         return new CloneIterator(this.updateFieldHandles) {
+            @Override
             protected void remove(Object current) {
                 MWRelationalReturningPolicy.this.removeUpdateFieldHandle((MWColumnHandle) current);
             }
@@ -87,14 +89,17 @@ public final class MWRelationalReturningPolicy
         this.fireItemRemoved(UPDATE_FIELDS_COLLECTION, handle.getColumn());
     }
 
+    @Override
     public Iterator updateFields() {
         return new TransformationIterator(this.updateFieldHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumnHandle) next).getColumn();
             }
         };
     }
 
+    @Override
     public int updateFieldsSize() {
         return this.updateFieldHandles.size();
     }
@@ -107,6 +112,7 @@ public final class MWRelationalReturningPolicy
         this.fireItemAdded(UPDATE_FIELDS_COLLECTION, updateField);
     }
 
+    @Override
     public void removeUpdateField(MWDataField updateField) {
         this.removeUpdateField((MWColumn) updateField);
     }
@@ -131,6 +137,7 @@ public final class MWRelationalReturningPolicy
 
     // ********** problems **********
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkPlatformForNativeReturningSupport(problems);
@@ -187,6 +194,7 @@ public final class MWRelationalReturningPolicy
 
     // ********** Model synchronization **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.updateFieldHandles) { children.addAll(this.updateFieldHandles); }
@@ -201,9 +209,11 @@ public final class MWRelationalReturningPolicy
 
     private NodeReferenceScrubber buildUpdateFieldScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWRelationalReturningPolicy.this.removeUpdateFieldHandle((MWColumnHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWRelationalReturningPolicy.buildUpdateFieldScrubber()";
             }

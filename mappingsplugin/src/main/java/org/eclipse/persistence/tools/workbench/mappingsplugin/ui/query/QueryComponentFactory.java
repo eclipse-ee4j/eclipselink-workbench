@@ -35,10 +35,12 @@ public class QueryComponentFactory extends SwingComponentFactory {
 
     private static PropertyValueModel buildRefreshIdentityMapHolder(PropertyValueModel queryHolder) {
         return new PropertyAspectAdapter(queryHolder, MWAbstractReadQuery.REFRESH_IDENTITY_MAP_RESULT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWAbstractReadQuery) this.subject).isRefreshIdentityMapResult());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWAbstractReadQuery) this.subject).setRefreshIdentityMapResult(((Boolean) value).booleanValue());
             }

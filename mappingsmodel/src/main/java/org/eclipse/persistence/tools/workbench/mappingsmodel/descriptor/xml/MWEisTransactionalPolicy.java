@@ -64,11 +64,13 @@ public final class MWEisTransactionalPolicy
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.primaryKeyPolicy = new MWXmlPrimaryKeyPolicy(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.primaryKeyPolicy);
@@ -76,10 +78,12 @@ public final class MWEisTransactionalPolicy
 
 
 
+    @Override
     protected MWQueryManager buildQueryManager() {
         return new MWEisQueryManager(this);
     }
 
+    @Override
     protected MWLockingPolicy buildLockingPolicy() {
         return new MWEisDescriptorLockingPolicy(this);
     }
@@ -98,6 +102,7 @@ public final class MWEisTransactionalPolicy
 
     // *************** Runtime Conversion ********************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptor(runtimeDescriptor);
         this.primaryKeyPolicy.adjustRuntimeDescriptor(runtimeDescriptor);

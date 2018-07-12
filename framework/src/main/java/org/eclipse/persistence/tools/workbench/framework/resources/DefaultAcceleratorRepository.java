@@ -69,6 +69,7 @@ public class DefaultAcceleratorRepository implements AcceleratorRepository {
     /**
      * @see AcceleratorRepository#hasAccelerator(String)
      */
+    @Override
     public boolean hasAccelerator(String key) {
         return (key == null) || CollectionTools.contains(this.resourceBundle.getKeys(), key);
     }
@@ -76,6 +77,7 @@ public class DefaultAcceleratorRepository implements AcceleratorRepository {
     /**
      * @see AcceleratorRepository#getAccelerator(String)
      */
+    @Override
     public KeyStroke getAccelerator(String key) {
         return (key == null) ? null : KeyStroke.getKeyStroke(this.getString(key));
     }
@@ -103,6 +105,7 @@ public class DefaultAcceleratorRepository implements AcceleratorRepository {
         }
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.resourceBundle.getClass().getName());
     }

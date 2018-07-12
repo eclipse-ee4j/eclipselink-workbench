@@ -53,11 +53,13 @@ public class LoginExternalOptionsPaneTest extends AbstractLoginPaneTest
         testFocusTransferByMnemonic("CONNECTION_EXTERNAL_CONNECTION_POOLING_CHECK_BOX", COMPONENT_RADIO_BUTTON);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return null;
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Login External Options Test";

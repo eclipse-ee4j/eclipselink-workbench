@@ -35,32 +35,40 @@ final class GroupingAttributesPanel extends AbstractAttributeItemsPanel {
         super(queryHolder, contextHolder);
     }
 
+    @Override
     String listTitleKey() {
         return "REPORT_QUERY_GROUPING_ATTRIBUTES_LIST";
     }
 
+    @Override
     protected String helpTopicId() {
         return "query.report.groupings";
     }
 
+    @Override
     UpDownOptionAdapter buildAttributesPanelAdapter() {
         return new UpDownOptionAdapter() {
+            @Override
             public String optionalButtonKey() {
                 return "REPORT_QUERY_GROUPING_ATTRIBUTES_LIST_EDIT_BUTTON";
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 editSelectedAttribute((MWGroupingItem) listSelectionModel.getSelectedValue());
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 addGroupingAttribute();
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 Object[] selectedValues = listSelectionModel.getSelectedValues();
                 for (int i = 0; i < selectedValues.length; i++) {
@@ -68,12 +76,14 @@ final class GroupingAttributesPanel extends AbstractAttributeItemsPanel {
                 }
             }
 
+            @Override
             public void moveItemsDown(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                    ((MWReportQuery) getQuery()).moveGroupingItemDown((MWGroupingItem) items[i]);
                 }
             }
 
+            @Override
             public void moveItemsUp(Object[] items) {
                 for (int i = 0; i < items.length; i++) {
                     ((MWReportQuery) getQuery()).moveGroupingItemUp((MWGroupingItem) items[i]);
@@ -83,17 +93,21 @@ final class GroupingAttributesPanel extends AbstractAttributeItemsPanel {
     }
 
 
+    @Override
     protected ListValueModel buildAttributesHolder() {
         return new ListAspectAdapter(getQueryHolder(), MWReportQuery.GROUPING_ITEMS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWReportQuery) this.subject).groupingItems();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWReportQuery) this.subject).groupingItemsSize();
             }
         };
     }
 
+    @Override
     protected boolean panelEnabled(MWQueryFormat queryFormat) {
         return queryFormat.groupingAtributesAllowed();
     }
@@ -102,32 +116,40 @@ final class GroupingAttributesPanel extends AbstractAttributeItemsPanel {
         editSelectedAttribute(null);
     }
 
+    @Override
     AttributeItemDialog buildAttributeItemDialog(MWAttributeItem item) {
         AttributeItemDialog dialog = new AttributeItemDialog(getQuery(), item, getWorkbenchContext()) {
+            @Override
             protected String titleKey() {
                 return "GROUPING_ATTRIBUTES_DIALOG_TITLE";
             }
 
+            @Override
             protected String editTitleKey() {
                 return "GROUPING_ATTRIBUTES_EDIT_DIALOG_TITLE";
             }
 
+            @Override
             protected String helpTopicId() {
                 return "dialog.groupingAttribute";
             }
 
+            @Override
             protected int attributeItemsSize() {
                 return ((MWReportQuery) getQuery()).groupingItemsSize();
             }
 
+            @Override
             protected int indexOfAttributeItem(MWAttributeItem attributeItem) {
                 return ((MWReportQuery) getQuery()).indexOfGroupingItem((MWGroupingItem) attributeItem);
             }
 
+            @Override
             protected void removeAttributeItem(int index) {
                 ((MWReportQuery) getQuery()).removeGroupingItem(index);
             }
 
+            @Override
             protected void addAttributeItem(int index, Iterator queryables, Iterator allowsNulls) {
                 ((MWReportQuery) getQuery()).addGroupingItem(index, queryables, allowsNulls);
             }

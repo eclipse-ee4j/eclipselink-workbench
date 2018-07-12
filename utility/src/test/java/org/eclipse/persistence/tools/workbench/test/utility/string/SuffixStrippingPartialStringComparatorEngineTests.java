@@ -48,6 +48,7 @@ public class SuffixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.addAll(this.buildSuffixStringHolders("zzz", 75));
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("xxx", stringHolders1);
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("yyy", stringHolders1);
@@ -77,6 +78,7 @@ public class SuffixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.addAll(this.buildSuffixStringHolders("aaazzz", 35));
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("xxx", stringHolders1);
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("yyy", stringHolders1);
@@ -108,6 +110,7 @@ public class SuffixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.add(new SimpleStringHolder("zzz"));        // add a string that is ALL suffix!
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("xxx", stringHolders1);
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("yyy", stringHolders1);
@@ -139,6 +142,7 @@ public class SuffixStrippingPartialStringComparatorEngineTests extends TestCase 
         holders2.add(new SimpleStringHolder("zzz"));        // add a string that is ALL suffix!
 
         class LocalEngine implements PartialStringComparatorEngine {
+            @Override
             public StringHolderPair[] match(StringHolder[] stringHolders1, StringHolder[] stringHolders2) {
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertSomeSuffixes("xxx", stringHolders1);
                 SuffixStrippingPartialStringComparatorEngineTests.this.assertNoSuffixes("yyy", stringHolders1);

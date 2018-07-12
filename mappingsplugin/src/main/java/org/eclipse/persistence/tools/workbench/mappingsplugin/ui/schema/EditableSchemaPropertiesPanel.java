@@ -115,6 +115,7 @@ final class EditableSchemaPropertiesPanel
 
     private PropertyChangeListener buildFileListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 File newFile = new File((String) evt.getNewValue());
 
@@ -146,6 +147,7 @@ final class EditableSchemaPropertiesPanel
 
     private PropertyChangeListener buildErrorListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 EditableSchemaPropertiesPanel.this.notifyErrorCheckers(evt);
             }
@@ -304,6 +306,7 @@ final class EditableSchemaPropertiesPanel
 
     private FileChooserPanel buildFileChooserPanel() {
         FileChooserPanel fileChooserPanel = new FileChooserPanel(getApplicationContext(), this.fileHolder, "FILE_RADIO_BUTTON_LABEL") {
+            @Override
             protected boolean labelVisible() {
                 return false;
             }
@@ -319,10 +322,12 @@ final class EditableSchemaPropertiesPanel
 
     private FileFilter buildFileFilter() {
         return new FileFilter() {
+            @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory() || pathname.getAbsolutePath().endsWith(".xsd");
             }
 
+            @Override
             public String getDescription() {
                 return EditableSchemaPropertiesPanel.this.resourceRepository().getString("XML_SCHEMA_DEFINITION_DESCRIPTION");
             }
@@ -339,9 +344,11 @@ final class EditableSchemaPropertiesPanel
 
     private FileHolder buildFileChooserRootFileHolder() {
         return new FileHolder() {
+            @Override
             public File getFile() {
                 return project().getSaveDirectory();
             }
+            @Override
             public void setFile(File file) {
                 throw new UnsupportedOperationException();
             }
@@ -356,6 +363,7 @@ final class EditableSchemaPropertiesPanel
      */
     private FileHolder buildFileChooserDefaultDirectoryHolder(final String prefKey) {
         return new FileHolder() {
+            @Override
             public File getFile() {
                 File projectSaveDir = EditableSchemaPropertiesPanel.this.project().getSaveDirectory();
                 if (projectSaveDir != null) {
@@ -370,6 +378,7 @@ final class EditableSchemaPropertiesPanel
                 return FileTools.userHomeDirectory();
             }
 
+            @Override
             public void setFile(File file) {
                 if (file.equals(FileTools.userHomeDirectory())) {
                     // don't save the user home
@@ -430,6 +439,7 @@ final class EditableSchemaPropertiesPanel
 
     private PropertyChangeListener buildLoadMechanismListener(final Component component, final String loadMechanism) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() == loadMechanism);
             }
@@ -548,6 +558,7 @@ final class EditableSchemaPropertiesPanel
             return resourceNameTextField;
         }
 
+        @Override
         public void setEnabled(boolean enabled) {
             super.setEnabled(enabled);
 

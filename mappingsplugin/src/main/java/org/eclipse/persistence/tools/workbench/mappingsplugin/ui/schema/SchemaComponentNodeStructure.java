@@ -65,6 +65,7 @@ abstract class SchemaComponentNodeStructure
     // **************** Displayable contract **********************************
 
     /** No icons here */
+    @Override
     public Icon icon() {
         return null;
     }
@@ -72,6 +73,7 @@ abstract class SchemaComponentNodeStructure
 
     // **************** Comparable contract ***********************************
 
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }

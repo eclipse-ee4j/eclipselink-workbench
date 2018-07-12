@@ -36,13 +36,16 @@ public interface BidiStringConverter extends StringConverter {
     BidiStringConverter DEFAULT_INSTANCE =
         new BidiStringConverter() {
             /** Return the object's #toString() result. */
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? null : o.toString();
             }
             /** Return the string as the object. */
+            @Override
             public Object convertToObject(String s) {
                 return s;
             }
+            @Override
             public String toString() {
                 return "DefaultBidiStringConverter";
             }
@@ -51,13 +54,16 @@ public interface BidiStringConverter extends StringConverter {
     BidiStringConverter BOOLEAN_CONVERTER =
         new BidiStringConverter() {
             /** Return "true" if the Boolean is true, otherwise return "false". */
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? null : o.toString();
             }
             /** Return Boolean.TRUE if the string is "true" (case-insensitive), otherwise return Boolean.FALSE. */
+            @Override
             public Object convertToObject(String s) {
                 return (s == null) ? null : Boolean.valueOf(s);
             }
+            @Override
             public String toString() {
                 return "BooleanBidiStringConverter";
             }
@@ -66,13 +72,16 @@ public interface BidiStringConverter extends StringConverter {
     BidiStringConverter INTEGER_CONVERTER =
         new BidiStringConverter() {
             /** Integer's #toString() works well. */
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? null : o.toString();
             }
             /** Convert the string to an Integer, if possible. */
+            @Override
             public Object convertToObject(String s) {
                 return (s == null) ? null : Integer.valueOf(s);
             }
+            @Override
             public String toString() {
                 return "IntegerBidiStringConverter";
             }

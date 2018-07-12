@@ -45,8 +45,10 @@ public interface MWXmlReferenceMapping extends MWXmlMapping, MWReferenceObjectMa
 
     public boolean sourceFieldMayUseCollectionXpath();
 
+    @Override
     public MWDescriptor getReferenceDescriptor();
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor newValue);
 
 }

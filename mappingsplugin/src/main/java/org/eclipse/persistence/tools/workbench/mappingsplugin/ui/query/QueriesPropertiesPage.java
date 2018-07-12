@@ -20,7 +20,6 @@ import java.awt.Insets;
 import java.util.Iterator;
 
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.ListCellRenderer;
@@ -71,6 +70,7 @@ public abstract class QueriesPropertiesPage
         super(relationalDescriptorNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.queryManagerHolder = buildQueryManagerHolder();
@@ -85,6 +85,7 @@ public abstract class QueriesPropertiesPage
 
     protected ListCellRenderer buildQueriesListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((MWQuery) value).signature();
             }
@@ -105,9 +106,11 @@ public abstract class QueriesPropertiesPage
 
     private CollectionValueModel buildQueriesHolder() {
         return new CollectionAspectAdapter(this.queryManagerHolder, MWQueryManager.QUERY_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWQueryManager) this.subject).queries();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWQueryManager) this.subject).queriesSize();
             }
@@ -116,6 +119,7 @@ public abstract class QueriesPropertiesPage
 
     protected ListSelectionListener buildQueryListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     ObjectListSelectionModel listSelectionModel = (ObjectListSelectionModel) e.getSource();
@@ -145,22 +149,27 @@ public abstract class QueriesPropertiesPage
 
     protected AddRemoveListPanel.OptionAdapter buildAddRemoveListPanelAdapter() {
         return new AddRemoveListPanel.OptionAdapter() {
+            @Override
             public void addNewItem(ObjectListSelectionModel listSelectionModel) {
                 promptToAddQuery(listSelectionModel);
             }
 
+            @Override
             public void removeSelectedItems(ObjectListSelectionModel listSelectionModel) {
                 removeSelectedQueries(listSelectionModel);
             }
 
+            @Override
             public void optionOnSelection(ObjectListSelectionModel listSelectionModel) {
                 promptToRenameQuery(listSelectionModel);
             }
 
+            @Override
             public boolean enableOptionOnSelectionChange(ObjectListSelectionModel listSelectionModel) {
                 return listSelectionModel.getSelectedValuesSize() == 1;
             }
 
+            @Override
             public String optionalButtonKey() {
                 return "RENAME_BUTTON";
             }
@@ -202,20 +211,26 @@ public abstract class QueriesPropertiesPage
     public void promptToRenameQuery(ObjectListSelectionModel listSelectionModel) {
         final MWQuery selectedQuery = (MWQuery) listSelectionModel.getSelectedValue();
             Builder builder = new Builder(){
+            @Override
                 public String getTitle() {
                     return resourceRepository().getString("RENAME_QUERY_DIALOG.title");
                 }
+            @Override
                 public String getTextFieldDescription() {
                     return resourceRepository().getString("RENAME_QUERY_DIALOG.message");
                 }
+            @Override
                 public String getOriginalName() {
                     return selectedQuery.getName();
                 }
+            @Override
                 public String getHelpTopicId() {
                     return "descriptor.queryManager.namedQueries";
                 }
+            @Override
                 protected DocumentFactory buildDefaultDocumentFactory() {
                     return new DocumentFactory() {
+                    @Override
                         public Document buildDocument() {
                             return new RegexpDocument(RegexpDocument.RE_METHOD);
                         }
@@ -251,11 +266,13 @@ public abstract class QueriesPropertiesPage
     protected QuickViewItem buildQueryParameterQuickViewItem(MWQueryItem queryItem) {
         return new QueryQuickViewItem(queryItem) {
 
+            @Override
             public void select() {
                 selectGeneralPanel();
                 getQueryGeneralPanel().selectParameter((MWQueryParameter) getValue());
             }
 
+            @Override
             public String displayString() {
                 MWQueryParameter parameter = (MWQueryParameter) getValue();
 
@@ -322,6 +339,7 @@ public abstract class QueriesPropertiesPage
 
     private PropertyValueModel buildVarietyTypeHolder() {
         return new TransformationPropertyValueModel(getQueryHolder()) {
+            @Override
             protected Object transform(Object value) {
                 MWQuery query = (MWQuery) value;
 

@@ -31,16 +31,19 @@ final class PlatformPreferencesNode extends AbstractPreferencesNode
         super(context);
     }
 
+    @Override
     protected String buildDisplayString()
     {
         return resourceRepository().getString("PREFERENCES.SC.PLATFORM");
     }
 
+    @Override
     protected Component buildPropertiesPage()
     {
         return new PlatformPreferencesPage(getPreferencesContext());
     }
 
+    @Override
     public String helpTopicId()
     {
         return "preferences.sessions.platform";

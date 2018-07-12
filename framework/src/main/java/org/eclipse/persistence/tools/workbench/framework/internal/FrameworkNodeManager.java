@@ -98,6 +98,7 @@ final class FrameworkNodeManager
         this.recentFilesManager = this.buildRecentFilesManager();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.rootNode = new FrameworkRootNode(this);
@@ -118,6 +119,7 @@ final class FrameworkNodeManager
         return new PreferencesRecentFilesManager(recentFilesNode, baseNode, RECENT_FILES_MAX_SIZE_PREFERENCE);
     }
 
+    @Override
     protected void checkParent(Node parent) {
         if (parent != null) {
             throw new IllegalArgumentException(ClassTools.shortClassNameForObject(this) + " should not have a parent");
@@ -132,6 +134,7 @@ final class FrameworkNodeManager
      * Install the appropriate validator on the "project-level" node
      * and add it to our collection of "project-level" nodes.
      */
+    @Override
     public void addProjectNode(ApplicationNode projectNode) {
         // adding the project node to the tree will trigger the building
         // of all the application nodes;
@@ -195,6 +198,7 @@ final class FrameworkNodeManager
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.NodeManager#removeProjectNode(org.eclipse.persistence.tools.workbench.framework.app.ApplicationNode)
      */
+    @Override
     public void removeProjectNode(ApplicationNode projectNode) {
         this.removeItemFromCollection(projectNode, this.projectNodes, PROJECT_NODES_COLLECTION);
 
@@ -210,6 +214,7 @@ final class FrameworkNodeManager
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.NodeManager#projectNodesFor(org.eclipse.persistence.tools.workbench.framework.Plugin)
      */
+    @Override
     public ApplicationNode[] projectNodesFor(Plugin plugin) {
         Collection nodes = new ArrayList();
         for (Iterator stream = this.projectNodes(); stream.hasNext(); ) {
@@ -224,6 +229,7 @@ final class FrameworkNodeManager
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.NodeManager#getRootNode()
      */
+    @Override
     public TreeNodeValueModel getRootNode() {
         return this.rootNode;
     }
@@ -234,6 +240,7 @@ final class FrameworkNodeManager
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.node.Node#displayString()
      */
+    @Override
     public String displayString() {
         // this node should never be visible
         return null;
@@ -242,6 +249,7 @@ final class FrameworkNodeManager
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#getChangeNotifier()
      */
+    @Override
     public ChangeNotifier getChangeNotifier() {
         return DefaultChangeNotifier.instance();
     }
@@ -249,6 +257,7 @@ final class FrameworkNodeManager
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.node.AbstractNodeModel#getValidator()
      */
+    @Override
     public Validator getValidator() {
         return Node.NULL_VALIDATOR;
     }
@@ -520,6 +529,7 @@ final class FrameworkNodeManager
      * Save the specified node and, if it was saved successfully,
      * add it to the recent files list. Return whether the node was saved.
      */
+    @Override
     public boolean save(ApplicationNode node, WorkbenchContext workbenchContext) {
 
         boolean saved = node.save(getMostRecentSaveDirectory(), workbenchContext);

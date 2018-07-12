@@ -36,6 +36,7 @@ public class DatabaseSessionNode extends SessionNode {
 
     // **************** factory methods ****************************************
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
 
         AbstractPropertiesPage propertiesPage = null;
@@ -52,6 +53,7 @@ public class DatabaseSessionNode extends SessionNode {
         return propertiesPage;
     }
 
+    @Override
     protected Object propertiesPageKey() {
 
         if( this.session().platformIsXml()) {
@@ -66,10 +68,12 @@ public class DatabaseSessionNode extends SessionNode {
         throw new IllegalArgumentException("The key of the properties page is unknown");
     }
 
+    @Override
     public String helpTopicID() {
         return "navigator.session.database";
     }
 
+    @Override
     protected String buildIconKey() {
         return SessionCellRendererAdapter.iconKey(session());
     }

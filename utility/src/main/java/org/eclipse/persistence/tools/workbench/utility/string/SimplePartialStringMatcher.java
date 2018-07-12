@@ -30,6 +30,7 @@ public class SimplePartialStringMatcher
     /**
      * @see PartialStringMatcher#match(String, StringHolder[])
      */
+    @Override
     public StringHolderScore match(String string, StringHolder[] stringHolders) {
         double bestScore = -1.0;
         StringHolder best = null;

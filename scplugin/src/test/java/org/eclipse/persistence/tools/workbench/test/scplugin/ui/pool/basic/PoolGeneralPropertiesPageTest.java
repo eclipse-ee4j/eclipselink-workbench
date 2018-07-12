@@ -58,11 +58,13 @@ public class PoolGeneralPropertiesPageTest extends AbstractPoolPanelTest
         runTestCase(new ConnectionCountPaneTest(this, (PoolNode) getNodeHolder().getValue()));
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(PoolGeneralPropertiesPage.class, getNodeHolder());
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Connection Pool - General Tab Test";

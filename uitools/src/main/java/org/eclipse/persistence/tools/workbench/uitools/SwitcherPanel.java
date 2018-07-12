@@ -98,9 +98,11 @@ public class SwitcherPanel extends JPanel {
      */
     protected PropertyChangeListener buildListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 SwitcherPanel.this.valueChanged(e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "value listener";
             }

@@ -37,6 +37,7 @@ public abstract class MappingsTask extends ProjectTask {
         super();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -54,6 +55,7 @@ public abstract class MappingsTask extends ProjectTask {
         this.projectFile = projectFile;
     }
 
+    @Override
     protected void preExecute() throws BuildException {
         super.preExecute();
 

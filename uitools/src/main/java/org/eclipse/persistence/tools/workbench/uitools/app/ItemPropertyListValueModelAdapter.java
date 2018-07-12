@@ -97,6 +97,7 @@ public class ItemPropertyListValueModelAdapter extends ItemAspectListValueModelA
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.itemPropertyListener = this.buildItemPropertyListener();
@@ -104,9 +105,11 @@ public class ItemPropertyListValueModelAdapter extends ItemAspectListValueModelA
 
     protected PropertyChangeListener buildItemPropertyListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 ItemPropertyListValueModelAdapter.this.itemAspectChanged(e);
             }
+            @Override
             public String toString() {
                 return "item property listener: " + Arrays.asList(ItemPropertyListValueModelAdapter.this.propertyNames);
             }
@@ -116,12 +119,14 @@ public class ItemPropertyListValueModelAdapter extends ItemAspectListValueModelA
 
     // ********** behavior **********
 
+    @Override
     protected void startListeningToItem(Model item) {
         for (int i = this.propertyNames.length; i-- > 0; ) {
             item.addPropertyChangeListener(this.propertyNames[i], this.itemPropertyListener);
         }
     }
 
+    @Override
     protected void stopListeningToItem(Model item) {
         for (int i = this.propertyNames.length; i-- > 0; ) {
             item.removePropertyChangeListener(this.propertyNames[i], this.itemPropertyListener);

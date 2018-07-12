@@ -16,9 +16,7 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin.sourcegen;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.prefs.Preferences;
 
 import javax.swing.JFileChooser;
@@ -28,8 +26,6 @@ import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContex
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
 import org.eclipse.persistence.tools.workbench.framework.ui.dialog.ExceptionDialog;
 import org.eclipse.persistence.tools.workbench.framework.uitools.FileChooser;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.MappingsPlugin;
 import org.eclipse.persistence.tools.workbench.uitools.CancelException;
@@ -213,6 +209,7 @@ public final class ModelSourceGenerationCoordinator
     }
 
 
+    @Override
     public boolean continueOnException(SourceCodeGenerator.ContinuableExceptionEvent cee)
     {
         this.processErrorless = false;
@@ -224,10 +221,12 @@ public final class ModelSourceGenerationCoordinator
                     resourceRepository().getString("EXPORT_MODEL_SOURCE_CONTINUABLE_ERROR_DIALOG.title"))
              {
 
+            @Override
             protected String buildOKText() {
                 return resourceRepository().getString("EXPORT_MODEL_SOURCE_YES_BUTTON");
             }
 
+            @Override
             protected String buildCancelText() {
                 return resourceRepository().getString("EXPORT_MODEL_SOURCE_NO_BUTTON");
             }
@@ -238,6 +237,7 @@ public final class ModelSourceGenerationCoordinator
         return dialog.wasConfirmed();
     }
 
+    @Override
     public boolean fileAlreadyExists(MWProject project,
                                      SourceCodeGenerator.FileAlreadyExistsEvent faee) {
 

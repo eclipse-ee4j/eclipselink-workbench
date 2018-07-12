@@ -35,6 +35,7 @@ final class LogInAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeText("DATABASE_LOG_IN");
@@ -44,14 +45,17 @@ final class LogInAction
     }
 
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {MWDatabase.CONNECTED_PROPERTY};
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return !((MWDatabase) ((DatabaseNode) selectedNode).getValue()).isConnected();
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         MWDatabase database = (MWDatabase) selectedNode.getValue();
         if (!ableToLogin(database)) {

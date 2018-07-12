@@ -38,6 +38,7 @@ public class TeeOutputStream extends OutputStream {
     /**
      * @see java.io.OutputStream#write(int)
      */
+    @Override
     public synchronized void write(int b) throws IOException {
         this.stream1.write(b);
         this.stream2.write(b);
@@ -46,6 +47,7 @@ public class TeeOutputStream extends OutputStream {
     /**
      * @see java.io.OutputStream#write(byte[])
      */
+    @Override
     public synchronized void write(byte[] b) throws IOException {
         this.stream1.write(b);
         this.stream2.write(b);
@@ -54,6 +56,7 @@ public class TeeOutputStream extends OutputStream {
     /**
      * @see java.io.OutputStream#write(byte[], int, int)
      */
+    @Override
     public synchronized void write(byte[] b, int off, int len) throws IOException {
         this.stream1.write(b, off, len);
         this.stream2.write(b, off, len);
@@ -62,6 +65,7 @@ public class TeeOutputStream extends OutputStream {
     /**
      * @see java.io.OutputStream#flush()
      */
+    @Override
     public synchronized void flush() throws IOException {
         this.stream1.flush();
         this.stream2.flush();
@@ -70,6 +74,7 @@ public class TeeOutputStream extends OutputStream {
     /**
      * @see java.io.OutputStream#close()
      */
+    @Override
     public synchronized void close() throws IOException {
         this.stream1.close();
         this.stream2.close();

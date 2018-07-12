@@ -30,7 +30,6 @@ import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultCellEditor;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -38,8 +37,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -155,6 +152,7 @@ public final class ClasspathPanel
 
     private TreeModel buildClasspathModel(ListValueModel model) {
         return new PrimitiveListTreeModel(model) {
+            @Override
             protected void primitiveChanged(int index, Object newValue) {
                 ClasspathPanel.this.replaceEntry(index, newValue);
             }
@@ -163,18 +161,22 @@ public final class ClasspathPanel
 
     private TreeModelListener buildTreeModelListener(final JTree classpathTree) {
         return new TreeModelListener() {
+            @Override
             public void treeNodesChanged(TreeModelEvent e) {
             }
 
+            @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 TreeModel model = (TreeModel) e.getSource();
                 ExpandPathRunner runner = new ExpandPathRunner(classpathTree, model.getRoot());
                 EventQueue.invokeLater(runner);
             }
 
+            @Override
             public void treeNodesRemoved(TreeModelEvent e) {
             }
 
+            @Override
             public void treeStructureChanged(TreeModelEvent e) {
             }
         };
@@ -188,11 +190,13 @@ public final class ClasspathPanel
 
     private Action buildAddEntryAction() {
         Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 setText(resourceRepository().getString("ADD_ENTRY_BUTTON_TEXT"));
                 setMnemonic(resourceRepository().getMnemonic("ADD_ENTRY_BUTTON_TEXT"));
             }
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ClasspathPanel.this.addEntry();
             }
@@ -203,9 +207,11 @@ public final class ClasspathPanel
 
     private Action buildBrowseAction() {
         Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 this.initializeTextAndMnemonic("BROWSE_BUTTON_1");
             }
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ClasspathPanel.this.promptToAddEntries();
             }
@@ -216,10 +222,12 @@ public final class ClasspathPanel
 
     private Action buildRemoveAction() {
         Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 setText(resourceRepository().getString("REMOVE_BUTTON_TEXT"));
                 setMnemonic(resourceRepository().getMnemonic("REMOVE_BUTTON_TEXT"));
             }
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ClasspathPanel.this.removeEntries();
             }
@@ -230,10 +238,12 @@ public final class ClasspathPanel
 
     private Action buildUpAction() {
         Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 setText(resourceRepository().getString("UP_BUTTON_TEXT"));
                 setMnemonic(resourceRepository().getMnemonic("UP_BUTTON_TEXT"));
             }
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ClasspathPanel.this.moveSelectedEntriesUp();
             }
@@ -244,10 +254,12 @@ public final class ClasspathPanel
 
     private Action buildDownAction() {
         Action action = new AbstractFrameworkAction(getApplicationContext()) {
+            @Override
             protected void initialize() {
                 setText(resourceRepository().getString("DOWN_BUTTON_TEXT"));
                 setMnemonic(resourceRepository().getMnemonic("DOWN_BUTTON_TEXT"));
             }
+            @Override
             public void actionPerformed(ActionEvent event) {
                 ClasspathPanel.this.moveSelectedEntriesDown();
             }
@@ -313,6 +325,7 @@ public final class ClasspathPanel
 
     private JTree buildClasspathTree() {
         JTree classpathTree = new SwingComponentFactory.AccessibleTree(classpathModel) {
+            @Override
             public void cancelEditing() {
                 if (isEditing()) {
                     TreePath path = getEditingPath();
@@ -346,6 +359,7 @@ public final class ClasspathPanel
 
     private TreeSelectionListener buildClasspathSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 ClasspathPanel.this.classpathSelectionChanged();
             }
@@ -358,6 +372,7 @@ public final class ClasspathPanel
 
     private DefaultTreeCellRenderer buildTreeCellRenderer() {
         return new DefaultTreeCellRenderer() {
+            @Override
             public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean focus) {
                 super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, focus);
                 if (leaf) {
@@ -547,12 +562,14 @@ public final class ClasspathPanel
 
     private FileFilter buildFileFilter() {
         return new FileFilter() {
+            @Override
             public boolean accept(File file) {
                 String name = file.getName().toLowerCase();
                 return name.endsWith(".jar")
                         || name.endsWith(".zip")
                         || file.isDirectory();
             }
+            @Override
             public String getDescription() {
                 return resourceRepository().getString(".jar.zip");
             }
@@ -582,6 +599,7 @@ public final class ClasspathPanel
             this.rootNode = rootNode;
         }
 
+        @Override
         public void run() {
             TreePath path = new TreePath(rootNode);
 
@@ -612,12 +630,15 @@ public final class ClasspathPanel
 
         DefaultClasspathDirectoryHolder NULL_INSTANCE =
             new DefaultClasspathDirectoryHolder() {
+            @Override
                 public File getDefaultClasspathDirectory() {
                     return null;
                 }
+            @Override
                 public void setDefaultClasspathDirectory(File defaultClasspathDirectory) {
                     // do nothing
                 }
+            @Override
                 public String toString() {
                     return "NullDefaultClasspathDirectoryHolder";
                 }

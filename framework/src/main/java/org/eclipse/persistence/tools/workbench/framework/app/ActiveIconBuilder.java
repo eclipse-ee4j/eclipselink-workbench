@@ -59,6 +59,7 @@ public class ActiveIconBuilder
      * Dim the original icon if necessary.
      * @see IconBuilder#buildIcon()
      */
+    @Override
     public Icon buildIcon() {
         Icon originalIcon = this.original.buildIcon();
         return (this.active) ? originalIcon : this.buildInactiveIcon(originalIcon);
@@ -97,6 +98,7 @@ public class ActiveIconBuilder
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -108,6 +110,7 @@ public class ActiveIconBuilder
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if (o instanceof ActiveIconBuilder) {
             return this.equals((ActiveIconBuilder) o);
@@ -123,6 +126,7 @@ public class ActiveIconBuilder
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.original.hashCode() ^
             Boolean.valueOf(this.active).hashCode();
@@ -131,6 +135,7 @@ public class ActiveIconBuilder
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.original);
     }

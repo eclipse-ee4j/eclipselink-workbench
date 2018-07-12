@@ -46,6 +46,7 @@ public class ArrayAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#diffIsFatal(Object, Object)
      */
+    @Override
     public boolean diffIsFatal(Object object1, Object object2) {
         if ((object1 == null) || ! (object1.getClass().isArray())) {
             return true;
@@ -59,6 +60,7 @@ public class ArrayAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#containerClass()
      */
+    @Override
     public Class containerClass() {
         return Array.class;
     }
@@ -66,6 +68,7 @@ public class ArrayAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#size(Object)
      */
+    @Override
     public int size(Object container) {
         return ((Object[]) container).length;
     }
@@ -73,6 +76,7 @@ public class ArrayAdapter
     /**
      * @see OrderedContainerDifferentiator.Adapter#get(Object, int)
      */
+    @Override
     public Object get(Object container, int index) {
         return ((Object[]) container)[index];
     }
@@ -80,6 +84,7 @@ public class ArrayAdapter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "ArrayAdapter";
     }

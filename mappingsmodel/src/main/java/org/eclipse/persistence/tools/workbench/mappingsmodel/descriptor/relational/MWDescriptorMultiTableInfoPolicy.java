@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumnPair;
@@ -29,19 +28,14 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWTable;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWAbstractDescriptorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWReferenceHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.RelationalDescriptor;
-import org.eclipse.persistence.mappings.TransformationMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
-import org.eclipse.persistence.sessions.Record;
 
 public final class MWDescriptorMultiTableInfoPolicy extends MWAbstractDescriptorPolicy
 {
@@ -63,11 +57,13 @@ public final class MWDescriptorMultiTableInfoPolicy extends MWAbstractDescriptor
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.secondaryTableHolders = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.secondaryTableHolders) { children.addAll(this.secondaryTableHolders); }
@@ -139,6 +135,7 @@ public final class MWDescriptorMultiTableInfoPolicy extends MWAbstractDescriptor
 
     public Iterator secondaryTables() {
         return new TransformationIterator(secondaryTableHolders()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWSecondaryTableHolder) next).getTable();
             }
@@ -155,10 +152,12 @@ public final class MWDescriptorMultiTableInfoPolicy extends MWAbstractDescriptor
 
     // ************* MWAbstractDescriptorPolicy overrides ***************
 
+    @Override
     public boolean isActive() {
         return true;
     }
 
+    @Override
     public MWDescriptorPolicy getPersistedPolicy() {
         return this;
     }
@@ -166,6 +165,7 @@ public final class MWDescriptorMultiTableInfoPolicy extends MWAbstractDescriptor
 
     // ************* Problems overrides ***************
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         checkPrimaryKeysAcrossMultipleTables(problems);
@@ -209,6 +209,7 @@ public final class MWDescriptorMultiTableInfoPolicy extends MWAbstractDescriptor
 
     // ************** runtime conversion *************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         runtimeDescriptor.getAdditionalTablePrimaryKeyFields();  // lazy initialization
         Iterator secondaryTables = getTableDescriptor().secondaryTables();

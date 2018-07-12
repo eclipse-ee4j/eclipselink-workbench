@@ -30,6 +30,7 @@ final class MapAsEisOneToManyAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeIcon("mapping.eisOneToMany");
@@ -38,14 +39,17 @@ final class MapAsEisOneToManyAction
         initializeToolTipText("MAP_AS_EIS_ONE_TO_MANY_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWEisOneToManyMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWEisDescriptor) descriptor).addEisOneToManyMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWEisOneToManyMapping.class;
     }

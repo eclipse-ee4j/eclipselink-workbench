@@ -66,6 +66,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
         super();
     }
 
+    @Override
     protected String windowTitle() {
         return "Session Project Classes:";
     }
@@ -91,6 +92,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
     private CollectionValueModel buildStringListAdapter() {
 
         return new CollectionAspectAdapter( DatabaseSessionAdapter.ADDITIONAL_PROJECTS_COLLECTION, stringList()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ( stringList()).additionalProjects();
             }
@@ -100,6 +102,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
     private CollectionValueModel buildClassListAdapter() {
 
         return new CollectionAspectAdapter( ClassList.CLASS_LIST, classList()) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return classList().list();
             }
@@ -110,6 +113,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
         return new ListModelAdapter( listValueModel); // for sorted list wrap it in a SortedListValueModelAdapter
     }
 
+    @Override
     protected Component buildPropertyTestingPanel() {
 
         JPanel propertyListPanel = new JPanel( new GridLayout( 0, 1));
@@ -147,6 +151,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
         listPanel.add( new JScrollPane( listBox), BorderLayout.CENTER);
         return listPanel;
     }
+    @Override
     protected Component buildMainPanel() {
 
         JPanel mainPanel = new JPanel( new BorderLayout());
@@ -162,6 +167,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
 //        addRemoveTaskPanel.add( this.buildRemoveButton());
         return addRemoveTaskPanel;
     }
+    @Override
     protected Component buildControlPanel() {
 
         JPanel controlPanel = new JPanel( new GridLayout( 1, 0));
@@ -193,6 +199,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
 
     private Action buildAddClassAction() {
         Action action = new AbstractAction( "add class") {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 SCProjectClassUITest.this.addProjectClass();
             }
@@ -207,6 +214,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
 
     private Action buildRemoveAction() {
         Action action = new AbstractAction( "remove class") {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 SCProjectClassUITest.this.removeProjectClass();
             }
@@ -233,6 +241,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
         }
     }
 
+    @Override
     protected void resetProperty() {
 
         Iterator i = (( DatabaseSessionAdapter)subject()).additionalProjects();
@@ -240,12 +249,14 @@ public class SCProjectClassUITest extends SCSessionUITest {
 //        (( DatabaseSessionAdapter)subject()).removeProjectClassNamed( name);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 
         windowW = 800;
          windowH = 300;
     }
+    @Override
     protected void printModel() {
         System.out.println( "subject.projectClasses[");
 
@@ -264,6 +275,7 @@ public class SCProjectClassUITest extends SCSessionUITest {
 
         public static final String CLASS_LIST = "classList";
 
+        @Override
         protected void initialize() {
             super.initialize();
 

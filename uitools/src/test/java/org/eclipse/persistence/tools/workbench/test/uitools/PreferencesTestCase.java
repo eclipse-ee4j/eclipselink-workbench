@@ -37,6 +37,7 @@ public abstract class PreferencesTestCase extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         Preferences packageNode = Preferences.userNodeForPackage(this.getClass());
@@ -50,6 +51,7 @@ public abstract class PreferencesTestCase extends TestCase {
         this.testNode = this.classNode.node(TEST_NODE_NAME);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         // wait for all the events to be delivered before tearing down
         this.waitForEventQueueToClear();

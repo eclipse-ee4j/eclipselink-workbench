@@ -173,11 +173,13 @@ public final class MWMethodParameter extends MWModel {
 
     // ********** behavior **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.typeDeclaration);
     }
 
+    @Override
     public void nodeRenamed(Node node) {
         super.nodeRenamed(node);
         if (this.getType() == node) {
@@ -188,6 +190,7 @@ public final class MWMethodParameter extends MWModel {
 
     // ********** displaying and printing **********
 
+    @Override
     public void toString(StringBuffer sb) {
         this.typeDeclaration.toString(sb);
     }

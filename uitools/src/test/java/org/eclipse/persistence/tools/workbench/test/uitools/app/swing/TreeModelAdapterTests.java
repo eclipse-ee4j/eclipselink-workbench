@@ -139,6 +139,7 @@ public class TreeModelAdapterTests extends TestCase {
         TreeModel treeModel = this.buildUnsortedTreeModel();
         this.eventFired = false;
         treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesChanged(TreeModelEvent e) {
                 TreeModelAdapterTests.this.eventFired = true;
             }
@@ -161,6 +162,7 @@ public class TreeModelAdapterTests extends TestCase {
         TreeModel treeModel = this.buildUnsortedTreeModel();
         this.eventFired = false;
         treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 TreeModelAdapterTests.this.eventFired = true;
             }
@@ -182,6 +184,7 @@ public class TreeModelAdapterTests extends TestCase {
         TreeModel treeModel = this.buildUnsortedTreeModel();
         this.eventFired = false;
         treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesRemoved(TreeModelEvent e) {
                 TreeModelAdapterTests.this.eventFired = true;
             }
@@ -203,12 +206,15 @@ public class TreeModelAdapterTests extends TestCase {
         TreeModel treeModel = new TreeModelAdapter(nodeHolder);
         this.eventFired = false;
         treeModel.addTreeModelListener(new TestTreeModelListener() {
+            @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 // do nothing
             }
+            @Override
             public void treeNodesRemoved(TreeModelEvent e) {
                 // do nothing
             }
+            @Override
             public void treeStructureChanged(TreeModelEvent e) {
                 TreeModelAdapterTests.this.eventFired = true;
             }
@@ -402,6 +408,7 @@ public static class TestModel extends AbstractModel {
         this.dumpOn(System.out);
     }
 
+    @Override
     public String toString() {
         return "TestModel(" + this.name + ")";
     }
@@ -447,6 +454,7 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.testModelListener = this.buildTestModelListener();
@@ -454,6 +462,7 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
 
     private PropertyChangeListener buildTestModelListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 TestNode.this.testModelChanged(e);
             }
@@ -477,6 +486,7 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
      */
     protected ListValueModel buildNodeAdapter(TestModel model) {
         return new TransformationListValueModelAdapter(this.buildChildrenAdapter(model)) {
+            @Override
             protected Object transformItem(Object item) {
                 return TestNode.this.buildChildNode((TestModel) item);
             }
@@ -493,9 +503,11 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
      */
     protected CollectionValueModel buildChildrenAdapter(TestModel model) {
         return new CollectionAspectAdapter(TestModel.CHILDREN_COLLECTION, model) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((TestModel) this.subject).children();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((TestModel) this.subject).childrenSize();
             }
@@ -505,6 +517,7 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.testModel;
     }
@@ -512,16 +525,19 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
     /**
      * this will probably never be called...
      */
+    @Override
     public void setValue(Object value) {
         Object old = this.testModel;
         this.testModel = (TestModel) value;
         this.firePropertyChanged(VALUE, old, this.testModel);
     }
 
+    @Override
     public TreeNodeValueModel getParent() {
         return this.parent;
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
@@ -529,10 +545,12 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         this.testModel.addPropertyChangeListener(TestModel.NAME_PROPERTY, this.testModelListener);
     }
 
+    @Override
     protected void disengageValue() {
         this.testModel.removePropertyChangeListener(TestModel.NAME_PROPERTY, this.testModelListener);
     }
@@ -540,10 +558,12 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
 
     // ********** Displayable implementation **********
 
+    @Override
     public String displayString() {
         return this.testModel.getName();
     }
 
+    @Override
     public Icon icon() {
         return null;
     }
@@ -616,10 +636,12 @@ public static abstract class TestNode extends AbstractTreeNodeValueModel impleme
     /**
      * use the standard Displayable comparator
      */
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
 
+    @Override
     public String toString() {
         return "Node(" + this.testModel + ")";
     }
@@ -641,6 +663,7 @@ public static class SortedTestNode extends TestNode {
 
     // ********** initialization **********
     /** the list should be sorted */
+    @Override
     protected ListValueModel buildChildrenModel(TestModel testModel) {
         return new SortedListValueModelAdapter(this.buildDisplayStringAdapter(testModel));
     }
@@ -649,6 +672,7 @@ public static class SortedTestNode extends TestNode {
         return new ItemPropertyListValueModelAdapter(this.buildNodeAdapter(testModel), DISPLAY_STRING_PROPERTY);
     }
     /** children are also sorted nodes */
+    @Override
     protected TestNode buildChildNode(TestModel childNode) {
         return new SortedTestNode(this, childNode);
     }
@@ -671,10 +695,12 @@ public static class UnsortedTestNode extends TestNode {
 
     // ********** initialization **********
     /** the list should NOT be sorted */
+    @Override
     protected ListValueModel buildChildrenModel(TestModel testModel) {
         return this.buildNodeAdapter(testModel);
     }
     /** children are also unsorted nodes */
+    @Override
     protected TestNode buildChildNode(TestModel childNode) {
         return new UnsortedTestNode(this, childNode);
     }
@@ -698,6 +724,7 @@ public static class SpecialTestNode extends UnsortedTestNode {
 
     // ********** initialization **********
     /** return a different list of children for "node 3" */
+    @Override
     protected ListValueModel buildChildrenModel(TestModel testModel) {
         if (testModel.getName().equals("node 3")) {
             return this.buildSpecialChildrenModel(testModel);
@@ -710,6 +737,7 @@ public static class SpecialTestNode extends UnsortedTestNode {
         return new SimpleListValueModel(Arrays.asList(children));
     }
     /** children are also special nodes */
+    @Override
     protected TestNode buildChildNode(TestModel childNode) {
         return new SpecialTestNode(this, childNode);
     }
@@ -728,12 +756,14 @@ public static class NameTestNode extends AbstractTreeNodeValueModel {
         super();
         this.initialize(specialNode);
     }
+    @Override
     protected void initialize() {
         super.initialize();
         this.nameListener = this.buildNameListener();
     }
     protected PropertyChangeListener buildNameListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 NameTestNode.this.nameChanged(e);
             }
@@ -746,9 +776,11 @@ public static class NameTestNode extends AbstractTreeNodeValueModel {
 
     protected PropertyValueModel buildNameAdapter() {
         return new PropertyAspectAdapter(TestModel.NAME_PROPERTY, this.getTestModel()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) this.subject).getName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) this.subject).setName((String) value);
             }
@@ -761,24 +793,30 @@ public static class NameTestNode extends AbstractTreeNodeValueModel {
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.nameAdapter.getValue();
     }
+    @Override
     public void setValue(Object value) {
         this.nameAdapter.setValue(value);
     }
+    @Override
     public TreeNodeValueModel getParent() {
         return this.specialNode;
     }
+    @Override
     public ListValueModel getChildrenModel() {
         return NullListValueModel.instance();
     }
 
     // ********** AbstractTreeNodeValueModel implementation **********
 
+    @Override
     protected void engageValue() {
         this.nameAdapter.addPropertyChangeListener(ValueModel.VALUE, this.nameListener);
     }
+    @Override
     protected void disengageValue() {
         this.nameAdapter.removePropertyChangeListener(ValueModel.VALUE, this.nameListener);
     }
@@ -798,15 +836,19 @@ public static class NameTestNode extends AbstractTreeNodeValueModel {
  * override and implement expected event methods
  */
 public class TestTreeModelListener implements TreeModelListener {
+    @Override
     public void treeNodesChanged(TreeModelEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void treeNodesInserted(TreeModelEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void treeNodesRemoved(TreeModelEvent e) {
         fail("unexpected event");
     }
+    @Override
     public void treeStructureChanged(TreeModelEvent e) {
         fail("unexpected event");
     }

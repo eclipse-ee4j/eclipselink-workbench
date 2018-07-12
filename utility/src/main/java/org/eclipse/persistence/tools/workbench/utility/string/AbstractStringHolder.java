@@ -27,8 +27,10 @@ public abstract class AbstractStringHolder
         super();
     }
 
+    @Override
     public abstract String getString();
 
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -37,6 +39,7 @@ public abstract class AbstractStringHolder
         }
     }
 
+    @Override
     public boolean equals(Object o) {
         if ( ! (o instanceof StringHolder)) {
             return false;
@@ -49,11 +52,13 @@ public abstract class AbstractStringHolder
                 s.equals(other.getString());
     }
 
+    @Override
     public int hashCode() {
         String s = this.getString();
         return (s == null) ? 0 : s.hashCode();
     }
 
+    @Override
     public int compareTo(Object o) {
         return this.compareTo((StringHolder) o);
     }
@@ -62,6 +67,7 @@ public abstract class AbstractStringHolder
         return this.getString().compareTo(sh.getString());
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.getString());
     }

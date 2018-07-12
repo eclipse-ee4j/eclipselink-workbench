@@ -27,12 +27,14 @@ final class HelpAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("HELP");
         this.initializeToolTipText("HELP.tooltip");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         this.helpManager().showTopic(selectedNode.helpTopicID());
     }

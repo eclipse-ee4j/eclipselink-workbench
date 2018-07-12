@@ -17,11 +17,9 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.mapping;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 
 public final class MWLegacyUnmappedMapping extends MWMapping {
@@ -34,17 +32,21 @@ public final class MWLegacyUnmappedMapping extends MWMapping {
         super(parent, attribute, name);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
     }
 
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
 
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
     }
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return null;
     }

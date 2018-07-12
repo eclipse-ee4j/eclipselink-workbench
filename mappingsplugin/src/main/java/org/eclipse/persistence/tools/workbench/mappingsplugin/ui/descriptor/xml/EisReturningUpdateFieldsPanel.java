@@ -35,6 +35,7 @@ final class EisReturningUpdateFieldsPanel
         super( subjectHolder, contextHolder);
     }
 
+    @Override
     protected void addField() {
         MWEisReturningPolicy returningPolicy = (MWEisReturningPolicy) this.returningPolicy();
         MWXmlField xmlField = returningPolicy.buildEmptyUpdateField();

@@ -45,6 +45,7 @@ final class ManyToManyTargetReferencePanel
      * set of candidate references; it has two, in the relation table:
      * source and target
      */
+    @Override
     protected Iterator candidateReferences(MWTableReferenceMapping mapping) {
         return ((MWManyToManyMapping) mapping).candidateRelationTableTargetReferences();
     }
@@ -53,11 +54,14 @@ final class ManyToManyTargetReferencePanel
      * override because we want the "target" reference, not the
      * "source" reference
      */
+    @Override
     protected PropertyValueModel buildTableReferenceHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWManyToManyMapping.TARGET_REFERENCE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWManyToManyMapping) this.subject).getTargetReference();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWManyToManyMapping) this.subject).setTargetReference((MWReference) value);
             }
@@ -68,6 +72,7 @@ final class ManyToManyTargetReferencePanel
      * override because we want to set the "target" reference, not the
      * "source" reference
      */
+    @Override
     protected void setReference(MWReference reference) {
         MWManyToManyMapping mapping = this.mapping();
         mapping.setTargetReference(reference);
@@ -79,6 +84,7 @@ final class ManyToManyTargetReferencePanel
     /**
      * the reference source is the "relation" table
      */
+    @Override
     protected List candidateNewReferenceSourceTables() {
         MWTable relationTable = this.mapping().getRelationTable();
         if (relationTable == null) {
@@ -90,6 +96,7 @@ final class ManyToManyTargetReferencePanel
     /**
      * the reference source is the "relation" table
      */
+    @Override
     protected MWTable defaultNewReferenceSourceTable() {
         return this.mapping().getRelationTable();
     }
@@ -97,6 +104,7 @@ final class ManyToManyTargetReferencePanel
     /**
      * the reference target is one of the "reference" descriptor's tables
      */
+    @Override
     protected MWTable defaultNewReferenceTargetTable() {
         MWRelationalDescriptor descriptor = (MWRelationalDescriptor) this.mapping().getReferenceDescriptor();
         if (descriptor == null) {

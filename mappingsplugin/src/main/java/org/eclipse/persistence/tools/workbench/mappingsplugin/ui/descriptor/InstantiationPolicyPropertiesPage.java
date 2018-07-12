@@ -76,6 +76,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
         return "descriptor.instantiation";
     }
 
+    @Override
     protected Component buildPage()
     {
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -253,6 +254,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     private PropertyValueModel buildInstantiationPolicyHolder()
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWMappingDescriptor.INSTANTIATION_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 MWDescriptorPolicy policy = ((MWMappingDescriptor) this.subject).getInstantiationPolicy();
                 return policy.isActive() ? policy : null;
@@ -266,11 +268,13 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
         {
             this.policyTypeHolder = new PropertyAspectAdapter(this.instantiationPolicyValueHolder,
                     MWDescriptorInstantiationPolicy.POLICY_TYPE_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     return ((MWDescriptorInstantiationPolicy) this.subject).getPolicyType();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value)
                 {
                     ((MWDescriptorInstantiationPolicy) this.subject).setPolicyType((String) value);
@@ -312,6 +316,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return InstantiationPolicyPropertiesPage.this.descriptor().getRepository();
             }
@@ -321,10 +326,12 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     private PropertyValueModel buildFactoryTypeHolder()
     {
         return new PropertyAspectAdapter(this.instantiationPolicyValueHolder, MWDescriptorInstantiationPolicy.FACTORY_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorInstantiationPolicy) this.subject).getFactoryType();
             }
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWClass type = (MWClass) value;
@@ -349,10 +356,12 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.instantiationPolicyValueHolder,
                 MWDescriptorInstantiationPolicy.USE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorInstantiationPolicy) this.subject).getUseMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorInstantiationPolicy) this.subject).setUseMethod((MWMethod)value);
             }
@@ -364,10 +373,12 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.instantiationPolicyValueHolder,
                 MWDescriptorInstantiationPolicy.FACTORY_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorInstantiationPolicy) this.subject).getFactoryMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorInstantiationPolicy) this.subject).setFactoryMethod((MWMethod)value);
             }
@@ -379,10 +390,12 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.instantiationPolicyValueHolder,
                 MWDescriptorInstantiationPolicy.INSTANTIATION_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorInstantiationPolicy) this.subject).getInstantiationMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorInstantiationPolicy) this.subject).setInstantiationMethod((MWMethod)value);
             }
@@ -394,6 +407,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), MWDescriptor.MW_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptor) this.subject).getMWClass();
@@ -414,6 +428,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     private CachingComboBoxModel buildUseMethodComboBoxModel()
     {
         return new IndirectComboBoxModel(buildUseMethodSelectionHolder(), buildUseMethodClassHolder()) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return InstantiationPolicyPropertiesPage.this.orderedFactoryInstantiationMethodChoices((MWClass) subject);
             }
@@ -443,6 +458,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     private CachingComboBoxModel buildFactoryMethodComboBoxModel()
     {
         return new IndirectComboBoxModel(buildFactoryMethodSelectionHolder(), this.factoryTypeHolder) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return InstantiationPolicyPropertiesPage.this.orderedFactoryMethodChoices((MWClass) subject);
             }
@@ -452,6 +468,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     private CachingComboBoxModel buildInstantiationMethodComboBoxModel()
     {
         return new IndirectComboBoxModel(buildInstantiationMethodSelectionHolder(), this.factoryTypeHolder) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return InstantiationPolicyPropertiesPage.this.orderedFactoryInstantiationMethodChoices((MWClass) subject);
             }
@@ -467,6 +484,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
         return listChooser;
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder)
     {
         super.initialize(nodeHolder);
@@ -485,6 +503,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(useMethodHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
 
@@ -499,6 +518,7 @@ final class InstantiationPolicyPropertiesPage extends ScrollablePropertiesPage
     {
         PropertyValueModel booleanHolder = new TransformationPropertyValueModel(factoryHolder)
         {
+            @Override
             protected Object transform(Object value)
             {
 

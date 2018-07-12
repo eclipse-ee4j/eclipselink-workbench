@@ -59,12 +59,14 @@ public abstract class MWTypeConverter extends MWConverter {
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.attributeType = new MWTypeDeclaration(this, this.typeFor(String.class));
         this.dataType = new MWTypeDeclaration(this, this.typeFor(String.class));
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 

@@ -31,6 +31,7 @@ public interface MWComplexTypeDefinition
      * (NOTE: This does not indicate the number of TOTAL elements that this type
      *  can have, as some of this elements will probably be mutually exclusive.)
      */
+    @Override
     int totalElementCount();
 
     /** Return the amount of different attributes that this type can have. */

@@ -39,6 +39,7 @@ public class IconRepositoryTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         iconRepository = new DefaultIconRepository(this.buildResourceFileNames());
@@ -48,6 +49,7 @@ public class IconRepositoryTests extends TestCase {
         return new TestResourceFileNameMap();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -106,6 +108,7 @@ public class IconRepositoryTests extends TestCase {
 
 
 private static class TestResourceFileNameMap extends AbstractIconResourceFileNameMap {
+    @Override
     protected String[][] getEntries() {
         return entries;
     }
@@ -116,6 +119,7 @@ private static class TestResourceFileNameMap extends AbstractIconResourceFileNam
 }
 
 private static class InvalidResourceFileNameMap extends AbstractIconResourceFileNameMap {
+    @Override
     protected String[][] getEntries() {
         return entries;
     }

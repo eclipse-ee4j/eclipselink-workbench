@@ -71,6 +71,7 @@ public class PoolTabbedPropertiesPage extends TabbedPropertiesPage {
 
         return new AbstractPropertiesPage( getNodeHolder(), getWorkbenchContextHolder()) {
 
+            @Override
             protected void initializeLayout() {
 
                 JTabbedPane tabbedPane = new JTabbedPane();
@@ -94,6 +95,7 @@ public class PoolTabbedPropertiesPage extends TabbedPropertiesPage {
         return "LOGIN_PROPERTIES_TAB_TITLE";
     }
 
+    @Override
     protected void initializeTabs() {
 
         this.addTab( this.buildGeneralPropertiesPage(),     this.buildGeneralPropertiesPageTitle());

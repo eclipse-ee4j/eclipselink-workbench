@@ -38,6 +38,7 @@ final class OneToManyTableReferencePropertiesPage extends ScrollablePropertiesPa
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

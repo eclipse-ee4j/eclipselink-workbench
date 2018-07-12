@@ -45,6 +45,7 @@ final class PreferencesAction extends AbstractFrameworkAction {
     /**
      * initialize stuff
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("PREFERENCES");
@@ -55,6 +56,7 @@ final class PreferencesAction extends AbstractFrameworkAction {
     /**
      * ignore the selected nodes
      */
+    @Override
     protected void execute() {
         EventQueue.invokeLater(new LaunchPreferencesDialog(getWorkbenchContext(), application));
     }
@@ -69,6 +71,7 @@ final class PreferencesAction extends AbstractFrameworkAction {
             this.application = application;
         }
 
+        @Override
         public void run() {
             getWorkbenchContext().getCurrentWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 

@@ -24,6 +24,7 @@ final class MapAsOxDirectAction extends MapAsDirectAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.xmlDirect");

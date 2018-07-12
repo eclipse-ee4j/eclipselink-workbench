@@ -32,6 +32,7 @@ final class ShowProblemsAction
         this.workbenchWindow = workbenchWindow;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("window.showProblems");
@@ -40,6 +41,7 @@ final class ShowProblemsAction
         this.initializeAccelerator("window.showProblems.ACCELERATOR");
     }
 
+    @Override
     protected void execute() {
         this.workbenchWindow.toggleShowProblems();
     }

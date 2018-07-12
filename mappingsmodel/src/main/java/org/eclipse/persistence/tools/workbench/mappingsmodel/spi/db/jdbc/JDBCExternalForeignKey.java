@@ -79,6 +79,7 @@ final class JDBCExternalForeignKey implements ExternalForeignKey {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalForeignKey#getName()
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -86,6 +87,7 @@ final class JDBCExternalForeignKey implements ExternalForeignKey {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalForeignKey#getColumnPairs()
      */
+    @Override
     public ExternalForeignKeyColumnPair[] getColumnPairs() {
         return this.columnPairs;
     }
@@ -93,6 +95,7 @@ final class JDBCExternalForeignKey implements ExternalForeignKey {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalForeignKey#getTargetTableDescription()
      */
+    @Override
     public ExternalTableDescription getTargetTableDescription() {
         return this.targetTableDescription;
     }
@@ -124,6 +127,7 @@ final class JDBCExternalForeignKey implements ExternalForeignKey {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.name);
     }

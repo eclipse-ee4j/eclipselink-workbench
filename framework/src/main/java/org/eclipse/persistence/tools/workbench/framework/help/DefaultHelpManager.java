@@ -121,6 +121,7 @@ class DefaultHelpManager
      */
     private KeyListener buildKeyListener() {
         return new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
                 if (( ! e.isConsumed()) && (e.getKeyCode() == KeyEvent.VK_F1)) {
                     DefaultHelpManager.this.showTopic((Component) e.getSource());
@@ -144,6 +145,7 @@ class DefaultHelpManager
     /**
      * @see InternalHelpManager#setLocalHelpFailed(boolean)
      */
+    @Override
     public void setLocalHelpFailed(boolean localHelpFailed) {
         this.localHelpFailed = localHelpFailed;
     }
@@ -153,6 +155,7 @@ class DefaultHelpManager
      * if we had problems loading his "local" help book.
      * @see InternalHelpManager#launchComplete()
      */
+    @Override
     public void launchComplete() {
         if (this.localHelpFailed) {
             this.showTopic("noHelp");
@@ -165,6 +168,7 @@ class DefaultHelpManager
     /**
      * @see HelpManager#showHelp()
      */
+    @Override
     public void showHelp() {
         this.showTopic("default");
     }
@@ -172,6 +176,7 @@ class DefaultHelpManager
     /**
      * @see HelpManager#showTopic(String)
      */
+    @Override
     public void showTopic(String topicID) {
         this.showTopicInternal(topicID);
     }
@@ -185,6 +190,7 @@ class DefaultHelpManager
      * check for its parent's topic ID and on up the hierarchy
      * @see HelpManager#showTopic(java.awt.Component)
      */
+    @Override
     public void showTopic(Component component) {
         String topicID = this.getTopicID(component);
         if (topicID != null) {
@@ -195,6 +201,7 @@ class DefaultHelpManager
     /**
      * @see HelpManager#addTopicIDs(java.util.Map)
      */
+    @Override
     public void addTopicIDs(Map componentsToTopicIDs) {
         for (Iterator stream = componentsToTopicIDs.entrySet().iterator(); stream.hasNext(); ) {
             Map.Entry entry = (Map.Entry) stream.next();
@@ -207,6 +214,7 @@ class DefaultHelpManager
      * but we register the topic ID with only the one component
      * @see HelpManager#addTopicID(java.awt.Component, String)
      */
+    @Override
     public void addTopicID(Component component, String topicID) {
         this.listenTo(component);
         this.topicIDs.put(component, topicID);
@@ -215,6 +223,7 @@ class DefaultHelpManager
     /**
      * @see HelpManager#removeTopicIDs(java.util.Map)
      */
+    @Override
     public void removeTopicIDs(Map componentsToTopicIDs) {
         this.removeTopicIDs(componentsToTopicIDs.keySet());
     }
@@ -222,6 +231,7 @@ class DefaultHelpManager
     /**
      * @see HelpManager#removeTopicIDs(java.util.Collection)
      */
+    @Override
     public void removeTopicIDs(Collection components) {
         for (Iterator stream = components.iterator(); stream.hasNext(); ) {
             this.removeTopicID((Component) stream.next());
@@ -231,11 +241,13 @@ class DefaultHelpManager
     /**
      * @see HelpManager#removeTopicID(java.awt.Component)
      */
+    @Override
     public void removeTopicID(Component component) {
         this.topicIDs.remove(component);
         this.stopListeningTo(component);
     }
 
+    @Override
     public void addItemsToPopupMenuForComponent(JMenuItem[] menuItems, Component component) {
         this.mouseListener.addItemsToPopupMenuForComponent(menuItems, component);
     }
@@ -244,6 +256,7 @@ class DefaultHelpManager
     /**
      * @see HelpManager#shutDown()
      */
+    @Override
     public void shutDown() {
     }
 
@@ -390,6 +403,7 @@ class DefaultHelpManager
          */
         private ActionListener buildMenuItemListener() {
             return new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     // display help for the component stashed away when the pop-up menu was first displayed
                     LocalMouseListener.this.showHelp();
@@ -400,15 +414,18 @@ class DefaultHelpManager
 
         // ********** MouseListener implementation **********
 
+        @Override
         public void mousePressed(MouseEvent e) {
             this.handleMouseEvent(e);
         }
 
+        @Override
         public void mouseClicked(MouseEvent e) {
             // is this method needed??? copied from CSHManager...
             this.handleMouseEvent(e);
         }
 
+        @Override
         public void mouseReleased(MouseEvent e) {
             this.handleMouseEvent(e);
         }

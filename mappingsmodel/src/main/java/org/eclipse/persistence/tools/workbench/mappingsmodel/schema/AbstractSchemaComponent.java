@@ -61,6 +61,7 @@ public abstract class AbstractSchemaComponent
     }
 
     /** default implementation */
+    @Override
     public boolean isReference() {
         return false;
     }

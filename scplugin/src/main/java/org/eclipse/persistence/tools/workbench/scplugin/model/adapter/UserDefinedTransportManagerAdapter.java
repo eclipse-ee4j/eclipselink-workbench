@@ -50,6 +50,7 @@ public final class UserDefinedTransportManagerAdapter extends TransportManagerAd
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new UserDefinedTransportManagerConfig();
     }
@@ -81,6 +82,7 @@ public final class UserDefinedTransportManagerAdapter extends TransportManagerAd
     /**
      * Add any problems from this adapter to the given set.
      */
+    @Override
     protected void addProblemsTo( List branchProblems) {
 
         super.addProblemsTo(branchProblems);

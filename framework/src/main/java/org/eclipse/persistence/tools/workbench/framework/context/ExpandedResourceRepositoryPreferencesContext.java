@@ -54,6 +54,7 @@ public class ExpandedResourceRepositoryPreferencesContext
     /**
      * @see PreferencesContextWrapper#getResourceRepository()
      */
+    @Override
     public ResourceRepository getResourceRepository() {
         return this.expandedResourceRepository;
     }

@@ -57,6 +57,7 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 edit();
@@ -69,6 +70,7 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
      *
      * @return A new <code>JButton</code>
      */
+    @Override
     protected JButton buildEditButton()
     {
         JButton button = buildButton("SESSION_PROJECT_EDIT_BUTTON");
@@ -82,10 +84,12 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
      *
      * @return A new <code>PropertyValueModel</code>
      */
+    @Override
     protected PropertyValueModel buildPrimaryProjectNameHolder()
     {
         return new PropertyAspectAdapter(getSubjectHolder(), DatabaseSessionAdapter.PRIMARY_PROJECT_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
@@ -101,6 +105,7 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
      * text field
      * @return A new non-editable <code>JTextField</code>
      */
+    @Override
     protected JTextField buildPrimaryProjectTextField(Document document)
     {
         JTextField textField = super.buildPrimaryProjectTextField(document);
@@ -149,6 +154,7 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
             initialize(databaseSession);
         }
 
+        @Override
         public void apply(boolean projectTypeXml, String projectName)
         {
             if (projectTypeXml)
@@ -161,6 +167,7 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
             }
         }
 
+        @Override
         public String getProjectName()
         {
             return this.projectName;
@@ -173,6 +180,7 @@ final class SessionProjectPane extends AbstractSessionProjectlPane
             this.projectName = databaseSession.getPrimaryProjectName();
         }
 
+        @Override
         public boolean isProjectXml()
         {
             return this.projectTypeXml;

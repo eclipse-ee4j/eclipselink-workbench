@@ -20,7 +20,6 @@ import org.eclipse.persistence.internal.helper.DatabaseField;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.foundation.AbstractCompositeObjectMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWXmlDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWMapping;
@@ -44,6 +43,7 @@ public final class MWCompositeObjectMapping
 
     // **************** MWXpathContext implementation *************************
 
+    @Override
     protected boolean mayUseCollectionData() {
         return false;
     }
@@ -55,6 +55,7 @@ public final class MWCompositeObjectMapping
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWCompositeObjectMapping(this);
     }
@@ -62,6 +63,7 @@ public final class MWCompositeObjectMapping
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addXmlFieldProblemsTo(List newProblems) {
         super.addXmlFieldProblemsTo(newProblems);
         this.addXmlFieldNotSingularProblemTo(newProblems);
@@ -76,10 +78,12 @@ public final class MWCompositeObjectMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return this.xmlDescriptor().buildDefaultRuntimeCompositeObjectMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AbstractCompositeObjectMapping runtimeMapping =
             (AbstractCompositeObjectMapping) super.runtimeMapping();

@@ -46,6 +46,7 @@ public class PropertyAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
 
         return new PropertyConfig();
@@ -83,6 +84,7 @@ public class PropertyAdapter extends SCAdapter {
         firePropertyChanged(VALUE_PROPERTY, oldValue, value);
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append("name=");

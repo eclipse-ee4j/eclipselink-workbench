@@ -47,6 +47,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#getObject1()
      */
+    @Override
     public Object getObject1() {
         return this.object1;
     }
@@ -54,6 +55,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#getObject2()
      */
+    @Override
     public Object getObject2() {
         return this.object2;
     }
@@ -61,6 +63,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#identical()
      */
+    @Override
     public boolean identical() {
         return false;
     }
@@ -68,6 +71,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#different()
      */
+    @Override
     public boolean different() {
         return true;
     }
@@ -75,6 +79,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#getDifferentiator()
      */
+    @Override
     public Differentiator getDifferentiator() {
         return this.differentiator;
     }
@@ -82,6 +87,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#getDescription()
      */
+    @Override
     public String getDescription() {
         StringWriter sw = new StringWriter();
         IndentingPrintWriter pw = new IndentingPrintWriter(sw);
@@ -92,6 +98,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         pw.print(this.descriptionTitle);
         pw.println(':');
@@ -108,6 +115,7 @@ public class SimpleDiff implements Diff {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return this.getDescription();
     }

@@ -88,6 +88,7 @@ final class EisReferenceMappingFieldPairEditingDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setTitle(this.resourceRepository().getString("EIS_REFERENCE_MAPPING_FIELD_PAIR_EDITING_DIALOG.TITLE"));
@@ -103,6 +104,7 @@ final class EisReferenceMappingFieldPairEditingDialog
 
     private PropertyChangeListener buildValidatingListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 EisReferenceMappingFieldPairEditingDialog.this.updateMessage();
                 EisReferenceMappingFieldPairEditingDialog.this.updateOKAction();
@@ -110,6 +112,7 @@ final class EisReferenceMappingFieldPairEditingDialog
         };
     }
 
+    @Override
     protected Component buildMainPanel() {
         return new EisReferenceMappingFieldPairEditingPanel(this.getWorkbenchContext(), this.fieldPairEditor);
     }
@@ -137,12 +140,14 @@ final class EisReferenceMappingFieldPairEditingDialog
     }
 
     /** Overridden to set error flag */
+    @Override
     protected void setErrorMessage(String message) {
         super.setErrorMessage(message);
         this.noError = (message == null);
     }
 
     /** Overridden to clear error flag */
+    @Override
     protected void clearErrorMessage() {
         super.clearErrorMessage();
         this.noError = true;
@@ -152,6 +157,7 @@ final class EisReferenceMappingFieldPairEditingDialog
         this.getOKAction().setEnabled(this.noError);
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.editEisReferenceMappingFieldPair";
     }
@@ -188,6 +194,7 @@ final class EisReferenceMappingFieldPairEditingDialog
 
         // **************** Source Xml field **********************************
 
+        @Override
         public ValueModel sourceXmlFieldHolder() {
             if (this.sourceXmlFieldHolder == null) {
                 this.sourceXmlFieldHolder = this.buildSourceXmlFieldHolder();
@@ -207,6 +214,7 @@ final class EisReferenceMappingFieldPairEditingDialog
 
         // **************** Source Xpath **************************************
 
+        @Override
         public PropertyValueModel sourceXpathHolder() {
             if (this.sourceXpathHolder == null) {
                 this.sourceXpathHolder = this.buildSourceXpathHolder();
@@ -221,10 +229,12 @@ final class EisReferenceMappingFieldPairEditingDialog
 
         private PropertyValueModel buildInternalSourceXpathHolder() {
             return new PropertyAspectAdapter(this.sourceXmlFieldHolder(), MWXmlField.XPATH_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWXmlField) this.subject).getXpath();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWXmlField) this.subject).setXpath((String) value);
                 }
@@ -242,6 +252,7 @@ final class EisReferenceMappingFieldPairEditingDialog
 
         // **************** Target Xml field **********************************
 
+        @Override
         public ValueModel targetXmlFieldHolder() {
             if (this.targetXmlFieldHolder == null) {
                 this.targetXmlFieldHolder = this.buildTargetXmlFieldHolder();
@@ -261,6 +272,7 @@ final class EisReferenceMappingFieldPairEditingDialog
 
         // **************** Target Xpath **************************************
 
+        @Override
         public PropertyValueModel targetXpathHolder() {
             if (this.targetXpathHolder == null) {
                 this.targetXpathHolder = this.buildTargetXpathHolder();
@@ -275,10 +287,12 @@ final class EisReferenceMappingFieldPairEditingDialog
 
         private PropertyValueModel buildInternalTargetXpathHolder() {
             return new PropertyAspectAdapter(this.targetXmlFieldHolder(), MWXmlField.XPATH_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWXmlField) this.subject).getXpath();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWXmlField) this.subject).setXpath((String) value);
                 }

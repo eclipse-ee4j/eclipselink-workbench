@@ -70,11 +70,13 @@ public class DefaultStringRepository extends ResourceBundleStringRepository {
      * Return the string associated with the specified key,
      * stripping off the first ampersand ('&'), if present.
      */
+    @Override
     protected String get(String key) {
         String string = StringTools.removeFirstOccurrence(super.get(key), this.getMnemonicChar());
         return StringTools.replaceHTMLBreaks(string);
     }
 
+    @Override
     protected String format(String string, Object[] arguments) {
         if (arguments.length == 0) {
             return string;

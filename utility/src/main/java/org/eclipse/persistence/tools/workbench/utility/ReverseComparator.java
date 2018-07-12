@@ -44,6 +44,7 @@ public class ReverseComparator
     /**
      * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
      */
+    @Override
     public int compare(Object o1, Object o2) {
         if (this.comparator == null) {
             return ((Comparable) o2).compareTo(o1);

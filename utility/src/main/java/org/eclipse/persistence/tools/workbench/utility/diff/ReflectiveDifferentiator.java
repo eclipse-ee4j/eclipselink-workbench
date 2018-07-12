@@ -158,6 +158,7 @@ public class ReflectiveDifferentiator implements Differentiator {
     /**
      * @see Differentiator#diff(Object, Object)
      */
+    @Override
     public Diff diff(Object object1, Object object2) {
         return this.diff(object1, object2, this.fieldDifferentiators, DifferentiatorAdapter.NORMAL);
     }
@@ -165,6 +166,7 @@ public class ReflectiveDifferentiator implements Differentiator {
     /**
      * @see Differentiator#keyDiff(Object, Object)
      */
+    @Override
     public Diff keyDiff(Object object1, Object object2) {
         return this.keyDifferentiator.keyDiff(object1, object2);
     }
@@ -195,6 +197,7 @@ public class ReflectiveDifferentiator implements Differentiator {
     /**
      * @see Differentiator#comparesValueObjects()
      */
+    @Override
     public boolean comparesValueObjects() {
         return this.comparesValueObjects;
     }
@@ -269,6 +272,7 @@ public class ReflectiveDifferentiator implements Differentiator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, ClassTools.shortNameFor(this.javaClass));
     }
@@ -790,6 +794,7 @@ public class ReflectiveDifferentiator implements Differentiator {
             this.keyFieldDifferentiators = new HashMap();
         }
 
+        @Override
         public Diff keyDiff(Object object1, Object object2) {
             // borrow some of ReflectiveDifferentiator's code
             return ReflectiveDifferentiator.this.diff(object1, object2, this.keyFieldDifferentiators, DifferentiatorAdapter.KEY);
@@ -836,6 +841,7 @@ public class ReflectiveDifferentiator implements Differentiator {
             this.methodName = methodName;
         }
 
+        @Override
         public Diff keyDiff(Object object1, Object object2) {
             return this.diffKeys(this.key(object1), this.key(object2));
         }
@@ -856,6 +862,7 @@ public class ReflectiveDifferentiator implements Differentiator {
             return NULL_KEY;
         }
 
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.methodName);
         }

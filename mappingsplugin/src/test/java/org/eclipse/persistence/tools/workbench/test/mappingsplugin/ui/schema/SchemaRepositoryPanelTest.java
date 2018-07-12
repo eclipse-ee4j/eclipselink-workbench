@@ -166,6 +166,7 @@ public final class SchemaRepositoryPanelTest
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -195,6 +196,7 @@ public final class SchemaRepositoryPanelTest
 
     private Action buildPreviousAction() {
         Action action = new AbstractAction("previous") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SchemaRepositoryPanelTest.this.previous();
             }
@@ -217,6 +219,7 @@ public final class SchemaRepositoryPanelTest
 
     private Action buildNextAction() {
         Action action = new AbstractAction("next") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SchemaRepositoryPanelTest.this.next();
             }
@@ -253,6 +256,7 @@ public final class SchemaRepositoryPanelTest
 
     private Action buildClearAction() {
         Action action = new AbstractAction("clear") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SchemaRepositoryPanelTest.this.clear();
             }
@@ -277,6 +281,7 @@ public final class SchemaRepositoryPanelTest
 
     private Action buildPrintAction() {
         Action action = new AbstractAction("print") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SchemaRepositoryPanelTest.this.print();
             }

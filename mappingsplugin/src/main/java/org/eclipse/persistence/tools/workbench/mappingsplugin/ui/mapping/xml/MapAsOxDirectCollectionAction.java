@@ -26,6 +26,7 @@ final class MapAsOxDirectCollectionAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.xmlDirectCollection");
@@ -35,6 +36,7 @@ final class MapAsOxDirectCollectionAction
     }
 
 
+    @Override
     protected Class mappingClass() {
         return MWXmlDirectCollectionMapping.class;
     }

@@ -73,6 +73,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
     {
         return new TransformationPropertyValueModel(buildIndirectionTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 if (MWIndirectableMapping.VALUE_HOLDER_INDIRECTION.equals(value))
@@ -90,6 +91,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
     {
         return new TransformationPropertyValueModel(buildIndirectionTypeHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(! MWIndirectableMapping.NO_INDIRECTION.equals(value));
@@ -101,6 +103,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWIndirectableMapping.INDIRECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWProxyIndirectionMapping mapping = (MWProxyIndirectionMapping) this.subject;
@@ -114,6 +117,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
                 return MWIndirectableMapping.NO_INDIRECTION;
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWProxyIndirectionMapping mapping = (MWProxyIndirectionMapping) this.subject;
@@ -140,6 +144,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
     {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(getSubjectHolder(), MWIndirectableMapping.INDIRECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWProxyIndirectionMapping mapping = (MWProxyIndirectionMapping) this.subject;
@@ -153,6 +158,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
                 return MWIndirectableMapping.NO_INDIRECTION;
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWProxyIndirectionMapping mapping = (MWProxyIndirectionMapping) this.subject;
@@ -170,6 +176,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
 
         return new TransformationPropertyValueModel(adapter)
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(! MWIndirectableMapping.NO_INDIRECTION.equals(value));
@@ -182,6 +189,7 @@ public final class ProxyIndirectionPanel extends AbstractSubjectPanel
         return new RadioButtonModelAdapter(valueHolder, Boolean.TRUE);
     }
 
+    @Override
     protected void initializeLayout()
     {
         JCheckBox useIndirectionCheckBox = buildCheckBox

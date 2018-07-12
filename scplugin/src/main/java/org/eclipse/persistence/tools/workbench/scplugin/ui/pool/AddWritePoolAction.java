@@ -30,6 +30,7 @@ public class AddWritePoolAction extends AbstractEnablableFrameworkAction {
         super( context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeText( "ADD_WRITE_CONNECTION_POOL");
@@ -39,6 +40,7 @@ public class AddWritePoolAction extends AbstractEnablableFrameworkAction {
         this.initializeToolTipText( "ADD_WRITE_CONNECTION_POOL.TOOL_TIP");
     }
 
+    @Override
     protected void execute( ApplicationNode selectedNode) {
 
         ServerSessionAdapter session = ( ServerSessionAdapter)selectedNode.getValue();
@@ -51,12 +53,14 @@ public class AddWritePoolAction extends AbstractEnablableFrameworkAction {
         (( AbstractApplicationNode)selectedNode.getProjectRoot()).selectDescendantNodeForValue( newPool, navigatorSelectionModel());
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         ServerSessionAdapter session = (ServerSessionAdapter) selectedNode.getValue();
 
         return !session.hasWritePool();
     }
 
+    @Override
     protected String[] enabledPropertyNames() {
         return new String[] {ServerSessionAdapter.WRITE_CONNECTION_POOL_PROPERTY};
     }

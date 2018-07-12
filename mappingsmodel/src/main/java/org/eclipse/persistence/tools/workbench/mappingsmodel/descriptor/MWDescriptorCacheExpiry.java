@@ -94,6 +94,7 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.dailyExpiryTime        = DEFAULT_DAILY_EXPIRY_TIME;
@@ -103,10 +104,12 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
     }
 
 
+    @Override
     public Date getDailyExpiryTime() {
         return this.dailyExpiryTime;
     }
 
+    @Override
     public void setDailyExpiryTime(Date dailyExpiryTime) {
         Date oldDailyExpiryTime = this.dailyExpiryTime;
         if (newExpiryTimeDifferent(dailyExpiryTime)) {
@@ -131,14 +134,17 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
      *
      * @param dailyExpiryTime
      */
+    @Override
     public void setDailyExpiryTime(Calendar dailyExpiryTime) {
         setDailyExpiryTime(dailyExpiryTime.getTime());
     }
 
+    @Override
     public String getExpiryType() {
         return this.expiryType;
     }
 
+    @Override
     public void setExpiryType(String expiryType) {
         String oldExpiryType = this.expiryType;
         this.expiryType = expiryType;
@@ -151,10 +157,12 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
         }
     }
 
+    @Override
     public boolean getUpdateReadTimeOnUpdate() {
         return this.updateReadTimeOnUpdate;
     }
 
+    @Override
     public void setUpdateReadTimeOnUpdate(boolean updateReadTimeOnUpdate) {
         boolean oldUpdateReadTimeOnUpdate = this.updateReadTimeOnUpdate;
         this.updateReadTimeOnUpdate = updateReadTimeOnUpdate;
@@ -162,10 +170,12 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
     }
 
 
+    @Override
     public Long getTimeToLiveExpiry() {
         return this.timeToLiveExpiry;
     }
 
+    @Override
     public void setTimeToLiveExpiry(Long timeToLiveExpiry) {
         Long oldTimeToLive = this.timeToLiveExpiry;
         this.timeToLiveExpiry = timeToLiveExpiry;
@@ -179,6 +189,7 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
 
     // ***************** runtime conversion **********************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         if (getExpiryType() == CACHE_EXPIRY_NO_EXPIRY) {
             runtimeDescriptor.setCacheInvalidationPolicy(new NoExpiryCacheInvalidationPolicy());
@@ -195,6 +206,7 @@ public final class MWDescriptorCacheExpiry extends MWModel implements MWCacheExp
     }
 
 
+    @Override
     public MWCacheExpiry getPersistedPolicy() {
         return this;
     }

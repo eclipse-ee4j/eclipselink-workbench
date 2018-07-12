@@ -43,17 +43,20 @@ public class Employee implements EmployeeInterface
      * For bi-directional relationships, it is important to maintain both sides of the relationship when changing it.
      */
 
+    @Override
     public void addPhoneNumber(PhoneNumber phoneNumber)
     {
         getPhoneNumbers().addElement(phoneNumber);
         phoneNumber.setOwner(this);
     }
 
+    @Override
     public String getFirstName()
     {
         return firstName;
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
@@ -63,11 +66,13 @@ public class Employee implements EmployeeInterface
      * The get/set methods must however be changed to wrap/unwrap the value holder.
      */
 
+    @Override
     public EmployeeInterface getManager()
     {
         return (EmployeeInterface) manager.getValue();
     }
 
+    @Override
     public EmploymentPeriod getPeriod()
     {
         return period;
@@ -78,6 +83,7 @@ public class Employee implements EmployeeInterface
      * The get/set methods must however be changed to wrap/unwrap the value holder.
      */
 
+    @Override
     public Vector getPhoneNumbers()
     {
         return (Vector) phoneNumbers.getValue();
@@ -90,16 +96,19 @@ public class Employee implements EmployeeInterface
      * Only in independent relationships should you null out the back reference.
      */
 
+    @Override
     public void removePhoneNumber(PhoneNumber phoneNumber)
     {
         getPhoneNumbers().removeElement(phoneNumber);
     }
 
+    @Override
     public void setFirstName(String firstName)
     {
         this.firstName = firstName;
     }
 
+    @Override
     public void setLastName(String lastName)
     {
         this.lastName = lastName;
@@ -111,11 +120,13 @@ public class Employee implements EmployeeInterface
      * The get/set methods must however be changed to wrap/unwrap the value holder.
      */
 
+    @Override
     public void setManager(EmployeeInterface manager)
     {
         this.manager.setValue(manager);
     }
 
+    @Override
     public void setPeriod(EmploymentPeriod period)
     {
         this.period = period;
@@ -126,6 +137,7 @@ public class Employee implements EmployeeInterface
      * The get/set methods must however be changed to wrap/unwrap the value holder.
      */
 
+    @Override
     public void setPhoneNumbers(Vector phoneNumbers)
     {
         this.phoneNumbers.setValue(phoneNumbers);

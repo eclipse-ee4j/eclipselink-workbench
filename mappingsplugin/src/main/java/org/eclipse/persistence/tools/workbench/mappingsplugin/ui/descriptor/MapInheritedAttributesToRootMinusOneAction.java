@@ -26,11 +26,13 @@ final class MapInheritedAttributesToRootMinusOneAction extends AbstractMapInheri
         super(context);
     }
 
+    @Override
     protected void execute(MWMappingDescriptor descriptor) throws ClassNotFoundException
     {
         descriptor.mapInheritedAttributesToRootMinusOne();
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();

@@ -41,6 +41,7 @@ public final class SCPluginFactory implements PluginFactory {
 
     // ********** PluginFactory implementation **********
 
+    @Override
     public Plugin createPlugin(ApplicationContext context) {
         return new SCPlugin();
     }

@@ -52,7 +52,6 @@ import org.eclipse.persistence.tools.workbench.uitools.swing.CachingComboBoxMode
 import org.eclipse.persistence.tools.workbench.uitools.swing.ExtendedComboBoxModel;
 import org.eclipse.persistence.tools.workbench.uitools.swing.IndirectComboBoxModel;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
-import org.eclipse.persistence.tools.workbench.utility.iterators.NullListIterator;
 
 
 /**
@@ -81,6 +80,7 @@ final class AfterLoadingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.afterLoadingPolicyHolder = this.buildAfterLoadingPolicyHolder();
@@ -90,6 +90,7 @@ final class AfterLoadingPropertiesPage
 
     private PropertyValueModel buildAfterLoadingPolicyHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), MWMappingDescriptor.AFTER_LOADING_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 MWDescriptorPolicy policy = ((MWMappingDescriptor) this.subject).getAfterLoadingPolicy();
                 return policy.isActive() ? policy : null;
@@ -99,10 +100,12 @@ final class AfterLoadingPropertiesPage
 
     private PropertyValueModel buildPostLoadMethodClassHolder() {
         return new PropertyAspectAdapter(this.afterLoadingPolicyHolder, MWDescriptorAfterLoadingPolicy.POST_LOAD_METHOD_CLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorAfterLoadingPolicy) this.subject).getPostLoadMethodClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 MWClass type = (MWClass) value;
                 ((MWDescriptorAfterLoadingPolicy) this.subject).setPostLoadMethodClass(type);
@@ -125,10 +128,12 @@ final class AfterLoadingPropertiesPage
 
     private PropertyValueModel buildPostLoadMethodHolder() {
         PropertyValueModel propertyValueModel = new PropertyAspectAdapter(this.afterLoadingPolicyHolder, MWDescriptorAfterLoadingPolicy.POST_LOAD_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWDescriptorAfterLoadingPolicy) this.subject).getPostLoadMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWDescriptorAfterLoadingPolicy) this.subject).setPostLoadMethod((MWMethod)value);
             }
@@ -136,6 +141,7 @@ final class AfterLoadingPropertiesPage
         return new ValuePropertyPropertyValueModelAdapter(propertyValueModel, MWMethod.SIGNATURE_PROPERTY);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel afterLoadingExecutePanel = new JPanel(new GridBagLayout());
         afterLoadingExecutePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -253,6 +259,7 @@ final class AfterLoadingPropertiesPage
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return AfterLoadingPropertiesPage.this.descriptor().getRepository();
             }
@@ -283,6 +290,7 @@ final class AfterLoadingPropertiesPage
 
     private CachingComboBoxModel buildPostLoadMethodComboBoxModel() {
         return new IndirectComboBoxModel(this.postLoadMethodHolder, this.postLoadMethodClassHolder) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return AfterLoadingPropertiesPage.this.orderedPostLoadMethodChoices((MWClass) subject);
             }
@@ -304,6 +312,7 @@ final class AfterLoadingPropertiesPage
 
     private PropertyChangeListener buildPostLoadMethodClassListener(final ListChooser listChooser) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 AfterLoadingPropertiesPage.this.updatePostLoadMethodChooser(listChooser);
             }

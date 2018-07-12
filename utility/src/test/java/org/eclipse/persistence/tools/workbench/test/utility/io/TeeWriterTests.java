@@ -38,6 +38,7 @@ public class TeeWriterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.writer1 = new CharArrayWriter();
@@ -45,6 +46,7 @@ public class TeeWriterTests extends TestCase {
         this.tee = new TeeWriter(this.writer1, this.writer2);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

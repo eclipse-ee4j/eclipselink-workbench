@@ -41,6 +41,7 @@ public class ReadOnlyListValueModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.listHolder = this.buildListHolder();
@@ -48,6 +49,7 @@ public class ReadOnlyListValueModelTests extends TestCase {
 
     private ListValueModel buildListHolder() {
         return new AbstractReadOnlyListValueModel() {
+            @Override
             public Object getValue() {
                 return ReadOnlyListValueModelTests.list();
             }
@@ -72,6 +74,7 @@ public class ReadOnlyListValueModelTests extends TestCase {
         return result;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

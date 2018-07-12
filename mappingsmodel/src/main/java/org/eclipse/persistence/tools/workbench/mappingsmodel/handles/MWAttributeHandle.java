@@ -15,12 +15,9 @@
 package org.eclipse.persistence.tools.workbench.mappingsmodel.handles;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 
 /**
@@ -84,6 +81,7 @@ public final class MWAttributeHandle extends MWHandle {
         this.attribute = attribute;
     }
 
+    @Override
     protected Node node() {
         return getAttribute();
     }
@@ -93,6 +91,7 @@ public final class MWAttributeHandle extends MWHandle {
         return this;
     }
 
+    @Override
     public void postProjectBuild() {
         super.postProjectBuild();
         if (this.attributeDeclaringTypeName != null && this.attributeName != null) {
@@ -113,10 +112,12 @@ public final class MWAttributeHandle extends MWHandle {
      * If the handles being compared are in a collection that is being sorted,
      * NEITHER attribute should be null.
      */
+    @Override
     public int compareTo(Object o) {
         return this.attribute.compareTo(((MWAttributeHandle) o).attribute);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         if (this.attribute == null) {
             sb.append("null");

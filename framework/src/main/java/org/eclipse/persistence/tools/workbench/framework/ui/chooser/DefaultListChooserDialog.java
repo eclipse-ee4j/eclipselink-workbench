@@ -74,6 +74,7 @@ public class DefaultListChooserDialog
     protected FilteringListPanel buildFilteringListPanel() {
         FilteringListPanel panel =
             new FilteringListPanel(this.builder.getCompleteList(), this.builder.getInitialSelection(),  this.builder.getStringConverter()) {
+                @Override
                 protected ListCellRenderer buildDefaultCellRenderer() {
                     if (DefaultListChooserDialog.this.builder.getListCellRenderer() != null) {
                         return DefaultListChooserDialog.this.builder.getListCellRenderer();
@@ -105,6 +106,7 @@ public class DefaultListChooserDialog
      */
     protected MouseListener buildListBoxMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     DefaultListChooserDialog.this.clickOK();
@@ -118,6 +120,7 @@ public class DefaultListChooserDialog
      */
     protected ListSelectionListener buildListBoxSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     DefaultListChooserDialog.this.updateOK();
@@ -127,6 +130,7 @@ public class DefaultListChooserDialog
     }
 
     // open up access for inner class
+    @Override
     protected void clickOK() {
         super.clickOK();
     }
@@ -142,6 +146,7 @@ public class DefaultListChooserDialog
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildMainPanel()
      */
+    @Override
     protected Component buildMainPanel() {
         return this.filteringListPanel;
     }
@@ -149,6 +154,7 @@ public class DefaultListChooserDialog
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#getHelpTopicID()
      */
+    @Override
     protected String helpTopicId() {
         return this.builder.getHelpTopicId();
     }
@@ -156,6 +162,7 @@ public class DefaultListChooserDialog
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#initialFocusComponent()
      */
+    @Override
     protected Component initialFocusComponent() {
         return this.filteringListPanel.getTextField();
     }
@@ -164,6 +171,7 @@ public class DefaultListChooserDialog
      * Override to set an explicit size instead of using #pack().
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#prepareToShow()
      */
+    @Override
     protected void prepareToShow() {
         this.setSize(300, 485);    // use Golden Ratio
         this.setLocationRelativeTo(this.getParent());
@@ -238,6 +246,7 @@ public class DefaultListChooserDialog
             return this.buildDialog(context, (Builder) this.clone(), list, initSel);
         }
 
+        @Override
         protected Object clone() {
             Builder clone;
             try {

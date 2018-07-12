@@ -50,6 +50,7 @@ public class MenuItemDescription extends ButtonDescription
      */
     private static class MenuItemCreator implements ButtonCreator
     {
+        @Override
         public AbstractButton createButton(FrameworkAction action)
         {
             return new JMenuItem(action);

@@ -16,7 +16,6 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.rel
 import org.eclipse.persistence.tools.workbench.framework.app.ApplicationNode;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.ChangeDescriptorTypeAction;
 
@@ -28,6 +27,7 @@ final class AggregateDescriptorAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeIcon("descriptor.aggregate");
@@ -35,10 +35,12 @@ final class AggregateDescriptorAction
         initializeToolTipText("MORPH_TO_AGGREGATE_DESCRIPTOR_ACTION.toolTipText");
     }
 
+    @Override
     protected MWDescriptor morphDescriptor(MWDescriptor descriptor) {
         return  ((MWRelationalDescriptor) descriptor).asMWAggregateDescriptor();
     }
 
+    @Override
     protected boolean shouldBeSelected(ApplicationNode selectedNode) {
         return ((RelationalClassDescriptorNode) selectedNode).isAggregateDescriptor();
     }

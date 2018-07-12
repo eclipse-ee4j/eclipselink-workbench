@@ -53,6 +53,7 @@ final class NullHelpManager
     /**
      * @see InternalHelpManager#setLocalHelpFailed(boolean)
      */
+    @Override
     public void setLocalHelpFailed(boolean localHelpFailed) {
         // ignore - if we have a "null" help manager, we obviously had bigger
         // problems than just a failure of "local" help
@@ -63,6 +64,7 @@ final class NullHelpManager
      * that Help has been disabled.
      * @see LocalHelpManager#launchComplete()
      */
+    @Override
     public void launchComplete() {
         JOptionPane.showMessageDialog(null, this.resourceRepository.getString("HELP_INITIALIZATION_ERROR", StringTools.CR));
     }
@@ -73,6 +75,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#showHelp()
      */
+    @Override
     public void showHelp() {
         // do nothing
     }
@@ -80,6 +83,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#showTopic(String)
      */
+    @Override
     public void showTopic(String topicID) {
         // do nothing
     }
@@ -87,6 +91,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#showTopic(java.awt.Component)
      */
+    @Override
     public void showTopic(Component component) {
         // do nothing
     }
@@ -94,6 +99,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#addTopicIDs(java.util.Map)
      */
+    @Override
     public void addTopicIDs(Map componentsToTopicIDs) {
         // do nothing
     }
@@ -101,6 +107,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#addTopicID(java.awt.Component, String)
      */
+    @Override
     public void addTopicID(Component component, String topicID) {
         // do nothing
     }
@@ -108,6 +115,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#removeTopicIDs(java.util.Map)
      */
+    @Override
     public void removeTopicIDs(Map componentsToTopicIDs) {
         // do nothing
     }
@@ -115,6 +123,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#removeTopicIDs(java.util.Collection)
      */
+    @Override
     public void removeTopicIDs(Collection components) {
         // do nothing
     }
@@ -122,6 +131,7 @@ final class NullHelpManager
     /**
      * @see HelpManager#removeTopicID(java.awt.Component)
      */
+    @Override
     public void removeTopicID(Component component) {
         // do nothing
     }
@@ -129,12 +139,14 @@ final class NullHelpManager
     /**
      * @see HelpManager#addItemsToPopupMenuForComponent(JMenuItem[], Component)
      */
+    @Override
     public void addItemsToPopupMenuForComponent(JMenuItem[] menuItems, Component component) {
         // do nothing
     }
     /**
      * @see HelpManager#shutDown()
      */
+    @Override
     public void shutDown() {
         // do nothing
     }
@@ -142,6 +154,7 @@ final class NullHelpManager
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return "NullHelpManager";
     }

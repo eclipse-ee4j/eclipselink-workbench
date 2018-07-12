@@ -49,6 +49,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#getObject1()
      */
+    @Override
     public Object getObject1() {
         return this.entry1;
     }
@@ -56,6 +57,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#getObject2()
      */
+    @Override
     public Object getObject2() {
         return this.entry2;
     }
@@ -63,6 +65,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#identical()
      */
+    @Override
     public boolean identical() {
         return ! this.different();
     }
@@ -70,6 +73,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#different()
      */
+    @Override
     public boolean different() {
         return this.keyDiff.different() || this.valueDiff.different();
     }
@@ -77,6 +81,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#getDifferentiator()
      */
+    @Override
     public Differentiator getDifferentiator() {
         return this.differentiator;
     }
@@ -84,6 +89,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#getDescription()
      */
+    @Override
     public String getDescription() {
         if (this.identical()) {
             return "";
@@ -111,6 +117,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Diff#appendDescription(org.eclipse.persistence.tools.workbench.utility.io.IndentingPrintWriter)
      */
+    @Override
     public void appendDescription(IndentingPrintWriter pw) {
         if (this.keyDiff.different()) {
             pw.print("The entries' keys are different");
@@ -147,6 +154,7 @@ public class MapEntryDiff implements Diff {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return (this.identical()) ? NO_DIFFERENCE_DESCRIPTION : this.getDescription();
     }

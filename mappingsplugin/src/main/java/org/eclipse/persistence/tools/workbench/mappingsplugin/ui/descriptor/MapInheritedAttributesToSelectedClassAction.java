@@ -25,6 +25,7 @@ final class MapInheritedAttributesToSelectedClassAction extends AbstractMapInher
         super(context);
     }
 
+    @Override
     protected void execute(MWMappingDescriptor descriptor) throws ClassNotFoundException
     {
         HierarchyClassSelector classSelector = new HierarchyClassSelector(descriptor.getMWClass(), getWorkbenchContext());
@@ -34,6 +35,7 @@ final class MapInheritedAttributesToSelectedClassAction extends AbstractMapInher
             descriptor.mapInheritedAttributesToClass(classSelector.getSelectedClass());
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();

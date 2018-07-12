@@ -85,6 +85,7 @@ public class RdbmsConnectionPropertiesPageTest extends AbstractSessionPanelTest
         testFocusTransferByMnemonic("CONNECTION_USER_NAME_FIELD", COMPONENT_TEXT_FIELD);
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(RdbmsConnectionPropertiesPage.class, getNodeHolder());
@@ -96,14 +97,17 @@ public class RdbmsConnectionPropertiesPageTest extends AbstractSessionPanelTest
         return (DatabaseLoginAdapter) session.getLogin();
     }
 
+    @Override
     protected void printModel()
     {
     }
 
+    @Override
     protected void resetProperty()
     {
     }
 
+    @Override
     protected String windowTitle()
     {
         return "RDBMS Connection Page Test";

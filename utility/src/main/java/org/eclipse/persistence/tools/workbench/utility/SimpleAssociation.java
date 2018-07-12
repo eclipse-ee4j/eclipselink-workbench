@@ -49,6 +49,7 @@ public class SimpleAssociation
     /**
      * @see Association#getKey()
      */
+    @Override
     public Object getKey() {
         return this.key;
     }
@@ -56,6 +57,7 @@ public class SimpleAssociation
     /**
      * @see Association#getValue()
      */
+    @Override
     public synchronized Object getValue() {
         return this.value;
     }
@@ -63,6 +65,7 @@ public class SimpleAssociation
     /**
      * @see Association#setValue(Object)
      */
+    @Override
     public synchronized Object setValue(Object value) {
         Object old = this.value;
         this.value = value;
@@ -72,6 +75,7 @@ public class SimpleAssociation
     /**
      * @see Object#clone()
      */
+    @Override
     public synchronized Object clone() {
         try {
             return super.clone();

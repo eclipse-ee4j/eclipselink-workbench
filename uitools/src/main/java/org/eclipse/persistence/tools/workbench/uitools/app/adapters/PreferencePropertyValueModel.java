@@ -132,6 +132,7 @@ public class PreferencePropertyValueModel
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         // our value is null when we are not listening to the preference
@@ -146,9 +147,11 @@ public class PreferencePropertyValueModel
     protected PreferenceChangeListener buildPreferenceChangeListener() {
         // transform the preference change events into VALUE property change events
         return new PreferenceChangeListener() {
+            @Override
             public void preferenceChange(PreferenceChangeEvent e) {
                 PreferencePropertyValueModel.this.preferenceChanged(e.getKey(), e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "preference change listener";
             }
@@ -162,6 +165,7 @@ public class PreferencePropertyValueModel
      * Return the cached (converted) value.
      * @see org.eclipse.persistence.tools.workbench.uitools.app.ValueModel#getValue()
      */
+    @Override
     public synchronized Object getValue() {
         return this.value;
     }
@@ -173,6 +177,7 @@ public class PreferencePropertyValueModel
      * Set the cached value, then set the appropriate preference value.
      * @see org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel#setValue(Object)
      */
+    @Override
     public synchronized void setValue(Object value) {
         if (this.hasNoListeners()) {
             return;        // no changes allowed when we have no listeners
@@ -193,6 +198,7 @@ public class PreferencePropertyValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.AspectAdapter#hasListeners()
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyPropertyChangeListeners(VALUE);
     }
@@ -200,6 +206,7 @@ public class PreferencePropertyValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.AspectAdapter#fireAspectChange(Object, Object)
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.firePropertyChanged(VALUE, oldValue, newValue);
     }
@@ -207,6 +214,7 @@ public class PreferencePropertyValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.AspectAdapter#engageNonNullSubject()
      */
+    @Override
     protected void engageNonNullSubject() {
         ((Preferences) this.subject).addPreferenceChangeListener(this.preferenceChangeListener);
         this.value = this.buildValue();
@@ -215,6 +223,7 @@ public class PreferencePropertyValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.app.AspectAdapter#disengageNonNullSubject()
      */
+    @Override
     protected void disengageNonNullSubject() {
         try {
             ((Preferences) this.subject).removePreferenceChangeListener(this.preferenceChangeListener);
@@ -235,6 +244,7 @@ public class PreferencePropertyValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.key);
         sb.append(" => ");

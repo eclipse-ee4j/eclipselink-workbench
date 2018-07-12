@@ -26,10 +26,12 @@ final class GenerateDescriptorsFromAllTablesAction extends AbstractFrameworkActi
         super(context);
     }
 
+    @Override
     protected void initialize() {
         initializeTextAndMnemonic("ALL_TABLES");
     }
 
+    @Override
     protected void execute() {
         for (int i = 0; i < selectedProjectNodes().length; i++) {
             RelationalProjectNode projectNode = (RelationalProjectNode) selectedProjectNodes()[i];

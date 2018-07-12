@@ -26,8 +26,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWTableHand
 import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWHandle.NodeReferenceScrubber;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.OneToOneMapping;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
@@ -76,6 +74,7 @@ public final class MWSequencingPolicy extends MWModel {
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent){
         super.initialize(parent);
         this.tableHandle = new MWTableHandle(this, this.buildTableScrubber());
@@ -154,6 +153,7 @@ public final class MWSequencingPolicy extends MWModel {
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.nameColumnHandle);
@@ -163,9 +163,11 @@ public final class MWSequencingPolicy extends MWModel {
 
     private NodeReferenceScrubber buildNameColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWSequencingPolicy.this.setNameColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWSequencingPolicy.buildNameColumnScrubber()";
             }
@@ -174,9 +176,11 @@ public final class MWSequencingPolicy extends MWModel {
 
     private NodeReferenceScrubber buildCounterColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWSequencingPolicy.this.setCounterColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWSequencingPolicy.buildCounterColumnScrubber()";
             }
@@ -185,9 +189,11 @@ public final class MWSequencingPolicy extends MWModel {
 
     private NodeReferenceScrubber buildTableScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWSequencingPolicy.this.setTable(null);
             }
+            @Override
             public String toString() {
                 return "MWSequencingPolicy.buildTableScrubber()";
             }
@@ -200,6 +206,7 @@ public final class MWSequencingPolicy extends MWModel {
     /**
      * Check for any problems and add them to the specified collection.
      */
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         if (this.sequencingType == SEQUENCE_TABLE) {
@@ -239,6 +246,7 @@ public final class MWSequencingPolicy extends MWModel {
 
     // ********** Display methods  **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(getSequencingType());
     }

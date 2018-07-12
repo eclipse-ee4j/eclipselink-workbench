@@ -42,11 +42,13 @@ public class CloneIteratorTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.originalCollection = this.buildCollection();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -103,6 +105,7 @@ public class CloneIteratorTests extends TestCase {
 
     public void testRemoveEliminator() {
         CloneIterator.Mutator eliminator = new CloneIterator.Mutator() {
+            @Override
             public void remove(Object current) {
                 CloneIteratorTests.this.originalCollection.remove(current);
             }
@@ -112,6 +115,7 @@ public class CloneIteratorTests extends TestCase {
 
     public void testRemoveSubclass() {
         this.verifyRemove(new CloneIterator(this.originalCollection) {
+            @Override
             protected void remove(Object current) {
                 CloneIteratorTests.this.originalCollection.remove(current);
             }
@@ -155,6 +159,7 @@ public class CloneIteratorTests extends TestCase {
 
     private Runnable buildRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 CloneIteratorTests.this.loopWithCloneIterator();
             }
@@ -239,6 +244,7 @@ public class CloneIteratorTests extends TestCase {
         public SlowCollection() {
             super();
         }
+        @Override
         public Object[] toArray() {
             this.setHasStartedClone(true);
             // take a little snooze before returning the array

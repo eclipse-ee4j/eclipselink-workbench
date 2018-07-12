@@ -102,6 +102,7 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyChangeListener buildAttributeTypeDeclarationListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ClassAttributeAccessorsPanel.this.updateGetAndSetMethodLabels();
                 ClassAttributeAccessorsPanel.this.updateAccessorPanelVisibility();
@@ -111,6 +112,7 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildAttributeTypeAdapter() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getType();
             }
@@ -119,6 +121,7 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildAttributeDimensionalityAdapter() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.DIMENSIONALITY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return new Integer(((MWClassAttribute) this.subject).getDimensionality());
             }
@@ -127,6 +130,7 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildAttributeValueTypeAdapter() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.VALUE_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getValueType();
             }
@@ -135,6 +139,7 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyChangeListener buildAttributeValueTypeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 ClassAttributeAccessorsPanel.this.updateAccessorPanelVisibility();
             }
@@ -416,6 +421,7 @@ final class ClassAttributeAccessorsPanel
 
     private ValueModel buildAttributeTypeBooleanHolder() {
         return new TransformationPropertyValueModel(this.attributeTypeHolder) {
+            @Override
             protected Object transform(Object value) {
                 return value == null ? Boolean.FALSE : Boolean.TRUE;
             }
@@ -424,6 +430,7 @@ final class ClassAttributeAccessorsPanel
 
     private ActionListener buildGenerateGetSetMethodsActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ClassAttributeAccessorsPanel.this.getAttribute().generateGetAndSetMethods();
             }
@@ -432,6 +439,7 @@ final class ClassAttributeAccessorsPanel
 
     private ActionListener buildGenerateValueGetSetMethodsActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ClassAttributeAccessorsPanel.this.getAttribute().generateValueGetAndSetMethods();
             }
@@ -440,6 +448,7 @@ final class ClassAttributeAccessorsPanel
 
     private ActionListener buildGenerateAddRemoveMethodsActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ClassAttributeAccessorsPanel.this.getAttribute().generateAddAndRemoveMethods();
             }
@@ -467,6 +476,7 @@ final class ClassAttributeAccessorsPanel
     private CachingComboBoxModel buildGetMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildGetMethodHolder(), this.attributeHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return ClassAttributeAccessorsPanel.this.orderedGetMethodChoices((MWClassAttribute) subject);
                 }
@@ -476,10 +486,12 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildGetMethodHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.GET_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getGetMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setGetMethod((MWMethod) value);
             }
@@ -515,6 +527,7 @@ final class ClassAttributeAccessorsPanel
     private CachingComboBoxModel buildSetMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildSetMethodHolder(), this.attributeHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return ClassAttributeAccessorsPanel.this.orderedSetMethodChoices((MWClassAttribute) subject);
                 }
@@ -524,10 +537,12 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildSetMethodHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.SET_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getSetMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setSetMethod((MWMethod) value);
             }
@@ -563,6 +578,7 @@ final class ClassAttributeAccessorsPanel
     private CachingComboBoxModel buildValueGetMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildValueGetMethodHolder(), this.attributeHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return ClassAttributeAccessorsPanel.this.orderedValueGetMethodChoices((MWClassAttribute) subject);
                 }
@@ -572,10 +588,12 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildValueGetMethodHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.VALUE_GET_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getValueGetMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setValueGetMethod((MWMethod) value);
             }
@@ -611,6 +629,7 @@ final class ClassAttributeAccessorsPanel
     private CachingComboBoxModel buildValueSetMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildValueSetMethodHolder(), this.attributeHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return ClassAttributeAccessorsPanel.this.orderedValueSetMethodChoices((MWClassAttribute) subject);
                 }
@@ -620,10 +639,12 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildValueSetMethodHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.VALUE_SET_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getValueSetMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setValueSetMethod((MWMethod) value);
             }
@@ -659,6 +680,7 @@ final class ClassAttributeAccessorsPanel
     private CachingComboBoxModel buildAddMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildAddMethodHolder(), this.attributeHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return ClassAttributeAccessorsPanel.this.orderedAddMethodChoices((MWClassAttribute) subject);
                 }
@@ -668,10 +690,12 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildAddMethodHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.ADD_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getAddMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setAddMethod((MWMethod) value);
             }
@@ -707,6 +731,7 @@ final class ClassAttributeAccessorsPanel
     private CachingComboBoxModel buildRemoveMethodComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildRemoveMethodHolder(), this.attributeHolder) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return ClassAttributeAccessorsPanel.this.orderedRemoveMethodChoices((MWClassAttribute) subject);
                 }
@@ -716,10 +741,12 @@ final class ClassAttributeAccessorsPanel
 
     private PropertyValueModel buildRemoveMethodHolder() {
         return new PropertyAspectAdapter(this.attributeHolder, MWClassAttribute.REMOVE_METHOD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWClassAttribute) this.subject).getRemoveMethod();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWClassAttribute) this.subject).setRemoveMethod((MWMethod) value);
             }
@@ -744,6 +771,7 @@ final class ClassAttributeAccessorsPanel
     /** We want to display the signature, but we want filtering based only on the method name */
     private StringConverter buildMethodStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? "" : ((MWMethod) o).getName();
             }

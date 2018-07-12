@@ -50,6 +50,7 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.wrappedValueHolder = new SimplePropertyValueModel();
@@ -60,6 +61,7 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
         return CollectionTools.collection(new SingleElementIterator(this.wrappedValueHolder.getValue()));
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -67,6 +69,7 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
 
     public void testGetValue() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
         });
         this.wrappedValueHolder.setValue("foo");
@@ -78,6 +81,7 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
 
     public void testStaleValue() {
         CollectionChangeListener listener = new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
         };
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, listener);
@@ -113,7 +117,9 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
 
     public void testListChangedToEmpty() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
+            @Override
             public void itemsRemoved(CollectionChangeEvent e) {/* OK */}
         });
         this.wrappedValueHolder.setValue("foo");
@@ -124,6 +130,7 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
 
     public void testCollectionChangedFromEmpty() {
         this.adapter.addCollectionChangeListener(ValueModel.VALUE, new TestListener() {
+            @Override
             public void itemsAdded(CollectionChangeEvent e) {/* OK */}
         });
         JList jList = new JList(new ListModelAdapter(this.adapter));
@@ -144,12 +151,15 @@ public class PropertyCollectionValueModelAdapterTests extends TestCase {
     // ********** member class **********
 
     private static class TestListener implements CollectionChangeListener {
+        @Override
         public void collectionChanged(CollectionChangeEvent e) {
             fail("unexpected event");
         }
+        @Override
         public void itemsAdded(CollectionChangeEvent e) {
             fail("unexpected event");
         }
+        @Override
         public void itemsRemoved(CollectionChangeEvent e) {
             fail("unexpected event");
         }

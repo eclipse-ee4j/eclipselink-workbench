@@ -25,7 +25,6 @@ import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.XMLField;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
@@ -83,6 +82,7 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.referenceDescriptorHandle = new MWDescriptorHandle(this, this.buildReferenceDescriptorScrubber());
@@ -94,9 +94,11 @@ public abstract class MWAbstractCompositeMapping
 
     private NodeReferenceScrubber buildElementTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAbstractCompositeMapping.this.setElementType(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractCompositeMapping.buildElementTypeScrubber()";
             }
@@ -105,16 +107,19 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** Reference descriptor **********************************
 
+    @Override
     public MWDescriptor getReferenceDescriptor() {
         return this.referenceDescriptorHandle.getDescriptor();
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor newReferenceDescriptor) {
         MWDescriptor oldReferenceDescriptor = this.referenceDescriptorHandle.getDescriptor();
         this.referenceDescriptorHandle.setDescriptor(newReferenceDescriptor);
         this.firePropertyChanged(REFERENCE_DESCRIPTOR_PROPERTY, oldReferenceDescriptor, newReferenceDescriptor);
     }
 
+    @Override
     public boolean descriptorIsValidReferenceDescriptor(MWDescriptor descriptor) {
         // can have pretty much any reference descriptor
         return true;
@@ -122,10 +127,12 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** Element type ******************************************
 
+    @Override
     public MWComplexTypeDefinition getElementType() {
         return (MWComplexTypeDefinition) this.elementTypeHandle.getComponent();
     }
 
+    @Override
     public void setElementType(MWComplexTypeDefinition newElementType) {
         MWComplexTypeDefinition oldElementType = this.getElementType();
         this.elementTypeHandle.setComponent(newElementType);
@@ -190,6 +197,7 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** MWXpathedMapping implementation  **********************
 
+    @Override
     public MWXmlField getXmlField() {
         return this.xmlField;
     }
@@ -197,14 +205,17 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWSchemaContextComponent schemaContext() {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         return this.getXmlField().isResolved() ? this.getXmlField() : null;
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         if (! this.isReadOnly() && ! this.getXmlField().getXpath().equals("")) {
             writtenFields.add(this.getXmlField());
@@ -214,24 +225,29 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** MWXpathContext implementation  ************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return MWAbstractCompositeMapping.this.mayUseCollectionData();
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return true;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return false;
             }
@@ -250,6 +266,7 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeFromMWXpathedMapping(MWXpathedMapping oldMapping) {
         super.initializeFromMWXpathedMapping(oldMapping);
 
@@ -257,6 +274,7 @@ public abstract class MWAbstractCompositeMapping
         // can't use typed, so don't set that
     }
 
+    @Override
     protected void initializeFromMWReferenceObjectMapping(MWReferenceObjectMapping oldMapping) {
         super.initializeFromMWReferenceObjectMapping(oldMapping);
 
@@ -266,6 +284,7 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** Problem handling **************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         // would like to add xpath and reference descriptor problems first
         this.addXmlFieldProblemsTo(newProblems);
@@ -313,6 +332,7 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** containment hierarchy *********************************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.referenceDescriptorHandle);
@@ -323,15 +343,18 @@ public abstract class MWAbstractCompositeMapping
 
     private NodeReferenceScrubber buildReferenceDescriptorScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWAbstractCompositeMapping.this.setReferenceDescriptor(null);
             }
+            @Override
             public String toString() {
                 return "MWAbstractCompositeMapping.buildReferenceDescriptorScrubber()";
             }
         };
     }
 
+    @Override
     public void descriptorReplaced(MWDescriptor oldDescriptor, MWDescriptor newDescriptor) {
         super.descriptorReplaced(oldDescriptor, newDescriptor);
         // we don't need this until we support multiple descriptor types in XML/EIS projects
@@ -341,11 +364,13 @@ public abstract class MWAbstractCompositeMapping
     }
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         this.xmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);
     }
@@ -353,6 +378,7 @@ public abstract class MWAbstractCompositeMapping
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         AggregateMapping runtimeMapping =
             (AggregateMapping) super.runtimeMapping();

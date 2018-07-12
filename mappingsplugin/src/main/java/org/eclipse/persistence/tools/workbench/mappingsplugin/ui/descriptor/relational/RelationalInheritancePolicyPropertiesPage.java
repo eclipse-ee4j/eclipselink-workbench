@@ -80,6 +80,7 @@ public final class RelationalInheritancePolicyPropertiesPage
 
     private StringConverter buildTableStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTable) o).getName();
             }
@@ -88,10 +89,12 @@ public final class RelationalInheritancePolicyPropertiesPage
 
     private PropertyValueModel buildViewChooserPropertyAdapter() {
         return new PropertyAspectAdapter(getInheritancePolicyHolder(), MWRelationalDescriptorInheritancePolicy.READ_ALL_SUBCLASSES_VIEW_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalDescriptorInheritancePolicy) subject).getReadAllSubclassesView();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDescriptorInheritancePolicy)subject).setReadAllSubclassesView((MWTable)value);
             }
@@ -101,10 +104,12 @@ public final class RelationalInheritancePolicyPropertiesPage
     private PropertyValueModel buildReadSubclassesOnQueryBooleanHolder() {
 
         return new PropertyAspectAdapter(getInheritancePolicyHolder(), MWRelationalDescriptorInheritancePolicy.READ_SUBCLASSES_ON_QUERY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject(){
                 return Boolean.valueOf(((MWRelationalDescriptorInheritancePolicy) subject).isReadSubclassesOnQuery());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDescriptorInheritancePolicy)subject).setReadSubclassesOnQuery(((Boolean)value).booleanValue());
             }
@@ -114,10 +119,12 @@ public final class RelationalInheritancePolicyPropertiesPage
     private PropertyValueModel buildOuterJoinAllSubclassesBooleanHolder() {
 
         return new PropertyAspectAdapter(getInheritancePolicyHolder(), MWRelationalDescriptorInheritancePolicy.OUTER_JOIN_ALL_SUBCLASSES) {
+            @Override
             protected Object getValueFromSubject(){
                 return Boolean.valueOf(((MWRelationalDescriptorInheritancePolicy) subject).isOuterJoinAllSubclasses());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalDescriptorInheritancePolicy)subject).setOuterJoinAllSubclasses(((Boolean)value).booleanValue());
             }
@@ -129,6 +136,7 @@ public final class RelationalInheritancePolicyPropertiesPage
         return classIndicatorPolicyPanel;
     }
 
+    @Override
     protected Component buildPage() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -240,6 +248,7 @@ public final class RelationalInheritancePolicyPropertiesPage
         return contentPanel;
     }
 
+    @Override
     protected String helpTopicIdPrefix() {
         return "descriptor.relational";
     }

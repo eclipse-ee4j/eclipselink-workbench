@@ -100,6 +100,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SCAbstractPanelTest.this.clearModel();
             }
@@ -134,6 +135,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     private Action buildCloneWindowAction() {
         Action action = new AbstractAction("Clone") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 openCloneWindow();
             }
@@ -177,10 +179,12 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
     {
         return new NodeManager()
         {
+            @Override
             public void addProjectNode(ApplicationNode node)
             {
             }
 
+            @Override
             public TreeNodeValueModel getRootNode()
             {
                 return null;
@@ -191,62 +195,76 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
                 return new NavigatorSelectionModel()
                 {
 
+                    @Override
                     public void addTreeSelectionListener(TreeSelectionListener listener)
                     {
                     }
+                    @Override
                     public ApplicationNode[] getSelectedNodes()
                     {
                         return null;
                     }
 
+                    @Override
                     public ApplicationNode[] getSelectedProjectNodes()
                     {
                         return null;
                     }
 
+                    @Override
                     public TreePath[] getSelectionPaths()
                     {
                         return null;
                     }
 
+                    @Override
                     public void popAndRestoreExpansionState()
                     {
                     }
 
+                    @Override
                     public void popAndRestoreExpansionState(ApplicationNode oldNode, ApplicationNode morphedNode) {
 
                     }
+                    @Override
                     public void pushExpansionState()
                     {
                     }
 
+                    @Override
                     public void removeTreeSelectionListener(TreeSelectionListener listener)
                     {
                     }
 
+                    @Override
                     public void setSelectedNode(ApplicationNode node)
                     {
                     }
+                    @Override
                     public void expandNode(ApplicationNode node)
                     {
                     }
 
+                    @Override
                     public void setSelectionPaths(TreePath[] pPaths)
                     {
                     }
                 };
             }
 
+            @Override
             public ApplicationNode[] projectNodesFor(Plugin plugin)
             {
                 return new ApplicationNode[] {(ApplicationNode) getNodeHolder().getValue()};
             }
 
+            @Override
             public boolean save(ApplicationNode node, WorkbenchContext workbenchContext) {
                 // TODO Auto-generated method stub
                 return false;
             }
 
+            @Override
             public void removeProjectNode(ApplicationNode node)
             {
             }
@@ -281,6 +299,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction( "print model") {
+            @Override
             public void actionPerformed( ActionEvent event) {
                 SCAbstractPanelTest.this.printModel();
             }
@@ -308,6 +327,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     private Action buildResetPropertyAction() {
         Action action = new AbstractAction( "reset property") {
+            @Override
             public void actionPerformed (ActionEvent event) {
                 SCAbstractPanelTest.this.resetProperty();
             }
@@ -322,6 +342,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 SCAbstractPanelTest.this.restoreModel();
             }
@@ -353,18 +374,22 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
     {
         return new TreeModelListener()
         {
+            @Override
             public void treeNodesChanged(TreeModelEvent e)
             {
             }
 
+            @Override
             public void treeNodesInserted(TreeModelEvent e)
             {
             }
 
+            @Override
             public void treeNodesRemoved(TreeModelEvent e)
             {
             }
 
+            @Override
             public void treeStructureChanged(TreeModelEvent e)
             {
             }
@@ -378,6 +403,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     protected abstract void clearModel();
 
+    @Override
     protected void execute(String[] arguments) throws Exception
     {
         super.execute(arguments);
@@ -393,6 +419,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
         return projectNode;
     }
 
+    @Override
     protected ResourceRepository getResourceRepository()
     {
         return getProjectNode().getApplicationContext().getResourceRepository();
@@ -433,6 +460,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
         windowH = 400;
     }
 
+    @Override
     protected void initializeWindow() throws Exception
     {
         super.initializeWindow();
@@ -477,6 +505,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
         this.selectionHolder = selectionHolder;
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         initialize();
@@ -511,6 +540,7 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
      *
      * @throws Exception
      */
+    @Override
     protected void tearDown() throws Exception
     {
         selectionHolder.setValue(null);
@@ -525,14 +555,23 @@ public abstract class SCAbstractPanelTest extends AbstractPanelTest
 
     private class ApplicationTest implements Application
     {
+        @Override
         public String  getBuildNumber()      { return null; }
+        @Override
         public String getReleaseDesignation() { return null; }
+        @Override
         public String  getFullProductName()  { return null; }
+        @Override
         public String  getProductName()  { return null; }
+        @Override
         public String getFullProductNameAndVersionNumber() { return null; }
+        @Override
         public String  getShortProductName() { return null; }
+        @Override
         public String  getVersionNumber()    { return null; }
+        @Override
         public boolean isDevelopmentMode()   { return true; }
+        @Override
         public boolean isFirstExecution()   { return false; }
     }
 }

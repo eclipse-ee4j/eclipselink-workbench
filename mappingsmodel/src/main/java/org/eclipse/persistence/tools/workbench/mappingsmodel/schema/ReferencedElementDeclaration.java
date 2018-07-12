@@ -50,10 +50,12 @@ public final class ReferencedElementDeclaration
 
     // **************** SchemaComponentReference contract *********************
 
+    @Override
     protected MWNamedSchemaComponent getReferencedComponent() {
         return this.element;
     }
 
+    @Override
     protected void resolveReference(String elementNamespace, String elementName) {
         this.element = (ExplicitElementDeclaration) this.getSchema().element(elementNamespace, elementName);
     }
@@ -61,26 +63,32 @@ public final class ReferencedElementDeclaration
 
     // **************** MWElementDeclaration contract *************************
 
+    @Override
     public MWSchemaTypeDefinition getType() {
         return this.element.getType();
     }
 
+    @Override
     public MWElementDeclaration getSubstitutionGroup() {
         return this.element.getSubstitutionGroup();
     }
 
+    @Override
     public boolean isAbstract() {
         return this.element.isAbstract();
     }
 
+    @Override
     public String getDefaultValue() {
         return this.element.getDefaultValue();
     }
 
+    @Override
     public String getFixedValue() {
         return this.element.getFixedValue();
     }
 
+    @Override
     public boolean isNillable() {
         return this.element.isNillable();
     }
@@ -88,14 +96,17 @@ public final class ReferencedElementDeclaration
 
     // **************** MWParticle contract ***********************************
 
+    @Override
     public int getMinOccurs() {
         return this.minOccurs;
     }
 
+    @Override
     public int getMaxOccurs() {
         return this.maxOccurs;
     }
 
+    @Override
     public boolean isDescriptorContextComponent() {
         return false;
     }
@@ -112,6 +123,7 @@ public final class ReferencedElementDeclaration
         }
     }
 
+    @Override
     public boolean isEquivalentTo(XSParticleDecl xsParticle) {
         return this.element.isEquivalentTo(xsParticle);
     }
@@ -119,6 +131,7 @@ public final class ReferencedElementDeclaration
 
     // **************** MWXpathableSchemaComponent contract *******************
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return this.element.baseBuiltInTypes();
     }
@@ -126,22 +139,27 @@ public final class ReferencedElementDeclaration
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return true;
     }
 
+    @Override
     public String contextTypeQname() {
         return this.element.contextTypeQname();
     }
 
+    @Override
     public boolean containsText() {
         return this.element.containsText();
     }
 
+    @Override
     public boolean containsWildcard() {
         return this.element.containsWildcard();
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return this.element.compareSchemaOrder(element1, element2);
     }
@@ -149,10 +167,12 @@ public final class ReferencedElementDeclaration
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public MWNamedSchemaComponent nestedNamedComponent(QName qName) {
         return this.element.nestedNamedComponent(qName);
     }
 
+    @Override
     public int totalElementCount() {
         return this.element.totalElementCount();
     }

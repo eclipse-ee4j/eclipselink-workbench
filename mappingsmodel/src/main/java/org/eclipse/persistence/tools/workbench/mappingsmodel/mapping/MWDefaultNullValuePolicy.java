@@ -68,12 +68,14 @@ public final class MWDefaultNullValuePolicy
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.nullValueType = new MWTypeDeclaration(this, this.typeFor(java.lang.String.class));
         this.nullValue = "";
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.nullValueType);
@@ -82,24 +84,29 @@ public final class MWDefaultNullValuePolicy
 
     // *************** Accessors **************
 
+    @Override
     public boolean usesNullValue() {
         return true;
     }
 
+    @Override
     public String getNullValue() {
         return this.nullValue;
     }
 
+    @Override
     public void setNullValue(String newValue) {
         String oldValue = this.nullValue;
         this.nullValue = newValue;
         this.firePropertyChanged(NULL_VALUE_PROPERTY, oldValue, newValue);
     }
 
+    @Override
     public MWTypeDeclaration getNullValueType() {
         return this.nullValueType;
     }
 
+    @Override
     public void setNullValueType(MWTypeDeclaration newNullType) {
         if (newNullType == null) {
             throw new NullPointerException();
@@ -112,6 +119,7 @@ public final class MWDefaultNullValuePolicy
 
     // **************** Runtime conversion ****************
 
+    @Override
     public void adjustRuntimeMapping(AbstractDirectMapping mapping) {
         mapping.setNullValue(this.nullValue());
     }
@@ -144,6 +152,7 @@ public final class MWDefaultNullValuePolicy
 
     // **************** TopLink Only Methos ***************
 
+    @Override
     public MWNullValuePolicy getValueForTopLink() {
         return this;
     }

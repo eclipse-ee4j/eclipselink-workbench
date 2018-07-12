@@ -66,6 +66,7 @@ public class PreferencesCollectionValueModel
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.preferences = new HashMap();
@@ -78,9 +79,11 @@ public class PreferencesCollectionValueModel
     protected PreferenceChangeListener buildPreferenceChangeListener() {
         // transform the preference change events into VALUE collection change events
         return new PreferenceChangeListener() {
+            @Override
             public void preferenceChange(PreferenceChangeEvent e) {
                 PreferencesCollectionValueModel.this.preferenceChanged(e.getKey(), e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "preference change listener";
             }
@@ -94,6 +97,7 @@ public class PreferencesCollectionValueModel
      * Return an iterator on the preference models.
      * @see org.eclipse.persistence.tools.workbench.uitools.app.ValueModel#getValue()
      */
+    @Override
     public synchronized Object getValue() {
         return this.preferences.values().iterator();
     }
@@ -104,6 +108,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see CollectionValueModel#addItem(Object)
      */
+    @Override
     public void addItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -111,6 +116,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see CollectionValueModel#addItems(Collection)
      */
+    @Override
     public void addItems(Collection items) {
         for (Iterator stream = items.iterator(); stream.hasNext(); ) {
             this.addItem(stream.next());
@@ -120,6 +126,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see CollectionValueModel#removeItem(Object)
      */
+    @Override
     public void removeItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -127,6 +134,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see CollectionValueModel#removeItems(Collection)
      */
+    @Override
     public void removeItems(Collection items) {
         for (Iterator stream = items.iterator(); stream.hasNext(); ) {
             this.removeItem(stream.next());
@@ -136,6 +144,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public synchronized int size() {
         return this.preferences.size();
     }
@@ -146,6 +155,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see AspectAdapter#hasListeners()
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyCollectionChangeListeners(VALUE);
     }
@@ -153,6 +163,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see AspectAdapter#fireAspectChange(Object, Object)
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.fireCollectionChanged(VALUE);
     }
@@ -160,6 +171,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see AspectAdapter#disengageNonNullSubject()
      */
+    @Override
     protected void engageNonNullSubject() {
         ((Preferences) this.subject).addPreferenceChangeListener(this.preferenceChangeListener);
         for (Iterator stream = this.preferenceModels(); stream.hasNext(); ) {
@@ -171,6 +183,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see AspectAdapter#engageNonNullSubject()
      */
+    @Override
     protected void disengageNonNullSubject() {
         try {
             ((Preferences) this.subject).removePreferenceChangeListener(this.preferenceChangeListener);
@@ -191,6 +204,7 @@ public class PreferencesCollectionValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.subject);
     }
@@ -210,6 +224,7 @@ public class PreferencesCollectionValueModel
             throw new RuntimeException(ex);
         }
         return new TransformationIterator(new ArrayIterator(keys)) {
+            @Override
             protected Object transform(Object next) {
                 return PreferencesCollectionValueModel.this.buildPreferenceModel((String) next);
             }

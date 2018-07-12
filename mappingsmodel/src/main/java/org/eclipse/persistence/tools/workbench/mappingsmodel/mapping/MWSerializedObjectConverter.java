@@ -48,20 +48,24 @@ public final class MWSerializedObjectConverter extends MWConverter {
     // *********** MWConverter implementation ***********
 
     /** Should ONLY be used in one place - the UI */
+    @Override
     public String accessibleNameKey() {
         return "ACCESSIBLE_SERIALIZED_MAPPING_NODE";
     }
 
+    @Override
     public String getType() {
         return SERIALIZED_OBJECT_CONVERTER;
     }
 
+    @Override
     public String iconKey() {
         return "mapping.serialized";
     }
 
     // ************* Runtime Conversion ************
 
+    @Override
     public Converter runtimeConverter(DatabaseMapping mapping) {
         return new SerializedObjectConverter(mapping);
     }

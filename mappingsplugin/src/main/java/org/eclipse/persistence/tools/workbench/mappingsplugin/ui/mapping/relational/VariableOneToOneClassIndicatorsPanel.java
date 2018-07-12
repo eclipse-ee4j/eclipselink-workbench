@@ -57,6 +57,7 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(PropertyValueModel nodeHolder) {
         super.initialize(nodeHolder);
         this.classIndicatorPolicyHolder = buildClassIndicatorPolicyHolder();
@@ -65,6 +66,7 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
 
     private PropertyValueModel buildClassIndicatorPolicyHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWVariableOneToOneMapping) subject).getClassIndicatorPolicy();
             }
@@ -75,6 +77,7 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
         return "mapping.variableOneToOne.classIndicators";
     }
 
+    @Override
     protected Component buildPage() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -121,6 +124,7 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
 
     private ValueModel buildClassIndicatorFieldChooserEnablerModel() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(!((MWVariableOneToOneMapping) subject).parentDescriptorIsAggregate());
             }
@@ -150,10 +154,12 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
 
     private PropertyValueModel buildClassIndicatorFieldChooserPropertyAdapter() {
         return new PropertyAspectAdapter(this.classIndicatorPolicyHolder, MWRelationalClassIndicatorFieldPolicy.FIELD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWRelationalClassIndicatorFieldPolicy)subject).getField();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWRelationalClassIndicatorFieldPolicy)subject).setField((MWColumn)value);
             }
@@ -166,10 +172,12 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
 
     public CachingComboBoxModel buildColumnComboBoxModel(PropertyValueModel databaseFieldHolder) {
         return new IndirectComboBoxModel(databaseFieldHolder, buildTableHolder()) {
+            @Override
             protected ListIterator listValueFromSubject(Object subject) {
                 return CollectionTools.sort(((MWTable) subject).columns()).listIterator();
             }
 
+            @Override
             protected int listSizeFromSubject(Object subject) {
                 return ((MWTable) subject).columnsSize();
             }
@@ -187,6 +195,7 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
     //affected inheritance policy as well as var 1-1
     private ValueModel buildTableHolder() {
         return new PropertyAspectAdapter(this.parentDescriptorHolder, MWTableDescriptor.PRIMARY_TABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return((MWRelationalClassDescriptor) subject).getPrimaryTable();
             }
@@ -195,6 +204,7 @@ final class VariableOneToOneClassIndicatorsPanel extends ScrollablePropertiesPag
 
     private PropertyValueModel buildParentDescriptorHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWVariableOneToOneMapping) subject).getParentDescriptor();
             }

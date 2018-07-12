@@ -28,7 +28,6 @@ import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.queries.DatabaseQuery;
-import org.eclipse.persistence.queries.ObjectLevelReadQuery;
 
 public final class MWRelationalSpecificQueryOptions
     extends MWModel
@@ -93,6 +92,7 @@ public final class MWRelationalSpecificQueryOptions
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.cacheStatement = TriStateBoolean.UNDEFINED;
@@ -101,6 +101,7 @@ public final class MWRelationalSpecificQueryOptions
         this.queryFormat = new MWExpressionQueryFormat(this);
     }
 
+    @Override
     protected void addChildrenTo(List list) {
         super.addChildrenTo(list);
         list.add(this.queryFormat);
@@ -121,10 +122,12 @@ public final class MWRelationalSpecificQueryOptions
 
     // ************ Bind All Parameters ************
 
+    @Override
     public TriStateBoolean isBindAllParameters() {
         return this.bindAllParameters;
     }
 
+    @Override
     public void setBindAllParameters(TriStateBoolean bindAllParameters) {
         TriStateBoolean oldBindAllParameters = isBindAllParameters();
         this.bindAllParameters = bindAllParameters;
@@ -134,10 +137,12 @@ public final class MWRelationalSpecificQueryOptions
 
     // ************ Cache Statement ************
 
+    @Override
     public TriStateBoolean isCacheStatement() {
         return this.cacheStatement;
     }
 
+    @Override
     public void setCacheStatement(TriStateBoolean cacheStatement) {
         TriStateBoolean oldCacheStatement = isCacheStatement();
         this.cacheStatement = cacheStatement;
@@ -147,10 +152,12 @@ public final class MWRelationalSpecificQueryOptions
 
     // ************ prepare ************
 
+    @Override
     public boolean isPrepare() {
         return this.prepare;
     }
 
+    @Override
     public void setPrepare(boolean prepare) {
         boolean oldPrepare = isPrepare();
         this.prepare = prepare;
@@ -160,14 +167,17 @@ public final class MWRelationalSpecificQueryOptions
 
     // ************ query format ************
 
+    @Override
     public MWQueryFormat getQueryFormat() {
         return this.queryFormat;
     }
 
+    @Override
     public String getQueryFormatType() {
         return this.queryFormat.getType();
     }
 
+    @Override
     public void setQueryFormatType(String queryFormat) {
         Object oldValue = getQueryFormatType();
         if (oldValue == queryFormat) {
@@ -232,20 +242,24 @@ public final class MWRelationalSpecificQueryOptions
         this.queryFormat = queryFormat;
     }
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         if (getQueryFormat().getExpression() != null) {
             getQueryFormat().getExpression().recalculateQueryables();
         }
     }
 
+    @Override
     public MWRelationalSpecificQueryOptions getRelationalOptions() {
         return this;
     }
 
+    @Override
     public void formatSetToEjbql() {
         // do nothing
     }
 
+    @Override
     public void formatSetToSql() {
         // do nothing
     }
@@ -253,6 +267,7 @@ public final class MWRelationalSpecificQueryOptions
 
     //     ************* Problem Handling **************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         checkCachesStatementButDoesNotBindParameters(currentProblems);

@@ -37,6 +37,7 @@ public class SessionLoggingPropertiesPageTest extends AbstractSessionPanelTest
 
     }
 
+    @Override
     protected JComponent buildPane() throws Exception
     {
         return buildPage(SessionLoggingPropertiesPage.class, getNodeHolder());
@@ -48,11 +49,13 @@ public class SessionLoggingPropertiesPageTest extends AbstractSessionPanelTest
                     .execute(args);
     }
 
+    @Override
     protected String windowTitle()
     {
         return "Testing Session Logging Page";
     }
 
+    @Override
     protected void printModel()
     {
         SessionAdapter session = (SessionAdapter) this.getSelectionHolder().getValue();
@@ -66,6 +69,7 @@ public class SessionLoggingPropertiesPageTest extends AbstractSessionPanelTest
         System.out.println("subject.log( " + displayString + " )");
     }
 
+    @Override
     protected void resetProperty()
     {
         SessionAdapter session = ((SessionAdapter) this.getSelectionHolder().getValue());

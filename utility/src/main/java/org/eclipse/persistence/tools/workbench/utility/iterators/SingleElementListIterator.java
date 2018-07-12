@@ -52,6 +52,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.next == this.element;
     }
@@ -59,6 +60,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#next()
      */
+    @Override
     public Object next() {
         if (this.next == END) {
             throw new NoSuchElementException();
@@ -70,6 +72,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int nextIndex() {
         return (this.next == this.element) ? 0 : 1;
     }
@@ -77,6 +80,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#hasPrevious()
      */
+    @Override
     public boolean hasPrevious() {
         return this.next == END;
     }
@@ -84,6 +88,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#previous()
      */
+    @Override
     public Object previous() {
         if (this.next == this.element) {
             throw new NoSuchElementException();
@@ -95,6 +100,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#nextIndex()
      */
+    @Override
     public int previousIndex() {
         return (this.next == END) ? 0 : -1;
     }
@@ -102,6 +108,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#add(Object)
      */
+    @Override
     public void add(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -109,6 +116,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#set(Object)
      */
+    @Override
     public void set(Object o) {
         throw new UnsupportedOperationException();
     }
@@ -116,6 +124,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see java.util.ListIterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -123,6 +132,7 @@ public class SingleElementListIterator implements ListIterator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.element + ')';
     }

@@ -61,6 +61,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#addListener(String, Class, Object)
      */
+    @Override
     protected void addListener(String aspectName, Class listenerClass, Object listener) {
         this.checkAspectName(aspectName);
         // redirect to "generic" listeners collection
@@ -70,6 +71,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#removeListener(String, Class, Object)
      */
+    @Override
     protected void removeListener(String aspectName, Class listenerClass, Object listener) {
         this.checkAspectName(aspectName);
         // redirect to "generic" listeners collection
@@ -82,6 +84,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#hasAnyListeners(Class, String)
      */
+    @Override
     protected boolean hasAnyListeners(Class listenerClass, String aspectName) {
         this.checkAspectName(aspectName);
         // redirect to "generic" listeners collection
@@ -94,6 +97,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireStateChanged()
      */
+    @Override
     public void fireStateChanged() {
         throw this.unsupportedOperationException();
     }
@@ -101,6 +105,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireStateChanged(org.eclipse.persistence.tools.workbench.utility.events.StateChangeEvent)
      */
+    @Override
     public void fireStateChanged(StateChangeEvent event) {
         throw this.unsupportedOperationException();
     }
@@ -111,6 +116,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#firePropertyChanged(java.beans.PropertyChangeEvent)
      */
+    @Override
     public void firePropertyChanged(PropertyChangeEvent event) {
         this.checkAspectName(event.getPropertyName());
         super.firePropertyChanged(event);
@@ -119,6 +125,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#firePropertyChanged(String, Object, Object)
      */
+    @Override
     public void firePropertyChanged(String propertyName, Object oldValue, Object newValue) {
         this.checkAspectName(propertyName);
         super.firePropertyChanged(propertyName, oldValue, newValue);
@@ -127,6 +134,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#firePropertyChanged(String, int, int)
      */
+    @Override
     public void firePropertyChanged(String propertyName, int oldValue, int newValue) {
         this.checkAspectName(propertyName);
         super.firePropertyChanged(propertyName, oldValue, newValue);
@@ -135,6 +143,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#firePropertyChanged(String, boolean, boolean)
      */
+    @Override
     public void firePropertyChanged(String propertyName, boolean oldValue, boolean newValue) {
         this.checkAspectName(propertyName);
         super.firePropertyChanged(propertyName, oldValue, newValue);
@@ -146,6 +155,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsAdded(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     public void fireItemsAdded(CollectionChangeEvent event) {
         this.checkAspectName(event.getCollectionName());
         super.fireItemsAdded(event);
@@ -154,6 +164,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsAdded(String, java.util.Collection)
      */
+    @Override
     public void fireItemsAdded(String collectionName, Collection addedItems) {
         this.checkAspectName(collectionName);
         super.fireItemsAdded(collectionName, addedItems);
@@ -162,6 +173,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemAdded(String, Object)
      */
+    @Override
     public void fireItemAdded(String collectionName, Object addedItem) {
         this.checkAspectName(collectionName);
         super.fireItemAdded(collectionName, addedItem);
@@ -170,6 +182,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     public void fireItemsRemoved(CollectionChangeEvent event) {
         this.checkAspectName(event.getCollectionName());
         super.fireItemsRemoved(event);
@@ -178,6 +191,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsRemoved(String, java.util.Collection)
      */
+    @Override
     public void fireItemsRemoved(String collectionName, Collection removedItems) {
         this.checkAspectName(collectionName);
         super.fireItemsRemoved(collectionName, removedItems);
@@ -186,6 +200,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemRemoved(String, Object)
      */
+    @Override
     public void fireItemRemoved(String collectionName, Object removedItem) {
         this.checkAspectName(collectionName);
         super.fireItemRemoved(collectionName, removedItem);
@@ -194,6 +209,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireCollectionChanged(org.eclipse.persistence.tools.workbench.utility.events.CollectionChangeEvent)
      */
+    @Override
     public void fireCollectionChanged(CollectionChangeEvent event) {
         this.checkAspectName(event.getCollectionName());
         super.fireCollectionChanged(event);
@@ -202,6 +218,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireCollectionChanged(String)
      */
+    @Override
     public void fireCollectionChanged(String collectionName) {
         this.checkAspectName(collectionName);
         super.fireCollectionChanged(collectionName);
@@ -213,6 +230,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsAdded(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void fireItemsAdded(ListChangeEvent event) {
         this.checkAspectName(event.getListName());
         super.fireItemsAdded(event);
@@ -221,6 +239,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsAdded(String, int, java.util.List)
      */
+    @Override
     public void fireItemsAdded(String listName, int index, List addedItems) {
         this.checkAspectName(listName);
         super.fireItemsAdded(listName, index, addedItems);
@@ -229,6 +248,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemAdded(String, int, Object)
      */
+    @Override
     public void fireItemAdded(String listName, int index, Object addedItem) {
         this.checkAspectName(listName);
         super.fireItemAdded(listName, index, addedItem);
@@ -237,6 +257,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void fireItemsRemoved(ListChangeEvent event) {
         this.checkAspectName(event.getListName());
         super.fireItemsRemoved(event);
@@ -245,6 +266,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsRemoved(String, int, java.util.List)
      */
+    @Override
     public void fireItemsRemoved(String listName, int index, List removedItems) {
         this.checkAspectName(listName);
         super.fireItemsRemoved(listName, index, removedItems);
@@ -253,6 +275,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemRemoved(String, int, Object)
      */
+    @Override
     public void fireItemRemoved(String listName, int index, Object removedItem) {
         this.checkAspectName(listName);
         super.fireItemRemoved(listName, index, removedItem);
@@ -261,6 +284,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsReplaced(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void fireItemsReplaced(ListChangeEvent event) {
         this.checkAspectName(event.getListName());
         super.fireItemsReplaced(event);
@@ -269,6 +293,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemsReplaced(String, int, java.util.List, java.util.List)
      */
+    @Override
     public void fireItemsReplaced(String listName, int index, List newItems, List replacedItems) {
         this.checkAspectName(listName);
         super.fireItemsReplaced(listName, index, newItems, replacedItems);
@@ -277,6 +302,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireItemReplaced(String, int, Object, Object)
      */
+    @Override
     public void fireItemReplaced(String listName, int index, Object newItem, Object replacedItem) {
         this.checkAspectName(listName);
         super.fireItemReplaced(listName, index, newItem, replacedItem);
@@ -285,6 +311,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireListChanged(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void fireListChanged(ListChangeEvent event) {
         this.checkAspectName(event.getListName());
         super.fireListChanged(event);
@@ -293,6 +320,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireListChanged(String)
      */
+    @Override
     public void fireListChanged(String listName) {
         this.checkAspectName(listName);
         super.fireListChanged(listName);
@@ -304,6 +332,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireNodeAdded(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeEvent)
      */
+    @Override
     public void fireNodeAdded(TreeChangeEvent event) {
         this.checkAspectName(event.getTreeName());
         super.fireNodeAdded(event);
@@ -312,6 +341,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireNodeAdded(String, Object[])
      */
+    @Override
     public void fireNodeAdded(String treeName, Object[] path) {
         this.checkAspectName(treeName);
         super.fireNodeAdded(treeName, path);
@@ -320,6 +350,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireNodeRemoved(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeEvent)
      */
+    @Override
     public void fireNodeRemoved(TreeChangeEvent event) {
         this.checkAspectName(event.getTreeName());
         super.fireNodeRemoved(event);
@@ -328,6 +359,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireNodeRemoved(String, Object[])
      */
+    @Override
     public void fireNodeRemoved(String treeName, Object[] path) {
         this.checkAspectName(treeName);
         super.fireNodeRemoved(treeName, path);
@@ -336,6 +368,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireTreeChanged(org.eclipse.persistence.tools.workbench.utility.events.TreeChangeEvent)
      */
+    @Override
     public void fireTreeChanged(TreeChangeEvent event) {
         this.checkAspectName(event.getTreeName());
         super.fireTreeChanged(event);
@@ -344,6 +377,7 @@ public class ValueModelChangeSupport extends ChangeSupport {
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ChangeSupport#fireTreeChanged(String, Object[])
      */
+    @Override
     public void fireTreeChanged(String treeName, Object[] path) {
         this.checkAspectName(treeName);
         super.fireTreeChanged(treeName, path);

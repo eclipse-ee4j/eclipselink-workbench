@@ -101,6 +101,7 @@ public class ComboBoxTreeCellRenderer
 
     // ********** initialization **********
 
+    @Override
     protected JComponent buildComponent() {
         JComboBox comboBox = new JComboBox();
         // see javax.swing.DefaultCellEditor for usage
@@ -117,6 +118,7 @@ public class ComboBoxTreeCellRenderer
 
     private ActionListener buildActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JComboBox comboBox = (JComboBox) e.getSource();
                 Object selectedItem = comboBox.getSelectedItem();
@@ -154,6 +156,7 @@ public class ComboBoxTreeCellRenderer
     /**
      * Tweak the combo-box colors.
      */
+    @Override
     protected void setForeground(Color c) {
         super.setForeground(c);
         if (c == UIManager.getColor("Tree.textForeground")) {
@@ -164,6 +167,7 @@ public class ComboBoxTreeCellRenderer
     /**
      * Tweak the combo-box colors.
      */
+    @Override
     protected void setBackground(Color c) {
         super.setBackground(c);
         if (c == UIManager.getColor("Tree.textBackground")) {
@@ -174,6 +178,7 @@ public class ComboBoxTreeCellRenderer
     /**
      * Set the value of the combo-box.
      */
+    @Override
     protected void setValue(Object value) {
         this.getComboBox().setSelectedItem(value);
     }
@@ -184,6 +189,7 @@ public class ComboBoxTreeCellRenderer
     /**
      * @see TreeCellEditorAdapter#getValue()
      */
+    @Override
     public Object getValue() {
         return this.getComboBox().getSelectedItem();
     }
@@ -191,6 +197,7 @@ public class ComboBoxTreeCellRenderer
     /**
      * @see TreeCellEditorAdapter#setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener)
      */
+    @Override
     public void setImmediateEditListener(TreeCellEditorAdapter.ImmediateEditListener listener) {
         this.immediateEditListener = listener;
     }

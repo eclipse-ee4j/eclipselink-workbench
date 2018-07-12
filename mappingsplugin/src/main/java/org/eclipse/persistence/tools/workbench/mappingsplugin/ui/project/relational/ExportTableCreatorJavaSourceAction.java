@@ -31,6 +31,7 @@ public final class ExportTableCreatorJavaSourceAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeText("exportTableCreatorJavaSource");
@@ -42,6 +43,7 @@ public final class ExportTableCreatorJavaSourceAction
         updateEnabledState();
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         TableCreatorSourceGenerationCoordinator coordinator = new TableCreatorSourceGenerationCoordinator(getWorkbenchContext());
         coordinator.exportTableCreatorSource((MWRelationalProject) selectedNode.getProjectRoot().getValue());

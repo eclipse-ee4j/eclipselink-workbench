@@ -28,7 +28,6 @@ import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
 import org.eclipse.persistence.tools.workbench.framework.uitools.SwingComponentFactory;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlDirectCollectionMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlDirectMapping;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.MappingComponentFactory;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.MethodAccessingPanel;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
@@ -49,6 +48,7 @@ final class OxDirectCollectionMappingGeneralPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -148,6 +148,7 @@ final class OxDirectCollectionMappingGeneralPropertiesPage
 
     private ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlDirectCollectionMapping) this.subject).getXmlField();
             }
@@ -177,9 +178,11 @@ final class OxDirectCollectionMappingGeneralPropertiesPage
 
     private PropertyValueModel buildIsCdataHolder(ValueModel mappingHolder) {
         return new PropertyAspectAdapter(mappingHolder, MWXmlDirectCollectionMapping.IS_CDATA_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlDirectCollectionMapping) subject).isCdata());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlDirectCollectionMapping) subject).setCdata(((Boolean) value).booleanValue());
             }

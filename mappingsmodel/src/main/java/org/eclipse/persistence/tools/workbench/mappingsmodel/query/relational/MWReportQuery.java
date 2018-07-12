@@ -137,6 +137,7 @@ public final class MWReportQuery
         }
         //There is not api ReportQuery.setReturnChoice, so a String of if/else is
         //the only option
+        @Override
         public void setMWOptionOnTopLinkObject(Object query) {
             String returnChoice = getMWModelOption();
             if (returnChoice == RETURN_SINGLE_ATTRIBUTE) {
@@ -177,6 +178,7 @@ public final class MWReportQuery
             super(mwModelString, externalString);
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object query) {
             if (getMWModelOption() == FULL_PRIMARY_KEY) {
                 ((ReportQuery) query).setShouldRetrievePrimaryKeys(true);
@@ -211,6 +213,7 @@ public final class MWReportQuery
     }
 
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.relationalOptions = new MWRelationalSpecificQueryOptions(this);
@@ -221,6 +224,7 @@ public final class MWReportQuery
         this.orderingItems = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.relationalOptions);
@@ -233,6 +237,7 @@ public final class MWReportQuery
     // ******************* Morphing *******************
 
 
+    @Override
     public MWReadAllQuery asReadAllQuery() {
         getQueryManager().removeQuery(this);
         MWReadAllQuery newQuery = getQueryManager().addReadAllQuery(getName());
@@ -240,6 +245,7 @@ public final class MWReportQuery
         return newQuery;
     }
 
+    @Override
     public MWReadObjectQuery asReadObjectQuery() {
         getQueryManager().removeQuery(this);
         MWReadObjectQuery newQuery = getQueryManager().addReadObjectQuery(getName());
@@ -247,15 +253,18 @@ public final class MWReportQuery
         return newQuery;
     }
 
+    @Override
     public MWReportQuery asReportQuery() {
         return this;
     }
 
+    @Override
     public void initializeFrom(MWReadQuery query) {
         super.initializeFrom(query);
         initializeFrom((MWRelationalQuery) query);
     }
 
+    @Override
     public void initializeFrom(MWRelationalQuery query) {
         super.initializeFrom(query);
         getRelationalOptions().initializeFrom(query.getRelationalOptions());
@@ -272,18 +281,21 @@ public final class MWReportQuery
 //        //partial attributes can become attribute items in a report query
 //    }
 
+    @Override
     public String queryType() {
         return REPORT_QUERY;
     }
 
     //*********** MWRelationalQuery implementation  ***************
 
+    @Override
     public void formatSetToEjbql() {
         removeAttributeItems(attributeItems());
         removeOrderingItems(orderingItems());
         removeGroupingItems(groupingItems());
     }
 
+    @Override
     public void formatSetToSql() {
         removeOrderingItems(orderingItems());
         removeGroupingItems(groupingItems());
@@ -291,43 +303,53 @@ public final class MWReportQuery
 
     // ******************* Accessors *******************
 
+    @Override
     public MWRelationalSpecificQueryOptions getRelationalOptions() {
         return this.relationalOptions;
     }
 
+    @Override
     public String getQueryFormatType() {
         return this.relationalOptions.getQueryFormatType();
     }
 
+    @Override
     public void setQueryFormatType(String type) {
         this.relationalOptions.setQueryFormatType(type);
     }
 
+    @Override
     public MWQueryFormat getQueryFormat() {
         return this.relationalOptions.getQueryFormat();
     }
 
+    @Override
     public TriStateBoolean isCacheStatement() {
         return this.relationalOptions.isCacheStatement();
     }
 
+    @Override
     public void setCacheStatement(TriStateBoolean cacheStatement) {
         this.relationalOptions.setCacheStatement(cacheStatement);
     }
 
 
+    @Override
     public TriStateBoolean isBindAllParameters() {
         return this.relationalOptions.isBindAllParameters();
     }
 
+    @Override
     public void setBindAllParameters(TriStateBoolean bindAllParameters) {
         this.relationalOptions.setBindAllParameters(bindAllParameters);
     }
 
+    @Override
     public boolean isPrepare() {
         return this.relationalOptions.isPrepare();
     }
 
+    @Override
     public void setPrepare(boolean bindAllParameters) {
         this.relationalOptions.setPrepare(bindAllParameters);
     }
@@ -557,6 +579,7 @@ public final class MWReportQuery
 
     // ********** orderingItems **********
 
+    @Override
     public Ordering addOrderingItem(MWQueryable queryable) {
         if (orderingAttributesAllowed()) {
             MWReportOrderingItem orderingItem = new MWReportOrderingItem(this, queryable);
@@ -566,6 +589,7 @@ public final class MWReportQuery
         throw new IllegalStateException("Ordering Items are not allowed if the QueryFormat is EJBQL or SQL");
     }
 
+    @Override
     public Ordering addOrderingItem(Iterator queryables) {
         if (orderingAttributesAllowed()) {
             MWReportOrderingItem orderingItem = new MWReportOrderingItem(this, queryables);
@@ -575,6 +599,7 @@ public final class MWReportQuery
         throw new IllegalStateException("Ordering Items are not allowed if the QueryFormat is EJBQL or SQL");
     }
 
+    @Override
     public Ordering addOrderingItem(Iterator queryables, Iterator allowsNull) {
         if (orderingAttributesAllowed()) {
             MWReportOrderingItem orderingItem = new MWReportOrderingItem(this, queryables, allowsNull);
@@ -584,6 +609,7 @@ public final class MWReportQuery
         throw new IllegalStateException("Ordering Items are not allowed if the QueryFormat is EJBQL or SQL");
     }
 
+    @Override
     public Ordering addOrderingItem(int index, Iterator queryables, Iterator allowsNull) {
         if (orderingAttributesAllowed()) {
             MWReportOrderingItem orderingItem = new MWReportOrderingItem(this, queryables, allowsNull);
@@ -611,10 +637,12 @@ public final class MWReportQuery
         return getQueryFormat().orderingAttributesAllowed();
     }
 
+    @Override
     public void removeOrderingItem(Ordering orderingItem) {
         removeOrderingItem(this.orderingItems.indexOf(orderingItem));
     }
 
+    @Override
     public void removeOrderingItem(int index) {
         removeItemFromList(index, this.orderingItems, ORDERING_ITEMS_LIST);
     }
@@ -625,24 +653,29 @@ public final class MWReportQuery
         }
     }
 
+    @Override
     public ListIterator orderingItems() {
         return new CloneListIterator(this.orderingItems);
     }
 
+    @Override
     public int orderingItemsSize() {
         return this.orderingItems.size();
     }
 
+    @Override
     public int indexOfOrderingItem(Ordering orderingItem) {
         return this.orderingItems.indexOf(orderingItem);
     }
 
+    @Override
     public void moveOrderingItemUp(Ordering item) {
         int index = indexOfOrderingItem(item);
         removeOrderingItem(index);
         addOrderingItem(index - 1, item);
     }
 
+    @Override
     public void moveOrderingItemDown(Ordering item) {
         int index = indexOfOrderingItem(item);
         removeOrderingItem(index);
@@ -650,6 +683,7 @@ public final class MWReportQuery
     }
 
 
+    @Override
     public void notifyExpressionsToRecalculateQueryables() {
         this.relationalOptions.notifyExpressionsToRecalculateQueryables();
     }
@@ -657,6 +691,7 @@ public final class MWReportQuery
 
     // ******************* Runtime Conversion *******************
 
+    @Override
     public DatabaseQuery runtimeQuery() {
         ReportQuery query = (ReportQuery) super.runtimeQuery();
 
@@ -680,6 +715,7 @@ public final class MWReportQuery
         return query;
     }
 
+    @Override
     protected ObjectLevelReadQuery buildRuntimeQuery() {
         return new ReportQuery();
     }

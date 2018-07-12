@@ -27,7 +27,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -137,15 +136,19 @@ public class ListChooser
      */
     private PopupMenuListener buildPopupMenuListener() {
         return new PopupMenuListener() {
+            @Override
             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
                 ListChooser.this.aboutToShowPopup();
             }
+            @Override
             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
                 // do nothing
             }
+            @Override
             public void popupMenuCanceled(PopupMenuEvent e) {
                 // do nothing
             }
+            @Override
             public String toString() {
                 return "pop-up menu listener";
             }
@@ -168,11 +171,13 @@ public class ListChooser
 
     private KeyListener buildF3KeyListener() {
         return new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_F3) {
                     goToSelectedItem();
                 }
             }
+            @Override
             public String toString() {
                 return "F3 key listener";
             }
@@ -211,6 +216,7 @@ public class ListChooser
     // **************** Choosable functionality *******************************
 
     /** override behavior - consume selection if chooser is not choosable */
+    @Override
     public void setSelectedIndex(int anIndex) {
         if (this.choosable) {
             super.setSelectedIndex(anIndex);
@@ -275,6 +281,7 @@ public class ListChooser
                  getModel().getElementAt(0) == null;
     }
 
+    @Override
     public int getSelectedIndex() {
         boolean listNotCached = !listIsCached();
         if (listNotCached) {
@@ -296,8 +303,10 @@ public class ListChooser
    }
 
     //wrap the renderer to deal with the prototypeDisplayValue
+    @Override
     public void setRenderer(final ListCellRenderer aRenderer) {
         super.setRenderer(new ListCellRenderer(){
+            @Override
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 if (value == prototypeLabel) {
                     return prototypeLabel;
@@ -364,6 +373,7 @@ public class ListChooser
             }
         }
 
+        @Override
         public void run() {
             ListChooser.this.hidePopup();
 

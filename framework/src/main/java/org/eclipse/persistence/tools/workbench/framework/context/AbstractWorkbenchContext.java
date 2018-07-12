@@ -36,10 +36,12 @@ public abstract class AbstractWorkbenchContext
     /**
      * @see WorkbenchContext#buildExpandedApplicationContextWorkbenchContext(ApplicationContext)
      */
+    @Override
     public WorkbenchContext buildExpandedApplicationContextWorkbenchContext(ApplicationContext appContext) {
         return new ApplicationContextWorkbenchContext(this, appContext);
     }
 
+    @Override
     public WorkbenchContext buildExpandedResourceRepositoryContext(Class resourceBundleClass) {
         return buildExpandedResourceRepositoryContext(resourceBundleClass, null);
     }
@@ -47,6 +49,7 @@ public abstract class AbstractWorkbenchContext
     /**
      * @see WorkbenchContext#buildExpandedResourceRepositoryContext(Class, resources.IconResourceFileNameMap)
      */
+    @Override
     public WorkbenchContext buildExpandedResourceRepositoryContext(Class resourceBundleClass, IconResourceFileNameMap iconResourceFileNameMap) {
         return buildExpandedApplicationContextWorkbenchContext(getApplicationContext().buildExpandedResourceRepositoryContext(resourceBundleClass, iconResourceFileNameMap));
     }
@@ -54,6 +57,7 @@ public abstract class AbstractWorkbenchContext
     /**
      * @see ApplicationContext#buildExpandedResourceRepositoryContext(resources.IconResourceFileNameMap)
      */
+    @Override
     public WorkbenchContext buildExpandedResourceRepositoryContext(IconResourceFileNameMap iconResourceFileNameMap) {
         return this.buildExpandedResourceRepositoryContext(null, iconResourceFileNameMap);
     }

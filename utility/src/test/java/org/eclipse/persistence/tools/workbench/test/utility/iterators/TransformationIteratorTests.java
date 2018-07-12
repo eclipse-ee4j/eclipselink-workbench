@@ -152,6 +152,7 @@ public class TransformationIteratorTests extends TestCase {
     private Transformer buildTransformer() {
         // transform each string into an integer with a value of the string's length
         return new Transformer() {
+            @Override
             public Object transform(Object next) {
                 return new Integer(((String) next).length());
             }
@@ -161,6 +162,7 @@ public class TransformationIteratorTests extends TestCase {
     private Iterator buildInnerTransformationIterator(Iterator nestedIterator) {
         // transform each string into an integer with a value of the string's length
         return new TransformationIterator(nestedIterator) {
+            @Override
             protected Object transform(Object next) {
                 return new Integer(((String) next).length());
             }

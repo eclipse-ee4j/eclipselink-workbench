@@ -82,6 +82,7 @@ public class SimpleDisplayable
     /**
      * @see Displayable#displayString()
      */
+    @Override
     public String displayString() {
         return this.object.toString();
     }
@@ -89,6 +90,7 @@ public class SimpleDisplayable
     /**
      * @see Displayable#icon()
      */
+    @Override
     public Icon icon() {
         return null;
     }
@@ -99,6 +101,7 @@ public class SimpleDisplayable
     /**
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object o) {
         return DEFAULT_COMPARATOR.compare(this, o);
     }
@@ -185,6 +188,7 @@ public class SimpleDisplayable
 
     // ********** override methods **********
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.object);
     }

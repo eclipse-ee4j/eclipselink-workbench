@@ -55,6 +55,7 @@ public abstract class MWEisDescriptor
 
     // **************** Inheritance policy ************************************
 
+    @Override
     protected MWDescriptorInheritancePolicy buildInheritancePolicy() {
         return new MWEisDescriptorInheritancePolicy(this);
     }
@@ -76,6 +77,7 @@ public abstract class MWEisDescriptor
     }
 
 
+    @Override
     public void initializeOn(MWDescriptor newDescriptor) {
         ((MWEisDescriptor) newDescriptor).initializeFromMWEisDescriptor(this);
     }
@@ -86,12 +88,14 @@ public abstract class MWEisDescriptor
 
     // **************** runtime conversion ************************************
 
+    @Override
     protected ClassDescriptor buildBasicRuntimeDescriptor() {
         EISDescriptor runtimeDescriptor = new EISDescriptor();
         runtimeDescriptor.setJavaClassName(getMWClass().getName());
         return runtimeDescriptor;
     }
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         EISDescriptor runtimeDescriptor = (EISDescriptor) super.buildRuntimeDescriptor();
 
@@ -100,6 +104,7 @@ public abstract class MWEisDescriptor
         return runtimeDescriptor;
     }
 
+    @Override
     protected void adjustRuntimeDescriptorRootProperties(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptorRootProperties(runtimeDescriptor);
 
@@ -114,28 +119,34 @@ public abstract class MWEisDescriptor
         }
     }
 
+    @Override
     public AbstractDirectMapping buildDefaultRuntimeDirectMapping() {
         return new EISDirectMapping();
     }
 
+    @Override
     public AbstractCompositeDirectCollectionMapping buildDefaultRuntimeDirectCollectionMapping() {
         return new EISCompositeDirectCollectionMapping();
     }
 
+    @Override
     public AbstractCompositeObjectMapping buildDefaultRuntimeCompositeObjectMapping() {
         return new EISCompositeObjectMapping();
     }
 
+    @Override
     public AbstractCompositeCollectionMapping buildDefaultRuntimeCompositeCollectionMapping() {
         return new EISCompositeCollectionMapping();
     }
 
+    @Override
     public AbstractTransformationMapping buildDefaultRuntimeTransformationMapping() {
         return new EISTransformationMapping();
     }
 
     //    **************** mappings ***************
 
+    @Override
     public MWMappingFactory mappingFactory() {
         return MWEisMappingFactory.instance();
     }

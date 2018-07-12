@@ -186,6 +186,7 @@ final class XmlReferenceMappingFieldPairsPanel
     /** Sets the table enabled/disabled based on this panels enabled/disabled state */
     private PropertyChangeListener buildTableEnabler(final JTable table) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 table.setEnabled(((Boolean) evt.getNewValue()).booleanValue());
             }
@@ -224,6 +225,7 @@ final class XmlReferenceMappingFieldPairsPanel
 
     private ActionListener buildAddFieldPairAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWXmlReferenceMapping eisReferenceMapping =
                     (MWXmlReferenceMapping) XmlReferenceMappingFieldPairsPanel.this.getSubjectHolder().getValue();
@@ -238,6 +240,7 @@ final class XmlReferenceMappingFieldPairsPanel
     /** Sets the addButton enabled/disabled based on this panels enabled/disabled state */
     private PropertyChangeListener buildAddButtonEnabler(final JButton button) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 button.setEnabled(((Boolean) evt.getNewValue()).booleanValue());
             }
@@ -254,6 +257,7 @@ final class XmlReferenceMappingFieldPairsPanel
 
     private ActionListener buildEditActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWXmlFieldPair fieldPair =
                     (MWXmlFieldPair) XmlReferenceMappingFieldPairsPanel.this.fieldPairsSelectionModel.getSelectedValue();
@@ -268,6 +272,7 @@ final class XmlReferenceMappingFieldPairsPanel
     private void buildEditFieldPairButtonEnabler(final JButton editButton) {
         this.fieldPairsSelectionModel.addListSelectionListener(
             new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         editButton.setEnabled(XmlReferenceMappingFieldPairsPanel.this.fieldPairsSelectionModel.getSelectedValues().length == 1);
@@ -287,6 +292,7 @@ final class XmlReferenceMappingFieldPairsPanel
 
     private ActionListener buildRemoveFieldPairsActionListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 XmlReferenceMappingFieldPairsPanel.this.removeSelectedFieldPairs();
             }
@@ -302,6 +308,7 @@ final class XmlReferenceMappingFieldPairsPanel
     private void buildRemoveFieldPairsButtonEnabler(final JButton removeButton) {
         this.fieldPairsSelectionModel.addListSelectionListener(
             new ListSelectionListener() {
+                @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if ( ! e.getValueIsAdjusting()) {
                         removeButton.setEnabled(! XmlReferenceMappingFieldPairsPanel.this.fieldPairsSelectionModel.isSelectionEmpty());
@@ -324,6 +331,7 @@ final class XmlReferenceMappingFieldPairsPanel
         public static final int SOURCE_XPATH_COLUMN = 0;
         public static final int TARGET_XPATH_COLUMN = 1;
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
@@ -333,6 +341,7 @@ final class XmlReferenceMappingFieldPairsPanel
             this.resourceRepository = resourceRepository;
         }
 
+        @Override
         public String getColumnName(int index) {
             switch (index) {
                 case SOURCE_XPATH_COLUMN:
@@ -345,14 +354,17 @@ final class XmlReferenceMappingFieldPairsPanel
             return "";
         }
 
+        @Override
         public Class getColumnClass(int index) {
             return String.class;
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWXmlFieldPair fieldPair = (MWXmlFieldPair) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];

@@ -32,10 +32,12 @@ public class ClassAttributeCellRendererAdapter extends NoneSelectedCellRendererA
         super(repository);
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWClassAttribute) value).nameWithShortType();
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         if (((MWClassAttribute) value).getModifier().isPackage())
             return resourceRepository().getIcon("field.default");

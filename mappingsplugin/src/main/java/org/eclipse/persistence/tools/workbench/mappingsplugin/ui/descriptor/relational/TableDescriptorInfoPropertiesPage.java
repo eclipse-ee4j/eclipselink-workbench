@@ -50,6 +50,7 @@ final class TableDescriptorInfoPropertiesPage
     // **************** Initialization ****************************************
 
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -194,10 +195,12 @@ final class TableDescriptorInfoPropertiesPage
 
     private PropertyValueModel buildPrimaryTableHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWTableDescriptor.PRIMARY_TABLE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableDescriptor) this.subject).getPrimaryTable();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableDescriptor) this.subject).setPrimaryTable((MWTable) value);
             }
@@ -215,6 +218,7 @@ final class TableDescriptorInfoPropertiesPage
 
     private StringConverter buildTableStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWTable) o).getName();
             }

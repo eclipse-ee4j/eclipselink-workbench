@@ -47,6 +47,7 @@ public class ReadOnlyIterator implements Iterator {
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         // delegate to the nested iterator
         return this.nestedIterator.hasNext();
@@ -55,6 +56,7 @@ public class ReadOnlyIterator implements Iterator {
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         // delegate to the nested iterator
         return this.nestedIterator.next();
@@ -63,6 +65,7 @@ public class ReadOnlyIterator implements Iterator {
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -70,6 +73,7 @@ public class ReadOnlyIterator implements Iterator {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.nestedIterator + ')';
     }

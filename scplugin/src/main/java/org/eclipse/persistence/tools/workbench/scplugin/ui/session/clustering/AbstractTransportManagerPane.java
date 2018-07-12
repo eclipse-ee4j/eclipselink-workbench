@@ -97,12 +97,14 @@ abstract class AbstractTransportManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), TransportManagerAdapter.ON_CONNECTION_ERROR_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 TransportManagerAdapter transport = (TransportManagerAdapter) subject;
                 return Boolean.valueOf(transport.removeConnectionOnError());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 TransportManagerAdapter transport = (TransportManagerAdapter) subject;

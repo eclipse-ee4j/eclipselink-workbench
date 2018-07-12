@@ -28,6 +28,7 @@ public final class MapAsTransformationAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.transformation");
@@ -36,14 +37,17 @@ public final class MapAsTransformationAction
         this.initializeToolTipText("MAP_AS_TRANSFORMATION_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWTransformationMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return descriptor.addTransformationMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWTransformationMapping.class;
     }

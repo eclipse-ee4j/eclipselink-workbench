@@ -35,6 +35,7 @@ public final class EisMappingSelectionActionsPolicy
 
     // **************** Mapping toolbar ***************************************
 
+    @Override
     protected ToolBarButtonGroupDescription buildMapAsToolBarGroup(WorkbenchContext context) {
         ToolBarButtonGroupDescription toolBarGroup = new ToolBarButtonGroupDescription();
         this.addDirectMappingButtons(toolBarGroup, context);
@@ -61,6 +62,7 @@ public final class EisMappingSelectionActionsPolicy
 
     // **************** Mapping menu ******************************************
 
+    @Override
     protected MenuGroupDescription buildMapAsMenuGroup(WorkbenchContext context) {
         MenuGroupDescription menuGroup = new MenuGroupDescription();
         this.addDirectMappingMenuItems(menuGroup, context);

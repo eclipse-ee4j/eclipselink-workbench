@@ -19,11 +19,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
@@ -35,7 +33,6 @@ import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.NullVal
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
-import org.eclipse.persistence.tools.workbench.uitools.app.swing.CheckBoxModelAdapter;
 
 
 final class EisDirectMappingGeneralPropertiesPage
@@ -50,6 +47,7 @@ final class EisDirectMappingGeneralPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -135,6 +133,7 @@ final class EisDirectMappingGeneralPropertiesPage
 
     private ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlDirectMapping) this.subject).getXmlField();
             }

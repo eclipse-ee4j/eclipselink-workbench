@@ -52,6 +52,7 @@ final class EisOneToManyGeneralPropertiesPage
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -222,6 +223,7 @@ final class EisOneToManyGeneralPropertiesPage
             );
         }
 
+        @Override
         protected void initializeLayout() {
             this.setBorder(
                 BorderFactory.createCompoundBorder(
@@ -297,10 +299,12 @@ final class EisOneToManyGeneralPropertiesPage
 
         private PropertyValueModel buildForeignKeyLocationHolderValue() {
             return new PropertyAspectAdapter(this.getSubjectHolder(), MWEisOneToManyMapping.FOREIGN_KEY_LOCATION_PROPERTY) {
+                @Override
                 protected Object getValueFromSubject() {
                     return Boolean.valueOf((((MWEisOneToManyMapping) this.subject).foreignKeysAreOnSource()));
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     if (Boolean.FALSE.equals(value)) {
                         ((MWEisOneToManyMapping) this.subject).setForeignKeysOnTarget();
@@ -337,6 +341,7 @@ final class EisOneToManyGeneralPropertiesPage
             );
         }
 
+        @Override
         protected void initializeLayout() {
             this.setLayout(new GridBagLayout());
 
@@ -426,6 +431,7 @@ final class EisOneToManyGeneralPropertiesPage
 
         private ValueModel buildGroupingElementXpathHolder() {
             return new PropertyAspectAdapter(getSubjectHolder()) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWEisOneToManyMapping) this.subject).getForeignKeyGroupingElement();
                 }
@@ -448,6 +454,7 @@ final class EisOneToManyGeneralPropertiesPage
             return panel;
         }
 
+        @Override
         public void setEnabled(boolean enabled) {
             super.setEnabled(enabled);
 

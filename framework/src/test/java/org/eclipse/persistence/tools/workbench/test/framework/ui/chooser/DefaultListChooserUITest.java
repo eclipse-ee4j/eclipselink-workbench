@@ -110,9 +110,11 @@ public class DefaultListChooserUITest {
 
     private PropertyValueModel buildColorHolder(ValueModel testModelHolder) {
         return new PropertyAspectAdapter(testModelHolder, TestModel.COLOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((TestModel) subject).getColor();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((TestModel) subject).setColor((String) value);
             }
@@ -159,6 +161,7 @@ public class DefaultListChooserUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -216,6 +219,7 @@ public class DefaultListChooserUITest {
 
     private PropertyChangeListener buildEnabledListener(final JComboBox comboBox) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 comboBox.setEnabled(((Boolean) evt.getNewValue()).booleanValue());
             }
@@ -224,6 +228,7 @@ public class DefaultListChooserUITest {
 
     private PropertyChangeListener buildChoosableListener(final ListChooser chooser) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 chooser.setChoosable(((Boolean) evt.getNewValue()).booleanValue());
             }
@@ -232,6 +237,7 @@ public class DefaultListChooserUITest {
 
     private PropertyChangeListener buildLookAndFeelListener(final JComponent component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 try {
                     UIManager.setLookAndFeel((String) evt.getNewValue());
@@ -248,6 +254,7 @@ public class DefaultListChooserUITest {
         testContext.setCurrentWindow(window);
 
         return new WorkbenchContextHolder() {
+            @Override
             public WorkbenchContext getWorkbenchContext() {
                 return testContext;
             }
@@ -330,6 +337,7 @@ public class DefaultListChooserUITest {
 
     private Action buildResetColorAction() {
         Action action = new AbstractAction("reset color") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DefaultListChooserUITest.this.resetColor();
             }
@@ -349,6 +357,7 @@ public class DefaultListChooserUITest {
 
     private Action buildClearModelAction() {
         Action action = new AbstractAction("clear model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DefaultListChooserUITest.this.clearModel();
             }
@@ -368,6 +377,7 @@ public class DefaultListChooserUITest {
 
     private Action buildRestoreModelAction() {
         Action action = new AbstractAction("restore model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DefaultListChooserUITest.this.restoreModel();
             }
@@ -387,6 +397,7 @@ public class DefaultListChooserUITest {
 
     private Action buildPrintModelAction() {
         Action action = new AbstractAction("print model") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DefaultListChooserUITest.this.printModel();
             }
@@ -406,6 +417,7 @@ public class DefaultListChooserUITest {
 
     private Action buildAddTenAction() {
         Action action = new AbstractAction("add 20") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DefaultListChooserUITest.this.addTen();
             }
@@ -428,6 +440,7 @@ public class DefaultListChooserUITest {
 
     private Action buildRemoveTenAction() {
         Action action = new AbstractAction("remove 20") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 DefaultListChooserUITest.this.removeTen();
             }
@@ -496,6 +509,7 @@ private static class TestModel extends AbstractModel {
         this.color = color;
         this.firePropertyChanged(COLOR_PROPERTY, old, color);
     }
+    @Override
     public String toString() {
         return "TestModel(" + color + ")";
     }
@@ -518,6 +532,7 @@ private class LocalListChooser2 extends ListChooser {
         super(model);
     }
 
+    @Override
     protected ListBrowser buildBrowser() {
         return new FilteringListBrowser();
     }

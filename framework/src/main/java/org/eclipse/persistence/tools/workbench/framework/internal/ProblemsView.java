@@ -116,9 +116,11 @@ final class ProblemsView {
 
     private ListValueModel buildApplicationProblemsAdapter(ValueModel appProblemContainerHolder) {
         return new ListAspectAdapter(appProblemContainerHolder, ApplicationProblemContainer.APPLICATION_PROBLEMS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((ApplicationProblemContainer) this.subject).applicationProblems();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((ApplicationProblemContainer) this.subject).applicationProblemsSize();
             }
@@ -127,9 +129,11 @@ final class ProblemsView {
 
     private ListValueModel buildBranchApplicationProblemsAdapter(ValueModel appProblemContainerHolder) {
         return new ListAspectAdapter(appProblemContainerHolder, ApplicationProblemContainer.BRANCH_APPLICATION_PROBLEMS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((ApplicationProblemContainer) this.subject).branchApplicationProblems();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((ApplicationProblemContainer) this.subject).branchApplicationProblemsSize();
             }
@@ -153,6 +157,7 @@ final class ProblemsView {
      */
     private KeyListener buildKeyListener(final HelpManager helpManager) {
         return new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
                 if (( ! e.isConsumed()) && (e.getKeyCode() == KeyEvent.VK_F1)) {
                     helpManager.showTopic("problemsPane");
@@ -220,6 +225,7 @@ final class ProblemsView {
      */
     private MouseListener buildTableMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     ProblemsView.this.tableDoubleClicked();
@@ -233,9 +239,11 @@ final class ProblemsView {
      */
     private MouseListener buildPopupMenuMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 this.handleMouseEvent(e);
             }
+            @Override
             public void mouseReleased(MouseEvent e) {
                 this.handleMouseEvent(e);
             }
@@ -314,22 +322,27 @@ final class ProblemsView {
             this.resourceRepository = resourceRepository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAMES[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             return Object.class;
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             ApplicationProblem problem = (ApplicationProblem) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];

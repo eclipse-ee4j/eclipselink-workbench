@@ -60,6 +60,7 @@ public abstract class AbstractReadOnlyCollectionValueModel
     /**
      * @see CollectionValueModel#addItem(Object)
      */
+    @Override
     public void addItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -67,6 +68,7 @@ public abstract class AbstractReadOnlyCollectionValueModel
     /**
      * @see CollectionValueModel#addItems(java.util.Collection)
      */
+    @Override
     public void addItems(Collection items) {
         throw new UnsupportedOperationException();
     }
@@ -74,6 +76,7 @@ public abstract class AbstractReadOnlyCollectionValueModel
     /**
      * @see CollectionValueModel#removeItem(Object)
      */
+    @Override
     public void removeItem(Object item) {
         throw new UnsupportedOperationException();
     }
@@ -81,6 +84,7 @@ public abstract class AbstractReadOnlyCollectionValueModel
     /**
      * @see CollectionValueModel#removeItems(java.util.Collection)
      */
+    @Override
     public void removeItems(Collection items) {
         throw new UnsupportedOperationException();
     }
@@ -88,6 +92,7 @@ public abstract class AbstractReadOnlyCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return CollectionTools.size((Iterator) this.getValue());
     }
@@ -98,6 +103,7 @@ public abstract class AbstractReadOnlyCollectionValueModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, CollectionTools.collection((Iterator) this.getValue()));
     }

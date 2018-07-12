@@ -30,6 +30,7 @@ public class ProjectCellRendererAdapter extends NoneSelectedCellRendererAdapter
         super(repository);
     }
 
+    @Override
     public String buildAccessibleName(Object value) {
         if (value instanceof MWRelationalProject)
             return resourceRepository().getString("ACCESSIBLE_RELATIONAL_PROJECT_NODE", ((MWRelationalProject)value).displayString());
@@ -43,6 +44,7 @@ public class ProjectCellRendererAdapter extends NoneSelectedCellRendererAdapter
         return null;
     }
 
+    @Override
     protected Icon buildNonNullValueIcon(Object value) {
         if (value instanceof MWRelationalProject)
             return resourceRepository().getIcon("project.relational");
@@ -56,6 +58,7 @@ public class ProjectCellRendererAdapter extends NoneSelectedCellRendererAdapter
         return resourceRepository().getIcon("warning");
     }
 
+    @Override
     protected String buildNonNullValueText(Object value) {
         return ((MWProject) value).getName();
     }

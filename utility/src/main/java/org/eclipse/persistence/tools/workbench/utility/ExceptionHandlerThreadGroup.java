@@ -52,6 +52,7 @@ public class ExceptionHandlerThreadGroup
      * Any uncaught exceptions are forwarded to the broadcaster.
      * @see ThreadGroup#uncaughtException(Thread, Throwable)
      */
+    @Override
     public synchronized void uncaughtException(Thread t, Throwable e) {
         this.broadcaster.broadcast(t, e);
     }

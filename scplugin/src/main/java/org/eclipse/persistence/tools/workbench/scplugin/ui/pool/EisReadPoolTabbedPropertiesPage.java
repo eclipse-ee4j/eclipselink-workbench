@@ -26,6 +26,7 @@ public class EisReadPoolTabbedPropertiesPage extends PoolTabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected Component buildLoginPropertiesPage() {
         return new EisReadPoolLoginPropertiesPage( this.getNodeHolder(), getWorkbenchContextHolder());
     }

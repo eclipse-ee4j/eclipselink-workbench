@@ -89,6 +89,7 @@ final class ReportQueryPanel
 
     protected QuickViewPanel.QuickViewItem buildReportAttributeQuickViewItem(MWReportAttributeItem attributeItem) {
         return new QueryQuickViewItem(attributeItem) {
+            @Override
             public void select() {
                 ReportQueryPanel.this.queryPropertiesPane.setSelectedComponent(ReportQueryPanel.this.attributesPanel);
                 ReportQueryPanel.this.attributesPanel.select((MWReportAttributeItem) getValue());
@@ -98,6 +99,7 @@ final class ReportQueryPanel
 
     protected QuickViewPanel.QuickViewItem buildGroupingAttributeQuickViewItem(MWGroupingItem groupingItem) {
         return new QueryQuickViewItem(groupingItem) {
+            @Override
             public void select() {
                 ReportQueryPanel.this.queryPropertiesPane.setSelectedComponent(ReportQueryPanel.this.queryGroupingOrderingPanel);
                 ReportQueryPanel.this.queryGroupingOrderingPanel.selectGroupingItem((MWGroupingItem) getValue());
@@ -107,6 +109,7 @@ final class ReportQueryPanel
 
     protected QuickViewPanel.QuickViewItem buildOrderingAttributeQuickViewItem(Ordering orderingItem) {
         return new QueryQuickViewItem(orderingItem) {
+            @Override
             public void select() {
                 ReportQueryPanel.this.queryPropertiesPane.setSelectedComponent(ReportQueryPanel.this.queryGroupingOrderingPanel);
                 ReportQueryPanel.this.queryGroupingOrderingPanel.selectOrderingItem((Ordering) getValue());

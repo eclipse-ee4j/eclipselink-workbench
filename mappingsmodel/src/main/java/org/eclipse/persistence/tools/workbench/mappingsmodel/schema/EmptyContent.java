@@ -33,10 +33,12 @@ public final class EmptyContent
 
     // **************** Behavior **********************************************
 
+    @Override
     boolean hasTextContent() {
         return false;
     }
 
+    @Override
     boolean containsWildcard() {
         return false;
     }

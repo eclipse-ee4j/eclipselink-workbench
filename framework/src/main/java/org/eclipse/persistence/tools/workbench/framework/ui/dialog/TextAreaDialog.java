@@ -84,6 +84,7 @@ public class TextAreaDialog extends AbstractDialog {
     /**
      * @see AbstractDialog#helpTopicId()
      */
+    @Override
     protected String helpTopicId() {
         return this.helpTopicID;
     }
@@ -91,6 +92,7 @@ public class TextAreaDialog extends AbstractDialog {
     /**
      * @see AbstractDialog#buildMainPanel()
      */
+    @Override
     protected Component buildMainPanel() {
         this.setSize(500, 400);
         this.textArea = buildTextArea();
@@ -107,6 +109,7 @@ public class TextAreaDialog extends AbstractDialog {
     /**
      * @see AbstractDialog#cancelButtonIsVisible()
      */
+    @Override
     protected boolean cancelButtonIsVisible() {
         return false;
     }
@@ -114,6 +117,7 @@ public class TextAreaDialog extends AbstractDialog {
     /**
      * @see AbstractDialog#buildCustomActions()
      */
+    @Override
     protected Iterator buildCustomActions() {
         Action copyAction = this.buildCopyAction();
         return new SingleElementIterator(copyAction);
@@ -121,6 +125,7 @@ public class TextAreaDialog extends AbstractDialog {
 
     private Action buildCopyAction() {
         return new AbstractAction(this.buildCopyText()) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 TextAreaDialog.this.copyPressed();
             }
@@ -144,6 +149,7 @@ public class TextAreaDialog extends AbstractDialog {
      * and don't want to "pack" the dialog.
      * @see AbstractDialog#prepareToShow()
      */
+    @Override
     protected void prepareToShow() {
         this.setLocationRelativeTo(this.getParent());
     }

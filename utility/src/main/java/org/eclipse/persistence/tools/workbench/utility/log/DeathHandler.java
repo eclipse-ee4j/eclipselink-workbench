@@ -41,6 +41,7 @@ public class DeathHandler extends Handler {
     /**
      * @see java.util.logging.Handler#close()
      */
+    @Override
     public void close() throws SecurityException {
         // do nothing
     }
@@ -48,6 +49,7 @@ public class DeathHandler extends Handler {
     /**
      * @see java.util.logging.Handler#flush()
      */
+    @Override
     public void flush() {
         // do nothing
     }
@@ -55,6 +57,7 @@ public class DeathHandler extends Handler {
     /**
      * @see java.util.logging.Handler#publish(java.util.logging.LogRecord)
      */
+    @Override
     public void publish(LogRecord record) {
         if (this.isLoggable(record)) {
             new Thread(this.runnableDeath, "Death").start();
@@ -64,6 +67,7 @@ public class DeathHandler extends Handler {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

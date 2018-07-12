@@ -69,9 +69,11 @@ final class AboutDialog extends JDialog {
 
     protected AbstractFrameworkAction buildOKAction(WorkbenchContext context) {
         return new AbstractFrameworkAction(context) {
+            @Override
             protected void initialize() {
                 this.initializeText("DIALOG.OK_BUTTON_TEXT");
             }
+            @Override
             protected void execute() {
                 AboutDialog.this.dispose();
             }
@@ -242,6 +244,7 @@ final class AboutDialog extends JDialog {
      * (which resizes the dialog to fit its contents) and then
      * setting the location relative to the parent component.
      */
+    @Override
     public void show() {
         this.pack();
         this.setLocationRelativeTo(this.getParent());

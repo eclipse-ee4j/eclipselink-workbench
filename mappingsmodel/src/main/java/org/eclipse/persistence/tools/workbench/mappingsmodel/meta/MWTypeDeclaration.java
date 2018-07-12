@@ -24,8 +24,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalCl
 import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
@@ -76,6 +74,7 @@ public final class MWTypeDeclaration extends MWModel {
         this.refresh(externalClassDescription);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.typeHandle = new MWClassHandle(this, this.buildTypeScrubber());
@@ -359,6 +358,7 @@ public final class MWTypeDeclaration extends MWModel {
 
     // ********** behavior **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.typeHandle);
@@ -366,9 +366,11 @@ public final class MWTypeDeclaration extends MWModel {
 
     private NodeReferenceScrubber buildTypeScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWTypeDeclaration.this.setType(null);
             }
+            @Override
             public String toString() {
                 return "MWTypeDeclaration.buildTypeScrubber()";
             }
@@ -387,6 +389,7 @@ public final class MWTypeDeclaration extends MWModel {
     /**
      * e.g. "java.lang.Object[]"
      */
+    @Override
     public String displayString() {
         int dim = this.dimensionality;
         if (dim == 0) {
@@ -422,6 +425,7 @@ public final class MWTypeDeclaration extends MWModel {
         return sb.toString();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.displayString());
     }

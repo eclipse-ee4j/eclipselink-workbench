@@ -54,6 +54,7 @@ public class DescriptorCreationFailuresDialog extends StatusDialog {
 
     private static Collection buildStatus(DescriptorCreationFailureContainer failures) {
         SortedSet failuresSet = CollectionTools.sortedSet(failures.failureEvents(), new Comparator() {
+            @Override
             public int compare(Object object1, Object object2) {
                 DescriptorCreationFailureEvent event1 = (DescriptorCreationFailureEvent) object1;
                 DescriptorCreationFailureEvent event2 = (DescriptorCreationFailureEvent) object2;
@@ -77,6 +78,7 @@ public class DescriptorCreationFailuresDialog extends StatusDialog {
         return statusList;
     }
 
+    @Override
     protected CellRendererAdapter buildNodeRenderer(Object value) {
         if (value instanceof String)
             return new ClassNameCellRendererAdapter();
@@ -88,6 +90,7 @@ public class DescriptorCreationFailuresDialog extends StatusDialog {
     }
 
     //remove the descriptors before returning from the dialog
+    @Override
     protected boolean preConfirm() {
         Iterator failureEvents = this.failures.failureEvents();
         while (failureEvents.hasNext()){
@@ -101,10 +104,12 @@ public class DescriptorCreationFailuresDialog extends StatusDialog {
     }
 
     protected class ClassNameCellRendererAdapter extends AbstractCellRendererAdapter {
+        @Override
         public Icon buildIcon(Object value) {
             return resourceRepository().getIcon("class.public");
         }
 
+        @Override
         public String buildText(Object value) {
             String className = (String) value;
 
@@ -139,10 +144,12 @@ public class DescriptorCreationFailuresDialog extends StatusDialog {
     }
 
     private class ErrorCellRendererAdapter extends AbstractCellRendererAdapter {
+        @Override
         public Icon buildIcon(Object value) {
             return resourceRepository().getIcon("error");
         }
 
+        @Override
         public String buildText(Object value) {
             return ((Error) value).getErrorMessage(resourceRepository());
         }

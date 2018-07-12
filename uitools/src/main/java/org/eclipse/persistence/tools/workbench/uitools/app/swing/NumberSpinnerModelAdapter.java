@@ -119,9 +119,11 @@ public class NumberSpinnerModelAdapter extends SpinnerNumberModel {
 
     private PropertyChangeListener buildNumberChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 NumberSpinnerModelAdapter.this.synchronize(e.getNewValue());
             }
+            @Override
             public String toString() {
                 return "number listener";
             }
@@ -139,6 +141,7 @@ public class NumberSpinnerModelAdapter extends SpinnerNumberModel {
      * @see javax.swing.JSpinner.DefaultEditor(javax.swing.JSpinner)
      * @see javax.swing.SpinnerModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.getChangeListeners().length == 0) {
             // sorry about this "lateral" call to super  ~bjv
@@ -156,6 +159,7 @@ public class NumberSpinnerModelAdapter extends SpinnerNumberModel {
      * The resulting event will be ignored: @see synchronizeDelegate(Object).
      * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(Object value) {
         super.setValue(value);
         this.numberHolder.setValue(value);
@@ -165,6 +169,7 @@ public class NumberSpinnerModelAdapter extends SpinnerNumberModel {
      * Extend to start listening to the underlying number if necessary.
      * @see javax.swing.SpinnerModel#addChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void addChangeListener(ChangeListener listener) {
         if (this.getChangeListeners().length == 0) {
             this.numberHolder.addPropertyChangeListener(ValueModel.VALUE, this.numberChangeListener);
@@ -177,6 +182,7 @@ public class NumberSpinnerModelAdapter extends SpinnerNumberModel {
      * Extend to stop listening to the underlying number if appropriate.
      * @see javax.swing.SpinnerModel#removeChangeListener(javax.swing.event.ChangeListener)
      */
+    @Override
     public void removeChangeListener(ChangeListener listener) {
         super.removeChangeListener(listener);
         if (this.getChangeListeners().length == 0) {
@@ -221,6 +227,7 @@ public class NumberSpinnerModelAdapter extends SpinnerNumberModel {
 
     // ********** standard methods **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.numberHolder);
     }

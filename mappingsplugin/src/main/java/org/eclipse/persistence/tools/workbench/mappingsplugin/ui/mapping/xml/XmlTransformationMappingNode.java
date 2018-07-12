@@ -32,6 +32,7 @@ public final class XmlTransformationMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_XML_TRANSFORMATION_MAPPING_NODE";
     }
@@ -39,6 +40,7 @@ public final class XmlTransformationMappingNode
 
     // **************** MappingNode contract **********************************
 
+    @Override
     protected String buildIconKey() {
         return "mapping.transformation";
     }
@@ -46,6 +48,7 @@ public final class XmlTransformationMappingNode
 
     // **************** ApplicationNode contract ******************************
 
+    @Override
     public String helpTopicID() {
 //        return this.getDescriptorNode().mappingHelpTopicPrefix() + ".transformation";
         return "mapping.xmlTransformation"; // For 10.1.3
@@ -54,6 +57,7 @@ public final class XmlTransformationMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         XmlDescriptorNode parentNode = (XmlDescriptorNode) getDescriptorNode();
         return parentNode.propertiesPageClassForTransformationMapping();

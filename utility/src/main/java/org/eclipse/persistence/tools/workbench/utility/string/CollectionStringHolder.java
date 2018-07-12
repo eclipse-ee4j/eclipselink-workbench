@@ -36,6 +36,7 @@ public class CollectionStringHolder extends AbstractStringHolder {
         this.string = string;
     }
 
+    @Override
     public final String getString() {
         return this.string;
     }

@@ -29,6 +29,7 @@ public class CollectionChangeAdapter implements CollectionChangeListener {
     /**
      * @see CollectionChangeListener#itemsAdded(CollectionChangeEvent)
      */
+    @Override
     public void itemsAdded(CollectionChangeEvent e) {
         // do nothing
     }
@@ -36,6 +37,7 @@ public class CollectionChangeAdapter implements CollectionChangeListener {
     /**
      * @see CollectionChangeListener#itemsRemoved(CollectionChangeEvent)
      */
+    @Override
     public void itemsRemoved(CollectionChangeEvent e) {
         // do nothing
     }
@@ -43,6 +45,7 @@ public class CollectionChangeAdapter implements CollectionChangeListener {
     /**
      * @see CollectionChangeListener#collectionChanged(CollectionChangeEvent)
      */
+    @Override
     public void collectionChanged(CollectionChangeEvent e) {
         // do nothing
     }

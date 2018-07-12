@@ -47,6 +47,7 @@ final class AggregateMappingPanel extends ScrollablePropertiesPage {
         return "mapping.aggregate";
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -151,9 +152,11 @@ final class AggregateMappingPanel extends ScrollablePropertiesPage {
 
     private PropertyValueModel buildAllowsNullHolder() {
         return new PropertyAspectAdapter(getSelectionHolder(), MWAggregateMapping.ALLOWS_NULL_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWAggregateMapping) subject).allowsNull());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWAggregateMapping) subject).setAllowsNull(((Boolean) value).booleanValue());
             }

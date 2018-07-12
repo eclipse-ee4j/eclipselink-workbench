@@ -83,12 +83,14 @@ final class LoggingOptionsPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LogAdapter.SHOULD_LOG_EXCEPTION_STACK_TRACE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LogAdapter adapter = (LogAdapter) subject;
                 return Boolean.valueOf(adapter.getShouldLogExceptionStackTrace());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LogAdapter adapter = (LogAdapter) subject;
@@ -118,12 +120,14 @@ final class LoggingOptionsPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LogAdapter.SHOULD_PRINT_CONNECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LogAdapter adapter = (LogAdapter) subject;
                 return Boolean.valueOf(adapter.getShouldPrintConnection());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LogAdapter adapter = (LogAdapter) subject;
@@ -153,12 +157,14 @@ final class LoggingOptionsPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LogAdapter.SHOULD_PRINT_DATE_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LogAdapter adapter = (LogAdapter) subject;
                 return Boolean.valueOf(adapter.getShouldPrintDate());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LogAdapter adapter = (LogAdapter) subject;
@@ -188,12 +194,14 @@ final class LoggingOptionsPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LogAdapter.SHOULD_PRINT_SESSION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LogAdapter adapter = (LogAdapter) subject;
                 return Boolean.valueOf(adapter.getShouldPrintSession());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LogAdapter adapter = (LogAdapter) subject;
@@ -223,12 +231,14 @@ final class LoggingOptionsPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), LogAdapter.SHOULD_PRINT_THREAD_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LogAdapter adapter = (LogAdapter) subject;
                 return Boolean.valueOf(adapter.getShouldPrintThread());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 LogAdapter adapter = (LogAdapter) subject;
@@ -240,6 +250,7 @@ final class LoggingOptionsPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();

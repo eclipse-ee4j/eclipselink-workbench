@@ -80,6 +80,7 @@ public final class MWEisOneToManyMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.foreignKeyLocation = KEYS_ON_TARGET;
@@ -90,10 +91,12 @@ public final class MWEisOneToManyMapping
     /**
      * 1:n mappings always have a selection interaction
      */
+    @Override
     protected boolean requiresSelectionInteraction() {
         return true;
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
 
@@ -137,6 +140,7 @@ public final class MWEisOneToManyMapping
     }
 
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.foreignKeyGroupingElement);
@@ -181,6 +185,7 @@ public final class MWEisOneToManyMapping
 
     // **************** Container policy **************************************
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -191,6 +196,7 @@ public final class MWEisOneToManyMapping
         firePropertyChanged(CONTAINER_POLICY_PROPERTY, oldValue, containerPolicy);
     }
 
+    @Override
     public MWMapContainerPolicy setMapContainerPolicy() {
         if (this.containerPolicy instanceof MWMapContainerPolicy) {
             return (MWMapContainerPolicy) this.containerPolicy;
@@ -200,6 +206,7 @@ public final class MWEisOneToManyMapping
         return cp;
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -209,6 +216,7 @@ public final class MWEisOneToManyMapping
         return cp;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -218,6 +226,7 @@ public final class MWEisOneToManyMapping
         return cp;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -244,6 +253,7 @@ public final class MWEisOneToManyMapping
 
     // **************** MWXmlMapping contract *********************************
 
+    @Override
     public MWXmlField firstMappedXmlField() {
         return this.getForeignKeyGroupingElement().isResolved() ?
             this.getForeignKeyGroupingElement()
@@ -256,24 +266,29 @@ public final class MWEisOneToManyMapping
     //   This mapping works as the context for the grouping element.
     //   MWXmlFieldPair acts as the context for the source and target fields.
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.eisDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return true;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return true;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return false;
             }
@@ -284,6 +299,7 @@ public final class MWEisOneToManyMapping
      * Return true if a source field may use a collection xpath
      * @see MWEisReferenceMapping#sourceFieldMayUseCollectionXpath()
      */
+    @Override
     public boolean sourceFieldMayUseCollectionXpath() {
         return true;
     }
@@ -291,10 +307,12 @@ public final class MWEisOneToManyMapping
 
     // ************* MWIndirectableCollectionMapping implementation ***********
 
+    @Override
     public boolean usesTransparentIndirection() {
         return this.getIndirectionType() == TRANSPARENT_INDIRECTION;
     }
 
+    @Override
     public void setUseTransparentIndirection() {
         this.setIndirectionType(TRANSPARENT_INDIRECTION);
     }
@@ -302,6 +320,7 @@ public final class MWEisOneToManyMapping
 
     // ************* Problem Handling *****************************************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -365,15 +384,18 @@ public final class MWEisOneToManyMapping
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWEisOneToManyMapping(this);
     }
 
+    @Override
     public void initializeFromMWCompositeCollectionMapping(MWCompositeCollectionMapping oldMapping) {
         super.initializeFromMWCompositeCollectionMapping(oldMapping);
         //getContainerPolicy().initializeFrom(oldMapping.getContainerPolicy());
     }
 
+    @Override
     protected void initializeFromMWIndirectableContainerMapping(MWIndirectableContainerMapping oldMapping) {
         super.initializeFromMWIndirectableContainerMapping(oldMapping);
 
@@ -386,12 +408,14 @@ public final class MWEisOneToManyMapping
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths */
+    @Override
     public void resolveXpaths() {
         super.resolveXpaths();
         this.foreignKeyGroupingElement.resolveXpaths();
     }
 
     /** @see MWXmlNode#schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         super.schemaChanged(change);
         this.foreignKeyGroupingElement.schemaChanged(change);
@@ -400,10 +424,12 @@ public final class MWEisOneToManyMapping
 
     // **************** Runtime Conversion ************************************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new EISOneToManyMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         EISOneToManyMapping mapping = (EISOneToManyMapping) super.runtimeMapping();
 

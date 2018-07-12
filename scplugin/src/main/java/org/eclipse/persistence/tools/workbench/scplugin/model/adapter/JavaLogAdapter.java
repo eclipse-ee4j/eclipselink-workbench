@@ -45,10 +45,12 @@ public final class JavaLogAdapter extends LogAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new JavaLogConfig();
     }
 
+    @Override
     public void toString( StringBuffer sb) {
 
         sb.append( "TODO: toString()");

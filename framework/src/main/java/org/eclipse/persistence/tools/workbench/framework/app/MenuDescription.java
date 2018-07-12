@@ -42,6 +42,7 @@ public class MenuDescription extends RootMenuDescription
     /**
      * Returns the <code>JMenu</code> represented by this description.
      */
+    @Override
     public Component component()
     {
         JMenu menu = (JMenu)super.component();

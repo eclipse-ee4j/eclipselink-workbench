@@ -32,17 +32,20 @@ public final class EisOneToManyMappingNode extends MappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_ONE_TO_MANY_MAPPING_NODE";
     }
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
 //        return this.getDescriptorNode().mappingHelpTopicPrefix() + ".externalOneToManyRoot";
         return "mapping.xmlExternalOneToManyRoot"; // For 10.1.3
     }
 
+    @Override
     protected String buildIconKey() {
         return "mapping.eisOneToMany";
     }
@@ -50,6 +53,7 @@ public final class EisOneToManyMappingNode extends MappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return EisOneToManyTabbedPropertiesPage.class;
     }

@@ -16,19 +16,11 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.xml;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.ButtonModel;
-import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.xml.MWXmlField;
-import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.xml.SchemaComplexTypeChooser;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.xml.XpathChooser;
-import org.eclipse.persistence.tools.workbench.uitools.ComponentEnabler;
-import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
-import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.ValueModel;
-import org.eclipse.persistence.tools.workbench.uitools.app.swing.RadioButtonModelAdapter;
 
 
 public final class AggregatableXmlFieldPanel

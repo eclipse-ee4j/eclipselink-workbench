@@ -52,11 +52,13 @@ public final class MWEisReturningPolicy
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.updateFields = new Vector();
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.updateFields) { children.addAll(this.updateFields); }
@@ -80,14 +82,17 @@ public final class MWEisReturningPolicy
 
     // **************** Update fields *****************************************
 
+    @Override
     public Iterator updateFields() {
         return new CloneIterator(this.updateFields) {
+            @Override
             protected void remove(Object current) {
                 MWEisReturningPolicy.this.removeUpdateField((MWXmlField) current);
             }
         };
     }
 
+    @Override
     public int updateFieldsSize() {
         return this.updateFields.size();
     }
@@ -107,6 +112,7 @@ public final class MWEisReturningPolicy
         return new MWXmlField(this);
     }
 
+    @Override
     public void removeUpdateField(MWDataField updateField) {
         this.removeUpdateField((MWXmlField) updateField);
     }
@@ -118,24 +124,29 @@ public final class MWEisReturningPolicy
 
     // ********** MWXpathContext implementation **********
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.eisDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -184,6 +195,7 @@ public final class MWEisReturningPolicy
 
     private Iterator specifiedInsertFieldReturnOnlyFlags() {
         return new FilteringIterator(this.insertFieldReturnOnlyFlags()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWEisReturningPolicyInsertFieldReturnOnlyFlag) o).getXmlField().isSpecified();
             }
@@ -196,6 +208,7 @@ public final class MWEisReturningPolicy
 
     private Iterator specifiedUpdateFields() {
         return new FilteringIterator(this.updateFields()) {
+            @Override
             protected boolean accept(Object o) {
                 return ((MWXmlField) o).isSpecified();
             }

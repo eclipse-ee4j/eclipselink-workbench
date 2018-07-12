@@ -81,6 +81,7 @@ public class CheckEOL {
      */
     private Iterator javaFiles(Iterator files) {
         return new FilteringIterator(files) {
+            @Override
             protected boolean accept(Object next) {
                 return ((File) next).getName().toLowerCase().endsWith(".java");
             }
@@ -118,6 +119,7 @@ public class CheckEOL {
      */
     public Iterator filesWithInvalidWinEOL(Iterator files) {
         return new FilteringIterator(files) {
+            @Override
             protected boolean accept(Object next) {
                 try {
                     return CheckEOL.this.fileHasInvalidWinEOL((File) next);
@@ -174,6 +176,7 @@ public class CheckEOL {
 
     private Iterator fileNames(Iterator files) {
         return new TransformationIterator(files) {
+            @Override
             protected Object transform(Object next) {
                 return ((File) next).getAbsolutePath();
             }

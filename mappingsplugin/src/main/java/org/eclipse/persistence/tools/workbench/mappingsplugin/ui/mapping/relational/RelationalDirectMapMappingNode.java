@@ -30,6 +30,7 @@ public final class RelationalDirectMapMappingNode extends MappingNode {
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_DIRECT_MAP_MAPPING_NODE";
     }
@@ -37,10 +38,12 @@ public final class RelationalDirectMapMappingNode extends MappingNode {
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".directMap";
     }
 
+    @Override
     protected String buildIconKey() {
         return ((MWRelationalDirectMapMapping) getMapping()).iconKey();
     }
@@ -48,6 +51,7 @@ public final class RelationalDirectMapMappingNode extends MappingNode {
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return RelationalDirectMapMappingTabbedPropertiesPage.class;
     }

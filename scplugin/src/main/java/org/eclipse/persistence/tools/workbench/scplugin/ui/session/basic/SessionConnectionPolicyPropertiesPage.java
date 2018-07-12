@@ -68,12 +68,14 @@ public class SessionConnectionPolicyPropertiesPage extends ScrollablePropertiesP
     {
         return new PropertyAspectAdapter(getSelectionHolder(), ServerSessionAdapter.LAZY_CONNECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ServerSessionAdapter session = (ServerSessionAdapter) subject;
                 return Boolean.valueOf(session.usesLazyConnection());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ServerSessionAdapter session = (ServerSessionAdapter) subject;
@@ -86,12 +88,14 @@ public class SessionConnectionPolicyPropertiesPage extends ScrollablePropertiesP
     {
         return new PropertyAspectAdapter(getSelectionHolder(), ServerSessionAdapter.USE_EXCLUSIVE_CONNECTION_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 ServerSessionAdapter session = (ServerSessionAdapter) subject;
                 return Boolean.valueOf(session.usesExclusiveConnection());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ServerSessionAdapter session = (ServerSessionAdapter) subject;
@@ -105,6 +109,7 @@ public class SessionConnectionPolicyPropertiesPage extends ScrollablePropertiesP
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

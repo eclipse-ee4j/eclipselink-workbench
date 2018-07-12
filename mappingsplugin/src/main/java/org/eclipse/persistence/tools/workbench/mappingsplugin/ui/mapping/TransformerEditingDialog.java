@@ -102,6 +102,7 @@ public final class TransformerEditingDialog
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
 
@@ -119,6 +120,7 @@ public final class TransformerEditingDialog
 
     private PropertyChangeListener buildValidatingListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 TransformerEditingDialog.this.updateErrorMessage();
                 TransformerEditingDialog.this.updateOKAction();
@@ -159,12 +161,14 @@ public final class TransformerEditingDialog
     }
 
     /** Overridden to set error flag */
+    @Override
     protected void setErrorMessage(String message) {
         super.setErrorMessage(message);
         this.noError = (message == null);
     }
 
     /** Overridden to clear error flag */
+    @Override
     protected void clearErrorMessage() {
         super.clearErrorMessage();
         this.noError = true;
@@ -174,14 +178,17 @@ public final class TransformerEditingDialog
         this.getOKAction().setEnabled(this.noError);
     }
 
+    @Override
     protected Component buildMainPanel() {
         return new TransformerEditingPanel(this.transformerEditor, new DefaultWorkbenchContextHolder(this.getWorkbenchContext()));
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.editTransformer";
     }
 
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         setSize(Math.max(500, getWidth()), getHeight());
@@ -227,6 +234,7 @@ public final class TransformerEditingDialog
 
         // **************** Transformer type **********************************
 
+        @Override
         public PropertyValueModel transformerTypeHolder() {
             if (this.transformerTypeHolder == null) {
                 this.transformerTypeHolder = this.buildTransformerTypeHolder();
@@ -248,6 +256,7 @@ public final class TransformerEditingDialog
             return new SimplePropertyValueModel(transformerType);
         }
 
+        @Override
         public String transformerType() {
             return (String) this.transformerTypeHolder().getValue();
         }
@@ -255,6 +264,7 @@ public final class TransformerEditingDialog
 
         // **************** Transformation method *****************************
 
+        @Override
         public PropertyValueModel transformationMethodHolder() {
             if (this.methodHolder == null) {
                 this.methodHolder = this.buildMethodHolder();
@@ -269,6 +279,7 @@ public final class TransformerEditingDialog
 
         protected abstract PropertyValueModel buildInternalMethodHolder();
 
+        @Override
         public MWMethod transformationMethod() {
             return (MWMethod) this.transformationMethodHolder().getValue();
         }
@@ -276,6 +287,7 @@ public final class TransformerEditingDialog
 
         // **************** Transformer class *********************************
 
+        @Override
         public PropertyValueModel transformerClassHolder() {
             if (this.classHolder == null) {
                 this.classHolder = this.buildClassHolder();
@@ -290,10 +302,12 @@ public final class TransformerEditingDialog
 
         protected abstract PropertyValueModel buildInternalClassHolder();
 
+        @Override
         public MWClass transformerClass() {
             return (MWClass) this.transformerClassHolder().getValue();
         }
 
+        @Override
         public MWClassRepository classRepository() {
             return this.transformationMapping().getRepository();
         }
@@ -303,6 +317,7 @@ public final class TransformerEditingDialog
 
         // **************** Editing *******************************************
 
+        @Override
         public void commit() {
             if (this.transformerType() == TRANSFORMATION_METHOD) {
                 this.methodTrigger.accept();
@@ -325,20 +340,25 @@ public final class TransformerEditingDialog
             this.transformationMapping = transformationMapping;
         }
 
+        @Override
         protected MWTransformationMapping transformationMapping() {
             return this.transformationMapping;
         }
 
+        @Override
         public Iterator candidateTransformationMethods() {
             return this.transformationMapping().candidateAttributeTransformationMethods();
         }
 
+        @Override
         public boolean transformationMethodIsValid() {
             return this.transformationMethod().isCandidateAttributeTransformerMethod();
         }
 
+        @Override
         protected PropertyValueModel buildInternalMethodHolder() {
             return new PropertyAspectAdapter(MWTransformationMapping.ATTRIBUTE_TRANSFORMER_PROPERTY, this.transformationMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWTransformer transformer = ((MWTransformationMapping) this.subject).getAttributeTransformer();
 
@@ -350,14 +370,17 @@ public final class TransformerEditingDialog
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWTransformationMapping) this.subject).setAttributeTransformer((MWMethod) value);
                 }
             };
         }
 
+        @Override
         protected PropertyValueModel buildInternalClassHolder() {
             return new PropertyAspectAdapter(MWTransformationMapping.ATTRIBUTE_TRANSFORMER_PROPERTY, this.transformationMapping) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWTransformer transformer = ((MWTransformationMapping) this.subject).getAttributeTransformer();
 
@@ -369,6 +392,7 @@ public final class TransformerEditingDialog
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWTransformationMapping) this.subject).setAttributeTransformer((MWClass) value);
                 }
@@ -388,20 +412,25 @@ public final class TransformerEditingDialog
             this.association = association;
         }
 
+        @Override
         protected MWTransformationMapping transformationMapping() {
             return this.association.getMapping();
         }
 
+        @Override
         public Iterator candidateTransformationMethods() {
             return this.transformationMapping().candidateFieldTransformationMethods();
         }
 
+        @Override
         public boolean transformationMethodIsValid() {
             return this.transformationMethod().isCandidateFieldTransformerMethod();
         }
 
+        @Override
         protected PropertyValueModel buildInternalMethodHolder() {
             return new PropertyAspectAdapter(MWFieldTransformerAssociation.FIELD_TRANSFORMER_PROPERTY, this.association) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWTransformer transformer = ((MWFieldTransformerAssociation) this.subject).getFieldTransformer();
 
@@ -413,14 +442,17 @@ public final class TransformerEditingDialog
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWFieldTransformerAssociation) this.subject).setFieldTransformer((MWMethod) value);
                 }
             };
         }
 
+        @Override
         protected PropertyValueModel buildInternalClassHolder() {
             return new PropertyAspectAdapter(MWFieldTransformerAssociation.FIELD_TRANSFORMER_PROPERTY, this.association) {
+                @Override
                 protected Object getValueFromSubject() {
                     MWTransformer transformer = ((MWFieldTransformerAssociation) this.subject).getFieldTransformer();
 
@@ -432,6 +464,7 @@ public final class TransformerEditingDialog
                     }
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWFieldTransformerAssociation) this.subject).setFieldTransformer((MWClass) value);
                 }

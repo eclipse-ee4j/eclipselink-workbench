@@ -20,13 +20,11 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWQueryKey;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumnPair;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWCollectionContainerPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWContainerPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWIndirectableContainerMapping;
@@ -41,17 +39,12 @@ import org.eclipse.persistence.tools.workbench.utility.iterators.CloneListIterat
 import org.eclipse.persistence.tools.workbench.utility.iterators.FilteringIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.NullIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
-import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
-
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.internal.indirection.TransparentIndirectionPolicy;
 import org.eclipse.persistence.mappings.CollectionMapping;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
-import org.eclipse.persistence.sessions.Record;
 
 
 public abstract class MWCollectionMapping
@@ -87,11 +80,13 @@ public abstract class MWCollectionMapping
 
     // **************** Building and Initializing *************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.orderings = new Vector();
     }
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
 
@@ -126,6 +121,7 @@ public abstract class MWCollectionMapping
         }
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.containerPolicy);
@@ -135,6 +131,7 @@ public abstract class MWCollectionMapping
 
     // **************** Container policy **************************************
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -145,6 +142,7 @@ public abstract class MWCollectionMapping
         firePropertyChanged(CONTAINER_POLICY_PROPERTY, oldValue, containerPolicy);
     }
 
+    @Override
     public MWMapContainerPolicy setMapContainerPolicy() {
         if (this.containerPolicy instanceof MWMapContainerPolicy) {
             return (MWMapContainerPolicy) this.containerPolicy;
@@ -154,6 +152,7 @@ public abstract class MWCollectionMapping
         return cp;
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -163,6 +162,7 @@ public abstract class MWCollectionMapping
         return cp;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -172,6 +172,7 @@ public abstract class MWCollectionMapping
         return cp;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -192,6 +193,7 @@ public abstract class MWCollectionMapping
 
     // **************** Morphing **********************
 
+    @Override
     protected void initializeFromMWCollectionMapping(MWCollectionMapping oldMapping) {
         super.initializeFromMWCollectionMapping(oldMapping);
 
@@ -205,6 +207,7 @@ public abstract class MWCollectionMapping
     }
 
 
+    @Override
     protected void initializeFromMWIndirectableContainerMapping(MWIndirectableContainerMapping oldMapping) {
         super.initializeFromMWIndirectableContainerMapping(oldMapping);
 
@@ -260,10 +263,12 @@ public abstract class MWCollectionMapping
         removeItemFromList(index, this.orderings, ORDERINGS_LIST);
     }
 
+    @Override
     public void setUseTransparentIndirection() {
         setIndirectionType(TRANSPARENT_INDIRECTION);
     }
 
+    @Override
     public void setReferenceDescriptor(MWDescriptor descriptor) {
         super.setReferenceDescriptor(descriptor);
 
@@ -272,26 +277,31 @@ public abstract class MWCollectionMapping
 
     // ************** Queryable interface *************
 
+    @Override
     public boolean usesAnyOf() {
         return true;
     }
 
+    @Override
     public boolean isTraversableForReadAllQueryOrderable() {
         return false;
     }
 
     // **************** Queries ***************
 
+    @Override
     public boolean usesTransparentIndirection() {
         return getIndirectionType() == TRANSPARENT_INDIRECTION;
     }
 
+    @Override
     public boolean isCollectionMapping(){
         return true;
     }
 
     // **************** Behavior **********************************************
 
+    @Override
     protected void forceEjb20Indirection() {
         super.forceEjb20Indirection();
         setUseTransparentIndirection();
@@ -300,6 +310,7 @@ public abstract class MWCollectionMapping
 
     // **************** Aggregate Support *****************
 
+    @Override
     protected Collection buildAggregateFieldNameGenerators() {
         Collection generators = super.buildAggregateFieldNameGenerators();
         if (getReference() != null) {
@@ -313,12 +324,14 @@ public abstract class MWCollectionMapping
         return generators;
     }
 
+    @Override
     protected boolean fieldIsWritten(MWColumnPair association) {
         return false;
     }
 
     //********* runtime conversion *********
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         CollectionMapping runtimeMapping = (CollectionMapping) super.runtimeMapping();
 
@@ -345,12 +358,14 @@ public abstract class MWCollectionMapping
 
     // ************** Problem Handling ****************
 
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkContainerClassIsValidForTransparentIndirection(newProblems);
         this.addUsesTransparentIndirectionWhileMaintainsBiDirectionalRelationship(newProblems);
     }
 
+    @Override
     public void addWrittenFieldsTo(Collection writtenFields) {
         //m-m and 1-m mappings do not directly write their fields
     }

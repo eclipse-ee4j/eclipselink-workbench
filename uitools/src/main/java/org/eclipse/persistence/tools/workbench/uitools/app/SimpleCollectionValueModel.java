@@ -54,6 +54,7 @@ public class SimpleCollectionValueModel
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#buildDefaultChangeSupport()
      */
+    @Override
     protected ChangeSupport buildDefaultChangeSupport() {
         return new ValueModelChangeSupport(this);
     }
@@ -64,6 +65,7 @@ public class SimpleCollectionValueModel
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // try to prevent backdoor modification of the collection
         return new ReadOnlyIterator(this.value);
@@ -75,6 +77,7 @@ public class SimpleCollectionValueModel
     /**
      * @see CollectionValueModel#addItem(Object)
      */
+    @Override
     public void addItem(Object item) {
         this.addItemToCollection(item, this.value, VALUE);
     }
@@ -82,6 +85,7 @@ public class SimpleCollectionValueModel
     /**
      * @see CollectionValueModel#addItems(Collection)
      */
+    @Override
     public void addItems(Collection items) {
         this.addItemsToCollection(items, this.value, VALUE);
     }
@@ -89,6 +93,7 @@ public class SimpleCollectionValueModel
     /**
      * @see CollectionValueModel#removeItem(Object)
      */
+    @Override
     public void removeItem(Object item) {
         this.removeItemFromCollection(item, this.value, VALUE);
     }
@@ -96,6 +101,7 @@ public class SimpleCollectionValueModel
     /**
      * @see CollectionValueModel#removeItems(Collection)
      */
+    @Override
     public void removeItems(Collection items) {
         this.removeItemsFromCollection(items, this.value, VALUE);
     }
@@ -103,6 +109,7 @@ public class SimpleCollectionValueModel
     /**
      * @see CollectionValueModel#size()
      */
+    @Override
     public int size() {
         return this.value.size();
     }
@@ -130,6 +137,7 @@ public class SimpleCollectionValueModel
         this.fireItemsRemoved(VALUE, items);
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.value);
     }

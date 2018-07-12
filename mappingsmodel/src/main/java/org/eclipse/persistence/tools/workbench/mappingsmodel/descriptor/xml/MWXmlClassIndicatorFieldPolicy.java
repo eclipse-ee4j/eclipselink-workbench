@@ -68,12 +68,14 @@ public final class MWXmlClassIndicatorFieldPolicy
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.xmlField = new MWXmlField(this);
         this.useXSIType = false;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.xmlField);
@@ -86,6 +88,7 @@ public final class MWXmlClassIndicatorFieldPolicy
         return this.xmlField;
     }
 
+    @Override
     public MWDataField getField() {
         return this.getXmlField();
     }
@@ -131,24 +134,29 @@ public final class MWXmlClassIndicatorFieldPolicy
 
     // **************** MWXpathContext implementation *************************
 
+    @Override
     public MWSchemaContextComponent schemaContext(MWXmlField xmlField) {
         return this.xmlDescriptor().getSchemaContext();
     }
 
+    @Override
     public MWXpathSpec xpathSpec(MWXmlField xmlField) {
         return this.buildXpathSpec();
     }
 
     protected MWXpathSpec buildXpathSpec() {
         return new MWXpathSpec() {
+            @Override
             public boolean mayUseCollectionData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseComplexData() {
                 return false;
             }
 
+            @Override
             public boolean mayUseSimpleData() {
                 return true;
             }
@@ -169,11 +177,13 @@ public final class MWXmlClassIndicatorFieldPolicy
 
 
     // **************** Problem support ***************************************
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
         this.checkClassIndicatorField(newProblems);
     }
 
+    @Override
     protected boolean fieldSpecified() {
         if (!isUseXSIType()) {
             return getXmlField().isResolved();
@@ -185,11 +195,13 @@ public final class MWXmlClassIndicatorFieldPolicy
     // **************** Model synchronization *********************************
 
     /** @see MWXmlNode#resolveXpaths() */
+    @Override
     public void resolveXpaths() {
         this.xmlField.resolveXpaths();
     }
 
     /** @see MWXmlNode.schemaChanged(SchemaChange) */
+    @Override
     public void schemaChanged(SchemaChange change) {
         this.xmlField.schemaChanged(change);
     }
@@ -197,6 +209,7 @@ public final class MWXmlClassIndicatorFieldPolicy
 
     // **************** Runtime conversion ************************************
 
+    @Override
     public void adjustRuntimeInheritancePolicy(InheritancePolicy runtimeInheritancePolicy) {
         super.adjustRuntimeInheritancePolicy(runtimeInheritancePolicy);
 

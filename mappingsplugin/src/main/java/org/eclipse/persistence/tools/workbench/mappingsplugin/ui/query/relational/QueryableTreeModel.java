@@ -57,6 +57,7 @@ final class QueryableTreeModel implements TreeModel {
         return this.queryableFilter;
     }
 
+    @Override
     public Object getRoot() {
         return this.rootDescriptor;
     }
@@ -71,6 +72,7 @@ final class QueryableTreeModel implements TreeModel {
         return list;
     }
 
+    @Override
     public Object getChild(Object parent, int index) {
         MWQueryable queryableObject;
 
@@ -91,6 +93,7 @@ final class QueryableTreeModel implements TreeModel {
         return childNode;
     }
 
+    @Override
     public int getChildCount(Object parent) {
         if (parent == getRoot())
             return this.queryableObjects.size();
@@ -100,6 +103,7 @@ final class QueryableTreeModel implements TreeModel {
         }
     }
 
+    @Override
     public boolean isLeaf(Object node)
     {
         if (node == getRoot())
@@ -107,11 +111,13 @@ final class QueryableTreeModel implements TreeModel {
         return ((QueryableTreeNode)node).isLeaf(this.queryableFilter);
     }
 
+    @Override
     public void valueForPathChanged(TreePath path, Object newValue)
     {
     //The tree will not change, so i do not need to implement this method
     }
 
+    @Override
     public int getIndexOfChild(Object parent, Object child)
     {
         if (parent == getRoot())
@@ -126,11 +132,13 @@ final class QueryableTreeModel implements TreeModel {
 
     }
 
+    @Override
     public void addTreeModelListener(TreeModelListener l)
     {
         //The tree will not change, so i don't need any listeners
     }
 
+    @Override
     public void removeTreeModelListener(TreeModelListener l)
     {
         //The tree will not change, so i don't need any listeners

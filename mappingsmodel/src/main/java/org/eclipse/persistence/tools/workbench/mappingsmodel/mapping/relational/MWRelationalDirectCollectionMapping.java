@@ -16,11 +16,7 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational
 
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWMappingDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassDescriptor;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWColumnHandle;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.handles.MWReferenceHandle;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWCollectionContainerPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWContainerMapping;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWContainerPolicy;
@@ -31,13 +27,10 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.MWSetContai
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.DirectCollectionMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
-import org.eclipse.persistence.sessions.Record;
 
 
 public final class MWRelationalDirectCollectionMapping
@@ -61,6 +54,7 @@ public final class MWRelationalDirectCollectionMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(MWClassAttribute attribute, String name) {
         super.initialize(attribute, name);
 
@@ -79,6 +73,7 @@ public final class MWRelationalDirectCollectionMapping
     }
 
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.containerPolicy);
@@ -87,6 +82,7 @@ public final class MWRelationalDirectCollectionMapping
 
     // **************** Container policy **************************************
 
+    @Override
     public MWContainerPolicy getContainerPolicy() {
         return this.containerPolicy;
     }
@@ -97,6 +93,7 @@ public final class MWRelationalDirectCollectionMapping
         firePropertyChanged(CONTAINER_POLICY_PROPERTY, oldValue, containerPolicy);
     }
 
+    @Override
     public MWCollectionContainerPolicy setCollectionContainerPolicy() {
         if (this.containerPolicy instanceof MWCollectionContainerPolicy) {
             return (MWCollectionContainerPolicy) this.containerPolicy;
@@ -106,6 +103,7 @@ public final class MWRelationalDirectCollectionMapping
         return cp;
     }
 
+    @Override
     public MWListContainerPolicy setListContainerPolicy() {
         if (this.containerPolicy instanceof MWListContainerPolicy) {
             return (MWListContainerPolicy) this.containerPolicy;
@@ -115,6 +113,7 @@ public final class MWRelationalDirectCollectionMapping
         return cp;
     }
 
+    @Override
     public MWSetContainerPolicy setSetContainerPolicy() {
         if (this.containerPolicy instanceof MWSetContainerPolicy) {
             return (MWSetContainerPolicy) this.containerPolicy;
@@ -124,26 +123,31 @@ public final class MWRelationalDirectCollectionMapping
         return cp;
     }
 
+    @Override
     protected MWClass conatinerPolicyClass() {
         return getContainerPolicy().getDefaultingContainerClass().getContainerClass();
     }
 
     // **************** MWRelationalDirectContainerMapping implementation **************
 
+    @Override
     protected int automapNonPrimaryKeyColumnsSize() {
         return 1;
     }
 
     // **************** Morphing **************
 
+    @Override
     public MWDirectCollectionMapping asMWDirectCollectionMapping() {
         return this;
     }
 
+    @Override
     protected void initializeOn(MWMapping newMapping) {
         newMapping.initializeFromMWRelationalDirectCollectionMapping(this);
     }
 
+    @Override
     protected void initializeFromMWCollectionMapping(MWCollectionMapping oldMapping) {
         super.initializeFromMWCollectionMapping(oldMapping);
 
@@ -154,6 +158,7 @@ public final class MWRelationalDirectCollectionMapping
 
     // **************** MWQueryable interface ***********************
 
+    @Override
     public String iconKey() {
         return "mapping.directCollection";
     }
@@ -162,6 +167,7 @@ public final class MWRelationalDirectCollectionMapping
     // **************** runtime *************
 
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         DirectCollectionMapping runtimeMapping = (DirectCollectionMapping) super.runtimeMapping();
 

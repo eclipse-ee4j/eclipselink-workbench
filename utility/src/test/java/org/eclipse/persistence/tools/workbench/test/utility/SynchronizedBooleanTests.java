@@ -36,6 +36,7 @@ public class SynchronizedBooleanTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.sb = new SynchronizedBoolean();
@@ -45,6 +46,7 @@ public class SynchronizedBooleanTests extends TestCase {
         this.endTime = 0;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -164,6 +166,7 @@ public class SynchronizedBooleanTests extends TestCase {
 
     private Command buildSetTrueCommand() {
         return new Command() {
+            @Override
             public void execute(SynchronizedBoolean syncBool) {
                 syncBool.setTrue();
             }
@@ -172,6 +175,7 @@ public class SynchronizedBooleanTests extends TestCase {
 
     private Command buildWaitUntilTrueCommand(final long timeout) {
         return new Command() {
+            @Override
             public void execute(SynchronizedBoolean syncBool) throws Exception {
                 SynchronizedBooleanTests.this.setStartTime(System.currentTimeMillis());
                 SynchronizedBooleanTests.this.setTimeoutOccurred( ! syncBool.waitUntilTrue(timeout));
@@ -182,6 +186,7 @@ public class SynchronizedBooleanTests extends TestCase {
 
     private Command buildWaitToSetFalseCommand(final long timeout) {
         return new Command() {
+            @Override
             public void execute(SynchronizedBoolean syncBool) throws Exception {
                 SynchronizedBooleanTests.this.setStartTime(System.currentTimeMillis());
                 SynchronizedBooleanTests.this.setTimeoutOccurred( ! syncBool.waitToSetFalse(timeout));
@@ -192,6 +197,7 @@ public class SynchronizedBooleanTests extends TestCase {
 
     private Runnable buildRunnable(final Command command, final SynchronizedBoolean syncBool, final long sleep) {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     if (sleep != 0) {

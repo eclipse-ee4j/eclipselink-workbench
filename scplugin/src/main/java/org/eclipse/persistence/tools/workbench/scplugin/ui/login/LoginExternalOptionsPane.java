@@ -18,13 +18,11 @@ package org.eclipse.persistence.tools.workbench.scplugin.ui.login;
 import java.awt.GridLayout;
 import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 
 import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.DatabaseSessionAdapter;
 import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.LoginAdapter;
-import org.eclipse.persistence.tools.workbench.scplugin.model.adapter.ServerSessionAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 import org.eclipse.persistence.tools.workbench.uitools.app.swing.CheckBoxModelAdapter;
@@ -98,6 +96,7 @@ public class LoginExternalOptionsPane extends AbstractSubjectPanel
     {
         PropertyValueModel subjectHolder = new PropertyAspectAdapter(getSubjectHolder(), "")
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 LoginAdapter login = (LoginAdapter) subject;
@@ -107,11 +106,13 @@ public class LoginExternalOptionsPane extends AbstractSubjectPanel
 
         return new PropertyAspectAdapter(subjectHolder, DatabaseSessionAdapter.EXTERNAL_CONNECTION_POOLING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject() {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
                 return Boolean.valueOf(session.usesExternalConnectionPooling());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 DatabaseSessionAdapter session = (DatabaseSessionAdapter) subject;
                 session.setExternalConnectionPooling(((Boolean)value).booleanValue());
@@ -122,6 +123,7 @@ public class LoginExternalOptionsPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         add(buildExternalConnectionPoolingCheckBox());

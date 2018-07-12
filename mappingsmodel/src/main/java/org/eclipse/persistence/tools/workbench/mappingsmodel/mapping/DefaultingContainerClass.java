@@ -53,6 +53,7 @@ public final class DefaultingContainerClass extends MWModel {
 
     // **************** Building and Initializing *************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.containerClassHandle = new MWClassHandle(this, this.buildContainerClassScrubber());
@@ -62,6 +63,7 @@ public final class DefaultingContainerClass extends MWModel {
 
     // **************** Containment hierarchy *************
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.containerClassHandle);
@@ -69,9 +71,11 @@ public final class DefaultingContainerClass extends MWModel {
 
     private NodeReferenceScrubber buildContainerClassScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 DefaultingContainerClass.this.setContainerClass(null);
             }
+            @Override
             public String toString() {
                 return "DefaultingContainerClass.buildContainerClassScrubber()";
             }
@@ -142,6 +146,7 @@ public final class DefaultingContainerClass extends MWModel {
 
     // ************** Problem Handling ****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkContainerClass(currentProblems);

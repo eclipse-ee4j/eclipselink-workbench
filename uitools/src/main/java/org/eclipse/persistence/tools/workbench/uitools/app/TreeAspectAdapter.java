@@ -74,6 +74,7 @@ public abstract class TreeAspectAdapter
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.treeChangeListener = this.buildTreeChangeListener();
@@ -85,15 +86,19 @@ public abstract class TreeAspectAdapter
     protected TreeChangeListener buildTreeChangeListener() {
         // transform the subject's tree change events into VALUE tree change events
         return new TreeChangeListener() {
+            @Override
             public void nodeAdded(TreeChangeEvent e) {
                 TreeAspectAdapter.this.nodeAdded(e);
             }
+            @Override
             public void nodeRemoved(TreeChangeEvent e) {
                 TreeAspectAdapter.this.nodeRemoved(e);
             }
+            @Override
             public void treeChanged(TreeChangeEvent e) {
                 TreeAspectAdapter.this.treeChanged(e);
             }
+            @Override
             public String toString() {
                 return "tree change listener: " + TreeAspectAdapter.this.treeName;
             }
@@ -108,6 +113,7 @@ public abstract class TreeAspectAdapter
      * This should be an *iterator* on the tree.
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         if (this.subject == null) {
             return NullIterator.instance();
@@ -132,6 +138,7 @@ public abstract class TreeAspectAdapter
      * Insert the specified node in the subject's tree aspect.
      * @see TreeValueModel#addNode(Object[])
      */
+    @Override
     public void addNode(Object[] parentPath, Object node) {
         throw new UnsupportedOperationException();
     }
@@ -140,6 +147,7 @@ public abstract class TreeAspectAdapter
      * Remove the specified node from the subject's tree aspect.
      * @see TreeValueModel#removeNode(Object[])
      */
+    @Override
     public void removeNode(Object[] path) {
         throw new UnsupportedOperationException();
     }
@@ -150,6 +158,7 @@ public abstract class TreeAspectAdapter
     /**
      * @see AspectAdapter#hasListeners()
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyTreeChangeListeners(VALUE);
     }
@@ -157,6 +166,7 @@ public abstract class TreeAspectAdapter
     /**
      * @see AspectAdapter#fireAspectChange(Object, Object)
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.fireTreeStructureChanged(VALUE);
     }
@@ -164,6 +174,7 @@ public abstract class TreeAspectAdapter
     /**
      * @see AspectAdapter#engageNonNullSubject()
      */
+    @Override
     protected void engageNonNullSubject() {
         ((Model) this.subject).addTreeChangeListener(this.treeName, this.treeChangeListener);
     }
@@ -171,6 +182,7 @@ public abstract class TreeAspectAdapter
     /**
      * @see AspectAdapter#disengageNonNullSubject()
      */
+    @Override
     protected void disengageNonNullSubject() {
         ((Model) this.subject).removeTreeChangeListener(this.treeName, this.treeChangeListener);
     }
@@ -178,6 +190,7 @@ public abstract class TreeAspectAdapter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.treeName);
     }

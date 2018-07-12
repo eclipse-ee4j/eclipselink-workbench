@@ -91,6 +91,7 @@ public abstract class MWAbstractReadQuery
     }
 
     /** initialize persistent state*/
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.refreshIdentityMapResult = false;
@@ -102,6 +103,7 @@ public abstract class MWAbstractReadQuery
 
     // ************* morphing ***********
 
+    @Override
     public void initializeFrom(MWReadQuery query) {
         super.initializeFrom(query);
         setMaintainCache(query.isMaintainCache());
@@ -113,10 +115,12 @@ public abstract class MWAbstractReadQuery
 
     // ************* maintain cache ***********
 
+    @Override
     public boolean isMaintainCache() {
         return this.maintainCache;
     }
 
+    @Override
     public void setMaintainCache(boolean maintainCache) {
         boolean oldMaintainCache = isMaintainCache();
         this.maintainCache = maintainCache;
@@ -125,10 +129,12 @@ public abstract class MWAbstractReadQuery
 
     // ************* refresh identity map result ***********
 
+    @Override
     public boolean isRefreshIdentityMapResult() {
         return this.refreshIdentityMapResult;
     }
 
+    @Override
     public void setRefreshIdentityMapResult(boolean refreshIdentityMapResult) {
         boolean oldRefreshIdentityMapResult = isRefreshIdentityMapResult();
         this.refreshIdentityMapResult = refreshIdentityMapResult;
@@ -138,11 +144,13 @@ public abstract class MWAbstractReadQuery
 
     // ************* refresh remote identity map result ***********
 
+    @Override
     public boolean isRefreshRemoteIdentityMapResult() {
         return this.refreshRemoteIdentityMapResult;
     }
 
 
+    @Override
     public void setRefreshRemoteIdentityMapResult(boolean refreshRemoteIdentityMapResult) {
         boolean oldRefreshRemoteIdentityMapResult = isRefreshRemoteIdentityMapResult();
         this.refreshRemoteIdentityMapResult = refreshRemoteIdentityMapResult;
@@ -151,10 +159,12 @@ public abstract class MWAbstractReadQuery
 
     // ************* use wraper policy ***********
 
+    @Override
     public boolean isUseWrapperPolicy() {
         return this.useWrapperPolicy;
     }
 
+    @Override
     public void setUseWrapperPolicy(boolean useWrapperPolicy) {
         boolean oldUseWrapperPolicy = isUseWrapperPolicy();
         this.useWrapperPolicy = useWrapperPolicy;
@@ -164,6 +174,7 @@ public abstract class MWAbstractReadQuery
 
     // ************* rules **************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkDoesNotMaintainCacheButDoesRefreshIdentityMapResults(currentProblems);
@@ -195,6 +206,7 @@ public abstract class MWAbstractReadQuery
 
     // ************* runtime conversion ***********
 
+    @Override
     public DatabaseQuery runtimeQuery() {
         ObjectLevelReadQuery runtimeQuery = (ObjectLevelReadQuery) super.runtimeQuery();
         runtimeQuery.setShouldMaintainCache(isMaintainCache());
@@ -205,6 +217,7 @@ public abstract class MWAbstractReadQuery
         return runtimeQuery;
     }
 
+    @Override
     public void adjustFromRuntime(ObjectLevelReadQuery runtimeQuery) {
         super.adjustFromRuntime(runtimeQuery);
         setMaintainCache(runtimeQuery.shouldMaintainCache());

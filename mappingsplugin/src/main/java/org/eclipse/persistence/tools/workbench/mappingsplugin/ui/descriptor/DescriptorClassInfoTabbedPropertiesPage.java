@@ -32,6 +32,7 @@ public final class DescriptorClassInfoTabbedPropertiesPage extends AbstractPrope
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected void initializeLayout() {
         this.tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
         this.tabbedPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));

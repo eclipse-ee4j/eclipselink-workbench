@@ -45,6 +45,7 @@ public class MWError {
         return arguments;
     }
 
+    @Override
     public boolean equals(Object anObject) {
         if (this == anObject)
             return true;
@@ -58,6 +59,7 @@ public class MWError {
             return false;
     }
 
+    @Override
     public int hashCode() {
         // TODO: TEMPORARY
         if (errorId == null)

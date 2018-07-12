@@ -104,6 +104,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyAspectAdapter(getSelectionHolder(), DatabaseLoginAdapter.PLATFORM_CLASS_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -122,6 +123,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
                 }
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 DatabaseLoginAdapter login = (DatabaseLoginAdapter) subject;
@@ -140,6 +142,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
      *
      * @return The container with all its widgets
      */
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -213,6 +216,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 pseudoModel.setParentNode((AbstractNodeModel) e.getNewValue());
@@ -225,6 +229,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
      *
      * @param nodeHolder The holder of the subject, which is <code>DatabaseLoginAdapter</code>
      */
+    @Override
     protected void initialize(PropertyValueModel nodeHolder)
     {
         super.initialize(nodeHolder);
@@ -257,6 +262,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
          *
          * @return A new <code>JCheckBox</code>
          */
+        @Override
         protected JCheckBox buildExternalConnectionPoolingCheckBox()
         {
             JCheckBox checkBox = super.buildExternalConnectionPoolingCheckBox();
@@ -289,6 +295,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
         {
             return new PropertyAspectAdapter(PseudoExternalConnectionPoolingModel.ENABLED_PROPERTY, pseudoModel)
             {
+                @Override
                 protected Object getValueFromSubject()
                 {
                     PseudoExternalConnectionPoolingModel model = (PseudoExternalConnectionPoolingModel) subject;
@@ -317,6 +324,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
         {
             return new PropertyChangeListener()
             {
+                @Override
                 public void propertyChange(PropertyChangeEvent e)
                 {
                     DatabaseLoginAdapter login = (DatabaseLoginAdapter) getParent();
@@ -347,6 +355,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
         {
             return new PropertyChangeListener()
             {
+                @Override
                 public void propertyChange(PropertyChangeEvent e)
                 {
                     updateEnableState();
@@ -358,6 +367,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
         {
             return new PropertyChangeListener()
             {
+                @Override
                 public void propertyChange(PropertyChangeEvent e)
                 {
                     ServerPlatformAdapter oldServerPlatform = (ServerPlatformAdapter) e.getOldValue();
@@ -371,6 +381,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
             };
         }
 
+        @Override
         protected void checkParent(Node parent)
         {
             // The parent is set/unset dynamically
@@ -406,6 +417,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
             }
         }
 
+        @Override
         public String displayString()
         {
             return null;
@@ -438,6 +450,7 @@ public class RdbmsConnectionPropertiesPage extends AbstractLoginPropertiesPage
         /**
          * Initializes this pseudo model.
          */
+        @Override
         protected void initialize()
         {
             super.initialize();

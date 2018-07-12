@@ -57,6 +57,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#add(int, java.lang.Object)
      */
+    @Override
     public void add(int index, Object element) {
         this.synchList.add(index, element);
     }
@@ -64,6 +65,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#add(java.lang.Object)
      */
+    @Override
     public boolean add(Object o) {
         return this.synchList.add(o);
     }
@@ -71,6 +73,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#addAll(java.util.Collection)
      */
+    @Override
     public boolean addAll(Collection c) {
         return this.synchList.addAll(c);
     }
@@ -78,6 +81,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#addAll(int, java.util.Collection)
      */
+    @Override
     public boolean addAll(int index, Collection c) {
         return this.synchList.addAll(index, c);
     }
@@ -85,6 +89,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#clear()
      */
+    @Override
     public void clear() {
         this.synchList.clear();
     }
@@ -92,6 +97,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#contains(java.lang.Object)
      */
+    @Override
     public boolean contains(Object o) {
         return this.synchList.contains(o);
     }
@@ -99,6 +105,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#containsAll(java.util.Collection)
      */
+    @Override
     public boolean containsAll(Collection c) {
         return this.synchList.containsAll(c);
     }
@@ -106,6 +113,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#get(int)
      */
+    @Override
     public Object get(int index) {
         return this.synchList.get(index);
     }
@@ -113,6 +121,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#indexOf(java.lang.Object)
      */
+    @Override
     public int indexOf(Object o) {
         return this.synchList.indexOf(o);
     }
@@ -120,6 +129,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#isEmpty()
      */
+    @Override
     public boolean isEmpty() {
         return this.synchList.isEmpty();
     }
@@ -127,6 +137,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#iterator()
      */
+    @Override
     public Iterator iterator() {
         return this.synchList.iterator();
     }
@@ -134,6 +145,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#lastIndexOf(java.lang.Object)
      */
+    @Override
     public int lastIndexOf(Object o) {
         return this.synchList.lastIndexOf(o);
     }
@@ -141,6 +153,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#listIterator()
      */
+    @Override
     public ListIterator listIterator() {
         return this.synchList.listIterator();
     }
@@ -148,6 +161,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#listIterator(int)
      */
+    @Override
     public ListIterator listIterator(int index) {
         return this.synchList.listIterator(index);
     }
@@ -155,6 +169,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#remove(int)
      */
+    @Override
     public Object remove(int index) {
         return this.synchList.remove(index);
     }
@@ -162,6 +177,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#remove(java.lang.Object)
      */
+    @Override
     public boolean remove(Object o) {
         return this.synchList.remove(o);
     }
@@ -169,6 +185,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#removeAll(java.util.Collection)
      */
+    @Override
     public boolean removeAll(Collection c) {
         return this.synchList.removeAll(c);
     }
@@ -176,6 +193,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#retainAll(java.util.Collection)
      */
+    @Override
     public boolean retainAll(Collection c) {
         return this.synchList.retainAll(c);
     }
@@ -183,6 +201,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#set(int, java.lang.Object)
      */
+    @Override
     public Object set(int index, Object element) {
         return this.synchList.set(index, element);
     }
@@ -190,6 +209,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#size()
      */
+    @Override
     public int size() {
         return this.synchList.size();
     }
@@ -197,6 +217,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#subList(int, int)
      */
+    @Override
     public List subList(int fromIndex, int toIndex) {
         return this.synchList.subList(fromIndex, toIndex);
     }
@@ -204,6 +225,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#toArray()
      */
+    @Override
     public Object[] toArray() {
         return this.synchList.toArray();
     }
@@ -211,6 +233,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.Collection#toArray(java.lang.Object[])
      */
+    @Override
     public Object[] toArray(Object[] a) {
         return this.synchList.toArray(a);
     }
@@ -221,6 +244,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener#itemsAdded(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void itemsAdded(ListChangeEvent e) {
         int i = e.getIndex();
         for (Iterator stream = e.items(); stream.hasNext(); ) {
@@ -231,6 +255,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener#itemsRemoved(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void itemsRemoved(ListChangeEvent e) {
         int i = e.getIndex();
         for (Iterator stream = e.items(); stream.hasNext(); ) {
@@ -242,6 +267,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener#itemsReplaced(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void itemsReplaced(ListChangeEvent e) {
         int i = e.getIndex();
         for (ListIterator stream = e.items(); stream.hasNext(); ) {
@@ -252,6 +278,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.events.ListChangeListener#listChanged(org.eclipse.persistence.tools.workbench.utility.events.ListChangeEvent)
      */
+    @Override
     public void listChanged(ListChangeEvent e) {
         this.synchList.clear();
         CollectionTools.addAll(this.synchList, (Iterator) ((ListValueModel) e.getSource()).getValue());
@@ -263,6 +290,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see javax.swing.event.ListDataListener#contentsChanged(javax.swing.event.ListDataEvent)
      */
+    @Override
     public void contentsChanged(ListDataEvent e) {
         this.synchList.clear();
         ListModel lm = (ListModel) e.getSource();
@@ -275,6 +303,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see javax.swing.event.ListDataListener#intervalAdded(javax.swing.event.ListDataEvent)
      */
+    @Override
     public void intervalAdded(ListDataEvent e) {
         ListModel lm = (ListModel) e.getSource();
         int start = Math.min(e.getIndex0(), e.getIndex1());
@@ -287,6 +316,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see javax.swing.event.ListDataListener#intervalRemoved(javax.swing.event.ListDataEvent)
      */
+    @Override
     public void intervalRemoved(ListDataEvent e) {
         int start = Math.min(e.getIndex0(), e.getIndex1());
         int end = Math.max(e.getIndex0(), e.getIndex1());
@@ -302,6 +332,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#equals(java.lang.Object)
      */
+    @Override
     public boolean equals(Object o) {
         return this.synchList.equals(o);
     }
@@ -309,6 +340,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.util.List#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.synchList.hashCode();
     }
@@ -316,6 +348,7 @@ public class SynchronizedList implements List, ListChangeListener, ListDataListe
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return this.synchList.toString();
     }

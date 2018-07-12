@@ -36,6 +36,7 @@ final class VariableOneToOneMappingTabbedPropertiesPage extends TabbedProperties
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(new VariableOneToOneMappingPanel(getNodeHolder(), getWorkbenchContextHolder()), "VARIABLE_ONE_TO_ONE_GENERAL_TAB");
         addTab(new VariableOneToOneQueryKeyAssociationsPanel(getNodeHolder(), getWorkbenchContextHolder()), "VARIABLE_ONE_TO_ONE_QUERY_KEY_ASSOCIATIONS_TAB");

@@ -51,6 +51,7 @@ public final class NullReader
     /**
      * @see java.io.Reader#close()
      */
+    @Override
     public void close() {
         // do nothing
     }
@@ -58,6 +59,7 @@ public final class NullReader
     /**
      * @see java.io.Reader#read()
      */
+    @Override
     public int read() {
         return -1;
     }
@@ -65,6 +67,7 @@ public final class NullReader
     /**
      * @see java.io.Reader#read(char[])
      */
+    @Override
     public int read(char[] cbuf) {
         return -1;
     }
@@ -72,6 +75,7 @@ public final class NullReader
     /**
      * @see java.io.Reader#read(char[], int, int)
      */
+    @Override
     public int read(char[] cbuf, int off, int len) {
         return -1;
     }
@@ -79,6 +83,7 @@ public final class NullReader
     /**
      * @see java.io.Reader#skip(long)
      */
+    @Override
     public long skip(long n) {
         return 0;
     }
@@ -86,6 +91,7 @@ public final class NullReader
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

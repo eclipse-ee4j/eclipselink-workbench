@@ -82,6 +82,7 @@ public final class Counter
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public synchronized boolean equals(Object o) {
         if ( ! (o instanceof Counter)) {
             return false;
@@ -92,6 +93,7 @@ public final class Counter
     /**
      * @see Object#hashCode()
      */
+    @Override
     public synchronized int hashCode() {
         return this.count;
     }
@@ -99,6 +101,7 @@ public final class Counter
     /**
      * @see Object#clone()
      */
+    @Override
     public synchronized Object clone() {
         try {
             return super.clone();
@@ -110,6 +113,7 @@ public final class Counter
     /**
      * @see Object#toString()
      */
+    @Override
     public synchronized String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(ClassTools.shortClassNameForObject(this));

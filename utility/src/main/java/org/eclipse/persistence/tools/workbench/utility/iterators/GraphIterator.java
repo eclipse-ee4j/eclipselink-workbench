@@ -156,6 +156,7 @@ public class GraphIterator
     /**
      * @see java.util.Iterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         return this.nextNeighbor != END_NEIGHBOR;
     }
@@ -163,6 +164,7 @@ public class GraphIterator
     /**
      * @see java.util.Iterator#next()
      */
+    @Override
     public Object next() {
         if (this.nextNeighbor == END_NEIGHBOR) {
             throw new NoSuchElementException();
@@ -176,6 +178,7 @@ public class GraphIterator
     /**
      * @see java.util.Iterator#remove()
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException("remove()");
     }
@@ -190,6 +193,7 @@ public class GraphIterator
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this) + '(' + this.currentIterator + ')';
     }
@@ -213,10 +217,12 @@ public class GraphIterator
         MisterRogers NULL_INSTANCE =
             new MisterRogers() {
                 // return no neighbors
+                @Override
                 public Iterator neighbors(Object next) {
                     return NullIterator.instance();
                 }
 
+                @Override
                 public String toString() {
                     return super.toString() + "(Hello, neighbor.)";
                 }

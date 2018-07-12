@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational
 import java.util.Iterator;
 import java.util.Set;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumnPair;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalClassDescriptor;
@@ -27,7 +26,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassCodeGen
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethod;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethodCodeGenPolicy;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.OneToManyMapping;
 import org.eclipse.persistence.oxm.XMLDescriptor;
@@ -44,6 +42,7 @@ public final class MWOneToManyMapping
         super(descriptor, attribute, name);
     }
 
+    @Override
     public MWOneToManyMapping asMWOneToManyMapping() {
         return this;
     }
@@ -51,6 +50,7 @@ public final class MWOneToManyMapping
     /**
     * IMPORTANT:  See MWRMapping class comment.
     */
+    @Override
     protected void initializeOn(MWMapping newMapping)  {
         newMapping.initializeFromMWOneToManyMapping(this);
     }
@@ -77,6 +77,7 @@ public final class MWOneToManyMapping
     }
 
 
+    @Override
     public boolean isOneToManyMapping(){
         return true;
     }
@@ -85,6 +86,7 @@ public final class MWOneToManyMapping
      * Used for code gen.
      * See MWMapping.accessorCodeGenPolicy(MWMethod)
      */
+    @Override
     public MWMethodCodeGenPolicy accessorCodeGenPolicy(MWMethod accessor, MWClassCodeGenPolicy classCodeGenPolicy)
     {
         // If TopLink maintains the relationship, we don't care about what attribute
@@ -102,6 +104,7 @@ public final class MWOneToManyMapping
 
     // ************* MWQueryable implementation **************
 
+    @Override
     public String iconKey() {
         return "mapping.oneToMany";
     }
@@ -112,6 +115,7 @@ public final class MWOneToManyMapping
     /**
      * one-to-many mappings are always "target foreign key"
      */
+    @Override
     protected Set buildCandidateReferences() {
         return this.buildCandidateTargetReferences();
     }
@@ -119,10 +123,12 @@ public final class MWOneToManyMapping
 
     // ************* runtime conversion **************
 
+    @Override
     protected DatabaseMapping buildRuntimeMapping() {
         return new OneToManyMapping();
     }
 
+    @Override
     public DatabaseMapping runtimeMapping() {
         OneToManyMapping runtimeMapping = (OneToManyMapping) super.runtimeMapping();
         if (getReference() != null) {

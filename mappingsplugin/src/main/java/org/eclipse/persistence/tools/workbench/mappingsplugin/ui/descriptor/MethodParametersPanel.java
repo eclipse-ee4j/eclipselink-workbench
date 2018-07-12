@@ -42,7 +42,6 @@ import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContex
 import org.eclipse.persistence.tools.workbench.framework.resources.ResourceRepository;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.uitools.SwingComponentFactory;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethod;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWMethodParameter;
@@ -81,6 +80,7 @@ final class MethodParametersPanel
      * This action adds a new database field at the end of the table.
      */
     private class AddParameterAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             MWClass type = ClassChooserTools.promptForType(
                     MethodParametersPanel.this.getMethod().getRepository(),
@@ -114,6 +114,7 @@ final class MethodParametersPanel
     }
 
     private class RemoveParameterAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             removeSelectedMethodParameters();
         }
@@ -138,6 +139,7 @@ final class MethodParametersPanel
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     removeParameterButton.setEnabled(rowSelectionModel.getSelectedValue() != null);
@@ -148,9 +150,11 @@ final class MethodParametersPanel
 
     private ListValueModel buildParametersAdapter() {
         return new ListAspectAdapter(this.methodHolder, MWMethod.METHOD_PARAMETERS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWMethod) subject).methodParameters();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWMethod) subject).methodParametersSize();
             }
@@ -276,6 +280,7 @@ final class MethodParametersPanel
         private PropertyChangeHandler(JScrollPane scrollPane) {
             this.scrollPane = scrollPane;
         }
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             JTable table = (JTable) scrollPane.getViewport().getView();
             if (table.isEnabled())
@@ -304,14 +309,17 @@ final class MethodParametersPanel
             this.resourceRepository = repository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             return this.resourceRepository.getString(COLUMN_NAME_KEYS[index]);
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case TYPE_COLUMN:                return Object.class;
@@ -321,10 +329,12 @@ final class MethodParametersPanel
             }
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             return index != TYPE_COLUMN;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWMethodParameter methodParameter = (MWMethodParameter) subject;
             PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];
@@ -337,9 +347,11 @@ final class MethodParametersPanel
 
         private PropertyValueModel buildTypeAdapter(MWMethodParameter methodParameter) {
             PropertyValueModel adapter = new PropertyAspectAdapter(MWMethodParameter.TYPE_PROPERTY, methodParameter) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWMethodParameter) subject).getType();
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWMethodParameter) subject).setType((MWClass) value);
                 }
@@ -349,9 +361,11 @@ final class MethodParametersPanel
 
         private PropertyValueModel buildDimensionalityAdapter(MWMethodParameter methodParameter) {
             return new PropertyAspectAdapter(MWMethodParameter.DIMENSIONALITY_PROPERTY, methodParameter) {
+                @Override
                 protected Object getValueFromSubject() {
                     return new Integer(((MWMethodParameter) subject).getDimensionality());
                 }
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWMethodParameter) subject).setDimensionality(((Integer) value).intValue());
                 }
@@ -361,6 +375,7 @@ final class MethodParametersPanel
 
     private PropertyChangeListener buildMethodListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(getMethod() != null);
             }

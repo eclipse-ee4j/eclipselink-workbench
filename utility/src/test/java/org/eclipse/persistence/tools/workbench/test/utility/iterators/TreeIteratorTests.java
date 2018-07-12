@@ -39,6 +39,7 @@ public class TreeIteratorTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -137,6 +138,7 @@ public class TreeIteratorTests extends TestCase {
 
     private TreeIterator.Midwife buildMidwife() {
         return new TreeIterator.Midwife() {
+            @Override
             public Iterator children(Object next) {
                 return ((TreeNode) next).children();
             }
@@ -148,6 +150,7 @@ public class TreeIteratorTests extends TestCase {
      */
     private Iterator buildTreeIterator2() {
         return new TreeIterator(this.buildTree()) {
+            @Override
             public Iterator children(Object next) {
                 return ((TreeNode) next).children();
             }
@@ -193,6 +196,7 @@ public class TreeIteratorTests extends TestCase {
         public int childrenSize() {
             return this.children.size();
         }
+        @Override
         public String toString() {
             return "TreeNode(" + this.name + ")";
         }

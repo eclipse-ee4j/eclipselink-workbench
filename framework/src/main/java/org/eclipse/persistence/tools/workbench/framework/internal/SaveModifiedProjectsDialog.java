@@ -106,6 +106,7 @@ final class SaveModifiedProjectsDialog
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setName("File.SaveAll");
@@ -125,6 +126,7 @@ final class SaveModifiedProjectsDialog
     private CellRendererAdapter buildCellRendererAdapter() {
         return new AbstractCellRendererAdapter() {
 
+            @Override
             public String buildAccessibleName(Object value) {
                 ApplicationNode node = (ApplicationNode) value;
                 String accessibleName = node.accessibleName();
@@ -141,10 +143,12 @@ final class SaveModifiedProjectsDialog
                 return accessibleName;
             }
 
+            @Override
             public Icon buildIcon(Object value) {
                 return ((Displayable) value).icon();
             }
 
+            @Override
             public String buildText(Object value) {
                 ApplicationNode node = (ApplicationNode) value;
                 String display = node.displayString();
@@ -163,6 +167,7 @@ final class SaveModifiedProjectsDialog
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.ui.dialog.AbstractDialog#buildMainPanel()
      */
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setPreferredSize(new Dimension(405, 250));    // use Golden Ratio
@@ -249,10 +254,12 @@ final class SaveModifiedProjectsDialog
         return mainPanel;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.file.saveAll";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return checkList;
     }
@@ -262,6 +269,7 @@ final class SaveModifiedProjectsDialog
 
     private Action buildSelectAllAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 SaveModifiedProjectsDialog.this.selectAllPressed();
             }
@@ -274,6 +282,7 @@ final class SaveModifiedProjectsDialog
 
     private Action buildUnselectAllAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 SaveModifiedProjectsDialog.this.unselectAllPressed();
             }

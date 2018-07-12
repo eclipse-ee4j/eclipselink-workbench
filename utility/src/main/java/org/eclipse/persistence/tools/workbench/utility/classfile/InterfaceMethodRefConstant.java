@@ -34,10 +34,12 @@ public class InterfaceMethodRefConstant extends AbstractMethodRefConstant {
         super(pool, tag, stream);
     }
 
+    @Override
     public String description() {
         return "interface method ref";
     }
 
+    @Override
     public void accept(Visitor visitor) {
         super.accept(visitor);
         visitor.visit(this);

@@ -29,6 +29,7 @@ final class MapAsVariableOneToOneAction extends ChangeMappingTypeAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.variableOneToOne");
@@ -37,14 +38,17 @@ final class MapAsVariableOneToOneAction extends ChangeMappingTypeAction {
         this.initializeToolTipText("MAP_AS_VARIABLE_ONE_TO_ONE_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWVariableOneToOneMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWRelationalClassDescriptor) descriptor).addVariableOneToOneMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWVariableOneToOneMapping.class;
     }

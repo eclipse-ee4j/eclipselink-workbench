@@ -47,50 +47,62 @@ public final class NullChangeNotifier
         super();
     }
 
+    @Override
     public void stateChanged(StateChangeListener listener, StateChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void propertyChange(PropertyChangeListener listener, PropertyChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void itemsAdded(CollectionChangeListener listener, CollectionChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void itemsRemoved(CollectionChangeListener listener, CollectionChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void collectionChanged(CollectionChangeListener listener, CollectionChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void itemsAdded(ListChangeListener listener, ListChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void itemsRemoved(ListChangeListener listener, ListChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void itemsReplaced(ListChangeListener listener, ListChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void listChanged(ListChangeListener listener, ListChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void nodeAdded(TreeChangeListener listener, TreeChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void nodeRemoved(TreeChangeListener listener, TreeChangeEvent event) {
         // do nothing
     }
 
+    @Override
     public void treeChanged(TreeChangeListener listener, TreeChangeEvent event) {
         // do nothing
     }

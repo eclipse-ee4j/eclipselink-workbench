@@ -37,6 +37,7 @@ final class RelationalProjectTabbedPropertiesPage extends ProjectTabbedPropertie
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(buildProjectGeneralPropertiesPage(), "GENERAL_TAB_TITLE");
         addTab(buildProjectSequencingPropertiesPage(), "SEQUENCING_TAB_TITLE");
@@ -52,6 +53,7 @@ final class RelationalProjectTabbedPropertiesPage extends ProjectTabbedPropertie
         return new RelationalProjectOptionsPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
 
+    @Override
     protected Component buildProjectDefaultsPropertiesPage()
     {
         return new RelationalProjectDefaultsPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());

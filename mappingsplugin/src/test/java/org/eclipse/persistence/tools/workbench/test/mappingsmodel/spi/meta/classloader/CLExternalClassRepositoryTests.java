@@ -39,23 +39,28 @@ public class CLExternalClassRepositoryTests
         super(name);
     }
 
+    @Override
     protected ExternalClassRepositoryFactory buildFactory() {
         return CLExternalClassRepositoryFactory.instance();
     }
 
+    @Override
     protected ExternalClassRepository systemClasspathRepository() throws ClassNotFoundException {
         return this.factory.buildClassRepository(new File[0]);
     }
 
+    @Override
     protected ExternalClassRepository systemRepositoryFor(ExternalClassRepository repository) throws ClassNotFoundException {
         Class systemReposClass = this.systemRepositoryClass();
         return (ExternalClassRepository) ClassTools.getStaticFieldValue(systemReposClass, "INSTANCE");
     }
 
+    @Override
     protected void verifyArrayTypesContains(Map arrayTypes, Class arrayType) {
         assertTrue(arrayTypes.containsKey(arrayType));
     }
 
+    @Override
     protected ExternalClassRepository buildExternalClassRepository(File[] classpath) {
         return this.factory.buildClassRepository(classpath);
     }
@@ -66,12 +71,14 @@ public class CLExternalClassRepositoryTests
 //        super.testPerformance();
 //    }
 //
+    @Override
     public void testSystemArrayTypes() throws Exception {
         // clear out the cached external class descriptions
         this.clearSystemRepository();
         super.testSystemArrayTypes();
     }
 
+    @Override
     public void testProjectArrayTypes() throws Exception {
         // clear out the cached external class descriptions
         this.clearSystemRepository();

@@ -39,6 +39,7 @@ final class XmlProjectOptionsPropertiesPage extends ProjectOptionsPropertiesPage
         super(oxProjectNodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
 
         JPanel panel = new JPanel(new GridBagLayout());

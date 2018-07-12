@@ -39,11 +39,13 @@ public class TriStateBooleanCellRendererAdapterTest extends TestCase
         return new TestSuite(TriStateBooleanCellRendererAdapterTest.class);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.simpleRepos = buildStringRepository();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -54,12 +56,15 @@ public class TriStateBooleanCellRendererAdapterTest extends TestCase
     {
         TriStateBooleanCellRendererAdapter decorator =
             new TriStateBooleanCellRendererAdapter(this.simpleRepos) {
+                @Override
                 protected String undefinedResourceKey() {
                     return "test1";
                 }
+                @Override
                 protected String falseResourceKey() {
                     return "test2";
                 }
+                @Override
                 protected String trueResourceKey() {
                     return "test3";
                 }
@@ -83,6 +88,7 @@ public class TriStateBooleanCellRendererAdapterTest extends TestCase
 
     private StringRepository buildStringRepository() {
         return new ResourceBundleStringRepository(TestResourceBundle.class) {
+            @Override
             public String getString(String key) {
                 return key;
             }

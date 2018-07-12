@@ -237,9 +237,11 @@ public class LoginSpecPanel
 
     private CollectionValueModel buildAllDriverClassesAdapter() {
         return new CollectionAspectAdapter(selectedLoginSpecHolder) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return compositeDriverClassIterator(MWLoginSpec.commonDriverClassNames());
             }
+            @Override
             protected int sizeFromSubject() {
                 return compositeDriverClassSize(MWLoginSpec.commonDriverClassNamesSize());
             }
@@ -265,6 +267,7 @@ public class LoginSpecPanel
 
     private PropertyValueModel buildDriverClassAdapter() {
         return new PropertyAspectAdapter(this.selectedLoginSpecHolder, MWLoginSpec.DRIVER_CLASS_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 String name = ((MWLoginSpec) this.subject).getDriverClassName();
                 if (name == null) {
@@ -275,6 +278,7 @@ public class LoginSpecPanel
                 }
                 return name;
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWLoginSpec) this.subject).setDriverClassName((String) value);
             }
@@ -296,9 +300,11 @@ public class LoginSpecPanel
 
     private CollectionValueModel buildAllConnectionUrlsAdapter() {
         return new CollectionAspectAdapter(this.selectedLoginSpecHolder, MWLoginSpec.CANDIDATE_URLS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return compositeConnectionUrlIterator(((MWLoginSpec) this.subject).candidateURLs());
             }
+            @Override
             protected int sizeFromSubject() {
                 return compositeConnectionUrlSize(((MWLoginSpec) this.subject).candidateURLsSize());
             }
@@ -324,6 +330,7 @@ public class LoginSpecPanel
 
     private PropertyValueModel buildConnectionUrlAdapter() {
         return new PropertyAspectAdapter(this.selectedLoginSpecHolder, MWLoginSpec.URL_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 String url = ((MWLoginSpec) this.subject).getURL();
                 if (url == null) {
@@ -334,6 +341,7 @@ public class LoginSpecPanel
                 }
                 return url;
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 String string = (String) value;
                 MWLoginSpec loginSpec = (MWLoginSpec) this.subject;
@@ -359,9 +367,11 @@ public class LoginSpecPanel
 
     private PropertyValueModel buildUserNameAdapter() {
         return new PropertyAspectAdapter(this.selectedLoginSpecHolder, MWLoginSpec.USER_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWLoginSpec) this.subject).getUserName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWLoginSpec) this.subject).setUserName((String) value);
             }
@@ -382,9 +392,11 @@ public class LoginSpecPanel
 
     private PropertyValueModel buildPasswordAdapter() {
         return new PropertyAspectAdapter(this.selectedLoginSpecHolder, MWLoginSpec.PASSWORD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWLoginSpec) this.subject).getPassword();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWLoginSpec) this.subject).setPassword((String) value);
             }
@@ -404,9 +416,11 @@ public class LoginSpecPanel
 
     private PropertyValueModel buildSavePasswordPropertyAdapter() {
         return new PropertyAspectAdapter(this.selectedLoginSpecHolder, MWLoginSpec.SAVE_PASSWORD_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWLoginSpec) this.subject).isSavePassword());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWLoginSpec) this.subject).setSavePassword(((Boolean) value).booleanValue());
             }
@@ -415,6 +429,7 @@ public class LoginSpecPanel
 
     private PropertyChangeListener buildSelectedLoginInfoListener(final Component component) {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 component.setEnabled(evt.getNewValue() != null);
             }

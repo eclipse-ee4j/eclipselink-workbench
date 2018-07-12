@@ -25,8 +25,6 @@ import javax.swing.JPanel;
 
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.project.MWProject;
-import org.eclipse.persistence.tools.workbench.uitools.app.PropertyAspectAdapter;
 import org.eclipse.persistence.tools.workbench.uitools.app.PropertyValueModel;
 
 
@@ -36,6 +34,7 @@ final class ProjectGeneralPropertiesPage extends AbstractProjectGeneralPropertie
         super(projectNodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage()
     {
         GridBagConstraints constraints = new GridBagConstraints();

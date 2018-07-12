@@ -146,6 +146,7 @@ abstract class CompositeObjectMappingPropertiesPage
 
     protected ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCompositeObjectMapping) this.subject).getXmlField();
             }

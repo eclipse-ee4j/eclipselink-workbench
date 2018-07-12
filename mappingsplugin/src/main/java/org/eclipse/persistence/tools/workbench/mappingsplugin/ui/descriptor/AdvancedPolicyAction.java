@@ -157,6 +157,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     }
 
 
+    @Override
     protected void execute()
     {
         List advancedPolicyItemList = buildApplicableAdvancedPolicyHolderList();
@@ -211,6 +212,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     {
         Filter iteratorFilter = new Filter()
         {
+            @Override
             public boolean accept(Object o)
             {
                 return ((AdvancedPolicyHolder)o).initialSelectionState();
@@ -228,6 +230,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     {
         return new AbstractCellRendererAdapter()
         {
+            @Override
             public String buildText(Object value)
             {
                 return ((AdvancedPolicyHolder) value).displayString();
@@ -236,6 +239,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     }
     private Comparator buildAdvancedPolicyComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return Collator.getInstance().compare(((AdvancedPolicyHolder) o1).displayString(), ((AdvancedPolicyHolder) o2).displayString());
             }
@@ -258,12 +262,15 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     private class HackableListDataListener implements ListDataListener
     {
 
+        @Override
         public void contentsChanged(ListDataEvent e)
         {
         }
+        @Override
         public void intervalAdded(ListDataEvent e)
         {
         }
+        @Override
         public void intervalRemoved(ListDataEvent e)
         {
         }
@@ -272,6 +279,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
 
     private class CopyingPolicyHolder implements AdvancedPolicyHolder
     {
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -287,6 +295,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -302,6 +311,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -317,6 +327,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("COPY_POLICY_MAPPING_DESCRIPTOR_ACTION");
@@ -325,6 +336,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
 
     private class AfterLoadingPolicyHolder implements AdvancedPolicyHolder
     {
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -340,6 +352,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -355,6 +368,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -370,6 +384,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("AFTER_LOAD_POLICY_MAPPING_DESCRIPTOR_ACTION");
@@ -378,6 +393,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
 
     private class InheritencePolicyHolder implements AdvancedPolicyHolder
     {
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -393,6 +409,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -408,6 +425,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -423,6 +441,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("INHERITANCE_POLICY_MAPPING_DESCRIPTOR_ACTION");
@@ -431,6 +450,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
 
     private class InstantiationPolicyHolder implements AdvancedPolicyHolder
     {
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -446,6 +466,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -461,6 +482,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -476,6 +498,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("INSTANTIATION_POLICY_MAPPING_DESCRIPTOR_ACTION");
@@ -484,6 +507,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
 
     public class EventsPolicyHolder implements AdvancedPolicyHolder
     {
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -499,6 +523,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -514,6 +539,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             ApplicationNode[] selectedNodes = selectedNodes();
@@ -529,6 +555,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("EVENTS_POLICY_MAPPING_DESCRIPTOR_ACTION");
@@ -538,6 +565,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     private class InterfaceAliasPolicyHolder implements AdvancedPolicyHolder
     {
 
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selection = selectedNodes();
@@ -552,6 +580,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             boolean isSelected = true;
@@ -564,6 +593,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selection = selectedNodes();
@@ -578,6 +608,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("INTERFACE_ALIAS_ACTION");
@@ -587,6 +618,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     private class MultiTableInfoPolicyHolder implements AdvancedPolicyHolder
     {
 
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selection = selectedNodes();
@@ -601,6 +633,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public boolean initialSelectionState()
         {
             boolean isSelected = true;
@@ -613,6 +646,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selection = selectedNodes();
@@ -627,6 +661,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("MULTI_TABLE_INFO_ACTION");
@@ -636,6 +671,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
     private class ReturningPolicyHolder implements AdvancedPolicyHolder
     {
 
+        @Override
         public void addToSelectedNodes()
         {
             ApplicationNode[] selection = selectedNodes();
@@ -656,6 +692,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
                 }
             }
         }
+        @Override
         public boolean initialSelectionState()
         {
             boolean isSelected = true;
@@ -668,6 +705,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             return isSelected;
         }
 
+        @Override
         public void removeFromSelectedNodes()
         {
             ApplicationNode[] selection = selectedNodes();
@@ -682,6 +720,7 @@ public class AdvancedPolicyAction extends AbstractFrameworkAction
             }
         }
 
+        @Override
         public String displayString()
         {
             return getResourceString("RETURNING_ACTION");

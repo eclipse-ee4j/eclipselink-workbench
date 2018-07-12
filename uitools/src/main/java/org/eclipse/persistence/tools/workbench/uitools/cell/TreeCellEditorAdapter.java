@@ -49,6 +49,7 @@ public class TreeCellEditorAdapter
 
     private ImmediateEditListener buildImmediateEditListener() {
         return new ImmediateEditListener() {
+            @Override
             public void immediateEdit() {
                 TreeCellEditorAdapter.this.stopCellEditing();
             }
@@ -61,6 +62,7 @@ public class TreeCellEditorAdapter
     /**
      * @see javax.swing.CellEditor#getCellEditorValue()
      */
+    @Override
     public Object getCellEditorValue() {
         return this.renderer.getValue();
     }
@@ -72,6 +74,7 @@ public class TreeCellEditorAdapter
      * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
      */
 
+    @Override
     public Component getTreeCellEditorComponent(JTree tree, Object value, boolean isSelected, boolean expanded, boolean leaf, int row) {
         return this.renderer.getTreeCellRendererComponent(tree, value, isSelected, expanded, leaf, row, true);
     }

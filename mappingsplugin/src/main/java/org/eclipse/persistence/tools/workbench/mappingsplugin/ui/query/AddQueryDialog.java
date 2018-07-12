@@ -63,6 +63,7 @@ class AddQueryDialog
         this.supportsReportQuery = supportsReportQuery;
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel messagePanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -206,23 +207,28 @@ class AddQueryDialog
 
         return namePanel;
     }
+    @Override
     public void actionPerformed(ActionEvent ae) {
         getNameTextField().requestFocus();
         validateQuery();
     }
+    @Override
     public void caretUpdate(CaretEvent ce) {
         validateQuery();
     }
 
+    @Override
     protected String helpTopicId() {
         return "descriptor.queryManager.namedQueries";
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         setTitle(resourceRepository().getString("ADD_QUERY_DIALOG.title"));
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.nameTextField;
     }

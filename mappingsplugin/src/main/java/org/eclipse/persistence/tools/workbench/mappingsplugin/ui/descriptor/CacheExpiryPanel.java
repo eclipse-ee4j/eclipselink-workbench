@@ -17,7 +17,6 @@ package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,8 +28,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractSubjectPanel;
@@ -66,6 +63,7 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
         addHelpTopicId(this, helpId);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.cacheExpiryHolder = buildCacheExpiryAdapter();
@@ -74,10 +72,12 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildCacheExpiryAdapter() {
         return new PropertyAspectAdapter(getSubjectHolder(), MWDescriptorCachingPolicy.CACHE_EXPIRY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCachingPolicy) this.subject).getCacheExpiry();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 //Do nothing here, this is handled in the projectDefaultAdapter
             }
@@ -86,10 +86,12 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildCacheExpiryTypeAdapter() {
         return new PropertyAspectAdapter(this.cacheExpiryHolder, MWCacheExpiry.CACHE_EXPIRY_TYPE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCacheExpiry) this.subject).getExpiryType();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCacheExpiry) this.subject).setExpiryType((String) value);
             }
@@ -97,6 +99,7 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
     }
 
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -293,9 +296,11 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildProjectDefaultAdapter() {
         return new TransformationPropertyValueModel(this.cacheExpiryHolder) {
+            @Override
             protected Object transform(Object value) {
                 return (value instanceof MWDescriptorCacheExpiry) ? Boolean.FALSE : Boolean.TRUE;
             }
+            @Override
             protected Object reverseTransform(Object value) {
                 MWCachingPolicy cachingPolicy = (MWCachingPolicy) getSubjectHolder().getValue();
                 if (cachingPolicy == null) {
@@ -335,10 +340,12 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildTimeToLiveAdapter() {
         return new PropertyAspectAdapter(this.cacheExpiryHolder, MWCacheExpiry.TIME_TO_LIVE_EXPIRY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCacheExpiry) this.subject).getTimeToLiveExpiry();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCacheExpiry) this.subject).setTimeToLiveExpiry((Long) value);
             }
@@ -368,10 +375,12 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildDailyExpiryHolder() {
         return new PropertyAspectAdapter(this.cacheExpiryHolder, MWCacheExpiry.DAILY_EXPIRY_TIME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCacheExpiry) this.subject).getDailyExpiryTime();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCacheExpiry) this.subject).setDailyExpiryTime((Date) value);
             }
@@ -385,10 +394,12 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildUpdateReadTimeOnUpdateHolder() {
         return new PropertyAspectAdapter(this.cacheExpiryHolder, MWCacheExpiry.UPDATE_READ_TIME_ON_UPDATE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWCacheExpiry) this.subject).getUpdateReadTimeOnUpdate());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWCacheExpiry) this.subject).setUpdateReadTimeOnUpdate(((Boolean) value).booleanValue());
             }
@@ -397,6 +408,7 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildUpdateReadTimeOnUpdateComponentEnabler(Component component) {
         ValueModel noExpiryHolder = new TransformationPropertyValueModel(this.cacheExpiryTypeHolder) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value != MWCacheExpiry.CACHE_EXPIRY_NO_EXPIRY);
             }
@@ -406,6 +418,7 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildTimeToLiveExpiryComponentEnabler(Component[] components) {
         ValueModel noExpiryHolder = new TransformationPropertyValueModel(this.cacheExpiryTypeHolder) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value == MWCacheExpiry.CACHE_EXPIRY_TIME_TO_LIVE_EXPIRY);
             }
@@ -415,6 +428,7 @@ final class CacheExpiryPanel extends AbstractSubjectPanel {
 
     private ComponentEnabler buildDailyExpiryComponentEnabler(Component[] components) {
         ValueModel noExpiryHolder = new TransformationPropertyValueModel(this.cacheExpiryTypeHolder) {
+            @Override
             protected Object transform(Object value) {
                 return Boolean.valueOf(value == MWCacheExpiry.CACHE_EXPIRY_DAILY_EXPIRY);
             }

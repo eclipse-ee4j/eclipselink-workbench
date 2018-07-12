@@ -35,6 +35,7 @@ public class DisplayableTableCellRenderer extends SimpleTableCellRenderer {
     /**
      * Cast the value to Displayable and return its icon.
      */
+    @Override
     protected Icon buildIcon(Object value) {
         return ((Displayable) value).icon();
     }
@@ -42,6 +43,7 @@ public class DisplayableTableCellRenderer extends SimpleTableCellRenderer {
     /**
      * Cast the value to Displayable and return its display string.
      */
+    @Override
     protected String buildText(Object value) {
         return ((Displayable) value).displayString();
     }

@@ -22,7 +22,6 @@ import java.util.TreeSet;
 import java.util.Vector;
 
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWDataField;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.ProblemConstants;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.db.MWColumn;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.MWDescriptorLockingPolicy;
@@ -37,7 +36,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
 import org.eclipse.persistence.descriptors.AllFieldsLockingPolicy;
 import org.eclipse.persistence.descriptors.ChangedFieldsLockingPolicy;
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.FieldsLockingPolicy;
 import org.eclipse.persistence.descriptors.SelectedFieldsLockingPolicy;
 import org.eclipse.persistence.descriptors.TimestampLockingPolicy;
@@ -84,6 +82,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     // ********** initialization **********
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.versionLockingColumnHandle = new MWColumnHandle(this, this.buildVersionLockingColumnScrubber());
@@ -93,6 +92,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     // ********** containment hierarchy **********
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.versionLockingColumnHandle);
@@ -101,9 +101,11 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     private NodeReferenceScrubber buildVersionLockingColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWTableDescriptorLockingPolicy.this.setVersionLockingColumn(null);
             }
+            @Override
             public String toString() {
                 return "MWTableDescriptorLockingPolicy.buildVersionLockingColumnScrubber()";
             }
@@ -119,9 +121,11 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     private NodeReferenceScrubber buildColumnLockColumnScrubber() {
         return new NodeReferenceScrubber() {
+            @Override
             public void nodeReferenceRemoved(Node node, MWHandle handle) {
                 MWTableDescriptorLockingPolicy.this.removeColumnLockColumnHandle((MWColumnHandle) handle);
             }
+            @Override
             public String toString() {
                 return "MWTableDescriptorLockingPolicy.buildColumnLockColumnScrubber()";
             }
@@ -148,10 +152,12 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
         this.firePropertyChanged(VERSION_LOCKING_COLUMN_PROPERTY, old, column);
     }
 
+    @Override
     public MWDataField getVersionLockField() {
         return this.getVersionLockingColumn();
     }
 
+    @Override
     public void setVersionLockField(MWDataField lockField) {
         this.setVersionLockingColumn((MWColumn) lockField);
     }
@@ -160,6 +166,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
     // ***** columnLockColumns
     private Iterator columnLockColumnHandles() {
         return new CloneIterator(this.columnLockColumnHandles) {
+            @Override
             protected void remove(Object current) {
                 MWTableDescriptorLockingPolicy.this.removeColumnLockColumnHandle((MWColumnHandle) current);
             }
@@ -173,6 +180,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     public Iterator columnLockColumns() {
         return new TransformationIterator(this.columnLockColumnHandles()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumnHandle) next).getColumn();
             }
@@ -207,12 +215,14 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     public Iterator columnLockColumnsNames() {
         return new TransformationIterator(this.columnLockColumns()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWColumn) next).qualifiedName();
             }
         };
     }
 
+    @Override
     public void setLockingType(String newLockingType) {
         String oldLockingType = getLockingType();
         super.setLockingType(newLockingType);
@@ -278,6 +288,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     // ************* problems *************
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.selectedColumnsLockingNotMapped(problems);
@@ -285,6 +296,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
     }
 
     //override for column locking types don't want to do check this if we are column locking
+    @Override
     protected void checkWriteLockFieldWritable(List newProblems) {
         if (this.getOptimisticLockingType() == OPTIMISTIC_VERSION_LOCKING_TYPE) {
             super.checkWriteLockFieldWritable(newProblems);
@@ -316,6 +328,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
         }
     }
 
+    @Override
     protected void checkLockFieldSpecifiedForLockingPolicy(List newProblems) {
         if (this.getLockingType() == OPTIMISTIC_LOCKING
                 && this.getOptimisticLockingType() == OPTIMISTIC_VERSION_LOCKING_TYPE)
@@ -353,6 +366,7 @@ public final class MWTableDescriptorLockingPolicy extends MWDescriptorLockingPol
 
     // ************* runtime conversion *************
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         super.adjustRuntimeDescriptor(runtimeDescriptor);
         if (getLockingType() == OPTIMISTIC_LOCKING) {

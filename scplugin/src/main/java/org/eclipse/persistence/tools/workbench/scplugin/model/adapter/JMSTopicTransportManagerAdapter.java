@@ -63,12 +63,14 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new JMSTopicTransportManagerConfig();
     }
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
         super.initializeFromModel( scConfig);
 
@@ -78,6 +80,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Initializes default value.
      */
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 
@@ -87,6 +90,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
         super.initialize( newConfig);
 
@@ -96,6 +100,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 
@@ -167,6 +172,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Returns jndiNamingService URL.
      */
+    @Override
     public String getURL() {
 
         return this.namingService.getURL();
@@ -174,6 +180,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Sets config model.
      */
+    @Override
     public void setURL( String url) {
 
         this.namingService.setURL( url);
@@ -181,6 +188,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Returns jndiNamingService UserName.
      */
+    @Override
     public String getUserName() {
 
         return this.namingService.getUserName();
@@ -188,6 +196,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Sets config model.
      */
+    @Override
     public void setUserName( String name) {
 
         Object old = this.namingService.getUserName();
@@ -198,6 +207,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Returns jndiNamingService Password.
      */
+    @Override
     public String getPassword() {
 
         return this.namingService.getPassword();
@@ -205,6 +215,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Sets config model.
      */
+    @Override
     public void setPassword( String pw) {
 
         Object old = this.namingService.getPassword();
@@ -232,6 +243,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Returns this InitialContextFactoryName.
      */
+    @Override
     public String getInitialContextFactoryName() {
 
         return this.namingService.getInitialContextFactoryName();
@@ -239,6 +251,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Sets config model.
      */
+    @Override
     public void setInitialContextFactoryName( String name) {
 
         Object old = this.namingService.getInitialContextFactoryName();
@@ -249,6 +262,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Returns an iterator on this collection of properties.
      */
+    @Override
     public Iterator properties() {
 
         return this.namingService.properties();
@@ -256,6 +270,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Returns the count of property.
      */
+    @Override
     public int propertySize() {
 
         return this.namingService.propertySize();
@@ -263,6 +278,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Adds the given properties and fire notification.
      */
+    @Override
     public PropertyAdapter addProperty( String name, String value) {
 
         PropertyAdapter property = this.namingService.addProperty( name, value);
@@ -272,6 +288,7 @@ public final class JMSTopicTransportManagerAdapter extends TransportManagerAdapt
     /**
      * Removes the given properties and fire notification.
      */
+    @Override
     public void removeProperty(PropertyAdapter property) {
 
         this.namingService.removeProperty(property);

@@ -52,6 +52,7 @@ public final class NullOutputStream
     /**
      * @see java.io.OutputStream#write(int)
      */
+    @Override
     public void write(int b) throws IOException {
         // do nothing
     }
@@ -59,6 +60,7 @@ public final class NullOutputStream
     /**
      * @see java.io.OutputStream#write(byte[])
      */
+    @Override
     public void write(byte[] b) throws IOException {
         // do nothing
     }
@@ -66,6 +68,7 @@ public final class NullOutputStream
     /**
      * @see java.io.OutputStream#write(byte[], int, int)
      */
+    @Override
     public void write(byte[] b, int off, int len) throws IOException {
         // do nothing
     }
@@ -73,6 +76,7 @@ public final class NullOutputStream
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

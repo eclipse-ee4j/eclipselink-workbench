@@ -58,6 +58,7 @@ public class InterfaceAliasPolicyPage extends ScrollablePropertiesPage
         return "descriptor.interfacealias";
     }
 
+    @Override
     protected Component buildPage()
     {
         //         Interface alias panel
@@ -125,6 +126,7 @@ public class InterfaceAliasPolicyPage extends ScrollablePropertiesPage
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return InterfaceAliasPolicyPage.this.descriptor().getRepository();
             }
@@ -134,10 +136,12 @@ public class InterfaceAliasPolicyPage extends ScrollablePropertiesPage
     private PropertyValueModel buildInterfaceAliasHolder()
     {
         return new PropertyAspectAdapter(buildInterfaceAliasPolicyHolder(), MWDescriptorInterfaceAliasPolicy.INTERFACE_ALIAS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject()
             {
                 return ((MWDescriptorInterfaceAliasPolicy) subject).getInterfaceAlias();
             }
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWDescriptorInterfaceAliasPolicy policy  = (MWDescriptorInterfaceAliasPolicy)subject;
@@ -172,6 +176,7 @@ public class InterfaceAliasPolicyPage extends ScrollablePropertiesPage
         return new PropertyAspectAdapter(getSelectionHolder(),
                 MWTableDescriptor.INTERFACE_ALIAS_POLICY_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWDescriptorPolicy policy = ((MWInterfaceAliasDescriptor) this.subject).getInterfaceAliasPolicy();

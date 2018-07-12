@@ -114,6 +114,7 @@ public class ClassChooserDialogUITest {
 
     private WorkbenchContext buildWorkbenchContext(final Window window) {
         return new TestWorkbenchContext() {
+            @Override
             public Window getCurrentWindow() {
                 return window;
             }
@@ -126,6 +127,7 @@ public class ClassChooserDialogUITest {
             super(classpath);
         }
 
+        @Override
         public Iterator classDescriptions() {
             if (this.classDescriptions == null) {
                 this.classDescriptions = new ArrayList(10000);
@@ -134,6 +136,7 @@ public class ClassChooserDialogUITest {
             return this.classDescriptions.iterator();
         }
 
+        @Override
         public void refreshClassDescriptions() {
             this.classDescriptions = null;
         }
@@ -141,8 +144,10 @@ public class ClassChooserDialogUITest {
         /**
          * filter out all the "local" and "anonymous" classes
          */
+        @Override
         protected Filter classNameFilter() {
             return new Filter() {
+                @Override
                 public boolean accept(Object o) {
                     return ClassTools.classNamedIsDeclarable((String) o);
                 }

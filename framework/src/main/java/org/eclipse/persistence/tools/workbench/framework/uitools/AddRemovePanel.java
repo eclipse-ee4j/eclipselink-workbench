@@ -105,6 +105,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ActionListener buildGoToListener() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AddRemovePanel.this.goToSelectedItem();
             }
@@ -113,6 +114,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     protected KeyListener buildF3KeyListener() {
         return new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_F3) {
                     AddRemovePanel.this.goToSelectedItem();
@@ -140,6 +142,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ListSelectionListener buildRowSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     AddRemovePanel.this.rowSelectionChanged(e);
@@ -167,6 +170,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ListChangeListener buildListChangeListener() {
         return new ListChangeAdapter() {
+            @Override
             public void listChanged(ListChangeEvent e) {
                 AddRemovePanel.this.updateButtons();
             }
@@ -353,6 +357,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ActionListener buildAddItemActionHandler() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AddRemovePanel.this.addNewItem();
             }
@@ -378,6 +383,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ActionListener buildRemoveItemsActionHandler() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AddRemovePanel.this.removeSelectedItems();
             }
@@ -406,6 +412,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ActionListener buildOptionalActionHandler() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ((OptionAdapter) getAdapter()).optionOnSelection(getSelectionModel());
             }
@@ -435,6 +442,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ActionListener buildUpActionHandler() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AddRemovePanel.this.moveItemsUp();
             }
@@ -469,6 +477,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
 
     private ActionListener buildDownActionHandler() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AddRemovePanel.this.moveItemsDown();
             }
@@ -509,6 +518,7 @@ public abstract class AddRemovePanel extends AbstractPanel {
         return this.buttonOrientation;
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         getComponent().setEnabled(enabled);

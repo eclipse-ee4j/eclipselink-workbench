@@ -25,7 +25,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQuery;
 import org.eclipse.persistence.tools.workbench.utility.iterators.CloneListIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.expressions.ExpressionOperator;
@@ -121,18 +120,21 @@ public final class MWCompoundExpression extends MWExpression {
         super(parent, AND);
     }
 
+    @Override
     protected void addChildrenTo(List children)
     {
         super.addChildrenTo(children);
         synchronized (this.expressions) { children.addAll(this.expressions); }
     }
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
         this.expressions = new Vector();
     }
 
+    @Override
     protected void initialize()
     {
         super.initialize();
@@ -183,6 +185,7 @@ public final class MWCompoundExpression extends MWExpression {
     }
 
     //Used to determine the line number of the expression in the ExpressionTree (1, 2, 2.1, 2.1.1, etc)
+    @Override
     public String getIndex()
     {
         if (getParentCompoundExpression() == null)
@@ -211,6 +214,7 @@ public final class MWCompoundExpression extends MWExpression {
     }
 
 
+    @Override
     public void clearExpressions() {
         for (int i =0; i < this.expressions.size(); i++) {
             removeExpression((MWExpression) this.expressions.get(i));
@@ -225,10 +229,12 @@ public final class MWCompoundExpression extends MWExpression {
         getRootCompoundExpression().propertyChanged(this, REMOVE_EXPRESSION, expression);
     }
 
+    @Override
     public String displayString() {
         return getOperatorType();
     }
 
+    @Override
     public MWCompoundExpression getParentCompoundExpression() {
         if (this.getParent().getClass().isAssignableFrom(MWExpressionQueryFormat.class))
             return null;
@@ -243,6 +249,7 @@ public final class MWCompoundExpression extends MWExpression {
             return ((MWCompoundExpression)getParent()).getParentQuery();
     }
 
+    @Override
     public MWCompoundExpression getRootCompoundExpression() {
         if (this.getParent().getClass().isAssignableFrom(MWExpressionQueryFormat.class))
             return this;
@@ -250,6 +257,7 @@ public final class MWCompoundExpression extends MWExpression {
             return ((MWCompoundExpression)getParent()).getRootCompoundExpression();
     }
 
+    @Override
     void recalculateQueryables() {
         Iterator expressions = expressions();
         while (expressions.hasNext())
@@ -263,6 +271,7 @@ public final class MWCompoundExpression extends MWExpression {
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWExpression#restoreChanges(String, Object, Object)
      */
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue) {
         super.undoChange(propertyName, oldValue, newValue);
         if (propertyName == ADD_EXPRESSION) {
@@ -294,6 +303,7 @@ public final class MWCompoundExpression extends MWExpression {
         clearChanges();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         super.toString(sb);
         sb.append("operator = " );
@@ -333,6 +343,7 @@ public final class MWCompoundExpression extends MWExpression {
 
     //review this one again and make sure to unit test it well
     //Conversion methods
+    @Override
     Expression buildRuntimeExpression(ExpressionBuilder builder) {
         Expression finalExpression = null;
         int operator;

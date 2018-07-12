@@ -34,10 +34,12 @@ final class ModelGroupNodeStructure
 
     // **************** SchemaComponentNode contract **************************
 
+    @Override
     protected ListIterator componentDetails() {
         return new SingleElementListIterator(this.buildCompositorDetail());
     }
 
+    @Override
     public String displayString() {
         return ((MWModelGroup) this.getComponent()).getCompositor();
     }
@@ -45,10 +47,12 @@ final class ModelGroupNodeStructure
 
     // **************** ParticleTermNodeStructure contract ********************
 
+    @Override
     public void disengageParticle() {
         this.disengageComponent();
     }
 
+    @Override
     public ListIterator details(ListIterator particleDetails) {
         return new CompositeListIterator(this.details(), particleDetails);
     }
@@ -58,10 +62,12 @@ final class ModelGroupNodeStructure
 
     SchemaComponentDetail buildCompositorDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "compositor";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return ((MWModelGroup) this.component).getCompositor();
             }

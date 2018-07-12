@@ -113,6 +113,7 @@ public final class MWReportAttributeItem extends MWAttributeItem {
 
 
     /** Initialize persistent state*/
+    @Override
     protected void initialize(Node parentNode) {
         super.initialize(parentNode);
         this.function = NO_FUNCTION;
@@ -144,6 +145,7 @@ public final class MWReportAttributeItem extends MWAttributeItem {
 
     // ****************** MWQueryItem implementation ************
 
+    @Override
     public void removeSelfFromParent() {
         ((MWReportQuery) getParentQuery()).removeAttributeItem(this);
     }
@@ -151,12 +153,14 @@ public final class MWReportAttributeItem extends MWAttributeItem {
 
     // ****************** Problem Handling************
 
+    @Override
     public void addQueryableNullProblemTo(List currentProblems) {
         if (getFunction() != COUNT_FUNCTION) {
             currentProblems.add(queryableNullProblem());
         }
     }
 
+    @Override
     public Problem queryableNullProblem() {
         return buildProblem(
                 ProblemConstants.QUERYABLE_NULL_FOR_REPORT_ITEM,
@@ -164,16 +168,19 @@ public final class MWReportAttributeItem extends MWAttributeItem {
                 getName());
     }
 
+    @Override
     public Problem queryableInvalidProblem(MWQueryable queryable) {
         return buildProblem(ProblemConstants.QUERYABLE_NOT_VALID_FOR_REPORT_QUERY_ATTRIBUTE, getName(), getParentQuery().signature());
     }
 
+    @Override
     public boolean isQueryableValid(MWQueryable queryable) {
         return queryable.isValidForReportQueryAttribute();
     }
 
     // ****************** Runtime Conversion ************
 
+    @Override
     protected void adjustRuntimeQuery(ObjectLevelReadQuery readQuery) {
         ReportQuery reportQuery = (ReportQuery) readQuery;
         Expression expression = getQueryableArgument().runtimeExpression(reportQuery.getExpressionBuilder());
@@ -216,6 +223,7 @@ public final class MWReportAttributeItem extends MWAttributeItem {
 
 
 
+    @Override
     public String displayString() {
         if (getQueryableArgument().getQueryableArgumentElement().getQueryable() == null && getFunction() == COUNT_FUNCTION) {
             return getFunction();

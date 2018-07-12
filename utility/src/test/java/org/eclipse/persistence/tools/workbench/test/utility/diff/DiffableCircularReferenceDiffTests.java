@@ -36,10 +36,12 @@ public class DiffableCircularReferenceDiffTests extends AbstractCircularReferenc
         super(name);
     }
 
+    @Override
     protected Differentiator buildDifferentiator() {
         return DiffableDifferentiator.instance();
     }
 
+    @Override
     void verifyMismatch02(CompositeDiff cd, String differentComment) {
         SimpleDiff sd = (SimpleDiff) cd.getDiffs()[0];
         assertTrue(sd.different());
@@ -47,6 +49,7 @@ public class DiffableCircularReferenceDiffTests extends AbstractCircularReferenc
         assertEquals(differentComment, sd.getObject2());
     }
 
+    @Override
     void verifyMismatch03(CompositeDiff cd) {
         Diff[] diffs = cd.getDiffs();
         CompositeDiff parentDiff;
@@ -65,6 +68,7 @@ public class DiffableCircularReferenceDiffTests extends AbstractCircularReferenc
         assertTrue(parentDiff.identical());
     }
 
+    @Override
     void verifyMismatch09(Diff diff) {
         List leafMismatches = DiffTestTools.differentLeafDiffList(diff);
         assertEquals(1, leafMismatches.size());
@@ -74,6 +78,7 @@ public class DiffableCircularReferenceDiffTests extends AbstractCircularReferenc
         assertEquals(null, leafDiff.getObject2());
     }
 
+    @Override
     void verifyMismatch10(TestBranchNode node, Diff diff) {
         List leafMismatches = DiffTestTools.differentLeafDiffList(diff);
         assertEquals(1, leafMismatches.size());

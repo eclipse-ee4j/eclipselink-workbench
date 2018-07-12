@@ -96,6 +96,7 @@ public class ResourceBundleStringRepository implements StringRepository {
     /**
      * @see StringRepository#hasString(String)
      */
+    @Override
     public boolean hasString(String key) {
         return (key == null) || CollectionTools.contains(this.resourceBundle.getKeys(), key);
     }
@@ -103,6 +104,7 @@ public class ResourceBundleStringRepository implements StringRepository {
     /**
      * @see StringRepository#getString(String)
      */
+    @Override
     public String getString(String key) {
         return this.getString(key, EMPTY_ARGUMENTS);
     }
@@ -110,6 +112,7 @@ public class ResourceBundleStringRepository implements StringRepository {
     /**
      * @see StringRepository#getString(String, Object)
      */
+    @Override
     public String getString(String key, Object argument) {
         return this.getString(key, new Object[] {argument});
     }
@@ -117,6 +120,7 @@ public class ResourceBundleStringRepository implements StringRepository {
     /**
      * @see StringRepository#getString(String, Object, Object)
      */
+    @Override
     public String getString(String key, Object argument1, Object argument2) {
         return this.getString(key, new Object[] {argument1, argument2});
     }
@@ -124,6 +128,7 @@ public class ResourceBundleStringRepository implements StringRepository {
     /**
      * @see StringRepository#getString(String, Object, Object, Object)
      */
+    @Override
     public String getString(String key, Object argument1, Object argument2, Object argument3) {
         return this.getString(key, new Object[] {argument1, argument2, argument3});
     }
@@ -131,6 +136,7 @@ public class ResourceBundleStringRepository implements StringRepository {
     /**
      * @see StringRepository#getString(String, Object[])
      */
+    @Override
     public String getString(String key, Object[] arguments) {
         return this.format(this.get(key), arguments);
     }
@@ -169,6 +175,7 @@ public class ResourceBundleStringRepository implements StringRepository {
         return string;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.resourceBundle.getClass().getName());
     }

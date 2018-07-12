@@ -34,11 +34,13 @@ public LargeProject()
 {
     this.budget = 0.0;
 }
-public double getBudget()
+    @Override
+    public double getBudget()
 {
     return budget;
 }
-public Timestamp getMilestoneVersion()
+    @Override
+    public Timestamp getMilestoneVersion()
 {
     return milestoneVersion;
 }
@@ -69,11 +71,13 @@ private void postDelete(DescriptorEvent event)
 public void aboutToInsert(DescriptorEvent event)
 {
 }
-public void setBudget(double budget)
+    @Override
+    public void setBudget(double budget)
 {
     this.budget = budget;
 }
-public void setMilestoneVersion(Timestamp milestoneVersion)
+    @Override
+    public void setMilestoneVersion(Timestamp milestoneVersion)
 {
     this.milestoneVersion = milestoneVersion;
 }

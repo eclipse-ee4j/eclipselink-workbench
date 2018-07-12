@@ -50,10 +50,12 @@ public final class MWEisReadObjectQuery
     // ******************* Morphing *******************
 
 
+    @Override
     public String queryType() {
         return READ_OBJECT_QUERY;
     }
 
+    @Override
     public MWReadObjectQuery asReadObjectQuery() {
         return this;
     }
@@ -61,6 +63,7 @@ public final class MWEisReadObjectQuery
 
     // **************** Runtime Conversion ****************
 
+    @Override
     protected ObjectLevelReadQuery buildRuntimeQuery() {
         return new ReadObjectQuery();
     }

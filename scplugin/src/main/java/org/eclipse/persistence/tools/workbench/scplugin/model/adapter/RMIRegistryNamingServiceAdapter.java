@@ -52,6 +52,7 @@ public final class RMIRegistryNamingServiceAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new RMIRegistryNamingServiceConfig();
     }

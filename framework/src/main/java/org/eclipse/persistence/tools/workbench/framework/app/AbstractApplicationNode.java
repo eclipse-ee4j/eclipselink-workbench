@@ -264,9 +264,11 @@ public abstract class AbstractApplicationNode
 
     private PropertyChangeListener buildValueDisplayStringListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AbstractApplicationNode.this.displayStringChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "display string listener");
             }
@@ -275,9 +277,11 @@ public abstract class AbstractApplicationNode
 
     private PropertyChangeListener buildValueIconListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AbstractApplicationNode.this.iconChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "icon listener");
             }
@@ -286,9 +290,11 @@ public abstract class AbstractApplicationNode
 
     private PropertyChangeListener buildValueDirtyListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AbstractApplicationNode.this.dirtyChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "dirty listener");
             }
@@ -297,18 +303,23 @@ public abstract class AbstractApplicationNode
 
     private ListChangeListener buildValueBranchProblemsListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 AbstractApplicationNode.this.branchProblemsChanged();
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 AbstractApplicationNode.this.branchProblemsChanged();
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 AbstractApplicationNode.this.branchProblemsChanged();
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 AbstractApplicationNode.this.branchProblemsChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "branch problems listener");
             }
@@ -317,9 +328,11 @@ public abstract class AbstractApplicationNode
 
     private PropertyChangeListener buildValuePropertiesPageTitleTextListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AbstractApplicationNode.this.propertiesPageTitleTextChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "properties page title text listener");
             }
@@ -328,9 +341,11 @@ public abstract class AbstractApplicationNode
 
     private PropertyChangeListener buildValuePropertiesPageTitleIconListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 AbstractApplicationNode.this.propertiesPageTitleIconChanged();
             }
+            @Override
             public String toString() {
                 return StringTools.buildToStringFor(this, "properties page title icon listener");
             }
@@ -345,6 +360,7 @@ public abstract class AbstractApplicationNode
      * now check for apect-specific listeners before engaging the
      * various aspects of the value
      */
+    @Override
     protected void engageValue() {
         this.engageValueProperties();
         this.engageValueLists();
@@ -374,6 +390,7 @@ public abstract class AbstractApplicationNode
         }
     }
 
+    @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         if (this.hasNoStateChangeListeners()) {
             this.engageValueProperties();
@@ -386,6 +403,7 @@ public abstract class AbstractApplicationNode
      * check for property-specific listeners before engaging the
      * various properties of the value
      */
+    @Override
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         if (this.hasNoStateChangeListeners()) {
             if (this.hasNoPCLs(propertyName, DISPLAY_STRING_PROPERTY)) {
@@ -416,6 +434,7 @@ public abstract class AbstractApplicationNode
                     this.hasNoPropertyChangeListeners(propertyName);
     }
 
+    @Override
     public void addListChangeListener(ListChangeListener listener) {
         if (this.hasNoStateChangeListeners()) {
             this.engageValueLists();
@@ -428,6 +447,7 @@ public abstract class AbstractApplicationNode
      * check for list-specific listeners before engaging the
      * various lists of the value
      */
+    @Override
     public void addListChangeListener(String listName, ListChangeListener listener) {
         if (this.hasNoStateChangeListeners()) {
             if (this.hasNoProblemListeners(listName)) {
@@ -552,6 +572,7 @@ public abstract class AbstractApplicationNode
      * now check for aspect-specific listeners before disengaging the
      * various aspects of the value
      */
+    @Override
     protected void disengageValue() {
         this.disengageValueLists();
         this.disengageValueProperties();
@@ -581,6 +602,7 @@ public abstract class AbstractApplicationNode
         }
     }
 
+    @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         super.removePropertyChangeListener(listener);
         if (this.hasNoStateChangeListeners()) {
@@ -593,6 +615,7 @@ public abstract class AbstractApplicationNode
      * check for property-specific listeners before disengaging the
      * various properties of the value
      */
+    @Override
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         super.removePropertyChangeListener(propertyName, listener);
         if (this.hasNoStateChangeListeners()) {
@@ -614,6 +637,7 @@ public abstract class AbstractApplicationNode
         }
     }
 
+    @Override
     public void removeListChangeListener(ListChangeListener listener) {
         super.removeListChangeListener(listener);
         if (this.hasNoStateChangeListeners()) {
@@ -626,6 +650,7 @@ public abstract class AbstractApplicationNode
      * check for list-specific listeners before disengaging the
      * various lists of the value
      */
+    @Override
     public void removeListChangeListener(String listName, ListChangeListener listener) {
         super.removeListChangeListener(listName, listener);
         if (this.hasNoStateChangeListeners()) {
@@ -997,6 +1022,7 @@ public abstract class AbstractApplicationNode
 
     // ********** ValueModel implementation **********
 
+    @Override
     public Object getValue() {
         return this.value;
     }
@@ -1004,10 +1030,12 @@ public abstract class AbstractApplicationNode
 
     // ********** TreeNodeValueModel implementation **********
 
+    @Override
     public TreeNodeValueModel getParent() {
         return this.parent;
     }
 
+    @Override
     public ListValueModel getChildrenModel() {
         return NullListValueModel.instance();
     }
@@ -1015,10 +1043,12 @@ public abstract class AbstractApplicationNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public ApplicationContext getApplicationContext() {
         return this.context;
     }
 
+    @Override
     public Plugin getPlugin() {
         return this.plugin;
     }
@@ -1027,6 +1057,7 @@ public abstract class AbstractApplicationNode
      * The project root nodes are the direct children of
      * the "real" root node.
      */
+    @Override
     public ApplicationNode getProjectRoot() {
         if (this.getParent() == this.nodeManager().getRootNode()) {
             return this;
@@ -1034,35 +1065,43 @@ public abstract class AbstractApplicationNode
         return ((ApplicationNode) this.getParent()).getProjectRoot();
     }
 
+    @Override
     public final boolean isDirty() {
         return this.dirty;
     }
 
+    @Override
     public String helpTopicID() {
         return "default";
     }
 
+    @Override
     public boolean save(File mostRecentSaveDirectory, WorkbenchContext workbenchContext) {
         return this.getProjectRoot().save(mostRecentSaveDirectory, workbenchContext);
     }
 
+    @Override
     public boolean saveAs(File mostRecentSaveDirectory, WorkbenchContext workbenchContext) {
         return this.getProjectRoot().saveAs(mostRecentSaveDirectory, workbenchContext);
     }
 
+    @Override
     public File saveFile() {
         return this.getProjectRoot().saveFile();
     }
 
 
+    @Override
     public void addValuePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         this.value.addPropertyChangeListener(propertyName, listener);
     }
 
+    @Override
     public void removeValuePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         this.value.removePropertyChangeListener(propertyName, listener);
     }
 
+    @Override
     public final ApplicationNode descendantNodeForValue(Node node) {
         if (this.value == node) {
             return this;
@@ -1079,26 +1118,32 @@ public abstract class AbstractApplicationNode
 
     // ********** ApplicationProblemContainer implementation **********
 
+    @Override
     public final ListIterator applicationProblems() {
         return this.applicationProblems.listIterator();
     }
 
+    @Override
     public final int applicationProblemsSize() {
         return this.applicationProblems.size();
     }
 
+    @Override
     public final void addApplicationProblemsTo(List list) {
         list.addAll(this.applicationProblems);
     }
 
+    @Override
     public final ListIterator branchApplicationProblems() {
         return this.branchApplicationProblems.listIterator();
     }
 
+    @Override
     public final int branchApplicationProblemsSize() {
         return this.branchApplicationProblems.size();
     }
 
+    @Override
     public void addBranchApplicationProblemsTo(List list) {
         this.addApplicationProblemsTo(list);
         for (Iterator stream = this.children(); stream.hasNext(); ) {
@@ -1106,6 +1151,7 @@ public abstract class AbstractApplicationNode
         }
     }
 
+    @Override
     public boolean containsBranchApplicationProblemFor(Problem problem) {
         return this.value.containsBranchProblem(problem);
     }
@@ -1114,6 +1160,7 @@ public abstract class AbstractApplicationNode
      * Print the node's problem title, if appropriate; print the node's problems;
      * then print the node's children's problems, recursively.
      */
+    @Override
     public void printBranchApplicationProblemsOn(IndentingPrintWriter writer) {
         if (this.branchApplicationProblems.size() == 0) {
             return;
@@ -1141,10 +1188,12 @@ public abstract class AbstractApplicationNode
 
     // ********** EditorNode implementation **********
 
+    @Override
     public final String propertiesPageTitleText() {
         return this.propertiesPageTitleText;
     }
 
+    @Override
     public final Icon propertiesPageTitleIcon() {
         return this.propertiesPageTitleIcon;
     }
@@ -1152,10 +1201,12 @@ public abstract class AbstractApplicationNode
 
     // ********** Displayable implementation **********
 
+    @Override
     public final String displayString() {
         return this.displayString;
     }
 
+    @Override
     public final Icon icon() {
         return this.icon;
     }
@@ -1163,6 +1214,7 @@ public abstract class AbstractApplicationNode
 
     // ********** Comparable implementation **********
 
+    @Override
     public int compareTo(Object o) {
         // use the Comparator defined in Displayable, which compares displayStrings
         return DEFAULT_COMPARATOR.compare(this, o);
@@ -1176,6 +1228,7 @@ public abstract class AbstractApplicationNode
      * the text is not sufficient, if <code>null</code> is returned, then the
      * text is used as the accessible text.
      */
+    @Override
     public String accessibleName() {
         return this.resourceRepository().getString(this.accessibleNameKey(), this.displayString());
     }

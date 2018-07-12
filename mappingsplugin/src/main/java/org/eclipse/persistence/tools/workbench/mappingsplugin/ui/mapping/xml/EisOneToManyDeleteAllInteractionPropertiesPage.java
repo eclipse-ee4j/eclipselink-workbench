@@ -33,12 +33,14 @@ final class EisOneToManyDeleteAllInteractionPropertiesPage extends ScrollablePro
 
     private PropertyValueModel buildInterationHolder() {
         return new PropertyAspectAdapter(getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWEisOneToManyMapping) subject).getDeleteAllInteraction();
             }
         };
     }
 
+    @Override
     protected Component buildPage(){
         return new InteractionPanel(getApplicationContext(), buildInterationHolder(), "mappings.eis.deleteAllInteraction");
     }

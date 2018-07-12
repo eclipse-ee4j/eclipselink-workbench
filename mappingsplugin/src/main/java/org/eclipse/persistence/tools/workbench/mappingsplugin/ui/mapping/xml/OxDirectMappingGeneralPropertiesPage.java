@@ -23,7 +23,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContextHolder;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPanel;
 import org.eclipse.persistence.tools.workbench.framework.ui.view.ScrollablePropertiesPage;
@@ -50,6 +49,7 @@ final class OxDirectMappingGeneralPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -147,6 +147,7 @@ final class OxDirectMappingGeneralPropertiesPage
 
     private ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWXmlDirectMapping) this.subject).getXmlField();
             }
@@ -180,9 +181,11 @@ final class OxDirectMappingGeneralPropertiesPage
 
     private PropertyValueModel buildIsCdataHolder(ValueModel mappingHolder) {
         return new PropertyAspectAdapter(mappingHolder, MWXmlDirectMapping.IS_CDATA_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlDirectMapping) subject).isCdata());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlDirectMapping) subject).setCdata(((Boolean) value).booleanValue());
             }

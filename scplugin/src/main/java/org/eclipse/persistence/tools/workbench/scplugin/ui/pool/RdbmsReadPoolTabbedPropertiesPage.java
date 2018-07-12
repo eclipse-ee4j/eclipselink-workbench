@@ -26,6 +26,7 @@ public class RdbmsReadPoolTabbedPropertiesPage extends PoolTabbedPropertiesPage 
         super(context);
     }
 
+    @Override
     protected Component buildLoginPropertiesPage() {
         return new RdbmsReadPoolLoginPropertiesPage( this.getNodeHolder(), getWorkbenchContextHolder());
     }

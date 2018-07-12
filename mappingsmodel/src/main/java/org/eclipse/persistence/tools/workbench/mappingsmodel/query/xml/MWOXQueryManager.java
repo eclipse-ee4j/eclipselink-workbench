@@ -13,8 +13,6 @@
 package org.eclipse.persistence.tools.workbench.mappingsmodel.query.xml;
 
 import org.eclipse.persistence.oxm.XMLDescriptor;
-import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWEisTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.xml.MWOXTransactionalPolicy;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWQueryManager;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.query.MWReadAllQuery;
@@ -60,12 +58,15 @@ public final class MWOXQueryManager extends MWQueryManager implements
         return null;
     }
 
+    @Override
     public void resolveXpaths() {
     }
 
+    @Override
     public void schemaChanged(SchemaChange change) {
     }
 
+    @Override
     public boolean supportsReportQueries() {
         return false;
     }

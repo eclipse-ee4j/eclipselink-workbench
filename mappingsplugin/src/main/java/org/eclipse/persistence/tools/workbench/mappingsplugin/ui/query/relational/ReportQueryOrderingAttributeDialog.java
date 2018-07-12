@@ -61,11 +61,13 @@ final class ReportQueryOrderingAttributeDialog extends OrderingAttributeDialog {
         super(query, item, traversableFilter, chooseableFilter, context);
     }
 
+    @Override
     protected String helpTopicId() {
         return "descriptor.queryManager.reportQuery.orderingAttributes";
     }
 
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -176,6 +178,7 @@ final class ReportQueryOrderingAttributeDialog extends OrderingAttributeDialog {
 
     private Transformer buildSwitchPanelTransformer() {
         return new Transformer() {
+            @Override
             public Object transform(Object o) {
                 if (o == "Selected Attribute") {
                     return getExistingAttributePanel();
@@ -199,11 +202,13 @@ final class ReportQueryOrderingAttributeDialog extends OrderingAttributeDialog {
         reportAttributesList.setSelectionModel(this.attributesListSelectionModel);
         reportAttributesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         reportAttributesList.setCellRenderer(new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((MWReportAttributeItem) value).getName();
             }
         });
         reportAttributesList.addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                updateOKButton();
             }
@@ -246,6 +251,7 @@ final class ReportQueryOrderingAttributeDialog extends OrderingAttributeDialog {
         return panel;
     }
 
+    @Override
     protected void initializeEditMode(MWAttributeItem attributeItem) {
         if (((MWReportOrderingItem) attributeItem).getItemName() == null) {
             super.initializeEditMode(attributeItem);
@@ -263,6 +269,7 @@ final class ReportQueryOrderingAttributeDialog extends OrderingAttributeDialog {
         }
     }
 
+    @Override
     protected void updateOKButton() {
         if (this.attributesListSelectionModel.getSelectedValue() != null) {
             getOKAction().setEnabled(true);
@@ -273,6 +280,7 @@ final class ReportQueryOrderingAttributeDialog extends OrderingAttributeDialog {
     }
 
 
+    @Override
     protected boolean preConfirm() {
         MWReportAttributeItem attributeItem = (MWReportAttributeItem) this.attributesListSelectionModel.getSelectedValue();
         if (attributeItem == null) {

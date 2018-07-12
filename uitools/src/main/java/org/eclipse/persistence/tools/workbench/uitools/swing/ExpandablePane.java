@@ -190,7 +190,8 @@ public final class ExpandablePane extends JPanel
 
     private ActionListener buildActionListener()
     {
-        return new ActionListener() { public void actionPerformed(ActionEvent e)
+        return new ActionListener() {@Override
+ public void actionPerformed(ActionEvent e)
         {
             expandedHolder.setValue(!((Boolean)expandedHolder.getValue()).booleanValue());
             updateExpandButtonText();

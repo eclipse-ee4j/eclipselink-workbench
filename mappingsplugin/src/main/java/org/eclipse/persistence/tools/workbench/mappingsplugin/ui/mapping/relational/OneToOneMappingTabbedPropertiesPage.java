@@ -36,6 +36,7 @@ final class OneToOneMappingTabbedPropertiesPage extends TabbedPropertiesPage {
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(new OneToOneGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()),        "ONE_TO_ONE_GENERAL_TAB_TITLE");
         addTab(new OneToOneTableReferencePropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "ONE_TO_ONE_TABLE_REFERENCE_TAB_TITLE");

@@ -45,6 +45,7 @@ public class FrameworkConsole extends Console {
         this.initialize(context);
     }
 
+    @Override
     protected void initialize() {
         // wait until application context is instantiated
         if (this.appContext != null) {
@@ -58,6 +59,7 @@ public class FrameworkConsole extends Console {
         this.initialize();
     }
 
+    @Override
     protected JPanel buildMainPanel() {
         JPanel mainPanel = super.buildMainPanel();
         mainPanel.add(this.buildErrorLabel(), BorderLayout.PAGE_START);
@@ -70,6 +72,7 @@ public class FrameworkConsole extends Console {
         return errorLabel;
     }
 
+    @Override
     protected Component buildControlPanel() {
         JPanel controlPanel = new JPanel(new BorderLayout());
         JPanel controlPanel2 = new JPanel(new BorderLayout());
@@ -86,6 +89,7 @@ public class FrameworkConsole extends Console {
 
     private Action buildHelpAction() {
         Action action = new AbstractAction(resourceRepository().getString("DIALOG.HELP_BUTTON_TEXT")) {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FrameworkConsole.this.helpManager().showTopic(FrameworkConsole.this.helpTopicId());
             }
@@ -100,6 +104,7 @@ public class FrameworkConsole extends Console {
 
     private Action buildOKAction() {
         Action action = new AbstractAction(resourceRepository().getString("DIALOG.OK_BUTTON_TEXT")) {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FrameworkConsole.this.clear();
                 FrameworkConsole.this.hide();
@@ -121,6 +126,7 @@ public class FrameworkConsole extends Console {
         return "dialog.unexpected.output";
     }
 
+    @Override
     protected String title() {
         return this.resourceRepository().getString("UNEXPECTED_OUTPUT_LOG_TITLE");
     }

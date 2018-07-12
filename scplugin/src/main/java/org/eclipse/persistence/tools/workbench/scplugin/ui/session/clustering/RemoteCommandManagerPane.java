@@ -160,12 +160,14 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.CHANNEL_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
                 return adapter.getChannel();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -184,6 +186,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new TransformationPropertyValueModel(buildTransportManagerHolder())
         {
+            @Override
             protected Object transform(Object value)
             {
                 return Boolean.valueOf(! (value instanceof JMSTopicTransportManagerAdapter));
@@ -213,6 +216,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -237,6 +241,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter rcm = (RemoteCommandManagerAdapter) subject;
@@ -261,6 +266,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter rcm = (RemoteCommandManagerAdapter) subject;
@@ -306,6 +312,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -332,11 +339,13 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new AbstractReadOnlyCollectionValueModel()
         {
+            @Override
             public Object getValue()
             {
                 return manager.choices();
             }
 
+            @Override
             public int size()
             {
                 return manager.size();
@@ -371,6 +380,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter remoteCommandManager = (RemoteCommandManagerAdapter) subject;
@@ -393,12 +403,14 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
                 return manager.retrieveComboBoxSelection(adapter.getTransportManager());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 ComboBoxSelection selection = (ComboBoxSelection) value;
@@ -418,6 +430,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new Transformer()
         {
+            @Override
             public Object transform(Object value)
             {
                 if (value == null)
@@ -439,6 +452,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), RemoteCommandManagerAdapter.TRANSPORT_MANAGER_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -455,6 +469,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
     /**
      * Initializes the layout of this pane.
      */
+    @Override
     protected void initializeLayout()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -654,6 +669,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          *
          * @param subject The <code>RemoteCommandManagerAdapter</code>
          */
+        @Override
         public void setPropertyOn(Object subject)
         {
             RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -666,6 +682,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          * @param value The value used to retrieve a pane
          * @return The pane associated with the given value
          */
+        @Override
         public Object transform(Object value)
         {
             return jmsPane;
@@ -692,6 +709,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          *
          * @param subject The <code>RemoteCommandManagerAdapter</code>
          */
+        @Override
         public void setPropertyOn(Object subject)
         {
             RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -704,6 +722,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          * @param value The value used to retrieve a pane
          * @return The pane associated with the given value
          */
+        @Override
         public Object transform(Object value)
         {
             return rmiPane;
@@ -730,6 +749,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          *
          * @param subject The <code>RemoteCommandManagerAdapter</code>
          */
+        @Override
         public void setPropertyOn(Object subject)
         {
             RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -742,6 +762,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          * @param value The value used to retrieve a pane
          * @return The pane associated with the given value
          */
+        @Override
         public Object transform(Object value)
         {
             return rmiIIOPPane;
@@ -768,6 +789,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          *
          * @param subject The <code>RemoteCommandManagerAdapter</code>
          */
+        @Override
         public void setPropertyOn(Object subject)
         {
             RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -780,6 +802,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          * @param value The value used to retrieve a pane
          * @return The pane associated with the given value
          */
+        @Override
         public Object transform(Object value)
         {
             return sunCORBAPane;
@@ -806,6 +829,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          *
          * @param subject The <code>RemoteCommandManagerAdapter</code>
          */
+        @Override
         public void setPropertyOn(Object subject)
         {
             RemoteCommandManagerAdapter adapter = (RemoteCommandManagerAdapter) subject;
@@ -818,6 +842,7 @@ final class RemoteCommandManagerPane extends AbstractSubjectPanel
          * @param value The value used to retrieve a pane
          * @return The pane associated with the given value
          */
+        @Override
         public Object transform(Object value)
         {
             return userDefinedPane;

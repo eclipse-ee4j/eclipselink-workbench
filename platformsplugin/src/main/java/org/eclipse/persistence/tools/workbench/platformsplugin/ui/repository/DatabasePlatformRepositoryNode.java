@@ -60,6 +60,7 @@ public final class DatabasePlatformRepositoryNode
         super(value, context.getNodeManager().getRootNode(), plugin, context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.childrenModel = this.buildChildrenModel();
@@ -78,6 +79,7 @@ public final class DatabasePlatformRepositoryNode
     // transform the repository's collection of platforms into nodes
     private ListValueModel buildPlatformNodeAdapter() {
         return new TransformationListValueModelAdapter(this.buildPlatformsAdapter()) {
+            @Override
             protected Object transformItem(Object item) {
                 return DatabasePlatformRepositoryNode.this.buildDatabasePlatformNode((DatabasePlatform) item);
             }
@@ -91,9 +93,11 @@ public final class DatabasePlatformRepositoryNode
     // convert the repository's collection of platforms to a CollectionValueModel
     private CollectionValueModel buildPlatformsAdapter() {
         return new CollectionAspectAdapter(this, DatabasePlatformRepository.PLATFORMS_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((DatabasePlatformRepository) this.subject).platforms();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((DatabasePlatformRepository) this.subject).platformsSize();
             }
@@ -103,14 +107,17 @@ public final class DatabasePlatformRepositoryNode
 
     // ********** PlatformsApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DatabasePlatformRepositoryTabbedPropertiesPage.class;
     }
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
         return new DatabasePlatformRepositoryTabbedPropertiesPage(context);
     }
 
+    @Override
     public String helpTopicID() {
         return "database.platform.repository";
     }
@@ -118,18 +125,22 @@ public final class DatabasePlatformRepositoryNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     public ListValueModel getChildrenModel() {
         return this.childrenModel;
     }
 
+    @Override
     protected String[] displayStringPropertyNames() {
         return DATABASE_PLATFORM_REPOSITORY_DISPLAY_STRING_PROPERTY_NAMES;
     }
 
+    @Override
     protected String buildIconKey() {
         return "DATABASE_PLATFORM_REPOSITORY";
     }
 
+    @Override
     public boolean save(File mostRecentSaveDirectory, WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
         // the save location will be null on new repositories
@@ -145,6 +156,7 @@ public final class DatabasePlatformRepositoryNode
         return true;
     }
 
+    @Override
     public boolean saveAs(File mostRecentSaveDirectory, WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
         // the save location will be null on new repositories
@@ -157,6 +169,7 @@ public final class DatabasePlatformRepositoryNode
         return true;
     }
 
+    @Override
     public File saveFile() {
         return this.getDatabasePlatformRepository().getFile();
     }
@@ -164,6 +177,7 @@ public final class DatabasePlatformRepositoryNode
 
     // ********** ApplicationNode implementation **********
 
+    @Override
     public GroupContainerDescription buildMenuDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
 
@@ -181,6 +195,7 @@ public final class DatabasePlatformRepositoryNode
         return menu;
     }
 
+    @Override
     public GroupContainerDescription buildToolBarDescription(WorkbenchContext context) {
         context = this.buildLocalWorkbenchContext(context);
 

@@ -71,10 +71,12 @@ public abstract class AbstractAggregatableXmlFieldPanel extends AbstractXmlField
 
     protected PropertyValueModel buildAggregatedValue() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWXmlField.AGGREGATED_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWXmlField) this.subject).isAggregated());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWXmlField) this.subject).setAggregated(((Boolean) value).booleanValue());
             }
@@ -91,6 +93,7 @@ public abstract class AbstractAggregatableXmlFieldPanel extends AbstractXmlField
         return new RadioButtonModelAdapter(this.buildAggregatedValue(), Boolean.FALSE);
     }
 
+    @Override
     protected XpathChooser buildXpathChooser() {
         XpathChooser chooser = super.buildXpathChooser();
         this.createXpathChooserEnabler(chooser);
@@ -104,6 +107,7 @@ public abstract class AbstractAggregatableXmlFieldPanel extends AbstractXmlField
 
     private ValueModel buildSpecifyXpathHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWXmlField.AGGREGATED_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(! ((MWXmlField) this.subject).isAggregated());
             }

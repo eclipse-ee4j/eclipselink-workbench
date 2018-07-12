@@ -46,6 +46,7 @@ public class NOTFilter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Filter#accept(Object)
      */
+    @Override
     public boolean accept(Object o) {
         return ! this.filter.accept(o);
     }
@@ -60,6 +61,7 @@ public class NOTFilter
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -71,6 +73,7 @@ public class NOTFilter
     /**
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object o) {
         if ( ! (o instanceof NOTFilter)) {
             return false;
@@ -81,6 +84,7 @@ public class NOTFilter
     /**
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return this.filter.hashCode();
     }
@@ -88,6 +92,7 @@ public class NOTFilter
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.filter);
     }

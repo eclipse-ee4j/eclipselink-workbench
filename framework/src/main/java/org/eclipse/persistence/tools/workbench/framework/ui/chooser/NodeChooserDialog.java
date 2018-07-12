@@ -110,6 +110,7 @@ public class NodeChooserDialog
 
     // ********** main panel **********
 
+    @Override
     protected Component buildMainPanel() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
@@ -170,6 +171,7 @@ public class NodeChooserDialog
      */
     private MouseListener buildDoubleClickMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     NodeChooserDialog.this.clickOK();
@@ -188,6 +190,7 @@ public class NodeChooserDialog
 
     private ListSelectionListener buildNodeListSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( ! e.getValueIsAdjusting()) {
                     NodeChooserDialog.this.nodeSelectionChanged(e);
@@ -202,20 +205,24 @@ public class NodeChooserDialog
     /**
      * nothing is selected initially - so disable the OK button
      */
+    @Override
     protected Action buildOKAction() {
         Action action = super.buildOKAction();
         action.setEnabled(false);
         return action;
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.nodeChooser";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.filteringPanel.getTextField();
     }
 
+    @Override
     protected void prepareToShow() {
         this.setSize(350, 566);    // use the golden ratio
         this.setLocationRelativeTo(this.getParent());
@@ -224,6 +231,7 @@ public class NodeChooserDialog
     /**
      * increase visibility slightly for inner class
      */
+    @Override
     protected void clickOK() {
         super.clickOK();
     }

@@ -34,6 +34,7 @@ public class JavaClassClassDescriptionAdapter
     /**
      * Assume the "class description" is a Java Class object.
      */
+    @Override
     public String className(Object classDescription) {
         return ((Class) classDescription).getName();
     }

@@ -73,6 +73,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
         super(subjectHolder, contextHolder);
     }
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
 
@@ -86,6 +87,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
         this.quickViewModel.setParentNode((AbstractNodeModel) subject());
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -153,6 +155,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
     /** On single click, the QuickViewItem will select the appropriate components **/
     private MouseListener buildMouseListener() {
         return new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 JList list = (JList) e.getComponent();
                 int index = list.locationToIndex(e.getPoint());
@@ -174,11 +177,13 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
     {
         return new FocusListener()
         {
+            @Override
             public void focusGained(FocusEvent e)
             {
                 ((JList) e.getSource()).repaint();
             }
 
+            @Override
             public void focusLost(FocusEvent e)
             {
                 ((JList) e.getSource()).repaint();
@@ -209,6 +214,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
                 removeButton.setEnabled(enabled);
             }
 
+            @Override
             public void valueChanged(ListSelectionEvent e)
             {
                 if (e.getValueIsAdjusting())
@@ -233,11 +239,13 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
     {
         return new ListAspectAdapter(QuickViewModel.ITEMS_LIST, this.quickViewModel)
         {
+            @Override
             protected ListIterator getValueFromSubject()
             {
                 return ((QuickViewModel) this.subject).items();
             }
 
+            @Override
             protected int sizeFromSubject()
             {
                 return ((QuickViewModel) this.subject).itemsSize();
@@ -249,6 +257,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
     {
         return new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 JButton button = (JButton) e.getSource();
@@ -272,6 +281,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
     {
         return new PropertyChangeListener()
         {
+            @Override
             public void propertyChange(PropertyChangeEvent e)
             {
                 quickViewModel.setParentNode((Node) subject());
@@ -320,21 +330,25 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
      */
     private class QuickViewItemRenderer extends SimpleListCellRenderer
     {
+        @Override
         public String buildAccessibleName(Object value)
         {
             return ((QuickViewItem) value).accessibleName();
         }
 
+        @Override
         protected Icon buildIcon(Object value)
         {
             return ((QuickViewItem) value).icon();
         }
 
+        @Override
         protected String buildText(Object value)
         {
             return ((QuickViewItem) value).displayString();
         }
 
+        @Override
         public Component getListCellRendererComponent(JList list,
                                                       Object value,
                                                       int index,
@@ -399,6 +413,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
         private List sectionSynchronizers;
         public static final String ITEMS_LIST = "items";
 
+        @Override
         protected final void checkParent(Node parent)
         {
             // The parent is set/unset dynamically
@@ -413,12 +428,14 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
             }
         }
 
+        @Override
         public final String displayString()
         {
             return null;
         }
 
 
+        @Override
         protected void initialize()
         {
             super.initialize();
@@ -536,6 +553,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
 
             private class ListChangeHandler implements ListChangeListener
             {
+                @Override
                 public void itemsAdded(ListChangeEvent e)
                 {
                     // Notify the model new items have been added
@@ -545,6 +563,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
                     updateSectionsIndex(SectionSynchronizer.this);
                 }
 
+                @Override
                 public void itemsRemoved(ListChangeEvent e)
                 {
                     int size = itemsHolder.size();
@@ -556,12 +575,14 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
                     updateSectionsIndex(SectionSynchronizer.this);
                 }
 
+                @Override
                 public void itemsReplaced(ListChangeEvent e)
                 {
                     QuickViewModel.this.removeItemsFromList(index + e.getIndex(), e.size(), items, ITEMS_LIST);
                     QuickViewModel.this.addItemsToList(index + e.getIndex(), CollectionTools.list(e.items()), items, ITEMS_LIST);
                 }
 
+                @Override
                 public void listChanged(ListChangeEvent e)
                 {
                     // Nothing to do
@@ -588,6 +609,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
             initialize();
         }
 
+        @Override
         public Component getListCellRendererComponent(JList list,
                                                       Object value,
                                                       int index,
@@ -699,6 +721,7 @@ public abstract class QuickViewPanel extends AbstractSubjectPanel {
             }
         }
 
+        @Override
         public Component getListCellRendererComponent(JList list,
                                                       Object value,
                                                       int index,

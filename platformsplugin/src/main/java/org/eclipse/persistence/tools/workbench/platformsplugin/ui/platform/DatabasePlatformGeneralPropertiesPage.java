@@ -48,6 +48,7 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
         super(nodeHolder, contextHolder);
     }
 
+    @Override
     protected Component buildPage() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -205,9 +206,11 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
 
     private PropertyValueModel buildShortFileNameAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatform.SHORT_FILE_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).getShortFileName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatform) this.subject).setShortFileName((String) value);
             }
@@ -229,9 +232,11 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
 
     private PropertyValueModel buildRuntimePlatformClassNameAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatform.RUNTIME_PLATFORM_CLASS_NAME_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).getRuntimePlatformClassName();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatform) this.subject).setRuntimePlatformClassName((String) value);
             }
@@ -254,12 +259,14 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
 
     private PropertyValueModel buildSupportsNativeReturningAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatform.SUPPORTS_NATIVE_RETURNING_PROPERTY) {
+            @Override
             protected Object buildValue() {
                 if (this.subject == null) {
                     return Boolean.FALSE;
                 }
                 return Boolean.valueOf(((DatabasePlatform) this.subject).supportsNativeReturning());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatform) this.subject).setSupportsNativeReturning(((Boolean) value).booleanValue());
             }
@@ -282,12 +289,14 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
 
     private PropertyValueModel buildSupportsNativeSequencingAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatform.SUPPORTS_NATIVE_SEQUENCING_PROPERTY) {
+            @Override
             protected Object buildValue() {
                 if (this.subject == null) {
                     return Boolean.FALSE;
                 }
                 return Boolean.valueOf(((DatabasePlatform) this.subject).supportsNativeSequencing());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatform) this.subject).setSupportsNativeSequencing(((Boolean) value).booleanValue());
             }
@@ -311,12 +320,14 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
 
     private PropertyValueModel buildSupportsIdentityClauseAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), DatabasePlatform.SUPPORTS_IDENTITY_CLAUSE_PROPERTY) {
+            @Override
             protected Object buildValue() {
                 if (this.subject == null) {
                     return Boolean.FALSE;
                 }
                 return Boolean.valueOf(((DatabasePlatform) this.subject).supportsIdentityClause());
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatform) this.subject).setSupportsIdentityClause(((Boolean) value).booleanValue());
             }
@@ -338,9 +349,11 @@ final class DatabasePlatformGeneralPropertiesPage extends ScrollablePropertiesPa
 
     private PropertyValueModel buildCommentAdapter() {
         return new PropertyAspectAdapter(this.getSelectionHolder(), AbstractNodeModel.COMMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabasePlatform) this.subject).getComment();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DatabasePlatform) this.subject).setComment((String) value);
             }

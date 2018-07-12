@@ -79,6 +79,7 @@ final class ComboCellRenderer implements ListCellRenderer,
     /**
      * {@inheritDoc}
      */
+    @Override
     public Component getListCellRendererComponent(JList list,
                                                   Object value,
                                                   int index,

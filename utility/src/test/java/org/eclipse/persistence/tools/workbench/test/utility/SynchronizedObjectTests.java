@@ -38,6 +38,7 @@ public class SynchronizedObjectTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.so = new SynchronizedObject();
@@ -48,6 +49,7 @@ public class SynchronizedObjectTests extends TestCase {
         this.soValue = null;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -197,6 +199,7 @@ public class SynchronizedObjectTests extends TestCase {
 
     private Command buildSetNullCommand() {
         return new Command() {
+            @Override
             public void execute(SynchronizedObject sObject) {
                 sObject.setNull();
             }
@@ -205,6 +208,7 @@ public class SynchronizedObjectTests extends TestCase {
 
     private Command buildWaitUntilNullCommand(final long timeout) {
         return new Command() {
+            @Override
             public void execute(SynchronizedObject sObject) throws Exception {
                 SynchronizedObjectTests.this.setStartTime(System.currentTimeMillis());
                 SynchronizedObjectTests.this.setTimeoutOccurred( ! sObject.waitUntilNull(timeout));
@@ -215,6 +219,7 @@ public class SynchronizedObjectTests extends TestCase {
 
     private Command buildWaitToSetValueCommand(final long timeout) {
         return new Command() {
+            @Override
             public void execute(SynchronizedObject sObject) throws Exception {
                 SynchronizedObjectTests.this.setStartTime(System.currentTimeMillis());
                 SynchronizedObjectTests.this.setTimeoutOccurred( ! sObject.waitToSetValue(SynchronizedObjectTests.this.value, timeout));
@@ -225,9 +230,10 @@ public class SynchronizedObjectTests extends TestCase {
 
     private Command buildInitializeValueCommand() {
         return new Command() {
+            @Override
             public void execute(final SynchronizedObject sObject) throws Exception {
-                sObject.execute(
-                    new org.eclipse.persistence.tools.workbench.utility.Command() {
+                sObject.execute(new org.eclipse.persistence.tools.workbench.utility.Command() {
+                    @Override
                         public void execute() {
                             // pretend to perform some long initialization process
                             try {
@@ -245,6 +251,7 @@ public class SynchronizedObjectTests extends TestCase {
 
     private Command buildGetValueCommand() {
         return new Command() {
+            @Override
             public void execute(SynchronizedObject sObject) throws Exception {
                 SynchronizedObjectTests.this.setStartTime(System.currentTimeMillis());
                 SynchronizedObjectTests.this.setSOValue(sObject.getValue());
@@ -255,6 +262,7 @@ public class SynchronizedObjectTests extends TestCase {
 
     private Runnable buildRunnable(final Command command, final SynchronizedObject sObject, final long sleep) {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     if (sleep != 0) {

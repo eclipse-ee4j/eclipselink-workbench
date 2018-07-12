@@ -58,6 +58,7 @@ public abstract class AbstractDisplayableTranslatorAdapter implements Displayabl
      * @param value The object to be represented by a string
      * @return A string representation of the given object
      */
+    @Override
     public String displayString(Object value)
     {
         if (value == null)
@@ -74,6 +75,7 @@ public abstract class AbstractDisplayableTranslatorAdapter implements Displayabl
      * @param value The object to be represented by an icon, if one is required
      * @return An icon representing the given object or <code>null</code>
      */
+    @Override
     public Icon icon(Object value)
     {
         if (value == null)

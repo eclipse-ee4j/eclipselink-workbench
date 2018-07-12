@@ -39,14 +39,17 @@ public final class DirectToFieldMappingNode
 
     // ************** ApplicationNode implementation *************
 
+    @Override
     protected String[] iconPropertyNames() {
         return DIRECT_MAPPING_ICON_PROPERTY_NAMES;
     }
 
+    @Override
     public String helpTopicID() {
         return this.getDescriptorNode().mappingHelpTopicPrefix() + ".directToField";
     }
 
+    @Override
     protected String buildIconKey() {
         return ((MWDirectToFieldMapping) getMapping()).iconKey();
     }
@@ -54,6 +57,7 @@ public final class DirectToFieldMappingNode
 
     // ************** AbstractApplicationNode overrides *************
 
+    @Override
     protected String accessibleNameKey() {
         return ((MWDirectToFieldMapping) getMapping()).accessibleNameKey();
     }
@@ -61,6 +65,7 @@ public final class DirectToFieldMappingNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return DirectToFieldMappingPropertiesPage.class;
     }

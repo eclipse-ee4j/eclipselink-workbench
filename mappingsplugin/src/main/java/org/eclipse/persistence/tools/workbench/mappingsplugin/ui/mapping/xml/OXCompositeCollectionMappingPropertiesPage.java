@@ -59,6 +59,7 @@ public final class OXCompositeCollectionMappingPropertiesPage
 
     // **************** Initialization ****************************************
 
+    @Override
     protected Component buildPage() {
 
         this.mainPanel = new JPanel(new GridBagLayout());
@@ -179,6 +180,7 @@ public final class OXCompositeCollectionMappingPropertiesPage
 
     private ValueModel buildXmlFieldHolder() {
         return new PropertyAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWCompositeCollectionMapping) this.subject).getXmlField();
             }

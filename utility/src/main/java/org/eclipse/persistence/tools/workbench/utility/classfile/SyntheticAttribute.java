@@ -40,18 +40,22 @@ public class SyntheticAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         // the synthetic attribute has no info...
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         // there's nothing to print...
     }
 
+    @Override
     public boolean isSynthetic() {
         return true;
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

@@ -49,11 +49,13 @@ public class JDBCTypeRepositoryTests extends TestCase {
         super(name);
     }
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.repository = TestDatabasePlatformRepositoryFactory.instance().createRepository().getJDBCTypeRepository();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

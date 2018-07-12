@@ -44,6 +44,7 @@ public class SimpleListCellRenderer
     /**
      * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, Object, int, boolean, boolean)
      */
+    @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         // substitute null for the cell value so nothing is drawn initially...
         super.getListCellRendererComponent(list, null, index, isSelected, cellHasFocus);

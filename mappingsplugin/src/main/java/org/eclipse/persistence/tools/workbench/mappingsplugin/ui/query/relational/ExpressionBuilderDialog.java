@@ -46,10 +46,12 @@ final class ExpressionBuilderDialog
         this.selectionRow = selectionRow;
     }
 
+    @Override
     public String helpTopicId() {
         return "dialog.expressionBuilder";
     }
 
+    @Override
     protected Component buildMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
 

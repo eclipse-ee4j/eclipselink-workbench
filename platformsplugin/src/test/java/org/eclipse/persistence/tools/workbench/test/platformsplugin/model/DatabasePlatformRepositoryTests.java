@@ -93,11 +93,13 @@ public class DatabasePlatformRepositoryTests extends TestCase {
         }
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.repository = TestDatabasePlatformRepositoryFactory.instance().createRepository();
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -274,6 +276,7 @@ public class DatabasePlatformRepositoryTests extends TestCase {
 
     private Iterator names(Iterator databaseTypes) {
         return new TransformationIterator(databaseTypes) {
+            @Override
             protected Object transform(Object next) {
                 return ((DatabaseType) next).getName();
             }

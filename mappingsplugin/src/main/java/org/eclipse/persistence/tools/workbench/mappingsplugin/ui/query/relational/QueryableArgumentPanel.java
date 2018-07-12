@@ -103,14 +103,17 @@ final class QueryableArgumentPanel
 
     private PropertyValueModel buildQueryableHolder() {
         return new PropertyAspectAdapter(getArgumentHolder(), MWQueryableArgument.QUERYABLE_ARGUMENT_ELEMENT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWQueryableArgument) subject).displayString();
             }
         };
     }
 
+    @Override
     protected PropertyValueModel buildQueryArgumentHolder(PropertyValueModel argumentHolder) {
         return new FilteringPropertyValueModel(argumentHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWQueryableArgument;
             }
@@ -119,6 +122,7 @@ final class QueryableArgumentPanel
 
     private ActionListener buildEditQueryKeyAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 editQueryKey();
             }

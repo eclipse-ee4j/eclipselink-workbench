@@ -22,7 +22,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
-import org.eclipse.persistence.sessions.Record;
 
 
 public abstract class MWDirectContainerMapping extends MWMapping
@@ -49,11 +48,13 @@ public abstract class MWDirectContainerMapping extends MWMapping
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.directValueConverter = new MWNullConverter(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.directValueConverter);
@@ -62,28 +63,33 @@ public abstract class MWDirectContainerMapping extends MWMapping
 
     // **************** Converter *********************************************
 
+    @Override
     public MWConverter getConverter() {
         return this.directValueConverter;
     }
 
+    @Override
     public MWNullConverter setNullConverter() {
         MWNullConverter nullConverter = new MWNullConverter(this);
         this.setDirectValueConverter(nullConverter);
         return nullConverter;
     }
 
+    @Override
     public MWObjectTypeConverter setObjectTypeConverter() {
         MWObjectTypeConverter objectTypeConverter = new MWObjectTypeConverter(this);
         this.setDirectValueConverter(objectTypeConverter);
         return objectTypeConverter;
     }
 
+    @Override
     public MWSerializedObjectConverter setSerializedObjectConverter() {
         MWSerializedObjectConverter serializedObjectConverter = new MWSerializedObjectConverter(this);
         this.setDirectValueConverter(serializedObjectConverter);
         return serializedObjectConverter;
     }
 
+    @Override
     public MWTypeConversionConverter setTypeConversionConverter() {
         MWTypeConversionConverter typeConversionConverter = buildTypeConversionConverter();
         this.setDirectValueConverter(typeConversionConverter);
@@ -105,6 +111,7 @@ public abstract class MWDirectContainerMapping extends MWMapping
 
     // **************** Morphing **********************************************
 
+    @Override
     protected void initializeFromMWConverterMapping(MWConverterMapping converterMapping) {
         super.initializeFromMWConverterMapping(converterMapping);
         this.setDirectValueConverter(converterMapping.getConverter());

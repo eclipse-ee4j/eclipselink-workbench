@@ -122,6 +122,7 @@ public class OSplitPane extends JSplitPane
      *
      * @param component The <code>Component</code> to display in that position
      */
+    @Override
     public void setLeftComponent(Component component)
     {
         ComponentOrientation orientation = ComponentOrientation.getOrientation(Locale.getDefault());
@@ -143,6 +144,7 @@ public class OSplitPane extends JSplitPane
      *    preferred: true
      *  description: The component to the right (or below) the divider.
      */
+    @Override
     public void setRightComponent(Component component)
     {
         ComponentOrientation orientation = ComponentOrientation.getOrientation(Locale.getDefault());

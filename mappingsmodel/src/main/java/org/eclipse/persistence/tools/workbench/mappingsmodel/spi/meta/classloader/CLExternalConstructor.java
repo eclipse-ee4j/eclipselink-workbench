@@ -41,6 +41,7 @@ final class CLExternalConstructor
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalConstructor#getExceptionTypes()
      */
+    @Override
     public ExternalClassDescription[] getExceptionTypes() {
         return this.buildClassDescriptionArray(this.getConstructor().getExceptionTypes());
     }
@@ -48,6 +49,7 @@ final class CLExternalConstructor
     /**
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.meta.ExternalConstructor#getParameterTypes()
      */
+    @Override
     public ExternalClassDescription[] getParameterTypes() {
         return this.buildClassDescriptionArray(this.getConstructor().getParameterTypes());
     }

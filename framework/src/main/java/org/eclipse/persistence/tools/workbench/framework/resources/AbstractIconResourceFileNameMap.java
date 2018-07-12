@@ -58,6 +58,7 @@ public abstract class AbstractIconResourceFileNameMap implements IconResourceFil
     /**
      * @see IconResourceFileNameMap#hasResourceFileName(String)
      */
+    @Override
     public boolean hasResourceFileName(String key) {
         return this.resourceFileNames.containsKey(key);
     }
@@ -65,6 +66,7 @@ public abstract class AbstractIconResourceFileNameMap implements IconResourceFil
     /**
      * @see IconResourceFileNameMap#getResourceFileName(String)
      */
+    @Override
     public String getResourceFileName(String key) {
         String resourceFileName = (String) this.resourceFileNames.get(key);
         if (resourceFileName == null) {
@@ -73,6 +75,7 @@ public abstract class AbstractIconResourceFileNameMap implements IconResourceFil
         return resourceFileName;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, String.valueOf(this.resourceFileNames.size()) + " icons");
     }

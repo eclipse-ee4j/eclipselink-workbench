@@ -44,6 +44,7 @@ public class LineNumberTableAttribute extends Attribute {
         super(stream, nameIndex, pool);
     }
 
+    @Override
     void initializeInfo(ClassFileDataInputStream stream) throws IOException {
         this.count = stream.readU2();
         short cnt = this.count;
@@ -54,6 +55,7 @@ public class LineNumberTableAttribute extends Attribute {
         }
     }
 
+    @Override
     public void displayNameOn(IndentingPrintWriter writer) {
         super.displayNameOn(writer);
         writer.print(" (count: ");
@@ -61,6 +63,7 @@ public class LineNumberTableAttribute extends Attribute {
         writer.print(")");
     }
 
+    @Override
     void displayInfoStringOn(IndentingPrintWriter writer) {
         short cnt = this.count;
         LineNumber[] numbers = this.lineNumbers;
@@ -71,6 +74,7 @@ public class LineNumberTableAttribute extends Attribute {
         }
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
         short cnt = this.count;
@@ -92,6 +96,7 @@ public class LineNumberTableAttribute extends Attribute {
         return this.lineNumbers[index];
     }
 
+    @Override
     void toString(StringBuffer sb) {
         sb.append(this.count);
         sb.append(" line number(s)");

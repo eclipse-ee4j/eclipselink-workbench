@@ -126,6 +126,7 @@ public final class ContainerAccessorPanel extends AbstractSubjectPanel {
 
     private PropertyValueModel buildAccessorPropertyValue() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWAbstractCompositeMapping.CONTAINER_ACCESSOR_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWAbstractCompositeMapping) this.subject).getContainerAccessor();
             }
@@ -148,6 +149,7 @@ public final class ContainerAccessorPanel extends AbstractSubjectPanel {
 
     private ActionListener buildAttributeTransformerEditAction() {
         return new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 MWAbstractCompositeMapping compositeMapping =
                     (MWAbstractCompositeMapping) ContainerAccessorPanel.this.subject();

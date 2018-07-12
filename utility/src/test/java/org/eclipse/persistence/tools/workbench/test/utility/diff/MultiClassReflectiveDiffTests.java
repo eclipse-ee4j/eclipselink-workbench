@@ -52,6 +52,7 @@ public class MultiClassReflectiveDiffTests extends AbstractReflectiveDiffTests {
         super(name);
     }
 
+    @Override
     protected Differentiator buildDifferentiator() {
         DiffEngine diffEngine = new DiffEngine();
 
@@ -84,6 +85,7 @@ public class MultiClassReflectiveDiffTests extends AbstractReflectiveDiffTests {
         return diffEngine;
     }
 
+    @Override
     protected Employee buildEmployee() {
         Employee result = super.buildEmployee();
 
@@ -115,10 +117,12 @@ public class MultiClassReflectiveDiffTests extends AbstractReflectiveDiffTests {
         return result;
     }
 
+    @Override
     protected Employee buildEmployee(int id, String name) {
         return new MultiClassEmployee(id, name);
     }
 
+    @Override
     protected ReflectiveDifferentiator employeeDifferentiator() {
         return (ReflectiveDifferentiator) ((DiffEngine) this.differentiator).getUserDifferentiator(MultiClassEmployee.class);
     }

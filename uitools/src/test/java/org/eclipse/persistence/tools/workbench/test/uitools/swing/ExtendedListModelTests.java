@@ -51,6 +51,7 @@ public class ExtendedListModelTests
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.listModel = this.buildListModel();
@@ -142,6 +143,7 @@ public class ExtendedListModelTests
         }
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -207,14 +209,17 @@ public class ExtendedListModelTests
 
     private ListDataListener buildListener() {
         return new ListDataListener() {
+            @Override
             public void intervalAdded(ListDataEvent e) {
                 ExtendedListModelTests.this.eventType = ADD;
                 ExtendedListModelTests.this.event = e;
             }
+            @Override
             public void intervalRemoved(ListDataEvent e) {
                 ExtendedListModelTests.this.eventType = REMOVE;
                 ExtendedListModelTests.this.event = e;
             }
+            @Override
             public void contentsChanged(ListDataEvent e) {
                 ExtendedListModelTests.this.eventType = CHANGE;
                 ExtendedListModelTests.this.event = e;

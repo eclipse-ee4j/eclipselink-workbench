@@ -170,15 +170,19 @@ public class Console {
 
     private DocumentListener buildDocumentListener() {
         return new DocumentListener() {
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 Console.this.documentChanged();
             }
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 Console.this.documentChanged();
             }
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 Console.this.documentChanged();
             }
+            @Override
             public String toString() {
                 return "document listener";
             }
@@ -254,6 +258,7 @@ public class Console {
 
     private Action buildCopyAction() {
         Action action = new AbstractAction("Copy") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 Console.this.copy();
             }
@@ -268,6 +273,7 @@ public class Console {
 
     private Action buildClearAction() {
         Action action = new AbstractAction("Clear") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 Console.this.clear();
             }
@@ -278,10 +284,12 @@ public class Console {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
                 Console.this.shutDown();
             }
+            @Override
             public String toString() {
                 return "window listener";
             }
@@ -405,6 +413,7 @@ public class Console {
          * Loop while there are more data to be read from the input stream.
          * @see Runnable#run()
          */
+        @Override
         public void run() {
             byte[] buffer = new byte[2048];        // use the default "pipe" size
             int length = this.read(buffer);
@@ -462,6 +471,7 @@ public class Console {
          * with an optional attribute set.
          * @see Runnable#run()
          */
+        @Override
         public void run() {
             try {
                 this.document.insertString(this.document.getLength(), this.string, this.attributeSet);
@@ -483,10 +493,12 @@ public class Console {
             super(document);
         }
 
+        @Override
         public boolean getScrollableTracksViewportWidth() {
             return this.getSize().width < this.getParent().getSize().width;
         }
 
+        @Override
         public void setSize(Dimension d) {
             if (d.width < this.getParent().getSize().width) {
                 d.width = this.getParent().getSize().width;

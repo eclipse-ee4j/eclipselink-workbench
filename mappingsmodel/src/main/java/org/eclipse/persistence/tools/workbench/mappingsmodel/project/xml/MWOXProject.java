@@ -53,6 +53,7 @@ public final class MWOXProject
 
     // **************** Initialization ****************************************
 
+    @Override
     protected MWProjectDefaultsPolicy buildDefaultsPolicy() {
         return new MWOXProjectDefaultsPolicy(this);
     }
@@ -60,6 +61,7 @@ public final class MWOXProject
 
     // **************** Descriptor creation ************************************
 
+    @Override
     protected MWDescriptor createDescriptorForType(MWClass type) throws InterfaceDescriptorCreationException {
 
         if (type.isInterface()) {
@@ -89,6 +91,7 @@ public final class MWOXProject
 
     // ************** runtime conversion **********
 
+    @Override
     protected DatasourceLogin buildRuntimeLogin() {
         return new XMLLogin();
     }

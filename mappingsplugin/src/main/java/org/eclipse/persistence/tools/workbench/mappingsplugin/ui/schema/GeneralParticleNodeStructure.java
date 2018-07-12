@@ -69,6 +69,7 @@ final class GeneralParticleNodeStructure
 
     private PropertyChangeListener buildDisplayStringChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 GeneralParticleNodeStructure.this.firePropertyChanged(DISPLAY_STRING_PROPERTY, evt.getOldValue(), evt.getNewValue());
             }
@@ -78,15 +79,18 @@ final class GeneralParticleNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     void disengageComponent() {
         super.disengageComponent();
         this.specificParticleStructure.disengageParticle();
     }
 
+    @Override
     public String displayString() {
         return this.specificParticleStructure.displayString();
     }
 
+    @Override
     protected ListIterator componentDetails() {
         SchemaComponentDetail[] details = new SchemaComponentDetail[2];
 
@@ -98,10 +102,12 @@ final class GeneralParticleNodeStructure
 
     SchemaComponentDetail buildMinOccursDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "minOccurs";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return String.valueOf(((MWParticle) this.component).getMinOccurs());
             }
@@ -110,10 +116,12 @@ final class GeneralParticleNodeStructure
 
     SchemaComponentDetail buildMaxOccursDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "maxOccurs";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 int maxOccurs = ((MWParticle) this.component).getMaxOccurs();
                 return (maxOccurs == MWXmlSchema.INFINITY) ? "unbounded" : String.valueOf(maxOccurs);

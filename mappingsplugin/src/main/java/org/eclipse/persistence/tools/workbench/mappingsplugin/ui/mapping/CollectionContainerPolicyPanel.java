@@ -79,6 +79,7 @@ public final class CollectionContainerPolicyPanel
 
     private ClassRepositoryHolder buildClassRepositoryHolder() {
         return new ClassRepositoryHolder() {
+            @Override
             public MWClassRepository getClassRepository() {
                 return ((MWModel) CollectionContainerPolicyPanel.this.subject()).getRepository();
             }
@@ -87,16 +88,19 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildCollectionContainerTypeHolder() {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(this.getSubjectHolder(), MWContainerMapping.CONTAINER_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerMapping) this.subject).getContainerPolicy();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 containerTypeHolder.setValue(CONTAINER_TYPE_COLLECTION);
             }
         };
 
         return new TransformationPropertyValueModel(adapter) {
+            @Override
             protected Object transform(Object value) {
                 if (value instanceof MWCollectionContainerPolicy)
                     return CONTAINER_TYPE_COLLECTION;
@@ -124,6 +128,7 @@ public final class CollectionContainerPolicyPanel
     private ItemListener buildContainerClassChooserEnabler(final ClassChooserPanel containerClassChooserPanel)
     {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 containerClassChooserPanel.setEnabled(e.getStateChange() == ItemEvent.SELECTED);
             }
@@ -132,10 +137,12 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildContainerClassHolder() {
         return new PropertyAspectAdapter(this.defaultingContainerClassHolder, DefaultingContainerClass.CONTAINER_CLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DefaultingContainerClass) this.subject).getContainerClass();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((DefaultingContainerClass) this.subject).setContainerClass((MWClass) value);
             }
@@ -147,9 +154,11 @@ public final class CollectionContainerPolicyPanel
      */
     private PropertyValueModel buildComparatorClassHolder() {
         return new PropertyAspectAdapter(this.containerPolicyHolder, MWContainerPolicy.COMPARATOR_CLASS_PROPERTY, MWContainerPolicy.SORT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerPolicy) this.subject).getComparatorClass();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWContainerPolicy) this.subject).setComparatorClass((MWClass) value);
             }
@@ -158,6 +167,7 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildContainerPolicyHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWContainerMapping.CONTAINER_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerMapping) this.subject).getContainerPolicy();
             }
@@ -166,10 +176,12 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildContainerTypeHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWContainerMapping.CONTAINER_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerMapping) this.subject).getContainerPolicy();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 if (value == CONTAINER_TYPE_COLLECTION) {
                     ((MWContainerMapping) this.subject).setCollectionContainerPolicy();
@@ -186,6 +198,7 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildDefaultingContainerClassHolder() {
         return new PropertyAspectAdapter(this.containerPolicyHolder) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerPolicy) this.subject).getDefaultingContainerClass();
             }
@@ -194,16 +207,19 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildListContainerTypeHolder() {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(this.getSubjectHolder(), MWContainerMapping.CONTAINER_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerMapping) this.subject).getContainerPolicy();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 containerTypeHolder.setValue(CONTAINER_TYPE_LIST);
             }
         };
 
         return new TransformationPropertyValueModel(adapter) {
+            @Override
             protected Object transform(Object value) {
                 if (value instanceof MWListContainerPolicy)
                     return CONTAINER_TYPE_LIST;
@@ -235,9 +251,11 @@ public final class CollectionContainerPolicyPanel
                 return (value == null) ? null : Boolean.valueOf(! value.booleanValue());
             }
 
+            @Override
             protected Object reverseTransform(Object value) {
                 return this.oppositeValue((Boolean) value);
             }
+            @Override
             protected Object transform(Object value) {
                 return this.oppositeValue((Boolean) value);
             }
@@ -246,10 +264,12 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildSetContainerTypeHolder() {
         PropertyAspectAdapter adapter = new PropertyAspectAdapter(this.getSubjectHolder(), MWContainerMapping.CONTAINER_POLICY_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWContainerMapping) this.subject).getContainerPolicy();
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 containerTypeHolder.setValue(CONTAINER_TYPE_SET);
             }
@@ -257,6 +277,7 @@ public final class CollectionContainerPolicyPanel
 
 
         return new TransformationPropertyValueModel(adapter) {
+            @Override
             protected Object transform(Object value) {
                 if (value instanceof MWSetContainerPolicy)
                     return CONTAINER_TYPE_SET;
@@ -282,10 +303,12 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildUseSortingHolder() {
         return new PropertyAspectAdapter(this.containerPolicyHolder, MWContainerPolicy.SORT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return Boolean.valueOf(((MWContainerPolicy)this.subject).usesSorting());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWContainerPolicy)this.subject).setUsesSorting(((Boolean) value).booleanValue());
             }
@@ -305,11 +328,13 @@ public final class CollectionContainerPolicyPanel
 
     private PropertyValueModel buildUseDefaultContainerClassHolder() {
         return new PropertyAspectAdapter(this.defaultingContainerClassHolder, DefaultingContainerClass.USES_DEFAULT_CONTAINER_CLASS_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 // return the opposite of usesDefaultContainerClass
                 return Boolean.valueOf(((DefaultingContainerClass) this.subject).usesDefaultContainerClass());
             }
 
+            @Override
             protected void setValueOnSubject(Object value) {
                 // set the opposite value for useDefaultContainerClass
                 ((DefaultingContainerClass) this.subject).setUseDefaultContainerClass(((Boolean) value).booleanValue());
@@ -320,18 +345,21 @@ public final class CollectionContainerPolicyPanel
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize(ValueModel subjectHolder) {
         super.initialize(subjectHolder);
         this.containerPolicyHolder = this.buildContainerPolicyHolder();
         this.defaultingContainerClassHolder = buildDefaultingContainerClassHolder();
         this.containerTypeHolder = this.buildContainerTypeHolder();
         this.containerTypeHolder.addPropertyChangeListener(PropertyValueModel.VALUE, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
             }
         });
 
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -481,6 +509,7 @@ public final class CollectionContainerPolicyPanel
      */
     private ItemListener buildUseSortingCheckboxEnabler(final JComponent useJoiningCheckbox) {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 useJoiningCheckbox.setEnabled(e.getStateChange() == ItemEvent.SELECTED);
             }
@@ -492,6 +521,7 @@ public final class CollectionContainerPolicyPanel
      */
     private ItemListener buildComparatorClassChooserSetEnabler(final JComponent comparatorClassChooser) {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 comparatorClassChooser.setEnabled((e.getStateChange() == ItemEvent.SELECTED) && useSortingCheckBox.isSelected());
             }
@@ -503,6 +533,7 @@ public final class CollectionContainerPolicyPanel
      */
     private ItemListener buildComparatorClassChooserSortingEnabler(final JComponent comparatorClassChooser) {
         return new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 comparatorClassChooser.setEnabled(e.getStateChange() == ItemEvent.SELECTED);
             }

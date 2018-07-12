@@ -48,6 +48,7 @@ public abstract class NoneSelectedCellRendererAdapter
 
     // ********** icon **********
 
+    @Override
     public Icon buildIcon(Object value) {
         return (value == this.nullValue()) ? this.buildNullValueIcon() : this.buildNonNullValueIcon(value);
     }
@@ -62,6 +63,7 @@ public abstract class NoneSelectedCellRendererAdapter
 
     // ********** text **********
 
+    @Override
     public String buildText(Object value) {
         return (value == this.nullValue()) ? this.buildNullValueText() : this.buildNonNullValueText(value);
     }
@@ -80,6 +82,7 @@ public abstract class NoneSelectedCellRendererAdapter
 
     // ********** tool tip text **********
 
+    @Override
     public String buildToolTipText(Object value) {
         return (value == this.nullValue()) ? this.buildNullValueToolTipText() : this.buildNonNullValueToolTipText(value);
     }
@@ -94,6 +97,7 @@ public abstract class NoneSelectedCellRendererAdapter
 
     // ********** accessible name **********
 
+    @Override
     public String buildAccessibleName(Object value) {
         return (value == this.nullValue()) ? this.buildNullValueAccessibleName() : this.buildNonNullValueAccessibleName(value);
     }

@@ -32,6 +32,7 @@ public class ExternalClassLoadFailureContainer
     /** failures, keyed by class name */
     private Map failures = new HashMap();
 
+    @Override
     public void externalClassLoadFailure(ExternalClassLoadFailureEvent e) {
         this.failures.put(e.getClassName(), e.getCause());
     }

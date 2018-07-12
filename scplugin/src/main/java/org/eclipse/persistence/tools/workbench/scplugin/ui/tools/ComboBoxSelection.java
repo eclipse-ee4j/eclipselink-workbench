@@ -47,6 +47,7 @@ public abstract class ComboBoxSelection implements Comparable {
         this.displayString = displayString;
     }
 
+    @Override
     public int compareTo( Object object) {
         ComboBoxSelection selection = ( ComboBoxSelection)object;
         return displayString().compareTo( selection.displayString());
@@ -74,6 +75,7 @@ public abstract class ComboBoxSelection implements Comparable {
      *
      * @return #displayString()
      */
+    @Override
     public String toString() {
         return displayString();
     }

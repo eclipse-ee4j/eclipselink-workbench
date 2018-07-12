@@ -41,6 +41,7 @@ abstract class AbstractMapInheritedAttributesAction extends AbstractFrameworkAct
     }
 
 
+    @Override
     protected final void execute()
     {
         Collection selectedDescriptors = CollectionTools.collection(selectedNodes());
@@ -81,6 +82,7 @@ abstract class AbstractMapInheritedAttributesAction extends AbstractFrameworkAct
             "MAP_INHERITED_ATTRIBUTES_STATUS_DIALOG_TITLE",
             "dialog.mapInheritedAttributes")
         {
+            @Override
             protected CellRendererAdapter buildNodeRenderer(Object value)
             {
                 if (value instanceof MWDescriptor)

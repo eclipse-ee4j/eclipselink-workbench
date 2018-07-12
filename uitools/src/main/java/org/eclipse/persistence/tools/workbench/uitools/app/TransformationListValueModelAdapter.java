@@ -85,6 +85,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.transformedList = new ArrayList();
@@ -96,6 +97,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         // try to prevent backdoor modification of the list
         return new ReadOnlyListIterator(this.transformedList);
@@ -107,6 +109,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#addItem(int, java.lang.Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -114,6 +117,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#addItems(int, java.util.List)
      */
+    @Override
     public void addItems(int index, List items) {
         throw new UnsupportedOperationException();
     }
@@ -121,6 +125,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         throw new UnsupportedOperationException();
     }
@@ -128,6 +133,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         throw new UnsupportedOperationException();
     }
@@ -135,6 +141,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#replaceItem(int, java.lang.Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -142,6 +149,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#replaceItems(int, java.util.List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         throw new UnsupportedOperationException();
     }
@@ -149,6 +157,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         return this.transformedList.get(index);
     }
@@ -156,6 +165,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.transformedList.size();
     }
@@ -163,6 +173,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
 
     // ********** behavior **********
 
+    @Override
     protected void engageModel() {
         super.engageModel();
         // synch the transformed list *after* we start listening to the list holder,
@@ -170,6 +181,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
         this.transformedList.addAll(this.transformItems(this.listHolder));
     }
 
+    @Override
     protected void disengageModel() {
         super.disengageModel();
         // clear out the list when we are not listening to the collection holder
@@ -223,6 +235,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
      * Transform them, add them to our transformation list,
      * and notify our listeners.
      */
+    @Override
     protected void itemsAdded(ListChangeEvent e) {
         this.addItemsToList(e.getIndex(), this.transformItems(e), this.transformedList, VALUE);
     }
@@ -232,6 +245,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
      * Remove the corresponding items from our transformation list
      * and notify our listeners.
      */
+    @Override
     protected void itemsRemoved(ListChangeEvent e) {
         this.removeItemsFromList(e.getIndex(), e.size(), this.transformedList, VALUE);
     }
@@ -241,6 +255,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
      * Replace the corresponding items in our transformation list
      * and notify our listeners.
      */
+    @Override
     protected void itemsReplaced(ListChangeEvent e) {
         this.setItemsInList(e.getIndex(), this.transformItems(e), this.transformedList, VALUE);
     }
@@ -249,6 +264,7 @@ public class TransformationListValueModelAdapter extends ListValueModelWrapper {
      * The wrapped list holder has changed in some dramatic fashion.
      * Reconfigure our listeners and forward the event.
      */
+    @Override
     protected void listChanged(ListChangeEvent e) {
         this.transformedList.clear();
         this.transformedList.addAll(this.transformItems(this.listHolder));

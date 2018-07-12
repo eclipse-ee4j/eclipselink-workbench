@@ -94,6 +94,7 @@ final class XmlSessionMultipleProjectsPane extends AbstractSessionMultipleProjec
      *
      * @param selectionModel The selection model used by the list
      */
+    @Override
     protected void addProject(ObjectListSelectionModel selectionModel)
     {
         DatabaseSessionAdapter databaseSession = (DatabaseSessionAdapter) subject();
@@ -175,6 +176,7 @@ final class XmlSessionMultipleProjectsPane extends AbstractSessionMultipleProjec
             }
         }
 
+        @Override
         protected Component buildMainPanel()
         {
             GridBagConstraints constraints = new GridBagConstraints();
@@ -217,6 +219,7 @@ final class XmlSessionMultipleProjectsPane extends AbstractSessionMultipleProjec
         {
             return new PropertyChangeListener()
             {
+                @Override
                 public void propertyChange(PropertyChangeEvent e)
                 {
                     String projectXml = (String) e.getNewValue();
@@ -239,6 +242,7 @@ final class XmlSessionMultipleProjectsPane extends AbstractSessionMultipleProjec
         {
             return new ActionListener()
             {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     addProjectXML();
@@ -246,16 +250,19 @@ final class XmlSessionMultipleProjectsPane extends AbstractSessionMultipleProjec
             };
         }
 
+        @Override
         protected String helpTopicId()
         {
             return "dialog.session.projectType";
         }
 
+        @Override
         protected Component initialFocusComponent()
         {
             return this.textField;
         }
 
+        @Override
         protected void prepareToShow()
         {
             super.prepareToShow();
@@ -269,11 +276,13 @@ final class XmlSessionMultipleProjectsPane extends AbstractSessionMultipleProjec
      */
     private class XmlFileFilter extends FileFilter
     {
+        @Override
         public boolean accept(File file)
         {
             return file.isDirectory() || ".xml".equalsIgnoreCase(FileTools.extension(file));
         }
 
+        @Override
         public String getDescription()
         {
             return resourceRepository().getString("SESSION_PROJECT_ADVANCED_FILE_CHOOSER_DESCRIPTION");

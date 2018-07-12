@@ -26,6 +26,7 @@ final class MapAsTypeConversionAction extends MapAsRelationalDirectMapping {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         initializeIcon("mapping.typeConversion");
@@ -34,12 +35,14 @@ final class MapAsTypeConversionAction extends MapAsRelationalDirectMapping {
         initializeToolTipText("MAP_AS_TYPE_CONVERSION_ACTION.toolTipText");
     }
 
+    @Override
     protected MappingNode morphNode(MappingNode selectedNode) {
         MappingNode mappingNode = super.morphNode(selectedNode);
         ((MWDirectMapping) mappingNode.getMapping()).setTypeConversionConverter();
         return mappingNode;
     }
 
+    @Override
     protected String converterType() {
         return MWConverter.TYPE_CONVERSION_CONVERTER;
     }

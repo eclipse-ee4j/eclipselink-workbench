@@ -56,6 +56,7 @@ public final class RelationalProjectNode
         super(project, plugin, context);
     }
 
+    @Override
     protected ApplicationContext expandContext(ApplicationContext context) {
         return super.expandContext(context).
             buildExpandedResourceRepositoryContext(UiDescriptorRelationalBundle.class).
@@ -65,12 +66,14 @@ public final class RelationalProjectNode
 
     // ********** ProjectNode implementation **********
 
+    @Override
     public String getCannotAutomapDescriptorsStringKey() {
         return "RELATIONAL_PROJECT_UNAUTOMAPPABLE";
     }
 
     // ************ ProjectNode implementation **********
 
+    @Override
     protected Child buildMetaDataRepositoryNode() {
         return new DatabaseNode(this.getProject().getDatabase(), this, this.getMappingsPlugin(), this.getApplicationContext());
     }
@@ -78,10 +81,12 @@ public final class RelationalProjectNode
 
     // ********** AbstractApplicationNode overrides **********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_RELATIONAL_PROJECT_NODE";
     }
 
+    @Override
     protected void addToMenuDescription(GroupContainerDescription menuDescription, WorkbenchContext context) {
         menuDescription.add(this.buildClassActionGroup(context));
         menuDescription.add(this.buildCloseDeleteActionGroup(context));
@@ -97,6 +102,7 @@ public final class RelationalProjectNode
         return autoMapGroup;
     }
 
+    @Override
     protected String buildIconKey() {
         return "project.relational";
     }
@@ -104,6 +110,7 @@ public final class RelationalProjectNode
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return RelationalProjectTabbedPropertiesPage.class;
     }
@@ -111,12 +118,15 @@ public final class RelationalProjectNode
 
     // *********** ProjectNode implementation *********
 
+    @Override
     protected DescriptorPackageNode buildDescriptorPackageNodeFor(MWDescriptor descriptor) {
         return new RelationalDescriptorPackageNode(descriptor.packageName(), this, this.getDescriptorNodeBuilder());
     }
 
+    @Override
     protected DescriptorNodeBuilder buildDescriptorNodeBuilder() {
         return new DescriptorPackageNode.DescriptorNodeBuilder() {
+            @Override
             public DescriptorNode buildDescriptorNode(MWDescriptor descriptor, DescriptorPackageNode descriptorPackageNode) {
                 if (descriptor instanceof MWTableDescriptor) {
                     return new TableDescriptorNode((MWTableDescriptor) descriptor, descriptorPackageNode);
@@ -134,6 +144,7 @@ public final class RelationalProjectNode
         };
     }
 
+    @Override
     protected GroupContainerDescription buildExportMenuDescription(WorkbenchContext context) {
         GroupContainerDescription exportMenu =
             new MenuDescription(
@@ -155,10 +166,12 @@ public final class RelationalProjectNode
         return exportMenu;
     }
 
+    @Override
     public boolean supportsExportProjectJavaSource() {
         return true;
     }
 
+    @Override
     public boolean supportsExportTableCreatorJavaSource() {
         return true;
     }

@@ -55,6 +55,7 @@ public class WebLogic_9_PlatformAdapter extends ServerPlatformAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new WebLogic_9_PlatformConfig();
     }

@@ -38,6 +38,7 @@ public class TeeOutputStreamTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.out1 = new ByteArrayOutputStream();
@@ -45,6 +46,7 @@ public class TeeOutputStreamTests extends TestCase {
         this.tee = new TeeOutputStream(this.out1, this.out2);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();

@@ -104,6 +104,7 @@ final class WorkspaceView {
 
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 ApplicationNode[] selectedNodes = ((NavigatorSelectionModel) e.getSource()).getSelectedNodes();
                 WorkspaceView.this.selectedNodesChanged(selectedNodes);

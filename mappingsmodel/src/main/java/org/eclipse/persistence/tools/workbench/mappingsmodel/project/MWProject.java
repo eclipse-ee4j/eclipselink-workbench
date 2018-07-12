@@ -15,31 +15,22 @@
 package org.eclipse.persistence.tools.workbench.mappingsmodel.project;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
-import org.eclipse.persistence.expressions.ExpressionBuilder;
-import org.eclipse.persistence.internal.sessions.AbstractSession;
 import org.eclipse.persistence.oxm.XMLDescriptor;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeDirectCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
-import org.eclipse.persistence.sessions.DatabaseRecord;
 import org.eclipse.persistence.sessions.DatasourceLogin;
 import org.eclipse.persistence.sessions.Project;
-import org.eclipse.persistence.sessions.Record;
-import org.eclipse.persistence.sessions.Session;
 import org.eclipse.persistence.sessions.factories.ProjectClassGenerator;
 import org.eclipse.persistence.sessions.factories.XMLProjectWriter;
 
@@ -57,7 +48,6 @@ import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.relational.
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.ExternalClassLoadFailureContainer;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.ExternalClassLoadFailureEvent;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClass;
-import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassAttribute;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.meta.MWClassRepository;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.relational.MWRelationalProject;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.project.xml.MWEisProject;
@@ -69,7 +59,6 @@ import org.eclipse.persistence.tools.workbench.utility.ClassTools;
 import org.eclipse.persistence.tools.workbench.utility.Classpath;
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator;
-import org.eclipse.persistence.tools.workbench.utility.XMLTools;
 import org.eclipse.persistence.tools.workbench.utility.ManifestInterrogator.Defaults;
 import org.eclipse.persistence.tools.workbench.utility.events.ChangeNotifier;
 import org.eclipse.persistence.tools.workbench.utility.events.DefaultChangeNotifier;
@@ -84,7 +73,6 @@ import org.eclipse.persistence.tools.workbench.utility.string.AffixStrippingPart
 import org.eclipse.persistence.tools.workbench.utility.string.ExhaustivePartialStringComparatorEngine;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringComparator;
 import org.eclipse.persistence.tools.workbench.utility.string.PartialStringComparatorEngine;
-import org.w3c.dom.Document;
 
 public abstract class MWProject
     extends MWModel
@@ -399,6 +387,7 @@ public abstract class MWProject
     /**
      * initialize transient state
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.descriptors = new Vector();    // descriptors are not mapped directly
@@ -410,6 +399,7 @@ public abstract class MWProject
     /**
      * initialize persistent state
      */
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.descriptorNames = new HashSet();
@@ -424,6 +414,7 @@ public abstract class MWProject
 
     protected abstract MWProjectDefaultsPolicy buildDefaultsPolicy();
 
+    @Override
     protected void checkParent(Node parent) {
         // only Projects can lack a parent
         if (parent != null) {
@@ -431,6 +422,7 @@ public abstract class MWProject
         }
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         synchronized (this.descriptors) { children.addAll(this.descriptors); }
@@ -462,6 +454,7 @@ public abstract class MWProject
     // ***** descriptors
     public Iterator descriptors() {
         return new CloneIterator(this.descriptors) {
+            @Override
             protected void remove(Object current) {
                 MWProject.this.removeDescriptor((MWDescriptor) current);
             }
@@ -619,6 +612,7 @@ public abstract class MWProject
     /**
      * as the root node, we must implement this method
      */
+    @Override
     public ChangeNotifier getChangeNotifier() {
         return this.changeNotifier;
     }
@@ -626,6 +620,7 @@ public abstract class MWProject
     /**
      * allow clients to install another change notifier
      */
+    @Override
     public void setChangeNotifier(ChangeNotifier changeNotifier) {
         this.changeNotifier = changeNotifier;
     }
@@ -635,6 +630,7 @@ public abstract class MWProject
     /**
      * as the root node, we must implement this method
      */
+    @Override
     public Validator getValidator() {
         return this.validator;
     }
@@ -642,6 +638,7 @@ public abstract class MWProject
     /**
      * allow clients to install an active validator
      */
+    @Override
     public void setValidator(Validator validator) {
         this.validator = validator;
     }
@@ -666,6 +663,7 @@ public abstract class MWProject
      */
     public Iterator mappingDescriptors() {
         return new FilteringIterator(this.descriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return next instanceof MWMappingDescriptor;
             }
@@ -678,6 +676,7 @@ public abstract class MWProject
 
     public Iterator descriptorsInPackage(final String packageName) {
         return new FilteringIterator(this.descriptors()) {
+            @Override
             protected boolean accept(Object next) {
                 return ((MWDescriptor) next).packageName().equals(packageName);
             }
@@ -713,6 +712,7 @@ public abstract class MWProject
 
     public Iterator activeDescriptors() {
         return new FilteringIterator(this.descriptors()) {
+            @Override
             public boolean accept(Object next) {
                 return ((MWDescriptor) next).isActive();
             }
@@ -770,6 +770,7 @@ public abstract class MWProject
      */
     public Iterator allWriteableMappings() {
         return new FilteringIterator(this.allMappings()) {
+            @Override
             protected boolean accept(Object next) {
                 return ! ((MWMapping) next).isReadOnly();
             }
@@ -783,6 +784,7 @@ public abstract class MWProject
     public Iterator allMappings() {
         return new CompositeIterator(
             new TransformationIterator(this.activeDescriptors()) {
+            @Override
                 protected Object transform(Object next) {
                     return ((MWDescriptor) next).mappings();
                 }
@@ -939,6 +941,7 @@ public abstract class MWProject
 
     // ********** misc stuff **********
 
+    @Override
     public void nodeRenamed(Node node) {
         super.nodeRenamed(node);
         if (this.descriptors.contains(node)) {
@@ -992,16 +995,19 @@ public abstract class MWProject
         }
     }
 
+    @Override
     protected void addTransientAspectNamesTo(Set transientAspectNames) {
         super.addTransientAspectNamesTo(transientAspectNames);
         transientAspectNames.add(VALIDATING_PROPERTY);
     }
 
+    @Override
     protected void addInsignificantAspectNamesTo(Set insignificantAspectNames) {
         super.addInsignificantAspectNamesTo(insignificantAspectNames);
         insignificantAspectNames.add(VALIDATING_PROPERTY);
     }
 
+    @Override
     public void validateBranch() {
         this.setIsValidating(true);
         super.validateBranch();
@@ -1011,18 +1017,22 @@ public abstract class MWProject
 
     // ********** SubComponentContainer implementation **********
 
+    @Override
     public Iterator projectSubFileComponents() {
         return this.descriptors();
     }
 
+    @Override
     public void setProjectSubFileComponents(Collection subComponents) {
         this.setDescriptors(subComponents);
     }
 
+    @Override
     public Iterator originalProjectSubFileComponentNames() {
         return this.descriptorNames.iterator();
     }
 
+    @Override
     public void setOriginalProjectSubFileComponentNames(Collection originalSubComponentNames) {
         this.descriptorNames = originalSubComponentNames;
     }
@@ -1034,6 +1044,7 @@ public abstract class MWProject
      * (classes, tables/schemas, and descriptors);
      * this is a bit hacky; but it's a nice usability feature
      */
+    @Override
     public boolean hasChangedMainProjectSaveFile() {
         if (this.isDirty()) {
             // the project itself is dirty
@@ -1148,6 +1159,7 @@ public abstract class MWProject
      * this is where the whole #postProjectBuild() cascade begins
      * @see ProjectReader#readProject()
      */
+    @Override
     public void postProjectBuild() {
         // set the child backpointers first
         this.setChildBackpointers();
@@ -1197,10 +1209,12 @@ public abstract class MWProject
 
     // ********** displaying and printing **********
 
+    @Override
     public String displayString() {
         return this.getName();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(getName());
     }
@@ -1209,21 +1223,27 @@ public abstract class MWProject
     // ********** member classes **********
 
     private static class LocalManifestDefaults implements Defaults {
+        @Override
         public String defaultSpecificationTitle() {
             return "EclipseLink";
         }
+        @Override
         public String defaultSpecificationVendor() {
             return "Eclipse";
         }
+        @Override
         public String defaultReleaseDesignation() {
             return "Version 1.0.0";
         }
+        @Override
         public String defaultLibraryDesignation() {
             return "Workbench";
         }
+        @Override
         public String defaultSpecificationVersion() {
             return "1.0.0";
         }
+        @Override
         public String defaultImplementationVersion() {
             return this.defaultSpecificationVersion();
         }

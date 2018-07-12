@@ -41,6 +41,7 @@ public class PipeTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.pipe = new Pipe(10);
@@ -50,6 +51,7 @@ public class PipeTests extends TestCase {
         this.exCaught = false;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -133,6 +135,7 @@ public class PipeTests extends TestCase {
 
     private Runnable buildWriteRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 OutputStream out = PipeTests.this.pipe.getOutputStream();
                 try {
@@ -154,6 +157,7 @@ public class PipeTests extends TestCase {
      */
     private Runnable buildWriteRunnable1() {
         return new Runnable() {
+            @Override
             public void run() {
                 OutputStream out = PipeTests.this.pipe.getOutputStream();
                 try {
@@ -175,6 +179,7 @@ public class PipeTests extends TestCase {
 
     private Runnable buildReadRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     InputStream in = PipeTests.this.pipe.getInputStream();
@@ -205,6 +210,7 @@ public class PipeTests extends TestCase {
      */
     private Runnable buildReadRunnable1() {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     InputStream in = PipeTests.this.pipe.getInputStream();
@@ -394,6 +400,7 @@ public class PipeTests extends TestCase {
 
     private Runnable buildReadRunnable(final int chunkSize) {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     InputStream in = PipeTests.this.pipe.getInputStream();
@@ -423,6 +430,7 @@ public class PipeTests extends TestCase {
 
     private Runnable buildWriteRunnable(final byte[] bytes, final int chunkSize) {
         return new Runnable() {
+            @Override
             public void run() {
                 try {
                     OutputStream out = PipeTests.this.pipe.getOutputStream();

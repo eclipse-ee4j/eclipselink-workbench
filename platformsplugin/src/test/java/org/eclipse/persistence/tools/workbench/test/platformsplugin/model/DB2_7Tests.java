@@ -36,6 +36,7 @@ public class DB2_7Tests extends PlatformTests {
         super(name);
     }
 
+    @Override
     protected String[] driverJARNames() {
         return new String[] {"db2java_7.2.5.zip"};
     }
@@ -43,14 +44,17 @@ public class DB2_7Tests extends PlatformTests {
     /**
      * the DB2 7.2 server is not set up with individual accounts
      */
+    @Override
     protected String userName() {
         return "mwdev1";
     }
 
+    @Override
     protected String driverClassName() {
         return "COM.ibm.db2.jdbc.net.DB2Driver";
     }
 
+    @Override
     protected String connectionURL() {
         return "jdbc:db2:" + this.serverName() + ":" + this.databaseName();
     }
@@ -66,10 +70,12 @@ public class DB2_7Tests extends PlatformTests {
         return "TOPLINK";
     }
 
+    @Override
     protected String platformName() {
         return "IBM DB2";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "07.02.0009";
     }
@@ -78,6 +84,7 @@ public class DB2_7Tests extends PlatformTests {
     //     LONG VARCHAR FOR BIT DATA
     //     VARCHAR() FOR BIT DATA
     //     CHAR() FOR BIT DATA
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    BIGINT_COL                    BIGINT,"); sb.append(CR);
         sb.append("    BLOB_1000_COL            BLOB(1000),"); sb.append(CR);    // size is required in version 7
@@ -103,6 +110,7 @@ public class DB2_7Tests extends PlatformTests {
         sb.append("VARCHAR_20_COL            VARCHAR(20)"); sb.append(CR);        // size is required
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // BIGINT
         this.verifyColumnAttribute(metaDataMap, "BIGINT_COL", "TABLE_CAT", null);

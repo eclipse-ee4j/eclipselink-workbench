@@ -10,8 +10,6 @@
  * SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
  */package org.eclipse.persistence.tools.workbench.scplugin.model.adapter;
 
-import org.eclipse.persistence.internal.sessions.factories.model.platform.ServerPlatformConfig;
-import org.eclipse.persistence.internal.sessions.factories.model.platform.WebSphere_7_0_PlatformConfig;
 
 /**
  * Session Configuration model adapter class for the

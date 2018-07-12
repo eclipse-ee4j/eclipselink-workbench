@@ -15,7 +15,6 @@
 package org.eclipse.persistence.tools.workbench.test.models.projects;
 
 import java.net.URISyntaxException;
-import java.util.HashMap;
 
 import javax.xml.namespace.QName;
 
@@ -25,9 +24,7 @@ import org.eclipse.persistence.tools.workbench.test.models.jaxb.employee.Employe
 import org.eclipse.persistence.tools.workbench.test.models.jaxb.employee.NormalHoursTransformer;
 import org.eclipse.persistence.tools.workbench.test.models.jaxb.employee.PhoneNumber;
 
-import org.eclipse.persistence.internal.queries.CollectionContainerPolicy;
 import org.eclipse.persistence.internal.queries.ListContainerPolicy;
-import org.eclipse.persistence.internal.queries.MapContainerPolicy;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
 import org.eclipse.persistence.oxm.NamespaceResolver;
 import org.eclipse.persistence.oxm.XMLConstants;
@@ -37,7 +34,6 @@ import org.eclipse.persistence.oxm.XMLLogin;
 import org.eclipse.persistence.oxm.mappings.XMLAnyAttributeMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCollectionReferenceMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeCollectionMapping;
-import org.eclipse.persistence.oxm.mappings.XMLCompositeDirectCollectionMapping;
 import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLDirectMapping;
 import org.eclipse.persistence.oxm.mappings.XMLFragmentCollectionMapping;
@@ -47,7 +43,6 @@ import org.eclipse.persistence.oxm.mappings.XMLTransformationMapping;
 import org.eclipse.persistence.oxm.schema.XMLSchemaFileReference;
 import org.eclipse.persistence.platform.xml.XMLSchemaReference;
 import org.eclipse.persistence.sessions.Project;
-import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.xml.AnyAttributeMappingNode;
 import org.eclipse.persistence.tools.workbench.utility.io.FileTools;
 
 

@@ -109,6 +109,7 @@ public interface MWCachingPolicy extends MWNode, Model
             super(mwModelString, externalString, toplinkClassName);
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object descriptor) {
             if (getMWModelOption() == MWCachingPolicy.CACHE_TYPE_PROJECT_DEFAULT) {
                 throw new IllegalStateException("Cannot convert the project default, handle this first");
@@ -123,6 +124,7 @@ public interface MWCachingPolicy extends MWNode, Model
             super(mwModelString, externalString);
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object descriptor) {
             if (getMWModelOption() == MWCachingPolicy.CACHE_ISOLATION_PROJECT_DEFAULT) {
                 throw new IllegalStateException("Cannot convert the project default, handle this first");
@@ -137,6 +139,7 @@ public interface MWCachingPolicy extends MWNode, Model
             super(mwModelString, externalString, new Integer(toplinkCacheSynchronizationType));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object descriptor) {
             if (getMWModelOption() == MWCachingPolicy.CACHE_COORDINATION_PROJECT_DEFAULT) {
                 throw new IllegalStateException("Cannot convert the project default, handle this first");
@@ -152,6 +155,7 @@ public interface MWCachingPolicy extends MWNode, Model
             super(mwModelString, externalString, new Integer(toplinkExistenceCheckingOption));
         }
 
+        @Override
         public void setMWOptionOnTopLinkObject(Object descriptor) {
             if (getMWModelOption() == MWCachingPolicy.EXISTENCE_CHECKING_PROJECT_DEFAULT) {
                 throw new IllegalStateException("Cannot convert the project default, handle this first");

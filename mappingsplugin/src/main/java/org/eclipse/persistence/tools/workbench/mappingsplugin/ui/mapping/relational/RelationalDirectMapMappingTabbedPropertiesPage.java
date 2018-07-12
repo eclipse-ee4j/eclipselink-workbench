@@ -36,6 +36,7 @@ final class RelationalDirectMapMappingTabbedPropertiesPage extends TabbedPropert
         super(context);
     }
 
+    @Override
     protected void initializeTabs() {
         addTab(new RelationalDirectMapGeneralPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()),        "DIRECT_COLLECTION_GENERAL_TAB_TITLE");
 //        addTab(new RelationalDirectMapMappingContainerOptionsPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "DIRECT_COLLECTION_OPTIONS_TAB_TITLE");

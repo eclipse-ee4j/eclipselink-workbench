@@ -29,7 +29,6 @@ import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
 import org.eclipse.persistence.descriptors.CMPPolicy;
 import org.eclipse.persistence.descriptors.ClassDescriptor;
-import org.eclipse.persistence.descriptors.DescriptorEvent;
 import org.eclipse.persistence.descriptors.InheritancePolicy;
 import org.eclipse.persistence.descriptors.PessimisticLockingPolicy;
 import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
@@ -136,6 +135,7 @@ public abstract class MWDescriptorLockingPolicy extends MWModel implements MWLoc
         super(descriptor);
     }
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
@@ -147,11 +147,13 @@ public abstract class MWDescriptorLockingPolicy extends MWModel implements MWLoc
 
     // ******** accessors *********
 
+    @Override
     public String getLockingType()
     {
         return this.lockingType;
     }
 
+    @Override
     public void setLockingType(String newLockingType)
     {
         String oldLockingType = this.lockingType;
@@ -168,11 +170,13 @@ public abstract class MWDescriptorLockingPolicy extends MWModel implements MWLoc
         }
     }
 
+    @Override
     public boolean shouldStoreVersionInCache()
     {
         return this.storeInCache;
     }
 
+    @Override
     public void setStoreInCache(boolean newStoreInCache)
     {
         boolean oldStoreInCache = this.storeInCache;
@@ -198,10 +202,12 @@ public abstract class MWDescriptorLockingPolicy extends MWModel implements MWLoc
         return (MWMappingDescriptor) ((MWTransactionalPolicy) this.getParent()).getParent();
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(getLockingType());
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor)
     {
         if (getLockingType() == PESSIMISTIC_LOCKING)
@@ -221,6 +227,7 @@ public abstract class MWDescriptorLockingPolicy extends MWModel implements MWLoc
         }
     }
 
+    @Override
     protected void addProblemsTo(List problems) {
         super.addProblemsTo(problems);
         this.checkLockFieldSpecifiedForLockingPolicy(problems);

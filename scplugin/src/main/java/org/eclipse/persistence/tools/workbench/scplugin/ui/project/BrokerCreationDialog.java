@@ -89,6 +89,7 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
         this.sessionBrokerNames = sessionBrokerNames;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         getOKAction().setEnabled( false);
@@ -98,6 +99,7 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
         return new DocumentAdapter(this.stringHolder);
     }
 
+    @Override
     protected Component buildMainPanel() {
         GridBagConstraints constraints = new GridBagConstraints();
         setTitle( resourceRepository().getString( "BROKER_CREATION_DIALOG_TITLE"));
@@ -165,12 +167,15 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
 
     private DocumentListener buildNameFieldDocumentListener() {
         return new DocumentListener() {
+           @Override
            public void insertUpdate(DocumentEvent e) {
                updateOKAction();
            }
+           @Override
            public void removeUpdate(DocumentEvent e) {
                updateOKAction();
            }
+           @Override
            public void changedUpdate(DocumentEvent e) {
            }
         };
@@ -195,6 +200,7 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
     private ActionListener buildServerPlatformAction() {
 
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 boolean checked = ((JCheckBox) e.getSource()).isSelected();
                 String serverClassName;
@@ -229,6 +235,7 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
         subPane.setEnabled(false);
 
         this.useServerPlatformCheckBox.addItemListener(new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
                 JCheckBox checkBox = (JCheckBox) e.getSource();
                 subPane.setEnabled(checkBox.isSelected());
@@ -255,6 +262,7 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
 
     private ListCellRenderer buildServerPlatformRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 if (value == null)
                     return "";
@@ -372,16 +380,19 @@ final class BrokerCreationDialog extends AbstractValidatingDialog {
         return NameTools.uniqueNameFor(sessionBrokerName, this.sessionBrokerNames);
     }
 
+    @Override
     protected void prepareToShow() {
         super.prepareToShow();
         this.nameTextField.setText(buildUniqueSessionBrokerName());
         this.nameTextField.selectAll();
     }
 
+    @Override
     protected String helpTopicId() {
         return "dialog.sessionBrokerCreation";
     }
 
+    @Override
     protected Component initialFocusComponent() {
         return this.nameTextField;
     }

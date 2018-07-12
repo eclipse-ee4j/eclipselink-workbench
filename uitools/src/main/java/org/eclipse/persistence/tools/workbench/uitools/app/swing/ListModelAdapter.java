@@ -86,18 +86,23 @@ public class ListModelAdapter extends AbstractListModel {
 
     protected ListChangeListener buildListChangeListener() {
         return new ListChangeListener() {
+            @Override
             public void itemsAdded(ListChangeEvent e) {
                 ListModelAdapter.this.itemsAdded(e);
             }
+            @Override
             public void itemsRemoved(ListChangeEvent e) {
                 ListModelAdapter.this.itemsRemoved(e);
             }
+            @Override
             public void itemsReplaced(ListChangeEvent e) {
                 ListModelAdapter.this.itemsReplaced(e);
             }
+            @Override
             public void listChanged(ListChangeEvent e) {
                 ListModelAdapter.this.listChanged();
             }
+            @Override
             public String toString() {
                 return "list listener";
             }
@@ -110,6 +115,7 @@ public class ListModelAdapter extends AbstractListModel {
     /**
      * @see javax.swing.ListModel#getSize()
      */
+    @Override
     public int getSize() {
         return this.listHolder.size();
     }
@@ -117,6 +123,7 @@ public class ListModelAdapter extends AbstractListModel {
     /**
      * @see javax.swing.ListModel#getElementAt(int)
      */
+    @Override
     public Object getElementAt(int index) {
         return this.listHolder.getItem(index);
     }
@@ -125,6 +132,7 @@ public class ListModelAdapter extends AbstractListModel {
      * Extend to start listening to the underlying model list if necessary.
      * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
      */
+    @Override
     public void addListDataListener(ListDataListener l) {
         if (this.hasNoListDataListeners()) {
             this.engageModel();
@@ -137,6 +145,7 @@ public class ListModelAdapter extends AbstractListModel {
      * Extend to stop listening to the underlying model list if appropriate.
      * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
      */
+    @Override
     public void removeListDataListener(ListDataListener l) {
         super.removeListDataListener(l);
         if (this.hasNoListDataListeners()) {
@@ -266,6 +275,7 @@ public class ListModelAdapter extends AbstractListModel {
 
     // ********** Object overrides **********
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.listHolder);
     }

@@ -43,6 +43,7 @@ public class PFPartialStringComparator implements PartialStringComparator {
         super();
     }
 
+    @Override
     public double compare(String s1, String s2) {
         return StringTools.calculateHighestMatchWeight(s1, s2);
     }
@@ -50,6 +51,7 @@ public class PFPartialStringComparator implements PartialStringComparator {
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return ClassTools.shortClassNameForObject(this);
     }

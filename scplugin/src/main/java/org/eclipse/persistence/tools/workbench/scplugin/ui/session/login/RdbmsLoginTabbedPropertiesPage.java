@@ -53,12 +53,14 @@ public class RdbmsLoginTabbedPropertiesPage extends TabbedPropertiesPage {
     protected PropertyValueModel buildPropertiesHolder() {
 
         PropertyAspectAdapter loginHolder = new PropertyAspectAdapter( getSelectionHolder(), DatabaseSessionAdapter.LOGIN_CONFIG_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((DatabaseSessionAdapter) subject).getLogin();
             }
         };
 
         return new PropertyAspectAdapter( loginHolder, DatabaseLoginAdapter.USE_PROPERTIES_PROPERTY) {
+            @Override
             protected Object buildValue() {
                 if (subject == null) {
                     return Boolean.FALSE;
@@ -66,6 +68,7 @@ public class RdbmsLoginTabbedPropertiesPage extends TabbedPropertiesPage {
                     return getValueFromSubject();
                 }
             }
+            @Override
             public Object getValueFromSubject() {
                 DatabaseLoginAdapter session = (DatabaseLoginAdapter) subject;
                 return Boolean.valueOf( session.usesProperties());
@@ -77,6 +80,7 @@ public class RdbmsLoginTabbedPropertiesPage extends TabbedPropertiesPage {
         return new ComponentBuilder() {
             private RdbmsPropertiesPropertiesPage page;
 
+            @Override
             public Component buildComponent( PropertyValueModel nodeHolder) {
                 if (page == null)
                     page = new RdbmsPropertiesPropertiesPage( nodeHolder, getWorkbenchContextHolder());
@@ -98,10 +102,12 @@ public class RdbmsLoginTabbedPropertiesPage extends TabbedPropertiesPage {
         return "LOGIN_SEQUENCING_TAB_TITLE";
     }
 
+    @Override
     protected Component buildTitlePanel() {
         return new JComponent() { };
     }
 
+    @Override
     protected JTabbedPane buildTabbedPane()
     {
         JTabbedPane tabbedPane = super.buildTabbedPane();
@@ -109,6 +115,7 @@ public class RdbmsLoginTabbedPropertiesPage extends TabbedPropertiesPage {
         return tabbedPane;
     }
 
+    @Override
     protected void initializeTabs() {
         addTab( buildConnectionPropertiesPage(), buildConnectionPropertiesPageTitle());
         addTab( buildSequencingPropertiesPage(), buildSequencingPropertiesPageTitle());

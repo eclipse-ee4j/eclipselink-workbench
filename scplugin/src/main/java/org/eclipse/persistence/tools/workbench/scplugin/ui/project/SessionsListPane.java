@@ -85,6 +85,7 @@ final class SessionsListPane extends AbstractSessionsListPane
     /**
      * Add a new database or server session.
      */
+    @Override
     protected void addNewSession()
     {
         AddNewSessionAction action = new AddNewSessionAction(getWorkbenchContext(), false);
@@ -106,6 +107,7 @@ final class SessionsListPane extends AbstractSessionsListPane
      *
      * @return A new <code>AddRemoveListPanel</code>
      */
+    @Override
     protected AddRemoveListPanel buildSessionListPane()
     {
         return new ExtendedSessionListPanel();
@@ -117,16 +119,19 @@ final class SessionsListPane extends AbstractSessionsListPane
      *
      * @return A new <code>CollectionValueModel</code>
      */
+    @Override
     protected CollectionValueModel buildSessionsCollectionHolder()
     {
         return new CollectionAspectAdapter(getSubjectHolder(), TopLinkSessionsAdapter.SESSIONS_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 TopLinkSessionsAdapter adapter = (TopLinkSessionsAdapter) subject;
                 return adapter.sessions();
             }
 
+            @Override
             protected int sizeFromSubject()
             {
                 TopLinkSessionsAdapter adapter = (TopLinkSessionsAdapter) subject;
@@ -144,6 +149,7 @@ final class SessionsListPane extends AbstractSessionsListPane
      * @return <code>true<code> if they can be removed; <code>false<code>
      * otherwise
      */
+    @Override
     protected boolean canRemoveSessions(Collection sessions)
     {
         Nominative nominative = (Nominative) subject();
@@ -237,6 +243,7 @@ final class SessionsListPane extends AbstractSessionsListPane
      *
      * @param sessions The {@link SessionAdapter}s to be removed from their parent
      */
+    @Override
     protected void removeSessions(Collection sessions)
     {
         TopLinkSessionsAdapter adapter = (TopLinkSessionsAdapter) subject();
@@ -258,6 +265,7 @@ final class SessionsListPane extends AbstractSessionsListPane
         {
             return new ActionListener()
             {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     addNewSessionBroker();

@@ -60,6 +60,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#addItem(int, Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -67,6 +68,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#addItems(int, java.util.List)
      */
+    @Override
     public void addItems(int index, List items) {
         throw new UnsupportedOperationException();
     }
@@ -74,6 +76,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         throw new UnsupportedOperationException();
     }
@@ -81,6 +84,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         throw new UnsupportedOperationException();
     }
@@ -88,6 +92,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#replaceItem(int, Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -95,6 +100,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#replaceItems(int, java.util.List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         throw new UnsupportedOperationException();
     }
@@ -102,6 +108,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         return CollectionTools.get((ListIterator) this.getValue(), index);
     }
@@ -109,6 +116,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return CollectionTools.size((ListIterator) this.getValue());
     }
@@ -119,6 +127,7 @@ public abstract class AbstractReadOnlyListValueModel
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, CollectionTools.collection((ListIterator) this.getValue()));
     }

@@ -78,6 +78,7 @@ public class DefaultSPIManager implements SPIManager {
     /**
      * @see SPIManager#getExternalClassRepositoryFactory()
      */
+    @Override
     public ExternalClassRepositoryFactory getExternalClassRepositoryFactory() {
         if (this.externalClassRepositoryFactory == null) {
             this.externalClassRepositoryFactory = this.buildExternalClassRepositoryFactory();
@@ -103,6 +104,7 @@ public class DefaultSPIManager implements SPIManager {
     /**
      * @see SPIManager#getExternalDatabaseFactory()
      */
+    @Override
     public ExternalDatabaseFactory getExternalDatabaseFactory() {
         if (this.externalDatabaseFactory == null) {
             this.externalDatabaseFactory = this.buildExternalDatabaseFactory();

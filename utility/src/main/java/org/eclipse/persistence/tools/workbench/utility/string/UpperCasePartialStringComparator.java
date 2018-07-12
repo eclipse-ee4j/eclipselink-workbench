@@ -32,6 +32,7 @@ public class UpperCasePartialStringComparator
     /**
      * @see PartialStringComparator#compare(String, String)
      */
+    @Override
     public double compare(String s1, String s2) {
         return this.partialStringComparator.compare(s1.toUpperCase(), s2.toUpperCase());
     }
@@ -39,6 +40,7 @@ public class UpperCasePartialStringComparator
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.partialStringComparator);
     }

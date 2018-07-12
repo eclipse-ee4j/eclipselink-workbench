@@ -30,10 +30,12 @@ public final class EisRootDescriptorNode extends EisDescriptorNode {
         super(descriptor, parentNode);
     }
 
+    @Override
     public String helpTopicID() {
         return "descriptor.eis.root";
     }
 
+    @Override
     public String buildIconKey() {
         return "descriptor.eis.root";
     }
@@ -48,27 +50,32 @@ public final class EisRootDescriptorNode extends EisDescriptorNode {
 
     // ********** DescriptorNode implementation **********
 
+    @Override
     protected String accessibleNameKey() {
         return "ACCESSIBLE_EIS_ROOT_DESCRIPTOR_NODE";
     }
 
     // ********** DescriptorNode overrides *************
 
+    @Override
     public boolean supportsInterfaceAliasPolicy() {
         return true;
     }
 
     // ********** MWApplicationNode overrides **********
 
+    @Override
     protected Class propertiesPageClass() {
         return EisRootDescriptorTabbedPropertiesPage.class;
     }
 
 
+    @Override
     public boolean isRootDescriptor() {
         return true;
     }
 
+    @Override
     public boolean supportsTransactionalDescriptorProperties() {
         return true;
     }

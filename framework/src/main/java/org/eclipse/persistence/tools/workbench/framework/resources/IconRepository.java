@@ -54,15 +54,18 @@ public interface IconRepository {
      */
     IconRepository NULL_INSTANCE =
         new IconRepository() {
+            @Override
             public boolean hasIcon(String key) {
                 return key == null;
             }
+            @Override
             public Icon getIcon(String key) {
                 if (key == null) {
                     return null;
                 }
                 throw new MissingIconException("Missing icon file resource name: " + key, key);
             }
+            @Override
             public String toString() {
                 return "NullIconRepository";
             }

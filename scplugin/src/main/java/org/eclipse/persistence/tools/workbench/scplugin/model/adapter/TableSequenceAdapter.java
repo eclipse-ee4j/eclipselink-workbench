@@ -55,6 +55,7 @@ public class TableSequenceAdapter extends SequenceAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new TableSequenceConfig();
     }
@@ -89,11 +90,13 @@ public class TableSequenceAdapter extends SequenceAdapter {
         firePropertyChanged(COUNTER_FIELD_PROPERTY, old, value);
     }
 
+    @Override
     public boolean isCustom() {
 
         return (config().getName().equals("Custom"));
     }
 
+    @Override
     public boolean isDefault() {
 
         return (config().getName().equals("Default"));

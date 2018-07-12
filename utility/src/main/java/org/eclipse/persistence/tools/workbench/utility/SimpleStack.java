@@ -46,6 +46,7 @@ public class SimpleStack
     /**
      * @see Stack#push(Object)
      */
+    @Override
     public void push(Object o) {
         this.elements.addLast(o);
     }
@@ -53,6 +54,7 @@ public class SimpleStack
     /**
      * @see Stack#pop()
      */
+    @Override
     public Object pop() {
         try {
             return this.elements.removeLast();
@@ -64,6 +66,7 @@ public class SimpleStack
     /**
      * @see Stack#peek()
      */
+    @Override
     public Object peek() {
         try {
             return this.elements.getLast();
@@ -75,6 +78,7 @@ public class SimpleStack
     /**
      * @see Stack#isEmpty()
      */
+    @Override
     public boolean isEmpty() {
         return this.elements.isEmpty();
     }
@@ -85,6 +89,7 @@ public class SimpleStack
     /**
      * @see Object#clone()
      */
+    @Override
     public Object clone() {
         SimpleStack clone;
         try {

@@ -57,6 +57,7 @@ public final class IdentityConstraintDefinition
         return descriptor;
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.constraint);

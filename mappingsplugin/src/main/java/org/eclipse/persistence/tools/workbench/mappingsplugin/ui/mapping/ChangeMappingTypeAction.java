@@ -32,17 +32,20 @@ public abstract class ChangeMappingTypeAction extends AbstractToggleFrameworkAct
         super(context);
     }
 
+    @Override
     protected void engageValueEnabled(AbstractApplicationNode node) {
         super.engageValueEnabled(node);
         ((MappingNode) node).descriptor().addPropertyChangeListener(MWDescriptor.ACTIVE_PROPERTY, getEnabledStateListener());
     }
 
+    @Override
     protected void disengageValueEnabled(AbstractApplicationNode node) {
         super.disengageValueEnabled(node);
         ((MappingNode) node).descriptor().removePropertyChangeListener(MWDescriptor.ACTIVE_PROPERTY, getEnabledStateListener());
     }
 
 
+    @Override
     protected void execute() {
         ApplicationNode[] nodes = this.selectedNodes();
         TreePath[] selectionPaths = new TreePath[nodes.length];
@@ -74,10 +77,12 @@ public abstract class ChangeMappingTypeAction extends AbstractToggleFrameworkAct
      */
     protected abstract MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute);
 
+    @Override
     protected boolean shouldBeSelected(ApplicationNode selectedNode) {
         return nodeIsMorphed((MappingNode) selectedNode);
     }
 
+    @Override
     protected boolean shouldBeEnabled(ApplicationNode selectedNode) {
         return ((MappingNode) selectedNode).descriptor().isActive();
     }

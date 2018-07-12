@@ -31,14 +31,17 @@ public class MySQL4Tests extends PlatformTests {
         super(name);
     }
 
+    @Override
     protected String[] driverJARNames() {
         return new String[] {"mysql-connector-java-3.1.7-bin.jar"};
     }
 
+    @Override
     protected String driverClassName() {
         return "com.mysql.jdbc.Driver";
     }
 
+    @Override
     protected String connectionURL() {
         return "jdbc:mysql://" + this.serverName() + "/" + this.databaseName();
     }
@@ -57,18 +60,22 @@ public class MySQL4Tests extends PlatformTests {
     /**
      * the MySQL server is not set up with individual accounts
      */
+    @Override
     protected String userName() {
         return "COREDEV2";
     }
 
+    @Override
     protected String platformName() {
         return "MySQL";
     }
 
+    @Override
     protected String expectedVersionNumber() {
         return "4.1.15";
     }
 
+    @Override
     protected void appendColumnsToTableDDL(StringBuffer sb) {
         sb.append("    BIT_COL                BIT,"); sb.append(CR);
         sb.append("    BOOL_COL                BOOL,"); sb.append(CR);
@@ -112,10 +119,12 @@ public class MySQL4Tests extends PlatformTests {
         sb.append("    YEAR_COL                YEAR"); sb.append(CR);
     }
 
+    @Override
     protected String tableName() {
         return super.tableName().toLowerCase();    // ???
     }
 
+    @Override
     protected void verifyTable(Map metaDataMap) {
         // BIT
         this.verifyColumnAttribute(metaDataMap, "BIT_COL", "TABLE_CAT", "");

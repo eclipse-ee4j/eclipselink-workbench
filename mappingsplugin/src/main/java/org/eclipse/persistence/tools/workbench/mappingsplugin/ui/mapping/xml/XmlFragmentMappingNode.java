@@ -15,7 +15,6 @@
 package org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.xml;
 
 import org.eclipse.persistence.tools.workbench.framework.app.SelectionActionsPolicy;
-import org.eclipse.persistence.tools.workbench.framework.ui.view.AbstractPropertiesPage;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.mapping.xml.MWXmlFragmentMapping;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.descriptor.xml.OXDescriptorNode;
 import org.eclipse.persistence.tools.workbench.mappingsplugin.ui.mapping.MappingNode;

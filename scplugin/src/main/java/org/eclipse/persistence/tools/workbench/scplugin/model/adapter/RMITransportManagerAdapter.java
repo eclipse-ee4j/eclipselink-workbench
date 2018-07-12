@@ -68,6 +68,7 @@ public class RMITransportManagerAdapter extends TransportManagerAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new RMITransportManagerConfig();
     }
@@ -95,6 +96,7 @@ public class RMITransportManagerAdapter extends TransportManagerAdapter {
     /**
      * Initializes this adapter from the config model.
      */
+    @Override
     protected void initializeFromModel( Object scConfig) {
 
         super.initializeFromModel( scConfig);
@@ -111,6 +113,7 @@ public class RMITransportManagerAdapter extends TransportManagerAdapter {
     /**
      * Initializes this new model.
      */
+    @Override
     protected void initialize( Object newConfig) {
 
         super.initialize( newConfig);
@@ -122,6 +125,7 @@ public class RMITransportManagerAdapter extends TransportManagerAdapter {
     /**
      * Initializes default value.
      */
+    @Override
     protected void initializeDefaults() {
         super.initializeDefaults();
 
@@ -318,6 +322,7 @@ public class RMITransportManagerAdapter extends TransportManagerAdapter {
      * Adds the children of this adapter to the given list.
      * @param children The list of children
      */
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
 

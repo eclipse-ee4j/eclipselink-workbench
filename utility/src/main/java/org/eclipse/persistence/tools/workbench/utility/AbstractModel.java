@@ -79,6 +79,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addStateChangeListener(StateChangeListener)
      */
+    @Override
     public synchronized void addStateChangeListener(StateChangeListener listener) {
         this.changeSupport().addStateChangeListener(listener);
     }
@@ -86,6 +87,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeStateChangeListener(StateChangeListener)
      */
+    @Override
     public synchronized void removeStateChangeListener(StateChangeListener listener) {
         this.changeSupport().removeStateChangeListener(listener);
     }
@@ -104,6 +106,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addPropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
         this.changeSupport().addPropertyChangeListener(listener);
     }
@@ -111,6 +114,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addPropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         this.changeSupport().addPropertyChangeListener(propertyName, listener);
     }
@@ -118,6 +122,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removePropertyChangeListener(PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
         this.changeSupport().removePropertyChangeListener(listener);
     }
@@ -125,6 +130,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removePropertyChangeListener(String, PropertyChangeListener)
      */
+    @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         this.changeSupport().removePropertyChangeListener(propertyName, listener);
     }
@@ -155,6 +161,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public synchronized void addCollectionChangeListener(CollectionChangeListener listener) {
         this.changeSupport().addCollectionChangeListener(listener);
     }
@@ -162,6 +169,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public synchronized void addCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         this.changeSupport().addCollectionChangeListener(collectionName, listener);
     }
@@ -169,6 +177,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeCollectionChangeListener(CollectionChangeListener)
      */
+    @Override
     public synchronized void removeCollectionChangeListener(CollectionChangeListener listener) {
         this.changeSupport().removeCollectionChangeListener(listener);
     }
@@ -176,6 +185,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeCollectionChangeListener(String, CollectionChangeListener)
      */
+    @Override
     public synchronized void removeCollectionChangeListener(String collectionName, CollectionChangeListener listener) {
         this.changeSupport().removeCollectionChangeListener(collectionName, listener);
     }
@@ -349,6 +359,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addListChangeListener(ListChangeListener)
      */
+    @Override
     public synchronized void addListChangeListener(ListChangeListener listener) {
         this.changeSupport().addListChangeListener(listener);
     }
@@ -356,6 +367,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addListChangeListener(String, ListChangeListener)
      */
+    @Override
     public synchronized void addListChangeListener(String listName, ListChangeListener listener) {
         this.changeSupport().addListChangeListener(listName, listener);
     }
@@ -363,6 +375,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeListChangeListener(ListChangeListener)
      */
+    @Override
     public synchronized void removeListChangeListener(ListChangeListener listener) {
         this.changeSupport().removeListChangeListener(listener);
     }
@@ -370,6 +383,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeListChangeListener(String, ListChangeListener)
      */
+    @Override
     public synchronized void removeListChangeListener(String listName, ListChangeListener listener) {
         this.changeSupport().removeListChangeListener(listName, listener);
     }
@@ -551,6 +565,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addTreeChangeListener(TreeChangeListener)
      */
+    @Override
     public synchronized void addTreeChangeListener(TreeChangeListener listener) {
         this.changeSupport().addTreeChangeListener(listener);
     }
@@ -558,6 +573,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#addTreeChangeListener(String, TreeChangeListener)
      */
+    @Override
     public synchronized void addTreeChangeListener(String treeName, TreeChangeListener listener) {
         this.changeSupport().addTreeChangeListener(treeName, listener);
     }
@@ -565,6 +581,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeTreeChangeListener(TreeChangeListener)
      */
+    @Override
     public synchronized void removeTreeChangeListener(TreeChangeListener listener) {
         this.changeSupport().removeTreeChangeListener(listener);
     }
@@ -572,6 +589,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see Model#removeTreeChangeListener(String, TreeChangeListener)
      */
+    @Override
     public synchronized void removeTreeChangeListener(String treeName, TreeChangeListener listener) {
         this.changeSupport().removeTreeChangeListener(treeName, listener);
     }
@@ -721,6 +739,7 @@ public abstract class AbstractModel implements Model {
      * Although cloning models is usually not a Good Idea,
      * we should at least support it properly.
      */
+    @Override
     protected Object clone() throws CloneNotSupportedException {
         AbstractModel clone = (AbstractModel) super.clone();
         clone.postClone();
@@ -744,6 +763,7 @@ public abstract class AbstractModel implements Model {
     /**
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         StringTools.buildSimpleToStringOn(this, sb);

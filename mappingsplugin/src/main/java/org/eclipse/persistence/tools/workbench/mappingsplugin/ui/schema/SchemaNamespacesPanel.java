@@ -58,6 +58,7 @@ final class SchemaNamespacesPanel
         super(schemaNodeHolder, contextHolder);
     }
 
+    @Override
     protected void initializeLayout() {
         this.setLayout(new GridBagLayout());
 
@@ -117,6 +118,7 @@ final class SchemaNamespacesPanel
 
     private ListValueModel buildBuiltInNamespacesAdapter() {
         return new ListAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWXmlSchema) this.subject).builtInNamespaces();
             }
@@ -139,6 +141,7 @@ final class SchemaNamespacesPanel
 
     private TableModelAdapter buildTargetNamespaceTableModel() {
         return new TableModelAdapter(this.buildTargetNamespaceAdapter(), this.buildColumnAdapter()) {
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 // prefix column should not be editable if the namespace is absent ("")
                 if (columnIndex == NamespaceColumnAdapter.PREFIX_COLUMN
@@ -155,9 +158,11 @@ final class SchemaNamespacesPanel
 
     private ListValueModel buildTargetNamespaceAdapter() {
         return new ListAspectAdapter(this.getSelectionHolder()) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return new SingleElementListIterator(((MWXmlSchema) this.subject).targetNamespace());
             }
+            @Override
             protected int sizeFromSubject() {
                 return 1;
             }
@@ -192,6 +197,7 @@ final class SchemaNamespacesPanel
 
     private CollectionValueModel buildImportedNamespacesAdapter() {
         return new CollectionAspectAdapter(this.getSelectionHolder(), MWXmlSchema.NAMESPACES_COLLECTION) {
+            @Override
             protected Iterator getValueFromSubject() {
                 return ((MWXmlSchema) this.subject).importedNamespaces();
             }
@@ -257,6 +263,7 @@ final class SchemaNamespacesPanel
 
     private CheckBoxTableCellRenderer buildDeclaredRenderer() {
         return new CheckBoxTableCellRenderer() {
+            @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean hasFocus, int row, int column) {
                 MWNamespace namespace = (MWNamespace) ((TableModelAdapter) table.getModel()).getModel().getItem(row);
 
@@ -272,6 +279,7 @@ final class SchemaNamespacesPanel
 
     private TableCellEditor buildDeclaredEditor(CheckBoxTableCellRenderer declaredRenderer) {
         return new TableCellEditorAdapter(declaredRenderer) {
+            @Override
             public Component getTableCellEditorComponent(JTable table, Object value, boolean selected, int row, int column) {
                 MWNamespace namespace = (MWNamespace) ((TableModelAdapter) table.getModel()).getModel().getItem(row);
 
@@ -310,10 +318,12 @@ final class SchemaNamespacesPanel
             this.resourceRepository = resourceRepository;
         }
 
+        @Override
         public int getColumnCount() {
             return COLUMN_COUNT;
         }
 
+        @Override
         public String getColumnName(int index) {
             switch (index) {
                 case URL_COLUMN:
@@ -329,6 +339,7 @@ final class SchemaNamespacesPanel
             return "";
         }
 
+        @Override
         public Class getColumnClass(int index) {
             switch (index) {
                 case URL_COLUMN:
@@ -344,6 +355,7 @@ final class SchemaNamespacesPanel
             return null;
         }
 
+        @Override
         public boolean isColumnEditable(int index) {
             switch (index) {
                 case URL_COLUMN:
@@ -359,6 +371,7 @@ final class SchemaNamespacesPanel
             return false;
         }
 
+        @Override
         public PropertyValueModel[] cellModels(Object subject) {
             MWNamespace namespace = (MWNamespace) subject;
             PropertyValueModel[] cellModels = new PropertyValueModel[COLUMN_COUNT];
@@ -372,6 +385,7 @@ final class SchemaNamespacesPanel
 
         private PropertyValueModel buildUrlAdapter(MWNamespace namespace) {
             return new PropertyAspectAdapter(MWNamespace.NAMESPACE_URL_PROPERTY, namespace) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWNamespace) this.subject).getNamespaceUrlForDisplay();
                 }
@@ -380,10 +394,12 @@ final class SchemaNamespacesPanel
 
         private PropertyValueModel buildPrefixAdapter(MWNamespace namespace) {
             return new PropertyAspectAdapter(MWNamespace.NAMESPACE_PREFIX_PROPERTY, namespace) {
+                @Override
                 protected Object getValueFromSubject() {
                     return ((MWNamespace) this.subject).getNamespacePrefix();
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWNamespace) this.subject).setNamespacePrefixFromUser((String) value);
                 }
@@ -392,10 +408,12 @@ final class SchemaNamespacesPanel
 
         private PropertyValueModel buildDeclaredAdapter(MWNamespace namespace) {
             return new PropertyAspectAdapter(MWNamespace.DECLARED_PROPERTY, namespace) {
+                @Override
                 protected Object getValueFromSubject() {
                     return new Boolean(((MWNamespace) this.subject).isDeclared());
                 }
 
+                @Override
                 protected void setValueOnSubject(Object value) {
                     ((MWNamespace) this.subject).setDeclared(((Boolean) value).booleanValue());
                 }

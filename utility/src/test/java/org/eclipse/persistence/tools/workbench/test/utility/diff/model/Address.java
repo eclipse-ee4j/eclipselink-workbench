@@ -65,6 +65,7 @@ public class Address {
         this.zip = string;
     }
 
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.street);
     }

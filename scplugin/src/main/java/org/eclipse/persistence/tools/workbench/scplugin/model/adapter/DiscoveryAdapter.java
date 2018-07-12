@@ -50,6 +50,7 @@ final class DiscoveryAdapter extends SCAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new DiscoveryConfig();
     }

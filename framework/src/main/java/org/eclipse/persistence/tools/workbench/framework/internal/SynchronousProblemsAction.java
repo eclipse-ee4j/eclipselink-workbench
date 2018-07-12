@@ -32,12 +32,14 @@ final class SynchronousProblemsAction
         this.workbenchWindow = workbenchWindow;
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeTextAndMnemonic("tools.synchronousProblems");
         this.initializeToolTipText("tools.synchronousProblems.toolTipText");
     }
 
+    @Override
     protected void execute() {
         this.workbenchWindow.toggleSynchronousProblems();
     }

@@ -53,6 +53,7 @@ public class SessionBrokerNode extends SessionsNode {
     // **************** factory methods ****************************************
 
 
+    @Override
     protected CollectionValueModel buildSessionsAspectAdapter() {
 
         return new ListCollectionValueModelAdapter(
@@ -63,9 +64,11 @@ public class SessionBrokerNode extends SessionsNode {
     private ListValueModel buildChildrenDirtyAdapter() {
         return new CollectionListValueModelAdapter(
             new CollectionAspectAdapter( this, SessionBrokerAdapter.SESSIONS_COLLECTION) {
+                @Override
                 protected Iterator getValueFromSubject() {
                     return (( SessionBrokerAdapter)subject).sessions();
                 }
+                @Override
                 protected int sizeFromSubject() {
                     return (( SessionBrokerAdapter)subject).sessionsSize();
                 }
@@ -73,16 +76,19 @@ public class SessionBrokerNode extends SessionsNode {
         );
     }
 
+    @Override
     protected AbstractPropertiesPage buildPropertiesPage(WorkbenchContext context) {
 
         return new SessionBrokerTabbedPropertiesPage(context);
     }
 
+    @Override
     protected Object propertiesPageKey() {
 
         return SessionBrokerTabbedPropertiesPage.class;
     }
 
+    @Override
     protected List buildDisplayStringPropertyNamesList() {
 
         List displayStrings = super.buildDisplayStringPropertyNamesList();
@@ -90,15 +96,18 @@ public class SessionBrokerNode extends SessionsNode {
         return displayStrings;
     }
 
+    @Override
     protected String buildIconKey() {
         return SessionCellRendererAdapter.iconKey(broker());
     }
 
+    @Override
     protected FrameworkAction buildDeleteNodeAction(WorkbenchContext workbenchContext) {
 
         return new DeleteBrokerAction(workbenchContext);
     }
 
+    @Override
     protected FrameworkAction buildRenameNodeAction(WorkbenchContext workbenchContext) {
 
         return new RenameSessionAction(workbenchContext);
@@ -109,6 +118,7 @@ public class SessionBrokerNode extends SessionsNode {
         return ( SessionBrokerAdapter)this.getValue();
     }
 
+    @Override
     public String helpTopicID() {
         return "navigator.session.broker";
     }

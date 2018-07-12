@@ -129,6 +129,7 @@ final class PreferencesNavigatorView {
 
     private KeyListener buildF1KeyListener() {
         return new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent e) {
                 // show help for the first selected node
                 if (e.getKeyCode() == KeyEvent.VK_F1) {
@@ -205,6 +206,7 @@ final class PreferencesNavigatorView {
      * renderer is requested. It is required when JAWS is running.
      */
     private static class PreferencesTreeCellRenderer implements TreeCellRenderer {
+        @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             NodeRenderer renderer = new NodeRenderer();
             return renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
@@ -226,6 +228,7 @@ final class PreferencesNavigatorView {
         /**
          * @see org.eclipse.persistence.tools.workbench.uitools.cell.SimpleTreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
          */
+        @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             this.setBorder(BORDER);
             return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
@@ -234,6 +237,7 @@ final class PreferencesNavigatorView {
         /**
          * @see org.eclipse.persistence.tools.workbench.uitools.cell.SimpleTreeCellRenderer#buildIcon(Object)
          */
+        @Override
         protected Icon buildIcon(Object value) {
             return null;
         }
@@ -241,6 +245,7 @@ final class PreferencesNavigatorView {
         /**
          * @see org.eclipse.persistence.tools.workbench.uitools.cell.SimpleTreeCellRenderer#buildText(Object)
          */
+        @Override
         protected String buildText(Object value) {
             return ((PreferencesNode) value).displayString();
         }
@@ -287,6 +292,7 @@ final class PreferencesNavigatorView {
          */
         private ActionListener buildMenuItemListener() {
             return new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     // display help for the component stashed away when the pop-up menu was first displayed
                     LocalMouseListener.this.showHelp();
@@ -299,9 +305,11 @@ final class PreferencesNavigatorView {
 
         // ********** MouseListener implementation **********
 
+        @Override
         public void mousePressed(MouseEvent e) {
             handleMouseEvent(e);
         }
+        @Override
         public void mouseReleased(MouseEvent e) {
             handleMouseEvent(e);
         }

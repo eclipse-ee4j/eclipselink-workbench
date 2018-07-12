@@ -28,82 +28,102 @@ public final class MWNullCachingPolicy extends MWModel implements MWCachingPolic
         super(parent);
     }
 
+    @Override
     public CacheTypeOption getCacheType() {
         return MWDescriptorCachingPolicy.PROJECT_DEFAULT_CACHE_TYPE;
     }
 
+    @Override
     public void setCacheType(CacheTypeOption cacheType) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public void setCacheType(String cacheTypeString) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public int getCacheSize() {
         return 0;
     }
 
+    @Override
     public void setCacheSize(int size) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public boolean usesProjectDefaultCacheSize() {
         return true;
     }
 
+    @Override
     public CacheCoordinationOption getCacheCoordination() {
         return nullCacheCoordinationOption;
     }
 
+    @Override
     public void setCacheCoordination(CacheCoordinationOption cacheCoordination) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public CacheIsolationOption getCacheIsolation() {
         return nullCacheIsolationOption;
     }
 
+    @Override
     public void setCacheIsolation(CacheIsolationOption cacheIsolation) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public ExistenceCheckingOption getExistenceChecking() {
         return nullExistenceCheckingOption;
     }
 
+    @Override
     public void setExistenceChecking(ExistenceCheckingOption existenceChecking) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public void setExistenceChecking(String existenceChecking) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public MWCacheExpiry getCacheExpiry() {
         return null;
     }
 
+    @Override
     public void setUseProjectDefaultCacheExpiry(boolean useProjectCacheExpiry) {
         throw new UnsupportedOperationException("Can not modify a null policy");
     }
 
+    @Override
     public MWMappingDescriptor getOwningDescriptor() {
         return (MWMappingDescriptor) ((MWTransactionalPolicy) getParent()).getParent();
     }
 
+    @Override
     public void initializeFrom(MWCachingPolicy otherPolicy) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void adjustRuntimeDescriptor(ClassDescriptor runtimeDescriptor) {
         //null policy
     }
 
+    @Override
     public MWCachingPolicy getPersistedPolicy() {
         return null;
     }
 
+    @Override
     public void descriptorInheritanceChanged() {
         //null policy
     }

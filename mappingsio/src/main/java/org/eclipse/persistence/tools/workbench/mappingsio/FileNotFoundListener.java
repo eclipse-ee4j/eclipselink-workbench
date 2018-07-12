@@ -38,9 +38,11 @@ public interface FileNotFoundListener extends EventListener {
 
     FileNotFoundListener NULL_INSTANCE =
         new FileNotFoundListener() {
+            @Override
             public void fileNotFound(FileNotFoundEvent e) {
                 // do nothing
             }
+            @Override
             public String toString() {
                 return "NullFileNotFoundListener";
             }

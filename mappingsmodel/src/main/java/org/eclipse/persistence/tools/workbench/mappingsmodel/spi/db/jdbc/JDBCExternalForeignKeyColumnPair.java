@@ -74,6 +74,7 @@ final class JDBCExternalForeignKeyColumnPair implements ExternalForeignKeyColumn
      * the source column can be null if we have problems reading the result set
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalForeignKeyColumnPair#getSourceColumn()
      */
+    @Override
     public ExternalColumn getSourceColumn() {
         return this.sourceColumn;
     }
@@ -82,6 +83,7 @@ final class JDBCExternalForeignKeyColumnPair implements ExternalForeignKeyColumn
      * the target column can be null if we have problems reading the result set
      * @see org.eclipse.persistence.tools.workbench.mappingsmodel.spi.db.ExternalForeignKeyColumnPair#getTargetColumn()
      */
+    @Override
     public ExternalColumn getTargetColumn() {
         return this.targetColumn;
     }
@@ -108,6 +110,7 @@ final class JDBCExternalForeignKeyColumnPair implements ExternalForeignKeyColumn
     /**
      * @see Object#toString()
      */
+    @Override
     public String toString() {
         return StringTools.buildToStringFor(this, this.sourceColumnName() + "=>" + this.targetColumnName());
     }
@@ -128,27 +131,35 @@ final class JDBCExternalForeignKeyColumnPair implements ExternalForeignKeyColumn
             }
             this.name = name;
         }
+        @Override
         public String getName() {
             return this.name;
         }
+        @Override
         public int getJDBCTypeCode() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public String getTypeName() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public int getSize() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public int getScale() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public boolean isNullable() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public boolean isPrimaryKey() {
             throw new UnsupportedOperationException();
         }
+        @Override
         public String toString() {
             return StringTools.buildToStringFor(this, this.name);
         }

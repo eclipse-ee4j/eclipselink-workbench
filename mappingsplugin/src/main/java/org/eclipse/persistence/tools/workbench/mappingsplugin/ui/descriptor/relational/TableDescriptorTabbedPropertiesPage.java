@@ -49,6 +49,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         super(context);
     }
 
+    @Override
     protected void initializeTabs()
     {
         super.initializeTabs();
@@ -70,6 +71,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
                 new RelationalReturningPolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder()), "RELATIONAL_DESCRIPTOR_RETURNING_TAB");
     }
 
+    @Override
     protected Component buildInheritancePolicyPropertiesPage() {
         return new RelationalInheritancePolicyPropertiesPage(getNodeHolder(), getWorkbenchContextHolder());
     }
@@ -77,12 +79,14 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
     /**
      * InheritancePolicy <code>ComponentBuilder</code> for dynamic tab.
      */
+    @Override
     protected ComponentBuilder buildInheritancePolicyPageBuilder()
     {
         return new ComponentBuilder()
         {
             private RelationalInheritancePolicyPropertiesPage inheritancePolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (inheritancePolicyPage == null)
@@ -103,6 +107,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         {
             private InterfaceAliasPolicyPage interfaceAliasPolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (interfaceAliasPolicyPage == null)
@@ -123,6 +128,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         {
             private TableLockingPolicyPropertiesPage lockingPolicyPage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (lockingPolicyPage == null)
@@ -140,6 +146,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         {
             private MultiTableInfoPropertiesPage multiTablePage;
 
+            @Override
             public Component buildComponent(PropertyValueModel nodeHolder)
             {
                 if (multiTablePage == null)
@@ -159,6 +166,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         return  buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWTableDescriptor.INTERFACE_ALIAS_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWTableDescriptor desc = (MWTableDescriptor)subject;
@@ -172,6 +180,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         return  buildDescriptorPolicyBooleanValueModel(
         new PropertyAspectAdapter(getSelectionHolder(), MWTableDescriptor.MULTI_TABLE_INFO_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWTableDescriptor desc = (MWTableDescriptor)subject;
@@ -185,6 +194,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         return  buildDescriptorPolicyBooleanValueModel(
             new PropertyAspectAdapter( getSelectionHolder(), MWTableDescriptor.RETURNING_POLICY_PROPERTY)
         {
+            @Override
             public Object getValueFromSubject()
             {
                 MWTableDescriptor desc = ( MWTableDescriptor)subject;
@@ -199,6 +209,7 @@ final class TableDescriptorTabbedPropertiesPage extends MappingDescriptorTabbedP
         {
             private RelationalReturningPolicyPropertiesPage returningPage;
 
+            @Override
             public Component buildComponent( PropertyValueModel nodeHolder)
             {
                 if( returningPage == null)

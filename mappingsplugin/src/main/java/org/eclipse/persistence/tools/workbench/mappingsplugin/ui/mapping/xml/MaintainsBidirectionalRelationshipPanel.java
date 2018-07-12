@@ -55,12 +55,14 @@ final class MaintainsBidirectionalRelationshipPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWEisReferenceMapping.MAINTAINS_BIDIRECTIONAL_RELATIONSHIP_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisReferenceMapping mapping = (MWEisReferenceMapping) subject;
                 return Boolean.valueOf(mapping.maintainsBidirectionalRelationship());
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisReferenceMapping mapping = (MWEisReferenceMapping) subject;
@@ -80,6 +82,7 @@ final class MaintainsBidirectionalRelationshipPanel extends AbstractSubjectPanel
     {
         PropertyAspectAdapter referenceDescriptorHolder = new PropertyAspectAdapter(getSubjectHolder(), MWEisReferenceMapping.REFERENCE_DESCRIPTOR_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisReferenceMapping mapping = (MWEisReferenceMapping) subject;
@@ -89,11 +92,13 @@ final class MaintainsBidirectionalRelationshipPanel extends AbstractSubjectPanel
 
         return new CollectionAspectAdapter(referenceDescriptorHolder, MWMappingDescriptor.MAPPINGS_COLLECTION)
         {
+            @Override
             protected Iterator getValueFromSubject()
             {
                 return ((MWMappingDescriptor) subject).mappings();
             }
 
+            @Override
             protected int sizeFromSubject()
             {
                 return ((MWMappingDescriptor) subject).mappingsSize();
@@ -111,12 +116,14 @@ final class MaintainsBidirectionalRelationshipPanel extends AbstractSubjectPanel
     {
         return new PropertyAspectAdapter(getSubjectHolder(), MWEisReferenceMapping.RELATIONSHIP_PARTNER_MAPPING_PROPERTY)
         {
+            @Override
             protected Object getValueFromSubject()
             {
                 MWEisReferenceMapping mapping = (MWEisReferenceMapping) subject;
                 return mapping.getRelationshipPartnerMapping();
             }
 
+            @Override
             protected void setValueOnSubject(Object value)
             {
                 MWEisReferenceMapping mapping = (MWEisReferenceMapping) subject;
@@ -131,6 +138,7 @@ final class MaintainsBidirectionalRelationshipPanel extends AbstractSubjectPanel
         (
             new FilteringCollectionValueModel(buildRelationshipPartnerCollectionHolder())
             {
+                @Override
                 protected boolean accept(Object value)
                 {
                     return value != subject();
@@ -139,6 +147,7 @@ final class MaintainsBidirectionalRelationshipPanel extends AbstractSubjectPanel
         );
     }
 
+    @Override
     protected void initializeLayout()
     {
         JCheckBox maintainsBidiRelationshipCheckBox = buildCheckBox

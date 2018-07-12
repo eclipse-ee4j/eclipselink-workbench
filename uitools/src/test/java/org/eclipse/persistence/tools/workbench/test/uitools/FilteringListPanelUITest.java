@@ -93,6 +93,7 @@ public class FilteringListPanelUITest {
 
     private Iterator buildTypes(String[] args) {
         return new TransformationIterator(this.buildClassNames(args)) {
+            @Override
             protected Object transform(Object next) {
                 return new Type((String) next);
             }
@@ -108,6 +109,7 @@ public class FilteringListPanelUITest {
 
     private WindowListener buildWindowListener() {
         return new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 e.getWindow().setVisible(false);
                 System.exit(0);
@@ -135,6 +137,7 @@ public class FilteringListPanelUITest {
 
     private StringConverter buildStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return (o == null) ? "" : ((Type) o).getName();
             }
@@ -143,9 +146,11 @@ public class FilteringListPanelUITest {
 
     private ListCellRenderer buildRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected Icon buildIcon(Object value) {
                 return UIManager.getIcon("Tree.leafIcon");
             }
+            @Override
             protected String buildText(Object value) {
                 return ((Type) value).getName();
             }
@@ -172,6 +177,7 @@ public class FilteringListPanelUITest {
 
     private Action buildSwapAction() {
         return new AbstractAction("swap") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FilteringListPanelUITest.this.swap();
             }
@@ -199,6 +205,7 @@ public class FilteringListPanelUITest {
 
     private Action buildStringAction() {
         return new AbstractAction("String") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FilteringListPanelUITest.this.selectStringType();
             }
@@ -236,6 +243,7 @@ public class FilteringListPanelUITest {
 
     private Action buildNullAction() {
         return new AbstractAction("null") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FilteringListPanelUITest.this.selectNull();
             }
@@ -259,6 +267,7 @@ public class FilteringListPanelUITest {
 
     private Action buildMax10Action() {
         return new AbstractAction("max = 10") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FilteringListPanelUITest.this.setMax10();
             }
@@ -287,6 +296,7 @@ public class FilteringListPanelUITest {
 
     private Action buildPrintAction() {
         return new AbstractAction("print") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 FilteringListPanelUITest.this.printType();
             }
@@ -315,9 +325,11 @@ public class FilteringListPanelUITest {
         public String getName() {
             return this.name;
         }
+        @Override
         public String toString() {
             return "Type: " + this.name ;
         }
+        @Override
         public int compareTo(Object o) {
             return this.name.compareTo(((Type) o).name);
         }

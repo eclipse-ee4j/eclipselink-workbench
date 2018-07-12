@@ -80,6 +80,7 @@ public final class PlatformsPlugin implements Plugin {
      * we only return actions for this plug-in in development mode
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildNewMenuItemWrappers(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public JMenuItem[] buildNewMenuItems(WorkbenchContext context) {
         if (this.isVisibleIn(context)) {
             return new JMenuItem[] {new JMenuItem(this.getNewDatabasePlatformRepositoryAction(this.wrap(context)))};
@@ -95,6 +96,7 @@ public final class PlatformsPlugin implements Plugin {
      * TODO disable this in production???
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#open(java.io.File, org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public ApplicationNode open(File file, WorkbenchContext context) throws UnsupportedFileException, OpenException {
         if ( ! this.fileIsSupported(file)) {
             throw new UnsupportedFileException();
@@ -110,6 +112,7 @@ public final class PlatformsPlugin implements Plugin {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildToolBarDescription(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public ComponentContainerDescription buildToolBarDescription(WorkbenchContext context) {
         return new ToolBarButtonGroupDescription();
     }
@@ -117,6 +120,7 @@ public final class PlatformsPlugin implements Plugin {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildMenuDescription(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public ComponentContainerDescription buildMenuDescription(WorkbenchContext context) {
         return new MenuGroupDescription();
     }
@@ -125,6 +129,7 @@ public final class PlatformsPlugin implements Plugin {
      * we only return a preference node for this plug-in in development mode
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildPreferencesNodes(org.eclipse.persistence.tools.workbench.framework.context.PreferencesContext)
      */
+    @Override
     public PreferencesNode[] buildPreferencesNodes(PreferencesContext context) {
         if (this.isVisibleIn(context)) {
             return new PreferencesNode[] {new PlatformsPreferencesNode((PreferencesContext) this.wrap(context))};

@@ -47,6 +47,7 @@ public final class Spacer extends JComponent
     /**
      * @param preferredSize
      */
+    @Override
     public void setPreferredSize(Dimension preferredSize)
     {
         super.setPreferredSize(preferredSize);
@@ -75,15 +76,20 @@ public final class Spacer extends JComponent
      */
     private class SpacerLayout implements LayoutManager
     {
+        @Override
         public void addLayoutComponent(String name, Component component) {}
+        @Override
         public void layoutContainer(Container parent) {}
+        @Override
         public void removeLayoutComponent(Component component) {}
 
+        @Override
         public Dimension minimumLayoutSize(Container parent)
         {
             return (Dimension) Spacer.this.minimumSize.clone();
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container parent)
         {
             return (Dimension) Spacer.this.minimumSize.clone();

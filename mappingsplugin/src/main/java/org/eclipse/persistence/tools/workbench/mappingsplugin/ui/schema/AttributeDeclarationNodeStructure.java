@@ -34,6 +34,7 @@ final class AttributeDeclarationNodeStructure
 
     // **************** SchemaComponentNodeStructure contract *****************
 
+    @Override
     protected ListIterator componentDetails() {
         return new CompositeListIterator(this.nameDetails(), this.attributeDetails());
     }
@@ -41,6 +42,7 @@ final class AttributeDeclarationNodeStructure
 
     // **************** NamedSchemaComponentNodeStructure contract *********************
 
+    @Override
     Integer topLevelOrderIndex() {
         return new Integer(2);
     }
@@ -61,10 +63,12 @@ final class AttributeDeclarationNodeStructure
 
     SchemaComponentDetail buildTypeDetail() {
         return new SchemaComponentQNamedDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "type";
             }
 
+            @Override
             protected MWNamedSchemaComponent getQNamedComponent() {
                 MWSchemaTypeDefinition type = ((MWAttributeDeclaration) this.component).getType();
                 return (type.getName() == null) ? null : type;
@@ -74,10 +78,12 @@ final class AttributeDeclarationNodeStructure
 
     SchemaComponentDetail buildDefaultDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "default";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 String defaultValue = ((MWAttributeDeclaration) this.component).getDefaultValue();
                 return (defaultValue == null) ? "" : defaultValue;
@@ -87,10 +93,12 @@ final class AttributeDeclarationNodeStructure
 
     SchemaComponentDetail buildFixedDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "fixed";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 String fixedValue = ((MWAttributeDeclaration) this.component).getFixedValue();
                 return (fixedValue == null) ? "" : fixedValue;
@@ -100,10 +108,12 @@ final class AttributeDeclarationNodeStructure
 
     SchemaComponentDetail buildUseDetail() {
         return new SchemaComponentDetail(this.getComponent()) {
+            @Override
             protected String getName() {
                 return "use";
             }
 
+            @Override
             protected String getValueFromComponent() {
                 return ((MWAttributeDeclaration) this.component).getUse();
             }

@@ -81,6 +81,7 @@ final class ParameterArgumentPanel
 
         JButton addButton = buildButton("ADD_PARAMETER_BUTTON");
         addButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 addParameter();
             }
@@ -132,9 +133,11 @@ final class ParameterArgumentPanel
 
     private ListValueModel buildParametersCollectionHolder() {
         return new ListAspectAdapter(getQueryHolder(), MWAbstractQuery.PARAMETERS_LIST) {
+            @Override
             protected ListIterator getValueFromSubject() {
                 return ((MWAbstractQuery) subject).parameters();
             }
+            @Override
             protected int sizeFromSubject() {
                 return ((MWAbstractQuery) subject).parametersSize();
             }
@@ -143,9 +146,11 @@ final class ParameterArgumentPanel
 
     private PropertyValueModel buildParameterHolder() {
         return new PropertyAspectAdapter(getArgumentHolder(), MWQueryParameterArgument.QUERY_PARAMETER_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWQueryParameterArgument) subject).getQueryParameter();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWQueryParameterArgument) subject).setQueryParameter((MWQueryParameter) value);
             }
@@ -153,8 +158,10 @@ final class ParameterArgumentPanel
         };
     }
 
+    @Override
     protected PropertyValueModel buildQueryArgumentHolder(PropertyValueModel argumentHolder) {
         return new FilteringPropertyValueModel(argumentHolder) {
+            @Override
             protected boolean accept(Object value) {
                 return value instanceof MWQueryParameterArgument;
             }
@@ -163,6 +170,7 @@ final class ParameterArgumentPanel
 
     private ListCellRenderer buildParametersListCellRenderer() {
         return new SimpleListCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 // need null check for combo-box
                 return value == null ? resourceRepository().getString("NONE_SELECTED") : ((MWQueryParameter) value).getName();

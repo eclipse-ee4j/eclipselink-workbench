@@ -30,6 +30,7 @@ final class MapAsAggregateAction
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.initializeIcon("mapping.aggregate");
@@ -38,14 +39,17 @@ final class MapAsAggregateAction
         this.initializeToolTipText("MAP_AS_AGGREGATE_ACTION.toolTipText");
     }
 
+    @Override
     protected MWMapping morphMapping(MWMapping mapping) {
         return mapping.asMWAggregateMapping();
     }
 
+    @Override
     protected MWMapping addMapping(MWMappingDescriptor descriptor, MWClassAttribute attribute) {
         return ((MWRelationalClassDescriptor) descriptor).addAggregateMapping(attribute);
     }
 
+    @Override
     protected Class mappingClass() {
         return MWAggregateMapping.class;
     }

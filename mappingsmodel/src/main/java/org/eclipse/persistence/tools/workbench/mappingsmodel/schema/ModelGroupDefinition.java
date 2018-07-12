@@ -64,11 +64,13 @@ public final class ModelGroupDefinition
 
     // **************** Inititalization ***************************************
 
+    @Override
     protected /* private-protected */ void initialize(Node parent) {
         super.initialize(parent);
         this.modelGroup = new ExplicitModelGroup(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.modelGroup);
@@ -77,6 +79,7 @@ public final class ModelGroupDefinition
 
     // **************** MWModelGroupDefinition contract ***********************
 
+    @Override
     public MWModelGroup getModelGroup() {
         return this.modelGroup;
     }
@@ -84,26 +87,32 @@ public final class ModelGroupDefinition
 
     // **************** MWSchemaContextComponent contract *********************
 
+    @Override
     public boolean hasType() {
         return false;
     }
 
+    @Override
     public String contextTypeQname() {
         return null;
     }
 
+    @Override
     public boolean containsText() {
         return false;
     }
 
+    @Override
     public boolean containsWildcard() {
         return this.modelGroup.containsWildcard();
     }
 
+    @Override
     public int compareSchemaOrder(MWElementDeclaration element1, MWElementDeclaration element2) {
         return this.modelGroup.compareSchemaOrder(element1, element2);
     }
 
+    @Override
     public Iterator baseBuiltInTypes() {
         return NullIterator.instance();
     }
@@ -111,10 +120,12 @@ public final class ModelGroupDefinition
 
     // **************** MWNamedSchemaComponent contract ***********************
 
+    @Override
     public String componentTypeName() {
         return "group";
     }
 
+    @Override
     public void addDirectlyOwnedComponentsTo(Collection directlyOwnedComponents) {
         this.modelGroup.addDirectlyOwnedComponentsTo(directlyOwnedComponents);
     }
@@ -122,26 +133,32 @@ public final class ModelGroupDefinition
 
     // **************** MWSchemaModel contract ********************************
 
+    @Override
     public Iterator structuralComponents() {
         return this.modelGroup.structuralComponents();
     }
 
+    @Override
     public Iterator descriptorContextComponents() {
         return this.modelGroup.descriptorContextComponents();
     }
 
+    @Override
     public Iterator xpathComponents() {
         return this.modelGroup.xpathComponents();
     }
 
+    @Override
     public MWNamedSchemaComponent nestedNamedComponent(QName qName) {
         return this.modelGroup.nestedNamedComponent(qName);
     }
 
+    @Override
     public MWElementDeclaration nestedElement(String namespaceUrl, String elementName) {
         return this.modelGroup.nestedElement(namespaceUrl, elementName);
     }
 
+    @Override
     public int totalElementCount() {
         return this.modelGroup.totalElementCount();
     }
@@ -149,11 +166,13 @@ public final class ModelGroupDefinition
 
     // **************** SchemaModel contract **********************************
 
+    @Override
     protected void reloadInternal(XSObject xsModelGroupDef) {
         super.reloadInternal(xsModelGroupDef);
         this.modelGroup.reload(((XSGroupDecl)xsModelGroupDef).getModelGroup());
     }
 
+    @Override
     public void resolveReferences() {
         super.resolveReferences();
         this.modelGroup.resolveReferences();

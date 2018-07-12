@@ -61,6 +61,7 @@ public abstract class ProjectTask extends Task {
         // do nothing by default;
     }
 
+    @Override
     public void execute() throws BuildException {
 
         this.preExecute();

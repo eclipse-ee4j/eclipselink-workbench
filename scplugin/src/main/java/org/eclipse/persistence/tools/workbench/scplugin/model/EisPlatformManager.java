@@ -56,6 +56,7 @@ public class EisPlatformManager extends SCPlatformManager {
     }
 
 
+    @Override
     protected void buidPlatforms() {
 
         this.addPlatform( AQ_ID, "org.eclipse.persistence.eis.adapters.aq.AQPlatform");
@@ -84,6 +85,7 @@ public class EisPlatformManager extends SCPlatformManager {
         return this.connectionSpecs.values().iterator();
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
 

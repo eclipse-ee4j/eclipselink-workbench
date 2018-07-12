@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.persistence.tools.workbench.mappingsmodel.MWModel;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.MWQueryKey;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWRelationalDescriptor;
 import org.eclipse.persistence.tools.workbench.mappingsmodel.descriptor.relational.MWTableDescriptor;
@@ -29,7 +28,6 @@ import org.eclipse.persistence.tools.workbench.utility.filters.Filter;
 import org.eclipse.persistence.tools.workbench.utility.iterators.NullIterator;
 import org.eclipse.persistence.tools.workbench.utility.node.Node;
 
-import org.eclipse.persistence.descriptors.ClassDescriptor;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 import org.eclipse.persistence.internal.expressions.QueryKeyExpression;
@@ -75,21 +73,25 @@ public final class MWQueryableArgument extends MWArgument
         setQueryableArgument(queryables, allowsNull);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.queryableArgumentElement);
     }
 
+    @Override
     protected void initialize(Node parent)
     {
         super.initialize(parent);
         this.queryableArgumentElement = new MWQueryableArgumentElement(this);
     }
 
+    @Override
     public String getType() {
         return QUERY_KEY_TYPE;
     }
 
+    @Override
     public String displayString()
     {
         return getQueryableArgumentElement().displayString();
@@ -97,6 +99,7 @@ public final class MWQueryableArgument extends MWArgument
 
     //*********** problem support ****************
 
+    @Override
     protected void addProblemsTo(List currentProblems) {
         super.addProblemsTo(currentProblems);
         this.checkQueryable(currentProblems);
@@ -115,6 +118,7 @@ public final class MWQueryableArgument extends MWArgument
 
     // ********** model synchronization support **********
 
+    @Override
     public void nodeRemoved(Node node) {
         super.nodeRemoved(node);
 
@@ -138,6 +142,7 @@ public final class MWQueryableArgument extends MWArgument
         }
     }
 
+    @Override
     public void descriptorUnmapped(Collection mappings) {
         super.descriptorUnmapped(mappings);
         for (Iterator stream = mappings.iterator(); stream.hasNext();) {
@@ -145,6 +150,7 @@ public final class MWQueryableArgument extends MWArgument
         }
     }
 
+    @Override
     public void mappingReplaced(MWMapping oldMapping, MWMapping newMapping)
     {
         super.mappingReplaced(oldMapping, newMapping);
@@ -163,6 +169,7 @@ public final class MWQueryableArgument extends MWArgument
         }
     }
 
+    @Override
     public void undoChange(String propertyName, Object oldValue, Object newValue)
     {
         if (propertyName == QUERYABLE_ARGUMENT_ELEMENT_PROPERTY)
@@ -231,6 +238,7 @@ public final class MWQueryableArgument extends MWArgument
         getQueryableArgumentParent().propertyChanged(this, QUERYABLE_ARGUMENT_ELEMENT_PROPERTY, oldElement, element);
     }
 
+    @Override
     void recalculateQueryables()
     {
         MWQueryableArgumentElement element = getQueryableArgumentElement();
@@ -248,6 +256,7 @@ public final class MWQueryableArgument extends MWArgument
             getQueryableArgumentElement().setQueryableToNull();
     }
 
+    @Override
     public void toString(StringBuffer sb)
     {
         super.toString(sb);
@@ -271,6 +280,7 @@ public final class MWQueryableArgument extends MWArgument
     }
 
     //Conversion to Runtime
+    @Override
     Expression runtimeExpression(ExpressionBuilder builder)
     {
         return queryableArgumentElement.convertToRuntime(builder);

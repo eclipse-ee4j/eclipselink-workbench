@@ -43,6 +43,7 @@ public abstract class MWReturningPolicyInsertFieldReturnOnlyFlag
         super(parent);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         this.returnOnly = false;
@@ -79,6 +80,7 @@ public abstract class MWReturningPolicyInsertFieldReturnOnlyFlag
         }
     }
 
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getField().fieldName());
         if (this.returnOnly) {
@@ -89,6 +91,7 @@ public abstract class MWReturningPolicyInsertFieldReturnOnlyFlag
     /**
      * implement this so we sort predictably when saving to xml
      */
+    @Override
     public String displayString() {
         return this.getField().fieldName();
     }

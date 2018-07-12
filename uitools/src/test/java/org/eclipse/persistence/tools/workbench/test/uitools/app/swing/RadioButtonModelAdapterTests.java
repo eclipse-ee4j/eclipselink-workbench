@@ -60,6 +60,7 @@ public class RadioButtonModelAdapterTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.valueHolder = new SimplePropertyValueModel(null);
@@ -68,6 +69,7 @@ public class RadioButtonModelAdapterTests extends TestCase {
         this.redButtonModelAdapter = new RadioButtonModelAdapter(this.valueHolder, RED);
 //        this.redButtonModelAdapter.setGroup(buttonGroup);
         this.redListener = new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 RadioButtonModelAdapterTests.this.redEventFired = true;
             }
@@ -76,6 +78,7 @@ public class RadioButtonModelAdapterTests extends TestCase {
         this.greenButtonModelAdapter = new RadioButtonModelAdapter(this.valueHolder, GREEN);
 //        this.greenButtonModelAdapter.setGroup(buttonGroup);
         this.greenListener = new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 RadioButtonModelAdapterTests.this.greenEventFired = true;
             }
@@ -84,6 +87,7 @@ public class RadioButtonModelAdapterTests extends TestCase {
         this.blueButtonModelAdapter = new RadioButtonModelAdapter(this.valueHolder, BLUE);
 //        this.blueButtonModelAdapter.setGroup(buttonGroup);
         this.blueListener = new TestChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 RadioButtonModelAdapterTests.this.blueEventFired = true;
             }
@@ -104,6 +108,7 @@ public class RadioButtonModelAdapterTests extends TestCase {
         this.blueEventFired = false;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -217,6 +222,7 @@ public class RadioButtonModelAdapterTests extends TestCase {
 
 
 private class TestChangeListener implements ChangeListener {
+    @Override
     public void stateChanged(ChangeEvent e) {
         fail("unexpected event");
     }

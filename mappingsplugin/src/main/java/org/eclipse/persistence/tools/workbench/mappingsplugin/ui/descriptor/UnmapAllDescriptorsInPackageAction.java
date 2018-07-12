@@ -24,6 +24,7 @@ final class UnmapAllDescriptorsInPackageAction extends AbstractFrameworkAction {
         super(context);
     }
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.setIcon(EMPTY_ICON);
@@ -31,6 +32,7 @@ final class UnmapAllDescriptorsInPackageAction extends AbstractFrameworkAction {
         this.initializeToolTipText("UNMAP_ALL_DESCRIPTORS_IN_PACKAGE_ACTION.toolTipText");
     }
 
+    @Override
     protected void execute(ApplicationNode selectedNode) {
         navigatorSelectionModel().pushExpansionState();
         ((UnmappablePackageNode) selectedNode).unmapEntirePackage();

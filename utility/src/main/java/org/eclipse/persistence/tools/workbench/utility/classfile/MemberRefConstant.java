@@ -40,11 +40,13 @@ public abstract class MemberRefConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.classIndex = stream.readU2();
         this.nameAndTypeIndex = stream.readU2();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" class: ");
@@ -83,6 +85,7 @@ public abstract class MemberRefConstant extends Constant {
         return this.nameAndTypeIndex;
     }
 
+    @Override
     public Object value() {
         return this.className() + '.' + this.name() + ':' + this.descriptor();
     }

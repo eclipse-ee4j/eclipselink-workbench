@@ -44,6 +44,7 @@ public class AbstractNodeModelTests extends TestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.root = this.buildRoot();
@@ -68,6 +69,7 @@ public class AbstractNodeModelTests extends TestCase {
         return r;
     }
 
+    @Override
     protected void tearDown() throws Exception {
         TestTools.clear(this);
         super.tearDown();
@@ -416,12 +418,14 @@ public class AbstractNodeModelTests extends TestCase {
             }
             this.name = name;
         }
+        @Override
         protected void initialize() {
             super.initialize();
             this.size = 0;
             this.testChildren = new HashBag();
         }
 
+        @Override
         protected void checkParent(Node parent) {
             // do nothing
         }
@@ -448,6 +452,7 @@ public class AbstractNodeModelTests extends TestCase {
 
         public Iterator testChildren() {
             return new CloneIterator(this.testChildren) {
+                @Override
                 protected void remove(Object current) {
                     TestWorkbenchModel.this.removeTestChild((TestWorkbenchModel) current);
                 }
@@ -471,6 +476,7 @@ public class AbstractNodeModelTests extends TestCase {
         }
 
         // ********** queries **********
+        @Override
         public String displayString() {
             return this.name;
         }
@@ -499,10 +505,12 @@ public class AbstractNodeModelTests extends TestCase {
         }
 
         // ********** behavior **********
+        @Override
         protected void addChildrenTo(List children) {
             super.addChildrenTo(children);
             children.addAll(this.testChildren);
         }
+        @Override
         protected void addProblemsTo(List currentProblems) {
             super.addProblemsTo(currentProblems);
             // names must be all lowercase...
@@ -514,6 +522,7 @@ public class AbstractNodeModelTests extends TestCase {
                 }
             }
         }
+        @Override
         public void toString(StringBuffer sb) {
             sb.append(this.name);
         }
@@ -524,6 +533,7 @@ public class AbstractNodeModelTests extends TestCase {
         public RootTestWorkbenchModel(String name) {
             super(null, name);
         }
+        @Override
         public Validator getValidator() {
             return Node.NULL_VALIDATOR;
         }

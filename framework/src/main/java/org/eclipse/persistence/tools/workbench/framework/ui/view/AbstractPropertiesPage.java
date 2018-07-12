@@ -108,10 +108,12 @@ public abstract class AbstractPropertiesPage
      */
     protected PropertyValueModel buildSelectionHolder() {
         return new TransformationPropertyValueModel(this.nodeHolder) {
+            @Override
             protected Object transform(Object value) {
                 // this will return the "user object" corresponding to the node
                 return (value == null) ? null : ((ApplicationNode) value).getValue();
             }
+            @Override
             protected Object reverseTransform(Object value) {
                 // for now, the properties page cannot set the value of the "user object";
                 // it is completely controlled by the node and framework
@@ -192,6 +194,7 @@ public abstract class AbstractPropertiesPage
      */
     protected PropertyValueModel buildPropertiesPageIconAdapter() {
         return new PropertyAspectAdapter(this.nodeHolder, EditorNode.PROPERTIES_PAGE_TITLE_ICON_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((EditorNode) this.subject).propertiesPageTitleIcon();
             }
@@ -204,6 +207,7 @@ public abstract class AbstractPropertiesPage
      */
     protected PropertyValueModel buildPropertiesPageTitleAdapter() {
         return new PropertyAspectAdapter(this.nodeHolder, EditorNode.PROPERTIES_PAGE_TITLE_TEXT_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((EditorNode) this.subject).propertiesPageTitleText();
             }

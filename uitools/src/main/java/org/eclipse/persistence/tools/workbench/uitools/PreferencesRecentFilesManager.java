@@ -82,6 +82,7 @@ public final class PreferencesRecentFilesManager
     /**
      * Build the listeners.
      */
+    @Override
     protected void initialize() {
         super.initialize();
         this.recentFilesListener = this.buildRecentFilesListener();
@@ -90,9 +91,11 @@ public final class PreferencesRecentFilesManager
 
     private PreferenceChangeListener buildRecentFilesListener() {
         return new PreferenceChangeListener() {
+            @Override
             public void preferenceChange(PreferenceChangeEvent evt) {
                 PreferencesRecentFilesManager.this.recentFilesChanged(evt.getKey(), evt.getNewValue());
             }
+            @Override
             public String toString() {
                 return "recent files listener";
             }
@@ -101,11 +104,13 @@ public final class PreferencesRecentFilesManager
 
     private PreferenceChangeListener buildMaxSizeListener() {
         return new PreferenceChangeListener() {
+            @Override
             public void preferenceChange(PreferenceChangeEvent evt) {
                 if (evt.getKey().equals(PreferencesRecentFilesManager.this.maxSizeKeyName)) {
                     PreferencesRecentFilesManager.this.maxSizeChanged();
                 }
             }
+            @Override
             public String toString() {
                 return "max size listener";
             }
@@ -135,6 +140,7 @@ public final class PreferencesRecentFilesManager
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.RecentFilesManager#getMaxSize()
      */
+    @Override
     public synchronized int getMaxSize() {
         return this.maxSize;
     }
@@ -142,6 +148,7 @@ public final class PreferencesRecentFilesManager
     /**
      * @see org.eclipse.persistence.tools.workbench.uitools.RecentFilesManager#setMaxSize(int)
      */
+    @Override
     public synchronized void setMaxSize(int maxSize) {
         if (this.maxSize == maxSize) {
             return;    // no change
@@ -163,6 +170,7 @@ public final class PreferencesRecentFilesManager
     /**
      * @see RecentFilesManager#getRecentFiles()
      */
+    @Override
     public synchronized File[] getRecentFiles() {
         return (File[]) this.recentFiles.toArray(new File[this.recentFiles.size()]);
     }
@@ -170,6 +178,7 @@ public final class PreferencesRecentFilesManager
     /**
      * @see RecentFilesManager#setMostRecentFile(java.io.File)
      */
+    @Override
     public synchronized void setMostRecentFile(File file) {
         int index = this.recentFiles.indexOf(file);
         if (index == 0) {
@@ -198,6 +207,7 @@ public final class PreferencesRecentFilesManager
         }
     }
 
+    @Override
     public synchronized void removeRecentFile(File file) {
         int index = this.recentFiles.indexOf(file);
         if (index == -1) {

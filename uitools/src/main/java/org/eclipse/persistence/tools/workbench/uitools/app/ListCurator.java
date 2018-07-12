@@ -67,6 +67,7 @@ public abstract class ListCurator
 
     // **************** Initialization ****************************************
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.record = new ArrayList();
@@ -78,9 +79,11 @@ public abstract class ListCurator
      */
     protected StateChangeListener buildStateChangeListener() {
         return new StateChangeListener() {
+            @Override
             public void stateChanged(StateChangeEvent e) {
                 ListCurator.this.submitInventoryReport();
             }
+            @Override
             public String toString() {
                 return "state change listener";
             }
@@ -90,6 +93,7 @@ public abstract class ListCurator
 
     // **************** ValueModel contract ***********************************
 
+    @Override
     public Object getValue() {
         return new ReadOnlyListIterator(this.record);
     }
@@ -101,6 +105,7 @@ public abstract class ListCurator
      * Return the item at the specified index of the subject's list aspect.
      * @see ListValueModel#getItem(int)
      */
+    @Override
     public Object getItem(int index) {
         return this.record.get(index);
     }
@@ -109,6 +114,7 @@ public abstract class ListCurator
      * Return the size of the subject's list aspect.
      * @see ListValueModel#size()
      */
+    @Override
     public int size() {
         return this.record.size();
     }
@@ -117,6 +123,7 @@ public abstract class ListCurator
      * Unsupported in this implementation
      * @see ListValueModel.addItem(int, Object)
      */
+    @Override
     public void addItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -125,6 +132,7 @@ public abstract class ListCurator
      * Unsupported in this implementation
      * @see ListValueModel.addItems(int, List)
      */
+    @Override
     public void addItems(int index, List items) {
         for (int i = 0; i < items.size(); i++) {
             this.addItem(index + i, items.get(i));
@@ -135,6 +143,7 @@ public abstract class ListCurator
      * Unsupported in this implementation
      * @see ListValueModel.removeItem(int)
      */
+    @Override
     public Object removeItem(int index) {
         throw new UnsupportedOperationException();
     }
@@ -143,6 +152,7 @@ public abstract class ListCurator
      * Unsupported in this implementation
      * @see ListValueModel.removeItems(int, int)
      */
+    @Override
     public List removeItems(int index, int length) {
         List removedItems = new ArrayList(length);
         for (int i = 0; i < length; i++) {
@@ -155,6 +165,7 @@ public abstract class ListCurator
      * Unsupported in this implementation
      * @see ListValueModel.replaceItem(int, Object)
      */
+    @Override
     public Object replaceItem(int index, Object item) {
         throw new UnsupportedOperationException();
     }
@@ -163,6 +174,7 @@ public abstract class ListCurator
      * Unsupported in this implementation
      * @see ListValueModel.replaceItems(int, List)
      */
+    @Override
     public List replaceItems(int index, List items) {
         List replacedItems = new ArrayList(items.size());
         for (int i = 0; i < items.size(); i++) {
@@ -177,6 +189,7 @@ public abstract class ListCurator
     /**
      * Return whether there are any listeners.
      */
+    @Override
     protected boolean hasListeners() {
         return this.hasAnyListChangeListeners(VALUE);
     }
@@ -184,6 +197,7 @@ public abstract class ListCurator
     /**
      * The aspect has changed, notify listeners appropriately.
      */
+    @Override
     protected void fireAspectChange(Object oldValue, Object newValue) {
         this.fireListChanged(VALUE);
     }
@@ -191,6 +205,7 @@ public abstract class ListCurator
     /**
      * The subject is not null - add our listener.
      */
+    @Override
     protected void engageNonNullSubject() {
         ((Model) this.subject).addStateChangeListener(this.stateChangeListener);
         // synch our list *after* we start listening to the subject,
@@ -201,6 +216,7 @@ public abstract class ListCurator
     /**
      * The subject is not null - remove our listener.
      */
+    @Override
     protected void disengageNonNullSubject() {
         ((Model) this.subject).removeStateChangeListener(this.stateChangeListener);
         // clear out the list when we are not listening to the subject

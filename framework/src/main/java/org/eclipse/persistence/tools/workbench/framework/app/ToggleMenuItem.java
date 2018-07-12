@@ -42,6 +42,7 @@ public class ToggleMenuItem extends JCheckBoxMenuItem
 
     private class SelectionListener implements PropertyChangeListener
     {
+        @Override
         public void propertyChange(PropertyChangeEvent event)
         {
             if (event.getPropertyName() == ToggleFrameworkAction.TOGGLE_STATE_PROPERTY)

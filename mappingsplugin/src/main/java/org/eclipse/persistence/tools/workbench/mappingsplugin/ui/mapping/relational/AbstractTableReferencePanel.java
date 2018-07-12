@@ -61,6 +61,7 @@ abstract class AbstractTableReferencePanel
 
     private ActionListener buildCreateNewReferenceAction() {
         return new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 AbstractTableReferencePanel.this.createNewReference();
             }
@@ -86,6 +87,7 @@ abstract class AbstractTableReferencePanel
     protected CachingComboBoxModel buildExtendedTableReferenceComboBoxModel() {
         return new ExtendedComboBoxModel(
             new IndirectComboBoxModel(this.buildTableReferenceHolder(), this.getSubjectHolder()) {
+                @Override
                 protected ListIterator listValueFromSubject(Object subject) {
                     return AbstractTableReferencePanel.this.orderedReferenceChoices((MWTableReferenceMapping) subject);
                 }
@@ -120,6 +122,7 @@ abstract class AbstractTableReferencePanel
 
     private StringConverter buildTableReferenceStringConverter() {
         return new StringConverter() {
+            @Override
             public String convertToString(Object o) {
                 return o == null ? "" : ((MWReference) o).getName();
             }
@@ -128,9 +131,11 @@ abstract class AbstractTableReferencePanel
 
     protected PropertyValueModel buildTableReferenceHolder() {
         return new PropertyAspectAdapter(this.getSubjectHolder(), MWTableReferenceMapping.REFERENCE_PROPERTY) {
+            @Override
             protected Object getValueFromSubject() {
                 return ((MWTableReferenceMapping) this.subject).getReference();
             }
+            @Override
             protected void setValueOnSubject(Object value) {
                 ((MWTableReferenceMapping) this.subject).setReference((MWReference) value);
             }
@@ -139,6 +144,7 @@ abstract class AbstractTableReferencePanel
 
     private NodeSelector buildTableReferenceNodeSelector() {
         return new NodeSelector() {
+            @Override
             public void selectNodeFor(Object item) {
                 RelationalProjectNode projectNode = (RelationalProjectNode) navigatorSelectionModel().getSelectedProjectNodes()[0];
                 projectNode.selectReference((MWReference) item, getWorkbenchContext());
@@ -146,6 +152,7 @@ abstract class AbstractTableReferencePanel
         };
     }
 
+    @Override
     protected void initializeLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
 

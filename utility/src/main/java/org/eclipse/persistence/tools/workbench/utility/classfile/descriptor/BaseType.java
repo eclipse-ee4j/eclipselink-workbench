@@ -58,18 +58,22 @@ public class BaseType extends FieldType {
 
     // ********** public API **********
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
+    @Override
     public int arrayDepth() {
         return 0;
     }
 
+    @Override
     public String elementTypeName() {
         return this.javaClass.getName();
     }
 
+    @Override
     public String javaName() {
         return this.javaClass.getName();
     }
@@ -77,18 +81,22 @@ public class BaseType extends FieldType {
     /*
      * Class.forName(String) does not work for primitives
      */
+    @Override
     public Class javaClass() {
         return this.javaClass;
     }
 
+    @Override
     public void appendDeclarationTo(StringBuffer sb) {
         sb.append(this.javaClass.getName());
     }
 
+    @Override
     public void printDeclarationOn(PrintWriter writer) {
         writer.print(this.javaClass.getName());
     }
 
+    @Override
     public String internalName() {
         return String.valueOf((char) this.code);
     }
@@ -96,10 +104,12 @@ public class BaseType extends FieldType {
 
     // ********** internal API **********
 
+    @Override
     void appendArrayJavaNameTo(StringBuffer sb) {
         sb.append((char) this.code);
     }
 
+    @Override
     void appendArrayInternalNameTo(StringBuffer sb) {
         sb.append((char) this.code);
     }

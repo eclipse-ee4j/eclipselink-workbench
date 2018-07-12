@@ -56,6 +56,7 @@ public class ANDFilter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.Filter#accept(Object)
      */
+    @Override
     public boolean accept(Object o) {
         return this.filter1.accept(o) && this.filter2.accept(o);
     }
@@ -63,6 +64,7 @@ public class ANDFilter
     /**
      * @see org.eclipse.persistence.tools.workbench.utility.CompoundFilter#operatorString()
      */
+    @Override
     protected String operatorString() {
         return "AND";
     }

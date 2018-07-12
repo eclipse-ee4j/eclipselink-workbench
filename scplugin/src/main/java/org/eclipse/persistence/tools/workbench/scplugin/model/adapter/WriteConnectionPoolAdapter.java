@@ -49,28 +49,33 @@ public class WriteConnectionPoolAdapter extends ConnectionPoolAdapter {
     /**
      * Factory method for building this model.
      */
+    @Override
     protected Object buildModel() {
         return new WriteConnectionPoolConfig();
     }
     /**
      * This does not have a Login (independently of the platform, i.e. rdb or eis)
      */
+    @Override
     protected LoginAdapter buildLogin() {
 
         return NullLoginAdapter.instance();
     }
 
+    @Override
     public boolean isWriteConnectionPool() {
         return true;
     }
     /**
      * Returns the Login adapter for this config model.
      */
+    @Override
     protected LoginAdapter getLoginFromModel() {
 
         return NullLoginAdapter.instance();
     }
 
+    @Override
     protected void initializeTypeDefaults() {
         // Don't call super; override behavior only
 

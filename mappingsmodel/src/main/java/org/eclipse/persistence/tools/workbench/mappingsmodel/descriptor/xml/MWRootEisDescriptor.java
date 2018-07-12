@@ -94,6 +94,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         super(project, type, name);
     }
 
+    @Override
     protected void initialize(Node parent) {
         super.initialize(parent);
         setInitialDefaultRootElement();
@@ -101,37 +102,44 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         this.interfaceAliasPolicy = new MWNullDescriptorPolicy(this);
     }
 
+    @Override
     protected void addChildrenTo(List children) {
         super.addChildrenTo(children);
         children.add(this.interfaceAliasPolicy);
         children.add(this.returningPolicy);
     }
 
+    @Override
     protected MWTransactionalPolicy buildDefaultTransactionalPolicy() {
         return new MWEisTransactionalPolicy(this);
     }
 
+    @Override
     public MWRootEisDescriptor asRootEisDescriptor() {
         return this;
     }
 
+    @Override
     public void applyAdvancedPolicyDefaults(MWProjectDefaultsPolicy defaultsPolicy) {
         defaultsPolicy.applyAdvancedPolicyDefaults(this);
     }
 
     // **************** Convenience ************
 
+    @Override
     public MWQueryManager getQueryManager() {
         return getTransactionalPolicy().getQueryManager();
     }
 
 
+    @Override
     public boolean isRootDescriptor() {
         return true;
     }
 
     // **************** Primary key policy ************************************
 
+    @Override
     public MWXmlPrimaryKeyPolicy primaryKeyPolicy() {
         return ((MWEisTransactionalPolicy) this.getTransactionalPolicy()).getPrimaryKeyPolicy();
     }
@@ -139,6 +147,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
 
     // **************** Interface Alias Policy API ******************************
 
+    @Override
     public void addInterfaceAliasPolicy() throws MWAdvancedPropertyAdditionException
     {
         if (interfaceAliasPolicy.isActive())
@@ -151,6 +160,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         }
     }
 
+    @Override
     public void removeInterfaceAliasPolicy()
     {
         if (interfaceAliasPolicy.isActive())
@@ -163,6 +173,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         }
     }
 
+    @Override
     public MWDescriptorPolicy getInterfaceAliasPolicy()
     {
         return interfaceAliasPolicy;
@@ -210,8 +221,10 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
 
     // - returns an iterator on the attributes mapped by all mappings obtained by
     //   getPrimaryKeyMappings()
+    @Override
     public Iterator primaryKeyAttributes() {
         return new TransformationIterator(this.primaryKeyMappings()) {
+            @Override
             protected Object transform(Object next) {
                 return ((MWMapping) next).getInstanceVariable();
             }
@@ -221,6 +234,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
 
     // - returns an iterator on all mappings in this descriptor that map to primary key fields,
     //   plus all mappings in this descriptor's superdescriptors that do the same
+    @Override
     public Iterator primaryKeyMappings() {
         Collection pkMappings = new Vector();
 
@@ -240,6 +254,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
 
     //     ********** MWReturningPolicy API**********
 
+    @Override
     public MWDescriptorPolicy getReturningPolicy() {
         return this.returningPolicy;
     }
@@ -252,6 +267,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         firePropertyChanged( RETURNING_POLICY_PROPERTY, old, returningPolicy);
     }
 
+    @Override
     public void addReturningPolicy() throws MWAdvancedPropertyAdditionException {
         if(this.returningPolicy.isActive()) {
             throw new MWAdvancedPropertyAdditionException( RETURNING_POLICY_PROPERTY, "policy already exists on descriptor");
@@ -261,6 +277,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         }
     }
 
+    @Override
     public void removeReturningPolicy() {
         if(this.returningPolicy.isActive()) {
             getReturningPolicy().dispose();
@@ -271,16 +288,19 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
         }
     }
 
+    @Override
     public boolean supportsReturningPolicy() {
         return true;
     }
 
+    @Override
     public boolean supportsCachingPolicy() {
         return true;
     }
     //************* Problem Handling *************
 
     /** Check for any problems and add them to the specified collection. */
+    @Override
     protected void addProblemsTo(List newProblems) {
         super.addProblemsTo(newProblems);
 
@@ -312,6 +332,7 @@ public final class MWRootEisDescriptor extends MWEisDescriptor
 
     // ************** Runtime conversion *****************
 
+    @Override
     public ClassDescriptor buildRuntimeDescriptor() {
         EISDescriptor runtimeDescriptor = (EISDescriptor) super.buildRuntimeDescriptor();
 

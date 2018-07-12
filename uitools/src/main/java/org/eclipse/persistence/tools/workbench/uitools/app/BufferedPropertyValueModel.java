@@ -91,6 +91,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
 
     // ********** initialization **********
 
+    @Override
     protected void initialize() {
         super.initialize();
         this.bufferedValue = UNASSIGNED;
@@ -100,9 +101,11 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
 
     protected PropertyChangeListener buildTriggerChangeListener() {
         return new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent e) {
                 BufferedPropertyValueModel.this.triggerChanged(e);
             }
+            @Override
             public String toString() {
                 return "trigger change listener";
             }
@@ -124,6 +127,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
      * otherwise, return the wrapped value.
      * @see ValueModel#getValue()
      */
+    @Override
     public Object getValue() {
         return (this.bufferedValue == UNASSIGNED) ? this.valueHolder.getValue() : this.bufferedValue;
     }
@@ -134,6 +138,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
      * when the trigger is "accepted".
      * @see PropertyValueModel#setValue(Object)
      */
+    @Override
     public void setValue(Object value) {
         Object old = this.getValue();
         this.bufferedValue = value;
@@ -147,6 +152,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
      * extend to engage the trigger holder also
      * @see PropertyValueModelWrapper#engageValueHolder()
      */
+    @Override
     protected void engageValueHolder() {
         super.engageValueHolder();
         this.triggerHolder.addPropertyChangeListener(VALUE, this.triggerChangeListener);
@@ -156,6 +162,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
      * extend to disengage the trigger holder also
      * @see PropertyValueModelWrapper#disengageValueHolder()
      */
+    @Override
     protected void disengageValueHolder() {
         this.triggerHolder.removePropertyChangeListener(VALUE, this.triggerChangeListener);
         super.disengageValueHolder();
@@ -170,6 +177,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
      * If we do have a "buffered" value, do nothing.
      * @see PropertyValueModelWrapper#valueChanged(java.beans.PropertyChangeEvent)
      */
+    @Override
     protected void valueChanged(PropertyChangeEvent e) {
         if (this.accepting) {
             // if we are currently "accepting" the value, ignore change notifications,
@@ -227,6 +235,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.tools.AbstractModel#toString(StringBuffer)
      */
+    @Override
     public void toString(StringBuffer sb) {
         sb.append(this.getValue());
     }
@@ -271,6 +280,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
          * change notification triggered by #setValue(Object).
          * @see ValueModel#getValue()
          */
+        @Override
         public Object getValue() {
             if (this.value == null) {
                 throw new IllegalStateException("The method Trigger.getValue() may only be called during change notification.");
@@ -283,6 +293,7 @@ public class BufferedPropertyValueModel extends PropertyValueModelWrapper {
          * listeners have been notified.
          * @see PropertyValueModel#setValue(Object)
          */
+        @Override
         public void setValue(Object value) {
             super.setValue(value);
             this.value = null;

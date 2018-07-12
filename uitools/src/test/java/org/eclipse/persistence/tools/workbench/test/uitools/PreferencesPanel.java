@@ -168,6 +168,7 @@ public class PreferencesPanel extends JPanel {
     }
     private TreeSelectionListener buildTreeSelectionListener() {
         return new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 PreferencesPanel.this.treeSelectionChanged();
             }
@@ -179,6 +180,7 @@ public class PreferencesPanel extends JPanel {
      */
     private TreeCellRenderer buildTreeCellRenderer() {
         return new SimpleTreeCellRenderer() {
+            @Override
             protected String buildText(Object value) {
                 return ((LocalNode) value).displayString();
             }
@@ -210,6 +212,7 @@ public class PreferencesPanel extends JPanel {
         return new PreferencesCollectionValueModel(this.selectedPreferencesHolder) {
             protected PreferencePropertyValueModel buildModel(String key) {
                 return new PreferencePropertyValueModel(this.subjectHolder, key) {
+                    @Override
                     protected String convertToString(Object o) {
                         String string = super.convertToString(o);
                         if (string == null) {
@@ -229,6 +232,7 @@ public class PreferencesPanel extends JPanel {
 
     private Comparator buildPreferenceComparator() {
         return new Comparator() {
+            @Override
             public int compare(Object o1, Object o2) {
                 return PreferencesPanel.this.collator.compare(((PreferencePropertyValueModel) o1).getKey(), ((PreferencePropertyValueModel) o2).getKey());
             }
@@ -248,6 +252,7 @@ public class PreferencesPanel extends JPanel {
 
     private ListSelectionListener buildTableSelectionListener() {
         return new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     return;
@@ -381,6 +386,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildAddNodeAction() {
         return new AbstractAction("Add Child Node") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.addChildToSelectedNode();
             }
@@ -417,6 +423,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildRenameNodeAction() {
         return new AbstractAction("Rename Node") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.renameSelectedNode();
             }
@@ -489,6 +496,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildRemoveNodeAction() {
         return new AbstractAction("Remove Node") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.removeSelectedNode();
             }
@@ -542,6 +550,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildExportNodeAction() {
         return new AbstractAction("Export Node") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.exportSelectedNode();
             }
@@ -574,6 +583,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildAddPreferenceAction() {
         return new AbstractAction("Add Preference") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.addPreferenceToSelectedNode();
             }
@@ -615,6 +625,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildRenamePreferenceAction() {
         return new AbstractAction("Rename Preference") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.renameSelectedPreference();
             }
@@ -660,6 +671,7 @@ public class PreferencesPanel extends JPanel {
 
     private Action buildRemovePreferenceAction() {
         return new AbstractAction("Remove Preference") {
+            @Override
             public void actionPerformed(ActionEvent event) {
                 PreferencesPanel.this.removeSelectedPreference();
             }
@@ -723,6 +735,7 @@ private class DefaultRootNode
      * Simply display the string "root".
      * @see org.eclipse.persistence.tools.workbench.test.uitools.PreferencesPanel.LocalNode#displayString()
      */
+    @Override
     public String displayString() {
         return NAME;
     }
@@ -775,6 +788,7 @@ private class PreferencesNode
      * Display the preferences's name.
      * @see org.eclipse.persistence.tools.workbench.test.uitools.PreferencesPanel.LocalNode#displayString()
      */
+    @Override
     public String displayString() {
         return this.name();
     }
@@ -785,6 +799,7 @@ private class PreferencesNode
     /**
      * @see java.util.prefs.NodeChangeListener#childAdded(java.util.prefs.NodeChangeEvent)
      */
+    @Override
     public void childAdded(NodeChangeEvent evt) {
         try {
             this.addNodeFor(evt.getChild());
@@ -805,6 +820,7 @@ private class PreferencesNode
     /**
      * @see java.util.prefs.NodeChangeListener#childRemoved(java.util.prefs.NodeChangeEvent)
      */
+    @Override
     public void childRemoved(NodeChangeEvent evt) {
         this.removeChildNodeFor(evt.getChild());
     }
@@ -829,6 +845,7 @@ private class PreferencesNode
     /**
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
+    @Override
     public int compareTo(Object o) {
         return this.collator().compare(this.name(), ((PreferencesNode) o).name());
     }
@@ -878,6 +895,7 @@ private class RootPreferencesNode extends PreferencesNode {
         this.rootName = rootName;
     }
 
+    @Override
     public String displayString() {
         return this.rootName;
     }
@@ -886,6 +904,7 @@ private class RootPreferencesNode extends PreferencesNode {
      * Return whether the node can be removed.
      * Root nodes canNOT be removed.
      */
+    @Override
     boolean canBeRemoved() {
         return false;
     }
@@ -906,14 +925,17 @@ private static class PreferenceColumnAdapter implements ColumnAdapter {
     private static final String[] COLUMN_NAMES = new String[] {"Key", "Value"};
 
 
+    @Override
     public int getColumnCount() {
         return COLUMN_COUNT;
     }
 
+    @Override
     public String getColumnName(int index) {
         return COLUMN_NAMES[index];
     }
 
+    @Override
     public Class getColumnClass(int index) {
         switch (index) {
             case KEY_COLUMN:            return Object.class;
@@ -922,10 +944,12 @@ private static class PreferenceColumnAdapter implements ColumnAdapter {
         }
     }
 
+    @Override
     public boolean isColumnEditable(int index) {
         return index != KEY_COLUMN;
     }
 
+    @Override
     public PropertyValueModel[] cellModels(Object subject) {
         PreferencePropertyValueModel preference = (PreferencePropertyValueModel) subject;
         PropertyValueModel[] result = new PropertyValueModel[COLUMN_COUNT];

@@ -174,6 +174,7 @@ public final class MappingsPlugin
      */
     private Runnable buildInitializeSynchronizedIOManagerRunnable() {
         return new Runnable() {
+            @Override
             public void run() {
                 MappingsPlugin.this.initializeSynchronizedIOManager();
             }
@@ -198,6 +199,7 @@ public final class MappingsPlugin
      */
     private Command buildInitializeIOManagerCommand() {
         return new Command() {
+            @Override
             public void execute() {
                 MappingsPlugin.this.initializeIOManager();
             }
@@ -258,6 +260,7 @@ public final class MappingsPlugin
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildNewMenuItems(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public JMenuItem[] buildNewMenuItems(WorkbenchContext context) {
 
         context = this.wrap(context);
@@ -271,6 +274,7 @@ public final class MappingsPlugin
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#open(java.io.File, org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public ApplicationNode open(File file, WorkbenchContext context) throws UnsupportedFileException, OpenException {
         if ( ! FileTools.extension(file).equalsIgnoreCase(MWProject.FILE_NAME_EXTENSION)) {
             throw new UnsupportedFileException();
@@ -309,6 +313,7 @@ public final class MappingsPlugin
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildToolBarDescription(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public ComponentContainerDescription buildToolBarDescription(WorkbenchContext context) {
         context = this.wrap(context);
         ToolBarDescription tbd = new ToolBarDescription();
@@ -326,6 +331,7 @@ public final class MappingsPlugin
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildMenuDescription(org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext)
      */
+    @Override
     public ComponentContainerDescription buildMenuDescription(WorkbenchContext context) {
         context = this.wrap(context);
         RootMenuDescription md = new RootMenuDescription();
@@ -344,6 +350,7 @@ public final class MappingsPlugin
     /**
      * @see org.eclipse.persistence.tools.workbench.framework.Plugin#buildPreferencesNodes(org.eclipse.persistence.tools.workbench.framework.context.PreferencesContext)
      */
+    @Override
     public PreferencesNode[] buildPreferencesNodes(PreferencesContext context) {
         return new PreferencesNode[] {new MappingsPreferencesNode((PreferencesContext) this.wrap(context))};
     }
@@ -598,6 +605,7 @@ public final class MappingsPlugin
             this.setPriority(Thread.MIN_PRIORITY);
         }
 
+        @Override
         public void run() {
             // loop until we are interrupted
             while (true) {
@@ -699,6 +707,7 @@ public final class MappingsPlugin
             this.saveLegacyProjectNow = false;
         }
 
+        @Override
         public void checkLegacyRead(String schemaVersion) {
             LegacyProjectMigrationDialog dialog = new LegacyProjectMigrationDialog(this.context);
             dialog.show();

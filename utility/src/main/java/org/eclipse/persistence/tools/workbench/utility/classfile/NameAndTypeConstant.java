@@ -43,11 +43,13 @@ public class NameAndTypeConstant extends Constant {
         super(pool, tag, stream);
     }
 
+    @Override
     void initialize(ClassFileDataInputStream stream) throws IOException {
         this.nameIndex = stream.readU2();
         this.descriptorIndex = stream.readU2();
     }
 
+    @Override
     public void displayStringOn(IndentingPrintWriter writer) {
         super.displayStringOn(writer);
         writer.print(" name: ");
@@ -56,6 +58,7 @@ public class NameAndTypeConstant extends Constant {
         writer.println(this.descriptor());
     }
 
+    @Override
     public String description() {
         return "name & type";
     }
@@ -76,10 +79,12 @@ public class NameAndTypeConstant extends Constant {
         return this.descriptorIndex;
     }
 
+    @Override
     public Object value() {
         return this.name() + ':' + this.descriptor();
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
