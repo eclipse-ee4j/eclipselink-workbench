@@ -146,11 +146,6 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
-                <artifactId>workbench.iconlib</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.persistence</groupId>
                 <artifactId>workbench.mappingsplugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -311,7 +306,6 @@
         <module>mappingsio</module>
         <module>elmwcore</module>
         <module>config</module>
-        <module>iconlib</module>
         <module>uitools</module>
         <module>framework</module>
         <module>platformsplugin</module>
