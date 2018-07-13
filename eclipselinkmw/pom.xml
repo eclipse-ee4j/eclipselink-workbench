@@ -39,10 +39,6 @@
     <dependencies>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
-            <artifactId>workbench.iconlib</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
             <artifactId>workbench.uitools</artifactId>
         </dependency>
         <dependency>
@@ -104,7 +100,6 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>org.eclipse.persistence:workbench.iconlib</include>
                                     <include>org.eclipse.persistence:workbench.uitools</include>
                                     <include>org.eclipse.persistence:workbench.framework</include>
                                     <include>org.eclipse.persistence:workbench.platformsplugin</include>
