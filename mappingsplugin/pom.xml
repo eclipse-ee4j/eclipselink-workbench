@@ -58,7 +58,9 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
-            <artifactId>workbench.config</artifactId>
+            <artifactId>workbench.platformsconfig</artifactId>
+            <classifier>resources</classifier>
+            <type>zip</type>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,7 +93,8 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/config</outputDirectory>
-                            <includeArtifactIds>workbench.config</includeArtifactIds>
+                            <includeGroupIds>${project.groupId}</includeGroupIds>
+                            <includeArtifactIds>workbench.platformsconfig</includeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>
@@ -101,9 +104,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <classpathDependencyExcludes>
-                        <classpathDependencyExclude>org.eclipse.persistence:workbench.config</classpathDependencyExclude>
-                    </classpathDependencyExcludes>
                     <additionalClasspathElements>
                         <additionalClasspathElement>${project.build.directory}/config</additionalClasspathElement>
                     </additionalClasspathElements>
