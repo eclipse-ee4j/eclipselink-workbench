@@ -141,8 +141,10 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
-                <artifactId>workbench.config</artifactId>
+                <artifactId>workbench.platformsconfig</artifactId>
                 <version>${project.version}</version>
+                <classifier>resources</classifier>
+                <type>zip</type>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
@@ -305,7 +307,7 @@
         <module>mappingsmodel</module>
         <module>mappingsio</module>
         <module>elmwcore</module>
-        <module>config</module>
+        <module>platformsconfig</module>
         <module>uitools</module>
         <module>framework</module>
         <module>platformsplugin</module>

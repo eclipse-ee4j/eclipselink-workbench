@@ -77,7 +77,7 @@
                 </excludes>
             </unpackOptions>
             <includes>
-                <include>org.eclipse.persistence:workbench.config</include>
+                <include>org.eclipse.persistence:workbench.platformsconfig</include>
             </includes>
         </dependencySet>
     </dependencySets>

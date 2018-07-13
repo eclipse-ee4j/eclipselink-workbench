@@ -39,7 +39,9 @@
     <dependencies>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
-            <artifactId>workbench.config</artifactId>
+            <artifactId>workbench.platformsconfig</artifactId>
+            <classifier>resources</classifier>
+            <type>zip</type>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
