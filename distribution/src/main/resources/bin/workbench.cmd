@@ -1,5 +1,5 @@
 @REM
-@REM Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+@REM Copyright (c) 2018, 2022 Oracle and/or its affiliates. All rights reserved.
 @REM
 @REM This program and the accompanying materials are made available under the
 @REM terms of the Eclipse Public License v. 2.0 which is available at
@@ -23,11 +23,12 @@ call :fixpath "%~dp0"
 set THIS=%_FIXPATH:~1%
 
 set CLASSPATH=%THIS%..\jlib\xercesImpl.jar
-set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\javax.resource-api.jar
+set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\xml-apis.jar
+set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\jakarta.jakarta-api.jar
 set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\eclipselink.jar
 set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\elmwcore.jar
 set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\eclipselinkmw.jar
-set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\javax.persistence.jar
+set CLASSPATH=%CLASSPATH%;%THIS%..\jlib\jakarta.persistence-api.jar
 set CLASSPATH=%CLASSPATH%;%THIS%..\config
 set CLASSPATH=%CLASSPATH%;%DRIVER_CLASSPATH%
 

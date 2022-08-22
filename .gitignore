@@ -1,3 +1,4 @@
+.idea/
 # maven specific files
 target/
 pom.xml.tag

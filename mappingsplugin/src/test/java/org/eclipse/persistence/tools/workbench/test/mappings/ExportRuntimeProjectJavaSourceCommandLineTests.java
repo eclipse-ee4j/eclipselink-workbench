@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1998, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -35,6 +35,7 @@ import org.eclipse.persistence.tools.workbench.test.utility.JavaTools;
 import org.eclipse.persistence.tools.workbench.test.utility.TestTools;
 import org.eclipse.persistence.tools.workbench.utility.Classpath;
 import org.eclipse.persistence.tools.workbench.utility.io.FileTools;
+import org.w3c.dom.ElementTraversal;
 
 public class ExportRuntimeProjectJavaSourceCommandLineTests extends AbstractExportRuntimeProjectJavaSourceTests {
 
@@ -73,6 +74,7 @@ public class ExportRuntimeProjectJavaSourceCommandLineTests extends AbstractExpo
         classpathEntries.add(Classpath.locationFor(ValueHolderInterface.class));    // org.eclipse.persistence.core/ecilpselink.jar
         classpathEntries.add(Classpath.locationFor(Oracle12Platform.class));    // org.eclipse.persistence.oracle/ecilpselink.jar
         classpathEntries.add(Classpath.locationFor(XMLParserConfiguration.class));  // xercesImpl.jar
+        classpathEntries.add(Classpath.locationFor(ElementTraversal.class));  // xml-apis.jar
         classpathEntries.add(FileTools.resourceFile("/platforms.dpr").getParentFile().getAbsolutePath());    // config dir
         Classpath classpath = new Classpath(classpathEntries);
 

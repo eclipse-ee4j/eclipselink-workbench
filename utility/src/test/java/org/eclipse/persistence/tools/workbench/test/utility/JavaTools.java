@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1998, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -21,16 +21,27 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.eclipse.persistence.tools.workbench.utility.CollectionTools;
 import org.eclipse.persistence.tools.workbench.utility.io.NullOutputStream;
 import org.eclipse.persistence.tools.workbench.utility.iterators.FilteringIterator;
 import org.eclipse.persistence.tools.workbench.utility.iterators.TransformationIterator;
 import org.eclipse.persistence.tools.workbench.utility.string.StringTools;
+
+import javax.tools.Diagnostic;
+import javax.tools.DiagnosticListener;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
 
 /**
  * Some tools for executing, compiling, JARing, etc.
@@ -59,14 +70,7 @@ public class JavaTools {
      * Throw a RuntimeException for any non-zero exit value.
      */
     public static void compile(File sourceFile, String classpath) throws IOException, InterruptedException {
-        List cmd = new ArrayList();
-        cmd.add(javaCompiler());
-        if ((classpath != null) && (classpath.length() != 0)) {
-            cmd.add("-classpath");
-            cmd.add(classpath);
-        }
-        cmd.add(sourceFile.getAbsolutePath());
-        exec((String[]) cmd.toArray(new String[cmd.size()]));
+        compile(Collections.singleton(sourceFile), classpath);
     }
 
     /**
@@ -100,14 +104,35 @@ public class JavaTools {
      * Throw a RuntimeException for any non-zero exit value.
      */
     public static void compile(Iterator sourceFiles, String classpath) throws IOException, InterruptedException {
-        List cmd = new ArrayList();
-        cmd.add(javaCompiler());
-        if ((classpath != null) && (classpath.length() != 0)) {
-            cmd.add("-classpath");
-            cmd.add(classpath);
+        final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        DiagnosticListener<JavaFileObject> diagnostics = new DiagnosticListener<JavaFileObject>() {
+            @Override
+            public void report(Diagnostic<? extends JavaFileObject> diagnostic) {
+                System.out.println(diagnostic.toString());
+            }
+        };
+        final StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnostics, Locale.getDefault(), StandardCharsets.UTF_8);
+        List<File> src = new ArrayList<>();
+        while (sourceFiles.hasNext()) {
+            File f = (File) sourceFiles.next();
+            if (f.getName().endsWith(".java")) {
+                src.add(f);
+            }
         }
-        CollectionTools.addAll(cmd, javaFileNames(sourceFiles));
-        exec((String[]) cmd.toArray(new String[cmd.size()]));
+        Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromFiles(src);
+        List<String> options = new ArrayList<>();
+        if (classpath != null && !classpath.isEmpty()) {
+            options.add("-classpath");
+            options.add(classpath);
+        }
+        JavaCompiler.CompilationTask task = compiler.getTask(
+                null,
+                fileManager,
+                diagnostics,
+                options,
+                Collections.emptySet(),
+                compilationUnits);
+        task.call();
     }
 
     /**

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2022 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
@@ -24,14 +24,14 @@
     <parent>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>workbench.parent</artifactId>
-        <version>2.7.3-SNAPSHOT</version>
+        <version>2.7.11-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>workbench.mappingsplugin</artifactId>
-    <version>2.7.3-SNAPSHOT</version>
+    <version>2.7.11-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mappings Plug-in</name>
 
@@ -103,6 +103,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <workingDirectory>${project.build.directory}/test-out</workingDirectory>
                     <testFailureIgnore>true</testFailureIgnore>
                     <additionalClasspathElements>
                         <additionalClasspathElement>${project.build.directory}/config</additionalClasspathElement>
@@ -112,6 +113,9 @@
                         <include>org.eclipse.persistence.tools.workbench.test.mappingsplugin.AllMappingsPluginTests</include>
                         <include>org.eclipse.persistence.tools.workbench.test.mappingsio.AllMappingsIOTests</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <java.io.tmpdir>${project.build.directory}/test-out/tmp</java.io.tmpdir>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
