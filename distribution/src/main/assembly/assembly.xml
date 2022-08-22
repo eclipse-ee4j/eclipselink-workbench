@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2022 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
@@ -57,8 +57,9 @@
             <fileMode>0644</fileMode>
             <includes>
                 <include>xerces:xercesImpl</include>
-                <include>javax.resource:javax.resource-api</include>
-                <include>org.eclipse.persistence:javax.persistence</include>
+                <include>xml-apis:xml-apis</include>
+                <include>jakarta.resource:jakarta.resource-api</include>
+                <include>jakarta.persistence:jakarta.persistence-api</include>
                 <include>org.eclipse.persistence:elmwcore</include>
                 <include>org.eclipse.persistence:eclipselinkmw</include>
                 <include>org.eclipse.persistence:eclipselink</include>

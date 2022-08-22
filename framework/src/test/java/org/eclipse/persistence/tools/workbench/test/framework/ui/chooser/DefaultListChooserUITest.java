@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1998, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -41,8 +41,6 @@ import javax.swing.UIManager;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import org.eclipse.persistence.tools.workbench.test.framework.TestWorkbenchContext;
-
-import com.sun.java.swing.plaf.motif.MotifLookAndFeel;
 
 import org.eclipse.persistence.tools.workbench.framework.context.ApplicationContext;
 import org.eclipse.persistence.tools.workbench.framework.context.WorkbenchContext;
@@ -294,7 +292,6 @@ public class DefaultListChooserUITest {
         List lookAndFeelValues = new ArrayList();
         lookAndFeelValues.add(MetalLookAndFeel.class.getName());
         lookAndFeelValues.add("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        lookAndFeelValues.add(MotifLookAndFeel.class.getName());
         lookAndFeelValues.add("oracle.bali.ewt.olaf.OracleLookAndFeel");    // remove compile-time dependency on OLAF
 
         return new SimpleListValueModel(lookAndFeelValues);

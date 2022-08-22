@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1998, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -35,12 +35,8 @@ public class ClassToolsTests extends TestCase {
 
     private static String testStaticField;
 
-    private static final boolean JDK7 = jdkIsVersion("1.7");
-    private static final boolean JDK8 = jdkIsVersion("1.8");
-    private static final boolean JDK9 = jdkIsVersion("9");
-
     private static boolean jdkIsVersion(String version) {
-        return System.getProperty("java.version").indexOf(version) != -1;
+        return System.getProperty("java.version").contains(version);
     }
 
     public static Test suite() {
@@ -293,12 +289,8 @@ public class ClassToolsTests extends TestCase {
         Map map = new HashMap();
         map.put("foo", "bar");
         Entry entry = (Entry) map.entrySet().iterator().next();
-        if (JDK8 || JDK9) {
-            // Node instead of Entry since JDK 7
-            assertEquals("Node", ClassTools.nestedClassNameForObject(entry));
-        } else {
-            assertEquals("Entry", ClassTools.nestedClassNameForObject(entry));
-        }
+        // Node instead of Entry since JDK 7
+        assertEquals("Node", ClassTools.nestedClassNameForObject(entry));
         assertEquals("Entry", ClassTools.nestedNameFor(java.util.Map.Entry.class));
     }
 
