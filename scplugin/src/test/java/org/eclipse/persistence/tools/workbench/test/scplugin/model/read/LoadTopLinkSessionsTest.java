@@ -21,6 +21,7 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -56,7 +57,7 @@ public class LoadTopLinkSessionsTest extends TestCase
 
         // Create the Channel for the destination
         String fileName = entry.getName().replace('/', '_');
-        File file = File.createTempFile(fileName, null);
+        File file = Files.createTempFile(fileName, null).toFile();
         FileOutputStream fos = new FileOutputStream(file);
         FileChannel destinationChannel = fos.getChannel();
 
