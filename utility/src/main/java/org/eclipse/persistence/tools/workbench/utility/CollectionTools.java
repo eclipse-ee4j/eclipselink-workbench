@@ -15,6 +15,7 @@
 package org.eclipse.persistence.tools.workbench.utility;
 
 import java.lang.reflect.Array;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1635,7 +1636,7 @@ public final class CollectionTools {
         if (distance == 0) {
             return array;
         }
-        for (int cycleStart = 0, nMoved = 0; nMoved != len; cycleStart++) {
+        for (int cycleStart = 0, nMoved = 0; nMoved < len; cycleStart++) {
             Object displaced = array[cycleStart];
             int i = cycleStart;
             do {
@@ -1676,7 +1677,7 @@ public final class CollectionTools {
         if (distance == 0) {
             return array;
         }
-        for (int cycleStart = 0, nMoved = 0; nMoved != len; cycleStart++) {
+        for (int cycleStart = 0, nMoved = 0; nMoved < len; cycleStart++) {
             char displaced = array[cycleStart];
             int i = cycleStart;
             do {
@@ -1717,7 +1718,7 @@ public final class CollectionTools {
         if (distance == 0) {
             return array;
         }
-        for (int cycleStart = 0, nMoved = 0; nMoved != len; cycleStart++) {
+        for (int cycleStart = 0, nMoved = 0; nMoved < len; cycleStart++) {
             int displaced = array[cycleStart];
             int i = cycleStart;
             do {
@@ -1758,7 +1759,7 @@ public final class CollectionTools {
         return set;
     }
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     /**
      * Return the array after "shuffling" it.

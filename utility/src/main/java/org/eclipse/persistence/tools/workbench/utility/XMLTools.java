@@ -29,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -79,6 +80,26 @@ public final class XMLTools {
     private static synchronized DocumentBuilderFactory documentBuilderFactory() {
         if (documentBuilderFactory == null) {
             documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            String FEATURE = null;
+            try {
+                FEATURE = "http://xml.org/sax/features/external-parameter-entities";
+                documentBuilderFactory.setFeature(FEATURE, false);
+
+                FEATURE = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
+                documentBuilderFactory.setFeature(FEATURE, false);
+
+                FEATURE = "http://xml.org/sax/features/external-general-entities";
+                documentBuilderFactory.setFeature(FEATURE, false);
+
+                documentBuilderFactory.setXIncludeAware(false);
+                documentBuilderFactory.setExpandEntityReferences(false);
+
+                documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            } catch (ParserConfigurationException e) {
+                throw new IllegalStateException("The feature '"
+                    + FEATURE + "' is not supported by your XML processor.", e);
+            }
         }
         return documentBuilderFactory;
     }
@@ -452,6 +473,9 @@ public final class XMLTools {
     private static synchronized TransformerFactory transformerFactory() {
         if (transformerFactory == null) {
             transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+            transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         }
         return transformerFactory;
     }
