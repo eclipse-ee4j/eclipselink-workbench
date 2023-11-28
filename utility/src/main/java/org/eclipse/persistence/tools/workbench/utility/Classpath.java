@@ -345,7 +345,7 @@ public class Classpath
             return path.substring(0, path.length() - convertToClassFileName(javaClass).length() - 1);
         } else if ("jrt".equals(protocol)) {
             // jdk9 - jrt:/java.base/java/lang/Object.class
-            return path.substring(0, path.indexOf('/', 5));
+            return path.substring(0, path.indexOf(File.separatorChar, 5));
         }
 
         throw new IllegalStateException(url.toString());
